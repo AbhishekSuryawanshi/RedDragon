@@ -9,7 +9,7 @@ import Foundation
 
 enum RequestType: String {
     case get    = "GET"
-    case pos    = "POST"
+    case post    = "POST"
     case put    = "PUT"
     case delete = "DELETE"
 }
