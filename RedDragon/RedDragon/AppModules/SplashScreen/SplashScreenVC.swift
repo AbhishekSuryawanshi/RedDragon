@@ -26,7 +26,8 @@ class SplashScreenVC: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [self] in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "TabView") as? UITabBarController
-            self.present(vc!, animated: true)
+            //self.present(vc!, animated: true)
+            self.navigationController?.pushViewController(vc!, animated: true)
         }
     }
 
