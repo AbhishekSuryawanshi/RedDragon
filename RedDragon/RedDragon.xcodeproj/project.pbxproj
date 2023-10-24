@@ -126,10 +126,9 @@
 			children = (
 				49B0B9E72AE68F0700A9D235 /* AppDelegate.swift */,
 				49B0B9E92AE68F0700A9D235 /* SceneDelegate.swift */,
-				49B0B9ED2AE68F0700A9D235 /* Main.storyboard */,
 				49B0B9F02AE68F0800A9D235 /* Assets.xcassets */,
-				49B0B9F22AE68F0800A9D235 /* LaunchScreen.storyboard */,
 				49B0B9F52AE68F0800A9D235 /* Info.plist */,
+				49F3EED62AE7DCC20095CAC6 /* StoryBoard */,
 				49B0B9FB2AE6909C00A9D235 /* Localization */,
 				49B0B9FC2AE690A900A9D235 /* Helper */,
 				49B0BA002AE690D200A9D235 /* Utilities */,
@@ -229,6 +228,15 @@
 			path = CommonServiceManager;
 			sourceTree = "<group>";
 		};
+		49F3EED62AE7DCC20095CAC6 /* StoryBoard */ = {
+			isa = PBXGroup;
+			children = (
+				49B0B9F22AE68F0800A9D235 /* LaunchScreen.storyboard */,
+				49B0B9ED2AE68F0700A9D235 /* Main.storyboard */,
+			);
+			path = StoryBoard;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -270,6 +278,7 @@
 				TargetAttributes = {
 					49B0B9E32AE68F0700A9D235 = {
 						CreatedOnToolsVersion = 15.0;
+						LastSwiftMigration = 1500;
 					};
 				};
 			};
@@ -511,6 +520,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -528,6 +538,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.RedDragon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -538,6 +549,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
