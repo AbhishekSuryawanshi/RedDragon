@@ -40,7 +40,13 @@ extension UIViewController {
     
 }
 
+//MARK: above functions can be use like:--
+///presentToStoryboard(Storyboard.play, animationType: .fade)
+//////presentToViewController(SoccerClubVC.self, storyboardName: Storyboard.menu, animationType: .autoReverse(presenting: .zoom))
+///navigateToViewController(FavoritePlayerVC.self, storyboardName: Storyboard.main, animationType: .autoReverse(presenting: .zoom))
 
+
+//MARK: Other animations
 /*
  //.autoReverse(presenting: .pageIn(direction: .left))
  //.pageOut(direction: .down)
