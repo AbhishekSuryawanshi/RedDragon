@@ -25,7 +25,7 @@ class APIServiceManager<ResponseModel: Decodable>: ObservableObject {
     // Closure to manage the display of loading indicators.
     var displayLoader: ((Bool) -> ())?
     
-    /// Create a URL request with optional authorization token for different types of users.
+    // Create a URL request with optional authorization token for different types of users.
     private func makeURLRequest(urlString: String, 
                                 method: RequestType,
                                 parameters: [String: Any]?,
@@ -74,7 +74,7 @@ class APIServiceManager<ResponseModel: Decodable>: ObservableObject {
     
     ///For __Guest user__ :- asyncCall(urlString: "your_url", method: .get, parameters: nil, isGuestUser: true)
     ///_For __Regular user__ :- asyncCall(urlString: "your_url", method: .get, parameters: nil, isGuestUser: false)
-    ///_For __no auth toke__ :- asyncCall(urlString: "your_url", method: .get, parameters: nil)
+    ///_For __no auth token__ :- asyncCall(urlString: "your_url", method: .get, parameters: nil)
     
     ///In below function __urlString: String = URLConstants.baseURL + extension
     ///method: GET/POST/PUT/DELETE = RequestType.get
