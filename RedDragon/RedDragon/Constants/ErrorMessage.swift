@@ -15,7 +15,7 @@ struct ErrorMessage {
     static let invalidName              = "Invalid name"
     static let invalidEmail             = "Invalid email"
     static let incorrectPassword        = "Incorrect password"
-    static let passwordCondition        = "Password must have more than 8 characters and should                                        contain at least 1 Uppercase letter, 1 Lowercase                                            letter, 1 number and 1 Special character"
+    static let passwordCondition        = "Password must have more than 8 characters and should contain at least 1 Uppercase letter, 1 Lowercase letter, 1 number and 1 Special character"
     static let dataNotFound             = "Data not found"
     static let networkAlert             = "No netork connection!"
     static let somethingWentWrong       = "Something went wrong, please try again"
