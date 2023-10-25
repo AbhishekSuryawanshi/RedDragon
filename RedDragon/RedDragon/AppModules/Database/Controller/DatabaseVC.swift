@@ -15,6 +15,11 @@ class DatabaseVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadFunctionality()
+    }
+    
+    func loadFunctionality() {
+        self.view.addSubview(Loader.activityIndicator)
         fetchLeagueDetailViewModel()
     }
     
@@ -29,7 +34,7 @@ extension DatabaseVC {
     func fetchLeagueDetailViewModel() {
         databaseVM = DatabaseViewModel()
         databaseVM?.showError = { [weak self] error in
-            //error
+            self?.popupCustomAlert(title: ErrorMessage.alert.localized, description: error)
         }
         databaseVM?.displayLoader = { [weak self] value in
             self?.showLoader(value)

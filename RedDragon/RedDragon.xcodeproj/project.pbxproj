@@ -33,6 +33,9 @@
 		494D7B752AE8F4CB00488E27 /* DatabaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494D7B742AE8F4CB00488E27 /* DatabaseVC.swift */; };
 		494D7B7A2AE92F4700488E27 /* DatabaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494D7B792AE92F4700488E27 /* DatabaseViewModel.swift */; };
 		494D7B7C2AE9317F00488E27 /* LeagueDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494D7B7B2AE9317F00488E27 /* LeagueDetailModel.swift */; };
+		494D7B802AE942C200488E27 /* CustomAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 494D7B7F2AE942C200488E27 /* CustomAlert.storyboard */; };
+		494D7B842AE94AF300488E27 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494D7B832AE94AF300488E27 /* UIViewController+Extension.swift */; };
+		494D7B862AE94B8A00488E27 /* CustomAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494D7B852AE94B8A00488E27 /* CustomAlertVC.swift */; };
 		49B0B9E82AE68F0700A9D235 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B0B9E72AE68F0700A9D235 /* AppDelegate.swift */; };
 		49B0B9EA2AE68F0700A9D235 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B0B9E92AE68F0700A9D235 /* SceneDelegate.swift */; };
 		49B0B9EF2AE68F0700A9D235 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49B0B9ED2AE68F0700A9D235 /* Main.storyboard */; };
@@ -93,6 +96,9 @@
 		494D7B742AE8F4CB00488E27 /* DatabaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseVC.swift; sourceTree = "<group>"; };
 		494D7B792AE92F4700488E27 /* DatabaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseViewModel.swift; sourceTree = "<group>"; };
 		494D7B7B2AE9317F00488E27 /* LeagueDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueDetailModel.swift; sourceTree = "<group>"; };
+		494D7B7F2AE942C200488E27 /* CustomAlert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomAlert.storyboard; sourceTree = "<group>"; };
+		494D7B832AE94AF300488E27 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		494D7B852AE94B8A00488E27 /* CustomAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertVC.swift; sourceTree = "<group>"; };
 		49B0B9E42AE68F0700A9D235 /* RedDragon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RedDragon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49B0B9E72AE68F0700A9D235 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49B0B9E92AE68F0700A9D235 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -316,6 +322,7 @@
 				474D99482AE7F42B009499D0 /* IBDesignable+Extension.swift */,
 				474D994F2AE7FAE9009499D0 /* UIColor+Extensions.swift */,
 				474D99532AE7FCFC009499D0 /* Extensions.swift */,
+				494D7B832AE94AF300488E27 /* UIViewController+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -323,6 +330,7 @@
 		49B0BA002AE690D200A9D235 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				494D7B852AE94B8A00488E27 /* CustomAlertVC.swift */,
 			);
 			name = Utilities;
 			path = ../Utilities;
@@ -364,6 +372,7 @@
 			children = (
 				49B0B9F22AE68F0800A9D235 /* LaunchScreen.storyboard */,
 				49B0B9ED2AE68F0700A9D235 /* Main.storyboard */,
+				494D7B7F2AE942C200488E27 /* CustomAlert.storyboard */,
 			);
 			path = StoryBoard;
 			sourceTree = "<group>";
@@ -460,6 +469,7 @@
 				474D993B2AE7F30D009499D0 /* Roboto-Italic.ttf in Resources */,
 				474D993D2AE7F30D009499D0 /* Roboto-Black.ttf in Resources */,
 				49B0B9EF2AE68F0700A9D235 /* Main.storyboard in Resources */,
+				494D7B802AE942C200488E27 /* CustomAlert.storyboard in Resources */,
 				474D993C2AE7F30D009499D0 /* Roboto-Light.ttf in Resources */,
 				474D99422AE7F30D009499D0 /* Roboto-BoldItalic.ttf in Resources */,
 				49B0BA3C2AE69A4D00A9D235 /* InfoPlist.strings in Resources */,
@@ -485,6 +495,7 @@
 				49B0BA492AE6A42800A9D235 /* CellIdentifier.swift in Sources */,
 				49B0BA212AE6982400A9D235 /* ErrorMessage.swift in Sources */,
 				49B0BA1F2AE697A500A9D235 /* CustomErrors.swift in Sources */,
+				494D7B842AE94AF300488E27 /* UIViewController+Extension.swift in Sources */,
 				494D7B752AE8F4CB00488E27 /* DatabaseVC.swift in Sources */,
 				49B0BA412AE6A29A00A9D235 /* Validations.swift in Sources */,
 				49B0BA1D2AE6976500A9D235 /* URLConstants.swift in Sources */,
@@ -502,6 +513,7 @@
 				49B0BA472AE6A3E800A9D235 /* StoryboardName.swift in Sources */,
 				4943184C2AE7A222007F7292 /* LoaderAnimation.swift in Sources */,
 				474D99502AE7FAE9009499D0 /* UIColor+Extensions.swift in Sources */,
+				494D7B862AE94B8A00488E27 /* CustomAlertVC.swift in Sources */,
 				494318502AE7A2A1007F7292 /* ZoomAnimation.swift in Sources */,
 				474D99542AE7FCFC009499D0 /* Extensions.swift in Sources */,
 			);
