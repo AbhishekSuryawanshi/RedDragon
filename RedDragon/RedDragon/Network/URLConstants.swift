@@ -10,5 +10,6 @@ import Foundation
 struct URLConstants {
     
     static let baseURL          = ""
+    static let leagueDetail     = "https://app.8com.cloud/api/v1/sportscore/data/league.php"
     
 }
