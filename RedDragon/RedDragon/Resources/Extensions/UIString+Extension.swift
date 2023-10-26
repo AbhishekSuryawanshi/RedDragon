@@ -5,12 +5,13 @@
 //  Created by QASR02 on 23/10/2023.
 //
 
-import Foundation
+import UIKit
 
 extension String {
     
-    // MARK: - Date and Time
-    
+    /// Here we are converting date string in one format to given output format
+    /// Showing localized date
+    /// If parameter "today" is true, it will show "Today" instead of date string
     func formatDate(inputFormat: dateFormat, outputFormat: dateFormat, today: Bool = false)-> String {
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = inputFormat.rawValue
@@ -51,4 +52,15 @@ extension String {
     }
     
     
+}
+
+// MARK: - NSMutableAttributedString
+
+extension NSMutableAttributedString {
+    @discardableResult func underLineText(_ text: String, remove: Bool = false) -> NSMutableAttributedString {
+        let attrs: [NSAttributedString.Key: Any] = [.underlineStyle: remove ? NSUnderlineStyle.thick.rawValue : 0]
+        let formattedString = NSMutableAttributedString(string:text, attributes: attrs)
+        append(formattedString)
+        return self
+    }
 }

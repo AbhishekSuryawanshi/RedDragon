@@ -57,23 +57,6 @@
             </objects>
             <point key="canvasLocation" x="68" y="2354"/>
         </scene>
-        <!--Social-->
-        <scene sceneID="R1i-rl-I7Q">
-            <objects>
-                <viewController modalPresentationStyle="overCurrentContext" id="lKw-G4-3xP" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="gGb-9W-16e">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="B0L-TP-e4l"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Social" image="Social" id="xgX-nS-x71"/>
-                    <navigationItem key="navigationItem" id="Gx2-bE-7eD"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TvW-LA-gQZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1019" y="2354"/>
-        </scene>
         <!--Wallet-->
         <scene sceneID="dq0-5S-ZPS">
             <objects>
@@ -128,15 +111,25 @@
                     </tabBar>
                     <connections>
                         <segue destination="MjK-dT-tth" kind="relationship" relationship="viewControllers" id="L2T-Rn-gmo"/>
-                        <segue destination="lKw-G4-3xP" kind="relationship" relationship="viewControllers" id="UF5-RK-3OP"/>
-                        <segue destination="HVP-tE-ciH" kind="relationship" relationship="viewControllers" id="W4o-5S-T49"/>
-                        <segue destination="bGf-RP-GfK" kind="relationship" relationship="viewControllers" id="wqU-FK-eom"/>
-                        <segue destination="FOH-wB-ALS" kind="relationship" relationship="viewControllers" id="KLd-Dy-hcE"/>
+                        <segue destination="fy7-qc-dHG" kind="relationship" relationship="viewControllers" id="V14-fE-wEr"/>
+                        <segue destination="HVP-tE-ciH" kind="relationship" relationship="viewControllers" id="2lS-EN-QDK"/>
+                        <segue destination="bGf-RP-GfK" kind="relationship" relationship="viewControllers" id="nJe-01-HpY"/>
+                        <segue destination="FOH-wB-ALS" kind="relationship" relationship="viewControllers" id="md7-ga-jgc"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cbo-hh-PQA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1856" y="1404"/>
+        </scene>
+        <!--Social-->
+        <scene sceneID="Sqd-qq-tMI">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Social" id="u6l-bX-DxY" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="pJY-1B-NAS"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vkw-NX-jhb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="966" y="2761"/>
         </scene>
         <!--Database-->
         <scene sceneID="ur3-5v-ovd">
@@ -147,6 +140,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ebx-Dv-wuN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1856" y="2685"/>
+        </scene>
+        <!--Social-->
+        <scene sceneID="7ON-3J-GjA">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="fy7-qc-dHG" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Social" image="Social" id="XXQ-a0-vAx"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="u1p-bE-QYw">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="u6l-bX-DxY" kind="relationship" relationship="rootViewController" id="fZh-DU-cjG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9BQ-aU-Xfr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="967" y="2354"/>
         </scene>
         <!--Database-->
         <scene sceneID="Vas-74-gV0">
