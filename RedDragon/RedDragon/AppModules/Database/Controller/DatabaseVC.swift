@@ -34,7 +34,7 @@ extension DatabaseVC {
     func fetchLeagueDetailViewModel() {
         databaseVM = DatabaseViewModel()
         databaseVM?.showError = { [weak self] error in
-            self?.popupCustomAlert(title: ErrorMessage.alert.localized, description: error)
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
         databaseVM?.displayLoader = { [weak self] value in
             self?.showLoader(value)
