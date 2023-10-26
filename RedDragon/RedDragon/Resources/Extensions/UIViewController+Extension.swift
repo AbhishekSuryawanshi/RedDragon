@@ -20,10 +20,12 @@ extension UIViewController {
         view.clipsToBounds = false
     }
     
-    func popupCustomAlert(title: String, description: String, animation: HeroDefaultAnimationType = .autoReverse(presenting: .zoom)) {
-        UserDefaults.standard.setValue(title, forKey: UserDefaultString.title)
-        UserDefaults.standard.setValue(description, forKey: UserDefaultString.description)
-        presentToViewController(CustomAlertVC.self, storyboardName: StoryboardName.customAlert, animationType: animation)
+    func customAlertView(title: String, description: String, image: String){
+        let alertVC = PMAlertController(title: title, description: description, image: UIImage(named: image), style: .alert)
+        alertVC.addAction(PMAlertAction(title: StringConstants.dismiss.localized, style: .default, action: { () in
+                    print("Capture action dismiss")
+                }))
+        self.present(alertVC, animated: true, completion: nil)
     }
     
 }
