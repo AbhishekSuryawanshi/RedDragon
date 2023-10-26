@@ -5,7 +5,7 @@
 //  Created by QASR02 on 23/10/2023.
 //
 
-import Foundation
+import UIKit
 
 extension String {
     
@@ -52,4 +52,15 @@ extension String {
     }
     
     
+}
+
+// MARK: - NSMutableAttributedString
+
+extension NSMutableAttributedString {
+    @discardableResult func underLineText(_ text: String, remove: Bool = false) -> NSMutableAttributedString {
+        let attrs: [NSAttributedString.Key: Any] = [.underlineStyle: remove ? NSUnderlineStyle.thick.rawValue : 0]
+        let formattedString = NSMutableAttributedString(string:text, attributes: attrs)
+        append(formattedString)
+        return self
+    }
 }
