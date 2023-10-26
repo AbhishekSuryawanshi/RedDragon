@@ -9,8 +9,9 @@ import Foundation
 
 extension String {
     
-    // MARK: - Date and Time
-    
+    /// Here we are converting date string in one format to given output format
+    /// Showing localized date
+    /// If parameter "today" is true, it will show "Today" instead of date string
     func formatDate(inputFormat: dateFormat, outputFormat: dateFormat, today: Bool = false)-> String {
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = inputFormat.rawValue

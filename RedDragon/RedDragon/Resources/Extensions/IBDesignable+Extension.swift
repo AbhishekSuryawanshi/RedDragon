@@ -8,7 +8,7 @@
 import UIKit
 
 @IBDesignable extension UIView {
-    //To add boarder, corner radius for any view in storyboard
+    ///To add boarder, corner radius for any view in storyboard
     
     @IBInspectable var borderColor: UIColor? {
         set {
