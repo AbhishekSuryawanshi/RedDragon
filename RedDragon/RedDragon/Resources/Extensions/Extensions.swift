@@ -73,7 +73,7 @@ extension Date {
     func formatDate(outputFormat: dateFormat)-> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = outputFormat.rawValue
-        dateFormatter.locale = Locale(identifier: UserDefaultString.language.contains("zh") ? "zh-Hans" : "en")
+        dateFormatter.locale = Locale(identifier: (UserDefaults.standard.language ?? "").contains("zh") ? "zh-Hans" : "en")
         return dateFormatter.string(from: self)
     }
 }
@@ -86,7 +86,7 @@ extension Int {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = outputFormat.rawValue
         dateFormatter.timeZone = .current
-        dateFormatter.locale = Locale(identifier: UserDefaultString.language.contains("zh") ? "zh-Hans" : "en")
+        dateFormatter.locale = Locale(identifier: (UserDefaults.standard.language ?? "").contains("zh") ? "zh-Hans" : "en")
         let dateStr = dateFormatter.string(from: date)
         if today && Calendar.current.isDateInToday(date) {
             return "Today".localized

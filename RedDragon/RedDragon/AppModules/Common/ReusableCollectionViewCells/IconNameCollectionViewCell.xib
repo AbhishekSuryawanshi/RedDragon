@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,10 +24,10 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fYS-o2-yQP">
-                        <rect key="frame" x="13" y="5" width="70" height="70"/>
+                        <rect key="frame" x="14" y="5" width="68" height="68"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tjK-5V-skG">
-                                <rect key="frame" x="6.6666666666666679" y="6.6666666666666679" width="56.666666666666657" height="56.666666666666657"/>
+                                <rect key="frame" x="5.6666666666666679" y="5.6666666666666679" width="56.666666666666657" height="56.666666666666657"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="56.666666666666657" id="DOi-zs-CR3"/>
@@ -39,14 +40,14 @@
                             <constraint firstAttribute="width" secondItem="fYS-o2-yQP" secondAttribute="height" multiplier="1:1" id="7Wz-zU-qA3"/>
                             <constraint firstItem="tjK-5V-skG" firstAttribute="centerX" secondItem="fYS-o2-yQP" secondAttribute="centerX" id="Dxk-mP-3oZ"/>
                             <constraint firstItem="tjK-5V-skG" firstAttribute="centerY" secondItem="fYS-o2-yQP" secondAttribute="centerY" id="WaX-4J-EdJ"/>
-                            <constraint firstAttribute="width" constant="70" id="shE-hl-Nzc"/>
+                            <constraint firstAttribute="width" constant="68" id="shE-hl-Nzc"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="35"/>
+                                <real key="value" value="34"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="value" name="gray1"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                 <real key="value" value="2"/>
@@ -54,7 +55,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6P-dx-oVV">
-                        <rect key="frame" x="2" y="79" width="92" height="17.666666666666671"/>
+                        <rect key="frame" x="2" y="77" width="92" height="17.666666666666671"/>
                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -80,4 +81,9 @@
             <point key="canvasLocation" x="334.35114503816794" y="13.380281690140846"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <namedColor name="gray1">
+            <color red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

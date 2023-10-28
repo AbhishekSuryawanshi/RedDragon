@@ -30,6 +30,7 @@ class APIServiceManager<ResponseModel: Decodable>: ObservableObject {
                                 method: RequestType,
                                 parameters: [String: Any]?,
                                 isGuestUser: Bool) -> URLRequest? {
+       
         guard let url = URL(string: urlString) else { return nil }
 
         var request = URLRequest(url: url)
@@ -47,7 +48,7 @@ class APIServiceManager<ResponseModel: Decodable>: ObservableObject {
                 let authorizationToken = HTTPHeader.createAuthorizationHeader(token: guestUserToken)
                 allHeaders = allHeaders.merging(authorizationToken, uniquingKeysWith: { $1 })
             } else {
-                if let userToken = UserDefaults.standard.string(forKey: UserDefaultString.token) {
+                if let userToken = UserDefaults.standard.token {
                     let authorizationToken = HTTPHeader.createAuthorizationHeader(token: userToken)
                     allHeaders = allHeaders.merging(authorizationToken, uniquingKeysWith: { $1 })
                 }
