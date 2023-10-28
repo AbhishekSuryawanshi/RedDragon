@@ -18,10 +18,14 @@ class HeaderBottom_1CollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
 
-    func setCellValues(title: String, iconName: String = "", selected: Bool) {
+    func configure(title: String, iconName: String = "", selected: Bool) {
         titleLabel.textColor = selected ? .white : .base
         iconImageView.tintColor = selected ? .white : .base
         bgView.backgroundColor = selected ? .base : .white
+        
         titleLabel.text = title
+        
+        //Check image or url, placeholder image
+        iconImageView.setImage(imageStr: iconName, placeholder: nil)
     }
 }

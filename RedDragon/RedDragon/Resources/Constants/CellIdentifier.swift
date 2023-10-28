@@ -13,5 +13,9 @@ struct CellIdentifier {
     // Common 
     static let headerTopCollectionViewCell        = "HeaderTopCollectionViewCell"
     static let headerBottom_1CollectionViewCell   = "HeaderBottom_1CollectionViewCell"
+    
+    //Social
+    static let IconNameCollectionViewCell         = "IconNameCollectionViewCell"
 }
+
 
