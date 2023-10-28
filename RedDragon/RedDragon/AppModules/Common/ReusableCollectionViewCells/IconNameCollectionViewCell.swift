@@ -34,12 +34,13 @@ class IconNameCollectionViewCell: UICollectionViewCell {
         titleLabel.text = title
         titleLabel.font = fontMedium(style == .services ? 13 : 11)
         
-        iconImageWidthConstraint.constant = style == .team ? (0.7 * 70) : 70
+        iconImageWidthConstraint.constant = style == .team ? (0.7 * 60) : 60
        
         iconImageView.cornerRadius = iconImageWidthConstraint.constant / 2
         print(iconImageView.cornerRadius)
         iconImageView.clipsToBounds = true
+        
         //Check image or url, placeholder image
-        iconImageView.setImage(imageStr: iconName, placeholder: nil)
+        iconImageView.setImage(imageStr: iconName, placeholder: (style == .league ? .noLeague : (style == .team ? .noTeam : nil)))
     }
 }

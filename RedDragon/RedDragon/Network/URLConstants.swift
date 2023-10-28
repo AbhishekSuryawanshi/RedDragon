@@ -17,18 +17,18 @@ struct URLConstants {
     static let socialBaseURL     = "https://muheh.com/euro5leagues/"
     
     //Match
-    static let foootballLeague   = socialBaseURL + "api/league/list"
-    static let foootballTeam     = socialBaseURL + "api/team/list"
-    static let foootballMatch    = socialBaseURL + "api/match/list"
+    static let socialLeague      = socialBaseURL + "api/league/list"
+    static let socialTeam        = socialBaseURL + "api/team/list"
+    static let socialMatch       = socialBaseURL + "api/match/list"
     
     //Post
     static let postList          = socialBaseURL + "api/poll-post"
     static let post              = socialBaseURL + "api/post"
     static let blockPost         = socialBaseURL + "api/post/block"
     
-    static let like              = socialBaseURL + "api/likes"
-    static let dislike           = socialBaseURL + "api/likes/unlike"
-    static let comment           = socialBaseURL + "api/comments"
+    static let socialLike        = socialBaseURL + "api/likes"
+    static let socialDislike     = socialBaseURL + "api/likes/unlike"
+    static let socialComment     = socialBaseURL + "api/comments"
     
     static let addPoll           = socialBaseURL + "api/poll/save"
     static let updatePoll        = socialBaseURL + "api/poll/update/"
