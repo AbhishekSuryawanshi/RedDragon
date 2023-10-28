@@ -17,6 +17,8 @@ class SocialVC: UIViewController {
     
     @IBOutlet weak var headerCollectionView: UICollectionView!
     @IBOutlet weak var sportsCollectionView: UICollectionView!
+    @IBOutlet weak var leagueCollectionView: UICollectionView!
+    @IBOutlet weak var teamsCollectionView: UICollectionView!
     
     var selectedSegment: socialHeaderSegment = .followed
     
@@ -26,10 +28,10 @@ class SocialVC: UIViewController {
     }
     
     func nibInitialization() {
-        let nib1 = UINib(nibName: CellIdentifier.headerTopCollectionViewCell, bundle: nil)
-        headerCollectionView?.register(nib1, forCellWithReuseIdentifier: CellIdentifier.headerTopCollectionViewCell)
-        let nib2 = UINib(nibName: CellIdentifier.headerBottom_1CollectionViewCell, bundle: nil)
-        sportsCollectionView?.register(nib2, forCellWithReuseIdentifier: CellIdentifier.headerBottom_1CollectionViewCell)
+        headerCollectionView.register(CellIdentifier.headerTopCollectionViewCell)
+        sportsCollectionView.register(CellIdentifier.headerBottom_1CollectionViewCell)
+        leagueCollectionView.register(CellIdentifier.IconNameCollectionViewCell)
+        teamsCollectionView.register(CellIdentifier.IconNameCollectionViewCell)
     }
 }
 
@@ -41,11 +43,15 @@ extension SocialVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == headerCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.headerTopCollectionViewCell, for: indexPath) as! HeaderTopCollectionViewCell
-            cell.setCellValues(title: socialHeaderSegment.allCases[indexPath.row].rawValue, selected: selectedSegment == socialHeaderSegment.allCases[indexPath.row])
+            cell.configure(title: socialHeaderSegment.allCases[indexPath.row].rawValue, selected: selectedSegment == socialHeaderSegment.allCases[indexPath.row])
+            return cell
+        } else if collectionView == leagueCollectionView || collectionView == teamsCollectionView {
+           let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.IconNameCollectionViewCell, for: indexPath) as! IconNameCollectionViewCell
+            cell.configure(title: "Laliga", iconName: "", style: collectionView == leagueCollectionView ? .league : .team)
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.headerBottom_1CollectionViewCell, for: indexPath) as! HeaderBottom_1CollectionViewCell
-            cell.setCellValues(title: socialHeaderSegment.allCases[indexPath.row].rawValue, selected: selectedSegment == socialHeaderSegment.allCases[indexPath.row])
+            cell.configure(title: socialHeaderSegment.allCases[indexPath.row].rawValue, selected: selectedSegment == socialHeaderSegment.allCases[indexPath.row])
             return cell
         }
     }
@@ -54,8 +60,11 @@ extension SocialVC: UICollectionViewDataSource {
 
 extension SocialVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedSegment = socialHeaderSegment.allCases[indexPath.row]
-        collectionView.reloadData()
+        if collectionView == leagueCollectionView || collectionView == teamsCollectionView {
+        } else {
+            selectedSegment = socialHeaderSegment.allCases[indexPath.row]
+            collectionView.reloadData()
+        }
     }
 }
 
@@ -64,10 +73,14 @@ extension SocialVC: UICollectionViewDelegateFlowLayout {
         if collectionView == headerCollectionView {
             let selected = selectedSegment == socialHeaderSegment.allCases[indexPath.row]
             return CGSize(width: socialHeaderSegment.allCases[indexPath.row].rawValue.localized.size(withAttributes: [NSAttributedString.Key.font : selected ? fontBold(17) : fontRegular(17)]).width + 40, height: 50)
+        } else if collectionView == leagueCollectionView {
+            return CGSize(width: 80, height: 112)
+        } else if collectionView == teamsCollectionView {
+            return CGSize(width: 80, height: 112)
         } else {
             let selected = selectedSegment == socialHeaderSegment.allCases[indexPath.row]
             return CGSize(width: socialHeaderSegment.allCases[indexPath.row].rawValue.localized.size(withAttributes: [NSAttributedString.Key.font : fontMedium(15)]).width + 70, height: 40)
         }
-       
+        
     }
 }

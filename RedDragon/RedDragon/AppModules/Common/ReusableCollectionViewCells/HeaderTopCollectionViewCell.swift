@@ -16,7 +16,7 @@ class HeaderTopCollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
 
-    func setCellValues(title: String, selected: Bool) {
+    func configure(title: String, selected: Bool) {
         let formatedText = NSMutableAttributedString()
         titleLabel.attributedText = formatedText.underLineText(title, remove: selected)
         titleLabel.font = selected ? fontBold(17) : fontRegular(17)

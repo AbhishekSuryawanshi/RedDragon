@@ -6,8 +6,26 @@
 //
 
 import UIKit
+import SDWebImage
+
+extension UIImageView {
+    func setImage(imageStr: String, placeholder: UIImage? = nil) {
+        self.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        if placeholder != nil {
+            self.sd_setImage(with: URL(string: imageStr), placeholderImage: placeholder)
+        } else {
+            self.sd_setImage(with: URL(string: imageStr))
+        }
+    }
+}
 
 extension UITableView {
+    /// Register a cell from external xib into a table instance.
+    func register(_ nibName: String) {
+        let nib = UINib(nibName: nibName, bundle: nil)
+        self.register(nib, forCellReuseIdentifier: nibName)
+    }
+    
     /// To show placeholder text in tableview if date is empty
     func setEmptyMessage(_ message: String) {
         let messageLabel = UILabel(frame: CGRect(x: 100, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
@@ -26,6 +44,12 @@ extension UITableView {
 }
 
 extension UICollectionView {
+    /// Register a cell from external xib into a collection instance.
+    func register(_ nibName: String) {
+        let nib = UINib(nibName: nibName, bundle: nil)
+        self.register(nib, forCellWithReuseIdentifier: nibName)
+    }
+    
     /// To show placeholder text in collectionview if date is empty
     func setEmptyMessage(_ message: String) {
         let messageLabel = UILabel(frame: CGRect(x: 100, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
