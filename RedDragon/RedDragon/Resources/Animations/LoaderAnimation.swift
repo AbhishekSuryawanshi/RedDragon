@@ -19,7 +19,7 @@ class Loader {
             centerX = Screen.screenX!
             centerY = Screen.screenY!
         }
-        var AV = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40), type: NVActivityIndicatorType.lineScale, color: UIColor.yellow, padding: 5)
+        var AV = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40), type: NVActivityIndicatorType.lineScale, color: UIColor.gray, padding: 5)
         AV.layer.cornerRadius = 25
         AV.backgroundColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1)
         AV.center = CGPoint(x: centerX! , y: centerY! - 30)
