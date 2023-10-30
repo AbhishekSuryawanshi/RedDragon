@@ -12,10 +12,18 @@ class DatabaseVC: UIViewController {
     
     var databaseVM: DatabaseViewModel?
     var cancellable = Set<AnyCancellable>()
+    var fetchCurrentLanguageCode = String()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        var lang = UserDefaults.standard.string(forKey: UserDefaultString.language)  ?? "en"
+        lang = (lang == "en-US") ? "en" : lang
+        fetchCurrentLanguageCode = lang
         loadFunctionality()
+        makeNetworkCall()
     }
     
     func loadFunctionality() {
@@ -25,6 +33,14 @@ class DatabaseVC: UIViewController {
     
     func showLoader(_ value: Bool) {
         value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
+    }
+    
+    func makeNetworkCall() {
+        guard Reachability.isConnectedToNetwork() else {
+            customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.networkAlert.localized, image: ImageConstants.alertImage)
+            return
+        }
+        databaseVM?.fetchLeagueDetailAsyncCall(lang: fetchCurrentLanguageCode == "en" ? "en" : "zh", slug: "england-premier-league", season: "")
     }
 }
 
