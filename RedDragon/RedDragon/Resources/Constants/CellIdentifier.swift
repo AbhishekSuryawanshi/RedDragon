@@ -8,14 +8,17 @@
 import Foundation
 
 struct CellIdentifier {
-    static let exampleCell                        = "ExampleCell"
-    
     // Common 
-    static let headerTopCollectionViewCell        = "HeaderTopCollectionViewCell"
-    static let headerBottom_1CollectionViewCell   = "HeaderBottom_1CollectionViewCell"
+    static let headerTopCollectionViewCell          = "HeaderTopCollectionViewCell"
+    static let headerBottom_1CollectionViewCell     = "HeaderBottom_1CollectionViewCell"
     
     //Social
-    static let IconNameCollectionViewCell         = "IconNameCollectionViewCell"
+    static let IconNameCollectionViewCell           = "IconNameCollectionViewCell"
+    
+    //Database
+    static let leagueNamesCollectionCell            = "LeagueCollectionViewCell"
+    static let standingTableCell                    = "StandingsTableViewCell"
+    static let seasonPerfoemanceTableCell           = "SeasonPerformanceTableViewCell"
 }
 
 

@@ -28,4 +28,9 @@ extension UIViewController {
         self.present(alertVC, animated: true, completion: nil)
     }
     
+    func defineTableViewNibCell(tableView: UITableView, cellName: String) {
+        let nib = UINib(nibName: cellName, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: cellName)
+    }
+    
 }
