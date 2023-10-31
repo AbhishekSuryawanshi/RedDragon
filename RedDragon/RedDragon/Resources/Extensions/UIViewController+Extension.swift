@@ -28,6 +28,30 @@ extension UIViewController {
         self.present(alertVC, animated: true, completion: nil)
     }
     
+    /// __Alert action function for multiple action buttons
+    func customAlertView(title: String, description: String, image: String, actions: [PMAlertAction]) {
+        let alertVC = PMAlertController(title: title, description: description, image: UIImage(named: image), style: .alert)
+        for action in actions {
+            alertVC.addAction(action)
+        }
+        self.present(alertVC, animated: true, completion: nil)
+    }
+    
+    //Use
+    /*
+     let okAction = PMAlertAction(title: "OK", style: .default) {
+         print("OK button tapped")
+     }
+
+     let cancelAction = PMAlertAction(title: "Cancel", style: .cancel) {
+         print("Cancel button tapped")
+     }
+
+     customAlertView(title: "Alert Title", description: "Alert Description", image: "alertImage", actions: [okAction, cancelAction])
+
+     */
+
+    
     func defineTableViewNibCell(tableView: UITableView, cellName: String) {
         let nib = UINib(nibName: cellName, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellName)

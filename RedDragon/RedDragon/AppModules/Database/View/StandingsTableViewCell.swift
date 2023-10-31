@@ -36,4 +36,12 @@ class StandingsTableViewCell: UITableViewCell {
         drawLabel.text = value[6]
     }
     
+    func configurationForFilters(_ value: [String]) {
+        teamLabel.text = value[2]
+        pointsLabel.text = value[3]
+        winLabel.text = value[4]
+        loseLabel.text = value[5]
+        drawLabel.text = value[6]
+    }
+    
 }

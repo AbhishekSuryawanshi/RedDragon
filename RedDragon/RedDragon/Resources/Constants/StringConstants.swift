@@ -26,4 +26,11 @@ struct StringConstants {
     //Custom Alert
     static let dismiss              = "Dismiss"
     
+    //Database Screen
+    static let team                 = "Team"
+    static let points               = "Points"
+    static let win                  = "Win"
+    static let lose                 = "Lose"
+    static let draw                 = "Draw"
+    
 }

@@ -22,7 +22,8 @@ class DatabaseVC: UIViewController {
     var seasonPerformanceNameData: [String]?
     var selectedIndexPath: IndexPath?
     private var leagues: [StaticLeague] = []
-
+    var setFlagFor_seasonPerformanceFilters: Bool = false
+    
     @IBOutlet weak var seasonButton: UIButton!
     @IBOutlet weak var standingsButton: UIButton!
     @IBOutlet weak var eventsButton: UIButton!
@@ -68,15 +69,19 @@ class DatabaseVC: UIViewController {
         fetchCurrentLanguageCode = lang
         standingsButton.setTitleColor(UIColor(red: 187/255, green: 25/255, blue: 16/255, alpha: 1), for: .normal)
         fetchLeagueDetailViewModel()
-        //code to show collectionView cell default first index selected
-        let indexPath = IndexPath(item: 0, section: 0)
-        leaguesCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
-        collectionView(leaguesCollectionView, didSelectItemAt: indexPath)
+        highlightFirstIndex_collectionView()
     }
     
     func nibInitialization() {
         defineTableViewNibCell(tableView: tableView, cellName: CellIdentifier.standingTableCell)
         defineTableViewNibCell(tableView: seasonPerformanceTabelView, cellName: CellIdentifier.seasonPerfoemanceTableCell)
+    }
+    
+    func highlightFirstIndex_collectionView() {
+        //code to show collectionView cell default first index selected
+        let indexPath = IndexPath(item: 0, section: 0)
+        leaguesCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
+        collectionView(leaguesCollectionView, didSelectItemAt: indexPath)
     }
     
     func showLoader(_ value: Bool) {
@@ -95,6 +100,10 @@ class DatabaseVC: UIViewController {
         if sender.tag == 1 {
             standingsButton.setTitleColor(UIColor(red: 187/255, green: 25/255, blue: 16/255, alpha: 1), for: .normal)
             eventsButton.setTitleColor(UIColor.black, for: .normal)
+            setFlagFor_seasonPerformanceFilters = false
+            makeNetworkCall()
+            removeData()
+            highlightFirstIndex_collectionView()
         } else if sender.tag == 2 {
             eventsButton.setTitleColor(UIColor(red: 187/255, green: 25/255, blue: 16/255, alpha: 1), for: .normal)
             standingsButton.setTitleColor(UIColor.black, for: .normal)
@@ -102,6 +111,11 @@ class DatabaseVC: UIViewController {
     }
     
     @IBAction func seasonButton(_ sender: Any) {
+        let alertVC = PMAlertController(title: "", description: "", image: nil, style: .alert)
+        alertVC.addAction(PMAlertAction(title: StringConstants.dismiss.localized, style: .default, action: { () in
+            print("Capture action dismiss")
+        }))
+        self.present(alertVC, animated: true, completion: nil)
     }
     
     func removeData() {
@@ -111,11 +125,18 @@ class DatabaseVC: UIViewController {
         seasonPerformanceNameData?.removeAll()
         seasonPerformanceTabelView.reloadData()
         seasonButton.setTitle("--", for: .normal)
+        setFlagFor_seasonPerformanceFilters = false
+        
+        teamLabel.text = StringConstants.team.localized
+        pointsLabel.text = StringConstants.points.localized
+        winLabel.text = StringConstants.win.localized
+        loseLabel.text = StringConstants.lose.localized
+        drawLabel.text = StringConstants.draw.localized
     }
 }
 
 extension DatabaseVC {
-
+    
     ///fetch view model for league detail
     func fetchLeagueDetailViewModel() {
         databaseVM = DatabaseViewModel()
@@ -129,13 +150,17 @@ extension DatabaseVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] leagueData in
-                self?.tableData = (leagueData?.data.standings.flatMap { $0.tableData })!
-                self?.tableView.reloadData()
-                self?.seasonButton.setTitle(leagueData?.data.season, for: .normal)
-                self?.seasonPerformanceNameData = (leagueData?.data.seasonPerformance ?? []).compactMap { $0.name }
-                self?.seasonPerformanceTabelView.reloadData()
+                self?.execute_onResponseData(leagueData!)
             })
             .store(in: &cancellable)
+    }
+    
+    func execute_onResponseData(_ leagueData: LeagueDetailModel) {
+        tableData = (leagueData.data.standings.flatMap { $0.tableData })
+        tableView.reloadData()
+        seasonButton.setTitle(leagueData.data.season, for: .normal)
+        seasonPerformanceNameData = (leagueData.data.seasonPerformance).compactMap { $0.name }
+        seasonPerformanceTabelView.reloadData()
     }
 }
 
@@ -160,7 +185,6 @@ extension DatabaseVC: UICollectionViewDelegate, UICollectionViewDataSource {
     }
 }
 
-
 extension DatabaseVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == seasonPerformanceTabelView {
@@ -182,7 +206,12 @@ extension DatabaseVC: UITableViewDelegate, UITableViewDataSource {
                 return UITableViewCell()
             }
             if let data = tableData?[indexPath.row] {
-                cell.configuration(data)
+                if setFlagFor_seasonPerformanceFilters {
+                    cell.numberLabel.text = "\(indexPath.row + 1)"
+                    cell.configurationForFilters(data)
+                } else {
+                    cell.configuration(data)
+                }
             }
             return cell
         }
@@ -194,6 +223,13 @@ extension DatabaseVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == seasonPerformanceTabelView {
+            
+            setFlagFor_seasonPerformanceFilters = true
+            
+            updateTableData(with: indexPath)
+            
+            updateHeaderLabels(at: indexPath)
+            
             if let previouslySelectedIndexPath = selectedIndexPath {
                 let previouslySelectedCell = tableView.cellForRow(at: previouslySelectedIndexPath) as? SeasonPerformanceTableViewCell
                 previouslySelectedCell?.nameLabel.textColor = .black
@@ -219,6 +255,25 @@ extension DatabaseVC: UITableViewDelegate, UITableViewDataSource {
         cell.nameLabel.textColor = isSelected ? .white : .black
         cell.backgroundColor = isSelected ? UIColor(red: 183/255, green: 25/255, blue: 16/255, alpha: 1) : UIColor(red: 255/255, green: 224/255, blue: 138/255, alpha: 1)
     }
+    
+    func updateTableData(with indexPath: IndexPath) {
+        let data = databaseVM?.responseData?.data.seasonPerformance[indexPath.row].data
+        tableData?.removeAll()
+        tableData = data
+        self.tableView.reloadData()
+    }
+    
+    func updateHeaderLabels(at indexPath: IndexPath) {
+        guard let subheader = databaseVM?.responseData?.data.seasonPerformance[indexPath.row].subheader else {
+            return
+        }
+        teamLabel.text = String(describing: subheader[2])
+        pointsLabel.text = String(describing: subheader[3])
+        winLabel.text = String(describing: subheader[4])
+        loseLabel.text = String(describing: subheader[5])
+        drawLabel.text = String(describing: subheader[6])
+    }
+    
 }
 
 
