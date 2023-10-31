@@ -9,4 +9,6 @@ import Foundation
 
 struct StoryboardName {
     static let main         = "Main"
+    static let social       = "Social"
+    static let database     = "Database"
 }

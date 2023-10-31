@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="StandingsTableViewCell" id="KGk-i7-Jjw" customClass="StandingsTableViewCell" customModule="RedDragon" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="35"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="35"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7id-wR-syV">
+                        <rect key="frame" x="0.0" y="0.0" width="25" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="oOx-CT-6Cz"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="13"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9c-5m-hnC">
+                        <rect key="frame" x="25" y="0.0" width="170" height="35"/>
+                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="13"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ENA-UJ-PS6">
+                        <rect key="frame" x="195" y="0.0" width="30" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="PbO-nN-4TE"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="11"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Win" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGh-IK-AKE">
+                        <rect key="frame" x="225" y="0.0" width="30" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="gVn-8o-B7a"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="11"/>
+                        <color key="textColor" red="0.12549019610000001" green="0.73333333329999995" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lose" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hfq-z3-Xs7">
+                        <rect key="frame" x="255" y="0.0" width="30" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="d7l-qV-qBR"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="11"/>
+                        <color key="textColor" red="0.73333333329999995" green="0.098039215690000001" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Draw" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5xP-j7-o6k">
+                        <rect key="frame" x="285" y="0.0" width="30" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="h5e-Km-t2l"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                        <color key="textColor" red="0.0" green="0.39607843139999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="D9c-5m-hnC" secondAttribute="bottom" id="8c8-Pn-0fS"/>
+                    <constraint firstAttribute="bottom" secondItem="ENA-UJ-PS6" secondAttribute="bottom" id="Fbk-lB-Rpm"/>
+                    <constraint firstAttribute="bottom" secondItem="BGh-IK-AKE" secondAttribute="bottom" id="IUd-yZ-Z2V"/>
+                    <constraint firstItem="7id-wR-syV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Ong-sQ-6MU"/>
+                    <constraint firstItem="BGh-IK-AKE" firstAttribute="leading" secondItem="ENA-UJ-PS6" secondAttribute="trailing" id="Pmw-kK-Gad"/>
+                    <constraint firstItem="Hfq-z3-Xs7" firstAttribute="leading" secondItem="BGh-IK-AKE" secondAttribute="trailing" id="QFq-xo-YsZ"/>
+                    <constraint firstItem="5xP-j7-o6k" firstAttribute="leading" secondItem="Hfq-z3-Xs7" secondAttribute="trailing" id="UH7-To-MsH"/>
+                    <constraint firstItem="ENA-UJ-PS6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="XRI-7F-HuJ"/>
+                    <constraint firstItem="D9c-5m-hnC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Yxa-Q8-Yqt"/>
+                    <constraint firstAttribute="bottom" secondItem="Hfq-z3-Xs7" secondAttribute="bottom" id="Zpm-sW-Swk"/>
+                    <constraint firstItem="D9c-5m-hnC" firstAttribute="leading" secondItem="7id-wR-syV" secondAttribute="trailing" id="c7m-uo-Yik"/>
+                    <constraint firstAttribute="bottom" secondItem="5xP-j7-o6k" secondAttribute="bottom" id="cey-nP-GAr"/>
+                    <constraint firstAttribute="trailing" secondItem="5xP-j7-o6k" secondAttribute="trailing" constant="5" id="e8L-MX-KBm"/>
+                    <constraint firstAttribute="bottom" secondItem="7id-wR-syV" secondAttribute="bottom" id="eVs-B9-Mux"/>
+                    <constraint firstItem="Hfq-z3-Xs7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="eiz-aZ-QBw"/>
+                    <constraint firstItem="5xP-j7-o6k" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="gHs-7j-qRr"/>
+                    <constraint firstItem="ENA-UJ-PS6" firstAttribute="leading" secondItem="D9c-5m-hnC" secondAttribute="trailing" id="lXm-6F-Mwl"/>
+                    <constraint firstItem="7id-wR-syV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="lcX-xI-d9E"/>
+                    <constraint firstItem="BGh-IK-AKE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="sZz-wN-IZg"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="drawLabel" destination="5xP-j7-o6k" id="KTc-BG-E61"/>
+                <outlet property="loseLabel" destination="Hfq-z3-Xs7" id="eBZ-tk-Ivn"/>
+                <outlet property="numberLabel" destination="7id-wR-syV" id="USW-O4-GfU"/>
+                <outlet property="pointsLabel" destination="ENA-UJ-PS6" id="8nw-aj-KSJ"/>
+                <outlet property="teamLabel" destination="D9c-5m-hnC" id="abz-n4-HSh"/>
+                <outlet property="winLabel" destination="BGh-IK-AKE" id="8d2-kS-odL"/>
+            </connections>
+            <point key="canvasLocation" x="132.82442748091603" y="20.774647887323944"/>
+        </tableViewCell>
+    </objects>
+</document>
