@@ -23,6 +23,7 @@ class SocialVC: UIViewController {
     @IBOutlet weak var teamLabel: UILabel!
     @IBOutlet weak var createPostButton: UIButton!
     @IBOutlet weak var postContainerView: UIView!
+    @IBOutlet weak var containerHeightConstraint: NSLayoutConstraint!
     
     var selectedSegment: socialHeaderSegment = .followed
     var cancellable = Set<AnyCancellable>()
@@ -48,7 +49,13 @@ class SocialVC: UIViewController {
         user.token = "68|DRxQldurF31fHxx8ldnvIMeePCY4XMIyDHQigJsx"
         UserDefaults.standard.user = user
         UserDefaults.standard.token = user.token
-         
+        
+        ViewEmbedder.embed(withIdentifier: "PostListVC", storyboard: UIStoryboard(name: StoryboardName.social, bundle: nil)
+                           , parent: self, container: postContainerView) { vc in
+            let vc = vc as! PostListVC
+            vc.delegate = self
+        }
+        
         self.view.addSubview(Loader.activityIndicator)
         nibInitialization()
         fetchSocialViewModel()
@@ -56,6 +63,7 @@ class SocialVC: UIViewController {
     }
     
     func refreshForLocalization() {
+        self.tabBarController?.tabBar.isHidden = false
         leagueLabel.text = "Leagues".localized
         teamLabel.text = "Teams".localized
         createPostButton.setTitle("Create a Post".localized, for: .normal)
@@ -65,16 +73,6 @@ class SocialVC: UIViewController {
         headerCollectionView.register(CellIdentifier.headerTopCollectionViewCell)
         leagueCollectionView.register(CellIdentifier.iconNameCollectionViewCell)
         teamsCollectionView.register(CellIdentifier.iconNameCollectionViewCell)
-    }
-    
-    func makeNetworkCall() {
-        guard Reachability.isConnectedToNetwork() else {
-            customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.networkAlert.localized, image: ImageConstants.alertImage)
-            return
-        }
-        Loader.activityIndicator.startAnimating()
-        SocialLeagueVM.shared.fetchLeagueListAsyncCall()
-        SocialTeamVM.shared.fetchTeamListAsyncCall()
     }
     
     // MARK: - Button Actions
@@ -88,14 +86,24 @@ class SocialVC: UIViewController {
             }
             return
         }
-        navigateToViewController(PostCreateVC.self, storyboardName: StoryboardName.social, animationType: .autoReverse(presenting: .zoom)) 
+        navigateToViewController(PostCreateVC.self, storyboardName: StoryboardName.social, animationType: .autoReverse(presenting: .zoom))
     }
 }
 
+// MARK: - API Services
 extension SocialVC {
+    func makeNetworkCall() {
+        guard Reachability.isConnectedToNetwork() else {
+            customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.networkAlert.localized, image: ImageConstants.alertImage)
+            return
+        }
+        Loader.activityIndicator.startAnimating()
+        SocialLeagueVM.shared.fetchLeagueListAsyncCall()
+        SocialTeamVM.shared.fetchTeamListAsyncCall()
+    }
     
-    ///fetch league list
     func fetchSocialViewModel() {
+        ///fetch league list
         SocialLeagueVM.shared.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
@@ -113,7 +121,7 @@ extension SocialVC {
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
         SocialTeamVM.shared.displayLoader = { [weak self] value in
-           // self?.showLoader(value)
+            // self?.showLoader(value)
             if !value {
                 Loader.activityIndicator.stopAnimating()
             }
@@ -127,9 +135,9 @@ extension SocialVC {
             })
             .store(in: &cancellable)
     }
-    
 }
 
+// MARK: - CollectionView Delegates
 extension SocialVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == headerCollectionView {
@@ -190,5 +198,12 @@ extension SocialVC: UICollectionViewDelegateFlowLayout {
             let selected = selectedSegment == socialHeaderSegment.allCases[indexPath.row]
             return CGSize(width: socialHeaderSegment.allCases[indexPath.row].rawValue.localized.size(withAttributes: [NSAttributedString.Key.font : fontMedium(15)]).width + 70, height: 40)
         }
+    }
+}
+
+// MARK: - Custom Delegate
+extension SocialVC: PostListVCDelegate {
+    func postList(height: CGFloat) {
+        containerHeightConstraint.constant = height
     }
 }

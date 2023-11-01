@@ -19,5 +19,6 @@ enum dateFormat: String {
     case ddMMyyyy             = "dd-MM-yyyy"
     case ddMMyyyy2            = "dd/MM/yyyy"
     case hhmmaddMMMyyyy       = "hh:mm a | d MMMM yyyy"
+    case hhmmaddMMMyyyy2      = "hh:mm a - dd/MM/yyyy"
     case hmma                 = "hh:mm a"
 }

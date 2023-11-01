@@ -38,35 +38,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aDc-1C-d74" userLabel="topView">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="119"/>
-                                <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="white" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VsT-Vn-f1g">
-                                        <rect key="frame" x="60" y="64" width="333" height="50"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="kfG-k3-Yb0"/>
-                                        </constraints>
-                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eiO-C4-ENS">
-                                            <size key="itemSize" width="128" height="128"/>
-                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        </collectionViewFlowLayout>
-                                        <cells/>
-                                        <connections>
-                                            <outlet property="dataSource" destination="Y6W-OH-hqX" id="1or-c0-seo"/>
-                                            <outlet property="delegate" destination="Y6W-OH-hqX" id="be9-qb-SUS"/>
-                                        </connections>
-                                    </collectionView>
-                                </subviews>
-                                <color key="backgroundColor" name="base"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="VsT-Vn-f1g" secondAttribute="trailing" id="JD5-v5-pie"/>
-                                    <constraint firstItem="VsT-Vn-f1g" firstAttribute="leading" secondItem="aDc-1C-d74" secondAttribute="leading" constant="60" id="XIJ-vA-Njc"/>
-                                    <constraint firstAttribute="bottom" secondItem="VsT-Vn-f1g" secondAttribute="bottom" constant="5" id="hRM-CH-eBR"/>
-                                </constraints>
-                            </view>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbC-Dr-8mj">
                                 <rect key="frame" x="15" y="129" width="363" height="689"/>
                                 <subviews>
@@ -186,6 +157,35 @@
                                     <constraint firstItem="grX-c6-0sG" firstAttribute="leading" secondItem="qbC-Dr-8mj" secondAttribute="leading" id="odJ-aW-uyO"/>
                                 </constraints>
                             </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aDc-1C-d74" userLabel="topView">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="119"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="white" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VsT-Vn-f1g">
+                                        <rect key="frame" x="60" y="64" width="333" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="kfG-k3-Yb0"/>
+                                        </constraints>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eiO-C4-ENS">
+                                            <size key="itemSize" width="128" height="128"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="Y6W-OH-hqX" id="1or-c0-seo"/>
+                                            <outlet property="delegate" destination="Y6W-OH-hqX" id="be9-qb-SUS"/>
+                                        </connections>
+                                    </collectionView>
+                                </subviews>
+                                <color key="backgroundColor" name="base"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="VsT-Vn-f1g" secondAttribute="trailing" id="JD5-v5-pie"/>
+                                    <constraint firstItem="VsT-Vn-f1g" firstAttribute="leading" secondItem="aDc-1C-d74" secondAttribute="leading" constant="60" id="XIJ-vA-Njc"/>
+                                    <constraint firstAttribute="bottom" secondItem="VsT-Vn-f1g" secondAttribute="bottom" constant="5" id="hRM-CH-eBR"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QFt-56-gbS">
                                 <rect key="frame" x="223" y="723" width="155" height="45"/>
                                 <color key="backgroundColor" name="yellow1"/>
@@ -225,11 +225,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="containerHeightConstraint" destination="pcx-vj-Did" id="fPg-qD-WM7"/>
                         <outlet property="createPostButton" destination="QFt-56-gbS" id="GUT-Nf-YRG"/>
                         <outlet property="headerCollectionView" destination="VsT-Vn-f1g" id="bpT-am-Shz"/>
                         <outlet property="leagueCollectionView" destination="9Md-Yp-vEA" id="K0e-g6-oIH"/>
                         <outlet property="leagueLabel" destination="Bsl-QB-PKN" id="L4L-MK-YG4"/>
-                        <outlet property="postContainerView" destination="tLy-18-Vm5" id="hNv-cw-QtK"/>
+                        <outlet property="postContainerView" destination="tLy-18-Vm5" id="xG7-aY-JC7"/>
                         <outlet property="teamLabel" destination="cIF-jB-d5h" id="QpZ-oZ-4Mb"/>
                         <outlet property="teamsCollectionView" destination="oQB-xP-lvn" id="Kue-gT-LLP"/>
                     </connections>
@@ -252,6 +253,10 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isEmptyRowsHidden" value="YES"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Sf7-vd-eN1" id="Yww-kx-RMu"/>
+                                    <outlet property="delegate" destination="Sf7-vd-eN1" id="3FJ-qB-SlB"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3Cf-mx-yMr"/>
@@ -263,6 +268,9 @@
                             <constraint firstItem="3Cf-mx-yMr" firstAttribute="trailing" secondItem="oOv-Na-xu7" secondAttribute="trailing" id="vRb-tW-1jE"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="listTableView" destination="oOv-Na-xu7" id="tie-AF-bYA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MO0-eB-rra" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1009,7 +1017,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PzL-CL-bNZ">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="93w-FN-z7C" customClass="PSImageScrollView" customModule="PitchStories" customModuleProvider="target">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="93w-FN-z7C" customClass="PSImageScrollView" customModule="RedDragon" customModuleProvider="target">
                                         <rect key="frame" x="5" y="64" width="383" height="759"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </scrollView>

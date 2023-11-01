@@ -10,7 +10,7 @@ import UIKit
 /// To show image grid for post images
 /// maximum 5 images
 class FeedCVLayout: UICollectionViewLayout {
-    var height = Int(screenWidth - 50)
+    var height = Int(screenWidth - 30)
     // 2
     var layoutType = 0
     fileprivate var cellPadding: CGFloat = 1

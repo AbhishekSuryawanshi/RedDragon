@@ -42,6 +42,9 @@
 		47A1AB2D2AECE5ED00F1BD13 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A1AB2C2AECE5ED00F1BD13 /* UserDefaultsExtension.swift */; };
 		47A1AB312AED3CA300F1BD13 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A1AB2F2AED3CA300F1BD13 /* PostTableViewCell.swift */; };
 		47A1AB322AED3CA300F1BD13 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47A1AB302AED3CA300F1BD13 /* PostTableViewCell.xib */; };
+		47B3E9972AF22BDC008BB827 /* SocialPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B3E9962AF22BDC008BB827 /* SocialPostViewModel.swift */; };
+		47B3E99A2AF25F70008BB827 /* SocialPollTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B3E9982AF25F70008BB827 /* SocialPollTableViewCell.swift */; };
+		47B3E99B2AF25F70008BB827 /* SocialPollTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47B3E9992AF25F70008BB827 /* SocialPollTableViewCell.xib */; };
 		47C8C9512AF0CAB700448D96 /* SingleImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C8C94F2AF0CAB700448D96 /* SingleImageCollectionViewCell.swift */; };
 		47C8C9522AF0CAB700448D96 /* SingleImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47C8C9502AF0CAB700448D96 /* SingleImageCollectionViewCell.xib */; };
 		47C8C9552AF0D3A900448D96 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 47C8C9542AF0D3A900448D96 /* CropViewController */; };
@@ -136,6 +139,9 @@
 		47A1AB2C2AECE5ED00F1BD13 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 		47A1AB2F2AED3CA300F1BD13 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		47A1AB302AED3CA300F1BD13 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
+		47B3E9962AF22BDC008BB827 /* SocialPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialPostViewModel.swift; sourceTree = "<group>"; };
+		47B3E9982AF25F70008BB827 /* SocialPollTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialPollTableViewCell.swift; sourceTree = "<group>"; };
+		47B3E9992AF25F70008BB827 /* SocialPollTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialPollTableViewCell.xib; sourceTree = "<group>"; };
 		47C8C94F2AF0CAB700448D96 /* SingleImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		47C8C9502AF0CAB700448D96 /* SingleImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingleImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		47C8C9582AF0D3FB00448D96 /* ImagePickerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerHelper.swift; sourceTree = "<group>"; };
@@ -275,6 +281,8 @@
 				47A1AB302AED3CA300F1BD13 /* PostTableViewCell.xib */,
 				4716B1172AEF8D6B003582A9 /* MatchTableViewCell.swift */,
 				4716B1182AEF8D6B003582A9 /* MatchTableViewCell.xib */,
+				47B3E9982AF25F70008BB827 /* SocialPollTableViewCell.swift */,
+				47B3E9992AF25F70008BB827 /* SocialPollTableViewCell.xib */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -303,10 +311,10 @@
 			isa = PBXGroup;
 			children = (
 				47FC33E32AEA50BE00FABED4 /* SocialVC.swift */,
+				47E7C84A2AEFBF8D00D054A8 /* PostListVC.swift */,
 				47E7C8482AEFBF6D00D054A8 /* PostDetailVC.swift */,
 				47E7C84C2AEFBFA800D054A8 /* PostCreateVC.swift */,
 				47C8C95C2AF116D700448D96 /* ImageZoomVC.swift */,
-				47E7C84A2AEFBF8D00D054A8 /* PostListVC.swift */,
 				47E7C8502AEFD2F400D054A8 /* PostMatchesVC.swift */,
 			);
 			path = Controller;
@@ -316,6 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				4784E3F02AECDCC000C96085 /* SocialViewModel.swift */,
+				47B3E9962AF22BDC008BB827 /* SocialPostViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -660,6 +669,7 @@
 				474D99432AE7F30D009499D0 /* Roboto-LightItalic.ttf in Resources */,
 				474D993E2AE7F30D009499D0 /* Roboto-Medium.ttf in Resources */,
 				49D085392AEF863D00A835B7 /* StandingsTableViewCell.xib in Resources */,
+				47B3E99B2AF25F70008BB827 /* SocialPollTableViewCell.xib in Resources */,
 				474D993A2AE7F30D009499D0 /* Roboto-Regular.ttf in Resources */,
 				49B0B9F42AE68F0800A9D235 /* LaunchScreen.storyboard in Resources */,
 				47A1AB322AED3CA300F1BD13 /* PostTableViewCell.xib in Resources */,
@@ -730,6 +740,7 @@
 				49B0B9EA2AE68F0700A9D235 /* SceneDelegate.swift in Sources */,
 				47E7C8512AEFD2F400D054A8 /* PostMatchesVC.swift in Sources */,
 				49B0BA042AE6919800A9D235 /* Reachability.swift in Sources */,
+				47B3E99A2AF25F70008BB827 /* SocialPollTableViewCell.swift in Sources */,
 				49D0853B2AEFD47300A835B7 /* LeagueCollectionViewCell.swift in Sources */,
 				47FC33E42AEA50BE00FABED4 /* SocialVC.swift in Sources */,
 				47FC33E12AEA4DAC00FABED4 /* HeaderTopCollectionViewCell.swift in Sources */,
@@ -741,6 +752,7 @@
 				49B0BA522AE6AA1A00A9D235 /* UserDefaultString.swift in Sources */,
 				47E7C84F2AEFC85D00D054A8 /* User.swift in Sources */,
 				47A1AB312AED3CA300F1BD13 /* PostTableViewCell.swift in Sources */,
+				47B3E9972AF22BDC008BB827 /* SocialPostViewModel.swift in Sources */,
 				49B0BA432AE6A31600A9D235 /* CoreAnimation.swift in Sources */,
 				49B0BA542AE6AB2E00A9D235 /* HTTPHeaderFile.swift in Sources */,
 				49B0BA472AE6A3E800A9D235 /* StoryboardName.swift in Sources */,

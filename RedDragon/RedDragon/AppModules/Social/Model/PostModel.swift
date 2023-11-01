@@ -26,20 +26,24 @@ struct SocialPost: Codable {
     var matchDetail: String = ""
     var matchModel = SocialMatch()
     var liked: Bool = false
+    var likeCount: Int = 0
+    var commentCount: Int = 0
     
     //Poll
     var user_id: Int = 0 //for parsing only
-    var question: String = ""
     var descriptn: String = ""
     var userPoll = PollAnswer()//  1 2 3
     var option_1: String = ""
     var option_2: String = ""
+    var option_3: String = ""   //Note: question key is used as option_3
     var option_1Count: Int = 0
     var option_2Count: Int = 0
     var option_3Count: Int = 0
     
+    var pollArray: [Poll] = []
+    
     enum CodingKeys: String, CodingKey {
-        case id, type, title, question, user_id, option_1, option_2
+        case id, type, title, user_id, option_1, option_2
         case contentHtml = "content_html"
         case descriptn = "description"
         case isVisible = "is_visible"
@@ -50,6 +54,8 @@ struct SocialPost: Codable {
         case lastName = "last_name"
         case getPostImages = "post_images"
         case liked = "is_logged_user_liked"
+        case likeCount = "likes_cnt"
+        case commentCount = "comments_cnt"
         case matchDetail = "match_detail"
         case updatedTime = "updated_at"
         case createdTime = "created_at"
@@ -57,6 +63,7 @@ struct SocialPost: Codable {
         case option_1Count = "option_1_count"
         case option_2Count = "option_2_count"
         case option_3Count = "option_3_count"
+        case option_3 = "question"
     }
     
     public init () {}
@@ -78,19 +85,19 @@ struct SocialPost: Codable {
         
         matchDetail = try (container.decodeIfPresent(String.self, forKey: .matchDetail) ?? "")
         if matchDetail != "" {
-            
             let jsonData = Data(matchDetail.utf8)//matchDetail.data(using: .utf8)!
             let decoder = JSONDecoder()
             do {
-               matchModel = try decoder.decode(SocialMatch.self, from: jsonData)
-             } catch {
-               
-             }
+                matchModel = try decoder.decode(SocialMatch.self, from: jsonData)
+            } catch {
+            }
         }
+        
         liked = try (container.decodeIfPresent(Bool.self, forKey: .liked) ?? false)
+        likeCount = try (container.decodeIfPresent(Int.self, forKey: .likeCount) ?? 0)
+        commentCount = try (container.decodeIfPresent(Int.self, forKey: .commentCount) ?? 0)
         updatedTime = try (container.decodeIfPresent(String.self, forKey: .updatedTime) ?? "")
         createdTime = try (container.decodeIfPresent(String.self, forKey: .createdTime) ?? "")
-        question = try (container.decodeIfPresent(String.self, forKey: .question) ?? "")
         descriptn = try (container.decodeIfPresent(String.self, forKey: .descriptn) ?? "")
         userPoll = try (container.decodeIfPresent(PollAnswer.self, forKey: .userPoll) ?? PollAnswer())
         option_1 = try (container.decodeIfPresent(String.self, forKey: .option_1) ?? "")
@@ -103,12 +110,29 @@ struct SocialPost: Codable {
         if type == "POLL" {
             userId = user_id
         }
+        pollArray.removeAll()
+        if option_3 != "" {
+            let poll_3 = Poll(title: option_3, count: option_3Count)
+            pollArray.append(poll_3)
+        }
+        if option_2 != "" {
+            let poll_2 = Poll(title: option_2, count: option_2Count)
+            pollArray.append(poll_2)
+        }
+        if option_1 != "" {
+            let poll_1 = Poll(title: option_1, count: option_1Count)
+            pollArray.append(poll_1)
+        }
     }
+}
+
+struct Poll: Codable {
+    var title: String = ""
+    var count: Int = 0
 }
 
 struct PollAnswer: Codable {
     var answer: Int = 0
-    
 }
 
 struct SocialPostImage: Codable {

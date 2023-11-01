@@ -27,7 +27,6 @@ class PostTableViewCell: UITableViewCell {
     
     @IBOutlet weak var imageBgView: UIView!
     @IBOutlet weak var imageCollectionView: UICollectionView!
-    @IBOutlet weak var imageBgViewWidthConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var matchView: UIView!
     @IBOutlet weak var matchBgView: UIView!
@@ -44,6 +43,8 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var likeCountLabel: UILabel!
+    @IBOutlet weak var commentCountLabel: UILabel!
     
     weak var delegate:PostTableCellDelegate?
     var imageArray: [String] = []
@@ -71,16 +72,22 @@ class PostTableViewCell: UITableViewCell {
         userImageView.setImage(imageStr: model.userImage, placeholder: UIImage(named: "person.circle.fill"))
         userNameLabel.text = "\(model.firstName) \(model.lastName)"
         dateLabel.text = model.updatedTime.formatDate2(inputFormat: .hhmmaddMMMyyyy)
-        imageBgViewWidthConstraint.constant = model.postImages.count == 0 ? 0 : screenWidth - 40
         imageBgView.isHidden = model.postImages.count == 0
         matchBgView.borderColor = .lightGray
         matchBgView.borderWidth = 0.3
         matchView.isHidden = true
        // pollView.isHidden = model.type != "POLL"
         likeButton.tintColor = model.liked ? .base : .darkGray
-        likeButton.setTitle("Like".localized, for: .normal)
-        commentButton.setTitle("Comment".localized, for: .normal)
-        shareButton.setTitle("Share".localized, for: .normal)
+        likeCountLabel.text = "\(model.likeCount)"
+        commentCountLabel.text = "\(model.commentCount)"
+        
+        if model.type == "POLL" {
+            let statusCount = model.option_1Count + model.option_2Count + model.option_3Count
+            statusLabel.text = statusCount == 0 ? "" : (statusCount == 1 ? "\(statusCount) Vote" : "\(statusCount) Votes")
+        } else {
+            let statusCount = model.likeCount + model.commentCount
+            statusLabel.text = statusCount == 0 ? "" : (statusCount == 1 ? "\(statusCount) Like/Comment" : "\(statusCount) Likes/Comments")
+        }
         
         if model.type == "POLL" {
 //            let descriptn = model.descriptn == "_Test_" ? "" : model.descriptn
@@ -131,7 +138,7 @@ class PostTableViewCell: UITableViewCell {
                 imageArray = model.postImages
                 imageCollectionView.reloadData()
                 setfeedImageCVLayout(collectionview: self.imageCollectionView, imageCount: imageArray.count)
-                imageBgViewWidthConstraint.constant = imageArray.count == 0 ? 0 : screenWidth - 40
+                imageBgView.isHidden = model.postImages.count == 0
                 imageCollectionView.reloadData()
             } else {
                 
@@ -140,13 +147,14 @@ class PostTableViewCell: UITableViewCell {
             //POST Match
             if model.matchDetail != "" {
                 matchView.isHidden = false
-                
-                matchDateLabel.text = model.matchModel.matchUnixTime.formatDate(outputFormat: dateFormat.hhmmaddMMMyyyy, today: true)
+                leagueLabel.text = model.matchModel.league.name
+                leagueImageView.setImage(imageStr: model.matchModel.league.logo, placeholder: UIImage.noLeague)
+                matchDateLabel.text = model.matchModel.matchUnixTime.formatDate(outputFormat: dateFormat.hhmmaddMMMyyyy2, today: true)
                 homeImageView.setImage(imageStr: model.matchModel.homeTeam.logo, placeholder: UIImage.noTeam)
                 awayImageView.setImage(imageStr: model.matchModel.awayTeam.logo, placeholder: UIImage.noTeam)
                 homeNameLabel.text = UserDefaults.standard.language == "en" ? model.matchModel.homeTeam.enName : model.matchModel.homeTeam.cnName
                 awayNameLabel.text = UserDefaults.standard.language == "en" ? model.matchModel.awayTeam.enName : model.matchModel.awayTeam.cnName
-                scoreLabel.text = "\(model.matchModel.awayScores.first ?? 0)"
+                scoreLabel.text = "\(model.matchModel.homeScores.first ?? 0) - \(model.matchModel.awayScores.first ?? 0)"
             } else {
                 matchView.isHidden = true
             }
