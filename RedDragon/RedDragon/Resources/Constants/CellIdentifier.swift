@@ -21,6 +21,7 @@ struct CellIdentifier {
     //Database
     static let leagueNamesCollectionCell            = "LeagueCollectionViewCell"
     static let standingTableCell                    = "StandingsTableViewCell"
+    static let eventsTableCell                      = "EventsTableViewCell"
     static let seasonPerfoemanceTableCell           = "SeasonPerformanceTableViewCell"
 }
 
