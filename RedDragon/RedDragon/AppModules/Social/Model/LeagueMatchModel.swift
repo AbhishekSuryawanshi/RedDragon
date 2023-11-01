@@ -97,6 +97,7 @@ struct SocialMatchResponse: Codable {
 
 struct SocialMatch: Codable {
     var id: String = ""
+    var league = SocialMatchLeague()
     var homeTeam = SocialMatchTeam()
     var awayTeam = SocialMatchTeam()
     var homeScores: [Int] = []
@@ -105,7 +106,7 @@ struct SocialMatch: Codable {
     var matchDate = Date()
     
     enum CodingKeys: String, CodingKey {
-        case id
+        case id, league
         case awayTeam = "away_team"
         case homeTeam = "home_team"
         case homeScores = "home_scores"
@@ -118,6 +119,7 @@ struct SocialMatch: Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try (container.decodeIfPresent(String.self, forKey: .id) ?? "")
+        league = try (container.decodeIfPresent(SocialMatchLeague.self, forKey: .league) ?? SocialMatchLeague())
         awayTeam = try (container.decodeIfPresent(SocialMatchTeam.self, forKey: .awayTeam) ?? SocialMatchTeam())
         homeTeam = try (container.decodeIfPresent(SocialMatchTeam.self, forKey: .homeTeam) ?? SocialMatchTeam())
         homeScores = try (container.decodeIfPresent([Int].self, forKey: .homeScores) ?? [])
@@ -146,6 +148,21 @@ struct SocialMatchTeam: Codable {
         id = try (container.decodeIfPresent(String.self, forKey: .id) ?? "")
         enName = try (container.decodeIfPresent(String.self, forKey: .enName) ?? "")
         cnName = try (container.decodeIfPresent(String.self, forKey: .cnName) ?? "")
+        logo  = try (container.decodeIfPresent(String.self, forKey: .logo) ?? "")
+    }
+}
+
+struct SocialMatchLeague: Codable {
+    var id: String  = ""
+    var name: String  = ""
+    var logo: String  = ""
+    
+    public init () {}
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try (container.decodeIfPresent(String.self, forKey: .id) ?? "")
+        name = try (container.decodeIfPresent(String.self, forKey: .name) ?? "")
         logo  = try (container.decodeIfPresent(String.self, forKey: .logo) ?? "")
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 protocol PostListVCDelegate: AnyObject {
     func postList(height: CGFloat)
@@ -13,11 +14,11 @@ protocol PostListVCDelegate: AnyObject {
 
 class PostListVC: UIViewController {
     
-    @IBOutlet weak var headerLBL: UILabel!
-    @IBOutlet weak var listTV: UITableView!
+    @IBOutlet weak var listTableView: UITableView!
     
+    var cancellable = Set<AnyCancellable>()
     weak var delegate: PostListVCDelegate?
-    var postList: [SocialPost] = []
+    var postArray: [SocialPost] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,48 +26,40 @@ class PostListVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        refreshForLocalization()
         guard let token = UserDefaults.standard.token else {
-            listTV.reloadData()
+            listTableView.reloadData()
             return
         }
-        getPostList()
+        loadFunctionality()
     }
     
     override func viewDidLayoutSubviews() {
-        listTV.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+        listTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
     }
     
     func initialSettings() {
         nibInitialization()
     }
     
-    func refreshForLocalization() {
-        headerLBL.text = "Recent Post & Analysis".localized
+    func loadFunctionality() {
+        self.view.addSubview(Loader.activityIndicator)
+        nibInitialization()
+        fetchPostViewModel()
+        makeNetworkCall()
     }
     
     func nibInitialization() {
-        listTV.register(CellIdentifier.postTableViewCell)
+        listTableView.register(CellIdentifier.postTableViewCell)
     }
     
-    func getPostList() {
-//        self.startLoader()
-//        PSPostVM.shared.getPostList { posts, status, errorMsg in
-//            stopLoader()
-//            if status {
-//                self.postList = posts
-//                self.calculateContentHeight()
-//            } else {
-//                PSToast.show(message: errorMsg, view: self.view)
-//            }
-//            self.listTV.reloadData()
-//        }
+    func showLoader(_ value: Bool) {
+        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
     }
     
     func calculateContentHeight() {
         var height: CGFloat = 0
-        for post in self.postList {
-            height = height + 50 //PSPostVM.shared.heightOfPostCell(model: post)
+        for post in self.postArray {
+            height = height + SocialPostVM.shared.heightOfPostCell(model: post)
         }
         self.delegate?.postList(height: height + 150)
     }
@@ -80,11 +73,11 @@ class PostListVC: UIViewController {
 //                if status {
 //                    self.postList.remove(at: _index)
 //                    self.calculateContentHeight()
-//                    self.listTV.reloadData()
+//                    self.listTableView.reloadData()
 //                } else {
 //                    PSToast.show(message: errorMsg, view: self.view)
 //                }
-//                self.listTV.reloadData()
+//                self.listTableView.reloadData()
 //            }
 //        }
     }
@@ -109,8 +102,8 @@ class PostListVC: UIViewController {
     func shareAction(model: SocialPost, image: UIImage) {
 //        let vc = UIActivityViewController(activityItems: [image, "\n\n\("Check out the football detail".localized) \(model.descriptn) \("from".localized) \(Bundle.appName.localized) \n\n \(PSURLs.appstore)"], applicationActivities: [])
 //        if let popoverController = vc.popoverPresentationController {
-//            popoverController.sourceView = self.listTV
-//            popoverController.sourceRect = self.listTV.bounds
+//            popoverController.sourceView = self.listTableView
+//            popoverController.sourceRect = self.listTableView.bounds
 //        }
 //        self.present(vc, animated: true)
     }
@@ -118,7 +111,7 @@ class PostListVC: UIViewController {
     // MARK: - Button Actions
     @objc func moreBTNTapped(sender: UIButton) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        if let user = UserDefaults.standard.user, user.id == postList[sender.tag].userId {// app user
+        if let user = UserDefaults.standard.user, user.id == postArray[sender.tag].userId {// app user
             let action1 = UIAlertAction(title: "Edit Post".localized, style: .default , handler:{ (UIAlertAction) in
                // self.showCreatePostVC(model: self.postList[sender.tag], isForEdit: true, leagueId: self.postList[sender.tag].leagueId)
             })
@@ -130,7 +123,7 @@ class PostListVC: UIViewController {
         } else {
             let action1 = UIAlertAction(title: "Block User".localized, style: .default , handler:{ (UIAlertAction) in
                 self.customAlertView_2Actions(title: "".localized, description: StringConstants.blockAlert.localized) {
-                    self.blockUser(userId: self.postList[sender.tag].userId)
+                    self.blockUser(userId: self.postArray[sender.tag].userId)
                 }
             })
             alert.addAction(action1)
@@ -154,7 +147,7 @@ class PostListVC: UIViewController {
     }
     
     @objc func shareBTNTapped(sender: UIButton) {
-        let postModel = postList[sender.tag]
+        let postModel = postArray[sender.tag]
         var shareImage = UIImage(named: "appLogo")!
         if postModel.postImages.count > 0 {
             UIImageView().kf.setImage(with: URL(string: postModel.postImages.first ?? "")) { result in
@@ -180,11 +173,11 @@ class PostListVC: UIViewController {
 //            if status {
 //                self.postList[sender.tag].liked = !model.liked
 //                let cellNmber = IndexPath(row: sender.tag, section: 0)
-//                self.listTV.reloadRows(at: [cellNmber], with: .automatic)
+//                self.listTableView.reloadRows(at: [cellNmber], with: .automatic)
 //            } else {
 //                PSToast.show(message: errorMsg, view: self.view)
 //            }
-//            self.listTV.reloadData()
+//            self.listTableView.reloadData()
 //        }
     }
     
@@ -196,7 +189,7 @@ class PostListVC: UIViewController {
     }
     
     @objc func pollOptionBTNTapped(sender: UIButton) {
-        let postModel = postList[sender.tag]
+        let postModel = postArray[sender.tag]
         var param: [String: Any] = [
             "answer": String(sender.titleLabel?.tag ?? 0)
         ]
@@ -221,22 +214,59 @@ class PostListVC: UIViewController {
     }
 }
 
+// MARK: - API Services
+extension PostListVC {
+    func makeNetworkCall() {
+        guard Reachability.isConnectedToNetwork() else {
+            customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.networkAlert.localized, image: ImageConstants.alertImage)
+            return
+        }
+        Loader.activityIndicator.startAnimating()
+        SocialPostVM.shared.fetchPostListAsyncCall()
+    }
+    
+    func fetchPostViewModel() {
+        ///fetch team list
+        SocialPostVM.shared.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        SocialPostVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        SocialPostVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] postData in
+                self?.execute_onResponseData(postData ?? [])
+            })
+            .store(in: &cancellable)
+    }
+    
+    func execute_onResponseData(_ postData: [SocialPost]) {
+        ///Posts and polls comes in separate order, so we have to apply date filter
+        postArray = postData.filter({ $0.type == "POST" })
+        postArray = postArray.sorted(by: { $0.updatedTime.compare($1.updatedTime) == .orderedDescending })
+        calculateContentHeight()
+        listTableView.reloadData()
+    }
+}
+
 // MARK: - TableView Delegate
 extension PostListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        
-        if postList.count == 0 {
+        if postArray.count == 0 {
             tableView.setEmptyMessage(UserDefaults.standard.token ?? "" == "" ? StringConstants.postsEmptyLoginAlert : ErrorMessage.dataNotFound)
         } else {
             tableView.restore()
         }
-        return postList.count
+        return postArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.postTableViewCell, for: indexPath) as! PostTableViewCell
         cell.delegate = self
-        cell.configure(_index: indexPath.row, model: postList[indexPath.row])
+        cell.configure(_index: indexPath.row, model: postArray[indexPath.row])
         cell.moreButton.addTarget(self, action: #selector(moreBTNTapped(sender:)), for: .touchUpInside)
         cell.likeButton.addTarget(self, action: #selector(likeBTNTapped(sender:)), for: .touchUpInside)
         cell.commentButton.addTarget(self, action: #selector(commentBTNTapped(sender:)), for: .touchUpInside)
@@ -250,15 +280,15 @@ extension PostListVC: UITableViewDataSource {
 
 extension PostListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if postList[indexPath.row].type != "POLL" {
+        if postArray[indexPath.row].type != "POLL" {
 //            let nextVC = homeStoryboard.instantiateViewController(withIdentifier: "PSPostDetailVC") as! PSPostDetailVC
-//            nextVC.postModel = postList[indexPath.row]
+//            nextVC.postModel = postArray[indexPath.row]
 //            self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50//PSPostVM.shared.heightOfPostCell(model: postList[indexPath.row])
+        return SocialPostVM.shared.heightOfPostCell(model: postArray[indexPath.row])
     }
 }
 
