@@ -32,5 +32,12 @@ struct StringConstants {
     static let dismiss              = "Dismiss"
     static let continue_            = "Continue"
     
+    //Database Screen
+    static let team                 = "Team"
+    static let points               = "Points"
+    static let win                  = "Win"
+    static let lose                 = "Lose"
+    static let draw                 = "Draw"
+    
 }
 
