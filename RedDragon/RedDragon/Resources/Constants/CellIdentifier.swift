@@ -13,9 +13,13 @@ struct CellIdentifier {
     // Common 
     static let headerTopCollectionViewCell        = "HeaderTopCollectionViewCell"
     static let headerBottom_1CollectionViewCell   = "HeaderBottom_1CollectionViewCell"
+    static let iconNameCollectionViewCell         = "IconNameCollectionViewCell"
+    static let singleImageCollectionViewCell      = "SingleImageCollectionViewCell"
     
     //Social
-    static let IconNameCollectionViewCell         = "IconNameCollectionViewCell"
+    static let postTableViewCell                  = "PostTableViewCell"
+    static let matchTableViewCell                 = "MatchTableViewCell"
+    
 }
 
 

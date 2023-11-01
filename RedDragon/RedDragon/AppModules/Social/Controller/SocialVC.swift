@@ -19,6 +19,10 @@ class SocialVC: UIViewController {
     @IBOutlet weak var headerCollectionView: UICollectionView!
     @IBOutlet weak var leagueCollectionView: UICollectionView!
     @IBOutlet weak var teamsCollectionView: UICollectionView!
+    @IBOutlet weak var leagueLabel: UILabel!
+    @IBOutlet weak var teamLabel: UILabel!
+    @IBOutlet weak var createPostButton: UIButton!
+    @IBOutlet weak var postContainerView: UIView!
     
     var selectedSegment: socialHeaderSegment = .followed
     var cancellable = Set<AnyCancellable>()
@@ -28,17 +32,39 @@ class SocialVC: UIViewController {
         loadFunctionality()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        refreshForLocalization()
+    }
+    
     func loadFunctionality() {
+        //Test User
+        var user = User()
+        user.id = 2
+        user.firstName = "Rita"
+        user.lastName = "James"
+        user.email = "rita@mailinator.com"
+        user.image = "http://45.76.178.21:6040/profile-images/FA7B2FAF-0B54-4067-B6D2-5520796390E920231004110047.png"
+        user.token = "68|DRxQldurF31fHxx8ldnvIMeePCY4XMIyDHQigJsx"
+        UserDefaults.standard.user = user
+        UserDefaults.standard.token = user.token
+         
         self.view.addSubview(Loader.activityIndicator)
         nibInitialization()
         fetchSocialViewModel()
         makeNetworkCall()
     }
     
+    func refreshForLocalization() {
+        leagueLabel.text = "Leagues".localized
+        teamLabel.text = "Teams".localized
+        createPostButton.setTitle("Create a Post".localized, for: .normal)
+    }
+    
     func nibInitialization() {
         headerCollectionView.register(CellIdentifier.headerTopCollectionViewCell)
-        leagueCollectionView.register(CellIdentifier.IconNameCollectionViewCell)
-        teamsCollectionView.register(CellIdentifier.IconNameCollectionViewCell)
+        leagueCollectionView.register(CellIdentifier.iconNameCollectionViewCell)
+        teamsCollectionView.register(CellIdentifier.iconNameCollectionViewCell)
     }
     
     func makeNetworkCall() {
@@ -49,6 +75,20 @@ class SocialVC: UIViewController {
         Loader.activityIndicator.startAnimating()
         SocialLeagueVM.shared.fetchLeagueListAsyncCall()
         SocialTeamVM.shared.fetchTeamListAsyncCall()
+    }
+    
+    // MARK: - Button Actions
+    
+    @IBAction func createPostButtonTapped(_ sender: UIButton) {
+        
+        guard let token = UserDefaults.standard.token else {
+            self.customAlertView_2Actions(title: "Login / Sign Up".localized, description: ErrorMessage.loginRequires.localized) {
+                //ToDo
+                // self.logoutAndRootToLoginVC()
+            }
+            return
+        }
+        navigateToViewController(PostCreateVC.self, storyboardName: StoryboardName.social, animationType: .autoReverse(presenting: .zoom)) 
     }
 }
 
@@ -109,12 +149,12 @@ extension SocialVC: UICollectionViewDataSource {
             cell.configure(title: socialHeaderSegment.allCases[indexPath.row].rawValue, selected: selectedSegment == socialHeaderSegment.allCases[indexPath.row])
             return cell
         } else if collectionView == leagueCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.IconNameCollectionViewCell, for: indexPath) as! IconNameCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.iconNameCollectionViewCell, for: indexPath) as! IconNameCollectionViewCell
             let model = SocialLeagueVM.shared.leagueArray[indexPath.row]
             cell.configure(title: UserDefaults.standard.language == "en" ? model.enName : model.cnName, iconName: model.logoURL, style: .league)
             return cell
         } else if collectionView == teamsCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.IconNameCollectionViewCell, for: indexPath) as! IconNameCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.iconNameCollectionViewCell, for: indexPath) as! IconNameCollectionViewCell
             let model = SocialTeamVM.shared.teamArray[indexPath.row]
             cell.configure(title: UserDefaults.standard.language == "en" ? model.enName : model.cnName, iconName: model.logoURL, style: .team)
             return cell
@@ -143,9 +183,9 @@ extension SocialVC: UICollectionViewDelegateFlowLayout {
             let selected = selectedSegment == socialHeaderSegment.allCases[indexPath.row]
             return CGSize(width: socialHeaderSegment.allCases[indexPath.row].rawValue.localized.size(withAttributes: [NSAttributedString.Key.font : selected ? fontBold(17) : fontRegular(17)]).width + 40, height: 50)
         } else if collectionView == leagueCollectionView {
-            return CGSize(width: 78, height: 112)
+            return CGSize(width: 75, height: 112)
         } else if collectionView == teamsCollectionView {
-            return CGSize(width: 78, height: 112)
+            return CGSize(width: 75, height: 112)
         } else {
             let selected = selectedSegment == socialHeaderSegment.allCases[indexPath.row]
             return CGSize(width: socialHeaderSegment.allCases[indexPath.row].rawValue.localized.size(withAttributes: [NSAttributedString.Key.font : fontMedium(15)]).width + 70, height: 40)
