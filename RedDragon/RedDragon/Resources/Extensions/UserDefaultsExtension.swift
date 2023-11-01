@@ -35,22 +35,11 @@ extension UserDefaults {
         removeObject(forKey: UserDefaultString.language)
         synchronize()
     }
-    
-    /*
-     var onbordingLoaded: Bool? {
+   
+     var user: User? {
          get {
-             return value(forKey: .onbordingLoaded) as? Bool
-         }
-         set {
-             set(newValue, forKey: .onbordingLoaded)
-             synchronize()
-         }
-     }
-     
-     var user: PSUser? {
-         get {
-             if let decodedData = value(forKey: .user) as? Data {
-                 let decodedValue = try? JSONDecoder().decode(PSUser.self, from: decodedData)
+             if let decodedData = value(forKey: UserDefaultString.user) as? Data {
+                 let decodedValue = try? JSONDecoder().decode(User.self, from: decodedData)
                  return decodedValue
              }
              return nil
@@ -58,17 +47,12 @@ extension UserDefaults {
          set {
              if let value = newValue {
                  let encodedData = try? JSONEncoder().encode(value)
-                 set(encodedData, forKey: .user)
+                 set(encodedData, forKey: UserDefaultString.user)
                  synchronize()
              }
          }
      }
      
-     extension String {
-         static let token               = "token"
-         static let user                = "user"
-     }
-     */
 }
 
 

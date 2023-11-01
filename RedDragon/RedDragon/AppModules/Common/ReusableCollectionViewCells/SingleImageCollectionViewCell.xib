@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="vXK-9u-kRE" customClass="SingleImageCollectionViewCell" customModule="RedDragon" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="323" height="297"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="323" height="297"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E86-mT-tew">
+                        <rect key="frame" x="0.0" y="0.0" width="323" height="297"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </imageView>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ydb-3I-Iea">
+                        <rect key="frame" x="285" y="10" width="28" height="28"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWA-u0-7Jo">
+                                <rect key="frame" x="-10" y="-10" width="48" height="48"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="close_1"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" name="wheat2"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="28" id="NcW-aD-fQ7"/>
+                            <constraint firstItem="VWA-u0-7Jo" firstAttribute="top" secondItem="ydb-3I-Iea" secondAttribute="top" constant="-10" id="PDe-Xi-HdH"/>
+                            <constraint firstAttribute="width" secondItem="ydb-3I-Iea" secondAttribute="height" multiplier="1:1" id="QGZ-M6-RHF"/>
+                            <constraint firstItem="VWA-u0-7Jo" firstAttribute="leading" secondItem="ydb-3I-Iea" secondAttribute="leading" constant="-10" id="jey-Nc-TQG"/>
+                            <constraint firstAttribute="bottom" secondItem="VWA-u0-7Jo" secondAttribute="bottom" constant="-10" id="l57-ru-4Ar"/>
+                            <constraint firstAttribute="trailing" secondItem="VWA-u0-7Jo" secondAttribute="trailing" constant="-10" id="mBs-Yx-hGK"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="14"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="1D2-vS-1HR"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="ydb-3I-Iea" firstAttribute="top" secondItem="vXK-9u-kRE" secondAttribute="top" constant="10" id="5YD-SU-mpt"/>
+                <constraint firstAttribute="trailing" secondItem="E86-mT-tew" secondAttribute="trailing" id="65S-hl-X3F"/>
+                <constraint firstAttribute="trailing" secondItem="ydb-3I-Iea" secondAttribute="trailing" constant="10" id="Gqq-Nc-cUV"/>
+                <constraint firstAttribute="bottom" secondItem="E86-mT-tew" secondAttribute="bottom" id="JaQ-nJ-BN8"/>
+                <constraint firstItem="E86-mT-tew" firstAttribute="leading" secondItem="vXK-9u-kRE" secondAttribute="leading" id="k0b-a2-3HS"/>
+                <constraint firstItem="E86-mT-tew" firstAttribute="top" secondItem="vXK-9u-kRE" secondAttribute="top" id="zpF-y3-Dna"/>
+            </constraints>
+            <size key="customSize" width="323" height="297"/>
+            <connections>
+                <outlet property="closeBgView" destination="ydb-3I-Iea" id="8i0-HT-IgA"/>
+                <outlet property="closeButton" destination="VWA-u0-7Jo" id="weq-Pe-4Gs"/>
+                <outlet property="imageImageView" destination="E86-mT-tew" id="onL-Ab-tOq"/>
+            </connections>
+            <point key="canvasLocation" x="162.59541984732823" y="86.971830985915503"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="close_1" width="23" height="23"/>
+        <namedColor name="wheat2">
+            <color red="0.90588235294117647" green="0.84313725490196079" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

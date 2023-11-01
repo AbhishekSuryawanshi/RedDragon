@@ -13,6 +13,7 @@ struct UserDefaultString {
     static let token        = "token"
     static let title        = "title"
     static let description  = "description"
+    static let user         = "user"
 }
 
 struct DefaultToken {

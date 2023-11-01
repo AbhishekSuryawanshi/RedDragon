@@ -10,6 +10,14 @@ import Hero
 
 extension UIViewController {
     
+    @IBAction func backClicked(_ sender: Any) {
+        if self.isBeingPresented || self.navigationController == nil {
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
     private func configureViewControllerAnimation<T: UIViewController>(_ viewController: T, animationType: HeroDefaultAnimationType, configure: ((T) -> Void)?) {
         viewController.hero.isEnabled = true
         viewController.hero.modalAnimationType = animationType
