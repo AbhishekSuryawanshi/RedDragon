@@ -75,8 +75,7 @@ class PostCreateVC: UIViewController {
     }
     
     func setValue() {
-        self.tabBarController?.tabBar.isHidden = true
-        
+        self.tabBarController?.tabBar.isHidden = true        
         if let user = UserDefaults.standard.user {
             //ToDo
             userImageView.setImage(imageStr: user.image, placeholder: UIImage(named: "person.circle.fill"))

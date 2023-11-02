@@ -41,12 +41,12 @@ class SocialVC: UIViewController {
     func loadFunctionality() {
         //Test User
         var user = User()
-        user.id = 2
-        user.firstName = "Rita"
-        user.lastName = "James"
-        user.email = "rita@mailinator.com"
-        user.image = "http://45.76.178.21:6040/profile-images/FA7B2FAF-0B54-4067-B6D2-5520796390E920231004110047.png"
-        user.token = "68|DRxQldurF31fHxx8ldnvIMeePCY4XMIyDHQigJsx"
+        user.id = 4
+        user.firstName = "Joe"
+        user.lastName = "Titto"
+        user.email = "joe@mailinator.com"
+        user.image = "http://45.76.178.21:6040/profile-images/99087FBB-6FB9-4B2B-B7D2-3BF4DD51F73320231012100148.png"
+        user.token = "70|6ts3zlgn0fjtLYbooHxQniqM6I33vSc5CGXrO5K4"
         UserDefaults.standard.user = user
         UserDefaults.standard.token = user.token
         

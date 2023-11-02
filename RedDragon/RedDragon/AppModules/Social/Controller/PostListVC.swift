@@ -138,12 +138,8 @@ class PostListVC: UIViewController {
             })
             alert.addAction(action2)
         }
-        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel , handler:{ (UIAlertAction)in
-            
-        }))
-        self.present(alert, animated: true, completion: {
-           
-        })
+        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel))
+        self.present(alert, animated: true)
     }
     
     @objc func shareBTNTapped(sender: UIButton) {

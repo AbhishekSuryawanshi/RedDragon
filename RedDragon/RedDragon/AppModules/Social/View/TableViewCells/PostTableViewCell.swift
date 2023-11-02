@@ -182,6 +182,8 @@ extension PostTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.singleImageCollectionViewCell, for: indexPath) as! SingleImageCollectionViewCell
         cell.imageImageView.setImage(imageStr: imageArray[indexPath.row])
+        cell.imageImageView.cornerRadius = 7
+        cell.imageImageView.clipsToBounds = true
         cell.closeBgView.isHidden = true
         return cell
     }
