@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41EB79CC2AF37BA000D068F7 /* PlayerDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41EB79C12AF37BA000D068F7 /* PlayerDetail.storyboard */; };
+		41EB79CD2AF37BA000D068F7 /* PlayerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB79C32AF37BA000D068F7 /* PlayerDetailViewController.swift */; };
+		41EB79CE2AF37BA000D068F7 /* PlayerProfileTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB79C62AF37BA000D068F7 /* PlayerProfileTopView.swift */; };
+		41EB79CF2AF37BA000D068F7 /* TeamsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB79C72AF37BA000D068F7 /* TeamsView.swift */; };
+		41EB79D02AF37BA000D068F7 /* TeamsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41EB79C82AF37BA000D068F7 /* TeamsView.xib */; };
+		41EB79D12AF37BA000D068F7 /* PlayerStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB79C92AF37BA000D068F7 /* PlayerStatsView.swift */; };
+		41EB79D22AF37BA000D068F7 /* PlayerStatsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41EB79CA2AF37BA000D068F7 /* PlayerStatsView.xib */; };
+		41EB79D32AF37BA000D068F7 /* PlayerProfileTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41EB79CB2AF37BA000D068F7 /* PlayerProfileTopView.xib */; };
 		4716B1192AEF8D6B003582A9 /* MatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4716B1172AEF8D6B003582A9 /* MatchTableViewCell.swift */; };
 		4716B11A2AEF8D6B003582A9 /* MatchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4716B1182AEF8D6B003582A9 /* MatchTableViewCell.xib */; };
 		472873552AEA7A780011F00F /* HeaderBottom_1CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472873532AEA7A780011F00F /* HeaderBottom_1CollectionViewCell.swift */; };
@@ -113,6 +121,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		41EB79C12AF37BA000D068F7 /* PlayerDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlayerDetail.storyboard; sourceTree = "<group>"; };
+		41EB79C32AF37BA000D068F7 /* PlayerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailViewController.swift; sourceTree = "<group>"; };
+		41EB79C62AF37BA000D068F7 /* PlayerProfileTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerProfileTopView.swift; sourceTree = "<group>"; };
+		41EB79C72AF37BA000D068F7 /* TeamsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamsView.swift; sourceTree = "<group>"; };
+		41EB79C82AF37BA000D068F7 /* TeamsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamsView.xib; sourceTree = "<group>"; };
+		41EB79C92AF37BA000D068F7 /* PlayerStatsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerStatsView.swift; sourceTree = "<group>"; };
+		41EB79CA2AF37BA000D068F7 /* PlayerStatsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerStatsView.xib; sourceTree = "<group>"; };
+		41EB79CB2AF37BA000D068F7 /* PlayerProfileTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerProfileTopView.xib; sourceTree = "<group>"; };
 		4716B1172AEF8D6B003582A9 /* MatchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchTableViewCell.swift; sourceTree = "<group>"; };
 		4716B1182AEF8D6B003582A9 /* MatchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MatchTableViewCell.xib; sourceTree = "<group>"; };
 		472873532AEA7A780011F00F /* HeaderBottom_1CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderBottom_1CollectionViewCell.swift; sourceTree = "<group>"; };
@@ -233,6 +249,61 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		41EB79BE2AF37BA000D068F7 /* PlayerDetail */ = {
+			isa = PBXGroup;
+			children = (
+				41EB79BF2AF37BA000D068F7 /* ViewModel */,
+				41EB79C02AF37BA000D068F7 /* Storyboard */,
+				41EB79C22AF37BA000D068F7 /* Controller */,
+				41EB79C42AF37BA000D068F7 /* Model */,
+				41EB79C52AF37BA000D068F7 /* View */,
+			);
+			path = PlayerDetail;
+			sourceTree = "<group>";
+		};
+		41EB79BF2AF37BA000D068F7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		41EB79C02AF37BA000D068F7 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				41EB79C12AF37BA000D068F7 /* PlayerDetail.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		41EB79C22AF37BA000D068F7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				41EB79C32AF37BA000D068F7 /* PlayerDetailViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		41EB79C42AF37BA000D068F7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		41EB79C52AF37BA000D068F7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				41EB79C62AF37BA000D068F7 /* PlayerProfileTopView.swift */,
+				41EB79C72AF37BA000D068F7 /* TeamsView.swift */,
+				41EB79C82AF37BA000D068F7 /* TeamsView.xib */,
+				41EB79C92AF37BA000D068F7 /* PlayerStatsView.swift */,
+				41EB79CA2AF37BA000D068F7 /* PlayerStatsView.xib */,
+				41EB79CB2AF37BA000D068F7 /* PlayerProfileTopView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		4716B11B2AEF982F003582A9 /* SubClass */ = {
 			isa = PBXGroup;
 			children = (
@@ -558,6 +629,7 @@
 		49B0BA052AE691EC00A9D235 /* AppModules */ = {
 			isa = PBXGroup;
 			children = (
+				41EB79BE2AF37BA000D068F7 /* PlayerDetail */,
 				47FC33DD2AEA4D4200FABED4 /* Common */,
 				494318482AE7A170007F7292 /* SplashScreen */,
 				47FC33D72AEA4C9000FABED4 /* Social */,
@@ -665,6 +737,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				473E1D132AEB910C00A806DF /* IconNameCollectionViewCell.xib in Resources */,
+				41EB79D02AF37BA000D068F7 /* TeamsView.xib in Resources */,
 				474D99452AE7F30D009499D0 /* Roboto-MediumItalic.ttf in Resources */,
 				47FC33E22AEA4DAC00FABED4 /* HeaderTopCollectionViewCell.xib in Resources */,
 				47C8C9522AF0CAB700448D96 /* SingleImageCollectionViewCell.xib in Resources */,
@@ -678,6 +751,7 @@
 				47B3E99B2AF25F70008BB827 /* SocialPollTableViewCell.xib in Resources */,
 				474D993A2AE7F30D009499D0 /* Roboto-Regular.ttf in Resources */,
 				49B0B9F42AE68F0800A9D235 /* LaunchScreen.storyboard in Resources */,
+				41EB79CC2AF37BA000D068F7 /* PlayerDetail.storyboard in Resources */,
 				47A1AB322AED3CA300F1BD13 /* PostTableViewCell.xib in Resources */,
 				47FC33D62AEA4C6800FABED4 /* Social.storyboard in Resources */,
 				49B0BA362AE69A2200A9D235 /* Localizable.strings in Resources */,
@@ -687,6 +761,7 @@
 				49DDB4752AF0E3E2000F9AFB /* SeasonPerformanceTableViewCell.xib in Resources */,
 				49F3429E2AF23CC70057C147 /* EventsTableViewCell.xib in Resources */,
 				474D993F2AE7F30D009499D0 /* Roboto-Thin.ttf in Resources */,
+				41EB79D22AF37BA000D068F7 /* PlayerStatsView.xib in Resources */,
 				49B0B9F12AE68F0800A9D235 /* Assets.xcassets in Resources */,
 				474D993B2AE7F30D009499D0 /* Roboto-Italic.ttf in Resources */,
 				474D993D2AE7F30D009499D0 /* Roboto-Black.ttf in Resources */,
@@ -694,6 +769,7 @@
 				474D993C2AE7F30D009499D0 /* Roboto-Light.ttf in Resources */,
 				4716B11A2AEF8D6B003582A9 /* MatchTableViewCell.xib in Resources */,
 				474D99422AE7F30D009499D0 /* Roboto-BoldItalic.ttf in Resources */,
+				41EB79D32AF37BA000D068F7 /* PlayerProfileTopView.xib in Resources */,
 				49B0BA3C2AE69A4D00A9D235 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -706,6 +782,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				47A1AB2D2AECE5ED00F1BD13 /* UserDefaultsExtension.swift in Sources */,
+				41EB79CE2AF37BA000D068F7 /* PlayerProfileTopView.swift in Sources */,
 				47E7C8432AEFBD6400D054A8 /* PostModel.swift in Sources */,
 				494B37E72AEA3BD700FB9BCD /* PMAlertAction.swift in Sources */,
 				47E7C8532AEFE4A400D054A8 /* GrowingTextView.swift in Sources */,
@@ -728,6 +805,7 @@
 				49B0BA492AE6A42800A9D235 /* CellIdentifier.swift in Sources */,
 				49B0BA212AE6982400A9D235 /* ErrorMessage.swift in Sources */,
 				49B0BA1F2AE697A500A9D235 /* CustomErrors.swift in Sources */,
+				41EB79CD2AF37BA000D068F7 /* PlayerDetailViewController.swift in Sources */,
 				494D7B842AE94AF300488E27 /* UIViewController+Extension.swift in Sources */,
 				49D085382AEF863D00A835B7 /* StandingsTableViewCell.swift in Sources */,
 				494D7B752AE8F4CB00488E27 /* DatabaseVC.swift in Sources */,
@@ -751,6 +829,8 @@
 				49D0853B2AEFD47300A835B7 /* LeagueCollectionViewCell.swift in Sources */,
 				47FC33E42AEA50BE00FABED4 /* SocialVC.swift in Sources */,
 				47FC33E12AEA4DAC00FABED4 /* HeaderTopCollectionViewCell.swift in Sources */,
+				41EB79CF2AF37BA000D068F7 /* TeamsView.swift in Sources */,
+				41EB79D12AF37BA000D068F7 /* PlayerStatsView.swift in Sources */,
 				49B0BA452AE6A37F00A9D235 /* StringConstants.swift in Sources */,
 				47C8C9592AF0D3FB00448D96 /* ImagePickerHelper.swift in Sources */,
 				49B0BA1A2AE696BF00A9D235 /* RequestType.swift in Sources */,
