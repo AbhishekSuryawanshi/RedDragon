@@ -686,7 +686,6 @@
                                             <constraint firstItem="V11-Gy-1sn" firstAttribute="leading" secondItem="WwQ-CB-NFP" secondAttribute="leading" constant="10" id="3NX-3f-4yZ"/>
                                             <constraint firstAttribute="bottom" secondItem="V11-Gy-1sn" secondAttribute="bottom" constant="10" id="PwF-Vg-g2W"/>
                                             <constraint firstAttribute="trailing" secondItem="V11-Gy-1sn" secondAttribute="trailing" constant="10" id="Ugw-do-63a"/>
-                                            <constraint firstAttribute="height" constant="1034" id="W5T-dq-ZLk"/>
                                             <constraint firstItem="V11-Gy-1sn" firstAttribute="top" secondItem="WwQ-CB-NFP" secondAttribute="top" constant="10" id="Wx5-jn-OKI"/>
                                         </constraints>
                                     </view>
@@ -1014,10 +1013,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PzL-CL-bNZ">
+                            <view alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PzL-CL-bNZ">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="93w-FN-z7C" customClass="PSImageScrollView" customModule="RedDragon" customModuleProvider="target">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="93w-FN-z7C" customClass="ImageScrollView" customModule="RedDragon" customModuleProvider="target">
                                         <rect key="frame" x="5" y="64" width="383" height="759"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </scrollView>
@@ -1026,7 +1025,7 @@
                             </view>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P8Y-sX-y8H">
                                 <rect key="frame" x="332" y="79" width="56" height="56"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="P8Y-sX-y8H" secondAttribute="height" multiplier="1:1" id="6yc-wc-maA"/>
                                     <constraint firstAttribute="width" constant="56" id="W5g-wG-AAM"/>
@@ -1036,11 +1035,6 @@
                                 <state key="normal" image="close_1">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="28"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="backClicked:" destination="Am4-Wm-RUb" eventType="touchUpInside" id="JgW-Lp-7Nn"/>
                                 </connections>

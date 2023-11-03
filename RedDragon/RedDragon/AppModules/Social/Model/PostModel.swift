@@ -102,6 +102,7 @@ struct SocialPost: Codable {
         userPoll = try (container.decodeIfPresent(PollAnswer.self, forKey: .userPoll) ?? PollAnswer())
         option_1 = try (container.decodeIfPresent(String.self, forKey: .option_1) ?? "")
         option_2 = try (container.decodeIfPresent(String.self, forKey: .option_2) ?? "")
+        //option_3 = try (container.decodeIfPresent(String.self, forKey: .option_3) ?? "")
         option_1Count = try (container.decodeIfPresent(Int.self, forKey: .option_1Count) ?? 0)
         option_2Count = try (container.decodeIfPresent(Int.self, forKey: .option_2Count) ?? 0)
         option_3Count = try (container.decodeIfPresent(Int.self, forKey: .option_3Count) ?? 0)
@@ -111,17 +112,21 @@ struct SocialPost: Codable {
             userId = user_id
         }
         pollArray.removeAll()
-        if option_3 != "" {
-            let poll_3 = Poll(title: option_3, count: option_3Count)
-            pollArray.append(poll_3)
+        if option_3Count != 0 {
+            print("======== ---")
+        }
+       
+        if option_1 != "" {
+            let poll_1 = Poll(title: option_1, count: option_1Count)
+            pollArray.append(poll_1)
         }
         if option_2 != "" {
             let poll_2 = Poll(title: option_2, count: option_2Count)
             pollArray.append(poll_2)
         }
-        if option_1 != "" {
-            let poll_1 = Poll(title: option_1, count: option_1Count)
-            pollArray.append(poll_1)
+        if option_3 != "" {
+            let poll_3 = Poll(title: option_3, count: option_3Count)
+            pollArray.append(poll_3)
         }
     }
 }
@@ -175,4 +180,21 @@ struct Social: Codable {
     }
 }
 
+struct BasicResponse: Codable {
+    let message: String?
+}
 
+struct ImageResponse: Codable {
+    var postImage: String = ""
+    
+    public init () {}
+    
+    enum CodingKeys: String, CodingKey {
+        case postImage = "url"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        postImage = try (container.decodeIfPresent(String.self, forKey: .postImage) ?? "")
+    }
+}
