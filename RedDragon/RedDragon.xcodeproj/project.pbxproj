@@ -114,6 +114,10 @@
 		49D0853B2AEFD47300A835B7 /* LeagueCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D0853A2AEFD47300A835B7 /* LeagueCollectionViewCell.swift */; };
 		49DDB4742AF0E3E2000F9AFB /* SeasonPerformanceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DDB4722AF0E3E2000F9AFB /* SeasonPerformanceTableViewCell.swift */; };
 		49DDB4752AF0E3E2000F9AFB /* SeasonPerformanceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DDB4732AF0E3E2000F9AFB /* SeasonPerformanceTableViewCell.xib */; };
+		49E6DE8A2AF38EA100A0DDC3 /* MatchDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49E6DE892AF38EA100A0DDC3 /* MatchDetail.storyboard */; };
+		49E6DE8C2AF38F7000A0DDC3 /* MatchDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6DE8B2AF38F7000A0DDC3 /* MatchDetail.swift */; };
+		49E6DE8E2AF3BE4B00A0DDC3 /* MatchDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6DE8D2AF3BE4B00A0DDC3 /* MatchDetailsViewModel.swift */; };
+		49E6DE902AF3C3D900A0DDC3 /* MatchDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6DE8F2AF3C3D900A0DDC3 /* MatchDetailsVC.swift */; };
 		49F3429D2AF23CC70057C147 /* EventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3429B2AF23CC70057C147 /* EventsTableViewCell.swift */; };
 		49F3429E2AF23CC70057C147 /* EventsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F3429C2AF23CC70057C147 /* EventsTableViewCell.xib */; };
 		49F3EECF2AE7AC580095CAC6 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EECE2AE7AC580095CAC6 /* Navigation.swift */; };
@@ -222,6 +226,10 @@
 		49D0853A2AEFD47300A835B7 /* LeagueCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueCollectionViewCell.swift; sourceTree = "<group>"; };
 		49DDB4722AF0E3E2000F9AFB /* SeasonPerformanceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonPerformanceTableViewCell.swift; sourceTree = "<group>"; };
 		49DDB4732AF0E3E2000F9AFB /* SeasonPerformanceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeasonPerformanceTableViewCell.xib; sourceTree = "<group>"; };
+		49E6DE892AF38EA100A0DDC3 /* MatchDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MatchDetail.storyboard; sourceTree = "<group>"; };
+		49E6DE8B2AF38F7000A0DDC3 /* MatchDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetail.swift; sourceTree = "<group>"; };
+		49E6DE8D2AF3BE4B00A0DDC3 /* MatchDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetailsViewModel.swift; sourceTree = "<group>"; };
+		49E6DE8F2AF3C3D900A0DDC3 /* MatchDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetailsVC.swift; sourceTree = "<group>"; };
 		49F3429B2AF23CC70057C147 /* EventsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewCell.swift; sourceTree = "<group>"; };
 		49F3429C2AF23CC70057C147 /* EventsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventsTableViewCell.xib; sourceTree = "<group>"; };
 		49F3EECE2AE7AC580095CAC6 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
@@ -634,6 +642,7 @@
 				494318482AE7A170007F7292 /* SplashScreen */,
 				47FC33D72AEA4C9000FABED4 /* Social */,
 				494D7B6C2AE8E96E00488E27 /* Database */,
+				49E6DE832AF38E3D00A0DDC3 /* MatchDetail */,
 			);
 			path = AppModules;
 			sourceTree = "<group>";
@@ -644,6 +653,57 @@
 				49B0BA4F2AE6A83800A9D235 /* APIServiceManager.swift */,
 			);
 			path = CommonServiceManager;
+			sourceTree = "<group>";
+		};
+		49E6DE832AF38E3D00A0DDC3 /* MatchDetail */ = {
+			isa = PBXGroup;
+			children = (
+				49E6DE842AF38E5300A0DDC3 /* Storyboard */,
+				49E6DE882AF38E7800A0DDC3 /* Model */,
+				49E6DE872AF38E6E00A0DDC3 /* View */,
+				49E6DE862AF38E6500A0DDC3 /* ViewModel */,
+				49E6DE852AF38E5C00A0DDC3 /* Controller */,
+			);
+			path = MatchDetail;
+			sourceTree = "<group>";
+		};
+		49E6DE842AF38E5300A0DDC3 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				49E6DE892AF38EA100A0DDC3 /* MatchDetail.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		49E6DE852AF38E5C00A0DDC3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				49E6DE8F2AF3C3D900A0DDC3 /* MatchDetailsVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		49E6DE862AF38E6500A0DDC3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				49E6DE8D2AF3BE4B00A0DDC3 /* MatchDetailsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		49E6DE872AF38E6E00A0DDC3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		49E6DE882AF38E7800A0DDC3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				49E6DE8B2AF38F7000A0DDC3 /* MatchDetail.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		49F3EED62AE7DCC20095CAC6 /* StoryBoard */ = {
@@ -753,6 +813,7 @@
 				49B0B9F42AE68F0800A9D235 /* LaunchScreen.storyboard in Resources */,
 				41EB79CC2AF37BA000D068F7 /* PlayerDetail.storyboard in Resources */,
 				47A1AB322AED3CA300F1BD13 /* PostTableViewCell.xib in Resources */,
+				49E6DE8A2AF38EA100A0DDC3 /* MatchDetail.storyboard in Resources */,
 				47FC33D62AEA4C6800FABED4 /* Social.storyboard in Resources */,
 				49B0BA362AE69A2200A9D235 /* Localizable.strings in Resources */,
 				494B37E62AEA3BD700FB9BCD /* PMAlertController.xib in Resources */,
@@ -818,6 +879,7 @@
 				4943184E2AE7A24D007F7292 /* Screen.swift in Sources */,
 				494D7B7A2AE92F4700488E27 /* DatabaseViewModel.swift in Sources */,
 				49DDB4742AF0E3E2000F9AFB /* SeasonPerformanceTableViewCell.swift in Sources */,
+				49E6DE902AF3C3D900A0DDC3 /* MatchDetailsVC.swift in Sources */,
 				494318522AE7A417007F7292 /* SplashScreenVC.swift in Sources */,
 				47C8C95B2AF0D9B600448D96 /* EmbedVCHelper.swift in Sources */,
 				49B0BA502AE6A83800A9D235 /* APIServiceManager.swift in Sources */,
@@ -846,6 +908,8 @@
 				49B0BA472AE6A3E800A9D235 /* StoryboardName.swift in Sources */,
 				4943184C2AE7A222007F7292 /* LoaderAnimation.swift in Sources */,
 				494318502AE7A2A1007F7292 /* ZoomAnimation.swift in Sources */,
+				49E6DE8E2AF3BE4B00A0DDC3 /* MatchDetailsViewModel.swift in Sources */,
+				49E6DE8C2AF38F7000A0DDC3 /* MatchDetail.swift in Sources */,
 				474D99542AE7FCFC009499D0 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
