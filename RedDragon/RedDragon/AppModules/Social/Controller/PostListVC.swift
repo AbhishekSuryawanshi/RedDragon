@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import Toast
 
 protocol PostListVCDelegate: AnyObject {
     func postList(height: CGFloat)
@@ -59,7 +60,7 @@ class PostListVC: UIViewController {
     func calculateContentHeight() {
         var height: CGFloat = 0
         for post in self.postArray {
-            height = height + SocialPostVM.shared.heightOfPostCell(model: post)
+            height = height + SocialPostListVM.shared.heightOfPostCell(model: post)
         }
         self.delegate?.postList(height: height + 150)
     }
@@ -162,19 +163,8 @@ class PostListVC: UIViewController {
     }
     
     @objc func likeBTNTapped(sender: UIButton) {
-//        self.startLoader()
-//        let model = self.postList[sender.tag]
-//        PSPostVM.shared.addLike(dislike: model.liked, postId: model.id) { status, errorMsg in
-//            stopLoader()
-//            if status {
-//                self.postList[sender.tag].liked = !model.liked
-//                let cellNmber = IndexPath(row: sender.tag, section: 0)
-//                self.listTableView.reloadRows(at: [cellNmber], with: .automatic)
-//            } else {
-//                PSToast.show(message: errorMsg, view: self.view)
-//            }
-//            self.listTableView.reloadData()
-//        }
+        let model = postArray[sender.tag]
+        SocialLikeCommentVM.shared.addLikeAsyncCall(dislike: model.liked, postId: model.id)
     }
     
     @objc func commentBTNTapped(sender: UIButton) {
@@ -183,64 +173,67 @@ class PostListVC: UIViewController {
 //        nextVC.likeView = false
 //        self.navigationController?.pushViewController(nextVC, animated: true)
     }
-    
-    @objc func pollOptionBTNTapped(sender: UIButton) {
-        let postModel = postArray[sender.tag]
-        var param: [String: Any] = [
-            "answer": String(sender.titleLabel?.tag ?? 0)
-        ]
-        switch sender.titleLabel?.tag {
-        case 1:
-            param.updateValue(postModel.option_1Count + 1, forKey: "option_1_count")
-        case 2:
-            param.updateValue(postModel.option_2Count + 1, forKey: "option_2_count")
-        default:
-            param.updateValue(postModel.option_3Count + 1, forKey: "option_3_count")
-        }
-//        self.startLoader()
-//        PSPostVM.shared.addEditPoll(isForEdit: true, pollId: postModel.id, parameters: param) { status, message in
-//            stopLoader()
-//            if status {
-//                PSToast.show(message: PSMessages.pollSuccess, view: self.view)
-//                self.getPostList()
-//            } else {
-//                PSToast.show(message: message, view: self.view)
-//            }
-//        }
-    }
 }
 
 // MARK: - API Services
 extension PostListVC {
     func makeNetworkCall() {
-        guard Reachability.isConnectedToNetwork() else {
-            customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.networkAlert.localized, image: ImageConstants.alertImage)
-            return
-        }
-        Loader.activityIndicator.startAnimating()
-        SocialPostVM.shared.fetchPostListAsyncCall()
+       SocialPostListVM.shared.fetchPostListAsyncCall()
     }
     
     func fetchPostViewModel() {
-        ///fetch team list
-        SocialPostVM.shared.showError = { [weak self] error in
+        ///fetch post and poll list
+        SocialPostListVM.shared.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
-        SocialPostVM.shared.displayLoader = { [weak self] value in
+        SocialPostListVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
         }
-        SocialPostVM.shared.$responseData
+        SocialPostListVM.shared.$responseData
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] postData in
                 self?.execute_onResponseData(postData ?? [])
             })
             .store(in: &cancellable)
+        
+        /// Add / Edit poll
+        SocialPollVM.shared.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        SocialPollVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        SocialPollVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                self?.view.makeToast(StringConstants.pollSuccess)
+                SocialPostListVM.shared.fetchPostListAsyncCall()
+
+            })
+            .store(in: &cancellable)
+        
+        
+        SocialLikeCommentVM.shared.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        SocialLikeCommentVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        SocialLikeCommentVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                SocialPostListVM.shared.fetchPostListAsyncCall()
+            })
+            .store(in: &cancellable)
     }
     
     func execute_onResponseData(_ postData: [SocialPost]) {
         ///Posts and polls comes in separate order, so we have to apply date filter
-        postArray = postData.filter({ $0.type == "POST" })
+       // postArray = postData.filter({ $0.type == "POST" })
+        postArray = postData
         postArray = postArray.sorted(by: { $0.updatedTime.compare($1.updatedTime) == .orderedDescending })
         calculateContentHeight()
         listTableView.reloadData()
@@ -267,9 +260,6 @@ extension PostListVC: UITableViewDataSource {
         cell.likeButton.addTarget(self, action: #selector(likeBTNTapped(sender:)), for: .touchUpInside)
         cell.commentButton.addTarget(self, action: #selector(commentBTNTapped(sender:)), for: .touchUpInside)
         cell.shareButton.addTarget(self, action: #selector(shareBTNTapped(sender:)), for: .touchUpInside)
-      //  cell.optionBTN_1.addTarget(self, action: #selector(pollOptionBTNTapped(sender:)), for: .touchUpInside)
-      //  cell.optionBTN_2.addTarget(self, action: #selector(pollOptionBTNTapped(sender:)), for: .touchUpInside)
-       // cell.optionBTN_3.addTarget(self, action: #selector(pollOptionBTNTapped(sender:)), for: .touchUpInside)
         return cell
     }
 }
@@ -284,12 +274,27 @@ extension PostListVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return SocialPostVM.shared.heightOfPostCell(model: postArray[indexPath.row])
+        return SocialPostListVM.shared.heightOfPostCell(model: postArray[indexPath.row])
     }
 }
 
 // MARK: - Table Cell Delegate
 extension PostListVC: PostTableCellDelegate {
+    func pollAdded(postModel: SocialPost, answer: Int) {
+        var param: [String: Any] = [
+            "answer": answer
+        ]
+        switch answer {
+        case 1:
+            param.updateValue(postModel.option_1Count + 1, forKey: "option_1_count")
+        case 2:
+            param.updateValue(postModel.option_2Count + 1, forKey: "option_2_count")
+        default:
+            param.updateValue(postModel.option_3Count + 1, forKey: "option_3_count")
+        }
+       SocialPollVM.shared.addEditPostListAsyncCall(isForEdit: true, pollId: postModel.id, parameters: param)
+    }
+    
     func postImageTapped(url: String) {
         presentToViewController(ImageZoomVC.self, storyboardName: StoryboardName.social, animationType: .autoReverse(presenting: .zoom)) { vc in
             vc.imageUrl = url

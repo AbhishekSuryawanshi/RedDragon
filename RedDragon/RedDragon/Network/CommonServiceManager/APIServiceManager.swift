@@ -86,6 +86,11 @@ class APIServiceManager<ResponseModel: Decodable>: ObservableObject {
                    method: RequestType,
                    parameters: [String: Any]?,
                    isGuestUser: Bool = false) {
+        
+        guard Reachability.isConnectedToNetwork() else {
+            showError?(ErrorMessage.networkAlert.localized)
+            return
+        }
         Task { @MainActor in
             displayLoader?(true)
             do {

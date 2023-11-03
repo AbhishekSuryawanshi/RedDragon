@@ -93,10 +93,10 @@ class SocialVC: UIViewController {
 // MARK: - API Services
 extension SocialVC {
     func makeNetworkCall() {
-        guard Reachability.isConnectedToNetwork() else {
-            customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.networkAlert.localized, image: ImageConstants.alertImage)
-            return
-        }
+//        guard Reachability.isConnectedToNetwork() else {
+//            customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.networkAlert.localized, image: ImageConstants.alertImage)
+//            return
+//        }
         Loader.activityIndicator.startAnimating()
         SocialLeagueVM.shared.fetchLeagueListAsyncCall()
         SocialTeamVM.shared.fetchTeamListAsyncCall()

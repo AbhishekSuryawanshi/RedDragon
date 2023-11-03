@@ -35,4 +35,7 @@ struct URLConstants {
     static let updatePoll        = socialBaseURL + "api/poll/update/"
     static let deletePoll        = socialBaseURL + "api/poll/delete"
     static let blockPoll         = socialBaseURL + "api/poll/block"
+    
+    //Image
+    static let postImage         = socialBaseURL + "api/resource/img"
 }

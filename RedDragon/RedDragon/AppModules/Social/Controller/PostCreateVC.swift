@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class PostCreateVC: UIViewController {
     
@@ -28,14 +29,14 @@ class PostCreateVC: UIViewController {
     
     @IBOutlet weak var matchView: UIView!
     @IBOutlet weak var matchBgView: UIView!
-    @IBOutlet weak var leagueImgeView: UIImageView!
-    @IBOutlet weak var leagueNameLabel: UILabel!
+    @IBOutlet weak var leagueImageView: UIImageView!
+    @IBOutlet weak var leagueLabel: UILabel!
     @IBOutlet weak var matchDateLabel: UILabel!
-    @IBOutlet weak var homeLabel: UILabel!
-    @IBOutlet weak var scoreLabel: UILabel!
-    @IBOutlet weak var awayLabel: UILabel!
     @IBOutlet weak var homeImageView: UIImageView!
     @IBOutlet weak var awayImageView: UIImageView!
+    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var homeNameLabel: UILabel!
+    @IBOutlet weak var awayNameLabel: UILabel!
     
     @IBOutlet weak var pollStackView: UIStackView!
     
@@ -52,6 +53,7 @@ class PostCreateVC: UIViewController {
     /// match - Post contains text, match details in "matchDetail", type = "POST"
     /// poll - Post contains text and poll details, type = "POLL"
     
+    var cancellable = Set<AnyCancellable>()
     var currentPostType: SocialPostType = .none
     var selectedMatch = SocialMatch()
     var loadMatches = true
@@ -68,10 +70,16 @@ class PostCreateVC: UIViewController {
     func initialSettings() {
         nibInitialization()
         setValue()
+        fetchSocialViewModel()
+        fetchImageViewModel()
     }
     
     func nibInitialization() {
         imageCollectionView.register(CellIdentifier.singleImageCollectionViewCell)
+    }
+    
+    func showLoader(_ value: Bool) {
+        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
     }
     
     func setValue() {
@@ -174,8 +182,7 @@ class PostCreateVC: UIViewController {
                 if imageArray.count < 5 {
                     showNewImageActionSheet()
                 } else {
-                    //ToDo
-                    //  PSToast.show(message: PSMessages.photoMaxCountAlert, view: self.view)
+                    self.customAlertView(title: ErrorMessage.photoMaxCountAlert.localized, description: "", image: ImageConstants.alertImage)
                 }
             case .poll:
                 return
@@ -224,7 +231,6 @@ class PostCreateVC: UIViewController {
              self.containerTopConstarint.constant = -460
              }
              */
-            
         }
     }
     
@@ -241,21 +247,16 @@ class PostCreateVC: UIViewController {
     
     func setMatchDetail() {
         matchView.isHidden = false
-        //ToDo
-        /*
-         matchDateLabel.text = selectedMatch.matchUnixTime.formatDate(outputFormat: dateFormat.eddmmmyyyy, today: true)
-         matchTimeLabel.text = selectedMatch.matchUnixTime.formatDate(outputFormat: dateFormat.hmma)
-         homeIconIV.setImage(imageStr: selectedMatch.homeTeam.logo, placeholder: UIImage.noTeam)
-         awayIconIV.setImage(imageStr: selectedMatch.awayTeam.logo, placeholder: UIImage.noTeam)
-         homeLabel.text = selectedLang == .en ? selectedMatch.homeTeam.enName : selectedMatch.homeTeam.cnName
-         awayLabel.text = selectedLang == .en ? selectedMatch.awayTeam.enName : selectedMatch.awayTeam.cnName
-         vsLabel.text = "vs".localized
-         homeScoreLabel.text = "\(selectedMatch.homeScores.first ?? 0)"
-         awayScoreLabel.text = "\(selectedMatch.awayScores.first ?? 0)"
-         matchBgView.applyShadow(radius: 3, opacity: 0.5, offset: CGSize(width: 1 , height: 1))
-         */
+        leagueLabel.text = selectedMatch.league.name
+        leagueImageView.setImage(imageStr: selectedMatch.league.logo, placeholder: UIImage.noLeague)
+        matchDateLabel.text = selectedMatch.matchUnixTime.formatDate(outputFormat: dateFormat.hhmmaddMMMyyyy2, today: true)
+        homeImageView.setImage(imageStr: selectedMatch.homeTeam.logo, placeholder: UIImage.noTeam)
+        awayImageView.setImage(imageStr: selectedMatch.awayTeam.logo, placeholder: UIImage.noTeam)
+        homeNameLabel.text = UserDefaults.standard.language == "en" ? selectedMatch.homeTeam.enName : selectedMatch.homeTeam.cnName
+        awayNameLabel.text = UserDefaults.standard.language == "en" ? selectedMatch.awayTeam.enName : selectedMatch.awayTeam.cnName
+        scoreLabel.text = "\(selectedMatch.homeScores.first ?? 0) - \(selectedMatch.awayScores.first ?? 0)"
         
-    }
+     }
     
     func validate() -> Bool {
         //ToDo
@@ -321,7 +322,6 @@ class PostCreateVC: UIViewController {
          onCompletion()
          }
          */
-        
     }
     
     @IBAction func postButtonTapped(_ sender: UIButton) {
@@ -386,6 +386,37 @@ class PostCreateVC: UIViewController {
     }
 }
 
+// MARK: - API Services
+extension PostCreateVC {
+    func fetchImageViewModel() {
+        PostImageViewModel.shared.$userImage
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                self?.imageArray.append(response ?? "")
+                self?.setImageView()
+            })
+            .store(in: &cancellable)
+    }
+    
+    func fetchSocialViewModel() {
+        ///fetch match list
+        SocialMatchVM.shared.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        SocialMatchVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        SocialMatchVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                SocialMatchVM.shared.matchArray = response ?? []
+            })
+            .store(in: &cancellable)
+    }
+}
+
 extension PostCreateVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imageArray.count
@@ -430,12 +461,10 @@ extension PostCreateVC: ImagePickerDelegate, UINavigationControllerDelegate {
     func pickerCanceled() {}
     
     func finishedPickingImage(image: UIImage, imageName: String) {
-        let imageData = image.jpegData(compressionQuality: 0.7) ?? Data()
-        //ToDo
-        //        PSLoginVM.shared.uploadImage(forProfileImage: false, imageData: imageData, imageName: imageName) { imageStr, status, message  in
-        //            self.imageArray.append(imageStr)
-        //            self.setImageView()
-        //        }
+        if let imageData = image.jpegData(compressionQuality: 0.8) {
+            // Pass the image data and image name to your view model for uploading
+            PostImageViewModel.shared.imageAsyncCall(imageName: imageName, imageData: imageData)
+        }
     }
     
     func showNewImageActionSheet() {
