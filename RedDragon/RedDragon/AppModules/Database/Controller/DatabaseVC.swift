@@ -230,7 +230,7 @@ extension DatabaseVC: UITableViewDelegate, UITableViewDataSource {
         }
         else {
             if setFlagFor_standing_events == true {
-                presentToViewController(MatchDetailsVC.self, storyboardName: StoryboardName.matchDetail) { vc in
+                navigateToViewController(MatchDetailsVC.self, storyboardName: StoryboardName.matchDetail) { vc in
                     vc.matchSlug = self.databaseVM?.responseData?.data.events[0].matches[indexPath.row].slug
                 }
             }

@@ -21,18 +21,18 @@ class MatchDetailsVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        makeNetworkCall()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         loadFunctionality()
-        fetchMatchDetailsViewModel()
-        makeNetworkCall()
     }
     
     func loadFunctionality() {
         nibInitialization()
         matchTabsData()
-        matchTabsCollectionView.reloadData()
+        configureUI()
+        fetchMatchDetailsViewModel()
     }
     
     func matchTabsData() {
@@ -59,8 +59,8 @@ class MatchDetailsVC: UIViewController {
             return
         }
         matchDetailViewModel?.fetchMatchDetailAsyncCall(lang: fetchCurrentLanguageCode == "en" ? "en" : "zh", 
-                                                        slug: matchSlug ?? "",
-                                                        sports: "football") //2023-02-21-liverpool-real-madrid
+                                                        slug: "2023-02-21-liverpool-real-madrid",
+                                                        sports: "football") //2023-02-21-liverpool-real-madrid //matchSlug ?? ""
     }
 }
 
@@ -78,7 +78,8 @@ extension MatchDetailsVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] data in
-                
+                print(data!)
+                self?.matchTabsCollectionView.reloadData()
             })
             .store(in: &cancellable)
     }
@@ -94,5 +95,30 @@ extension MatchDetailsVC: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.matchTabsCollectionViewCell, for: indexPath) as! MatchTabsCollectionViewCell
         cell.tabNameLabel.text = matchTabsArray[indexPath.item]
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //print(matchTabsArray[indexPath.item])
+    }
+}
+
+/// __Supportive function calls
+
+extension MatchDetailsVC {
+    func addActivityIndicator() {
+        self.view.addSubview(Loader.activityIndicator)
+    }
+    
+    func configureUI() {
+        addActivityIndicator()
+        highlightFirstIndex_collectionView()
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    func highlightFirstIndex_collectionView() {
+        //code to show collectionView cell default first index selected
+        let indexPath = IndexPath(item: 0, section: 0)
+        matchTabsCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
+        collectionView(matchTabsCollectionView, didSelectItemAt: indexPath)
     }
 }
