@@ -13,15 +13,19 @@ struct CellIdentifier {
     static let headerBottom_1CollectionViewCell   = "HeaderBottom_1CollectionViewCell"
     static let iconNameCollectionViewCell         = "IconNameCollectionViewCell"
     static let singleImageCollectionViewCell      = "SingleImageCollectionViewCell"
+    static let matchTabsCollectionViewCell        = "MatchTabsCollectionViewCell"
     
     //Social
     static let postTableViewCell                  = "PostTableViewCell"
     static let matchTableViewCell                 = "MatchTableViewCell"
+    static let socialPollTableViewCell            = "SocialPollTableViewCell"
     
     //Database
-    static let leagueNamesCollectionCell            = "LeagueCollectionViewCell"
-    static let standingTableCell                    = "StandingsTableViewCell"
-    static let seasonPerfoemanceTableCell           = "SeasonPerformanceTableViewCell"
+    static let leagueNamesCollectionCell          = "LeagueCollectionViewCell"
+    static let standingTableCell                  = "StandingsTableViewCell"
+    static let eventsTableCell                    = "EventsTableViewCell"
+    static let seasonPerfoemanceTableCell         = "SeasonPerformanceTableViewCell"
 }
+
 
 

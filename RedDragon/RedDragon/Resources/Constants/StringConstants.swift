@@ -27,6 +27,11 @@ struct StringConstants {
     static let blockAlert           = "You are about to block this user. You will no longer see their content and the user will no longer be able to see your content. Would you like to block this user?"
     static let reportPostAlert      = "You are about to report this post as malicious or abusive. Would you like to report this post to PitchStories?"
     static let postsEmptyLoginAlert = "Please, Login or Sign Up to your account to see the Posts"
+    static var profileUpdateSuccess = "Profile updated."
+    static var postCreateSuccess    = "Post added."
+    static var postUpdateSuccess    = "Post updated."
+    static var pollSuccess          = "Your Poll has been Added"
+    static var deleteAlert          = "Are you sure you want to delete?"
     
     //Custom Alert
     static let dismiss              = "Dismiss"
@@ -38,6 +43,15 @@ struct StringConstants {
     static let win                  = "Win"
     static let lose                 = "Lose"
     static let draw                 = "Draw"
+    
+    //Match Tabs
+    static let highlight            = "Highlight"
+    static let stat                 = "Stat"
+    static let lineup               = "Lineup"
+    static let bets                 = "Bets"
+    static let odds                 = "Odds"
+    static let analysis             = "Analysis"
+    static let expert               = "Expert"
     
 }
 

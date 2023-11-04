@@ -30,4 +30,14 @@ class MatchTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func setCellValues(model: SocialMatch) {
+        leagueLabel.text = model.league.name
+        leagueImageView.setImage(imageStr: model.league.logo, placeholder: UIImage.noLeague)
+        dateLabel.text = model.matchUnixTime.formatDate(outputFormat: dateFormat.hhmmaddMMMyyyy2, today: true)
+        homeImageView.setImage(imageStr: model.homeTeam.logo, placeholder: UIImage.noTeam)
+        awayImageView.setImage(imageStr: model.awayTeam.logo, placeholder: UIImage.noTeam)
+        homeNameLabel.text = UserDefaults.standard.language == "en" ? model.homeTeam.enName : model.homeTeam.cnName
+        awayNameLabel.text = UserDefaults.standard.language == "en" ? model.awayTeam.enName : model.awayTeam.cnName
+        scoreLabel.text = "\(model.homeScores.first ?? 0) - \(model.awayScores.first ?? 0)"
+    }
 }

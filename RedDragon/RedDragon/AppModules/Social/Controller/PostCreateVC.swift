@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class PostCreateVC: UIViewController {
     
@@ -24,21 +25,22 @@ class PostCreateVC: UIViewController {
     
     @IBOutlet weak var imageBgView: UIView!
     @IBOutlet weak var imageCollectionView: UICollectionView!
-    @IBOutlet weak var imageBgViewWidthConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var matchView: UIView!
     @IBOutlet weak var matchBgView: UIView!
-    @IBOutlet weak var leagueImgeView: UIImageView!
-    @IBOutlet weak var leagueNameLabel: UILabel!
+    @IBOutlet weak var leagueImageView: UIImageView!
+    @IBOutlet weak var leagueLabel: UILabel!
     @IBOutlet weak var matchDateLabel: UILabel!
-    @IBOutlet weak var homeLabel: UILabel!
-    @IBOutlet weak var scoreLabel: UILabel!
-    @IBOutlet weak var awayLabel: UILabel!
     @IBOutlet weak var homeImageView: UIImageView!
     @IBOutlet weak var awayImageView: UIImageView!
+    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var homeNameLabel: UILabel!
+    @IBOutlet weak var awayNameLabel: UILabel!
     
-    @IBOutlet weak var pollStackView: UIStackView!
-    
+    @IBOutlet weak var pollView: UIView!
+    @IBOutlet weak var pollTextField: UITextField!
+    @IBOutlet weak var pollTableView: UITableView!
+    @IBOutlet weak var pollTableHeightConstraint: NSLayoutConstraint!
     
     enum SocialPostType {
         case none
@@ -52,6 +54,7 @@ class PostCreateVC: UIViewController {
     /// match - Post contains text, match details in "matchDetail", type = "POST"
     /// poll - Post contains text and poll details, type = "POLL"
     
+    var cancellable = Set<AnyCancellable>()
     var currentPostType: SocialPostType = .none
     var selectedMatch = SocialMatch()
     var loadMatches = true
@@ -59,6 +62,7 @@ class PostCreateVC: UIViewController {
     var leagueId = ""
     var isForEdit = false
     var postModel = SocialPost()
+    var pollArray: [Poll] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,15 +72,21 @@ class PostCreateVC: UIViewController {
     func initialSettings() {
         nibInitialization()
         setValue()
+        fetchSocialViewModel()
+        fetchImageViewModel()
     }
     
     func nibInitialization() {
         imageCollectionView.register(CellIdentifier.singleImageCollectionViewCell)
+        pollTableView.register(CellIdentifier.socialPollTableViewCell)
+    }
+    
+    func showLoader(_ value: Bool) {
+        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
     }
     
     func setValue() {
         self.tabBarController?.tabBar.isHidden = true
-        
         if let user = UserDefaults.standard.user {
             //ToDo
             userImageView.setImage(imageStr: user.image, placeholder: UIImage(named: "person.circle.fill"))
@@ -88,25 +98,20 @@ class PostCreateVC: UIViewController {
         
         imageBgView.isHidden = true
         matchView.isHidden = true
-        pollStackView.isHidden = true
-        
+        pollView.isHidden = true
         
         containerTopConstarint.constant = 0
         headerLabel.text = isForEdit ? "Edit Post".localized : "Create Post".localized
         contentTxtView.placeholder = "What do you want to talk about?".localized
         contentTxtView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        contentTxtView.delegate = self
         contentTxtView.minHeight = 40
         contentTxtView.maxHeight = 400
-        contentTxtView.minHeight = 80
-        contentTxtView.maxHeight = 80
         postButton.setTitle(isForEdit ? "Save".localized : "Post".localized, for: .normal)
-        //ToDo
-        //        bottomTitleLabel.text = "Select your post".localized
-        //        photoLabel.text = "Add photos".localized
-        //        pollingLabel.text = "Polling".localized
-        //        matchLabel.text = "Match".localized
-        //        eventLabel.text = "Event".localized
-        //        vsLabel.text = "vs".localized
+        pollTextField.placeholder = "Add Choise".localized
+        imageButton.setTitle("Image".localized, for: .normal)
+        pollButton.setTitle("Poll".localized, for: .normal)
+        matchButton.setTitle("Match".localized, for: .normal)
         
         //ToDo
         /*
@@ -120,7 +125,6 @@ class PostCreateVC: UIViewController {
          option1TF.placeholder = "add option".localized
          option2TF.placeholder = "add option".localized
          */
-        
         
         if isForEdit {
             //ToDo
@@ -165,18 +169,17 @@ class PostCreateVC: UIViewController {
         matchButton.isEnabled = (currentPostType == .match || currentPostType == .none) ? true : false
         
         imageBgView.isHidden = currentPostType != .photo
-        pollStackView.isHidden = currentPostType != .poll
+        pollView.isHidden = currentPostType != .poll
         matchView.isHidden = currentPostType != .match || (selectedMatch.id == "" && currentPostType == .match)
-        imageBgViewWidthConstraint.constant = imageArray.count == 0 ? 0 : screenWidth - 40
-        
+        // imageViewWidthConstraint.constant = imageArray.count == 0 ? 0 : screenWidth - 40
+        imageBgView.isHidden = imageArray.count == 0
         if btnTap {
             switch currentPostType {
             case .photo:
                 if imageArray.count < 5 {
                     showNewImageActionSheet()
                 } else {
-                    //ToDo
-                    //  PSToast.show(message: PSMessages.photoMaxCountAlert, view: self.view)
+                    self.customAlertView(title: ErrorMessage.photoMaxCountAlert.localized, description: "", image: ImageConstants.alertImage)
                 }
             case .poll:
                 return
@@ -188,44 +191,20 @@ class PostCreateVC: UIViewController {
         }
     }
     
-    func getMatchList() {
-        //ToDo
-        /*
-         let param: [String: Any] = [
-         "leagueId": leagueId,
-         "fromDayNum": -5,
-         "toDayNum": 5
-         ]
-         self.startLoader()
-         PSHomeVM.shared.getMatchList(parameters: param) { status, errorMsg in
-         stopLoader()
-         self.loadMatches = false
-         self.showMatchList()
-         if status {} else {
-         PSToast.show(message: errorMsg, view: self.view)
-         }
-         }
-         */
-        
-    }
-    
     func showMatchList() {
+        loadMatches = false
         if loadMatches {
-            getMatchList()
+            SocialMatchVM.shared.fetchMatchListAsyncCall()
         } else {
-            //ToDo
-            /*
-             ViewEmbedder.embed(withIdentifier: "PostMatchesVC", storyboard: homeStoryboard
-             , parent: self, container: self.matchContainerView) { vc in
-             let vc = vc as! PostMatchesVC
-             vc.delegate = self
-             }
-             
-             UIView.animate(withDuration: 6) {
-             self.containerTopConstarint.constant = -460
-             }
-             */
-            
+            ViewEmbedder.embed(withIdentifier: "PostMatchesVC", storyboard: UIStoryboard(name: StoryboardName.social, bundle: nil)
+                               , parent: self, container: self.matchContainerView) { vc in
+                let vc = vc as! PostMatchesVC
+                vc.delegate = self
+            }
+            UIView.animate(withDuration: 0.35) {
+                self.containerTopConstarint.constant = -460
+                self.view.layoutIfNeeded()
+            }
         }
     }
     
@@ -236,26 +215,20 @@ class PostCreateVC: UIViewController {
     
     func setImageView() {
         setfeedImageCVLayout(collectionview: self.imageCollectionView, imageCount: self.imageArray.count)
-        self.imageBgViewWidthConstraint.constant = screenWidth - 40
-        self.imageCollectionView.reloadData()
+        imageBgView.isHidden = imageArray.count == 0
+        imageCollectionView.reloadData()
     }
     
     func setMatchDetail() {
         matchView.isHidden = false
-        //ToDo
-        /*
-         matchDateLabel.text = selectedMatch.matchUnixTime.formatDate(outputFormat: dateFormat.eddmmmyyyy, today: true)
-         matchTimeLabel.text = selectedMatch.matchUnixTime.formatDate(outputFormat: dateFormat.hmma)
-         homeIconIV.setImage(imageStr: selectedMatch.homeTeam.logo, placeholder: UIImage.noTeam)
-         awayIconIV.setImage(imageStr: selectedMatch.awayTeam.logo, placeholder: UIImage.noTeam)
-         homeLabel.text = selectedLang == .en ? selectedMatch.homeTeam.enName : selectedMatch.homeTeam.cnName
-         awayLabel.text = selectedLang == .en ? selectedMatch.awayTeam.enName : selectedMatch.awayTeam.cnName
-         vsLabel.text = "vs".localized
-         homeScoreLabel.text = "\(selectedMatch.homeScores.first ?? 0)"
-         awayScoreLabel.text = "\(selectedMatch.awayScores.first ?? 0)"
-         matchBgView.applyShadow(radius: 3, opacity: 0.5, offset: CGSize(width: 1 , height: 1))
-         */
-        
+        leagueLabel.text = selectedMatch.league.name
+        leagueImageView.setImage(imageStr: selectedMatch.league.logo, placeholder: UIImage.noLeague)
+        matchDateLabel.text = selectedMatch.matchUnixTime.formatDate(outputFormat: dateFormat.hhmmaddMMMyyyy2, today: true)
+        homeImageView.setImage(imageStr: selectedMatch.homeTeam.logo, placeholder: UIImage.noTeam)
+        awayImageView.setImage(imageStr: selectedMatch.awayTeam.logo, placeholder: UIImage.noTeam)
+        homeNameLabel.text = UserDefaults.standard.language == "en" ? selectedMatch.homeTeam.enName : selectedMatch.homeTeam.cnName
+        awayNameLabel.text = UserDefaults.standard.language == "en" ? selectedMatch.awayTeam.enName : selectedMatch.awayTeam.cnName
+        scoreLabel.text = "\(selectedMatch.homeScores.first ?? 0) - \(selectedMatch.awayScores.first ?? 0)"
     }
     
     func validate() -> Bool {
@@ -284,6 +257,13 @@ class PostCreateVC: UIViewController {
     }
     
     // MARK: - Button Actions
+    
+    @objc func removePollBTNTapped(sender: UIButton) {
+        self.customAlertView_2Actions(title: StringConstants.deleteAlert, description: "") {
+            self.pollArray.remove(at: sender.tag)
+            self.pollTableView.reloadData()
+        }
+    }
     
     @IBAction func postTypeButtonTapped(_ sender: UIButton) {
         
@@ -322,7 +302,14 @@ class PostCreateVC: UIViewController {
          onCompletion()
          }
          */
-        
+    }
+    
+    @IBAction func pollAddButtonTapped(_ sender: UIButton) {
+        guard !pollTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+        pollTextField.endEditing(true)
+        pollArray.append(Poll(title: pollTextField.text!, count: 0))
+        pollTextField.text = ""
+        pollTableView.reloadData()
     }
     
     @IBAction func postButtonTapped(_ sender: UIButton) {
@@ -382,8 +369,39 @@ class PostCreateVC: UIViewController {
              }
              }
              */
-            
         }
+    }
+}
+
+// MARK: - API Services
+extension PostCreateVC {
+    func fetchImageViewModel() {
+        PostImageViewModel.shared.$userImage
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                self?.imageArray.append(response ?? "")
+                self?.setImageView()
+            })
+            .store(in: &cancellable)
+    }
+    
+    func fetchSocialViewModel() {
+        ///fetch match list
+        SocialMatchVM.shared.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        SocialMatchVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        SocialMatchVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                self?.loadMatches = false
+                SocialMatchVM.shared.matchArray = response ?? []
+            })
+            .store(in: &cancellable)
     }
 }
 
@@ -394,7 +412,9 @@ extension PostCreateVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.singleImageCollectionViewCell, for: indexPath) as! SingleImageCollectionViewCell
-        cell.imageImageView.setImage(imageStr: imageArray[indexPath.row])
+        cell.imageImageView.setImage(imageStr: imageArray[indexPath.row],placeholder: UIImage.placeholder)
+        cell.imageImageView.cornerRadius = 7
+        cell.imageImageView.clipsToBounds = true
         cell.closeButton.tag = indexPath.row
         cell.closeButton.addTarget(self, action: #selector(removeImage(sender:)), for: .touchUpInside)
         return cell
@@ -414,12 +434,37 @@ extension PostCreateVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLa
     }
 }
 
+
+// MARK: - TableView Delegates
+extension PostCreateVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        pollTableHeightConstraint.constant = CGFloat((pollArray.count * 46))
+        return pollArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.socialPollTableViewCell, for: indexPath) as! SocialPollTableViewCell
+        cell.configure(type: .createPost, poll: pollArray[indexPath.row])
+        cell.closeButton.tag = indexPath.row
+        cell.closeButton.addTarget(self, action: #selector(removePollBTNTapped(sender:)), for: .touchUpInside)
+        return cell
+    }
+}
+
+extension PostCreateVC: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 46
+    }
+}
+
 // MARK: - TextView Delegates
-extension PostCreateVC: UITextViewDelegate, GrowingTextViewDelegate {
+extension PostCreateVC: GrowingTextViewDelegate {
     
     func textViewDidChangeHeight(_ textView: GrowingTextView, height: CGFloat) {
         UIView.animate(withDuration: 0.2) {
             self.view.layoutIfNeeded()
+            self.view.setNeedsLayout()
         }
     }
     func textViewDidBeginEditing(_ textView: UITextView) {}
@@ -431,12 +476,10 @@ extension PostCreateVC: ImagePickerDelegate, UINavigationControllerDelegate {
     func pickerCanceled() {}
     
     func finishedPickingImage(image: UIImage, imageName: String) {
-        let imageData = image.jpegData(compressionQuality: 0.7) ?? Data()
-        //ToDo
-        //        PSLoginVM.shared.uploadImage(forProfileImage: false, imageData: imageData, imageName: imageName) { imageStr, status, message  in
-        //            self.imageArray.append(imageStr)
-        //            self.setImageView()
-        //        }
+        if let imageData = image.jpegData(compressionQuality: 0.8) {
+            // Pass the image data and image name to your view model for uploading
+            PostImageViewModel.shared.imageAsyncCall(imageName: imageName, imageData: imageData)
+        }
     }
     
     func showNewImageActionSheet() {
@@ -467,8 +510,9 @@ extension PostCreateVC: PostMatchesVCDelegate {
     func matchSelected(match: SocialMatch) {
         selectedMatch = match
         setMatchDetail()
-        UIView.animate(withDuration: 6) {
+        UIView.animate(withDuration: 0.7) {
             self.containerTopConstarint.constant = 0
+            self.view.layoutIfNeeded()
         }
     }
 }

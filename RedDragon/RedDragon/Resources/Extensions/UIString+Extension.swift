@@ -100,6 +100,16 @@ extension String {
             documentAttributes: nil
         )
     }
+    
+    func heightOfString2(width: CGFloat, font: UIFont) -> CGFloat {
+        let label : UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.font = font
+        label.text = self
+        label.sizeToFit()
+        return label.frame.height
+    }
 }
 
 // MARK: - NSMutableAttributedString

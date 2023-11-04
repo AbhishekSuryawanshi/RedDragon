@@ -22,4 +22,13 @@ struct ErrorMessage {
     static let responseFailed           = "response failed with other than error code"
     static let profileUpdated           = "Profile Updated."
     static let loginRequires            = "The App requires login"
+    static var photoMinCountAlert       = "Alert! Photo count should be at least 1"
+    static var photoMaxCountAlert       = "You've already reached the limit of 5 photos"
+    
+    static var chatEmptyAlert           = "No Chats yet!"
+    static var likeListEmptyAlert       = "No Likes yet!"
+    static var commentListEmptyAlert    = "No Comments yet!"
+    static var leaguesEmptyAlert        = "No Leagues found"
+    static var teamEmptyAlert           = "No Teams found"
+    static var matchEmptyAlert          = "No Matches found"
 }

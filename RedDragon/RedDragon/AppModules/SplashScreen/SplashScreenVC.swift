@@ -30,6 +30,7 @@ class SplashScreenVC: UIViewController {
             //self.navigationController?.pushViewController(vc!, animated: true)
         }
     }
-
+    
+   
 
 }
