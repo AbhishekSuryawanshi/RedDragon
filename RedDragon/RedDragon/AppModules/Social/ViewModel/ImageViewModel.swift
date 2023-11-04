@@ -57,7 +57,8 @@ class PostImageViewModel: ObservableObject {
             return "Error: \(error)"
         }
     }
-    
+    ///call this function to upload image in multipart form
+    ///image url added to @Published variable userImage
     func imageAsyncCall(imageName: String, imageData: Data) {
         Task { @MainActor in
             displayLoader?(true)
@@ -65,11 +66,11 @@ class PostImageViewModel: ObservableObject {
                 let responseData = try await fetchUploadedImageURL(imageName: imageName, imageData: imageData)
                 var imageModel = ImageResponse()
                 if responseData != "" {
-                    let jsonData = Data(responseData.utf8)//matchDetail.data(using: .utf8)!
+                    let jsonData = Data(responseData.utf8)
                     let decoder = JSONDecoder()
                     do {
                         imageModel = try decoder.decode(ImageResponse.self, from: jsonData)
-                        userImage = URLConstants.socialBaseURL + (imageModel.postImage ?? "")
+                        userImage = URLConstants.socialBaseURL + imageModel.postImage
                     } catch {
                     }
                 }
@@ -89,9 +90,6 @@ class PostImageViewModel: ObservableObject {
         
         let statusCode = httpsResponse.statusCode
         if 200..<400 ~= statusCode {
-            //            if let responseString = String(data: data, encoding: .utf8) {
-            //                //print("Raw Response Data: \(responseString)")
-            //            }
             // Convert the raw data to a string
             if let responseString = String(data: data, encoding: .utf8) {
                 return responseString

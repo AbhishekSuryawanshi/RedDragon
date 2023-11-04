@@ -22,6 +22,7 @@ class SocialPollTableViewCell: UITableViewCell {
     @IBOutlet weak var leftWidthConstrant: NSLayoutConstraint!
     @IBOutlet weak var stackWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var pollStackView: UIStackView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,14 +37,17 @@ class SocialPollTableViewCell: UITableViewCell {
     func configure(type: PollCellType, poll: Poll, pollCount: Int = 0) {
       
         closeButton.isHidden = type == .createPost ? false : true
+        pollStackView.borderWidth = type == .createPost ? 0 : 1
+        leftView.borderWidth = type == .createPost ? 1 : 0
         
-        let pollViewWidth = screenWidth - 30
+        let pollViewWidth = type == .createPost ? (screenWidth - 46) : (screenWidth - 30)
         stackWidthConstraint.constant = pollViewWidth
+        leftWidthConstrant.constant = pollViewWidth
         if pollCount != 0 {
             
             let ansPercentage = CGFloat((poll.count * 100) / pollCount)
-            let rightViewWidth = (ansPercentage * 0.01) * pollViewWidth
-            leftWidthConstrant.constant = type == .pollAnswer ? rightViewWidth : pollViewWidth
+            let lefttViewWidth = (ansPercentage * 0.01) * pollViewWidth
+            leftWidthConstrant.constant = type == .pollAnswer ? lefttViewWidth : pollViewWidth
             rightLabel.text = type == .pollAnswer ? "\(ansPercentage == 0.0 ? 0 : ansPercentage)%" : ""
             rightLabel.text = rightLabel.text?.replacingOccurrences(of: ".0%", with: "%")
         } else {
@@ -54,5 +58,6 @@ class SocialPollTableViewCell: UITableViewCell {
         leftLabel.textColor = type == .pollAnswer ? .black : .yellow2
         leftLabel.textAlignment = type == .pollQuestien ? .center : .left
         leftLabel.text = poll.title
+        
     }
 }

@@ -28,4 +28,7 @@ struct ErrorMessage {
     static var chatEmptyAlert           = "No Chats yet!"
     static var likeListEmptyAlert       = "No Likes yet!"
     static var commentListEmptyAlert    = "No Comments yet!"
+    static var leaguesEmptyAlert        = "No Leagues found"
+    static var teamEmptyAlert           = "No Teams found"
+    static var matchEmptyAlert          = "No Matches found"
 }

@@ -44,6 +44,9 @@ class PostListVC: UIViewController {
     
     func loadFunctionality() {
         self.view.addSubview(Loader.activityIndicator)
+        if UserDefaults.standard.token ?? "" == "" {
+            execute_onResponseData([]) //set initial view for guest user login
+        }
         nibInitialization()
         fetchPostViewModel()
         makeNetworkCall()
@@ -214,7 +217,7 @@ extension PostListVC {
             })
             .store(in: &cancellable)
         
-        
+        /// Add Like
         SocialLikeCommentVM.shared.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
@@ -237,18 +240,19 @@ extension PostListVC {
         postArray = postArray.sorted(by: { $0.updatedTime.compare($1.updatedTime) == .orderedDescending })
         calculateContentHeight()
         listTableView.reloadData()
+        
+        ///set placeholder for tableview
+        if postArray.count == 0 {
+            listTableView.setEmptyMessage(UserDefaults.standard.token ?? "" == "" ? StringConstants.postsEmptyLoginAlert : ErrorMessage.dataNotFound)
+        } else {
+            listTableView.restore()
+        }
     }
 }
 
 // MARK: - TableView Delegate
 extension PostListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       
-        if postArray.count == 0 {
-            tableView.setEmptyMessage(UserDefaults.standard.token ?? "" == "" ? StringConstants.postsEmptyLoginAlert : ErrorMessage.dataNotFound)
-        } else {
-            tableView.restore()
-        }
         return postArray.count
     }
     
