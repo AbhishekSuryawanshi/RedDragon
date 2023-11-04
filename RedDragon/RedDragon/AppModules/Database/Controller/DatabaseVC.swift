@@ -226,6 +226,13 @@ extension DatabaseVC: UITableViewDelegate, UITableViewDataSource {
             selectedCell?.nameLabel.textColor = .white
             selectedCell?.backgroundColor = selectedColor
         }
+        else {
+            if setFlagFor_standing_events == true {
+                presentToViewController(MatchDetailsVC.self, storyboardName: StoryboardName.matchDetail) { vc in
+                    vc.matchSlug = self.databaseVM?.responseData?.data.events[0].matches[indexPath.row].slug
+                }
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {

@@ -11,9 +11,13 @@ import SDWebImage
 
 class MatchDetailsVC: UIViewController {
     
+    @IBOutlet weak var matchTabsCollectionView: UICollectionView!
+    
     private var cancellable = Set<AnyCancellable>()
     private var matchDetailViewModel: MatchDetailsViewModel?
     private var fetchCurrentLanguageCode = String()
+    private var matchTabsArray = [String]()
+    var matchSlug: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +30,23 @@ class MatchDetailsVC: UIViewController {
     }
     
     func loadFunctionality() {
-        
+        nibInitialization()
+        matchTabsData()
+        matchTabsCollectionView.reloadData()
+    }
+    
+    func matchTabsData() {
+        matchTabsArray = [StringConstants.highlight.localized,
+                          StringConstants.stat.localized,
+                          StringConstants.lineup.localized,
+                          StringConstants.bets.localized,
+                          StringConstants.odds.localized,
+                          StringConstants.analysis.localized,
+                          StringConstants.expert.localized ]
+    }
+    
+    func nibInitialization() {
+        matchTabsCollectionView.register(CellIdentifier.matchTabsCollectionViewCell)
     }
     
     func showLoader(_ value: Bool) {
@@ -39,8 +59,8 @@ class MatchDetailsVC: UIViewController {
             return
         }
         matchDetailViewModel?.fetchMatchDetailAsyncCall(lang: fetchCurrentLanguageCode == "en" ? "en" : "zh", 
-                                                        slug: "2023-02-21-liverpool-real-madrid",
-                                                        sports: "football")
+                                                        slug: matchSlug ?? "",
+                                                        sports: "football") //2023-02-21-liverpool-real-madrid
     }
 }
 
@@ -61,5 +81,18 @@ extension MatchDetailsVC {
                 
             })
             .store(in: &cancellable)
+    }
+}
+
+extension MatchDetailsVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return matchTabsArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.matchTabsCollectionViewCell, for: indexPath) as! MatchTabsCollectionViewCell
+        cell.tabNameLabel.text = matchTabsArray[indexPath.item]
+        return cell
     }
 }

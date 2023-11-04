@@ -6,19 +6,67 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Match DetailsVC-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="MatchDetailsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="MatchDetailsVC" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MatchDetailsVC" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="MatchDetailsVC" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stadium" translatesAutoresizingMaskIntoConstraints="NO" id="1Gi-OK-k6V">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="240"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="tkK-Bm-1Tn"/>
+                                </constraints>
+                            </imageView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gE9-C9-40Y">
+                                <rect key="frame" x="0.0" y="240" width="393" height="34"/>
+                                <color key="backgroundColor" red="1" green="0.85490196080000003" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="bof-v8-xD6"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ba3-KF-Qzx">
+                                    <size key="itemSize" width="218" height="29"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="BKE-9V-lXR">
+                                        <rect key="frame" x="0.0" y="0.0" width="218" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="fdx-lb-PrD">
+                                            <rect key="frame" x="0.0" y="0.0" width="218" height="34"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="218" height="34"/>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="LQf-mG-sCU"/>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="lAu-eV-J4O"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="1Gi-OK-k6V" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="1hm-R6-P4m"/>
+                            <constraint firstItem="gE9-C9-40Y" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="O7B-ri-LEq"/>
+                            <constraint firstItem="gE9-C9-40Y" firstAttribute="top" secondItem="1Gi-OK-k6V" secondAttribute="bottom" id="oMz-mY-PYg"/>
+                            <constraint firstItem="gE9-C9-40Y" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="r6l-Ai-g1f"/>
+                            <constraint firstItem="1Gi-OK-k6V" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="vER-WL-TRz"/>
+                            <constraint firstItem="1Gi-OK-k6V" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="wEM-Jk-v2k"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="matchTabsCollectionView" destination="gE9-C9-40Y" id="eHl-RT-fqU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -26,6 +74,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="stadium" width="393" height="219"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
