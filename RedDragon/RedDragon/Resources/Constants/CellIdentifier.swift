@@ -13,6 +13,7 @@ struct CellIdentifier {
     static let headerBottom_1CollectionViewCell   = "HeaderBottom_1CollectionViewCell"
     static let iconNameCollectionViewCell         = "IconNameCollectionViewCell"
     static let singleImageCollectionViewCell      = "SingleImageCollectionViewCell"
+    static let matchTabsCollectionViewCell        = "MatchTabsCollectionViewCell"
     
     //Social
     static let postTableViewCell                  = "PostTableViewCell"

@@ -44,5 +44,14 @@ struct StringConstants {
     static let lose                 = "Lose"
     static let draw                 = "Draw"
     
+    //Match Tabs
+    static let highlight            = "Highlight"
+    static let stat                 = "Stat"
+    static let lineup               = "Lineup"
+    static let bets                 = "Bets"
+    static let odds                 = "Odds"
+    static let analysis             = "Analysis"
+    static let expert               = "Expert"
+    
 }
 
