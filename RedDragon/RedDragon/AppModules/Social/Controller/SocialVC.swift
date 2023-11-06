@@ -57,6 +57,7 @@ class SocialVC: UIViewController {
         }
         
         self.view.addSubview(Loader.activityIndicator)
+        Loader.activityIndicator.startAnimating()
         nibInitialization()
         fetchSocialViewModel()
         makeNetworkCall()
@@ -97,9 +98,9 @@ extension SocialVC {
 //            customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.networkAlert.localized, image: ImageConstants.alertImage)
 //            return
 //        }
-        Loader.activityIndicator.startAnimating()
+        
         SocialLeagueVM.shared.fetchLeagueListAsyncCall()
-        SocialTeamVM.shared.fetchTeamListAsyncCall()
+        
     }
     
     func fetchSocialViewModel() {
@@ -113,18 +114,13 @@ extension SocialVC {
             .sink(receiveValue: { [weak self] leagueData in
                 SocialLeagueVM.shared.leagueArray = leagueData ?? []
                 self?.leagueCollectionView.reloadData()
+                SocialTeamVM.shared.fetchTeamListAsyncCall()
             })
             .store(in: &cancellable)
         
         ///fetch team list
         SocialTeamVM.shared.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
-        }
-        SocialTeamVM.shared.displayLoader = { [weak self] value in
-            // self?.showLoader(value)
-            if !value {
-                Loader.activityIndicator.stopAnimating()
-            }
         }
         SocialTeamVM.shared.$responseData
             .receive(on: DispatchQueue.main)
@@ -205,5 +201,6 @@ extension SocialVC: UICollectionViewDelegateFlowLayout {
 extension SocialVC: PostListVCDelegate {
     func postList(height: CGFloat) {
         containerHeightConstraint.constant = height
+        Loader.activityIndicator.stopAnimating()
     }
 }

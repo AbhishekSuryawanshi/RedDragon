@@ -39,11 +39,12 @@ class PostListVC: UIViewController {
     }
     
     func initialSettings() {
+        self.view.addSubview(Loader.activityIndicator)
         nibInitialization()
     }
     
     func loadFunctionality() {
-        self.view.addSubview(Loader.activityIndicator)
+        //self.view.addSubview(Loader.activityIndicator)
         if UserDefaults.standard.token ?? "" == "" {
             execute_onResponseData([]) //set initial view for guest user login
         }
@@ -271,9 +272,9 @@ extension PostListVC: UITableViewDataSource {
 extension PostListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if postArray[indexPath.row].type != "POLL" {
-//            let nextVC = homeStoryboard.instantiateViewController(withIdentifier: "PSPostDetailVC") as! PSPostDetailVC
-//            nextVC.postModel = postArray[indexPath.row]
-//            self.navigationController?.pushViewController(nextVC, animated: true)
+            navigateToViewController(PostDetailVC.self, storyboardName: StoryboardName.social, animationType: .autoReverse(presenting: .zoom)) { vc in
+                vc.postModel = self.postArray[indexPath.row]
+            }
         }
     }
     
