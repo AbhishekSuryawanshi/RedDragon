@@ -39,19 +39,21 @@ class DatabaseVC: UIViewController {
     private var setFlagFor_seasonPerformanceFilters: Bool = false
     private var setFlagFor_standing_events: Bool = false
     private var selectedLeagueSlug: String?
+    private var selectedLeagueName: String?
     private let deselectedColor: UIColor = UIColor(red: 255/255, green: 224/255, blue: 138/255, alpha: 1)
     private let selectedColor: UIColor = UIColor(red: 183/255, green: 25/255, blue: 16/255, alpha: 1)
     private let buttonColor_red: UIColor = UIColor(red: 187/255, green: 25/255, blue: 16/255, alpha: 1)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         setupLeagues()
         loadFunctionality()
         makeNetworkCall()
         nibInitialization()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        addActivityIndicator()
     }
     
     private func setupLeagues() {
@@ -70,7 +72,6 @@ class DatabaseVC: UIViewController {
     }
     
     func loadFunctionality() {
-        addActivityIndicator()
         configureLanguage()
         configureUI()
         fetchLeagueDetailViewModel()
@@ -88,10 +89,6 @@ class DatabaseVC: UIViewController {
     }
     
     func makeNetworkCall() {
-        guard Reachability.isConnectedToNetwork() else {
-            customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.networkAlert.localized, image: ImageConstants.alertImage)
-            return
-        }
         databaseVM?.fetchLeagueDetailAsyncCall(lang: fetchCurrentLanguageCode == "en" ? "en" : "zh", 
                                                slug: "england-premier-league",
                                                season: "")
@@ -152,6 +149,7 @@ extension DatabaseVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         removeData()
         selectedLeagueSlug = leagues[indexPath.item].slug
+        selectedLeagueName = leagues[indexPath.item].name
         databaseVM?.fetchLeagueDetailAsyncCall(lang: fetchCurrentLanguageCode == "en" ? "en" : "zh", slug: leagues[indexPath.item].slug, season: "")
     }
     
@@ -229,8 +227,9 @@ extension DatabaseVC: UITableViewDelegate, UITableViewDataSource {
         }
         else {
             if setFlagFor_standing_events == true {
-                navigateToViewController(MatchDetailsVC.self, storyboardName: StoryboardName.matchDetail) { vc in
+                navigateToViewController(MatchDetailsVC.self, storyboardName: StoryboardName.matchDetail) { [self] vc in
                     vc.matchSlug = self.databaseVM?.responseData?.data.events[0].matches[indexPath.row].slug
+                    vc.leagueName = selectedLeagueName?.isEmpty == false ? selectedLeagueName : "Premier League"
                 }
             }
         }

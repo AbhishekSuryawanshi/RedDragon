@@ -52,6 +52,7 @@ struct StringConstants {
     static let odds                 = "Odds"
     static let analysis             = "Analysis"
     static let expert               = "Expert"
+    static let firstHalf            = "First Half"
     
 }
 
