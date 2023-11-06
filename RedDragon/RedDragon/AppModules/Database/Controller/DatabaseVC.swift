@@ -74,6 +74,7 @@ class DatabaseVC: UIViewController {
         configureLanguage()
         configureUI()
         fetchLeagueDetailViewModel()
+        switchToStandings()
     }
     
     func nibInitialization() {
