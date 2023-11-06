@@ -77,6 +77,7 @@ class SocialPollVM: APIServiceManager<BasicResponse> {
 class SocialLikeCommentListVM: APIServiceManager<[Social]> {
     init () {}
     static let shared = SocialLikeCommentListVM()
+    var commentsArray: [Social] = []
     
     ///function to fetch post comment list for social module
     func fetchCommentListAsyncCall(postId: Int) {

@@ -35,7 +35,7 @@ class SocialTeamVM: APIServiceManager<[SocialTeam]> {
     }
 }
 
-class SocialMatchVM: APIServiceManager<[SocialMatch]> {
+class SocialMatchVM: APIServiceManager<SocialMatchResponse> {
     init () {}
     static let shared = SocialMatchVM()
     
@@ -43,8 +43,8 @@ class SocialMatchVM: APIServiceManager<[SocialMatch]> {
     
     ///function to fetch match list for social module
     ///We can send leagueId, teamId, fromDayNum, toDayNum parameter to get filtered matches
-    func fetchMatchListAsyncCall() {
-        let urlString   = URLConstants.socialMatch + "?fromDayNum=-5&toDayNum=5"
+    func fetchMatchListAsyncCall(leagueId: String) {
+        let urlString   = URLConstants.socialMatch + "?leagueId=\(leagueId)&fromDayNum=-5&toDayNum=5"
         let method      = RequestType.get
         asyncCall(urlString: urlString, method: method, parameters: nil)
     }

@@ -57,7 +57,6 @@ class PostCreateVC: UIViewController {
     var cancellable = Set<AnyCancellable>()
     var currentPostType: SocialPostType = .none
     var selectedMatch = SocialMatch()
-    var loadMatches = true
     var imageArray: [String] = []
     var leagueId = ""
     var isForEdit = false
@@ -70,9 +69,9 @@ class PostCreateVC: UIViewController {
     }
     
     func initialSettings() {
+        self.view.addSubview(Loader.activityIndicator)
         nibInitialization()
         setValue()
-        fetchSocialViewModel()
         fetchImageViewModel()
     }
     
@@ -184,26 +183,17 @@ class PostCreateVC: UIViewController {
             case .poll:
                 return
             case .match:
-                showMatchList()
+                ViewEmbedder.embed(withIdentifier: "PostMatchesVC", storyboard: UIStoryboard(name: StoryboardName.social, bundle: nil)
+                                   , parent: self, container: self.matchContainerView) { vc in
+                    let vc = vc as! PostMatchesVC
+                    vc.delegate = self
+                }
+                UIView.animate(withDuration: 0.35) {
+                    self.containerTopConstarint.constant = -460
+                    self.view.layoutIfNeeded()
+                }
             default: //event
                 return
-            }
-        }
-    }
-    
-    func showMatchList() {
-        loadMatches = false
-        if loadMatches {
-            SocialMatchVM.shared.fetchMatchListAsyncCall()
-        } else {
-            ViewEmbedder.embed(withIdentifier: "PostMatchesVC", storyboard: UIStoryboard(name: StoryboardName.social, bundle: nil)
-                               , parent: self, container: self.matchContainerView) { vc in
-                let vc = vc as! PostMatchesVC
-                vc.delegate = self
-            }
-            UIView.animate(withDuration: 0.35) {
-                self.containerTopConstarint.constant = -460
-                self.view.layoutIfNeeded()
             }
         }
     }
@@ -385,24 +375,6 @@ extension PostCreateVC {
             })
             .store(in: &cancellable)
     }
-    
-    func fetchSocialViewModel() {
-        ///fetch match list
-        SocialMatchVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
-        }
-        SocialMatchVM.shared.displayLoader = { [weak self] value in
-            self?.showLoader(value)
-        }
-        SocialMatchVM.shared.$responseData
-            .receive(on: DispatchQueue.main)
-            .dropFirst()
-            .sink(receiveValue: { [weak self] response in
-                self?.loadMatches = false
-                SocialMatchVM.shared.matchArray = response ?? []
-            })
-            .store(in: &cancellable)
-    }
 }
 
 extension PostCreateVC: UICollectionViewDataSource {
@@ -507,9 +479,11 @@ extension PostCreateVC: ImagePickerDelegate, UINavigationControllerDelegate {
 
 //MARK: - Custom Delegate
 extension PostCreateVC: PostMatchesVCDelegate {
-    func matchSelected(match: SocialMatch) {
-        selectedMatch = match
-        setMatchDetail()
+    func matchSelected(match: SocialMatch, matchSelected: Bool) {
+        if matchSelected {
+            selectedMatch = match
+            setMatchDetail()
+        }
         UIView.animate(withDuration: 0.7) {
             self.containerTopConstarint.constant = 0
             self.view.layoutIfNeeded()
