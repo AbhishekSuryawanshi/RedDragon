@@ -33,9 +33,8 @@ class IconNameCollectionViewCell: UICollectionViewCell {
         
         titleLabel.text = title
         titleLabel.font = fontMedium(style == .services ? 13 : 11)
-        
         iconImageWidthConstraint.constant = style == .team ? (0.7 * 60) : 60
-       
+        
         iconImageView.cornerRadius = iconImageWidthConstraint.constant / 2
         print(iconImageView.cornerRadius)
         iconImageView.clipsToBounds = true

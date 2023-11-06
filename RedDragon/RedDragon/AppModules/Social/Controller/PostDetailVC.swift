@@ -6,24 +6,106 @@
 //
 
 import UIKit
+import Combine
 
 class PostDetailVC: UIViewController {
 
+    @IBOutlet weak var headerLabel: UILabel!
+    @IBOutlet weak var listTableView: UITableView!
+    
+    var cancellable = Set<AnyCancellable>()
+    var postModel = SocialPost()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        initialSettings()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        refreshForLocalization()
     }
-    */
+    
+    override func viewDidLayoutSubviews() {
+        listTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 0)
+    }
+    
+    func initialSettings() {
+        self.view.addSubview(Loader.activityIndicator)
+        nibInitialization()
+        fetchSocialViewModel()
+        SocialLikeCommentListVM.shared.fetchCommentListAsyncCall(postId: postModel.id)
+    }
+    
+    func nibInitialization() {
+        listTableView.register(CellIdentifier.postTableViewCell)
+    }
 
+    func showLoader(_ value: Bool) {
+        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
+    }
+    
+    func refreshForLocalization() {
+        headerLabel.text = "Post".localized
+    }
+}
+
+// MARK: - API Services
+extension PostDetailVC {
+    func fetchSocialViewModel() {
+        ///fetch match list
+        SocialLikeCommentListVM.shared.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        SocialLikeCommentListVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        SocialLikeCommentListVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                SocialLikeCommentListVM.shared.commentsArray = response ?? []
+                self?.listTableView.reloadData()
+            })
+            .store(in: &cancellable)
+    }
+}
+
+// MARK: - TableView Delegates
+extension PostDetailVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1 + SocialLikeCommentListVM.shared.commentsArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.postTableViewCell, for: indexPath) as! PostTableViewCell
+            cell.configure(_index: indexPath.row, model: postModel)
+            cell.userNameLabel.tintColor = UIColor.blue3
+            return cell
+        } else {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.socialCommentTableViewCell, for: indexPath) as! SocialCommentTableViewCell
+            cell.configure(model: SocialLikeCommentListVM.shared.commentsArray[indexPath.row - 1], _index: indexPath.row - 1)
+            return cell
+        }
+    }
+}
+
+extension PostDetailVC: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            let postContentHeight = SocialPostListVM.shared.heightOfPostCell(model: postModel)
+            return postContentHeight
+        } else {
+            let model = SocialLikeCommentListVM.shared.commentsArray[indexPath.row - 1]
+            let height = model.comment.heightOfString2(width: screenWidth - 140, font: fontRegular(15))
+            if (UserDefaults.standard.user?.id ?? 0) == model.user.id {
+                return height + 80
+            } else {
+                return height + 55
+            }
+        }
+    }
 }

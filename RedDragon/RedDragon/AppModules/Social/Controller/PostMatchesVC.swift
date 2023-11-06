@@ -6,17 +6,22 @@
 //
 
 import UIKit
+import Combine
 
 protocol PostMatchesVCDelegate: AnyObject {
-    func matchSelected(match: SocialMatch)
+    func matchSelected(match: SocialMatch, matchSelected: Bool)
 }
 
 class PostMatchesVC: UIViewController {
-
+    
+    @IBOutlet weak var leagueLabeL: UILabel!
+    @IBOutlet weak var leagueCollectionView: UICollectionView!
     @IBOutlet weak var listTableView: UITableView!
     @IBOutlet weak var selectMatchLabeL: UILabel!
     
     weak var delegate: PostMatchesVCDelegate?
+    var cancellable = Set<AnyCancellable>()
+    var selectedLeague = SocialLeague()
     var selectedMatch = SocialMatch()
     
     override func viewDidLoad() {
@@ -29,35 +34,105 @@ class PostMatchesVC: UIViewController {
     }
     
     func initialSettings() {
+        self.view.addSubview(Loader.activityIndicator)
         nibInitialization()
+        fetchSocialViewModel()
         setupGestureRecognizers()
     }
     override func viewDidAppear(_ animated: Bool) {
         refreshForLocalization()
         
+        ///Show matches of first league
+        ///League list already loaded in scoial vc
+        selectedLeague = SocialLeagueVM.shared.leagueArray.first ?? SocialLeague()
+        SocialMatchVM.shared.fetchMatchListAsyncCall(leagueId: selectedLeague.id)
+        leagueCollectionView.reloadData()
     }
     func nibInitialization() {
         listTableView.register(CellIdentifier.matchTableViewCell)
+        leagueCollectionView.register(CellIdentifier.singleImageCollectionViewCell)
     }
     
     func refreshForLocalization() {
+        leagueLabeL.text = "Leagues".localized
         selectMatchLabeL.text = "Select match".localized
     }
-
+    
+    func showLoader(_ value: Bool) {
+        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
+    }
+    
     private func setupGestureRecognizers() {
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeAction(swipe:)))
         leftSwipe.direction = UISwipeGestureRecognizer.Direction.down
         view.addGestureRecognizer(leftSwipe)
     }
     
+    // MARK: - Gesture Action
     @objc func swipeAction(swipe: UISwipeGestureRecognizer) {
-        delegate?.matchSelected(match: selectedMatch)
+        delegate?.matchSelected(match: selectedMatch, matchSelected: false)
+    }
+}
+
+
+// MARK: - API Services
+extension PostMatchesVC {
+    func fetchSocialViewModel() {
+        ///fetch match list
+        SocialMatchVM.shared.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        SocialMatchVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        SocialMatchVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                SocialMatchVM.shared.matchArray = response?.data ?? []
+                self?.listTableView.reloadData()
+            })
+            .store(in: &cancellable)
+    }
+}
+
+// MARK: - CollectionView Delegates
+extension PostMatchesVC: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if SocialLeagueVM.shared.leagueArray.count == 0 {
+            collectionView.setEmptyMessage(ErrorMessage.leaguesEmptyAlert)
+        } else {
+            collectionView.restore()
+        }
+        return SocialLeagueVM.shared.leagueArray.count
     }
     
-    // MARK: - Button Actions
-    
-    @IBAction func downBTNTapped(_ sender: UIButton) {
-        
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.singleImageCollectionViewCell, for: indexPath) as! SingleImageCollectionViewCell
+        let model = SocialLeagueVM.shared.leagueArray[indexPath.row]
+        //cell.configure(title: UserDefaults.standard.language == "en" ? model.enName : model.cnName, iconName: model.logoURL, style: .league)
+        cell.imageImageView.cornerRadius = 30
+        cell.imageImageView.setImage(imageStr: model.logoURL, placeholder: UIImage.noLeague)
+        cell.imageImageView.borderColor = model.id == selectedLeague.id ? .black : .clear
+        cell.imageImageView.borderWidth = model.id == selectedLeague.id ? 3 : 0
+        cell.closeBgView.isHidden = true
+        return cell
+    }
+}
+
+extension PostMatchesVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //Show matches of selected league
+        ///League list already loaded in scoial vc
+        selectedLeague = SocialLeagueVM.shared.leagueArray[indexPath.row]
+        collectionView.reloadData()
+        SocialMatchVM.shared.fetchMatchListAsyncCall(leagueId: selectedLeague.id)
+    }
+}
+
+extension PostMatchesVC: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 60, height: 60)
     }
 }
 
@@ -83,11 +158,11 @@ extension PostMatchesVC: UITableViewDataSource {
 extension PostMatchesVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedMatch = SocialMatchVM.shared.matchArray[indexPath.row]
-        self.downBTNTapped(UIButton())
+        delegate?.matchSelected(match: selectedMatch, matchSelected: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        return 83
     }
 }
 
