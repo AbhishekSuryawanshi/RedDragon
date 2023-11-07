@@ -12,27 +12,36 @@ import SDWebImage
 class MatchDetailsVC: UIViewController {
     
     @IBOutlet weak var matchTabsCollectionView: UICollectionView!
+    @IBOutlet weak var leagueNameLabel: UILabel!
+    @IBOutlet weak var homeTeamImageView: UIImageView!
+    @IBOutlet weak var awayTeamImageView: UIImageView!
+    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var homeTeamNameLabel: UILabel!
+    @IBOutlet weak var awayTeamNameLabel: UILabel!
+    @IBOutlet weak var firstHalfScoreLabel: UILabel!
     
     private var cancellable = Set<AnyCancellable>()
     private var matchDetailViewModel: MatchDetailsViewModel?
     private var fetchCurrentLanguageCode = String()
     private var matchTabsArray = [String]()
     var matchSlug: String?
+    var leagueName: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         loadFunctionality()
-        fetchMatchDetailsViewModel()
-        makeNetworkCall()
     }
     
     func loadFunctionality() {
         nibInitialization()
         matchTabsData()
-        matchTabsCollectionView.reloadData()
+        configureUI()
+        fetchMatchDetailsViewModel()
+        makeNetworkCall()
     }
     
     func matchTabsData() {
@@ -54,13 +63,9 @@ class MatchDetailsVC: UIViewController {
     }
     
     func makeNetworkCall() {
-        guard Reachability.isConnectedToNetwork() else {
-            customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.networkAlert.localized, image: ImageConstants.alertImage)
-            return
-        }
         matchDetailViewModel?.fetchMatchDetailAsyncCall(lang: fetchCurrentLanguageCode == "en" ? "en" : "zh", 
-                                                        slug: matchSlug ?? "",
-                                                        sports: "football") //2023-02-21-liverpool-real-madrid
+                                                        slug: "2023-02-21-liverpool-real-madrid",
+                                                        sports: "football") //2023-02-21-liverpool-real-madrid //matchSlug ?? ""
     }
 }
 
@@ -78,9 +83,26 @@ extension MatchDetailsVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] data in
-                
+                print(data!)
+                self?.renderResponseData(data: data!)
             })
             .store(in: &cancellable)
+    }
+    
+    func renderResponseData(data: MatchDetail) {
+        let data = data.data
+        UIView.animate(withDuration: 1.0) { [self] in
+            leagueNameLabel.text = leagueName
+            homeTeamImageView.sd_imageIndicator = SDWebImageActivityIndicator.white
+            awayTeamImageView.sd_imageIndicator = SDWebImageActivityIndicator.white
+            homeTeamImageView.sd_setImage(with: URL(string: data.homeTeamImage))
+            awayTeamImageView.sd_setImage(with: URL(string: data.awayTeamImage))
+            homeTeamNameLabel.text = data.homeTeamName
+            awayTeamNameLabel.text = data.awayTeamName
+            scoreLabel.text = "\(data.homeScore) - \(data.awayScore)"
+            firstHalfScoreLabel.text = "\(StringConstants.firstHalf)(\(data.home1StHalf)-\(data.away1StHalf))"
+            self.view.layoutIfNeeded()
+        }
     }
 }
 
@@ -94,5 +116,30 @@ extension MatchDetailsVC: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.matchTabsCollectionViewCell, for: indexPath) as! MatchTabsCollectionViewCell
         cell.tabNameLabel.text = matchTabsArray[indexPath.item]
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //print(matchTabsArray[indexPath.item])
+    }
+}
+
+/// __Supportive function calls
+
+extension MatchDetailsVC {
+    func addActivityIndicator() {
+        self.view.addSubview(Loader.activityIndicator)
+    }
+    
+    func configureUI() {
+        addActivityIndicator()
+        highlightFirstIndex_collectionView()
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    func highlightFirstIndex_collectionView() {
+        //code to show collectionView cell default first index selected
+        let indexPath = IndexPath(item: 0, section: 0)
+        matchTabsCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
+        collectionView(matchTabsCollectionView, didSelectItemAt: indexPath)
     }
 }

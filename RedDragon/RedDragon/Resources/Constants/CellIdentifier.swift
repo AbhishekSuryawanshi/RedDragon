@@ -19,6 +19,7 @@ struct CellIdentifier {
     static let postTableViewCell                  = "PostTableViewCell"
     static let matchTableViewCell                 = "MatchTableViewCell"
     static let socialPollTableViewCell            = "SocialPollTableViewCell"
+    static let socialCommentTableViewCell         = "SocialCommentTableViewCell"
     
     //Database
     static let leagueNamesCollectionCell          = "LeagueCollectionViewCell"
