@@ -23,7 +23,6 @@ class HighlightViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //symbolCollectionView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
