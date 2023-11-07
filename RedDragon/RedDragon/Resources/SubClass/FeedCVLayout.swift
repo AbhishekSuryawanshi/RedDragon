@@ -13,7 +13,7 @@ class FeedCVLayout: UICollectionViewLayout {
     var height = Int(screenWidth - 30)
     // 2
     var layoutType = 0
-    fileprivate var cellPadding: CGFloat = 5
+    fileprivate var cellPadding: CGFloat = 7
     
     // 3
     fileprivate var cache = [UICollectionViewLayoutAttributes]()

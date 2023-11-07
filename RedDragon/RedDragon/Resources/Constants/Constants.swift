@@ -15,6 +15,7 @@ let screenHeight = UIScreen.main.bounds.height
 
 // MARK: - Date and Time
 enum dateFormat: String {
+    case ddMMyyyyWithTimeZone = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     case ddMMMyyyyhhmma       = "d MMM yyyy . hh:mm a"
     case ddMMyyyy             = "dd-MM-yyyy"
     case ddMMyyyy2            = "dd/MM/yyyy"

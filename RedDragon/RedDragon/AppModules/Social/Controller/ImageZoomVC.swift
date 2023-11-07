@@ -17,6 +17,8 @@ class ImageZoomVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        ///Get image from url and show in scroll view
         UIImageView().kf.setImage(with: URL(string: imageUrl)) { result in
             switch result {
             case .success(let value):
@@ -27,4 +29,8 @@ class ImageZoomVC: UIViewController {
         }
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        ///Hide tabbar
+        self.tabBarController?.tabBar.isHidden = true
+    }
 }
