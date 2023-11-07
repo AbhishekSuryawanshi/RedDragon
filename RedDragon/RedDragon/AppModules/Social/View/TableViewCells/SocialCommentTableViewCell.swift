@@ -27,7 +27,7 @@ class SocialCommentTableViewCell: UITableViewCell {
     }
     func configure(model: Social, _index: Int) {
         
-        userImageView.setImage(imageStr: model.user.image, placeholder: nil)
+        userImageView.setImage(imageStr: model.user.image, placeholder: .placeholderUser)
         nameLabel.text = "\(model.user.firstName) \(model.user.lastName)"
         commentLabel.text = model.comment
         deleteButton.setTitle("Delete".localized, for: .normal)

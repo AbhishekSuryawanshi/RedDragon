@@ -57,13 +57,14 @@ class SocialVC: UIViewController {
         }
         
         self.view.addSubview(Loader.activityIndicator)
-        Loader.activityIndicator.startAnimating()
+        
         nibInitialization()
         fetchSocialViewModel()
         makeNetworkCall()
     }
     
     func refreshForLocalization() {
+        Loader.activityIndicator.startAnimating()
         self.tabBarController?.tabBar.isHidden = false
         leagueLabel.text = "Leagues".localized
         teamLabel.text = "Teams".localized
@@ -168,7 +169,6 @@ extension SocialVC: UICollectionViewDataSource {
             return cell
         }
     }
-    
 }
 
 extension SocialVC: UICollectionViewDelegate {
@@ -201,6 +201,8 @@ extension SocialVC: UICollectionViewDelegateFlowLayout {
 extension SocialVC: PostListVCDelegate {
     func postList(height: CGFloat) {
         containerHeightConstraint.constant = height
-        Loader.activityIndicator.stopAnimating()
+        Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { (timer) in
+            Loader.activityIndicator.stopAnimating()
+        }
     }
 }

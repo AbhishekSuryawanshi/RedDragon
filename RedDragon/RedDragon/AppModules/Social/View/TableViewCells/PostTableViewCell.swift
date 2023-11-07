@@ -52,6 +52,8 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var likeCountLabel: UILabel!
     @IBOutlet weak var commentCountLabel: UILabel!
+    @IBOutlet weak var commentsLabel: UILabel!
+    @IBOutlet weak var bottomLineView: UIView!
     
     weak var delegate:PostTableCellDelegate?
     var pollCount = 0
@@ -73,12 +75,15 @@ class PostTableViewCell: UITableViewCell {
     
     func configure(_index: Int, model: SocialPost, detailPage:Bool = false) {
         self.model = model
+        commentsLabel.text = detailPage ? "Comments".localized : ""
         moreButton.isHidden = detailPage
-        commentStackView.isHidden = model.type == "POLL" || detailPage
+        bottomLineView.isHidden = detailPage
         
-        userImageView.setImage(imageStr: model.userImage, placeholder: UIImage(named: "person.circle.fill"))
+        commentStackView.isHidden = model.type == "POLL"
+        
+        userImageView.setImage(imageStr: model.userImage, placeholder: .placeholderUser)
         userNameLabel.text = "\(model.firstName) \(model.lastName)"
-        dateLabel.text = model.updatedTime.formatDate2(inputFormat: .hhmmaddMMMyyyy)
+        dateLabel.text = model.updatedTime.formatDate2(inputFormat: .ddMMyyyyWithTimeZone)
         imageBgView.isHidden = model.postImages.count == 0
         matchBgView.borderColor = .lightGray
         matchBgView.borderWidth = 0.3
@@ -140,9 +145,7 @@ class PostTableViewCell: UITableViewCell {
         } else {
             
             //POST
-            if let content = model.contentHtml.attributedHtmlString {
-                contentLabel.text = content.string
-            }
+            contentLabel.text = model.descriptn
             //POST Image
             if model.postImages.count > 0 {
                 imageCollectionView.reloadData()
@@ -157,10 +160,10 @@ class PostTableViewCell: UITableViewCell {
             if model.matchDetail != "" {
                 matchView.isHidden = false
                 leagueLabel.text = model.matchModel.league.name
-                leagueImageView.setImage(imageStr: model.matchModel.league.logo, placeholder: UIImage.noLeague)
+                leagueImageView.setImage(imageStr: model.matchModel.league.logo, placeholder: .placeholderLeague)
                 matchDateLabel.text = model.matchModel.matchUnixTime.formatDate(outputFormat: dateFormat.hhmmaddMMMyyyy2, today: true)
-                homeImageView.setImage(imageStr: model.matchModel.homeTeam.logo, placeholder: UIImage.noTeam)
-                awayImageView.setImage(imageStr: model.matchModel.awayTeam.logo, placeholder: UIImage.noTeam)
+                homeImageView.setImage(imageStr: model.matchModel.homeTeam.logo, placeholder: .placeholderTeam)
+                awayImageView.setImage(imageStr: model.matchModel.awayTeam.logo, placeholder: .placeholderTeam)
                 homeNameLabel.text = UserDefaults.standard.language == "en" ? model.matchModel.homeTeam.enName : model.matchModel.homeTeam.cnName
                 awayNameLabel.text = UserDefaults.standard.language == "en" ? model.matchModel.awayTeam.enName : model.matchModel.awayTeam.cnName
                 scoreLabel.text = "\(model.matchModel.homeScores.first ?? 0) - \(model.matchModel.awayScores.first ?? 0)"
