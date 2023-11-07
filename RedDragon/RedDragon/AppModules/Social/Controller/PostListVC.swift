@@ -70,47 +70,36 @@ class PostListVC: UIViewController {
     }
     
     func deletePost(_index: Int) {
-//        showAlert2(title: "", message: PSMessages.deleteAlert) {
-//            self.startLoader()
-//            let model = self.postList[_index]
-//            PSPostVM.shared.deletePostOrPoll(type: model.type == "POLL" ? .poll : .post, id: model.id) { status, errorMsg in
-//                stopLoader()
-//                if status {
-//                    self.postList.remove(at: _index)
-//                    self.calculateContentHeight()
-//                    self.listTableView.reloadData()
-//                } else {
-//                    PSToast.show(message: errorMsg, view: self.view)
-//                }
-//                self.listTableView.reloadData()
-//            }
-//        }
+        self.customAlertView_2Actions(title: "".localized, description: StringConstants.deleteAlert.localized) {
+            SocialDeleteVM.shared.deletePollOrPost(type: self.postArray[_index].type == "POLL" ? .poll : .post, id: self.postArray[_index].id)
+        }
     }
     
     func blockUser(userId: Int) {
-//        let param: [String: Any] = [
-//            "blocked_user_id": userId,
-//            "flag": true
-//        ]
-//        
-//        self.startLoader()
-//        PSSettingVM.shared.blockUserOrPost(type: .user, parameters: param) { status, errorMsg in
-//            stopLoader()
-//            if status{
-//                self.getPostList()
-//            } else {
-//                PSToast.show(message: errorMsg, view: self.view)
-//            }
-//        }
+        //        let param: [String: Any] = [
+        //            "blocked_user_id": userId,
+        //            "flag": true
+        //        ]
+        //
+        //        self.startLoader()
+        //        PSSettingVM.shared.blockUserOrPost(type: .user, parameters: param) { status, errorMsg in
+        //            stopLoader()
+        //            if status{
+        //                self.getPostList()
+        //            } else {
+        //                PSToast.show(message: errorMsg, view: self.view)
+        //            }
+        //        }
     }
     
     func shareAction(model: SocialPost, image: UIImage) {
-//        let vc = UIActivityViewController(activityItems: [image, "\n\n\("Check out the football detail".localized) \(model.descriptn) \("from".localized) \(Bundle.appName.localized) \n\n \(PSURLs.appstore)"], applicationActivities: [])
-//        if let popoverController = vc.popoverPresentationController {
-//            popoverController.sourceView = self.listTableView
-//            popoverController.sourceRect = self.listTableView.bounds
-//        }
-//        self.present(vc, animated: true)
+        Loader.activityIndicator.stopAnimating()
+        let vc = UIActivityViewController(activityItems: [image, "\n\n\("Dive into this story via the RedDragon app".localized) \n\(model.descriptn) \n\("Stay connected to the latest in football, basketball, tennis, and other sports with us. Install it from the App Store to find more news.".localized) \n\n \(URLConstants.appstore)"], applicationActivities: [])
+        if let popoverController = vc.popoverPresentationController {
+            popoverController.sourceView = self.listTableView
+            popoverController.sourceRect = self.listTableView.bounds
+        }
+        self.present(vc, animated: true)
     }
     
     // MARK: - Button Actions
@@ -118,7 +107,7 @@ class PostListVC: UIViewController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         if let user = UserDefaults.standard.user, user.id == postArray[sender.tag].userId {// app user
             let action1 = UIAlertAction(title: "Edit Post".localized, style: .default , handler:{ (UIAlertAction) in
-               // self.showCreatePostVC(model: self.postList[sender.tag], isForEdit: true, leagueId: self.postList[sender.tag].leagueId)
+                // self.showCreatePostVC(model: self.postList[sender.tag], isForEdit: true, leagueId: self.postList[sender.tag].leagueId)
             })
             alert.addAction(action1)
             let action2 = UIAlertAction(title: "Delete Post".localized, style: .default , handler:{ (UIAlertAction) in
@@ -135,10 +124,10 @@ class PostListVC: UIViewController {
             let action2 = UIAlertAction(title: "Report Post".localized, style: .default , handler:{ (UIAlertAction) in
                 self.customAlertView_2Actions(title: "".localized, description: StringConstants.reportPostAlert) {
                     //ToDo
-//                    let nextVC = homeStoryboard.instantiateViewController(withIdentifier: "PSReportVC") as! PSReportVC
-//                    nextVC.contentId = self.postList[sender.tag].id
-//                    nextVC.reportType = self.postList[sender.tag].type == "POLL" ? .poll : .post
-//                    self.navigationController?.pushViewController(nextVC, animated: true)
+                    //                    let nextVC = homeStoryboard.instantiateViewController(withIdentifier: "PSReportVC") as! PSReportVC
+                    //                    nextVC.contentId = self.postList[sender.tag].id
+                    //                    nextVC.reportType = self.postList[sender.tag].type == "POLL" ? .poll : .post
+                    //                    self.navigationController?.pushViewController(nextVC, animated: true)
                 }
             })
             alert.addAction(action2)
@@ -148,8 +137,9 @@ class PostListVC: UIViewController {
     }
     
     @objc func shareBTNTapped(sender: UIButton) {
+        Loader.activityIndicator.startAnimating()
         let postModel = postArray[sender.tag]
-        var shareImage = UIImage(named: "appLogo")!
+        var shareImage = UIImage() //ToDo add app logo
         if postModel.postImages.count > 0 {
             UIImageView().kf.setImage(with: URL(string: postModel.postImages.first ?? "")) { result in
                 switch result {
@@ -168,21 +158,20 @@ class PostListVC: UIViewController {
     
     @objc func likeBTNTapped(sender: UIButton) {
         let model = postArray[sender.tag]
-        SocialLikeCommentVM.shared.addLikeAsyncCall(dislike: model.liked, postId: model.id)
+        SocialAddLikeVM.shared.addLikeAsyncCall(dislike: model.liked, postId: model.id)
     }
     
     @objc func commentBTNTapped(sender: UIButton) {
-//        let nextVC = homeStoryboard.instantiateViewController(withIdentifier: "PSPostDetailVC") as! PSPostDetailVC
-//        nextVC.postModel = postList[sender.tag]
-//        nextVC.likeView = false
-//        self.navigationController?.pushViewController(nextVC, animated: true)
+        navigateToViewController(PostDetailVC.self, storyboardName: StoryboardName.social, animationType: .autoReverse(presenting: .zoom)) { vc in
+            vc.postModel = self.postArray[sender.tag]
+        }
     }
 }
 
 // MARK: - API Services
 extension PostListVC {
     func makeNetworkCall() {
-       SocialPostListVM.shared.fetchPostListAsyncCall()
+        SocialPostListVM.shared.fetchPostListAsyncCall()
     }
     
     func fetchPostViewModel() {
@@ -201,7 +190,7 @@ extension PostListVC {
             })
             .store(in: &cancellable)
         
-        /// Add / Edit poll
+        /// Add poll
         SocialPollVM.shared.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
@@ -212,20 +201,33 @@ extension PostListVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.view.makeToast(StringConstants.pollSuccess)
                 SocialPostListVM.shared.fetchPostListAsyncCall()
-
+            })
+            .store(in: &cancellable)
+        
+        /// Delete poll / post
+        SocialDeleteVM.shared.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        SocialDeleteVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        SocialDeleteVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                SocialPostListVM.shared.fetchPostListAsyncCall()
             })
             .store(in: &cancellable)
         
         /// Add Like
-        SocialLikeCommentVM.shared.showError = { [weak self] error in
+        SocialAddLikeVM.shared.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
-        SocialLikeCommentVM.shared.displayLoader = { [weak self] value in
+        SocialAddLikeVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
         }
-        SocialLikeCommentVM.shared.$responseData
+        SocialAddLikeVM.shared.$responseData
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
@@ -236,7 +238,7 @@ extension PostListVC {
     
     func execute_onResponseData(_ postData: [SocialPost]) {
         ///Posts and polls comes in separate order, so we have to apply date filter
-       // postArray = postData.filter({ $0.type == "POST" })
+        // postArray = postData.filter({ $0.type == "POST" })
         postArray = postData
         postArray = postArray.sorted(by: { $0.updatedTime.compare($1.updatedTime) == .orderedDescending })
         calculateContentHeight()
@@ -297,7 +299,7 @@ extension PostListVC: PostTableCellDelegate {
         default:
             param.updateValue(postModel.option_3Count + 1, forKey: "option_3_count")
         }
-       SocialPollVM.shared.addEditPostListAsyncCall(isForEdit: true, pollId: postModel.id, parameters: param)
+        SocialPollVM.shared.addEditPostListAsyncCall(isForEdit: true, pollId: postModel.id, parameters: param)
     }
     
     func postImageTapped(url: String) {

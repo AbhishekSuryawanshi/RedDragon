@@ -24,9 +24,7 @@ class SocialPostListVM: APIServiceManager<[SocialPost]> {
         if model.type == "POLL" {
             contentText = model.descriptn == "_Test_" ? "" : model.descriptn
         } else {
-            if let content = model.contentHtml.attributedHtmlString {
-                contentText = content.string
-            }
+            contentText = model.descriptn
         }
         
         let contentHeight = contentText.heightOfString2(width: screenWidth - 30, font: fontRegular(15))
@@ -55,6 +53,18 @@ class SocialPostVM: APIServiceManager<SocialPost> {
     }
 }
 
+class SocialDeleteVM: APIServiceManager<BasicResponse> {
+    init () {}
+    static let shared = SocialDeleteVM()
+    
+    ///function to delete a post or a poll
+    func deletePollOrPost(type: postType, id:Int) {
+        let urlString   = (type == .poll ? URLConstants.deletePoll : URLConstants.post) + "/\(id)"
+        let method      = RequestType.delete
+        asyncCall(urlString: urlString, method: method, parameters: nil)
+    }
+}
+
 class SocialPollVM: APIServiceManager<BasicResponse> {
     init () {}
     static let shared = SocialPollVM()
@@ -64,13 +74,6 @@ class SocialPollVM: APIServiceManager<BasicResponse> {
         let urlString   = isForEdit ? URLConstants.updatePoll + "\(pollId)" : URLConstants.addPoll
         let method      = isForEdit ? RequestType.put : RequestType.post
         asyncCall(urlString: urlString, method: method, parameters: parameters)
-    }
-    
-    ///function to delete a post or a poll
-    func deletePollOrPost(type: postType, id:Int) {
-        let urlString   = (type == .poll ? URLConstants.deletePoll : URLConstants.post) + "/\(id)"
-        let method      = RequestType.delete
-        asyncCall(urlString: urlString, method: method, parameters: nil)
     }
 }
 
@@ -94,9 +97,9 @@ class SocialLikeCommentListVM: APIServiceManager<[Social]> {
     }
 }
 
-class SocialLikeCommentVM: APIServiceManager<BasicResponse> {
+class SocialAddLikeVM: APIServiceManager<BasicResponse> {
     init () {}
-    static let shared = SocialLikeCommentVM()
+    static let shared = SocialAddLikeVM()
     
     ///function to like or dislike a post for social module
     func addLikeAsyncCall(dislike: Bool = false, postId: Int) {
@@ -104,6 +107,11 @@ class SocialLikeCommentVM: APIServiceManager<BasicResponse> {
         let method      = RequestType.post
         asyncCall(urlString: urlString, method: method, parameters: ["post_id": postId])
     }
+}
+
+class SocialAddCommentVM: APIServiceManager<BasicResponse> {
+    init () {}
+    static let shared = SocialAddCommentVM()
     
     ///function to add comment for a post for social module
     func addCommentAsyncCall(parameters: [String: Any]) {
@@ -111,6 +119,11 @@ class SocialLikeCommentVM: APIServiceManager<BasicResponse> {
         let method      = RequestType.post
         asyncCall(urlString: urlString, method: method, parameters: parameters)
     }
+}
+
+class SocialDeleteCommentVM: APIServiceManager<BasicResponse> {
+    init () {}
+    static let shared = SocialDeleteCommentVM()
     
     ///function to delete a comment
     func deleteComment(id: Int) {
