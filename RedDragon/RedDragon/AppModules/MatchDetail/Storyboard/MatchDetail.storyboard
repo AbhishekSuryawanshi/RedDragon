@@ -223,17 +223,219 @@
                         <outlet property="leagueNameLabel" destination="WBL-Rw-Plh" id="KgN-xa-pNc"/>
                         <outlet property="matchTabsCollectionView" destination="gE9-C9-40Y" id="eHl-RT-fqU"/>
                         <outlet property="scoreLabel" destination="OGy-7z-hHe" id="5Tf-zg-J9i"/>
+                        <outlet property="viewContainer" destination="y0x-us-4TW" id="b9e-eX-QFs"/>
+                        <outlet property="viewContainerHeight" destination="2FK-sd-Hq6" id="3C7-LR-wEl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="139.69465648854961" y="-2.1126760563380285"/>
         </scene>
+        <!--Highlight View Controller-->
+        <scene sceneID="G0F-3o-Pyu">
+            <objects>
+                <viewController storyboardIdentifier="HighlightViewController" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="SPm-XB-iuO" customClass="HighlightViewController" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HlF-vM-o0F">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZS6-xu-ZFE">
+                                <rect key="frame" x="0.0" y="702" width="393" height="150"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TXf-S1-fSH">
+                                        <rect key="frame" x="10" y="10" width="373" height="140"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="a15-yh-vqe">
+                                            <size key="itemSize" width="231" height="20"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SymbolsCollectionViewCell" id="E7w-EG-a5u" customClass="SymbolsCollectionViewCell" customModule="RedDragon" customModuleProvider="target">
+                                                <rect key="frame" x="71" y="0.0" width="231" height="20"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="yzA-X2-37u">
+                                                    <rect key="frame" x="0.0" y="0.0" width="231" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vtB-jO-ceA">
+                                                            <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="20" id="mbN-qT-afX"/>
+                                                                <constraint firstAttribute="height" constant="20" id="vAr-mb-Qvs"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2K-61-XRg">
+                                                            <rect key="frame" x="28" y="2.6666666666666661" width="195" height="14.999999999999998"/>
+                                                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="13"/>
+                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="a2K-61-XRg" secondAttribute="trailing" constant="8" id="623-0V-sYk"/>
+                                                        <constraint firstItem="vtB-jO-ceA" firstAttribute="top" secondItem="yzA-X2-37u" secondAttribute="top" id="QB0-LO-z2N"/>
+                                                        <constraint firstItem="vtB-jO-ceA" firstAttribute="leading" secondItem="yzA-X2-37u" secondAttribute="leading" id="Sdw-8C-59j"/>
+                                                        <constraint firstItem="a2K-61-XRg" firstAttribute="leading" secondItem="vtB-jO-ceA" secondAttribute="trailing" constant="8" symbolic="YES" id="exb-ku-jsO"/>
+                                                        <constraint firstItem="a2K-61-XRg" firstAttribute="centerY" secondItem="vtB-jO-ceA" secondAttribute="centerY" id="plx-9j-keB"/>
+                                                    </constraints>
+                                                </collectionViewCellContentView>
+                                                <size key="customSize" width="231" height="20"/>
+                                                <connections>
+                                                    <outlet property="symbolImageView" destination="vtB-jO-ceA" id="zWG-9g-s4J"/>
+                                                    <outlet property="symbolNameLabel" destination="a2K-61-XRg" id="EZo-r7-jCi"/>
+                                                </connections>
+                                            </collectionViewCell>
+                                        </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="SPm-XB-iuO" id="iA4-IN-fbQ"/>
+                                            <outlet property="delegate" destination="SPm-XB-iuO" id="5Ho-Nt-ipy"/>
+                                        </connections>
+                                    </collectionView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.96078431372549022" green="0.8666666666666667" blue="0.85490196078431369" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="TXf-S1-fSH" firstAttribute="leading" secondItem="ZS6-xu-ZFE" secondAttribute="leading" constant="10" id="2ID-QX-uLv"/>
+                                    <constraint firstItem="TXf-S1-fSH" firstAttribute="top" secondItem="ZS6-xu-ZFE" secondAttribute="top" constant="10" id="4gL-J3-jhw"/>
+                                    <constraint firstAttribute="trailing" secondItem="TXf-S1-fSH" secondAttribute="trailing" constant="10" id="DpM-Co-Dlf"/>
+                                    <constraint firstAttribute="bottom" secondItem="TXf-S1-fSH" secondAttribute="bottom" id="P9f-xM-9KL"/>
+                                    <constraint firstAttribute="height" constant="150" id="X96-NO-NEe"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Eie-0h-E0I"/>
+                        <color key="backgroundColor" systemColor="systemBlueColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="ZS6-xu-ZFE" secondAttribute="bottom" id="0H0-l6-rI9"/>
+                            <constraint firstItem="ZS6-xu-ZFE" firstAttribute="trailing" secondItem="Eie-0h-E0I" secondAttribute="trailing" id="Us8-im-GrL"/>
+                            <constraint firstItem="ZS6-xu-ZFE" firstAttribute="leading" secondItem="Eie-0h-E0I" secondAttribute="leading" id="n6G-eB-drj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="symbolCollectionView" destination="TXf-S1-fSH" id="TUb-MR-hPE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ekr-xk-wMs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="939.69465648854953" y="-2.1126760563380285"/>
+        </scene>
+        <!--Statistics View Controller-->
+        <scene sceneID="yiP-of-d31">
+            <objects>
+                <viewController storyboardIdentifier="StatisticsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aHB-tj-aYY" customClass="StatisticsViewController" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wBE-HS-KxC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Wkz-kF-b7w"/>
+                        <color key="backgroundColor" systemColor="systemBrownColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I8p-Bb-A8Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1785" y="-2"/>
+        </scene>
+        <!--Lineup View Controller-->
+        <scene sceneID="Pek-XV-roV">
+            <objects>
+                <viewController storyboardIdentifier="LineupViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sA9-1P-E0z" customClass="LineupViewController" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Tc7-YX-qym">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="25N-zz-N0X"/>
+                        <color key="backgroundColor" systemColor="systemYellowColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sny-Q7-LHA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2532" y="-2"/>
+        </scene>
+        <!--Bets View Controller-->
+        <scene sceneID="Hd0-Vq-Nrf">
+            <objects>
+                <viewController storyboardIdentifier="BetsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6pI-9I-Jyn" customClass="BetsViewController" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4lK-AH-z33">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="EvQ-Zx-EdI"/>
+                        <color key="backgroundColor" systemColor="systemTealColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8EW-ev-UUM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3331" y="-2"/>
+        </scene>
+        <!--Odds View Controller-->
+        <scene sceneID="Nor-eL-zbq">
+            <objects>
+                <viewController storyboardIdentifier="OddsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="A1X-YL-Tpg" customClass="OddsViewController" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GvT-gA-qKo">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="YRP-Vj-wz1"/>
+                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M6k-hK-3GW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4124" y="-2"/>
+        </scene>
+        <!--Analysis View Controller-->
+        <scene sceneID="WEy-Bm-6xe">
+            <objects>
+                <viewController storyboardIdentifier="AnalysisViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rX0-OH-qx2" customClass="AnalysisViewController" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZJo-I3-dsU">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="yyC-xa-nJx"/>
+                        <color key="backgroundColor" systemColor="systemPurpleColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Exq-rn-hwP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4978" y="-2"/>
+        </scene>
+        <!--Expert View Controller-->
+        <scene sceneID="764-xK-prF">
+            <objects>
+                <viewController storyboardIdentifier="ExpertViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cj5-uS-reB" customClass="ExpertViewController" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="npk-na-9SC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="yyN-Zr-6TC"/>
+                        <color key="backgroundColor" systemColor="systemMintColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="po4-xh-P5u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5801" y="-2"/>
+        </scene>
     </scenes>
     <resources>
         <image name="stadium" width="393" height="219"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBrownColor">
+            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemMintColor">
+            <color red="0.0" green="0.78039215689999997" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPurpleColor">
+            <color red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.18823529410000001" green="0.69019607839999997" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

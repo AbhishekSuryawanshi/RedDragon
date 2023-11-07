@@ -19,11 +19,14 @@ class MatchDetailsVC: UIViewController {
     @IBOutlet weak var homeTeamNameLabel: UILabel!
     @IBOutlet weak var awayTeamNameLabel: UILabel!
     @IBOutlet weak var firstHalfScoreLabel: UILabel!
+    @IBOutlet weak var viewContainer: UIView!
+    @IBOutlet weak var viewContainerHeight: NSLayoutConstraint!
     
     private var cancellable = Set<AnyCancellable>()
     private var matchDetailViewModel: MatchDetailsViewModel?
     private var fetchCurrentLanguageCode = String()
     private var matchTabsArray = [String]()
+    private var tabViewControllers: [UIViewController] = []
     var matchSlug: String?
     var leagueName: String?
 
@@ -52,6 +55,14 @@ class MatchDetailsVC: UIViewController {
                           StringConstants.odds.localized,
                           StringConstants.analysis.localized,
                           StringConstants.expert.localized ]
+        
+        tabViewControllers = [HighlightViewController(),
+                              StatisticsViewController(),
+                              LineupViewController(),
+                              BetsViewController(),
+                              OddsViewController(),
+                              AnalysisViewController(),
+                              ExpertViewController()]
     }
     
     func nibInitialization() {
@@ -119,7 +130,11 @@ extension MatchDetailsVC: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //print(matchTabsArray[indexPath.item])
+        guard indexPath.item < tabViewControllers.count else {
+            return
+        }
+        let viewControllers = tabViewControllers[indexPath.item]
+        embedViewController(viewControllers)
     }
 }
 
@@ -142,4 +157,11 @@ extension MatchDetailsVC {
         matchTabsCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
         collectionView(matchTabsCollectionView, didSelectItemAt: indexPath)
     }
+    
+    ///function to load view controllers on click of match tabs
+    func embedViewController(_ viewController: UIViewController) {
+        ViewEmbedder.embed(withIdentifier: String(describing: type(of: viewController)), storyboard: UIStoryboard(name: StoryboardName.matchDetail, bundle: nil), parent: self, container: viewContainer)
+        viewContainerHeight.constant = viewController.view.frame.size.height
+    }
+    
 }
