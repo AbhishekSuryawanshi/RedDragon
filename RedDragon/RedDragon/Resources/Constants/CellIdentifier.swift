@@ -26,6 +26,9 @@ struct CellIdentifier {
     static let standingTableCell                  = "StandingsTableViewCell"
     static let eventsTableCell                    = "EventsTableViewCell"
     static let seasonPerfoemanceTableCell         = "SeasonPerformanceTableViewCell"
+    
+    //Match Details
+    static let symbolCollectionViewCell           = "SymbolsCollectionViewCell"
 }
 
 
