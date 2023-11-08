@@ -54,5 +54,15 @@ struct StringConstants {
     static let expert               = "Expert"
     static let firstHalf            = "First Half"
     
+    //Highlight
+    static let goal                 = "Goal"
+    static let disallowed           = "Disallowed Goal"
+    static let substitution         = "Substitution"
+    static let yellowCard           = "Yellow Card"
+    static let redCard              = "Red Card"
+    static let VAR                  = "VAR"
+    static let penalty              = "Penalty"
+    static let minutesAdded         = "Minutes Added"
+    
 }
 
