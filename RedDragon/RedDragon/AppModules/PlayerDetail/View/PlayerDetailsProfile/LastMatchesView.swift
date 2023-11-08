@@ -9,6 +9,7 @@ import UIKit
 
 class LastMatchesView: UIView {
 
+    @IBOutlet var contentView: UIView!
     @IBOutlet weak var team2Lbl: UILabel!
     @IBOutlet weak var team2ImgView: UIImageView!
     @IBOutlet weak var team1Lbl: UILabel!
@@ -21,12 +22,17 @@ class LastMatchesView: UIView {
     @IBOutlet weak var roundLbl: UILabel!
     @IBOutlet weak var seeAllBtn: UIButton!
     @IBOutlet weak var lastMatchesLbl: UILabel!
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
+    
+    override init(frame: CGRect) {
+           super.init(frame: frame)
+           commonInit()
+       }
+       required init?(coder aDecoder: NSCoder) {
+           super.init(coder: aDecoder)
+           commonInit()
+       }
+       func commonInit() {
+           Bundle.main.loadNibNamed("LastMatchesView", owner: self, options: nil)
+           contentView.fixInView(self)
+       }
 }
