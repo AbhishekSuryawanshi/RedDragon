@@ -70,8 +70,10 @@ class PostCreateVC: UIViewController {
     
     func initialSettings() {
         self.view.addSubview(Loader.activityIndicator)
+
         ///Hide tabbar
         self.tabBarController?.tabBar.isHidden = true
+
         nibInitialization()
         setValue()
         fetchImageViewModel()
@@ -375,6 +377,7 @@ extension PostCreateVC {
             })
             .store(in: &cancellable)
     }
+
     
     func fetchPostViewModel() {
         /// Add / Edit poll
@@ -394,6 +397,7 @@ extension PostCreateVC {
             })
             .store(in: &cancellable)
     }
+
 }
 
 extension PostCreateVC: UICollectionViewDataSource {

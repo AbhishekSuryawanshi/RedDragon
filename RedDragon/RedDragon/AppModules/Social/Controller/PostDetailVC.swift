@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 class PostDetailVC: UIViewController {
-    
+
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var listTableView: UITableView!
     
@@ -26,13 +26,18 @@ class PostDetailVC: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
+
         listTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 20, right: 0)
+
+  
     }
     
     func initialSettings() {
         self.view.addSubview(Loader.activityIndicator)
+
         ///Hide tabbar
         self.tabBarController?.tabBar.isHidden = true
+
         nibInitialization()
         fetchSocialViewModel()
         SocialLikeCommentListVM.shared.fetchCommentListAsyncCall(postId: postModel.id)
@@ -40,6 +45,7 @@ class PostDetailVC: UIViewController {
     
     func nibInitialization() {
         listTableView.register(CellIdentifier.postTableViewCell)
+
     }
     
     func showLoader(_ value: Bool) {
@@ -111,4 +117,5 @@ extension PostDetailVC: UITableViewDelegate {
             }
         }
     }
+
 }
