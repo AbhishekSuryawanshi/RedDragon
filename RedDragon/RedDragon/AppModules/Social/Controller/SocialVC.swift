@@ -57,7 +57,7 @@ class SocialVC: UIViewController {
         }
         
         self.view.addSubview(Loader.activityIndicator)
-        
+
         nibInitialization()
         fetchSocialViewModel()
         makeNetworkCall()
@@ -201,8 +201,10 @@ extension SocialVC: UICollectionViewDelegateFlowLayout {
 extension SocialVC: PostListVCDelegate {
     func postList(height: CGFloat) {
         containerHeightConstraint.constant = height
+
         Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { (timer) in
             Loader.activityIndicator.stopAnimating()
         }
+
     }
 }
