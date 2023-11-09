@@ -32,10 +32,10 @@ class MatchTableViewCell: UITableViewCell {
     
     func setCellValues(model: SocialMatch) {
         leagueLabel.text = model.league.name
-        leagueImageView.setImage(imageStr: model.league.logo, placeholder: UIImage.noLeague)
+        leagueImageView.setImage(imageStr: model.league.logo, placeholder: .placeholderLeague)
         dateLabel.text = model.matchUnixTime.formatDate(outputFormat: dateFormat.hhmmaddMMMyyyy2, today: true)
-        homeImageView.setImage(imageStr: model.homeTeam.logo, placeholder: UIImage.noTeam)
-        awayImageView.setImage(imageStr: model.awayTeam.logo, placeholder: UIImage.noTeam)
+        homeImageView.setImage(imageStr: model.homeTeam.logo, placeholder: .placeholderTeam)
+        awayImageView.setImage(imageStr: model.awayTeam.logo, placeholder: .placeholderTeam)
         homeNameLabel.text = UserDefaults.standard.language == "en" ? model.homeTeam.enName : model.homeTeam.cnName
         awayNameLabel.text = UserDefaults.standard.language == "en" ? model.awayTeam.enName : model.awayTeam.cnName
         scoreLabel.text = "\(model.homeScores.first ?? 0) - \(model.awayScores.first ?? 0)"

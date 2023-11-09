@@ -40,6 +40,6 @@ class IconNameCollectionViewCell: UICollectionViewCell {
         iconImageView.clipsToBounds = true
         
         //Check image or url, placeholder image
-        iconImageView.setImage(imageStr: iconName, placeholder: (style == .league ? .noLeague : (style == .team ? .noTeam : nil)))
+        iconImageView.setImage(imageStr: iconName, placeholder: (style == .league ? .placeholderLeague : (style == .team ? .placeholderTeam : nil)))
     }
 }

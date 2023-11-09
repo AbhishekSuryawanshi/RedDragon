@@ -18,6 +18,10 @@ struct Fonts {
     static let fontThin        = "\(appFontName)-Thin"
 }
 
+func fontLight(_ size: CGFloat) -> UIFont {
+    let font = UIFont(name: Fonts.fontLight, size: size) ?? UIFont.systemFont(ofSize: size)
+    return font
+}
 func fontRegular(_ size: CGFloat) -> UIFont {
     let font = UIFont(name: Fonts.fontRegular, size: size) ?? UIFont.systemFont(ofSize: size)
     return font

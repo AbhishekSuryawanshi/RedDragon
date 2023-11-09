@@ -73,7 +73,7 @@ struct SocialPost: Codable {
         id = try (container.decodeIfPresent(Int.self, forKey: .id) ?? 0)
         type = try (container.decodeIfPresent(String.self, forKey: .type) ?? "")
         title = try (container.decodeIfPresent(String.self, forKey: .title) ?? "")
-        contentHtml = try (container.decodeIfPresent(String.self, forKey: .contentHtml) ?? "")
+        
         isVisible = try (container.decodeIfPresent(Int.self, forKey: .isVisible) ?? 0)
         leagueId = try (container.decodeIfPresent(String.self, forKey: .leagueId) ?? "")
         userId = try (container.decodeIfPresent(Int.self, forKey: .userId) ?? 0)
@@ -107,9 +107,15 @@ struct SocialPost: Codable {
         option_2Count = try (container.decodeIfPresent(Int.self, forKey: .option_2Count) ?? 0)
         option_3Count = try (container.decodeIfPresent(Int.self, forKey: .option_3Count) ?? 0)
         user_id = try (container.decodeIfPresent(Int.self, forKey: .user_id) ?? 0)
+        ///html content from contentHtml saved to description
+        contentHtml = try (container.decodeIfPresent(String.self, forKey: .contentHtml) ?? "")
         
         if type == "POLL" {
             userId = user_id
+        } else {
+            if let content = contentHtml.attributedHtmlString {
+                descriptn = content.string
+            }
         }
         pollArray.removeAll()
         if option_3Count != 0 {

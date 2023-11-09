@@ -112,7 +112,9 @@ extension PostMatchesVC: UICollectionViewDataSource {
         let model = SocialLeagueVM.shared.leagueArray[indexPath.row]
         //cell.configure(title: UserDefaults.standard.language == "en" ? model.enName : model.cnName, iconName: model.logoURL, style: .league)
         cell.imageImageView.cornerRadius = 30
-        cell.imageImageView.setImage(imageStr: model.logoURL, placeholder: UIImage.noLeague)
+
+        cell.imageImageView.setImage(imageStr: model.logoURL, placeholder: .placeholderLeague)
+
         cell.imageImageView.borderColor = model.id == selectedLeague.id ? .black : .clear
         cell.imageImageView.borderWidth = model.id == selectedLeague.id ? 3 : 0
         cell.closeBgView.isHidden = true

@@ -70,9 +70,14 @@ class PostCreateVC: UIViewController {
     
     func initialSettings() {
         self.view.addSubview(Loader.activityIndicator)
+
+        ///Hide tabbar
+        self.tabBarController?.tabBar.isHidden = true
+
         nibInitialization()
         setValue()
         fetchImageViewModel()
+        fetchPostViewModel()
     }
     
     func nibInitialization() {
@@ -85,10 +90,10 @@ class PostCreateVC: UIViewController {
     }
     
     func setValue() {
-        self.tabBarController?.tabBar.isHidden = true
+        
         if let user = UserDefaults.standard.user {
             //ToDo
-            userImageView.setImage(imageStr: user.image, placeholder: UIImage(named: "person.circle.fill"))
+            userImageView.setImage(imageStr: user.image, placeholder: .placeholderUser)
             userNameLabel.text = "\(user.firstName) \(user.lastName)"
         }
         dateLabel.text = Date().formatDate(outputFormat: dateFormat.hhmmaddMMMyyyy)
@@ -148,10 +153,7 @@ class PostCreateVC: UIViewController {
                 } else {
                     currentPostType = .none // POST basic...can convert to any post type
                 }
-                
-                if let content = postModel.contentHtml.attributedHtmlString {
-                    contentTxtView.text = content.string
-                }
+                contentTxtView.text = postModel.descriptn
             }
             setPostTypeView(btnTap: false)
         }
@@ -212,10 +214,10 @@ class PostCreateVC: UIViewController {
     func setMatchDetail() {
         matchView.isHidden = false
         leagueLabel.text = selectedMatch.league.name
-        leagueImageView.setImage(imageStr: selectedMatch.league.logo, placeholder: UIImage.noLeague)
+        leagueImageView.setImage(imageStr: selectedMatch.league.logo, placeholder: .placeholderLeague)
         matchDateLabel.text = selectedMatch.matchUnixTime.formatDate(outputFormat: dateFormat.hhmmaddMMMyyyy2, today: true)
-        homeImageView.setImage(imageStr: selectedMatch.homeTeam.logo, placeholder: UIImage.noTeam)
-        awayImageView.setImage(imageStr: selectedMatch.awayTeam.logo, placeholder: UIImage.noTeam)
+        homeImageView.setImage(imageStr: selectedMatch.homeTeam.logo, placeholder: .placeholderTeam)
+        awayImageView.setImage(imageStr: selectedMatch.awayTeam.logo, placeholder: .placeholderTeam)
         homeNameLabel.text = UserDefaults.standard.language == "en" ? selectedMatch.homeTeam.enName : selectedMatch.homeTeam.cnName
         awayNameLabel.text = UserDefaults.standard.language == "en" ? selectedMatch.awayTeam.enName : selectedMatch.awayTeam.cnName
         scoreLabel.text = "\(selectedMatch.homeScores.first ?? 0) - \(selectedMatch.awayScores.first ?? 0)"
@@ -375,6 +377,27 @@ extension PostCreateVC {
             })
             .store(in: &cancellable)
     }
+
+    
+    func fetchPostViewModel() {
+        /// Add / Edit poll
+        SocialPollVM.shared.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        SocialPollVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        SocialPollVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                self?.view.makeToast(StringConstants.pollSuccess)
+                SocialPostListVM.shared.fetchPostListAsyncCall()
+
+            })
+            .store(in: &cancellable)
+    }
+
 }
 
 extension PostCreateVC: UICollectionViewDataSource {
@@ -384,7 +407,7 @@ extension PostCreateVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.singleImageCollectionViewCell, for: indexPath) as! SingleImageCollectionViewCell
-        cell.imageImageView.setImage(imageStr: imageArray[indexPath.row],placeholder: UIImage.placeholder)
+        cell.imageImageView.setImage(imageStr: imageArray[indexPath.row],placeholder: .placeholderPost)
         cell.imageImageView.cornerRadius = 7
         cell.imageImageView.clipsToBounds = true
         cell.closeButton.tag = indexPath.row

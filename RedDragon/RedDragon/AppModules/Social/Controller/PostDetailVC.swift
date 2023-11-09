@@ -26,11 +26,18 @@ class PostDetailVC: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        listTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 0)
+
+        listTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 20, right: 0)
+
+  
     }
     
     func initialSettings() {
         self.view.addSubview(Loader.activityIndicator)
+
+        ///Hide tabbar
+        self.tabBarController?.tabBar.isHidden = true
+
         nibInitialization()
         fetchSocialViewModel()
         SocialLikeCommentListVM.shared.fetchCommentListAsyncCall(postId: postModel.id)
@@ -38,8 +45,9 @@ class PostDetailVC: UIViewController {
     
     func nibInitialization() {
         listTableView.register(CellIdentifier.postTableViewCell)
-    }
 
+    }
+    
     func showLoader(_ value: Bool) {
         value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
     }
@@ -80,8 +88,9 @@ extension PostDetailVC: UITableViewDataSource {
         if indexPath.row == 0 {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.postTableViewCell, for: indexPath) as! PostTableViewCell
-            cell.configure(_index: indexPath.row, model: postModel)
+            cell.configure(_index: indexPath.row, model: postModel, detailPage: true)
             cell.userNameLabel.tintColor = UIColor.blue3
+            cell.commentsLabel.text = SocialLikeCommentListVM.shared.commentsArray.count == 0 ? "" : "Comments".localized
             return cell
         } else {
             
@@ -97,15 +106,16 @@ extension PostDetailVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
             let postContentHeight = SocialPostListVM.shared.heightOfPostCell(model: postModel)
-            return postContentHeight
+            return postContentHeight + 35
         } else {
             let model = SocialLikeCommentListVM.shared.commentsArray[indexPath.row - 1]
-            let height = model.comment.heightOfString2(width: screenWidth - 140, font: fontRegular(15))
+            let height = model.comment.heightOfString2(width: screenWidth - 90, font: fontRegular(13))
             if (UserDefaults.standard.user?.id ?? 0) == model.user.id {
-                return height + 80
+                return height + 75
             } else {
-                return height + 55
+                return height + 53
             }
         }
     }
+
 }
