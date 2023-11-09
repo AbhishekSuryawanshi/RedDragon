@@ -35,7 +35,8 @@ struct SocialPost: Codable {
     var userPoll = PollAnswer()//  1 2 3
     var option_1: String = ""
     var option_2: String = ""
-    var option_3: String = ""   //Note: question key is used as option_3
+    var option_3: String = ""
+    var question: String = ""
     var option_1Count: Int = 0
     var option_2Count: Int = 0
     var option_3Count: Int = 0
@@ -43,7 +44,7 @@ struct SocialPost: Codable {
     var pollArray: [Poll] = []
     
     enum CodingKeys: String, CodingKey {
-        case id, type, title, user_id, option_1, option_2
+        case id, type, title, user_id, option_1, option_2, question
         case contentHtml = "content_html"
         case descriptn = "description"
         case isVisible = "is_visible"
@@ -63,7 +64,7 @@ struct SocialPost: Codable {
         case option_1Count = "option_1_count"
         case option_2Count = "option_2_count"
         case option_3Count = "option_3_count"
-        case option_3 = "question"
+       // case option_3 = "question"
     }
     
     public init () {}
@@ -103,6 +104,7 @@ struct SocialPost: Codable {
         option_1 = try (container.decodeIfPresent(String.self, forKey: .option_1) ?? "")
         option_2 = try (container.decodeIfPresent(String.self, forKey: .option_2) ?? "")
         //option_3 = try (container.decodeIfPresent(String.self, forKey: .option_3) ?? "")
+        question = try (container.decodeIfPresent(String.self, forKey: .question) ?? "")
         option_1Count = try (container.decodeIfPresent(Int.self, forKey: .option_1Count) ?? 0)
         option_2Count = try (container.decodeIfPresent(Int.self, forKey: .option_2Count) ?? 0)
         option_3Count = try (container.decodeIfPresent(Int.self, forKey: .option_3Count) ?? 0)

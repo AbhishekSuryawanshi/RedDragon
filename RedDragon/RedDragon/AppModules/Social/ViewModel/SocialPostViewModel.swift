@@ -22,22 +22,20 @@ class SocialPostListVM: APIServiceManager<[SocialPost]> {
         var contentText = ""
         
         if model.type == "POLL" {
-            contentText = model.descriptn == "_Test_" ? "" : model.descriptn
+            contentText = model.question
         } else {
             contentText = model.descriptn
         }
-        
+        let userDetailHeight: CGFloat = 100
         let contentHeight = contentText.heightOfString2(width: screenWidth - 30, font: fontRegular(15))
-        //ToDo
-        let questienHeight = 0.5 //model.question.heightOfString2(width: screenWidth - 60, font: fontRegular(16))
-        let imageHeight = model.postImages.count == 0 ? 0 : screenWidth - 30 //screenWidth - 40
-        let matchHeight:CGFloat = model.matchDetail == "" ? 0 : 95
-        let pollHeight = model.type == "POLL" ? (questienHeight + (model.userPoll.answer == 0 ? 190 : 185)) : 0
+        let imageHeight = model.postImages.count == 0 ? 0 : screenWidth //screenWidth - 30
+        let matchHeight:CGFloat = model.matchDetail == "" ? 0 : 110
+        var pollHeight: CGFloat = model.type == "POLL" ? CGFloat(40 + (model.pollArray.count * 60)) : 0
         let commentHeight:CGFloat = model.type == "POLL" ? 0 : 50
         
-        let totalHeight = contentHeight + questienHeight + imageHeight + matchHeight + pollHeight + commentHeight
+        let totalHeight = userDetailHeight + contentHeight + imageHeight + matchHeight + pollHeight + commentHeight
         
-        return totalHeight + 100
+        return totalHeight
     }
 }
 
@@ -70,7 +68,7 @@ class SocialPollVM: APIServiceManager<BasicResponse> {
     static let shared = SocialPollVM()
     
     ///function to add or edit poll for social module
-    func addEditPostListAsyncCall(isForEdit:Bool, pollId:Int, parameters: [String: Any]) {
+    func addEditPollListAsyncCall(isForEdit:Bool, pollId:Int, parameters: [String: Any]) {
         let urlString   = isForEdit ? URLConstants.updatePoll + "\(pollId)" : URLConstants.addPoll
         let method      = isForEdit ? RequestType.put : RequestType.post
         asyncCall(urlString: urlString, method: method, parameters: parameters)

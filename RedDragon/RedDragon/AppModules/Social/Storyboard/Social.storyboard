@@ -884,7 +884,9 @@
                         <outlet property="matchContainerView" destination="4y2-i9-tPT" id="WdH-fB-UsA"/>
                         <outlet property="matchDateLabel" destination="icB-Xp-WzD" id="fjA-rv-55P"/>
                         <outlet property="matchView" destination="BJp-D3-JOJ" id="S4J-fc-CG0"/>
+                        <outlet property="pollAddButtonHeightConstraint" destination="pjs-sO-Oxl" id="CZp-kF-Lrh"/>
                         <outlet property="pollButton" destination="99p-Oz-HJj" id="wLf-iq-s9r"/>
+                        <outlet property="pollFieldHeightConstraint" destination="GBf-g4-JTd" id="ORe-ds-hH4"/>
                         <outlet property="pollTableHeightConstraint" destination="vZh-CH-bUK" id="uKw-KR-aTg"/>
                         <outlet property="pollTableView" destination="abh-uJ-R5s" id="ABt-J2-0hP"/>
                         <outlet property="pollTextField" destination="SzF-z8-QaS" id="yOb-QJ-G6K"/>
@@ -1070,8 +1072,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="qo8-3b-qmG">
-                                <rect key="frame" x="15" y="119" width="363" height="629"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="qo8-3b-qmG">
+                                <rect key="frame" x="15" y="119" width="363" height="634"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SocialCommentTableViewCell" rowHeight="89" id="5Mb-GY-U4i" customClass="SocialCommentTableViewCell" customModule="RedDragon" customModuleProvider="target">
@@ -1173,14 +1175,14 @@
                                     <outlet property="delegate" destination="Vsz-5q-DBT" id="kOc-GE-D5I"/>
                                 </connections>
                             </tableView>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HDq-NR-qsw" userLabel="bottomView">
-                                <rect key="frame" x="0.0" y="743" width="393" height="109"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HDq-NR-qsw" userLabel="bottomView">
+                                <rect key="frame" x="0.0" y="748" width="393" height="104"/>
                                 <subviews>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2h6-N3-naM">
-                                        <rect key="frame" x="15" y="15" width="363" height="45"/>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2h6-N3-naM">
+                                        <rect key="frame" x="15" y="15" width="363" height="40"/>
                                         <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TGe-gi-WDt" customClass="GrowingTextView" customModule="RedDragon" customModuleProvider="target">
-                                                <rect key="frame" x="10" y="5" width="308" height="35"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TGe-gi-WDt" customClass="GrowingTextView" customModule="RedDragon" customModuleProvider="target">
+                                                <rect key="frame" x="10" y="5" width="308" height="30"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
@@ -1261,8 +1263,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Shadow3" translatesAutoresizingMaskIntoConstraints="NO" id="cwb-98-rgc">
-                                <rect key="frame" x="0.0" y="731" width="393" height="12"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Shadow3" translatesAutoresizingMaskIntoConstraints="NO" id="cwb-98-rgc">
+                                <rect key="frame" x="0.0" y="736" width="393" height="12"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -1333,14 +1335,6 @@
             <point key="canvasLocation" x="1414.5038167938931" y="648.59154929577471"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="MkM-G1-GVJ">
-            <size key="intrinsicContentSize" width="-1" height="30"/>
-        </designable>
-        <designable name="TGe-gi-WDt">
-            <size key="intrinsicContentSize" width="-1" height="30"/>
-        </designable>
-    </designables>
     <resources>
         <image name="Shadow3" width="375" height="8"/>
         <image name="add_1" width="24" height="24"/>
@@ -1388,4 +1382,3 @@
         </systemColor>
     </resources>
 </document>
-
