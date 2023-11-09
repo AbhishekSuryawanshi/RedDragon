@@ -9,14 +9,23 @@ import UIKit
 
 class PlayerDetailView: UIView {
 
+    @IBOutlet var contentView: UIView!
     @IBOutlet weak var playerDetailTxtView: UITextView!
     @IBOutlet weak var playerDetailLbl: UILabel!
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
+    
+    override init(frame: CGRect) {
+           super.init(frame: frame)
+           commonInit()
+       }
+       
+       required init?(coder aDecoder: NSCoder) {
+           super.init(coder: aDecoder)
+           commonInit()
+       }
+       
+       func commonInit() {
+           Bundle.main.loadNibNamed("PlayerDetailView", owner: self, options: nil)
+           contentView.fixInView(self)
+       }
+   
 }
