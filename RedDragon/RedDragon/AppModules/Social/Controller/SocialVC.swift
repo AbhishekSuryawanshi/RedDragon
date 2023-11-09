@@ -57,7 +57,7 @@ class SocialVC: UIViewController {
         }
         
         self.view.addSubview(Loader.activityIndicator)
-
+        
         nibInitialization()
         fetchSocialViewModel()
         makeNetworkCall()
@@ -78,6 +78,9 @@ class SocialVC: UIViewController {
     }
     
     // MARK: - Button Actions
+    @IBAction func searchButtonTapped(_ sender: UIButton) {
+        
+    }
     
     @IBAction func createPostButtonTapped(_ sender: UIButton) {
         
@@ -201,10 +204,8 @@ extension SocialVC: UICollectionViewDelegateFlowLayout {
 extension SocialVC: PostListVCDelegate {
     func postList(height: CGFloat) {
         containerHeightConstraint.constant = height
-
-        Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { (timer) in
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { (timer) in
             Loader.activityIndicator.stopAnimating()
         }
-
     }
 }
