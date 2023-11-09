@@ -70,10 +70,8 @@ class PostCreateVC: UIViewController {
     
     func initialSettings() {
         self.view.addSubview(Loader.activityIndicator)
-
         ///Hide tabbar
         self.tabBarController?.tabBar.isHidden = true
-
         nibInitialization()
         setValue()
         fetchImageViewModel()
@@ -106,7 +104,7 @@ class PostCreateVC: UIViewController {
         
         containerTopConstarint.constant = 0
         headerLabel.text = isForEdit ? "Edit Post".localized : "Create Post".localized
-        contentTxtView.placeholder = "What do you want to talk about?".localized
+        contentTxtView.placeholder = ErrorMessage.textEmptyAlert.localized
         contentTxtView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         contentTxtView.delegate = self
         contentTxtView.minHeight = 40
@@ -194,7 +192,7 @@ class PostCreateVC: UIViewController {
                     self.containerTopConstarint.constant = -460
                     self.view.layoutIfNeeded()
                 }
-            default: //event
+            default:
                 return
             }
         }
@@ -224,27 +222,24 @@ class PostCreateVC: UIViewController {
     }
     
     func validate() -> Bool {
-        //ToDo
-        /*
-         if currentPostType == .poll {
-         if questientTxtView.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-         PSToast.show(message: PSMessages.questionEmptyAlert, view: self.view)
-         return false
-         } else if option1TF.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-         PSToast.show(message: PSMessages.option1EmptyAlert, view: self.view)
-         return false
-         } else if option2TF.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-         PSToast.show(message: PSMessages.option2EmptyAlert, view: self.view)
-         return false
-         }
-         } else {
-         if contentTxtView.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-         PSToast.show(message: PSMessages.textEmptyAlert, view: self.view)
-         return false
-         }
-         }
-         */
         
+        if currentPostType == .poll {
+            //            if questientTxtView.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            //                PSToast.show(message: PSMessages.questionEmptyAlert, view: self.view)
+            //                return false
+            //            } else if option1TF.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            //                PSToast.show(message: PSMessages.option1EmptyAlert, view: self.view)
+            //                return false
+            //            } else if option2TF.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            //                PSToast.show(message: PSMessages.option2EmptyAlert, view: self.view)
+            //                return false
+            //            }
+        } else {
+            if contentTxtView.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+                self.view.makeToast(ErrorMessage.textEmptyAlert)
+                return false
+            }
+        }
         return true
     }
     
@@ -307,60 +302,50 @@ class PostCreateVC: UIViewController {
     @IBAction func postButtonTapped(_ sender: UIButton) {
         
         if validate() {
-            //ToDo
-            /*
-             if currentPostType == .poll {
-             if postModel.type == "POST" {
-             checkPostorPoll(){}
-             return
-             }
-             
-             let descriptn = contentTxtView.text! == "" ? "_Test_" : contentTxtView.text!
-             let param: [String: Any] = [
-             "question": questientTxtView.text!,
-             "league_id": leagueId,
-             "user_id": String(UserDefaults.standard.user?.id ?? 0),
-             "option_1": option1TF.text!,
-             "option_2": option2TF.text!,
-             "answer": "0",
-             "description": descriptn
-             ]
-             
-             self.startLoader()
-             PSPostVM.shared.addEditPoll(isForEdit: isForEdit, pollId: postModel.id, parameters: param) { status, message in
-             stopLoader()
-             if status {
-             self.showAlert1(message: self.isForEdit ? PSMessages.postUpdateSuccess : PSMessages.postCreateSuccess) {
-             self.navigationController?.popViewController(animated: true)
-             }
-             } else {
-             PSToast.show(message: message, view: self.view)
-             }
-             }
-             } else {
-             var param: [String: Any] = [
-             "title": "PitchStories", // Ignore title
-             "content_html": "<html><body> <p> \(contentTxtView.text!) </p> </body> </html>",
-             "is_visible": "1",
-             "league_id": leagueId,
-             "imgsUrls" : imageArray
-             ]
-             if currentPostType == .match {
-             param.updateValue(selectedMatch.convertToString ?? "", forKey: "match_detail")
-             }
-             self.startLoader()
-             PSPostVM.shared.addEditPost(isForEdit: isForEdit, postId: postModel.id, parameters: param) { status, message in
-             stopLoader()
-             if status {
-             self.showAlert1(message: self.isForEdit ? PSMessages.postUpdateSuccess : PSMessages.postCreateSuccess) {
-             self.navigationController?.popViewController(animated: true)
-             }
-             } else {
-             PSToast.show(message: message, view: self.view)
-             }
-             }
-             }
-             */
+            
+            if currentPostType == .poll {
+                if postModel.type == "POST" {
+                    checkPostorPoll(){}
+                    return
+                }
+                /*
+                 let descriptn = contentTxtView.text! == "" ? "_Test_" : contentTxtView.text!
+                 let param: [String: Any] = [
+                     "question": questientTxtView.text!,
+                     "league_id": leagueId,
+                     "user_id": String(UserDefaults.standard.user?.id ?? 0),
+                     "option_1": option1TF.text!,
+                     "option_2": option2TF.text!,
+                     "answer": "0",
+                     "description": descriptn
+                 ]
+                 
+                 self.startLoader()
+                 PSPostVM.shared.addEditPoll(isForEdit: isForEdit, pollId: postModel.id, parameters: param) { status, message in
+                     stopLoader()
+                     if status {
+                         self.showAlert1(message: self.isForEdit ? PSMessages.postUpdateSuccess : PSMessages.postCreateSuccess) {
+                             self.navigationController?.popViewController(animated: true)
+                         }
+                     } else {
+                         PSToast.show(message: message, view: self.view)
+                     }
+                 }
+                 */
+               
+            } else {
+                var param: [String: Any] = [
+                    "title": "PitchStories", // Ignore title
+                    "content_html": "<html><body> <p> \(contentTxtView.text!) </p> </body> </html>",
+                    "is_visible": "1",
+                    "league_id": leagueId,
+                    "imgsUrls" : imageArray
+                ]
+                if currentPostType == .match {
+                    param.updateValue(selectedMatch.convertToString ?? "", forKey: "match_detail")
+                }
+                SocialPostVM.shared.addEditPostListAsyncCall(isForEdit: isForEdit, postId: postModel.id, parameters: param)
+            }
         }
     }
 }
@@ -377,9 +362,28 @@ extension PostCreateVC {
             })
             .store(in: &cancellable)
     }
-
     
     func fetchPostViewModel() {
+        
+        /// Add / Edit post
+        SocialPostVM.shared.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        SocialPostVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        SocialPostVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                self?.view.makeToast(self?.isForEdit ?? true ? StringConstants.postUpdateSuccess : StringConstants.postCreateSuccess)
+                
+                Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { (timer) in
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            })
+            .store(in: &cancellable)
+        
         /// Add / Edit poll
         SocialPollVM.shared.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
@@ -391,13 +395,14 @@ extension PostCreateVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.view.makeToast(StringConstants.pollSuccess)
-                SocialPostListVM.shared.fetchPostListAsyncCall()
-
+                self?.view.makeToast(self?.isForEdit ?? true ? StringConstants.pollUpdateSuccess : StringConstants.pollCreateSuccess)
+                
+                Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { (timer) in
+                    self?.navigationController?.popViewController(animated: true)
+                }
             })
             .store(in: &cancellable)
     }
-
 }
 
 extension PostCreateVC: UICollectionViewDataSource {
