@@ -94,16 +94,16 @@ class PostTableViewCell: UITableViewCell {
         commentCountLabel.text = "\(model.commentCount)"
         if model.type == "POLL" {
             pollCount = model.option_1Count + model.option_2Count + model.option_3Count
-            statusLabel.text = pollCount == 0 ? "" : (pollCount == 1 ? "\(pollCount) Vote" : "\(pollCount) Votes")
+            statusLabel.text = pollCount < 2 ? "\(pollCount) Vote" : "\(pollCount) Votes"
         } else {
             let statusCount = model.likeCount + model.commentCount
             statusLabel.text = statusCount == 0 ? "" : (statusCount == 1 ? "\(statusCount) Like/Comment" : "\(statusCount) Likes/Comments")
         }
         
         if model.type == "POLL" {
-            pollViewHeightConstraint.constant = CGFloat(40 + (model.pollArray.count * 40))
+            pollViewHeightConstraint.constant = CGFloat(20 + (model.pollArray.count * 46))
             pollTableView.reloadData()
-            contentLabel.text = model.descriptn
+            contentLabel.text = model.question
             
             //            let descriptn = model.descriptn == "_Test_" ? "" : model.descriptn
             //            contentLabel.text = descriptn

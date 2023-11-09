@@ -41,6 +41,8 @@ class PostCreateVC: UIViewController {
     @IBOutlet weak var pollTextField: UITextField!
     @IBOutlet weak var pollTableView: UITableView!
     @IBOutlet weak var pollTableHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var pollFieldHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var pollAddButtonHeightConstraint: NSLayoutConstraint!
     
     enum SocialPostType {
         case none
@@ -110,23 +112,12 @@ class PostCreateVC: UIViewController {
         contentTxtView.minHeight = 40
         contentTxtView.maxHeight = 400
         postButton.setTitle(isForEdit ? "Save".localized : "Post".localized, for: .normal)
-        pollTextField.placeholder = "Add Choise".localized
+        pollTextField.placeholder = "Add Choice".localized
         imageButton.setTitle("Image".localized, for: .normal)
         pollButton.setTitle("Poll".localized, for: .normal)
         matchButton.setTitle("Match".localized, for: .normal)
-        
-        //ToDo
-        /*
-         questientTxtView.placeholder = "Type here..".localized
-         questientTxtView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-         eventDesTxtView.setPlaceholder(text: "Type here..".localized)
-         eventDesTxtView.checkPlaceholder()
-         questienTitleLabel.text = "Your question*".localized
-         option1Label.text = "Option 1*".localized
-         option2Label.text = "Option 2*".localized
-         option1TF.placeholder = "add option".localized
-         option2TF.placeholder = "add option".localized
-         */
+        pollFieldHeightConstraint.constant = 37
+        pollAddButtonHeightConstraint.constant = 47
         
         if isForEdit {
             //ToDo
@@ -137,7 +128,6 @@ class PostCreateVC: UIViewController {
                 //                questientTxtView.text = postModel.question
                 //                option1TF.text = postModel.option_1
                 //                option2TF.text = postModel.option_2
-                contentTxtView.text = postModel.descriptn == "_Test_" ? "" : postModel.descriptn
             } else {
                 if postModel.matchDetail != "" { // POST Match
                     currentPostType = .match
@@ -222,25 +212,27 @@ class PostCreateVC: UIViewController {
     }
     
     func validate() -> Bool {
-        
+        if contentTxtView.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            self.view.makeToast(ErrorMessage.textEmptyAlert)
+            return false
+        }
         if currentPostType == .poll {
-            //            if questientTxtView.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            //                PSToast.show(message: PSMessages.questionEmptyAlert, view: self.view)
-            //                return false
-            //            } else if option1TF.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            //                PSToast.show(message: PSMessages.option1EmptyAlert, view: self.view)
-            //                return false
-            //            } else if option2TF.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            //                PSToast.show(message: PSMessages.option2EmptyAlert, view: self.view)
-            //                return false
-            //            }
-        } else {
-            if contentTxtView.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-                self.view.makeToast(ErrorMessage.textEmptyAlert)
+            if pollArray.count < 2 {
+                self.view.makeToast(ErrorMessage.pollOptionEmptyAlert)
                 return false
             }
+        } else {
+            
         }
         return true
+    }
+    
+    func checkPostorPoll(onCompletion:@escaping () -> Void) {
+        /// Poll data added to a basic post, so type converting from "POST" to "POLL"
+        /// delete post and add as a new poll
+        
+        isForEdit = false
+        SocialDeleteVM.shared.deletePollOrPost(type: .post, id: postModel.id)
     }
     
     // MARK: - Button Actions
@@ -249,6 +241,8 @@ class PostCreateVC: UIViewController {
         self.customAlertView_2Actions(title: StringConstants.deleteAlert, description: "") {
             self.pollArray.remove(at: sender.tag)
             self.pollTableView.reloadData()
+            self.pollFieldHeightConstraint.constant = self.pollArray.count < 2 ? 37 : 0
+            self.pollAddButtonHeightConstraint.constant = self.pollArray.count < 2 ? 47 : 0
         }
     }
     
@@ -275,28 +269,15 @@ class PostCreateVC: UIViewController {
         }
     }
     
-    func checkPostorPoll(onCompletion:@escaping () -> Void) {
-        //Poll data added to a basic post, so type converting to "POLL"
-        // delete post and add as a new poll
-        //ToDo
-        /*
-         isForEdit = false
-         self.startLoader()
-         PSPostVM.shared.deletePostOrPoll(type: .post, id: postModel.id) { status, message in
-         
-         self.postModel.type = "POLL"
-         self.postButtonTapped(UIButton())
-         onCompletion()
-         }
-         */
-    }
-    
     @IBAction func pollAddButtonTapped(_ sender: UIButton) {
         guard !pollTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
         pollTextField.endEditing(true)
         pollArray.append(Poll(title: pollTextField.text!, count: 0))
         pollTextField.text = ""
         pollTableView.reloadData()
+        pollFieldHeightConstraint.constant = pollArray.count < 2 ? 37 : 0
+        pollAddButtonHeightConstraint.constant = pollArray.count < 2 ? 47 : 0
+        
     }
     
     @IBAction func postButtonTapped(_ sender: UIButton) {
@@ -308,31 +289,19 @@ class PostCreateVC: UIViewController {
                     checkPostorPoll(){}
                     return
                 }
-                /*
-                 let descriptn = contentTxtView.text! == "" ? "_Test_" : contentTxtView.text!
-                 let param: [String: Any] = [
-                     "question": questientTxtView.text!,
-                     "league_id": leagueId,
-                     "user_id": String(UserDefaults.standard.user?.id ?? 0),
-                     "option_1": option1TF.text!,
-                     "option_2": option2TF.text!,
-                     "answer": "0",
-                     "description": descriptn
-                 ]
-                 
-                 self.startLoader()
-                 PSPostVM.shared.addEditPoll(isForEdit: isForEdit, pollId: postModel.id, parameters: param) { status, message in
-                     stopLoader()
-                     if status {
-                         self.showAlert1(message: self.isForEdit ? PSMessages.postUpdateSuccess : PSMessages.postCreateSuccess) {
-                             self.navigationController?.popViewController(animated: true)
-                         }
-                     } else {
-                         PSToast.show(message: message, view: self.view)
-                     }
-                 }
-                 */
-               
+                
+                let param: [String: Any] = [
+                    "question": contentTxtView.text!,
+                    "league_id": SocialLeagueVM.shared.leagueArray.first?.id ?? "4zp5rzghp5q82w1",
+                    "user_id": String(UserDefaults.standard.user?.id ?? 0),
+                    "option_1": pollArray[0].title,
+                    "option_2": pollArray[1].title,
+                    "answer": "0",
+                    "description": "_Test_"
+                ]
+                /// "description" key not required, default key is adding because its a required field in backend
+                
+                SocialPollVM.shared.addEditPollListAsyncCall(isForEdit: isForEdit, pollId: postModel.id, parameters: param)
             } else {
                 var param: [String: Any] = [
                     "title": "PitchStories", // Ignore title
@@ -378,7 +347,7 @@ extension PostCreateVC {
             .sink(receiveValue: { [weak self] response in
                 self?.view.makeToast(self?.isForEdit ?? true ? StringConstants.postUpdateSuccess : StringConstants.postCreateSuccess)
                 
-                Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { (timer) in
+                Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (timer) in
                     self?.navigationController?.popViewController(animated: true)
                 }
             })
@@ -397,9 +366,25 @@ extension PostCreateVC {
             .sink(receiveValue: { [weak self] response in
                 self?.view.makeToast(self?.isForEdit ?? true ? StringConstants.pollUpdateSuccess : StringConstants.pollCreateSuccess)
                 
-                Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { (timer) in
+                Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (timer) in
                     self?.navigationController?.popViewController(animated: true)
                 }
+            })
+            .store(in: &cancellable)
+        
+        /// Delete post
+        SocialDeleteVM.shared.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        SocialDeleteVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        SocialDeleteVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                self?.postModel.type = "POLL"
+                self?.postButtonTapped(UIButton())
             })
             .store(in: &cancellable)
     }

@@ -298,7 +298,7 @@ extension PostListVC: PostTableCellDelegate {
         default:
             param.updateValue(postModel.option_3Count + 1, forKey: "option_3_count")
         }
-        SocialPollVM.shared.addEditPostListAsyncCall(isForEdit: true, pollId: postModel.id, parameters: param)
+        SocialPollVM.shared.addEditPollListAsyncCall(isForEdit: true, pollId: postModel.id, parameters: param)
     }
     
     func postImageTapped(url: String) {

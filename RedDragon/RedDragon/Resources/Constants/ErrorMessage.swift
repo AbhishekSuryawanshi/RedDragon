@@ -25,6 +25,7 @@ struct ErrorMessage {
     static var photoMinCountAlert       = "Alert! Photo count should be at least 1"
     static var photoMaxCountAlert       = "You've already reached the limit of 5 photos"
     static var textEmptyAlert           = "What do you want to talk about?"
+    static var pollOptionEmptyAlert     = "Please add two poll choices"
     
     static var chatEmptyAlert           = "No Chats yet!"
     static var likeListEmptyAlert       = "No Likes yet!"
