@@ -74,7 +74,7 @@ class MatchDetailsVC: UIViewController {
     }
     
     func makeNetworkCall() {
-        matchDetailViewModel?.fetchMatchDetailAsyncCall(lang: fetchCurrentLanguageCode == "en" ? "en" : "zh", 
+        matchDetailViewModel?.fetchMatchDetailAsyncCall(lang: fetchCurrentLanguageCode == "en" ? "en" : "zh",
                                                         slug: "2023-02-21-liverpool-real-madrid",
                                                         sports: "football") //2023-02-21-liverpool-real-madrid //matchSlug ?? ""
     }
@@ -94,7 +94,6 @@ extension MatchDetailsVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] data in
-                print(data!)
                 self?.renderResponseData(data: data!)
             })
             .store(in: &cancellable)
@@ -112,6 +111,7 @@ extension MatchDetailsVC {
             awayTeamNameLabel.text = data.awayTeamName
             scoreLabel.text = "\(data.homeScore) - \(data.awayScore)"
             firstHalfScoreLabel.text = "\(StringConstants.firstHalf)(\(data.home1StHalf)-\(data.away1StHalf))"
+            highlightFirstIndex_collectionView()
             self.view.layoutIfNeeded()
         }
     }
@@ -147,7 +147,6 @@ extension MatchDetailsVC {
     
     func configureUI() {
         addActivityIndicator()
-        highlightFirstIndex_collectionView()
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     

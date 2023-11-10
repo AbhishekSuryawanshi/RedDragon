@@ -28,9 +28,10 @@ struct StringConstants {
     static let reportPostAlert      = "You are about to report this post as malicious or abusive. Would you like to report this post to PitchStories?"
     static let postsEmptyLoginAlert = "Please, Login or Sign Up to your account to see the Posts"
     static var profileUpdateSuccess = "Profile updated."
-    static var postCreateSuccess    = "Post added."
-    static var postUpdateSuccess    = "Post updated."
-    static var pollSuccess          = "Your Poll has been Added"
+    static var postCreateSuccess    = "Your Post has been Added"
+    static var postUpdateSuccess    = "Your Post has been updated"
+    static var pollCreateSuccess    = "Your Poll has been Added"
+    static var pollUpdateSuccess    = "Your Poll has been updated"
     static var deleteAlert          = "Are you sure you want to delete?"
     
     //Custom Alert

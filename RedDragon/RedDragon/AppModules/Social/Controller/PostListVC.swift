@@ -103,7 +103,7 @@ class PostListVC: UIViewController {
     }
     
     // MARK: - Button Actions
-    @objc func moreBTNTapped(sender: UIButton) {
+    @objc func moreButtonTapped(sender: UIButton) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         if let user = UserDefaults.standard.user, user.id == postArray[sender.tag].userId {// app user
             let action1 = UIAlertAction(title: "Edit Post".localized, style: .default , handler:{ (UIAlertAction) in
@@ -136,7 +136,7 @@ class PostListVC: UIViewController {
         self.present(alert, animated: true)
     }
     
-    @objc func shareBTNTapped(sender: UIButton) {
+    @objc func shareButtonTapped(sender: UIButton) {
         Loader.activityIndicator.startAnimating()
         let postModel = postArray[sender.tag]
         var shareImage = UIImage() //ToDo add app logo
@@ -156,12 +156,12 @@ class PostListVC: UIViewController {
         }
     }
     
-    @objc func likeBTNTapped(sender: UIButton) {
+    @objc func likeButtonTapped(sender: UIButton) {
         let model = postArray[sender.tag]
         SocialAddLikeVM.shared.addLikeAsyncCall(dislike: model.liked, postId: model.id)
     }
     
-    @objc func commentBTNTapped(sender: UIButton) {
+    @objc func commentButtonTapped(sender: UIButton) {
         navigateToViewController(PostDetailVC.self, storyboardName: StoryboardName.social, animationType: .autoReverse(presenting: .zoom)) { vc in
             vc.postModel = self.postArray[sender.tag]
         }
@@ -190,7 +190,7 @@ extension PostListVC {
             })
             .store(in: &cancellable)
         
-        /// Add poll
+        /// Update poll
         SocialPollVM.shared.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
@@ -238,7 +238,6 @@ extension PostListVC {
     
     func execute_onResponseData(_ postData: [SocialPost]) {
         ///Posts and polls comes in separate order, so we have to apply date filter
-        // postArray = postData.filter({ $0.type == "POST" })
         postArray = postData
         postArray = postArray.sorted(by: { $0.updatedTime.compare($1.updatedTime) == .orderedDescending })
         calculateContentHeight()
@@ -263,10 +262,10 @@ extension PostListVC: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.postTableViewCell, for: indexPath) as! PostTableViewCell
         cell.delegate = self
         cell.configure(_index: indexPath.row, model: postArray[indexPath.row])
-        cell.moreButton.addTarget(self, action: #selector(moreBTNTapped(sender:)), for: .touchUpInside)
-        cell.likeButton.addTarget(self, action: #selector(likeBTNTapped(sender:)), for: .touchUpInside)
-        cell.commentButton.addTarget(self, action: #selector(commentBTNTapped(sender:)), for: .touchUpInside)
-        cell.shareButton.addTarget(self, action: #selector(shareBTNTapped(sender:)), for: .touchUpInside)
+        cell.moreButton.addTarget(self, action: #selector(moreButtonTapped(sender:)), for: .touchUpInside)
+        cell.likeButton.addTarget(self, action: #selector(likeButtonTapped(sender:)), for: .touchUpInside)
+        cell.commentButton.addTarget(self, action: #selector(commentButtonTapped(sender:)), for: .touchUpInside)
+        cell.shareButton.addTarget(self, action: #selector(shareButtonTapped(sender:)), for: .touchUpInside)
         return cell
     }
 }
@@ -299,7 +298,7 @@ extension PostListVC: PostTableCellDelegate {
         default:
             param.updateValue(postModel.option_3Count + 1, forKey: "option_3_count")
         }
-        SocialPollVM.shared.addEditPostListAsyncCall(isForEdit: true, pollId: postModel.id, parameters: param)
+        SocialPollVM.shared.addEditPollListAsyncCall(isForEdit: true, pollId: postModel.id, parameters: param)
     }
     
     func postImageTapped(url: String) {

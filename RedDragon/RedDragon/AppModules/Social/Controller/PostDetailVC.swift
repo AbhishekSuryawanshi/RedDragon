@@ -9,9 +9,10 @@ import UIKit
 import Combine
 
 class PostDetailVC: UIViewController {
-
+    
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var listTableView: UITableView!
+    @IBOutlet weak var commentTextView: GrowingTextView!
     
     var cancellable = Set<AnyCancellable>()
     var postModel = SocialPost()
@@ -26,26 +27,21 @@ class PostDetailVC: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-
-        listTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 20, right: 0)
-
-  
+        listTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 50, right: 0)
     }
     
     func initialSettings() {
         self.view.addSubview(Loader.activityIndicator)
-
         ///Hide tabbar
         self.tabBarController?.tabBar.isHidden = true
-
         nibInitialization()
-        fetchSocialViewModel()
+        fetchSocialPostViewModel()
+        commentTextView.textContainerInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         SocialLikeCommentListVM.shared.fetchCommentListAsyncCall(postId: postModel.id)
     }
     
     func nibInitialization() {
         listTableView.register(CellIdentifier.postTableViewCell)
-
     }
     
     func showLoader(_ value: Bool) {
@@ -54,13 +50,66 @@ class PostDetailVC: UIViewController {
     
     func refreshForLocalization() {
         headerLabel.text = "Post".localized
+        commentTextView.placeholder = "Add a comment".localized
+    }
+    
+    func shareAction(model: SocialPost, image: UIImage) {
+        Loader.activityIndicator.stopAnimating()
+        DispatchQueue.main.async {
+            let vc = UIActivityViewController(activityItems: [image, "\n\n\("Dive into this story via the RedDragon app".localized) \n\(model.descriptn) \n\("Stay connected to the latest in football, basketball, tennis, and other sports with us. Install it from the App Store to find more news.".localized) \n\n \(URLConstants.appstore)"], applicationActivities: [])
+            if let popoverController = vc.popoverPresentationController {
+                popoverController.sourceView = self.listTableView
+                popoverController.sourceRect = self.listTableView.bounds
+            }
+            self.present(vc, animated: true)
+        }
+    }
+    
+    // MARK: - Button Actions
+    @IBAction func commentSentButtonTapped(_ sender: UIButton) {
+        guard !commentTextView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+        commentTextView.endEditing(true)
+        let param: [String: Any] = [
+            "post_id": postModel.id,
+            "txt": commentTextView.text!
+        ]
+        SocialAddCommentVM.shared.addCommentAsyncCall(parameters: param)
+    }
+    
+    @objc func deleteCommentBTNTapped(sender: UIButton) {
+        self.customAlertView_2Actions(title: "".localized, description: StringConstants.deleteAlert.localized) {
+            SocialDeleteCommentVM.shared.deleteComment(id: SocialLikeCommentListVM.shared.commentsArray[sender.tag].id)
+        }
+    }
+    
+    @objc func shareButtonTapped(sender: UIButton) {
+        Loader.activityIndicator.startAnimating()
+        var shareImage = UIImage() //ToDo add app logo
+        if postModel.postImages.count > 0 {
+            UIImageView().kf.setImage(with: URL(string: postModel.postImages.first ?? "")) { result in
+                switch result {
+                case .success(let value):
+                    shareImage = value.image
+                    self.shareAction(model: self.postModel, image: shareImage)
+                case .failure(let error):
+                    print("Error Image: \(error)")
+                    self.shareAction(model: self.postModel, image: shareImage)
+                }
+            }
+        } else {
+            shareAction(model: postModel, image: shareImage)
+        }
+    }
+    
+    @objc func likeButtonTapped(sender: UIButton) {
+        SocialAddLikeVM.shared.addLikeAsyncCall(dislike: postModel.liked, postId: postModel.id)
     }
 }
 
 // MARK: - API Services
 extension PostDetailVC {
-    func fetchSocialViewModel() {
-        ///fetch match list
+    func fetchSocialPostViewModel() {
+        ///fetch comment list
         SocialLikeCommentListVM.shared.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
@@ -72,7 +121,59 @@ extension PostDetailVC {
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
                 SocialLikeCommentListVM.shared.commentsArray = response ?? []
+                self?.postModel.commentCount = SocialLikeCommentListVM.shared.commentsArray.count
                 self?.listTableView.reloadData()
+            })
+            .store(in: &cancellable)
+        
+        ///Add comment
+        SocialAddCommentVM.shared.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        SocialAddCommentVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        SocialAddCommentVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                self?.commentTextView.text = ""
+                SocialLikeCommentListVM.shared.fetchCommentListAsyncCall(postId: self?.postModel.id ?? 0)
+            })
+            .store(in: &cancellable)
+        
+        ///Delete comment
+        SocialDeleteCommentVM.shared.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        SocialDeleteCommentVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        SocialDeleteCommentVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                SocialLikeCommentListVM.shared.fetchCommentListAsyncCall(postId: self?.postModel.id ?? 0)
+            })
+            .store(in: &cancellable)
+        
+        /// Add Like
+        SocialAddLikeVM.shared.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        SocialAddLikeVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        SocialAddLikeVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                if (response?.message ?? "").lowercased().contains("success"), let status = self?.postModel.liked {
+                    ///update like status and likecount in post model
+                    self?.postModel.liked = !status
+                    self?.postModel.likeCount = status ? (self?.postModel.likeCount ?? 0) - 1 : (self?.postModel.likeCount ?? 0) + 1
+                    self?.listTableView.reloadData()
+                }
             })
             .store(in: &cancellable)
     }
@@ -91,11 +192,14 @@ extension PostDetailVC: UITableViewDataSource {
             cell.configure(_index: indexPath.row, model: postModel, detailPage: true)
             cell.userNameLabel.tintColor = UIColor.blue3
             cell.commentsLabel.text = SocialLikeCommentListVM.shared.commentsArray.count == 0 ? "" : "Comments".localized
+            cell.likeButton.addTarget(self, action: #selector(likeButtonTapped(sender:)), for: .touchUpInside)
+            cell.shareButton.addTarget(self, action: #selector(shareButtonTapped(sender:)), for: .touchUpInside)
             return cell
         } else {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.socialCommentTableViewCell, for: indexPath) as! SocialCommentTableViewCell
             cell.configure(model: SocialLikeCommentListVM.shared.commentsArray[indexPath.row - 1], _index: indexPath.row - 1)
+            cell.deleteButton.addTarget(self, action: #selector(deleteCommentBTNTapped(sender:)), for: .touchUpInside)
             return cell
         }
     }
@@ -117,5 +221,4 @@ extension PostDetailVC: UITableViewDelegate {
             }
         }
     }
-
 }

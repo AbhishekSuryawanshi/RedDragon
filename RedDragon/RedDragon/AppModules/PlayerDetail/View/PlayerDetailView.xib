@@ -17,9 +17,15 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlayerDetailView" customModule="RedDragon" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="6s3-ac-bL1"/>
+                <outlet property="playerDetailLbl" destination="Ayh-am-WSu" id="edr-ZC-xbC"/>
+                <outlet property="playerDetailTxtView" destination="qpg-2I-Bco" id="TEh-U3-K6R"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PlayerDetailView" customModule="RedDragon" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="393" height="135"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -40,6 +46,39 @@
                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
+                <view contentMode="scaleToFill" id="Lgv-QM-DP2">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="135"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ayh-am-WSu">
+                            <rect key="frame" x="10" y="10" width="87" height="17"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="17" id="Zsm-gI-vNo"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qpg-2I-Bco">
+                            <rect key="frame" x="10" y="37" width="373" height="88"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                            <color key="textColor" red="0.14117647059999999" green="0.1019607843" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="ie5-UV-CXl"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="qpg-2I-Bco" secondAttribute="bottom" constant="10" id="5Tk-Fh-Rhm"/>
+                        <constraint firstItem="Ayh-am-WSu" firstAttribute="top" secondItem="Lgv-QM-DP2" secondAttribute="top" constant="10" id="AzX-cn-DZa"/>
+                        <constraint firstItem="qpg-2I-Bco" firstAttribute="leading" secondItem="ie5-UV-CXl" secondAttribute="leading" constant="10" id="Fyu-Kt-yOB"/>
+                        <constraint firstItem="qpg-2I-Bco" firstAttribute="top" secondItem="Ayh-am-WSu" secondAttribute="bottom" constant="10" id="kqZ-2x-i2o"/>
+                        <constraint firstItem="Ayh-am-WSu" firstAttribute="leading" secondItem="Lgv-QM-DP2" secondAttribute="leading" constant="10" id="mDT-nr-Det"/>
+                        <constraint firstItem="ie5-UV-CXl" firstAttribute="trailing" secondItem="qpg-2I-Bco" secondAttribute="trailing" constant="10" id="mF1-eJ-q6Y"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -52,10 +91,6 @@
                 <constraint firstAttribute="bottom" secondItem="1Fj-cP-0qA" secondAttribute="bottom" constant="10" id="yF1-3Q-X8Z"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <connections>
-                <outlet property="playerDetailLbl" destination="Zov-2m-jzZ" id="fEd-Sb-xNy"/>
-                <outlet property="playerDetailTxtView" destination="1Fj-cP-0qA" id="gVU-YI-hyf"/>
-            </connections>
             <point key="canvasLocation" x="67.938931297709928" y="396.12676056338029"/>
         </view>
     </objects>

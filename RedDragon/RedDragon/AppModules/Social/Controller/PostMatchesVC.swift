@@ -45,8 +45,8 @@ class PostMatchesVC: UIViewController {
         ///Show matches of first league
         ///League list already loaded in scoial vc
         selectedLeague = SocialLeagueVM.shared.leagueArray.first ?? SocialLeague()
-        SocialMatchVM.shared.fetchMatchListAsyncCall(leagueId: selectedLeague.id)
         leagueCollectionView.reloadData()
+        SocialMatchVM.shared.fetchMatchListAsyncCall(leagueId: selectedLeague.id)
     }
     func nibInitialization() {
         listTableView.register(CellIdentifier.matchTableViewCell)
@@ -111,10 +111,8 @@ extension PostMatchesVC: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.singleImageCollectionViewCell, for: indexPath) as! SingleImageCollectionViewCell
         let model = SocialLeagueVM.shared.leagueArray[indexPath.row]
         //cell.configure(title: UserDefaults.standard.language == "en" ? model.enName : model.cnName, iconName: model.logoURL, style: .league)
-        cell.imageImageView.cornerRadius = 30
-
+        cell.imageImageView.cornerRadius = 0
         cell.imageImageView.setImage(imageStr: model.logoURL, placeholder: .placeholderLeague)
-
         cell.imageImageView.borderColor = model.id == selectedLeague.id ? .black : .clear
         cell.imageImageView.borderWidth = model.id == selectedLeague.id ? 3 : 0
         cell.closeBgView.isHidden = true
@@ -126,6 +124,8 @@ extension PostMatchesVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //Show matches of selected league
         ///League list already loaded in scoial vc
+        SocialMatchVM.shared.matchArray = []
+        listTableView.reloadData()
         selectedLeague = SocialLeagueVM.shared.leagueArray[indexPath.row]
         collectionView.reloadData()
         SocialMatchVM.shared.fetchMatchListAsyncCall(leagueId: selectedLeague.id)
