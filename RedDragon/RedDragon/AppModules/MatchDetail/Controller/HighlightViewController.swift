@@ -34,6 +34,7 @@ class HighlightViewController: UIViewController {
     
     func configureView(progressData: [Progress]?) {
         highlightProgress = progressData
+        symbolCollectionView.reloadData()
     }
 
 }
@@ -55,11 +56,25 @@ extension HighlightViewController: UICollectionViewDelegate, UICollectionViewDat
 extension HighlightViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return highlightProgress?[section].data.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let progressData = highlightProgress?[indexPath.section] else {
+            return UITableViewCell()
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.highlightTableViewCell, for: indexPath) as! HighlightTableViewCell
+        cell.homeTeamView.isHidden = true
+        cell.awayTeamView.isHidden = true
+        if progressData.data[indexPath.row].isHome == true {
+            cell.homeTeamTimeLabel.text = progressData.data[indexPath.row].time
+            cell.homeTeam_mainPlayerNameLabel.text = progressData.data[indexPath.row].mainPlayerName
+            cell.homeTeam_subPlayerNameLabel.text = progressData.data[indexPath.row].subPlayerName
+        } else if progressData.data[indexPath.row].isHome == false {
+            cell.awayTeamTimeLabel.text = progressData.data[indexPath.row].time
+            cell.awayTeam_mainPlayerNameLabel.text = progressData.data[indexPath.row].mainPlayerName
+            cell.awayTeam_subPlayerNameLabel.text = progressData.data[indexPath.row].subPlayerName
+        }
         return cell
     }
 }
