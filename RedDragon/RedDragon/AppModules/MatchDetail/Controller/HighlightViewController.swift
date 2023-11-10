@@ -12,6 +12,7 @@ class HighlightViewController: UIViewController {
     @IBOutlet weak var highlightTableView: UITableView!
     @IBOutlet weak var symbolCollectionView: UICollectionView!
     
+    private var highlightProgress: [Progress]?
     let symbolIconsArray: [UIImage] = [#imageLiteral(resourceName: "goal"), #imageLiteral(resourceName: "disallowedGoal"), #imageLiteral(resourceName: "substitution"), #imageLiteral(resourceName: "yellowCard"), #imageLiteral(resourceName: "redCard"), #imageLiteral(resourceName: "var"), #imageLiteral(resourceName: "penalty"), #imageLiteral(resourceName: "minutes")]
     let symbolNameArray: [String] = [StringConstants.goal.localized,
                                      StringConstants.disallowed.localized,
@@ -29,6 +30,10 @@ class HighlightViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         symbolCollectionView.reloadData()
+    }
+    
+    func configureView(progressData: [Progress]?) {
+        highlightProgress = progressData
     }
 
 }
