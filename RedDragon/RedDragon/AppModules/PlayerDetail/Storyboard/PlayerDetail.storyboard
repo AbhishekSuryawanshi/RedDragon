@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -15,119 +15,6 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Player Detail View Controller-->
-        <scene sceneID="s0d-6b-0kx">
-            <objects>
-                <viewController storyboardIdentifier="PlayerDetailViewController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="Y6W-OH-hqX" customClass="PlayerDetailViewController" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8vq-eL-ANS">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bxm-qz-isw">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1000"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cd2-Wx-MG5" customClass="PlayerProfileTopView" customModule="RedDragon" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="393" height="128"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="128" id="0gi-oY-Udy"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0iz-AL-xYI">
-                                                <rect key="frame" x="0.0" y="128" width="393" height="50"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="PPz-a5-Zqw"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yHm-pL-UDv" customClass="PlayerDetailView" customModule="RedDragon" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="178" width="393" height="90"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="90" id="9kn-xZ-0YL"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eIO-wh-Zgl" customClass="TeamsView" customModule="RedDragon" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="268" width="393" height="120"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="120" id="2eG-12-cPa"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v6U-se-vx3" customClass="PlayerStatsView" customModule="RedDragon" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="388" width="393" height="80"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="80" id="zam-hv-bZ6"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P3J-qO-Faw" customClass="SpiderChartView" customModule="RedDragon" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="468" width="393" height="210"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="210" id="0zr-JN-AJn"/>
-                                                </constraints>
-                                            </view>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="yHm-pL-UDv" secondAttribute="trailing" id="3Bp-Gt-HZc"/>
-                                            <constraint firstItem="0iz-AL-xYI" firstAttribute="top" secondItem="Cd2-Wx-MG5" secondAttribute="bottom" id="6OR-Ip-4V2"/>
-                                            <constraint firstItem="eIO-wh-Zgl" firstAttribute="leading" secondItem="Bxm-qz-isw" secondAttribute="leading" id="7oX-Bo-SSU"/>
-                                            <constraint firstItem="Cd2-Wx-MG5" firstAttribute="leading" secondItem="Bxm-qz-isw" secondAttribute="leading" id="Aup-kB-SLE"/>
-                                            <constraint firstAttribute="trailing" secondItem="Cd2-Wx-MG5" secondAttribute="trailing" id="GAA-nC-HcW"/>
-                                            <constraint firstItem="0iz-AL-xYI" firstAttribute="leading" secondItem="Bxm-qz-isw" secondAttribute="leading" id="UTF-8H-EGc"/>
-                                            <constraint firstItem="yHm-pL-UDv" firstAttribute="top" secondItem="0iz-AL-xYI" secondAttribute="bottom" id="UZw-hn-Ys4"/>
-                                            <constraint firstAttribute="trailing" secondItem="v6U-se-vx3" secondAttribute="trailing" id="XXC-mh-a2I"/>
-                                            <constraint firstItem="yHm-pL-UDv" firstAttribute="leading" secondItem="Bxm-qz-isw" secondAttribute="leading" id="XyA-de-Mm4"/>
-                                            <constraint firstItem="P3J-qO-Faw" firstAttribute="top" secondItem="v6U-se-vx3" secondAttribute="bottom" id="Xzc-oE-dem"/>
-                                            <constraint firstItem="v6U-se-vx3" firstAttribute="top" secondItem="eIO-wh-Zgl" secondAttribute="bottom" id="YWH-xE-WbN"/>
-                                            <constraint firstItem="v6U-se-vx3" firstAttribute="leading" secondItem="Bxm-qz-isw" secondAttribute="leading" id="ZJf-FN-3k1"/>
-                                            <constraint firstAttribute="trailing" secondItem="eIO-wh-Zgl" secondAttribute="trailing" id="c0C-zI-zjt"/>
-                                            <constraint firstAttribute="trailing" secondItem="P3J-qO-Faw" secondAttribute="trailing" id="cnc-NJ-435"/>
-                                            <constraint firstItem="P3J-qO-Faw" firstAttribute="leading" secondItem="Bxm-qz-isw" secondAttribute="leading" id="d8s-2d-pvM"/>
-                                            <constraint firstAttribute="height" constant="1000" id="peu-Q6-OeZ"/>
-                                            <constraint firstAttribute="trailing" secondItem="0iz-AL-xYI" secondAttribute="trailing" id="pfH-Ya-r3X"/>
-                                            <constraint firstItem="Cd2-Wx-MG5" firstAttribute="top" secondItem="Bxm-qz-isw" secondAttribute="top" id="qOp-D2-RIn"/>
-                                            <constraint firstItem="eIO-wh-Zgl" firstAttribute="top" secondItem="yHm-pL-UDv" secondAttribute="bottom" id="tT0-xy-7cQ"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="Bxm-qz-isw" firstAttribute="bottom" secondItem="s94-U8-wkJ" secondAttribute="bottom" id="0BN-NT-CzP"/>
-                                    <constraint firstItem="Bxm-qz-isw" firstAttribute="top" secondItem="s94-U8-wkJ" secondAttribute="top" id="MBZ-EA-N6l"/>
-                                    <constraint firstItem="Bxm-qz-isw" firstAttribute="width" secondItem="1iD-aB-uXD" secondAttribute="width" id="VtH-rx-iGm"/>
-                                    <constraint firstItem="Bxm-qz-isw" firstAttribute="leading" secondItem="s94-U8-wkJ" secondAttribute="leading" id="ccC-rM-9uk"/>
-                                    <constraint firstItem="Bxm-qz-isw" firstAttribute="trailing" secondItem="s94-U8-wkJ" secondAttribute="trailing" id="hHy-TT-ETQ"/>
-                                </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="s94-U8-wkJ"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="1iD-aB-uXD"/>
-                            </scrollView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="8vq-eL-ANS" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="HHU-hw-PCF"/>
-                            <constraint firstAttribute="bottom" secondItem="8vq-eL-ANS" secondAttribute="bottom" id="NzY-g3-yCJ"/>
-                            <constraint firstItem="8vq-eL-ANS" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="VF7-bt-WEI"/>
-                            <constraint firstAttribute="trailing" secondItem="8vq-eL-ANS" secondAttribute="trailing" id="uJ7-H7-umR"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="playerDetailView" destination="yHm-pL-UDv" id="upA-eT-Ogu"/>
-                        <outlet property="playerProfileView" destination="Cd2-Wx-MG5" id="JaY-Xl-WXg"/>
-                        <outlet property="playerSkillView" destination="P3J-qO-Faw" id="LUz-9W-ddP"/>
-                        <outlet property="playerStatsView" destination="v6U-se-vx3" id="K94-xZ-y4Y"/>
-                        <outlet property="playerTeamsView" destination="eIO-wh-Zgl" id="eWB-3H-kYO"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="40.458015267175568" y="-34.507042253521128"/>
-        </scene>
         <!--Player Detail View Controller-->
         <scene sceneID="GuP-Wo-CJV">
             <objects>
