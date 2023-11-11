@@ -60,7 +60,6 @@ class PostCreateVC: UIViewController {
     var currentPostType: SocialPostType = .none
     var selectedMatch = SocialMatch()
     var imageArray: [String] = []
-    var leagueId = ""
     var isForEdit = false
     var postModel = SocialPost()
     var pollArray: [Poll] = []
@@ -178,7 +177,7 @@ class PostCreateVC: UIViewController {
                     let vc = vc as! PostMatchesVC
                     vc.delegate = self
                 }
-                UIView.animate(withDuration: 0.35) {
+                UIView.transition(with: matchContainerView, duration: 0.5, options: .curveEaseIn) {
                     self.containerTopConstarint.constant = -460
                     self.view.layoutIfNeeded()
                 }
@@ -307,7 +306,7 @@ class PostCreateVC: UIViewController {
                     "title": "PitchStories", // Ignore title
                     "content_html": "<html><body> <p> \(contentTxtView.text!) </p> </body> </html>",
                     "is_visible": "1",
-                    "league_id": leagueId,
+                    "league_id": postModel.leagueId,
                     "imgsUrls" : imageArray
                 ]
                 if currentPostType == .match {
