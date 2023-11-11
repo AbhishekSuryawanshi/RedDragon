@@ -16,6 +16,8 @@ enum socialHeaderSegment: String, CaseIterable {
 
 class SocialVC: UIViewController {
     
+    @IBOutlet weak var leagueView: UIView!
+    @IBOutlet weak var teamView: UIView!
     @IBOutlet weak var headerCollectionView: UICollectionView!
     @IBOutlet weak var leagueCollectionView: UICollectionView!
     @IBOutlet weak var teamsCollectionView: UICollectionView!
@@ -24,9 +26,13 @@ class SocialVC: UIViewController {
     @IBOutlet weak var createPostButton: UIButton!
     @IBOutlet weak var postContainerView: UIView!
     @IBOutlet weak var containerHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var headerCVLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var searchTextField: UITextField!
     
     var selectedSegment: socialHeaderSegment = .followed
     var cancellable = Set<AnyCancellable>()
+    var leagueArray: [SocialLeague] = []
+    var teamArray: [SocialTeam] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,11 +70,13 @@ class SocialVC: UIViewController {
     }
     
     func refreshForLocalization() {
+        headerCVLeadingConstraint.constant = 60
         Loader.activityIndicator.startAnimating()
         self.tabBarController?.tabBar.isHidden = false
         leagueLabel.text = "Leagues".localized
         teamLabel.text = "Teams".localized
         createPostButton.setTitle("Create a Post".localized, for: .normal)
+        searchTextField.placeholder = "Search".localized
     }
     
     func nibInitialization() {
@@ -79,7 +87,33 @@ class SocialVC: UIViewController {
     
     // MARK: - Button Actions
     @IBAction func searchButtonTapped(_ sender: UIButton) {
+        if headerCVLeadingConstraint.constant == 60 {
+            UIView.animate(withDuration: 3) {
+                self.headerCVLeadingConstraint.constant = screenWidth
+            }
+        } else {
+            guard !searchTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+            searchTextField.endEditing(true)
+            searchData(text: searchTextField.text!)
+        }
+    }
+    @IBAction func searchCloseButtonTapped(_ sender: UIButton) {
+        // UIView.transition(with: searchTextField, duration: 3, options: .transitionFlipFromLeft) {
+        UIView.animate(withDuration: 3) {
+            self.headerCVLeadingConstraint.constant = 60
+        }
+        searchTextField.text = ""
+        let dataDict:[String: Any] = ["status": false]
+        NotificationCenter.default.post(name: NSNotification.socialSearchEnable, object: nil, userInfo: dataDict)
         
+        leagueView.isHidden = false
+        teamView.isHidden = false
+        
+        leagueArray = SocialLeagueVM.shared.leagueArray
+        leagueCollectionView.reloadData()
+        
+        teamArray = SocialTeamVM.shared.teamArray
+        teamsCollectionView.reloadData()
     }
     
     @IBAction func createPostButtonTapped(_ sender: UIButton) {
@@ -98,13 +132,12 @@ class SocialVC: UIViewController {
 // MARK: - API Services
 extension SocialVC {
     func makeNetworkCall() {
-//        guard Reachability.isConnectedToNetwork() else {
-//            customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.networkAlert.localized, image: ImageConstants.alertImage)
-//            return
-//        }
+        //        guard Reachability.isConnectedToNetwork() else {
+        //            customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.networkAlert.localized, image: ImageConstants.alertImage)
+        //            return
+        //        }
         
         SocialLeagueVM.shared.fetchLeagueListAsyncCall()
-        
     }
     
     func fetchSocialViewModel() {
@@ -117,6 +150,7 @@ extension SocialVC {
             .dropFirst()
             .sink(receiveValue: { [weak self] leagueData in
                 SocialLeagueVM.shared.leagueArray = leagueData ?? []
+                self?.leagueArray = leagueData ?? []
                 self?.leagueCollectionView.reloadData()
                 SocialTeamVM.shared.fetchTeamListAsyncCall()
             })
@@ -131,9 +165,44 @@ extension SocialVC {
             .dropFirst()
             .sink(receiveValue: { [weak self] teamData in
                 SocialTeamVM.shared.teamArray = teamData ?? []
+                self?.teamArray = teamData ?? []
                 self?.teamsCollectionView.reloadData()
             })
             .store(in: &cancellable)
+    }
+    
+    func searchData(text: String) {
+        if text.count > 0 {
+            let dataDict:[String: Any] = ["status": true,
+                                          "text": searchTextField.text!]
+            NotificationCenter.default.post(name: NSNotification.socialSearchEnable, object: nil, userInfo: dataDict)
+            
+            leagueArray = SocialLeagueVM.shared.leagueArray
+            leagueArray = leagueArray.filter({(item: SocialLeague) -> Bool in
+                if item.enName.lowercased().range(of: text.lowercased()) != nil {
+                    return true
+                }
+                if item.cnName.lowercased().range(of: text.lowercased()) != nil {
+                    return true
+                }
+                return false
+            })
+            leagueView.isHidden = leagueArray.count == 0 ? true : false
+            leagueCollectionView.reloadData()
+            
+            teamArray = SocialTeamVM.shared.teamArray
+            teamArray = teamArray.filter({(item: SocialTeam) -> Bool in
+                if item.enName.lowercased().range(of: text.lowercased()) != nil {
+                    return true
+                }
+                if item.cnName.lowercased().range(of: text.lowercased()) != nil {
+                    return true
+                }
+                return false
+            })
+            teamView.isHidden = teamArray.count == 0 ? true : false
+            teamsCollectionView.reloadData()
+        }
     }
 }
 
@@ -143,9 +212,9 @@ extension SocialVC: UICollectionViewDataSource {
         if collectionView == headerCollectionView {
             return socialHeaderSegment.allCases.count
         } else if collectionView == leagueCollectionView {
-            return SocialLeagueVM.shared.leagueArray.count
+            return leagueArray.count
         } else if collectionView == teamsCollectionView {
-            return SocialTeamVM.shared.teamArray.count
+            return teamArray.count
         } else {
             return socialHeaderSegment.allCases.count
         }
@@ -158,12 +227,12 @@ extension SocialVC: UICollectionViewDataSource {
             return cell
         } else if collectionView == leagueCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.iconNameCollectionViewCell, for: indexPath) as! IconNameCollectionViewCell
-            let model = SocialLeagueVM.shared.leagueArray[indexPath.row]
+            let model = leagueArray[indexPath.row]
             cell.configure(title: UserDefaults.standard.language == "en" ? model.enName : model.cnName, iconName: model.logoURL, style: .league)
             return cell
         } else if collectionView == teamsCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.iconNameCollectionViewCell, for: indexPath) as! IconNameCollectionViewCell
-            let model = SocialTeamVM.shared.teamArray[indexPath.row]
+            let model = teamArray[indexPath.row]
             cell.configure(title: UserDefaults.standard.language == "en" ? model.enName : model.cnName, iconName: model.logoURL, style: .team)
             return cell
         } else {
@@ -207,5 +276,31 @@ extension SocialVC: PostListVCDelegate {
         Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { (timer) in
             Loader.activityIndicator.stopAnimating()
         }
+    }
+}
+
+// MARK: - TextField Delegate
+extension SocialVC: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text,
+           let textRange = Range(range, in: text) {
+            let searchText = text.replacingCharacters(in: textRange,with: string)
+            print("searchText  \(searchText)")
+            //  searchData(text: searchText)
+        }
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        //searchData(text: searchTextField.text!)
+        return true
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        textField.text = ""
+        textField.resignFirstResponder()
+        //searchData(text: searchTextField.text!)
+        return true
     }
 }

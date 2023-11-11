@@ -19,6 +19,7 @@ class PostListVC: UIViewController {
     
     var cancellable = Set<AnyCancellable>()
     weak var delegate: PostListVCDelegate?
+    var allPostArray: [SocialPost] = []
     var postArray: [SocialPost] = []
     
     override func viewDidLoad() {
@@ -34,6 +35,10 @@ class PostListVC: UIViewController {
         loadFunctionality()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLayoutSubviews() {
         listTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
     }
@@ -41,6 +46,7 @@ class PostListVC: UIViewController {
     func initialSettings() {
         self.view.addSubview(Loader.activityIndicator)
         nibInitialization()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.searchEnable(notification:)), name: NSNotification.socialSearchEnable, object: nil)
     }
     
     func loadFunctionality() {
@@ -51,6 +57,26 @@ class PostListVC: UIViewController {
         nibInitialization()
         fetchPostViewModel()
         makeNetworkCall()
+    }
+    
+    @objc func searchEnable(notification: Notification) {
+        if let dict = notification.userInfo as NSDictionary? {
+            let status = dict["status"] as? Bool ?? false
+            let text = dict["text"] as? String ?? ""
+            if status {
+                postArray = allPostArray
+                postArray = postArray.filter({(item: SocialPost) -> Bool in
+                    if item.descriptn.lowercased().range(of: text.lowercased()) != nil {
+                        return true
+                    }
+                    return false
+                })
+            } else {
+                postArray = allPostArray
+            }
+            calculateContentHeight()
+            listTableView.reloadData()
+        }
     }
     
     func nibInitialization() {
@@ -107,7 +133,10 @@ class PostListVC: UIViewController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         if let user = UserDefaults.standard.user, user.id == postArray[sender.tag].userId {// app user
             let action1 = UIAlertAction(title: "Edit Post".localized, style: .default , handler:{ (UIAlertAction) in
-                // self.showCreatePostVC(model: self.postList[sender.tag], isForEdit: true, leagueId: self.postList[sender.tag].leagueId)
+                self.navigateToViewController(PostCreateVC.self, storyboardName: StoryboardName.social, animationType: .autoReverse(presenting: .zoom)) { vc in
+                    vc.isForEdit = true
+                    vc.postModel = self.postArray[sender.tag]
+                }
             })
             alert.addAction(action1)
             let action2 = UIAlertAction(title: "Delete Post".localized, style: .default , handler:{ (UIAlertAction) in
@@ -240,6 +269,9 @@ extension PostListVC {
         ///Posts and polls comes in separate order, so we have to apply date filter
         postArray = postData
         postArray = postArray.sorted(by: { $0.updatedTime.compare($1.updatedTime) == .orderedDescending })
+        allPostArray = postArray
+        
+        
         calculateContentHeight()
         listTableView.reloadData()
         
