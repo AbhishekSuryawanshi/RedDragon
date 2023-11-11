@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class HighlightViewController: UIViewController {
     
@@ -64,18 +65,40 @@ extension HighlightViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.highlightTableViewCell, for: indexPath) as! HighlightTableViewCell
-        cell.homeTeamView.isHidden = true
-        cell.awayTeamView.isHidden = true
         if progressData.data[indexPath.row].isHome == true {
+            cell.homeTeamView.isHidden = false
+            cell.awayTeamView.isHidden = true
             cell.homeTeamTimeLabel.text = progressData.data[indexPath.row].time
             cell.homeTeam_mainPlayerNameLabel.text = progressData.data[indexPath.row].mainPlayerName
             cell.homeTeam_subPlayerNameLabel.text = progressData.data[indexPath.row].subPlayerName
-        } else if progressData.data[indexPath.row].isHome == false {
+        }
+        if progressData.data[indexPath.row].isHome == false {
+            cell.homeTeamView.isHidden = true
+            cell.awayTeamView.isHidden = false
             cell.awayTeamTimeLabel.text = progressData.data[indexPath.row].time
             cell.awayTeam_mainPlayerNameLabel.text = progressData.data[indexPath.row].mainPlayerName
             cell.awayTeam_subPlayerNameLabel.text = progressData.data[indexPath.row].subPlayerName
         }
+        let imageName = progressData.data[indexPath.row].action
+        if imageName.contains( "yellow" ) {
+            cell.symbolImageView.image = UIImage.yellowCard
+        } 
+        if imageName.contains( "Minutes added 3" ) {
+            print("came into minutes")
+            cell.symbolImageView.image = UIImage.minutes
+        }
+        if imageName.contains( "substitute" ) {
+            cell.symbolImageView.image = UIImage.substitution
+        }
+        if imageName.contains( "goal" ) {
+            cell.symbolImageView.image = UIImage.goal
+        }
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
 }
 
