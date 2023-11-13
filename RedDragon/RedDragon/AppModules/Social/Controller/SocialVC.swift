@@ -16,6 +16,9 @@ enum socialHeaderSegment: String, CaseIterable {
 
 class SocialVC: UIViewController {
     
+    @IBOutlet weak var tagView: UIView!
+    @IBOutlet weak var tagCollectionView: UICollectionView!
+    @IBOutlet weak var tagCVHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var leagueView: UIView!
     @IBOutlet weak var teamView: UIView!
     @IBOutlet weak var headerCollectionView: UICollectionView!
@@ -31,12 +34,17 @@ class SocialVC: UIViewController {
     
     var selectedSegment: socialHeaderSegment = .followed
     var cancellable = Set<AnyCancellable>()
+    var tagsArray: [String] = []
     var leagueArray: [SocialLeague] = []
     var teamArray: [SocialTeam] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadFunctionality()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,17 +64,23 @@ class SocialVC: UIViewController {
         UserDefaults.standard.user = user
         UserDefaults.standard.token = user.token
         
+        self.view.addSubview(Loader.activityIndicator)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshHashTagView(notification:)), name: NSNotification.refreshHashTags, object: nil)
+        
         ViewEmbedder.embed(withIdentifier: "PostListVC", storyboard: UIStoryboard(name: StoryboardName.social, bundle: nil)
                            , parent: self, container: postContainerView) { vc in
             let vc = vc as! PostListVC
             vc.delegate = self
         }
         
-        self.view.addSubview(Loader.activityIndicator)
-        
         nibInitialization()
         fetchSocialViewModel()
         makeNetworkCall()
+        let tagLayout: BaseLayout = TagsCVLayout()
+        tagLayout.delegate = self
+        tagLayout.contentPadding = ItemsPadding(horizontal: 5, vertical: 5)
+        tagLayout.cellsPadding = ItemsPadding(horizontal: 5, vertical: 5)
+        tagCollectionView.collectionViewLayout = tagLayout
     }
     
     func refreshForLocalization() {
@@ -80,13 +94,30 @@ class SocialVC: UIViewController {
     }
     
     func nibInitialization() {
+        tagCollectionView.register(CellIdentifier.headerTopCollectionViewCell)
         headerCollectionView.register(CellIdentifier.headerTopCollectionViewCell)
         leagueCollectionView.register(CellIdentifier.iconNameCollectionViewCell)
         teamsCollectionView.register(CellIdentifier.iconNameCollectionViewCell)
     }
     
+    @objc func refreshHashTagView(notification: Notification) {
+        if let dict = notification.userInfo as NSDictionary? {
+            let hashTags = dict["data"] as? [String] ?? []
+            tagsArray = hashTags
+            tagCollectionView.reloadData()
+            tagCollectionView.layoutIfNeeded()
+            tagCVHeightConstraint.constant = tagCollectionView.contentSize.height
+            tagView.isHidden = tagsArray.count == 0
+            if tagCVHeightConstraint.constant > 150.0 {
+                tagCVHeightConstraint.constant = 150.0
+            }
+        }
+    }
+    
     // MARK: - Button Actions
     @IBAction func searchButtonTapped(_ sender: UIButton) {
+        tagView.isHidden = true
+        
         if headerCVLeadingConstraint.constant == 60 {
             UIView.animate(withDuration: 3) {
                 self.headerCVLeadingConstraint.constant = screenWidth
@@ -98,6 +129,8 @@ class SocialVC: UIViewController {
         }
     }
     @IBAction func searchCloseButtonTapped(_ sender: UIButton) {
+        tagView.isHidden = false
+        
         // UIView.transition(with: searchTextField, duration: 3, options: .transitionFlipFromLeft) {
         UIView.animate(withDuration: 3) {
             self.headerCVLeadingConstraint.constant = 60
@@ -209,7 +242,9 @@ extension SocialVC {
 // MARK: - CollectionView Delegates
 extension SocialVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == headerCollectionView {
+        if collectionView == tagCollectionView {
+            return tagsArray.count
+        } else if collectionView == headerCollectionView {
             return socialHeaderSegment.allCases.count
         } else if collectionView == leagueCollectionView {
             return leagueArray.count
@@ -221,9 +256,13 @@ extension SocialVC: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == headerCollectionView {
+        if collectionView == tagCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.headerTopCollectionViewCell, for: indexPath) as! HeaderTopCollectionViewCell
-            cell.configure(title: socialHeaderSegment.allCases[indexPath.row].rawValue, selected: selectedSegment == socialHeaderSegment.allCases[indexPath.row])
+            cell.configureTagCell(title: tagsArray[indexPath.row])
+            return cell
+        } else if collectionView == headerCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.headerTopCollectionViewCell, for: indexPath) as! HeaderTopCollectionViewCell
+            cell.configureUnderLineCell(title: socialHeaderSegment.allCases[indexPath.row].rawValue, selected: selectedSegment == socialHeaderSegment.allCases[indexPath.row])
             return cell
         } else if collectionView == leagueCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.iconNameCollectionViewCell, for: indexPath) as! IconNameCollectionViewCell
@@ -245,7 +284,32 @@ extension SocialVC: UICollectionViewDataSource {
 
 extension SocialVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == leagueCollectionView || collectionView == teamsCollectionView {
+        if collectionView == tagCollectionView || collectionView == leagueCollectionView || collectionView == teamsCollectionView {
+            /// Filter post based on search item
+            var dataDict:[String: Any] = [:]
+            switch collectionView {
+            case tagCollectionView:
+                dataDict = ["status": true,
+                            "text": tagsArray[indexPath.row]]
+            case leagueCollectionView:
+                dataDict = ["status": true,
+                            "text": leagueArray[indexPath.row].enName,
+                            "text2": leagueArray[indexPath.row].cnName]
+            case teamsCollectionView:
+                dataDict = ["status": true,
+                            "text": teamArray[indexPath.row].enName,
+                            "text2": teamArray[indexPath.row].cnName]
+            default:
+                return
+            }
+            
+            NotificationCenter.default.post(name: NSNotification.socialSearchEnable, object: nil, userInfo: dataDict)
+            self.navigateToViewController(SocialSearchVC.self, storyboardName: StoryboardName.social, animationType: .autoReverse(presenting: .zoom)) { vc in
+                vc.showMatches = collectionView != self.tagCollectionView
+                vc.leagueModel = collectionView == self.leagueCollectionView ? self.leagueArray[indexPath.row] : SocialLeague()
+                vc.teamModel = collectionView == self.teamsCollectionView ? self.teamArray[indexPath.row] : SocialTeam()
+                vc.searchText = dataDict["text"] as? String ?? ""
+            }
         } else {
             selectedSegment = socialHeaderSegment.allCases[indexPath.row]
             collectionView.reloadData()
@@ -255,7 +319,10 @@ extension SocialVC: UICollectionViewDelegate {
 
 extension SocialVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == headerCollectionView {
+        if collectionView == tagCollectionView {
+            let width = tagsArray[indexPath.row].size(OfFont: fontRegular(13)).width
+            return CGSize(width: width + 10, height: 26)
+        } else if collectionView == headerCollectionView {
             let selected = selectedSegment == socialHeaderSegment.allCases[indexPath.row]
             return CGSize(width: socialHeaderSegment.allCases[indexPath.row].rawValue.localized.size(withAttributes: [NSAttributedString.Key.font : selected ? fontBold(17) : fontRegular(17)]).width + 40, height: 50)
         } else if collectionView == leagueCollectionView {
@@ -269,15 +336,6 @@ extension SocialVC: UICollectionViewDelegateFlowLayout {
     }
 }
 
-// MARK: - Custom Delegate
-extension SocialVC: PostListVCDelegate {
-    func postList(height: CGFloat) {
-        containerHeightConstraint.constant = height
-        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { (timer) in
-            Loader.activityIndicator.stopAnimating()
-        }
-    }
-}
 
 // MARK: - TextField Delegate
 extension SocialVC: UITextFieldDelegate {
@@ -302,5 +360,23 @@ extension SocialVC: UITextFieldDelegate {
         textField.resignFirstResponder()
         //searchData(text: searchTextField.text!)
         return true
+    }
+}
+
+// MARK: - Custom Delegate
+
+extension SocialVC: PostListVCDelegate {
+    func postList(height: CGFloat) {
+        containerHeightConstraint.constant = height
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { (timer) in
+            Loader.activityIndicator.stopAnimating()
+        }
+    }
+}
+
+extension SocialVC: LayoutDelegate {
+    func cellSize(indexPath: IndexPath) -> CGSize {
+        let width = tagsArray[indexPath.row].size(OfFont: fontRegular(13)).width
+        return CGSize(width: width + 10, height: 26)
     }
 }

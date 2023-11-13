@@ -101,6 +101,10 @@ extension String {
         )
     }
     
+    func size(OfFont font: UIFont) -> CGSize {
+        return (self as NSString).size(withAttributes: [NSAttributedString.Key.font: font])
+    }
+    
     func heightOfString2(width: CGFloat, font: UIFont) -> CGFloat {
         let label : UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
         label.numberOfLines = 0

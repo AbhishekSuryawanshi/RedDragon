@@ -8,6 +8,6 @@
 import Foundation
 
 extension NSNotification {
-    static let socialSearchEnable = Notification.Name("socialSearchEnable")
-  
+    static let socialSearchEnable  = Notification.Name("socialSearchEnable")
+    static let refreshHashTags     = Notification.Name("refreshHashTags")
 }

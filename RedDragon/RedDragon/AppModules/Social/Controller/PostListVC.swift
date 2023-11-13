@@ -270,8 +270,17 @@ extension PostListVC {
         postArray = postData
         postArray = postArray.sorted(by: { $0.updatedTime.compare($1.updatedTime) == .orderedDescending })
         allPostArray = postArray
-        
-        
+        var hashTagAttay: [String] = []
+        for post in self.postArray {
+            let descriptnTextArray = post.descriptn.split(separator: " ")
+            for text in descriptnTextArray {
+                if text.contains("#") {
+                    hashTagAttay.append(String(text))
+                }
+            }
+        }
+        let dataDict:[String: Any] = ["data": hashTagAttay]
+        NotificationCenter.default.post(name: NSNotification.refreshHashTags, object: nil, userInfo: dataDict)
         calculateContentHeight()
         listTableView.reloadData()
         
