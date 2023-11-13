@@ -12,4 +12,5 @@ struct StoryboardName {
     static let social       = "Social"
     static let database     = "Database"
     static let matchDetail  = "MatchDetail"
+    static let playerDetail = "PlayerDetail"
 }
