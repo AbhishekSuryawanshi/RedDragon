@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		41BB28782B0236730080E63F /* PlayerDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BB28772B0236730080E63F /* PlayerDetailModel.swift */; };
-		41BB287A2B0237CE0080E63F /* PlayerDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BB28792B0237CE0080E63F /* PlayerDetailViewModel.swift */; };
 		41BB287C2B0247A60080E63F /* PlayerDetailProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BB287B2B0247A60080E63F /* PlayerDetailProfileViewController.swift */; };
 		41EB79CC2AF37BA000D068F7 /* PlayerDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41EB79C12AF37BA000D068F7 /* PlayerDetail.storyboard */; };
 		41EB79CD2AF37BA000D068F7 /* PlayerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB79C32AF37BA000D068F7 /* PlayerDetailViewController.swift */; };
@@ -157,6 +155,8 @@
 		49E6DE8A2AF38EA100A0DDC3 /* MatchDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49E6DE892AF38EA100A0DDC3 /* MatchDetail.storyboard */; };
 		49E6DE8C2AF38F7000A0DDC3 /* MatchDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6DE8B2AF38F7000A0DDC3 /* MatchDetail.swift */; };
 		49E6DE8E2AF3BE4B00A0DDC3 /* MatchDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6DE8D2AF3BE4B00A0DDC3 /* MatchDetailsViewModel.swift */; };
+		49EA0AF02B0258E90003D469 /* PlayerDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EA0AEF2B0258E90003D469 /* PlayerDetailModel.swift */; };
+		49EA0AF22B0258F30003D469 /* PlayerDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EA0AF12B0258F30003D469 /* PlayerDetailViewModel.swift */; };
 		49F3429D2AF23CC70057C147 /* EventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3429B2AF23CC70057C147 /* EventsTableViewCell.swift */; };
 		49F3429E2AF23CC70057C147 /* EventsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F3429C2AF23CC70057C147 /* EventsTableViewCell.xib */; };
 		49F3EECF2AE7AC580095CAC6 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EECE2AE7AC580095CAC6 /* Navigation.swift */; };
@@ -166,8 +166,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		41BB28772B0236730080E63F /* PlayerDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlayerDetailModel.swift; path = /Users/ali/Desktop/RedDragonNew/RedDragon/RedDragon/RedDragon/AppModules/PlayerDetail/Model/PlayerDetailModel.swift; sourceTree = "<absolute>"; };
-		41BB28792B0237CE0080E63F /* PlayerDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailViewModel.swift; sourceTree = "<group>"; };
 		41BB287B2B0247A60080E63F /* PlayerDetailProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailProfileViewController.swift; sourceTree = "<group>"; };
 		41EB79C12AF37BA000D068F7 /* PlayerDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlayerDetail.storyboard; sourceTree = "<group>"; };
 		41EB79C32AF37BA000D068F7 /* PlayerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailViewController.swift; sourceTree = "<group>"; };
@@ -309,6 +307,8 @@
 		49E6DE892AF38EA100A0DDC3 /* MatchDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MatchDetail.storyboard; sourceTree = "<group>"; };
 		49E6DE8B2AF38F7000A0DDC3 /* MatchDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetail.swift; sourceTree = "<group>"; };
 		49E6DE8D2AF3BE4B00A0DDC3 /* MatchDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetailsViewModel.swift; sourceTree = "<group>"; };
+		49EA0AEF2B0258E90003D469 /* PlayerDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailModel.swift; sourceTree = "<group>"; };
+		49EA0AF12B0258F30003D469 /* PlayerDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailViewModel.swift; sourceTree = "<group>"; };
 		49F3429B2AF23CC70057C147 /* EventsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewCell.swift; sourceTree = "<group>"; };
 		49F3429C2AF23CC70057C147 /* EventsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventsTableViewCell.xib; sourceTree = "<group>"; };
 		49F3EECE2AE7AC580095CAC6 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
@@ -342,23 +342,14 @@
 		41EB79BE2AF37BA000D068F7 /* PlayerDetail */ = {
 			isa = PBXGroup;
 			children = (
-				41EB79BF2AF37BA000D068F7 /* ViewModel */,
-				41EB79C02AF37BA000D068F7 /* Storyboard */,
-				41EB79C42AF37BA000D068F7 /* Model */,
-				41EB79C22AF37BA000D068F7 /* Controller */,
 				41EB79C52AF37BA000D068F7 /* View */,
+				49EA0AEE2B0258D60003D469 /* Model */,
+				49EA0AED2B02589F0003D469 /* ViewModel */,
+				41EB79C02AF37BA000D068F7 /* Storyboard */,
+				41EB79C22AF37BA000D068F7 /* Controller */,
 			);
 			path = PlayerDetail;
 			sourceTree = "<group>";
-		};
-		41EB79BF2AF37BA000D068F7 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				41BB28792B0237CE0080E63F /* PlayerDetailViewModel.swift */,
-			);
-			name = ViewModel;
-			path = /Users/ali/Desktop/RedDragonNew/RedDragon/RedDragon/RedDragon/AppModules/PlayerDetail/ViewModel;
-			sourceTree = "<absolute>";
 		};
 		41EB79C02AF37BA000D068F7 /* Storyboard */ = {
 			isa = PBXGroup;
@@ -379,15 +370,6 @@
 			);
 			path = Controller;
 			sourceTree = "<group>";
-		};
-		41EB79C42AF37BA000D068F7 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				41BB28772B0236730080E63F /* PlayerDetailModel.swift */,
-			);
-			name = Model;
-			path = /Users/ali/Desktop/RedDragonNew/RedDragon/RedDragon/RedDragon/AppModules/PlayerDetail/Model;
-			sourceTree = "<absolute>";
 		};
 		41EB79C52AF37BA000D068F7 /* View */ = {
 			isa = PBXGroup;
@@ -862,6 +844,22 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		49EA0AED2B02589F0003D469 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				49EA0AF12B0258F30003D469 /* PlayerDetailViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		49EA0AEE2B0258D60003D469 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				49EA0AEF2B0258E90003D469 /* PlayerDetailModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		49F3EED62AE7DCC20095CAC6 /* StoryBoard */ = {
 			isa = PBXGroup;
 			children = (
@@ -1067,20 +1065,20 @@
 				49B04A5A2AFA6EF900B440AA /* BetsViewController.swift in Sources */,
 				493D212E2AFE126400045672 /* PlayerDetailsTopView.swift in Sources */,
 				47E7C8512AEFD2F400D054A8 /* PostMatchesVC.swift in Sources */,
+				49EA0AF22B0258F30003D469 /* PlayerDetailViewModel.swift in Sources */,
 				41BB287C2B0247A60080E63F /* PlayerDetailProfileViewController.swift in Sources */,
 				49B0BA042AE6919800A9D235 /* Reachability.swift in Sources */,
 				49B04A582AFA6E1200B440AA /* LineupViewController.swift in Sources */,
 				41EB79E12AF3B70100D068F7 /* PlayerDetailView.swift in Sources */,
 				493D21362AFE127F00045672 /* MatchesTableViewCell.swift in Sources */,
 				47B3E99A2AF25F70008BB827 /* SocialPollTableViewCell.swift in Sources */,
+				49EA0AF02B0258E90003D469 /* PlayerDetailModel.swift in Sources */,
 				49D0853B2AEFD47300A835B7 /* LeagueCollectionViewCell.swift in Sources */,
 				47E2FACF2AFE6BAE00DBEFE6 /* SocialSearchVC.swift in Sources */,
 				41EB79DD2AF398DF00D068F7 /* SpiderChartView.swift in Sources */,
 				47FC33E42AEA50BE00FABED4 /* SocialVC.swift in Sources */,
 				47FC33E12AEA4DAC00FABED4 /* HeaderTopCollectionViewCell.swift in Sources */,
-				41BB287A2B0237CE0080E63F /* PlayerDetailViewModel.swift in Sources */,
 				41EB79CF2AF37BA000D068F7 /* TeamsView.swift in Sources */,
-				41BB28782B0236730080E63F /* PlayerDetailModel.swift in Sources */,
 				47ACF68C2AF508B50048FC3B /* ImageViewModel.swift in Sources */,
 				41EB79D12AF37BA000D068F7 /* PlayerStatsView.swift in Sources */,
 				49B0BA452AE6A37F00A9D235 /* StringConstants.swift in Sources */,
