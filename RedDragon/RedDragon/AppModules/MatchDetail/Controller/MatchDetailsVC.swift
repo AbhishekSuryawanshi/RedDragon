@@ -26,7 +26,6 @@ class MatchDetailsVC: UIViewController {
     private var matchDetailViewModel: MatchDetailsViewModel?
     private var fetchCurrentLanguageCode = String()
     private var matchTabsArray = [String]()
-    private var tabViewControllers: [UIViewController] = []
     var matchSlug: String?
     var leagueName: String?
 
@@ -43,6 +42,7 @@ class MatchDetailsVC: UIViewController {
         nibInitialization()
         matchTabsData()
         configureUI()
+        configureLanguage()
         fetchMatchDetailsViewModel()
         makeNetworkCall()
     }
@@ -55,14 +55,6 @@ class MatchDetailsVC: UIViewController {
                           StringConstants.odds.localized,
                           StringConstants.analysis.localized,
                           StringConstants.expert.localized ]
-        
-        tabViewControllers = [HighlightViewController(),
-                              StatisticsViewController(),
-                              LineupViewController(),
-                              BetsViewController(),
-                              OddsViewController(),
-                              AnalysisViewController(),
-                              ExpertViewController()]
     }
     
     func nibInitialization() {
@@ -130,11 +122,6 @@ extension MatchDetailsVC: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //        guard indexPath.item < tabViewControllers.count else {
-        //            return
-        //        }
-        //        let viewControllers = tabViewControllers[indexPath.item]
-        //        embedViewController(viewControllers)
         if indexPath.item == 0 {
             embedHighlighVC()
         }
@@ -153,18 +140,18 @@ extension MatchDetailsVC {
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
+    func configureLanguage() {
+        var lang = UserDefaults.standard.string(forKey: UserDefaultString.language) ?? "en"
+        lang = (lang == "en-US") ? "en" : lang
+        fetchCurrentLanguageCode = lang
+    }
+    
     func highlightFirstIndex_collectionView() {
         //code to show collectionView cell default first index selected
         let indexPath = IndexPath(item: 0, section: 0)
         matchTabsCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
         collectionView(matchTabsCollectionView, didSelectItemAt: indexPath)
     }
-    
-//    ///function to load view controllers on click of match tabs
-//    func embedViewController(_ viewController: UIViewController) {
-//        ViewEmbedder.embed(withIdentifier: String(describing: type(of: viewController)), storyboard: UIStoryboard(name: StoryboardName.matchDetail, bundle: nil), parent: self, container: viewContainer)
-//        viewContainerHeight.constant = viewController.view.frame.size.height
-//    }
     
     func embedHighlighVC() {
             ViewEmbedder.embed(withIdentifier: "HighlightViewController", storyboard: UIStoryboard(name: StoryboardName.matchDetail, bundle: nil), parent: self, container: viewContainer) { [self] vc in
