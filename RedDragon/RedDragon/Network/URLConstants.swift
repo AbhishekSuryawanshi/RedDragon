@@ -45,4 +45,9 @@ struct URLConstants {
     
     //Image
     static let postImage           = socialBaseURL + "api/resource/img"
+    
+    
+    // MARK: - PlayerDetail
+    
+    static let playerDetail = databaseBaseURL + "player.php"
 }

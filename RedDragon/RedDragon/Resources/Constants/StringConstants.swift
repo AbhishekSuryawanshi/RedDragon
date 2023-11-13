@@ -65,5 +65,11 @@ struct StringConstants {
     static let penalty              = "Penalty"
     static let minutesAdded         = "Minutes Added"
     
+    
+    //PlayerDetails
+    static let profile              = "Profile"
+    static let matches              = "Matches"
+    static let stats                = "Stats"
+    static let media                = "Media"
 }
 

@@ -30,6 +30,9 @@ struct CellIdentifier {
     //Match Details
     static let symbolCollectionViewCell           = "SymbolsCollectionViewCell"
     static let highlightTableViewCell             = "HighlightTableViewCell"
+    
+    //Player Details
+    static let playerDetailTabsCell               = ""
 }
 
 
