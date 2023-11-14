@@ -9,6 +9,8 @@ import UIKit
 
 class PlayerStatsCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var keyLbl: UILabel!
+    @IBOutlet weak var valueLbl: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

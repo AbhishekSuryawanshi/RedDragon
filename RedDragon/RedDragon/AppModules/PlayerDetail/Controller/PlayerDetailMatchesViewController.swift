@@ -14,11 +14,20 @@ class PlayerDetailMatchesViewController: UIViewController {
             self.matchesTableView.register("MatchesTableViewCell")
         }
     }
+    
+    var playerDetailViewModel: PlayerDetailViewModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+    
+    func configureView() {
+        self.matchesTableView.reloadData()
+        
+    }
+    
     
 }
 

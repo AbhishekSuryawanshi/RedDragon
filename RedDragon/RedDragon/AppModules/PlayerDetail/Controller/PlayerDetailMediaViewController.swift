@@ -15,10 +15,18 @@ class PlayerDetailMediaViewController: UIViewController {
             self.mediaCollectionView.register("PlayerDetailsMediaCollectionViewCell")
         }
     }
+    
+    var playerDetailViewModel: PlayerDetailViewModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    func configureView() {
+        self.mediaCollectionView.reloadData()
+        
     }
     
 }

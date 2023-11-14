@@ -69,7 +69,7 @@ class PlayerDetailViewController: UIViewController {
 }
 
 extension PlayerDetailViewController {
-    ///fetch viewModel for Match details
+    ///fetch viewModel for Player details
     func fetchPlayerDetailsViewModel() {
         playerDetailViewModel = PlayerDetailViewModel()
         playerDetailViewModel?.showError = { [weak self] error in
@@ -93,8 +93,14 @@ extension PlayerDetailViewController {
             playerProfileView.nameLbl.text = data?.playerName
             playerProfileView.profileImg.sd_imageIndicator = SDWebImageActivityIndicator.white
             playerProfileView.profileImg.sd_setImage(with: URL(string: data?.playerPhoto ?? ""))
-           // playerProfileView.positionLbl.text = "\(data?.indicators?["Main position"].value)"
-           // playerProfileView.valueLbl.text = "\(data?.indicators?["Rating"].value)"
+            for i in 0 ..< (data?.indicators?.count ?? 0){
+                if data?.indicators?[i].key == "Main position"{
+                    playerProfileView.positionLbl.text = " " + "\(data?.indicators?[i].value ?? "")" + " "
+                }
+                if data?.indicators?[i].key == "Rating"{
+                    playerProfileView.valueLbl.text = " " + "\(data?.indicators?[i].value ?? "")" + " "
+                }
+            }
             
             profileFirstIndex_collectionView()
             self.view.layoutIfNeeded()
@@ -125,13 +131,40 @@ extension PlayerDetailViewController {
         collectionView(playerDetailCollectionView, didSelectItemAt: indexPath)
     }
     
-    func embedProfileVC() {
-            ViewEmbedder.embed(withIdentifier: "PlayerDetailProfileViewController", storyboard: UIStoryboard(name: StoryboardName.playerDetail, bundle: nil), parent: self, container: viewContainer) { [self] vc in
-                let vc = vc as! PlayerDetailProfileViewController
-                vc.configureView()
-                //viewContainerHeight.constant = vc.view.frame.size.height
-            }
+    func embedProfileVC(playerDetails : PlayerDetailViewModel?) {
+        ViewEmbedder.embed(withIdentifier: "PlayerDetailProfileViewController", storyboard: UIStoryboard(name: StoryboardName.playerDetail, bundle: nil), parent: self, container: viewContainer) { [self] vc in
+            let vc = vc as! PlayerDetailProfileViewController
+            vc.playerDetailViewModel = playerDetails
+        
+            vc.configureView()
+            //viewContainerHeight.constant = vc.view.frame.size.height
         }
+    }
+    func embedMatchesVC(playerDetails : PlayerDetailViewModel?) {
+        ViewEmbedder.embed(withIdentifier: "PlayerDetailMatchesViewController", storyboard: UIStoryboard(name: StoryboardName.playerDetail, bundle: nil), parent: self, container: viewContainer) { [self] vc in
+            let vc = vc as! PlayerDetailMatchesViewController
+            vc.playerDetailViewModel = playerDetails
+            vc.configureView()
+            //viewContainerHeight.constant = vc.view.frame.size.height
+        }
+    }
+    func embedStatsVC(playerDetails : PlayerDetailViewModel?) {
+        ViewEmbedder.embed(withIdentifier: "PlayerDetailStatsViewController", storyboard: UIStoryboard(name: StoryboardName.playerDetail, bundle: nil), parent: self, container: viewContainer) { [self] vc in
+            let vc = vc as! PlayerDetailStatsViewController
+            vc.playerDetailViewModel = playerDetails
+            
+            vc.configureView()
+            //viewContainerHeight.constant = vc.view.frame.size.height
+        }
+    }
+    func embedMediaVC(playerDetails : PlayerDetailViewModel?) {
+        ViewEmbedder.embed(withIdentifier: "PlayerDetailMediaViewController", storyboard: UIStoryboard(name: StoryboardName.playerDetail, bundle: nil), parent: self, container: viewContainer) { [self] vc in
+            let vc = vc as! PlayerDetailMediaViewController
+            vc.playerDetailViewModel = playerDetails
+            vc.configureView()
+            //viewContainerHeight.constant = vc.view.frame.size.height
+        }
+    }
     
 }
 
@@ -148,7 +181,18 @@ extension PlayerDetailViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        if indexPath.item == 0 {
+            embedProfileVC(playerDetails: playerDetailViewModel)
+        }
+        else if indexPath.item == 1{
+            embedMatchesVC(playerDetails: playerDetailViewModel)
+        }
+        else if indexPath.item == 2{
+            embedStatsVC(playerDetails: playerDetailViewModel)
+        }
+        else if indexPath.item == 3{
+            embedMediaVC(playerDetails: playerDetailViewModel)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
