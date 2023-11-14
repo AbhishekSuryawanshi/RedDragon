@@ -55,7 +55,7 @@ extension String {
                         return "Today".localized + ", \(dateFormatterPrint.string(from: date))"
                     }
                 } else {
-                    return "Moments ago".localized
+                    return "Now".localized
                 }
             } else if Calendar.current.isDateInYesterday(date) {
                 return "Yesterday".localized + ", \(dateFormatterPrint.string(from: date))"
@@ -103,6 +103,11 @@ extension String {
     
     func size(OfFont font: UIFont) -> CGSize {
         return (self as NSString).size(withAttributes: [NSAttributedString.Key.font: font])
+    }
+    
+    func heightOfString(width: CGFloat, font: UIFont) -> CGFloat {
+        let size = CGSize(width: width, height: self.size(withAttributes: [NSAttributedString.Key.font : font]).height)
+        return size.height
     }
     
     func heightOfString2(width: CGFloat, font: UIFont) -> CGFloat {

@@ -303,12 +303,11 @@ extension SocialVC: UICollectionViewDelegate {
                 return
             }
             
-            NotificationCenter.default.post(name: NSNotification.socialSearchEnable, object: nil, userInfo: dataDict)
             self.navigateToViewController(SocialSearchVC.self, storyboardName: StoryboardName.social, animationType: .autoReverse(presenting: .zoom)) { vc in
                 vc.showMatches = collectionView != self.tagCollectionView
                 vc.leagueModel = collectionView == self.leagueCollectionView ? self.leagueArray[indexPath.row] : SocialLeague()
                 vc.teamModel = collectionView == self.teamsCollectionView ? self.teamArray[indexPath.row] : SocialTeam()
-                vc.searchText = dataDict["text"] as? String ?? ""
+                vc.searchDataDict = dataDict
             }
         } else {
             selectedSegment = socialHeaderSegment.allCases[indexPath.row]
@@ -366,9 +365,9 @@ extension SocialVC: UITextFieldDelegate {
 // MARK: - Custom Delegate
 
 extension SocialVC: PostListVCDelegate {
-    func postList(height: CGFloat) {
+    func postList(height: CGFloat, count: Int) {
         containerHeightConstraint.constant = height
-        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { (timer) in
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (timer) in
             Loader.activityIndicator.stopAnimating()
         }
     }

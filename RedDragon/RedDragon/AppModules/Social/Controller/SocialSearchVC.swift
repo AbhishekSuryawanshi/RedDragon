@@ -9,9 +9,11 @@ import UIKit
 import Combine
 
 class SocialSearchVC: UIViewController {
-
+    
     @IBOutlet weak var headerLabel: UILabel!
+    @IBOutlet weak var headerSubLabel: UILabel!
     @IBOutlet weak var logoView: UIView!
+    @IBOutlet weak var logoShadowView: UIView!
     @IBOutlet weak var matchView: UIView!
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -19,19 +21,23 @@ class SocialSearchVC: UIViewController {
     @IBOutlet weak var matchTableView: UITableView!
     @IBOutlet weak var postsContainerView: UIView!
     @IBOutlet weak var containerHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var matchHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var seeAllButton: UIButton!
     
     var cancellable = Set<AnyCancellable>()
+    var allMatchArray: [SocialMatch] = []
     var matchArray: [SocialMatch] = []
     var leagueModel = SocialLeague()
     var teamModel = SocialTeam()
     var showMatches = false
-    var searchText = ""
+    var searchEnable = true
+    var searchDataDict:[String: Any] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        initialSettings()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refreshForLocalization()
@@ -39,20 +45,23 @@ class SocialSearchVC: UIViewController {
     
     func refreshForLocalization() {
         Loader.activityIndicator.startAnimating()
+        seeAllButton.isHidden = matchArray.count == 0 ? true : false
     }
     
     func initialSettings() {
         nibInitialization()
         self.view.addSubview(Loader.activityIndicator)
-        ViewEmbedder.embed(withIdentifier: "PostListVC", storyboard: UIStoryboard(name: StoryboardName.social, bundle: nil)
-                           , parent: self, container: postsContainerView) { vc in
-            let vc = vc as! PostListVC
-            vc.delegate = self
-        }
-        headerLabel.text = searchText
-        logoView.isHidden = showMatches
-        matchView.isHidden = showMatches
         
+        fetchSocialViewModel()
+        /// Add hashtag for header label
+        headerLabel.text = searchDataDict["text"] as? String ?? ""
+        if headerLabel.text?.first != "#" {
+            headerLabel.text = "#" + headerLabel.text!
+        }
+        
+        logoView.isHidden = !showMatches
+        matchView.isHidden = !showMatches
+        logoShadowView.applyShadow(radius: 3, opacity: 0.9, offset: CGSize(width: 1 , height: 1))
         if showMatches {
             if teamModel.id == "" {
                 logoImageView.setImage(imageStr: leagueModel.logoURL, placeholder: .placeholderTeam)
@@ -63,12 +72,34 @@ class SocialSearchVC: UIViewController {
             matchTitleLabel.text = "Top Matches in " + (teamModel.id == "" ? "Leage" : "Team")
             SocialMatchVM.shared.fetchMatchListAsyncCall(leagueId: leagueModel.id, teamId: teamModel.id)
         } else {
-            
+            loadPostsView()
         }
     }
     
     func nibInitialization() {
         matchTableView.register(CellIdentifier.matchTableViewCell)
+    }
+    
+    func loadPostsView() {
+        ViewEmbedder.embed(withIdentifier: "PostListVC", storyboard: UIStoryboard(name: StoryboardName.social, bundle: nil)
+                           , parent: self, container: postsContainerView) { vc in
+            let vc = vc as! PostListVC
+            vc.delegate = self
+        }
+    }
+    
+    // MARK: - Button Action
+    
+    @IBAction func seeAllButtonTapped(_ sender: UIButton) {
+        if matchArray.count > 3 {
+            matchArray = Array(allMatchArray.prefix(3))
+            seeAllButton.setImage(.downArrow2, for: .normal)
+        } else {
+            matchArray = allMatchArray
+            seeAllButton.setImage(.upArrow, for: .normal)
+        }
+        
+        matchTableView.reloadData()
     }
 }
 
@@ -79,15 +110,23 @@ extension SocialSearchVC {
         SocialMatchVM.shared.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
-//        SocialMatchVM.shared.displayLoader = { [weak self] value in
-//            self?.showLoader(value)
-//        }
+        
         SocialMatchVM.shared.$responseData
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.matchArray = response?.data ?? []
+                self?.allMatchArray = response?.data ?? []
+                print("load..... match \(Date())")
+                self?.matchArray = Array(self?.allMatchArray.prefix(3) ?? [])
                 self?.matchTableView.reloadData()
+                self?.loadPostsView()
+                self?.seeAllButton.isHidden = self?.matchArray.count == 0 ? true : false
+                self?.seeAllButton.setImage(.downArrow2, for: .normal)
+                if self?.matchArray.count == 0 {
+                    self?.matchTableView.setEmptyMessage(ErrorMessage.matchEmptyAlert)
+                } else {
+                    self?.matchTableView.restore()
+                }
             })
             .store(in: &cancellable)
     }
@@ -96,11 +135,7 @@ extension SocialSearchVC {
 // MARK: - TableView Delegate
 extension SocialSearchVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if matchArray.count == 0 {
-            tableView.setEmptyMessage(ErrorMessage.matchEmptyAlert)
-        } else {
-            tableView.restore()
-        }
+        matchHeightConstraint.constant = matchArray.count == 0 ? 300 : (CGFloat(matchArray.count * 83) + 50)
         return matchArray.count
     }
     
@@ -119,9 +154,16 @@ extension SocialSearchVC: UITableViewDelegate {
 
 // MARK: - Custom Delegate
 extension SocialSearchVC: PostListVCDelegate {
-    func postList(height: CGFloat) {
+    func postList(height: CGFloat, count: Int) {
+        headerSubLabel.text = "\(count) " + (count < 2 ? "Post" : "Posts")
         containerHeightConstraint.constant = height
-        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { (timer) in
+        print("load..... post \(Date())")
+        if searchEnable {
+            searchEnable = false
+            NotificationCenter.default.post(name: NSNotification.socialSearchEnable, object: nil, userInfo: searchDataDict)
+        }
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (timer) in
+            print("load..... post loader \(Date())")
             Loader.activityIndicator.stopAnimating()
         }
     }

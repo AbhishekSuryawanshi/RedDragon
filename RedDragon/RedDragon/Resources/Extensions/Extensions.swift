@@ -8,6 +8,20 @@
 import UIKit
 import SDWebImage
 
+extension UIView {
+    //Use as myView.applyShadow(radius: 3, opacity: 0.5, offset: CGSize(width: 1 , height: 1))
+    func applyShadow(radius: CGFloat,
+                     opacity: Float,
+                     offset: CGSize,
+                     color: UIColor = .lightGray) {
+        layer.masksToBounds = false
+        layer.shadowRadius = radius
+        layer.shadowOpacity = opacity
+        layer.shadowOffset = offset
+        layer.shadowColor = color.cgColor
+    }
+}
+
 extension UIImageView {
     func setImage(imageStr: String, placeholder: UIImage? = nil) {
         self.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -111,6 +125,16 @@ extension Encodable {
             return String(data: jsonData, encoding: .utf8)
         } catch {
             return nil
+        }
+    }
+}
+
+extension Array {
+    
+    func uniques<T: Hashable>(by keyPath: KeyPath<Element, T>) -> [Element] {
+        return reduce([]) { result, element in
+            let alreadyExists = (result.contains(where: { $0[keyPath: keyPath] == element[keyPath: keyPath] }))
+            return alreadyExists ? result : result + [element]
         }
     }
 }
