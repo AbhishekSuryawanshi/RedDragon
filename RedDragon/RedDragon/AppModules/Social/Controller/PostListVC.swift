@@ -10,7 +10,7 @@ import Combine
 import Toast
 
 protocol PostListVCDelegate: AnyObject {
-    func postList(height: CGFloat)
+    func postList(height: CGFloat, count: Int)
 }
 
 class PostListVC: UIViewController {
@@ -92,7 +92,7 @@ class PostListVC: UIViewController {
         for post in self.postArray {
             height = height + SocialPostListVM.shared.heightOfPostCell(model: post)
         }
-        self.delegate?.postList(height: height + 150)
+        self.delegate?.postList(height: height + 150, count: postArray.count)
     }
     
     func deletePost(_index: Int) {
@@ -208,9 +208,9 @@ extension PostListVC {
         SocialPostListVM.shared.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
-        SocialPostListVM.shared.displayLoader = { [weak self] value in
-            self?.showLoader(value)
-        }
+//        SocialPostListVM.shared.displayLoader = { [weak self] value in
+//            self?.showLoader(value)
+//        }
         SocialPostListVM.shared.$responseData
             .receive(on: DispatchQueue.main)
             .dropFirst()
@@ -279,17 +279,19 @@ extension PostListVC {
                 }
             }
         }
-        let dataDict:[String: Any] = ["data": hashTagAttay]
+        ///Remove duplicates
+        let filteredArray = Array(Set(hashTagAttay))
+        let dataDict:[String: Any] = ["data": filteredArray]
         NotificationCenter.default.post(name: NSNotification.refreshHashTags, object: nil, userInfo: dataDict)
         calculateContentHeight()
         listTableView.reloadData()
         
         ///set placeholder for tableview
-        if postArray.count == 0 {
-            listTableView.setEmptyMessage(UserDefaults.standard.token ?? "" == "" ? StringConstants.postsEmptyLoginAlert : ErrorMessage.dataNotFound)
-        } else {
-            listTableView.restore()
-        }
+//        if postArray.count == 0 {
+//            listTableView.setEmptyMessage(UserDefaults.standard.token ?? "" == "" ? StringConstants.postsEmptyLoginAlert : ErrorMessage.dataNotFound)
+//        } else {
+//            listTableView.restore()
+//        }
     }
 }
 
