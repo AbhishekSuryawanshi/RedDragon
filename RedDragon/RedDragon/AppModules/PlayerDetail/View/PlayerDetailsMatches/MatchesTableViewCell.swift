@@ -9,6 +9,17 @@ import UIKit
 
 class MatchesTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var team2ScoreLbl: UILabel!
+    @IBOutlet weak var team1ScoreLbl: UILabel!
+    @IBOutlet weak var cellScoreView: UIView!
+    @IBOutlet weak var team2ImgView: UIImageView!
+    @IBOutlet weak var team2Lbl: UILabel!
+    @IBOutlet weak var team1TeamLbl: UILabel!
+    @IBOutlet weak var team1ImgView: UIImageView!
+    @IBOutlet weak var cellTeamsView: UIView!
+    @IBOutlet weak var dateLbl: UILabel!
+    @IBOutlet weak var roundLbl: UILabel!
+    @IBOutlet weak var cellTopView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

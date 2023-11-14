@@ -19,43 +19,52 @@ class PlayerDetailStatsViewController: UIViewController {
     @IBOutlet weak var otherLbl: UILabel!
     @IBOutlet weak var otherCollectionView: UICollectionView!{
         didSet{
-            self.cardsCollectionView.register("PlayerStatsCollectionViewCell")
+            self.otherCollectionView.register("PlayerStatsCollectionViewCell")
         }
     }
     @IBOutlet weak var otherView: UIView!
     @IBOutlet weak var defendingLbl: UILabel!
     @IBOutlet weak var defendingCollectionView: UICollectionView!{
         didSet{
-            self.cardsCollectionView.register("PlayerStatsCollectionViewCell")
+            self.defendingCollectionView.register("PlayerStatsCollectionViewCell")
         }
     }
     @IBOutlet weak var defendingView: UIView!
     @IBOutlet weak var passesLbl: UILabel!
     @IBOutlet weak var passesCollectionView: UICollectionView!{
         didSet{
-            self.cardsCollectionView.register("PlayerStatsCollectionViewCell")
+            self.passesCollectionView.register("PlayerStatsCollectionViewCell")
         }
     }
     @IBOutlet weak var passesView: UIView!
     @IBOutlet weak var attackingLbl: UILabel!
     @IBOutlet weak var attackingCollectionView: UICollectionView!{
         didSet{
-            self.cardsCollectionView.register("PlayerStatsCollectionViewCell")
+            self.attackingCollectionView.register("PlayerStatsCollectionViewCell")
         }
     }
     @IBOutlet weak var attackingView: UIView!
     @IBOutlet weak var matchesLbl: UILabel!
     @IBOutlet weak var matchesCollectionView: UICollectionView!{
         didSet{
-            self.cardsCollectionView.register("PlayerStatsCollectionViewCell")
+            self.matchesCollectionView.register("PlayerStatsCollectionViewCell")
         }
     }
     @IBOutlet weak var matchesView: UIView!
+    
+    var playerDetailViewModel: PlayerDetailViewModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+    
+    func configureView() {
+        self.cardsCollectionView.reloadData()
+        
+    }
+    
     
 }
 

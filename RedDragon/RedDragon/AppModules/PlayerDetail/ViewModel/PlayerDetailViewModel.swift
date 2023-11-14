@@ -7,12 +7,12 @@
 
 import Foundation
 
-class PlayerDetailsViewModel: APIServiceManager<PlayerDetailModel> {
+class PlayerDetailViewModel: APIServiceManager<PlayerDetailModel> {
     
     ///fetch player details data
-    func fetchPlayerDetailAsyncCall(lang: String, slug: String, sports: String) {
+    func fetchPlayerDetailAsyncCall(lang: String, slug: String) {
         let url     = URLConstants.playerDetail
-        let method  = RequestType.get
+        let method  = RequestType.post
         let parameters: [String: Any] = ["lang": lang, "slug": slug]
         asyncCall(urlString: url, method: method, parameters: parameters)
     }
