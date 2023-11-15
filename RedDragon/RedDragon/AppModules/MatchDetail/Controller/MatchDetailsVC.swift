@@ -125,6 +125,9 @@ extension MatchDetailsVC: UICollectionViewDelegate, UICollectionViewDataSource {
         if indexPath.item == 0 {
             embedHighlighVC()
         }
+        else if indexPath.item == 1 {
+            embedStatisticVC()
+        }
     }
 }
 
@@ -154,11 +157,21 @@ extension MatchDetailsVC {
     }
     
     func embedHighlighVC() {
-            ViewEmbedder.embed(withIdentifier: "HighlightViewController", storyboard: UIStoryboard(name: StoryboardName.matchDetail, bundle: nil), parent: self, container: viewContainer) { [self] vc in
-                let vc = vc as! HighlightViewController
-                vc.configureView(progressData: matchDetailViewModel?.responseData?.data.progress)
-                viewContainerHeight.constant = vc.view.frame.size.height
-            }
+        ViewEmbedder.embed(withIdentifier: "HighlightViewController", storyboard: UIStoryboard(name: StoryboardName.matchDetail, bundle: nil), parent: self, container: viewContainer) { [self] vc in
+            let vc = vc as! HighlightViewController
+            vc.configureView(progressData: matchDetailViewModel?.responseData?.data.progress)
+            viewContainerHeight.constant = vc.view.frame.size.height
         }
+    }
+    
+    func embedStatisticVC() {
+        ViewEmbedder.embed(withIdentifier: "StatisticsViewController", storyboard: UIStoryboard(name: StoryboardName.matchDetail, bundle: nil), parent: self, container: viewContainer) { [weak self] vc in
+            let vc = vc as! StatisticsViewController
+            vc.configureStatisticView(statisticData: self?.matchDetailViewModel?.responseData?.data.statistics)
+            vc.configureMediaData(mediaData: self?.matchDetailViewModel?.responseData?.data.medias)
+            vc.configureEventsData(recentMatches: self?.matchDetailViewModel?.responseData?.data.homeEvents)
+            self?.viewContainerHeight.constant = vc.view.frame.size.height
+        }
+    }
     
 }
