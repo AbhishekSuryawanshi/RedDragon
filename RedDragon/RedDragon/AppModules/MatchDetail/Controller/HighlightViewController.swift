@@ -40,13 +40,10 @@ class HighlightViewController: UIViewController {
         if progressData.isEmpty {
             customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.dataNotFound.localized, image: ImageConstants.alertImage)
         } else {
-            print(progressData as Any)
             highlightProgress = progressData
-            print(highlightProgress?.count as Any)
             symbolCollectionView.reloadData()
         }
     }
-
 }
 
 extension HighlightViewController: UICollectionViewDelegate, UICollectionViewDataSource {

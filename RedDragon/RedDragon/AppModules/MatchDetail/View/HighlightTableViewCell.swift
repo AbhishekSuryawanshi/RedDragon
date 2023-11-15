@@ -71,7 +71,6 @@ class HighlightTableViewCell: UITableViewCell {
         case let action where action.contains("yellow"):
             symbolImageView.image = UIImage.yellowCard
         case let action where action.contains("Minutes added 3"):
-            print("came into minutes")
             symbolImageView.image = UIImage.minutes
         case let action where action.contains("substitute"):
             symbolImageView.image = UIImage.substitution
