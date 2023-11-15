@@ -9,6 +9,7 @@ import Foundation
 
 struct StoryboardName {
     static let main         = "Main"
+    static let login        = "Login"
     static let social       = "Social"
     static let database     = "Database"
     static let matchDetail  = "MatchDetail"

@@ -130,4 +130,31 @@ extension NSMutableAttributedString {
         append(formattedString)
         return self
     }
+    @discardableResult func regularColorText(_ text: String, size: CGFloat, color: UIColor) -> NSMutableAttributedString {
+        let attrs: [NSAttributedString.Key: Any] = [.font: fontRegular(size), .foregroundColor: color]
+        let normalString = NSMutableAttributedString(string:text, attributes: attrs)
+        append(normalString)
+        return self
+    }
+    
+    @discardableResult func light(_ text: String, size: CGFloat) -> NSMutableAttributedString {
+        let attrs: [NSAttributedString.Key: Any] = [.font: fontLight(size)]
+        let normalString = NSMutableAttributedString(string:text, attributes: attrs)
+        append(normalString)
+        return self
+    }
+    
+    @discardableResult func regular(_ text: String, size: CGFloat) -> NSMutableAttributedString {
+        let attrs: [NSAttributedString.Key: Any] = [.font: fontRegular(size)]
+        let normalString = NSMutableAttributedString(string:text, attributes: attrs)
+        append(normalString)
+        return self
+    }
+    
+    @discardableResult func medium(_ text: String, size: CGFloat) -> NSMutableAttributedString {
+        let attrs: [NSAttributedString.Key: Any] = [.font: fontMedium(size)]
+        let normalString = NSMutableAttributedString(string:text, attributes: attrs)
+        append(normalString)
+        return self
+    }
 }
