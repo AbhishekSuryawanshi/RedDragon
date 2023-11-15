@@ -14,6 +14,15 @@ struct URLConstants {
     static let privacyPolicy       = ""
     static let terms               = ""
     
+    // MARK: -  Login
+    
+    static let loginBaseURL        = "http://157.245.159.136:5072/api/"
+    
+    static let login               = loginBaseURL + "login"
+    static let register            = loginBaseURL + "register"
+    static let verifyOTP           = loginBaseURL + "verifyotp"
+    
+    // MARK: -  Database
     
     static let databaseBaseURL     = "https://datasport.one/api/v1/sportscore/data/"
     static let leagueDetail        = databaseBaseURL + "league.php"

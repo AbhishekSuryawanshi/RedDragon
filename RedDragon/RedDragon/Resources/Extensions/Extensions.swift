@@ -9,10 +9,28 @@ import UIKit
 import SDWebImage
 
 extension UIView {
-    //Use as myView.applyShadow(radius: 3, opacity: 0.5, offset: CGSize(width: 1 , height: 1))
+    /// To curve the sides of view
+    /// add suitable corners in "corners" as [.topLeft, .topRight, .bottomLeft, .bottomRight, .allCorners]
+
+    func roundCornersWithBorderLayer(cornerRadii: CGFloat, corners: UIRectCorner, bound:CGRect, borderColor: UIColor = .clear, borderWidth: CGFloat = 0) {
+        let maskPath = UIBezierPath(roundedRect: bound, byRoundingCorners: corners, cornerRadii: CGSize(width: cornerRadii, height: cornerRadii))
+        let shape = CAShapeLayer()
+        shape.path = maskPath.cgPath
+        self.layer.mask = shape
+        
+        let borderLayer = CAShapeLayer()
+        borderLayer.path = maskPath.cgPath
+        borderLayer.fillColor = UIColor.clear.cgColor
+        borderLayer.strokeColor = borderColor.cgColor
+        borderLayer.lineWidth = borderWidth
+        borderLayer.frame = self.bounds
+        self.layer.addSublayer(borderLayer)
+    }
+    
+    /// To add shadow for view
     func applyShadow(radius: CGFloat,
                      opacity: Float,
-                     offset: CGSize,
+                     offset: CGSize = .zero,
                      color: UIColor = .lightGray) {
         layer.masksToBounds = false
         layer.shadowRadius = radius
@@ -23,6 +41,7 @@ extension UIView {
 }
 
 extension UIImageView {
+    /// To set image and its activity indicator from image url
     func setImage(imageStr: String, placeholder: UIImage? = nil) {
         self.sd_imageIndicator = SDWebImageActivityIndicator.gray
         if placeholder != nil {

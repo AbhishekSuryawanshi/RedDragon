@@ -345,7 +345,7 @@ extension PostListVC: PostTableCellDelegate {
     }
     
     func postImageTapped(url: String) {
-        presentToViewController(ImageZoomVC.self, storyboardName: StoryboardName.social, animationType: .autoReverse(presenting: .zoom)) { vc in
+        presentOverViewController(ImageZoomVC.self, storyboardName: StoryboardName.social) { vc in
             vc.imageUrl = url
         }
     }

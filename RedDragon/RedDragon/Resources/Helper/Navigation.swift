@@ -39,6 +39,15 @@ extension UIViewController {
         present(vc, animated: true)
     }
     
+    public func presentOverViewController<T: UIViewController>(_ viewController: T.Type, storyboardName: String = "Main", identifier: String? = nil, configure: ((T) -> Void)? = nil) {
+        let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: identifier ?? String(describing: viewController)) as! T
+        vc.modalPresentationStyle = .overCurrentContext
+       // vc.hero.
+        configure?(vc)
+        present(vc, animated: true)
+    }
+    
     public func navigateToViewController<T: UIViewController>(_ viewController: T.Type, storyboardName: String = "Main", identifier: String? = nil, animationType: HeroDefaultAnimationType = .zoomOut, configure: ((T) -> Void)? = nil) {
         let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: identifier ?? String(describing: viewController)) as! T

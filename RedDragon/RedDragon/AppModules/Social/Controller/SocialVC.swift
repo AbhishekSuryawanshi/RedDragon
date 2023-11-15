@@ -150,15 +150,19 @@ class SocialVC: UIViewController {
     }
     
     @IBAction func createPostButtonTapped(_ sender: UIButton) {
-        
-        guard let token = UserDefaults.standard.token else {
-            self.customAlertView_2Actions(title: "Login / Sign Up".localized, description: ErrorMessage.loginRequires.localized) {
-                //ToDo
-                // self.logoutAndRootToLoginVC()
-            }
-            return
-        }
-        navigateToViewController(PostCreateVC.self, storyboardName: StoryboardName.social, animationType: .autoReverse(presenting: .zoom))
+        self.tabBarController?.tabBar.isHidden = true
+        presentOverViewController(LoginVC.self, storyboardName: StoryboardName.login)
+       
+        /*
+         guard let token = UserDefaults.standard.token else {
+             self.customAlertView_2Actions(title: "Login / Sign Up".localized, description: ErrorMessage.loginRequires.localized) {
+                 //ToDo
+                 // self.logoutAndRootToLoginVC()
+             }
+             return
+         }
+         navigateToViewController(PostCreateVC.self, storyboardName: StoryboardName.social, animationType: .autoReverse(presenting: .zoom))
+         */
     }
 }
 
