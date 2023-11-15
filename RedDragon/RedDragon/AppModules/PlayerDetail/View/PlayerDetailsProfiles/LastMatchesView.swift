@@ -9,6 +9,18 @@ import UIKit
 
 class LastMatchesView: UIView {
 
+    @IBOutlet weak var team2Lbl2: UILabel!
+    @IBOutlet weak var team2ImgView2: UIImageView!
+    @IBOutlet weak var team1Lbl2: UILabel!
+    @IBOutlet weak var team1ImgView2: UIImageView!
+    @IBOutlet weak var date2Lbl: UILabel!
+    @IBOutlet weak var leagueName2Lbl: UILabel!
+    @IBOutlet weak var league2ImgView: UIImageView!
+    @IBOutlet weak var team2Score2Lbl: UILabel!
+    @IBOutlet weak var team1Score2Lbl: UILabel!
+    @IBOutlet weak var round2Lbl: UILabel!
+    @IBOutlet weak var secondMatchView: UIView!
+    @IBOutlet weak var firstMatchView: UIView!
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var team2Lbl: UILabel!
     @IBOutlet weak var team2ImgView: UIImageView!

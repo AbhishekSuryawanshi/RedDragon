@@ -18,6 +18,10 @@ class PlayerDetailProfileViewController: UIViewController {
     @IBOutlet weak var playerTeamsView: TeamsView!
     @IBOutlet weak var playerDetailView: PlayerDetailView!
     
+    var skillArr:[String?] = []
+    var skillVal:[String?] = []
+    var skillNum: [Float] = []
+    
     var playerDetailViewModel: PlayerDetailViewModel?
 
     override func viewDidLoad() {
@@ -26,9 +30,11 @@ class PlayerDetailProfileViewController: UIViewController {
     }
     
     func configureView() {
-        chart()
         configurePlayerDetailView()
         configurePlayerTeamDetailView()
+        configureChartsView()
+        configureLastMatchesView()
+        configureMediaView()
         
     }
     
@@ -69,22 +75,83 @@ class PlayerDetailProfileViewController: UIViewController {
             }
             
         }
-        
         playerTeamsView.team2ImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
         playerTeamsView.team2ImgView.sd_setImage(with: URL(string: playerDetailViewModel?.responseData?.data?.teamPhoto ?? ""))
         playerTeamsView.team2Lbl.text = playerDetailViewModel?.responseData?.data?.teamName
     }
     
-   
-
+    func configureChartsView(){
+        for i in 0 ..< (playerDetailViewModel?.responseData?.data?.rating?.count ?? 0){
+            skillArr.append("\(playerDetailViewModel?.responseData?.data?.rating?[i].value ?? "") " + "\(playerDetailViewModel?.responseData?.data?.rating?[i].key ?? "")")
+            skillVal.append(playerDetailViewModel?.responseData?.data?.rating?[i].value)
+        }
+       chart()
+    }
+    
     func chart(){
-        let spiderChartView = DDSpiderChartView(frame: CGRect(x: 10, y: 51, width: 373, height: 350)) // Replace with some frame or add constraints
-        spiderChartView.axes = ["Defending", "Passing", "Attacking", "Aggressive", "Possessive"] // Set axes by giving their labels
-        spiderChartView.addDataSet(values: [1.0, 0.5, 0.75, 0.6, 0.3], color: UIColor.yellow1 ) // Add first data set
-      
-        playerSkillView.spiderView.backgroundColor = .clear
-        playerSkillView.backgroundColor = .clear
+        let spiderChartView = DDSpiderChartView(frame: CGRect(x: 10, y: 50, width: screenWidth - 20, height: 350)) // Replace with some frame or add constraints
+        spiderChartView.axes = skillArr.map{
+            attributedAxisLabel($0 ?? "")} // Set axes by giving their labels
+        spiderChartView.addDataSet(values: removeCharacterFromString(valArr: skillVal), color: UIColor.yellow1, animated: true) // Add first data set
+        spiderChartView.backgroundColor = .white
+        playerSkillView.spiderView.color = .gray
+       // playerSkillView.spiderView.backgroundColor = .white
+        playerSkillView.backgroundColor = .white
         playerSkillView.addSubview(spiderChartView)
+    }
+    
+    func attributedAxisLabel(_ label: String) -> NSAttributedString {
+        let attributedString = NSMutableAttributedString()
+        attributedString.append(NSAttributedString(string: label, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "Roboto-Regular", size: 14)!]))
+        
+        return attributedString
+    }
+    
+    func configureLastMatchesView(){
+      //  for i in 0 ..< (playerDetailViewModel?.responseData?.data?.events?.count ?? 0){
+            for var j in 0 ..< (playerDetailViewModel?.responseData?.data?.events?[0].matches?.count ?? 0){
+                if j < 1{
+                    playerLastMatches.leagueImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
+                    playerLastMatches.leagueImgView.sd_setImage(with: URL(string: playerDetailViewModel?.responseData?.data?.events?[0].leagueLogo ?? ""))
+                    playerLastMatches.leagueNameLbl.text = playerDetailViewModel?.responseData?.data?.events?[0].leagueName
+                    playerLastMatches.roundLbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].round
+                    playerLastMatches.team1Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].homeName
+                    playerLastMatches.team2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].awayName
+                    playerLastMatches.team1ScoreLbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].homeScore
+                    playerLastMatches.team2ScoreLbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].awayScore
+                    playerLastMatches.dateLbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].date
+                    j = j+1
+                    playerLastMatches.league2ImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
+                    playerLastMatches.league2ImgView.sd_setImage(with: URL(string: playerDetailViewModel?.responseData?.data?.events?[0].leagueLogo ?? ""))
+                    playerLastMatches.leagueName2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].leagueName
+                    playerLastMatches.round2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].round
+                    playerLastMatches.team1Lbl2.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].homeName
+                    playerLastMatches.team2Lbl2.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].awayName
+                    playerLastMatches.team1Score2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].homeScore
+                    playerLastMatches.team2Score2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].awayScore
+                    playerLastMatches.date2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].date
+                }
+            }
+       // }
+    }
+    
+    func configureMediaView(){
+        for i in 0 ..< (playerDetailViewModel?.responseData?.data?.medias?.count ?? 0){
+            playerMediaDetails.mediaImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
+            playerMediaDetails.mediaImgView.sd_setImage(with: URL(string: playerDetailViewModel?.responseData?.data?.medias?[i].preview ?? ""))
+            playerMediaDetails.dateLbl.text = playerDetailViewModel?.responseData?.data?.medias?[i].date
+            playerMediaDetails.mediaDetailTxtView.text = playerDetailViewModel?.responseData?.data?.medias?[i].subtitle
+        }
+    }
+    
+    func removeCharacterFromString(valArr: [String?]) -> [Float]{
+        var val = ""
+        for i in 0 ..< valArr.count{
+            val = valArr[i]?.replacingOccurrences(of: "%", with: "") ?? ""
+            skillNum.append(((Float(val) ?? 0.0)/100.0))
+        }
+        return skillNum
+
     }
 
 }
