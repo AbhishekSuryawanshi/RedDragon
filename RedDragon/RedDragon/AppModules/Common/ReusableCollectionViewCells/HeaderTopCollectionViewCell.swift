@@ -17,9 +17,11 @@ class HeaderTopCollectionViewCell: UICollectionViewCell {
     }
 
     func configureUnderLineCell(title: String, selected: Bool) {
-        let formatedText = NSMutableAttributedString()
-        titleLabel.attributedText = formatedText.underLineText(title, remove: selected)
-        titleLabel.font = selected ? fontBold(17) : fontRegular(17)
+        var formatedText = NSMutableAttributedString()
+        formatedText = selected ? formatedText.bold(title, size: 17) : formatedText.regular(title, size: 17)
+        ///pass true to "remove" key to remove underline
+        formatedText.addUnderLine(textToFind: title, remove: !selected)
+        titleLabel.attributedText = formatedText
         titleLabel.textColor = .white
     }
     

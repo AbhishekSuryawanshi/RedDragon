@@ -14,6 +14,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var countryCodeButton: UIButton!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var bottomTextView: UITextView!
     
     var countryCode = "0"
     
@@ -34,10 +35,15 @@ class LoginVC: UIViewController {
         countryCodeButton.setTitle(countryCode, for: .normal)
         countryCodeButton.setImage(UIImage(named: "AE") ?? .placeholder1, for: .normal)
         
-        let formatedText = NSMutableAttributedString()
-        topTextLabel.attributedText = formatedText.regular("Please ", size: 15).medium("Login", size: 15).regular(" to continue", size: 15)
+        let topFormatedText = NSMutableAttributedString()
+        topTextLabel.attributedText = topFormatedText.regular("Please ", size: 15).medium("Login", size: 15).regular(" to continue", size: 15)
         phoneTextField.placeholder = "Phone Number".localized
         passwordTextField.placeholder = "Password".localized
+        let bottomFormatedText = NSMutableAttributedString()
+        bottomFormatedText.regular("Don't Have an Account? Tap here to ", size: 15).bold("Register", size: 15)
+        bottomFormatedText.addUnderLine(textToFind: "Register")
+        bottomFormatedText.addLink(textToFind: "Register", linkURL: "register")
+        bottomTextView.attributedText = bottomFormatedText
     }
     
     // MARK: - Button Actions
@@ -51,9 +57,6 @@ class LoginVC: UIViewController {
         
     }
     
-    @IBAction func registerButtonTapped(_ sender: UIButton) {
-        presentOverViewController(RegisterVC.self, storyboardName: StoryboardName.login)
-    }
 }
 
 // MARK: - TextField Delegate
@@ -79,6 +82,20 @@ extension LoginVC: UITextFieldDelegate {
         } else {
             return true
         }
+    }
+}
+
+//MARK: UITextView Delegates
+extension LoginVC: UITextViewDelegate {
+
+    public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        switch URL.absoluteString {
+        case "register":
+            presentOverViewController(RegisterVC.self, storyboardName: StoryboardName.login)
+        default:
+            print("")
+        }
+        return false
     }
 }
 
