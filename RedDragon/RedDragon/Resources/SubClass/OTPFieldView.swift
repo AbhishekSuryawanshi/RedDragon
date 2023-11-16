@@ -37,7 +37,7 @@ import UIKit
     public var displayType: DisplayType = .roundedCorner
     public var fieldsCount: Int = 6
     public var otpInputType: KeyboardType = .numeric
-    public var fieldFont: UIFont = fontMedium(28)
+    public var fieldFont: UIFont = fontMedium(18)
     public var secureEntry: Bool = false
     public var hideEnteredText: Bool = false
     public var requireCursor: Bool = true
@@ -48,8 +48,8 @@ import UIKit
     public var shouldAllowIntermediateEditing: Bool = false
     public var defaultBackgroundColor: UIColor = .wheat1//.withAlphaComponent(0.6)
     public var filledBackgroundColor: UIColor = .wheat1
-    public var defaultBorderColor: UIColor = .white
-    public var filledBorderColor: UIColor = .white
+    public var defaultBorderColor: UIColor = .gray2
+    public var filledBorderColor: UIColor = .gray2
     public var textColor: UIColor = .black
     public var errorBorderColor: UIColor?
     

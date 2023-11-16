@@ -8,16 +8,19 @@
 import UIKit
 
 class RegisterVC: UIViewController {
-
+    
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var topTextLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var countryCodeButton: UIButton!
     @IBOutlet weak var phoneTextField: UITextField!
+    @IBOutlet weak var userNameTextfield: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextfield: UITextField!
     @IBOutlet weak var bottomTextView: UITextView!
+    @IBOutlet weak var termsTextView: UITextView!
+    @IBOutlet weak var checkButton: UIButton!
     
     var countryCode = "0"
     
@@ -43,6 +46,7 @@ class RegisterVC: UIViewController {
         nameTextField.placeholder = "Full Name".localized
         emailTextfield.placeholder = "Email".localized
         phoneTextField.placeholder = "Phone Number".localized
+        userNameTextfield.placeholder = "User Name".localized
         passwordTextField.placeholder = "Password".localized
         confirmPasswordTextfield.placeholder = "Confirm Password".localized
         let bottomFormatedText = NSMutableAttributedString()
@@ -52,7 +56,50 @@ class RegisterVC: UIViewController {
         bottomTextView.attributedText = bottomFormatedText
     }
     
+    func validate() -> Bool {
+        if nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            self.view.makeToast(ErrorMessage.nameEmptyAlert)
+            return false
+        } else if emailTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            self.view.makeToast(ErrorMessage.emailEmptyAlert)
+            return false
+        } else if !isValidEmail(validate: emailTextfield.text!) {
+            self.view.makeToast(ErrorMessage.invalidEmail)
+            return false
+        } else if phoneTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            self.view.makeToast(ErrorMessage.phoneEmptyAlert)
+            return false
+        } else if !isValidPhone(validate: countryCode + phoneTextField.text!) {
+            self.view.makeToast(ErrorMessage.invalidPhone)
+            return false
+        } else if userNameTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            self.view.makeToast(ErrorMessage.userNameEmptyAlert)
+            return false
+        } else if passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            self.view.makeToast(ErrorMessage.passwordEmptyAlert)
+            return false
+        } else if !isValidPassword(validate: passwordTextField.text!) {
+            self.view.makeToast(ErrorMessage.passwordCondition, duration: 5)
+            return false
+        } else if confirmPasswordTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            self.view.makeToast(ErrorMessage.confirmPasswordEmptyAlert)
+            return false
+        } else if passwordTextField.text! != confirmPasswordTextfield.text! {
+            self.view.makeToast(ErrorMessage.passwordNotmatchedAlert)
+            return false
+        } else if !checkButton.isSelected {
+            self.view.makeToast(ErrorMessage.termsAlert)
+            return false
+        }
+        return true
+    }
+    
     // MARK: - Button Actions
+    
+    @IBAction func termsButtonTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+    }
+    
     @IBAction func countryCodeButtonTapped(_ sender: UIButton) {
         let countryVC = CountryCodeListVC()
         countryVC.delegate = self
@@ -60,9 +107,10 @@ class RegisterVC: UIViewController {
     }
     
     @IBAction func createAccountButtonTapped(_ sender: UIButton) {
-        presentOverViewController(VerificationVC.self, storyboardName: StoryboardName.login)
+        if validate() {
+            presentOverViewController(VerificationVC.self, storyboardName: StoryboardName.login)
+        }
     }
-    
 }
 
 // MARK: - TextField Delegate
@@ -93,7 +141,7 @@ extension RegisterVC: UITextFieldDelegate {
 
 //MARK: UITextView Delegates
 extension RegisterVC: UITextViewDelegate {
-
+    
     public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         switch URL.absoluteString {
         case "signIn":
