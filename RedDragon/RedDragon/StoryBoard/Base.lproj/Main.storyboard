@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -76,21 +76,14 @@
             <point key="canvasLocation" x="2717" y="2354"/>
         </scene>
         <!--Discover-->
-        <scene sceneID="ccj-T8-JAg">
+        <scene sceneID="G69-DG-Dws">
             <objects>
-                <viewController modalPresentationStyle="overCurrentContext" id="FOH-wB-ALS" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="aGp-sw-Zuz">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="ipi-xk-HKO"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Discover" image="Discover" id="bJE-JD-8Zw"/>
-                    <navigationItem key="navigationItem" id="HGo-BN-cJZ"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lIt-T6-hcg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="Discover" id="VLP-b8-Mb8" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="IVP-Pf-bfy"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DtN-FX-yqF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3549" y="2354"/>
+            <point key="canvasLocation" x="3604" y="2701"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="bU4-Mk-sHp">
@@ -123,12 +116,12 @@
                         <segue destination="fy7-qc-dHG" kind="relationship" relationship="viewControllers" id="V14-fE-wEr"/>
                         <segue destination="HVP-tE-ciH" kind="relationship" relationship="viewControllers" id="2lS-EN-QDK"/>
                         <segue destination="bGf-RP-GfK" kind="relationship" relationship="viewControllers" id="nJe-01-HpY"/>
-                        <segue destination="FOH-wB-ALS" kind="relationship" relationship="viewControllers" id="md7-ga-jgc"/>
+                        <segue destination="Y5S-L7-egR" kind="relationship" relationship="viewControllers" id="lwD-Ue-5Ey"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cbo-hh-PQA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1856" y="1404"/>
+            <point key="canvasLocation" x="1856" y="1347"/>
         </scene>
         <!--Social-->
         <scene sceneID="Sqd-qq-tMI">
@@ -184,6 +177,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="29Z-Hy-lAh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1856" y="2237"/>
+        </scene>
+        <!--Discover-->
+        <scene sceneID="OK3-pm-zi9">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Y5S-L7-egR" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Discover" image="Discover" id="8Rm-GM-AhY"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3Z8-fZ-UwT">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="VLP-b8-Mb8" kind="relationship" relationship="rootViewController" id="0j1-t2-ic6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Gi-Hz-exJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3605" y="2237"/>
         </scene>
     </scenes>
     <resources>
