@@ -124,12 +124,6 @@ extension String {
 // MARK: - NSMutableAttributedString
 
 extension NSMutableAttributedString {
-    @discardableResult func underLineText(_ text: String, remove: Bool = false) -> NSMutableAttributedString {
-        let attrs: [NSAttributedString.Key: Any] = [.underlineStyle: remove ? NSUnderlineStyle.thick.rawValue : 0]
-        let formattedString = NSMutableAttributedString(string:text, attributes: attrs)
-        append(formattedString)
-        return self
-    }
     @discardableResult func regularColorText(_ text: String, size: CGFloat, color: UIColor) -> NSMutableAttributedString {
         let attrs: [NSAttributedString.Key: Any] = [.font: fontRegular(size), .foregroundColor: color]
         let normalString = NSMutableAttributedString(string:text, attributes: attrs)
@@ -156,5 +150,34 @@ extension NSMutableAttributedString {
         let normalString = NSMutableAttributedString(string:text, attributes: attrs)
         append(normalString)
         return self
+    }
+    
+    @discardableResult func mediumColorText(_ text: String, size: CGFloat, color: UIColor) -> NSMutableAttributedString {
+        let attrs: [NSAttributedString.Key: Any] = [.font: fontMedium(size), .foregroundColor: color]
+        let normalString = NSMutableAttributedString(string:text, attributes: attrs)
+        append(normalString)
+        return self
+    }
+    
+    @discardableResult func bold(_ text: String, size: CGFloat) -> NSMutableAttributedString {
+        let attrs: [NSAttributedString.Key: Any] = [.font: fontBold(size)]
+        let normalString = NSMutableAttributedString(string:text, attributes: attrs)
+        append(normalString)
+        return self
+    }
+    
+    public func addUnderLine(textToFind:String, remove: Bool = false) {
+        let foundRange = self.mutableString.range(of: textToFind)
+        if foundRange.location != NSNotFound {
+            self.addAttribute(.underlineStyle, value: remove ? 0 : NSUnderlineStyle.thick.rawValue, range: foundRange)
+        }
+    }
+    
+    public func addLink(textToFind:String, linkURL:String) {//link color set by setting tint color in storyboard
+        let foundRange = self.mutableString.range(of: textToFind)
+        if foundRange.location != NSNotFound {
+            self.addAttribute(.link, value: linkURL, range: foundRange)
+            self.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.green, range: foundRange)
+        }
     }
 }

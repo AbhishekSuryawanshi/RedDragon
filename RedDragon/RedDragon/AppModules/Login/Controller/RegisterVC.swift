@@ -11,9 +11,13 @@ class RegisterVC: UIViewController {
 
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var topTextLabel: UILabel!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var countryCodeButton: UIButton!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var confirmPasswordTextfield: UITextField!
+    @IBOutlet weak var bottomTextView: UITextView!
     
     var countryCode = "0"
     
@@ -36,8 +40,16 @@ class RegisterVC: UIViewController {
         
         let formatedText = NSMutableAttributedString()
         topTextLabel.attributedText = formatedText.regular("Please ", size: 15).medium("Create an account", size: 15).regular(" to continue", size: 15)
+        nameTextField.placeholder = "Full Name".localized
+        emailTextfield.placeholder = "Email".localized
         phoneTextField.placeholder = "Phone Number".localized
         passwordTextField.placeholder = "Password".localized
+        confirmPasswordTextfield.placeholder = "Confirm Password".localized
+        let bottomFormatedText = NSMutableAttributedString()
+        bottomFormatedText.regular("Already Have an Account? Tap here to ", size: 15).bold("Sign In", size: 15)
+        bottomFormatedText.addUnderLine(textToFind: "Sign In")
+        bottomFormatedText.addLink(textToFind: "Sign In", linkURL: "signIn")
+        bottomTextView.attributedText = bottomFormatedText
     }
     
     // MARK: - Button Actions
@@ -48,12 +60,9 @@ class RegisterVC: UIViewController {
     }
     
     @IBAction func createAccountButtonTapped(_ sender: UIButton) {
-        
+        presentOverViewController(VerificationVC.self, storyboardName: StoryboardName.login)
     }
     
-    @IBAction func signInButtonTapped(_ sender: UIButton) {
-        
-    }
 }
 
 // MARK: - TextField Delegate
@@ -79,6 +88,20 @@ extension RegisterVC: UITextFieldDelegate {
         } else {
             return true
         }
+    }
+}
+
+//MARK: UITextView Delegates
+extension RegisterVC: UITextViewDelegate {
+
+    public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        switch URL.absoluteString {
+        case "signIn":
+            self.dismiss(animated: true)
+        default:
+            print("")
+        }
+        return false
     }
 }
 
