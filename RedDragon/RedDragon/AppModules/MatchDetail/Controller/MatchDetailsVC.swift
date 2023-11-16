@@ -67,7 +67,7 @@ class MatchDetailsVC: UIViewController {
     
     func makeNetworkCall() {
         matchDetailViewModel?.fetchMatchDetailAsyncCall(lang: fetchCurrentLanguageCode == "en" ? "en" : "zh",
-                                                        slug: "2023-02-21-liverpool-real-madrid",
+                                                        slug: matchSlug ?? "",
                                                         sports: "football") //2023-02-21-liverpool-real-madrid //matchSlug ?? ""
     }
 }
@@ -160,7 +160,7 @@ extension MatchDetailsVC {
         ViewEmbedder.embed(withIdentifier: "HighlightViewController", storyboard: UIStoryboard(name: StoryboardName.matchDetail, bundle: nil), parent: self, container: viewContainer) { [self] vc in
             let vc = vc as! HighlightViewController
             vc.configureView(progressData: matchDetailViewModel?.responseData?.data.progress)
-            viewContainerHeight.constant = vc.view.frame.size.height
+            //viewContainerHeight.constant = vc.view.frame.size.height
         }
     }
     
@@ -170,7 +170,7 @@ extension MatchDetailsVC {
             vc.configureStatisticView(statisticData: self?.matchDetailViewModel?.responseData?.data.statistics)
             vc.configureMediaData(mediaData: self?.matchDetailViewModel?.responseData?.data.medias)
             vc.configureEventsData(recentMatches: self?.matchDetailViewModel?.responseData?.data.homeEvents)
-            self?.viewContainerHeight.constant = vc.view.frame.size.height
+            //self?.viewContainerHeight.constant = vc.view.frame.size.height
         }
     }
     
