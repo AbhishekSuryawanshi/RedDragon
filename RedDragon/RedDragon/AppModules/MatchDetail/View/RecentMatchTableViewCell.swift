@@ -29,13 +29,14 @@ class RecentMatchTableViewCell: UITableViewCell {
         leagueImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
         leagueImageView.sd_setImage(with: URL(string: data.leagueLogo))
         leagueNameLabel.text = data.leagueName
-        //configureEvent(event: data.matches[indexPath.section])
+        configureEvent(event: data.matches[indexPath.item])
     }
     
     func configureEvent(event: Match) {
         dateLabel.text = event.date
         homeTeamNameLabel.text = event.homeName
         awayTeamNameLabel.text = event.awayName
+        homeAwayTeamScoreLabel.text = "\(event.homeScore) \(event.awayScore)"
     }
     
 }

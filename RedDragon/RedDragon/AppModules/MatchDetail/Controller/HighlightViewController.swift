@@ -12,6 +12,7 @@ class HighlightViewController: UIViewController {
     
     @IBOutlet weak var highlightTableView: UITableView!
     @IBOutlet weak var symbolCollectionView: UICollectionView!
+    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
     private var highlightProgress: [Progress]?
     private let symbolIconsArray: [UIImage] = [#imageLiteral(resourceName: "goal"), #imageLiteral(resourceName: "disallowedGoal"), #imageLiteral(resourceName: "substitution"), #imageLiteral(resourceName: "yellowCard"), #imageLiteral(resourceName: "redCard"), #imageLiteral(resourceName: "var"), #imageLiteral(resourceName: "penalty"), #imageLiteral(resourceName: "minutes")]
@@ -39,6 +40,7 @@ class HighlightViewController: UIViewController {
         }
         if progressData.isEmpty {
             customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.dataNotFound.localized, image: ImageConstants.alertImage)
+            tableViewHeight.constant = 0
         } else {
             highlightProgress = progressData
             symbolCollectionView.reloadData()
@@ -88,6 +90,10 @@ extension HighlightViewController: UITableViewDelegate, UITableViewDataSource {
             return nil
         }
         return UIHostingController(rootView: MatchHighlightHeaderView(title: sectionData.title)).view
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        tableViewHeight.constant = self.highlightTableView.contentSize.height
     }
 }
 

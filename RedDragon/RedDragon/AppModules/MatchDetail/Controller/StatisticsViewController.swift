@@ -14,6 +14,9 @@ class StatisticsViewController: UIViewController {
     @IBOutlet weak var highlightLabel: UILabel!
     @IBOutlet weak var collectionview: UICollectionView!
     @IBOutlet weak var recentMatchesTableView: UITableView!
+    @IBOutlet weak var recentMatchesTableViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var highlightView: UIView!
+    @IBOutlet weak var highlightViewHeight: NSLayoutConstraint!
     
     private var statisticsArray: [Statistic]?
     private var mediaArray: [Media]?
@@ -36,6 +39,7 @@ class StatisticsViewController: UIViewController {
         }
         if statisticData.isEmpty {
             customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.dataNotFound.localized, image: ImageConstants.alertImage)
+            tableViewHeight.constant = 0
         } else {
             statisticsArray = statisticData
             tableView.reloadData()
@@ -48,6 +52,7 @@ class StatisticsViewController: UIViewController {
         }
         if mediaData.isEmpty {
             customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.dataNotFound.localized, image: ImageConstants.alertImage)
+            highlightViewHeight.constant = 0
         } else {
             mediaArray = mediaData
             collectionview.reloadData()
@@ -117,13 +122,18 @@ extension StatisticsViewController: UITableViewDelegate, UITableViewDataSource {
             }
             return UIHostingController(rootView: MatchStatisticHeaderView(title: sectionData.header)).view
         } else {
-            return nil
+            guard let sectionData = eventsArray?[section] else {
+                return nil
+            }
+            return UIHostingController(rootView: RecentMatchHeaderView(title: sectionData.leagueName)).view
         }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if tableView == self.tableView {
-            tableViewHeight.constant = self.tableView.contentSize.height
+            tableViewHeight.constant = self.tableView.contentSize.height - 1200
+        } else if tableView == self.recentMatchesTableView {
+            recentMatchesTableViewHeight.constant = self.recentMatchesTableView.contentSize.height
         }
     }
 }
@@ -163,7 +173,22 @@ extension StatisticsViewController: UICollectionViewDelegate, UICollectionViewDa
 import SwiftUI
 
 struct MatchStatisticHeaderView: View {
+    let title: String
     
+    var body: some View {
+        ZStack {
+            VStack {
+                Text(title)
+                    .foregroundColor(.black)
+                    .multilineTextAlignment(.leading)
+                    .font(.system(size: 12, weight: .bold))
+            }
+        }
+        .frame(height: 30)
+    }
+}
+
+struct RecentMatchHeaderView: View {
     let title: String
     
     var body: some View {
