@@ -11,7 +11,11 @@ class VerificationVC: UIViewController {
 
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var topTextLabel: UILabel!
+    @IBOutlet weak var otpTextFieldView: OTPFieldView!
     @IBOutlet weak var bottomTextView: UITextView!
+    
+    var otpEntered = false
+    var otpValue = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,12 +35,16 @@ class VerificationVC: UIViewController {
         bottomFormatedText.addUnderLine(textToFind: "Resend")
         bottomFormatedText.addLink(textToFind: "Resend", linkURL: "resend")
         bottomTextView.attributedText = bottomFormatedText
-        
+        otpTextFieldView.fieldSize = (screenWidth - 100) / 6
+        otpTextFieldView.delegate = self
+        otpTextFieldView.initializeUI()
     }
 
     // MARK: - Button Actions
     @IBAction func submitButtonTapped(_ sender: UIButton) {
-        
+        if otpEntered {
+            
+        }
     }
 }
 
@@ -51,5 +59,22 @@ extension VerificationVC: UITextViewDelegate {
             print("")
         }
         return false
+    }
+}
+
+// MARK:- OTPFieldViewDelegate
+extension VerificationVC: OTPFieldViewDelegate {
+    func shouldBecomeFirstResponderForOTP(otpTextFieldIndex index: Int) -> Bool { return true }
+    
+    func hasEnteredAllOTP(hasEnteredAll hasEntered: Bool) -> Bool {
+        otpEntered = hasEntered
+        return false
+    }
+    
+    func textFeildshouldChangeCharacters() {}
+    
+    func enteredOTP(otp otpString: String) {
+        print("OTPString: \(otpString)")
+        otpValue = otpString
     }
 }

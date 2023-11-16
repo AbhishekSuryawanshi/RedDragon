@@ -46,6 +46,20 @@ class LoginVC: UIViewController {
         bottomTextView.attributedText = bottomFormatedText
     }
     
+    func validate() -> Bool {
+        if phoneTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            self.view.makeToast(ErrorMessage.phoneEmptyAlert)
+            return false
+        } else if !isValidPhone(validate: countryCode + phoneTextField.text!) {
+            self.view.makeToast(ErrorMessage.invalidPhone)
+            return false
+        } else if passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            self.view.makeToast(ErrorMessage.passwordEmptyAlert)
+            return false
+        }
+        return true
+    }
+    
     // MARK: - Button Actions
     @IBAction func countryCodeButtonTapped(_ sender: UIButton) {
         let countryVC = CountryCodeListVC()
@@ -54,9 +68,10 @@ class LoginVC: UIViewController {
     }
     
     @IBAction func createAccountButtonTapped(_ sender: UIButton) {
-        
+        if validate() {
+            
+        }
     }
-    
 }
 
 // MARK: - TextField Delegate

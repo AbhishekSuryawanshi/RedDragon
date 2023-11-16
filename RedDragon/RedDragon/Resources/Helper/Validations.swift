@@ -21,6 +21,15 @@ extension UIViewController {
         return namePredicate.evaluate(with: name)
     }
     
+    public func isValidPhone(validate phone: String) -> Bool {
+        let phoneNum = phone.components(separatedBy: CharacterSet.decimalDigits.inverted).joined(separator: "")
+        if phoneNum.count < 10 {
+            return false
+        } else {
+            return true
+        }
+    }
+    
     public func isValidPassword(validate password: String) -> Bool {
         let minLength = 8
         let maxLength = 20
@@ -54,6 +63,5 @@ extension UIViewController {
         }
         
         return true
-    }
-    
+    }    
 }
