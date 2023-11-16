@@ -20,14 +20,17 @@ class BetHomeVc: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+       initial()
+    }
+    
+
+    func initial(){
         tableView.register(CellIdentifier.betMatchTableVC)
         tableView.register(CellIdentifier.betWinTableVC)
         tableView.register(CellIdentifier.betLoseTableVC)
         collectionView.register(CellIdentifier.homeTitleCollectionVc)
         collectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .left)
     }
-    
-
 
     // MARK: - Navigation
 
