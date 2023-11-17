@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class RegisterVC: UIViewController {
     
@@ -22,6 +23,7 @@ class RegisterVC: UIViewController {
     @IBOutlet weak var termsTextView: UITextView!
     @IBOutlet weak var checkButton: UIButton!
     
+    var cancellable = Set<AnyCancellable>()
     var countryCode = "0"
     
     override func viewDidLoad() {
@@ -36,6 +38,9 @@ class RegisterVC: UIViewController {
     }
     
     func initialSettings() {
+        self.view.addSubview(Loader.activityIndicator)
+        fetchLoginViewModel()
+        
         ///set deafult value for country code
         countryCode = "+971"
         countryCodeButton.setTitle(countryCode, for: .normal)
@@ -50,10 +55,18 @@ class RegisterVC: UIViewController {
         passwordTextField.placeholder = "Password".localized
         confirmPasswordTextfield.placeholder = "Confirm Password".localized
         let bottomFormatedText = NSMutableAttributedString()
-        bottomFormatedText.regular("Already Have an Account? Tap here to ", size: 15).bold("Sign In", size: 15)
+        bottomFormatedText.regular("Already Have an Account? Tap here to", size: 15).bold(" Sign In", size: 15)
         bottomFormatedText.addUnderLine(textToFind: "Sign In")
-        bottomFormatedText.addLink(textToFind: "Sign In", linkURL: "signIn")
+        bottomFormatedText.addLink(textToFind: " Sign In", linkURL: "signIn")
         bottomTextView.attributedText = bottomFormatedText
+        let termsFormatedText = NSMutableAttributedString()
+        termsFormatedText.regular("Confirm your acceptance of the", size: 14).bold(" Terms and Conditions", size: 15)
+        bottomFormatedText.addLink(textToFind: " Terms and Conditions", linkURL: URLConstants.terms)
+        termsTextView.attributedText = termsFormatedText
+    }
+    
+    func showLoader(_ value: Bool) {
+        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
     }
     
     func validate() -> Bool {
@@ -108,8 +121,45 @@ class RegisterVC: UIViewController {
     
     @IBAction func createAccountButtonTapped(_ sender: UIButton) {
         if validate() {
-            presentOverViewController(VerificationVC.self, storyboardName: StoryboardName.login)
+            //Jen@12345, Red@12345 jen mike
+            let param: [String: Any] = [
+                "full_name": nameTextField.text!,
+                "email": emailTextfield.text!,
+                "phone_number": countryCode + phoneTextField.text!,
+                "username": userNameTextfield.text!,
+                "password": passwordTextField.text!
+            ]
+            RegisterVM.shared.registerAsyncCall(parameters: param)
         }
+    }
+}
+
+// MARK: - API Services
+extension RegisterVC {
+   
+    func fetchLoginViewModel() {
+        
+        RegisterVM.shared.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        RegisterVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        RegisterVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                /*
+                 self?.presentOverViewController(VerificationVC.self, storyboardName: StoryboardName.login) { vc in
+                     vc.email = self?.emailTextfield.text ?? ""
+                     vc.phoneNumber = (self?.countryCode ?? "") + (self?.phoneTextField.text ?? "")
+                 }
+                 */
+                
+
+            })
+            .store(in: &cancellable)
+        
     }
 }
 
@@ -147,7 +197,10 @@ extension RegisterVC: UITextViewDelegate {
         case "signIn":
             self.dismiss(animated: true)
         default:
-            print("")
+            //ToDo
+            ///check terms url 
+           // guard let url = URL(string: URL.absoluteString) else { return }
+            UIApplication.shared.open(URL)
         }
         return false
     }
