@@ -67,7 +67,7 @@ class MatchDetailsVC: UIViewController {
     
     func makeNetworkCall() {
         matchDetailViewModel?.fetchMatchDetailAsyncCall(lang: fetchCurrentLanguageCode == "en" ? "en" : "zh",
-                                                        slug: matchSlug ?? "",
+                                                        slug: "2023-02-21-liverpool-real-madrid",
                                                         sports: "football") //2023-02-21-liverpool-real-madrid //matchSlug ?? ""
     }
 }
@@ -123,10 +123,13 @@ extension MatchDetailsVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.item == 0 {
-            embedHighlighVC()
+            embedHighlightVC()
         }
         else if indexPath.item == 1 {
             embedStatisticVC()
+        }
+        else if indexPath.item == 2 {
+            embedLineupVC()
         }
     }
 }
@@ -156,7 +159,7 @@ extension MatchDetailsVC {
         collectionView(matchTabsCollectionView, didSelectItemAt: indexPath)
     }
     
-    func embedHighlighVC() {
+    func embedHighlightVC() {
         ViewEmbedder.embed(withIdentifier: "HighlightViewController", storyboard: UIStoryboard(name: StoryboardName.matchDetail, bundle: nil), parent: self, container: viewContainer) { [self] vc in
             let vc = vc as! HighlightViewController
             vc.configureView(progressData: matchDetailViewModel?.responseData?.data.progress)
@@ -171,6 +174,15 @@ extension MatchDetailsVC {
             vc.configureMediaData(mediaData: self?.matchDetailViewModel?.responseData?.data.medias)
             vc.configureEventsData(recentMatches: self?.matchDetailViewModel?.responseData?.data.homeEvents)
             //self?.viewContainerHeight.constant = vc.view.frame.size.height
+        }
+    }
+    
+    func embedLineupVC() {
+        ViewEmbedder.embed(withIdentifier: "LineupViewController", storyboard: UIStoryboard(name: StoryboardName.matchDetail, bundle: nil), parent: self, container: viewContainer) { [weak self] vc in
+            let vc = vc as! LineupViewController
+            vc.configureHomeLineupView(homeLineup: self?.matchDetailViewModel?.responseData?.data.homeLineup)
+            vc.configureAwayLineupView(awayLineup: self?.matchDetailViewModel?.responseData?.data.awayLineup)
+            vc.configureSubstitutePlayer(homeSubstituteData: self?.matchDetailViewModel?.responseData?.data.homeLineup, awaySubstituteData: self?.matchDetailViewModel?.responseData?.data.awayLineup)
         }
     }
     
