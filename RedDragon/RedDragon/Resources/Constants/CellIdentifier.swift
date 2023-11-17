@@ -33,6 +33,7 @@ struct CellIdentifier {
     static let statisticTableViewCell             = "StatisticsTableViewCell"
     static let mediaCollectionView                = "MediaCollectionViewCell"
     static let recentMatchTableCell               = "RecentMatchTableViewCell"
+    static let substituteTableCell                = "SubstituteTableViewCell"
     
     //Player Details
     static let playerDetailTabsCell               = ""
