@@ -140,6 +140,7 @@ class PlayerDetailProfileViewController: UIViewController {
             playerMediaDetails.mediaImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
             playerMediaDetails.mediaImgView.sd_setImage(with: URL(string: playerDetailViewModel?.responseData?.data?.medias?[i].preview ?? ""))
             playerMediaDetails.dateLbl.text = playerDetailViewModel?.responseData?.data?.medias?[i].date
+            playerMediaDetails.mediaDetailTitleLbl.text = playerDetailViewModel?.responseData?.data?.medias?[i].title
             playerMediaDetails.mediaDetailTxtView.text = playerDetailViewModel?.responseData?.data?.medias?[i].subtitle
         }
     }
