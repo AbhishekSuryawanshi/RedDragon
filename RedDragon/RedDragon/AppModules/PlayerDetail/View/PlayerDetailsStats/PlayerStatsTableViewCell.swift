@@ -11,7 +11,11 @@ class PlayerStatsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var sectionCollectionView: UICollectionView!
     
-    var playerDetailStats: PlayerDetailStatistic?
+    var playerDetailStatsDataArr: PlayerDetailStatisticData?
+    var isFour = false
+    var colorLbl = ""
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -32,25 +36,40 @@ class PlayerStatsTableViewCell: UITableViewCell {
     func nibInitialization() {
         sectionCollectionView.register(CellIdentifier.playerStatsCollectionViewCell)
         
-       
     }
     
 }
 
-extension PlayerStatsTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource{
+extension PlayerStatsTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+   
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return playerDetailStats?.data?[section].data?.count ?? 0
+        return playerDetailStatsDataArr?.data?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.playerStatsCollectionViewCell, for: indexPath) as! PlayerStatsCollectionViewCell
-        cell.valueLbl.text = playerDetailStats?.data?[indexPath.section].data?[indexPath.row].value
-        cell.keyLbl.text = playerDetailStats?.data?[indexPath.section].data?[indexPath.row].key
+        cell.valueLbl.text = playerDetailStatsDataArr?.data?[indexPath.row].value
+        cell.keyLbl.text = playerDetailStatsDataArr?.data?[indexPath.row].key
+        cell.valueLbl.textColor = UIColor.init(hex: colorLbl)
+        cell.keyLbl.textColor = UIColor.init(hex: colorLbl)
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 150, height: 50)
+        
+        if isFour{
+            let width = ((collectionView.frame.width) / 4) - 20
+            let height = width
+            
+            return CGSize(width: width, height: height)
+        }
+        else{
+            let width = ((collectionView.frame.width) / 3) - 20
+            let height = width * (9/16)
+            
+            return CGSize(width: width, height: height)
+        }
         
     }
     

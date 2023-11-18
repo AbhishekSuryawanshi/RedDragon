@@ -9,6 +9,7 @@ import UIKit
 
 class PlayerDetailsTopView: UIView {
 
+    @IBOutlet weak var mediaTitleLbl: UILabel!
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var playBtn: UIButton!
     @IBOutlet var contentView: UIView!

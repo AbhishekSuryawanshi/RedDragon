@@ -24,7 +24,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jSV-Nj-unZ">
-                        <rect key="frame" x="30.333333333333332" y="10" width="39.333333333333343" height="21"/>
+                        <rect key="frame" x="30.333333333333332" y="5" width="39.333333333333343" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="aOD-bX-3G3"/>
                         </constraints>
@@ -32,8 +32,8 @@
                         <color key="textColor" name="base"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b45-xF-aQl">
-                        <rect key="frame" x="35.333333333333336" y="41" width="29.666666666666664" height="49"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b45-xF-aQl">
+                        <rect key="frame" x="5" y="31" width="90" height="64"/>
                         <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -44,10 +44,12 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="jSV-Nj-unZ" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="FfV-TY-1F2"/>
-                <constraint firstItem="b45-xF-aQl" firstAttribute="top" secondItem="jSV-Nj-unZ" secondAttribute="bottom" constant="10" id="VkO-VA-hqr"/>
-                <constraint firstItem="jSV-Nj-unZ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="XEM-pg-QFA"/>
+                <constraint firstItem="b45-xF-aQl" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="Upu-la-ht8"/>
+                <constraint firstItem="b45-xF-aQl" firstAttribute="top" secondItem="jSV-Nj-unZ" secondAttribute="bottom" constant="5" id="VkO-VA-hqr"/>
+                <constraint firstItem="jSV-Nj-unZ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="XEM-pg-QFA"/>
                 <constraint firstItem="b45-xF-aQl" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="bh7-JL-lHP"/>
-                <constraint firstAttribute="bottom" secondItem="b45-xF-aQl" secondAttribute="bottom" constant="10" id="qY7-Oi-NW4"/>
+                <constraint firstAttribute="bottom" secondItem="b45-xF-aQl" secondAttribute="bottom" constant="5" id="qY7-Oi-NW4"/>
+                <constraint firstAttribute="trailing" secondItem="b45-xF-aQl" secondAttribute="trailing" constant="5" id="uc2-dg-rPh"/>
             </constraints>
             <size key="customSize" width="100" height="100"/>
             <userDefinedRuntimeAttributes>

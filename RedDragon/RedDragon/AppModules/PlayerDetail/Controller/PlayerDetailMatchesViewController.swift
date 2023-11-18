@@ -35,8 +35,6 @@ class PlayerDetailMatchesViewController: UIViewController {
        
     }
     
-    
-
 }
 
 extension PlayerDetailMatchesViewController: UITableViewDelegate, UITableViewDataSource{
