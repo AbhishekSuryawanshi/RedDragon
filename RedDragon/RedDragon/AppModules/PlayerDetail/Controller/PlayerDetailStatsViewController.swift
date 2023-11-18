@@ -10,51 +10,20 @@ import UIKit
 class PlayerDetailStatsViewController: UIViewController {
 
     @IBOutlet weak var mainTableView: UITableView!
-    @IBOutlet weak var leaguesCollectionView: UICollectionView!
-//    @IBOutlet weak var sixthViewHeight: NSLayoutConstraint!
-//    @IBOutlet weak var sixthCollectionViewHeight: NSLayoutConstraint!
-//    @IBOutlet weak var sixthLbl: UILabel!
-//    @IBOutlet weak var sixthCollectionView: UICollectionView!
-//    @IBOutlet weak var sixthView: UIView!
-//    @IBOutlet weak var fifthCollectionViewHeight: NSLayoutConstraint!
-//    @IBOutlet weak var fifthViewHeight: NSLayoutConstraint!
-//    @IBOutlet weak var fifthLbl: UILabel!
-//    @IBOutlet weak var fifthCollectionView: UICollectionView!
-//    @IBOutlet weak var fifthView: UIView!
-//    @IBOutlet weak var forthCollectionViewHeight: NSLayoutConstraint!
-//    @IBOutlet weak var forthViewHeight: NSLayoutConstraint!
-//    @IBOutlet weak var forthLbl: UILabel!
-//    @IBOutlet weak var forthCollectionView: UICollectionView!
-//    @IBOutlet weak var forthView: UIView!
-//    @IBOutlet weak var thirdLbl: UILabel!
-//    @IBOutlet weak var thirdCollectionViewHeight: NSLayoutConstraint!
-//    @IBOutlet weak var thirdCollectionView: UICollectionView!
-//    @IBOutlet weak var thirdView: UIView!
-//    @IBOutlet weak var thirdViewHeight: NSLayoutConstraint!
-//    @IBOutlet weak var secondLbl: UILabel!
-//    @IBOutlet weak var secondCollectionViewHeight: NSLayoutConstraint!
-//    @IBOutlet weak var secondCollectionView: UICollectionView!
-//    @IBOutlet weak var secondViewHeight: NSLayoutConstraint!
-//    @IBOutlet weak var secondView: UIView!
-//    @IBOutlet weak var firstLbl: UILabel!
-//    @IBOutlet weak var firstCollectionView: UICollectionView!
-//    @IBOutlet weak var firstCollectionViewHeight: NSLayoutConstraint!
-//    @IBOutlet weak var firstViewHeight: NSLayoutConstraint!
-//    @IBOutlet weak var firstView: UIView!
-//    
+    @IBOutlet weak var leaguesCollectionView: UICollectionView!    
     var playerDetailViewModel: PlayerDetailViewModel?
     var playerDetailStats: PlayerDetailStatistic?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        
+
     }
     
     func configureView() {
         playerDetailStats = playerDetailViewModel?.responseData?.data?.statistics?[0]
         loadFunctionality()
-       
     }
 
     func loadFunctionality() {
@@ -64,7 +33,6 @@ class PlayerDetailStatsViewController: UIViewController {
     func nibInitialization() {
         leaguesCollectionView.register(CellIdentifier.playerLeagueCollectionViewCell)
         mainTableView.register(CellIdentifier.playerStatsTableViewCell)
-        
     }
     
 }
@@ -75,29 +43,96 @@ extension PlayerDetailStatsViewController: UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return playerDetailViewModel?.responseData?.data?.statistics?[section].data?.count ?? 0
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.playerStatsTableViewCell, for: indexPath) as! PlayerStatsTableViewCell
-        cell.playerDetailStats = playerDetailStats
+        cell.playerDetailStatsDataArr = playerDetailStats?.data?[indexPath.section]
+        switch(indexPath.section){
+        case 0:
+            cell.contentView.backgroundColor = UIColor.init(hex: "FFDAD5")
+           
+        case 1:
+            cell.contentView.backgroundColor = UIColor.init(hex: "FFE08A")
+            
+        case 2:
+            cell.contentView.backgroundColor = UIColor.init(hex: "C6E7FF")
+            
+        case 3:
+            cell.contentView.backgroundColor = UIColor.init(hex: "FFDAD5")
+            
+        case 4:
+            cell.contentView.backgroundColor = UIColor.init(hex: "FFE08A")
+            
+        case 5:
+            cell.contentView.backgroundColor = UIColor.init(hex: "C6E7FF")
+            
+        default:
+            cell.contentView.backgroundColor = UIColor.init(hex: "FFDAD5")
+           
+        }
+        cell.isFour = indexPath.section != 0
         cell.sectionCollectionView.reloadData()
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        let count = playerDetailStats?.data?[indexPath.section].data?.count
+        var col = 4
+        var rows = 0
+        if indexPath.section == 0{
+           col = 3
+           
+        }
+        rows = Int((Double(count ?? 0) / Double(col)).rounded(.up))
+        let width = ((tableView.frame.width) - 20) / CGFloat(col)
+        var height = width * (9/16)
+        if indexPath.section == 0{
+            return CGFloat(height * CGFloat(rows))
+        }
+        else{
+            height = width
+            return CGFloat(height * CGFloat(rows))
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = PlayerStatsTableViewHeader()
         header.headerLbl.text = playerDetailStats?.data?[section].section
-        header.headerLbl.backgroundColor = .red
-        header.headerLbl.textColor = .white
+         switch(section){
+         case 0:
+             header.backgroundColor = UIColor.init(hex: "FFDAD5")
+             header.headerLbl.backgroundColor = UIColor.init(hex: "BB1910")
+         case 1:
+             header.backgroundColor = UIColor.init(hex: "FFE08A")
+             header.headerLbl.backgroundColor = UIColor.init(hex: "745B00")
+         case 2:
+             header.backgroundColor = UIColor.init(hex: "C6E7FF")
+             header.headerLbl.backgroundColor = UIColor.init(hex: "00658C")
+         case 3:
+             header.backgroundColor = UIColor.init(hex: "FFDAD5")
+             header.headerLbl.backgroundColor = UIColor.init(hex: "BB1910")
+         case 4:
+             header.backgroundColor = UIColor.init(hex: "FFE08A")
+             header.headerLbl.backgroundColor = UIColor.init(hex: "745B00")
+         case 5:
+             header.backgroundColor = UIColor.init(hex: "C6E7FF")
+             header.headerLbl.backgroundColor = UIColor.init(hex: "00658C")
+         default:
+             header.backgroundColor = UIColor.init(hex: "FFDAD5")
+             header.headerLbl.backgroundColor = .red
+             header.headerLbl.textColor = .white
+         }
+        
         return header
     }
     
-        
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 27
+    }
+    
 }
 
 extension PlayerDetailStatsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
@@ -126,3 +161,4 @@ extension PlayerDetailStatsViewController: UICollectionViewDelegate, UICollectio
     }
     
 }
+
