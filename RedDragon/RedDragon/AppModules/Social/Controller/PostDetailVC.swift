@@ -168,7 +168,9 @@ extension PostDetailVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                if (response?.message ?? "").lowercased().contains("success"), let status = self?.postModel.liked {
+                //todo 
+               // if (response?.message ?? "").lowercased().contains("success"),
+                    if let status = self?.postModel.liked {
                     ///update like status and likecount in post model
                     self?.postModel.liked = !status
                     self?.postModel.likeCount = status ? (self?.postModel.likeCount ?? 0) - 1 : (self?.postModel.likeCount ?? 0) + 1

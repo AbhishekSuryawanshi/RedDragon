@@ -51,7 +51,7 @@ class SocialPostVM: APIServiceManager<SocialPost> {
     }
 }
 
-class SocialDeleteVM: APIServiceManager<BasicResponse> {
+class SocialDeleteVM: APIServiceManager<BasicAPIResponse> {
     init () {}
     static let shared = SocialDeleteVM()
     
@@ -63,7 +63,7 @@ class SocialDeleteVM: APIServiceManager<BasicResponse> {
     }
 }
 
-class SocialPollVM: APIServiceManager<BasicResponse> {
+class SocialPollVM: APIServiceManager<BasicAPIResponse> {
     init () {}
     static let shared = SocialPollVM()
     
@@ -95,7 +95,7 @@ class SocialLikeCommentListVM: APIServiceManager<[Social]> {
     }
 }
 
-class SocialAddLikeVM: APIServiceManager<BasicResponse> {
+class SocialAddLikeVM: APIServiceManager<BasicAPIResponse> {
     init () {}
     static let shared = SocialAddLikeVM()
     
@@ -107,7 +107,7 @@ class SocialAddLikeVM: APIServiceManager<BasicResponse> {
     }
 }
 
-class SocialAddCommentVM: APIServiceManager<BasicResponse> {
+class SocialAddCommentVM: APIServiceManager<BasicAPIResponse> {
     init () {}
     static let shared = SocialAddCommentVM()
     
@@ -119,7 +119,7 @@ class SocialAddCommentVM: APIServiceManager<BasicResponse> {
     }
 }
 
-class SocialDeleteCommentVM: APIServiceManager<BasicResponse> {
+class SocialDeleteCommentVM: APIServiceManager<BasicAPIResponse> {
     init () {}
     static let shared = SocialDeleteCommentVM()
     

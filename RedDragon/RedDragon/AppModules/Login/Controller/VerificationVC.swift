@@ -8,8 +8,14 @@
 import UIKit
 import Combine
 
-class VerificationVC: UIViewController {
+enum verifyPushType {
+    case login
+    case register
+    case forgotPass
+}
 
+class VerificationVC: UIViewController {
+    
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var topTextLabel: UILabel!
     @IBOutlet weak var otpTextFieldView: OTPFieldView!
@@ -19,7 +25,9 @@ class VerificationVC: UIViewController {
     var otpEntered = false
     var email = ""
     var phoneNumber = ""
+    var password = ""
     var otpValue = ""
+    var pushFrom: verifyPushType = .login //push from which page
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +53,11 @@ class VerificationVC: UIViewController {
         otpTextFieldView.fieldSize = (screenWidth - 100) / 6
         otpTextFieldView.delegate = self
         otpTextFieldView.initializeUI()
+        
+        ///non - verified user tried to login, resend otp for verification
+        if pushFrom == .login {
+            ResendOtpVM.shared.resendOtpAsyncCall()
+        }
     }
     
     func showLoader(_ value: Bool) {
@@ -53,22 +66,23 @@ class VerificationVC: UIViewController {
     
     // MARK: - Button Actions
     @IBAction func submitButtonTapped(_ sender: UIButton) {
+      
         if otpEntered {
             let param: [String: Any] = [
                 "phone": phoneNumber,
                 "email": email,
                 "code": otpValue
             ]
-            LoginVM.shared.loginAsyncCall(parameters: param)
+            UserVerifyVM.shared.verificationAsyncCall(parameters: param)
         }
     }
 }
 
 // MARK: - API Services
 extension VerificationVC {
-   
+    
     func fetchLoginViewModel() {
-        
+        //response of otp verification
         UserVerifyVM.shared.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
@@ -79,20 +93,58 @@ extension VerificationVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                
+                self?.execute_onResponseData(response)
             })
             .store(in: &cancellable)
         
+        //response of resend otp
+        ResendOtpVM.shared.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        ResendOtpVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        ResendOtpVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                if let errorResponse = response?.error {
+                    self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                }
+            })
+            .store(in: &cancellable)
+    }
+    
+    func execute_onResponseData(_ response: LoginResponse?) {
+        
+        if let dataResponse = response?.response {
+            if let user = dataResponse.data {
+                ///User verified
+                UserDefaults.standard.user = user
+                UserDefaults.standard.token = user.token
+                
+                switch self.pushFrom {
+                case .register, .forgotPass:
+                    self.presentingViewController?.presentedViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+                default:
+                    self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+                }
+            }
+        } else {
+            if let errorResponse = response?.error {
+                self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+            }
+        }
     }
 }
 
 //MARK: UITextView Delegates
 extension VerificationVC: UITextViewDelegate {
-
+    
     public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         switch URL.absoluteString {
         case "resend":
-            print("resend preeeeee")
+            ResendOtpVM.shared.resendOtpAsyncCall()
         default:
             print("")
         }

@@ -1,24 +1,24 @@
 //
-//  LoginVC.swift
+//  ResetPasswordVC.swift
 //  RedDragon
 //
-//  Created by Qasr01 on 14/11/2023.
+//  Created by Qasr01 on 18/11/2023.
 //
 
 import UIKit
 import Combine
 
-class LoginVC: UIViewController {
+class ResetPasswordVC: UIViewController {
     
     @IBOutlet weak var bgView: UIView!
-    @IBOutlet weak var topTextLabel: UILabel!
     @IBOutlet weak var countryCodeButton: UIButton!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var bottomTextView: UITextView!
+    @IBOutlet weak var confirmPasswordTextfield: UITextField!
     
     var cancellable = Set<AnyCancellable>()
     var countryCode = "0"
+    var verificationCode = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,16 +39,6 @@ class LoginVC: UIViewController {
         countryCode = "+971"
         countryCodeButton.setTitle(countryCode, for: .normal)
         countryCodeButton.setImage(UIImage(named: "AE") ?? .placeholder1, for: .normal)
-        
-        let topFormatedText = NSMutableAttributedString()
-        topTextLabel.attributedText = topFormatedText.regular("Please ", size: 15).medium("Login", size: 15).regular(" to continue", size: 15)
-        phoneTextField.placeholder = "Phone Number".localized
-        passwordTextField.placeholder = "Password".localized
-        let bottomFormatedText = NSMutableAttributedString()
-        bottomFormatedText.regular("Don't Have an Account? Tap here to", size: 15).bold(" Register", size: 15)
-        bottomFormatedText.addUnderLine(textToFind: "Register")
-        bottomFormatedText.addLink(textToFind: " Register", linkURL: "register")
-        bottomTextView.attributedText = bottomFormatedText
     }
     
     func showLoader(_ value: Bool) {
@@ -65,44 +55,51 @@ class LoginVC: UIViewController {
         } else if passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
             self.view.makeToast(ErrorMessage.passwordEmptyAlert)
             return false
+        } else if !isValidPassword(validate: passwordTextField.text!) {
+            self.view.makeToast(ErrorMessage.passwordCondition, duration: 5)
+            return false
+        } else if confirmPasswordTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            self.view.makeToast(ErrorMessage.confirmPasswordEmptyAlert)
+            return false
+        } else if passwordTextField.text! != confirmPasswordTextfield.text! {
+            self.view.makeToast(ErrorMessage.passwordNotmatchedAlert)
+            return false
         }
         return true
     }
     
     // MARK: - Button Actions
+    
     @IBAction func countryCodeButtonTapped(_ sender: UIButton) {
         let countryVC = CountryCodeListVC()
         countryVC.delegate = self
         self.present(countryVC, animated: true)
     }
     
-    @IBAction func createAccountButtonTapped(_ sender: UIButton) {
+    @IBAction func continueButtonTapped(_ sender: UIButton) {
         if validate() {
             let param: [String: Any] = [
-                "phone_number": countryCode + phoneTextField.text!,
+                "code": verificationCode,
+                "phone": countryCode + phoneTextField.text!,
                 "password": passwordTextField.text!
             ]
-            LoginVM.shared.loginAsyncCall(parameters: param)
+            ResetPasswordVM.shared.resetPasswordAsyncCall(parameters: param)
         }
-    }
-    
-    @IBAction func forgotButtonTapped(_ sender: UIButton) {
-        self.presentOverViewController(ForgotPasswordVC.self, storyboardName: StoryboardName.login)
     }
 }
 
 // MARK: - API Services
-extension LoginVC {
+extension ResetPasswordVC {
     
     func fetchLoginViewModel() {
         
-        LoginVM.shared.showError = { [weak self] error in
+        ResetPasswordVM.shared.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
-        LoginVM.shared.displayLoader = { [weak self] value in
+        ResetPasswordVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
         }
-        LoginVM.shared.$responseData
+        ResetPasswordVM.shared.$responseData
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
@@ -112,21 +109,9 @@ extension LoginVC {
     }
     
     func execute_onResponseData(_ response: LoginResponse?) {
+        
         if let dataResponse = response?.response {
-            if let user = dataResponse.data {
-                if user.otpVerified == 0 {
-                    self.presentOverViewController(VerificationVC.self, storyboardName: StoryboardName.login) { vc in
-                        vc.email = user.email
-                        vc.phoneNumber = user.phoneNumber
-                        vc.password = self.passwordTextField.text ?? ""
-                        vc.pushFrom = .login
-                    }
-                } else {
-                    UserDefaults.standard.user = user
-                    UserDefaults.standard.token = user.token
-                    self.dismiss(animated: true)
-                }
-            }
+            self.view.makeToast(dataResponse.messages?.first)
         } else {
             if let errorResponse = response?.error {
                 self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
@@ -136,7 +121,7 @@ extension LoginVC {
 }
 
 // MARK: - TextField Delegate
-extension LoginVC: UITextFieldDelegate {
+extension ResetPasswordVC: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == phoneTextField {
@@ -161,22 +146,8 @@ extension LoginVC: UITextFieldDelegate {
     }
 }
 
-//MARK: UITextView Delegates
-extension LoginVC: UITextViewDelegate {
-    
-    public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        switch URL.absoluteString {
-        case "register":
-            presentOverViewController(RegisterVC.self, storyboardName: StoryboardName.login)
-        default:
-            print("")
-        }
-        return false
-    }
-}
-
 // MARK: - Custom Delegate
-extension LoginVC: CountryDelegate {
+extension ResetPasswordVC: CountryDelegate {
     func countrySelected(country: CountryModel) {
         countryCode = country.phoneCode
         countryCodeButton.setTitle("\(country.phoneCode)", for: .normal)

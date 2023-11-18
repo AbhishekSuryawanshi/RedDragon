@@ -121,7 +121,6 @@ class RegisterVC: UIViewController {
     
     @IBAction func createAccountButtonTapped(_ sender: UIButton) {
         if validate() {
-            //Jen@12345, Red@12345 jen mike
             let param: [String: Any] = [
                 "full_name": nameTextField.text!,
                 "email": emailTextfield.text!,
@@ -136,7 +135,7 @@ class RegisterVC: UIViewController {
 
 // MARK: - API Services
 extension RegisterVC {
-   
+    
     func fetchLoginViewModel() {
         
         RegisterVM.shared.showError = { [weak self] error in
@@ -149,17 +148,28 @@ extension RegisterVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                /*
-                 self?.presentOverViewController(VerificationVC.self, storyboardName: StoryboardName.login) { vc in
-                     vc.email = self?.emailTextfield.text ?? ""
-                     vc.phoneNumber = (self?.countryCode ?? "") + (self?.phoneTextField.text ?? "")
-                 }
-                 */
-                
-
+                self?.execute_onResponseData(response)
             })
             .store(in: &cancellable)
+    }
+    
+    func execute_onResponseData(_ response: LoginResponse?) {
         
+        if let dataResponse = response?.response {
+            if let user = dataResponse.data {
+                ///User registered, now verify OTP
+                self.presentOverViewController(VerificationVC.self, storyboardName: StoryboardName.login) { vc in
+                    vc.email = user.email
+                    vc.phoneNumber = user.phoneNumber
+                    vc.password = self.passwordTextField.text ?? ""
+                    vc.pushFrom = .register
+                }
+            }
+        } else {
+            if let errorResponse = response?.error {
+                self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+            }
+        }
     }
 }
 
@@ -198,8 +208,8 @@ extension RegisterVC: UITextViewDelegate {
             self.dismiss(animated: true)
         default:
             //ToDo
-            ///check terms url 
-           // guard let url = URL(string: URL.absoluteString) else { return }
+            ///check terms url
+            // guard let url = URL(string: URL.absoluteString) else { return }
             UIApplication.shared.open(URL)
         }
         return false

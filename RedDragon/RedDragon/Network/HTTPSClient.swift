@@ -31,7 +31,7 @@ class HTTPSClient: HTTPSClientProtocol {
         print("[Response] :==> \(request.url)\n\(responseDictionary ?? [:])")
         
         // Check if the HTTP response status code is within the success range (200-399).
-        guard let res = urlResponse as? HTTPURLResponse, 200..<400 ~= res.statusCode else {
+        guard let res = urlResponse as? HTTPURLResponse, 200..<407 ~= res.statusCode else {
             throw CustomErrors.unknown
         }
         // Decode the received data into the specified Decodable type.

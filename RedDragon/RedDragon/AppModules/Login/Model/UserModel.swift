@@ -7,8 +7,18 @@
 
 import Foundation
 
+struct LoginResponse: Codable {
+    let response: UserResponse?
+    let error: UserResponse?
+}
+
+struct UserResponse: Codable {
+    let code: Int?
+    let messages: [String]?
+    let data: User?
+}
+
 struct User: Codable {
-    
     var id: Int = 0
     var name: String = ""
     var email: String = ""
@@ -22,8 +32,8 @@ struct User: Codable {
     var token: String = ""
     
     enum CodingKeys: String, CodingKey {
-        case id, name, email, username
-        case fullName = "full_name"
+        case id, email, username
+        case name = "full_name"
         case phoneNumber = "phone_number"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
@@ -40,7 +50,6 @@ struct User: Codable {
         name = try container.decodeIfPresent(String.self, forKey: .name) ?? ""
         email = try container.decodeIfPresent(String.self, forKey: .email) ?? ""
         username = try container.decodeIfPresent(String.self, forKey: .username) ?? ""
-        fullName = try container.decodeIfPresent(String.self, forKey: .fullName) ?? ""
         phoneNumber = try container.decodeIfPresent(String.self, forKey: .phoneNumber) ?? ""
         createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) ?? ""
         updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt) ?? ""
