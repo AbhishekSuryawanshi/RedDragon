@@ -7,7 +7,7 @@
 
 import Foundation
 
-class RegisterVM: APIServiceManager<BasicResponse> {
+class RegisterVM: APIServiceManager<LoginResponse> {
     init () {}
     static let shared = RegisterVM()
     
@@ -17,7 +17,7 @@ class RegisterVM: APIServiceManager<BasicResponse> {
     }
 }
 
-class LoginVM: APIServiceManager<BasicResponse> {
+class LoginVM: APIServiceManager<LoginResponse> {
     init () {}
     static let shared = LoginVM()
     
@@ -27,7 +27,7 @@ class LoginVM: APIServiceManager<BasicResponse> {
     }
 }
 
-class UserVerifyVM: APIServiceManager<BasicResponse> {
+class UserVerifyVM: APIServiceManager<LoginResponse> {
     init () {}
     static let shared = UserVerifyVM()
     
