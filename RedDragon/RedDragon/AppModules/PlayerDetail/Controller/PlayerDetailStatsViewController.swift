@@ -64,12 +64,6 @@ class PlayerDetailStatsViewController: UIViewController {
     func nibInitialization() {
         leaguesCollectionView.register(CellIdentifier.playerLeagueCollectionViewCell)
         mainTableView.register(CellIdentifier.playerStatsTableViewCell)
-//        firstCollectionView.register(CellIdentifier.playerStatsCollectionViewCell)
-//        secondCollectionView.register(CellIdentifier.playerStatsCollectionViewCell)
-//        thirdCollectionView.register(CellIdentifier.playerStatsCollectionViewCell)
-//        forthCollectionView.register(CellIdentifier.playerStatsCollectionViewCell)
-//        fifthCollectionView.register(CellIdentifier.playerStatsCollectionViewCell)
-//        sixthCollectionView.register(CellIdentifier.playerStatsCollectionViewCell)
         
     }
     
