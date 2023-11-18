@@ -32,7 +32,37 @@ class UserVerifyVM: APIServiceManager<LoginResponse> {
     static let shared = UserVerifyVM()
     
     ///function for user verification after register
-    func loginAsyncCall(parameters: [String: Any]) {
+    func verificationAsyncCall(parameters: [String: Any]) {
         asyncCall(urlString: URLConstants.verifyOTP, method: .post, parameters: parameters)
+    }
+}
+
+class ResendOtpVM: APIServiceManager<LoginResponse> {
+    init () {}
+    static let shared = ResendOtpVM()
+    
+    ///function for resend OTP
+    func resendOtpAsyncCall() {
+        asyncCall(urlString: URLConstants.resendOTP, method: .get, parameters: nil)
+    }
+}
+
+class ForgotPasswordVM: APIServiceManager<LoginResponse> {
+    init () {}
+    static let shared = ForgotPasswordVM()
+    
+    ///function for forgot password
+    func forgotPasswordAsyncCall(parameters: [String: Any]) {
+        asyncCall(urlString: URLConstants.forgetPassword, method: .post, parameters: parameters)
+    }
+}
+
+class ResetPasswordVM: APIServiceManager<LoginResponse> {
+    init () {}
+    static let shared = ResetPasswordVM()
+    
+    ///function for reset password
+    func resetPasswordAsyncCall(parameters: [String: Any]) {
+        asyncCall(urlString: URLConstants.resetpassword, method: .post, parameters: parameters)
     }
 }

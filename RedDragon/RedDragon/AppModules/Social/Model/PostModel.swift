@@ -188,7 +188,7 @@ struct Social: Codable {
     }
 }
 
-struct BasicResponse: Codable {
+struct BasicResponsee: Codable {
     let message: String?
 }
 

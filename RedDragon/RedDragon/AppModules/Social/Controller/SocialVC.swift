@@ -53,17 +53,6 @@ class SocialVC: UIViewController {
     }
     
     func loadFunctionality() {
-        //Test User
-        var user = User()
-//        user.id = 4
-//        user.firstName = "Joe"
-//        user.lastName = "Titto"
-//        user.email = "joe@mailinator.com"
-//        user.image = "http://45.76.178.21:6040/profile-images/99087FBB-6FB9-4B2B-B7D2-3BF4DD51F73320231012100148.png"
-//        user.token = "70|6ts3zlgn0fjtLYbooHxQniqM6I33vSc5CGXrO5K4"
-        UserDefaults.standard.user = user
-        UserDefaults.standard.token = user.token
-        
         self.view.addSubview(Loader.activityIndicator)
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshHashTagView(notification:)), name: NSNotification.refreshHashTags, object: nil)
         
@@ -75,7 +64,8 @@ class SocialVC: UIViewController {
         
         nibInitialization()
         fetchSocialViewModel()
-        makeNetworkCall()
+        ///makeNetworkCall
+        SocialLeagueVM.shared.fetchLeagueListAsyncCall()
         let tagLayout: BaseLayout = TagsCVLayout()
         tagLayout.delegate = self
         tagLayout.contentPadding = ItemsPadding(horizontal: 5, vertical: 5)
@@ -168,14 +158,6 @@ class SocialVC: UIViewController {
 
 // MARK: - API Services
 extension SocialVC {
-    func makeNetworkCall() {
-        //        guard Reachability.isConnectedToNetwork() else {
-        //            customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.networkAlert.localized, image: ImageConstants.alertImage)
-        //            return
-        //        }
-        
-        SocialLeagueVM.shared.fetchLeagueListAsyncCall()
-    }
     
     func fetchSocialViewModel() {
         ///fetch league list

@@ -34,8 +34,10 @@
 		41EB79E72AF3C53200D068F7 /* LastMatchesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41EB79E62AF3C53200D068F7 /* LastMatchesView.xib */; };
 		41EB79E92AF4E20600D068F7 /* MediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB79E82AF4E20600D068F7 /* MediaView.swift */; };
 		41EB79EB2AF4E21500D068F7 /* MediaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41EB79EA2AF4E21500D068F7 /* MediaView.xib */; };
-		4703F8D62B0894BC00276F3E /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4703F8D52B0894BC00276F3E /* LoginModel.swift */; };
 		4703F8D82B089E4300276F3E /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4703F8D72B089E4300276F3E /* UserModel.swift */; };
+		4703F8DA2B08D6F000276F3E /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4703F8D92B08D6F000276F3E /* ForgotPasswordVC.swift */; };
+		4703F8DC2B08D70A00276F3E /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4703F8DB2B08D70A00276F3E /* ResetPasswordVC.swift */; };
+		4703F8E22B08E6BA00276F3E /* ResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4703F8E12B08E6BA00276F3E /* ResponseModel.swift */; };
 		4716B1192AEF8D6B003582A9 /* MatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4716B1172AEF8D6B003582A9 /* MatchTableViewCell.swift */; };
 		4716B11A2AEF8D6B003582A9 /* MatchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4716B1182AEF8D6B003582A9 /* MatchTableViewCell.xib */; };
 		472873552AEA7A780011F00F /* HeaderBottom_1CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472873532AEA7A780011F00F /* HeaderBottom_1CollectionViewCell.swift */; };
@@ -239,8 +241,10 @@
 		41EB79E62AF3C53200D068F7 /* LastMatchesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LastMatchesView.xib; sourceTree = "<group>"; };
 		41EB79E82AF4E20600D068F7 /* MediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaView.swift; sourceTree = "<group>"; };
 		41EB79EA2AF4E21500D068F7 /* MediaView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MediaView.xib; sourceTree = "<group>"; };
-		4703F8D52B0894BC00276F3E /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		4703F8D72B089E4300276F3E /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		4703F8D92B08D6F000276F3E /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
+		4703F8DB2B08D70A00276F3E /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
+		4703F8E12B08E6BA00276F3E /* ResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseModel.swift; sourceTree = "<group>"; };
 		4716B1172AEF8D6B003582A9 /* MatchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchTableViewCell.swift; sourceTree = "<group>"; };
 		4716B1182AEF8D6B003582A9 /* MatchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MatchTableViewCell.xib; sourceTree = "<group>"; };
 		472873532AEA7A780011F00F /* HeaderBottom_1CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderBottom_1CollectionViewCell.swift; sourceTree = "<group>"; };
@@ -564,6 +568,8 @@
 				47AE9C9C2B03AEB400C271FB /* LoginVC.swift */,
 				47AE9C9A2B03AE9E00C271FB /* RegisterVC.swift */,
 				47AE9C982B03AE8800C271FB /* VerificationVC.swift */,
+				4703F8D92B08D6F000276F3E /* ForgotPasswordVC.swift */,
+				4703F8DB2B08D70A00276F3E /* ResetPasswordVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -586,7 +592,7 @@
 		47AE9C962B03A9FB00C271FB /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4703F8D52B0894BC00276F3E /* LoginModel.swift */,
+				4703F8E12B08E6BA00276F3E /* ResponseModel.swift */,
 				4703F8D72B089E4300276F3E /* UserModel.swift */,
 			);
 			path = Model;
@@ -1307,6 +1313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				47A1AB2D2AECE5ED00F1BD13 /* UserDefaultsExtension.swift in Sources */,
+				4703F8E22B08E6BA00276F3E /* ResponseModel.swift in Sources */,
 				41EB79CE2AF37BA000D068F7 /* PlayerProfileTopView.swift in Sources */,
 				47E7C8432AEFBD6400D054A8 /* PostModel.swift in Sources */,
 				494B37E72AEA3BD700FB9BCD /* PMAlertAction.swift in Sources */,
@@ -1356,6 +1363,7 @@
 				494D7B752AE8F4CB00488E27 /* DatabaseVC.swift in Sources */,
 				473E1D122AEB910C00A806DF /* IconNameCollectionViewCell.swift in Sources */,
 				47AE9C9D2B03AEB400C271FB /* LoginVC.swift in Sources */,
+				4703F8DA2B08D6F000276F3E /* ForgotPasswordVC.swift in Sources */,
 				4784E3EF2AECDBFF00C96085 /* LeagueMatchModel.swift in Sources */,
 				E9DDB6292B049BA2004C8ACF /* SideMenuVc.swift in Sources */,
 				E9DDB6422B04E387004C8ACF /* BetMatchTableVC.swift in Sources */,
@@ -1392,6 +1400,7 @@
 				E9DDB63A2B04B72A004C8ACF /* MenuItemTableVC.swift in Sources */,
 				47B3E99A2AF25F70008BB827 /* SocialPollTableViewCell.swift in Sources */,
 				49EA0AF02B0258E90003D469 /* PlayerDetailModel.swift in Sources */,
+				4703F8DC2B08D70A00276F3E /* ResetPasswordVC.swift in Sources */,
 				47C3B7202B04D5DA00E12A4D /* CountryListTableViewCell.swift in Sources */,
 				49D0853B2AEFD47300A835B7 /* LeagueCollectionViewCell.swift in Sources */,
 				47E2FACF2AFE6BAE00DBEFE6 /* SocialSearchVC.swift in Sources */,
@@ -1416,7 +1425,6 @@
 				47B3E9972AF22BDC008BB827 /* SocialPostViewModel.swift in Sources */,
 				493D212A2AFE125600045672 /* PlayerDetailsMediaCollectionViewCell.swift in Sources */,
 				493D21352AFE127F00045672 /* MatchesHeaderView.swift in Sources */,
-				4703F8D62B0894BC00276F3E /* LoginModel.swift in Sources */,
 				41EB79E92AF4E20600D068F7 /* MediaView.swift in Sources */,
 				49B0BA432AE6A31600A9D235 /* CoreAnimation.swift in Sources */,
 				47AE9C9B2B03AE9E00C271FB /* RegisterVC.swift in Sources */,
