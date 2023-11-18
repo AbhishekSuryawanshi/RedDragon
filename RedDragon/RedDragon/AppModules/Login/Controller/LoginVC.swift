@@ -102,7 +102,7 @@ extension LoginVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                
+                print(response)
             })
             .store(in: &cancellable)
         

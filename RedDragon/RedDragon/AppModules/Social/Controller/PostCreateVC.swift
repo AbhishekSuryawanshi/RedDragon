@@ -91,9 +91,8 @@ class PostCreateVC: UIViewController {
     func setValue() {
         
         if let user = UserDefaults.standard.user {
-            //ToDo
-            userImageView.setImage(imageStr: user.image, placeholder: .placeholderUser)
-            userNameLabel.text = "\(user.firstName) \(user.lastName)"
+            userImageView.setImage(imageStr: user.profileImg, placeholder: .placeholderUser)
+            userNameLabel.text = user.fullName
         }
         dateLabel.text = Date().formatDate(outputFormat: dateFormat.hhmmaddMMMyyyy)
         setfeedImageCVLayout(collectionview: self.imageCollectionView, imageCount: imageArray.count)
