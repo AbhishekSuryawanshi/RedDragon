@@ -25,6 +25,11 @@ class HTTPSClient: HTTPSClientProtocol {
     func executeAsync<T: Decodable>(with request: URLRequest) async throws -> T {
         // Perform the network request and retrieve data and response.
         let (data, urlResponse) = try await session.data(for: request)
+        
+        let _response = try? JSONSerialization.jsonObject(with: data, options: [])
+        let responseDictionary = _response as? [String: Any]
+        print("[Response] :==> \(request.url)\n\(responseDictionary ?? [:])")
+        
         // Check if the HTTP response status code is within the success range (200-399).
         guard let res = urlResponse as? HTTPURLResponse, 200..<400 ~= res.statusCode else {
             throw CustomErrors.unknown

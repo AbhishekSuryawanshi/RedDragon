@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class VerificationVC: UIViewController {
 
@@ -14,7 +15,10 @@ class VerificationVC: UIViewController {
     @IBOutlet weak var otpTextFieldView: OTPFieldView!
     @IBOutlet weak var bottomTextView: UITextView!
     
+    var cancellable = Set<AnyCancellable>()
     var otpEntered = false
+    var email = ""
+    var phoneNumber = ""
     var otpValue = ""
     
     override func viewDidLoad() {
@@ -29,6 +33,9 @@ class VerificationVC: UIViewController {
     }
     
     func initialSettings() {
+        self.view.addSubview(Loader.activityIndicator)
+        fetchLoginViewModel()
+        
         topTextLabel.text = "A verification code has been sent \nto your mobile number"
         let bottomFormatedText = NSMutableAttributedString()
         bottomFormatedText.regular("Didn’t receive the code? ", size: 15).bold("Resend", size: 15)
@@ -39,12 +46,43 @@ class VerificationVC: UIViewController {
         otpTextFieldView.delegate = self
         otpTextFieldView.initializeUI()
     }
-
+    
+    func showLoader(_ value: Bool) {
+        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
+    }
+    
     // MARK: - Button Actions
     @IBAction func submitButtonTapped(_ sender: UIButton) {
         if otpEntered {
-            
+            let param: [String: Any] = [
+                "phone": phoneNumber,
+                "email": email,
+                "code": otpValue
+            ]
+            LoginVM.shared.loginAsyncCall(parameters: param)
         }
+    }
+}
+
+// MARK: - API Services
+extension VerificationVC {
+   
+    func fetchLoginViewModel() {
+        
+        UserVerifyVM.shared.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        UserVerifyVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        UserVerifyVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                
+            })
+            .store(in: &cancellable)
+        
     }
 }
 

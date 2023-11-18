@@ -31,7 +31,7 @@ class UserVerifyVM: APIServiceManager<BasicResponse> {
     init () {}
     static let shared = UserVerifyVM()
     
-    ///function for user login
+    ///function for user verification after register
     func loginAsyncCall(parameters: [String: Any]) {
         asyncCall(urlString: URLConstants.verifyOTP, method: .post, parameters: parameters)
     }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class LoginVC: UIViewController {
     
@@ -16,6 +17,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var bottomTextView: UITextView!
     
+    var cancellable = Set<AnyCancellable>()
     var countryCode = "0"
     
     override func viewDidLoad() {
@@ -30,6 +32,9 @@ class LoginVC: UIViewController {
     }
     
     func initialSettings() {
+        self.view.addSubview(Loader.activityIndicator)
+        fetchLoginViewModel()
+        
         ///set deafult value for country code
         countryCode = "+971"
         countryCodeButton.setTitle(countryCode, for: .normal)
@@ -40,10 +45,14 @@ class LoginVC: UIViewController {
         phoneTextField.placeholder = "Phone Number".localized
         passwordTextField.placeholder = "Password".localized
         let bottomFormatedText = NSMutableAttributedString()
-        bottomFormatedText.regular("Don't Have an Account? Tap here to ", size: 15).bold("Register", size: 15)
+        bottomFormatedText.regular("Don't Have an Account? Tap here to", size: 15).bold(" Register", size: 15)
         bottomFormatedText.addUnderLine(textToFind: "Register")
-        bottomFormatedText.addLink(textToFind: "Register", linkURL: "register")
+        bottomFormatedText.addLink(textToFind: " Register", linkURL: "register")
         bottomTextView.attributedText = bottomFormatedText
+    }
+    
+    func showLoader(_ value: Bool) {
+        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
     }
     
     func validate() -> Bool {
@@ -69,8 +78,34 @@ class LoginVC: UIViewController {
     
     @IBAction func createAccountButtonTapped(_ sender: UIButton) {
         if validate() {
-            
+            let param: [String: Any] = [
+                "phone_number": countryCode + phoneTextField.text!,
+                "password": passwordTextField.text!
+            ]
+            LoginVM.shared.loginAsyncCall(parameters: param)
         }
+    }
+}
+
+// MARK: - API Services
+extension LoginVC {
+   
+    func fetchLoginViewModel() {
+        
+        LoginVM.shared.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        LoginVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        LoginVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                
+            })
+            .store(in: &cancellable)
+        
     }
 }
 
