@@ -17,7 +17,11 @@ class PlayerDetailStatsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        if #available(iOS 15.0, *) {
+            mainTableView.sectionHeaderTopPadding = 0
+        } else {
+            // Fallback on earlier versions
+        }
 
     }
     
@@ -52,25 +56,27 @@ extension PlayerDetailStatsViewController: UITableViewDelegate, UITableViewDataS
         switch(indexPath.section){
         case 0:
             cell.contentView.backgroundColor = UIColor.init(hex: "FFDAD5")
+            cell.colorLbl = "BB1910"
            
         case 1:
             cell.contentView.backgroundColor = UIColor.init(hex: "FFE08A")
+            cell.colorLbl = "745B00"
             
         case 2:
             cell.contentView.backgroundColor = UIColor.init(hex: "C6E7FF")
-            
+            cell.colorLbl = "00658C"
         case 3:
             cell.contentView.backgroundColor = UIColor.init(hex: "FFDAD5")
-            
+            cell.colorLbl = "BB1910"
         case 4:
             cell.contentView.backgroundColor = UIColor.init(hex: "FFE08A")
-            
+            cell.colorLbl = "745B00"
         case 5:
             cell.contentView.backgroundColor = UIColor.init(hex: "C6E7FF")
-            
+            cell.colorLbl = "00658C"
         default:
             cell.contentView.backgroundColor = UIColor.init(hex: "FFDAD5")
-           
+            cell.colorLbl = "BB1910"
         }
         cell.isFour = indexPath.section != 0
         cell.sectionCollectionView.reloadData()
@@ -100,7 +106,7 @@ extension PlayerDetailStatsViewController: UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = PlayerStatsTableViewHeader()
-        header.headerLbl.text = playerDetailStats?.data?[section].section
+        header.headerLbl.text = " \(playerDetailStats?.data?[section].section ?? "") "
          switch(section){
          case 0:
              header.backgroundColor = UIColor.init(hex: "FFDAD5")

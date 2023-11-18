@@ -13,6 +13,7 @@ class PlayerStatsTableViewCell: UITableViewCell {
     
     var playerDetailStatsDataArr: PlayerDetailStatisticData?
     var isFour = false
+    var colorLbl = ""
     
     
     override func awakeFromNib() {
@@ -49,6 +50,9 @@ extension PlayerStatsTableViewCell: UICollectionViewDelegate, UICollectionViewDa
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.playerStatsCollectionViewCell, for: indexPath) as! PlayerStatsCollectionViewCell
         cell.valueLbl.text = playerDetailStatsDataArr?.data?[indexPath.row].value
         cell.keyLbl.text = playerDetailStatsDataArr?.data?[indexPath.row].key
+        cell.valueLbl.textColor = UIColor.init(hex: colorLbl)
+        cell.keyLbl.textColor = UIColor.init(hex: colorLbl)
+        
         return cell
     }
     

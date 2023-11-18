@@ -263,7 +263,7 @@
                             </collectionView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlb-Ix-MUg">
                                 <rect key="frame" x="0.0" y="50" width="393" height="802"/>
-                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="uBf-74-rKX" id="Fp9-zb-JDj"/>
                                     <outlet property="delegate" destination="uBf-74-rKX" id="wYC-nt-zBg"/>
@@ -300,16 +300,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a4R-C2-p3n" customClass="PlayerDetailsTopView" customModule="RedDragon" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="83" width="393" height="200"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="431"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="lrT-yh-004"/>
+                                    <constraint firstAttribute="height" constant="431" id="lrT-yh-004"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="k0t-EP-Ugi">
-                                <rect key="frame" x="0.0" y="283" width="393" height="535"/>
+                                <rect key="frame" x="0.0" y="431" width="393" height="387"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vOy-gO-fue">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vOy-gO-fue">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -325,12 +325,12 @@
                         <viewLayoutGuide key="safeArea" id="OdQ-6a-XQP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="a4R-C2-p3n" firstAttribute="top" secondItem="OdQ-6a-XQP" secondAttribute="top" constant="24" id="3Np-ht-VX3"/>
                             <constraint firstItem="a4R-C2-p3n" firstAttribute="trailing" secondItem="OdQ-6a-XQP" secondAttribute="trailing" id="4Dl-Gv-k99"/>
                             <constraint firstItem="k0t-EP-Ugi" firstAttribute="bottom" secondItem="OdQ-6a-XQP" secondAttribute="bottom" id="ARu-vq-Afo"/>
                             <constraint firstItem="k0t-EP-Ugi" firstAttribute="leading" secondItem="OdQ-6a-XQP" secondAttribute="leading" id="IPd-d0-A8d"/>
                             <constraint firstItem="a4R-C2-p3n" firstAttribute="leading" secondItem="OdQ-6a-XQP" secondAttribute="leading" id="P6G-cK-xfp"/>
                             <constraint firstItem="k0t-EP-Ugi" firstAttribute="top" secondItem="a4R-C2-p3n" secondAttribute="bottom" id="R2v-YB-Nmq"/>
+                            <constraint firstItem="a4R-C2-p3n" firstAttribute="top" secondItem="yhW-LX-AJy" secondAttribute="top" id="lHo-Ii-3fW"/>
                             <constraint firstItem="k0t-EP-Ugi" firstAttribute="trailing" secondItem="OdQ-6a-XQP" secondAttribute="trailing" id="p1I-F3-l2n"/>
                         </constraints>
                     </view>
@@ -347,9 +347,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

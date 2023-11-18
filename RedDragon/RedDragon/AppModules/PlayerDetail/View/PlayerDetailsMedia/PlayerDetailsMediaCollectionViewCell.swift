@@ -9,6 +9,7 @@ import UIKit
 
 class PlayerDetailsMediaCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var mediaDetailTitle: UILabel!
     @IBOutlet weak var playBtn: UIButton!
     @IBOutlet weak var mediaDetailTxtView: UITextView!
     @IBOutlet weak var dateLbl: UILabel!

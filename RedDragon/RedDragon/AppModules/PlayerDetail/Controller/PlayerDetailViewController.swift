@@ -152,9 +152,8 @@ extension PlayerDetailViewController {
         ViewEmbedder.embed(withIdentifier: "PlayerDetailStatsViewController", storyboard: UIStoryboard(name: StoryboardName.playerDetail, bundle: nil), parent: self, container: viewContainer) { [self] vc in
             let vc = vc as! PlayerDetailStatsViewController
             vc.playerDetailViewModel = playerDetails
-            
             vc.configureView()
-            //viewContainerHeight.constant = vc.view.frame.size.height
+            
         }
     }
     func embedMediaVC(playerDetails : PlayerDetailViewModel?) {
@@ -162,7 +161,7 @@ extension PlayerDetailViewController {
             let vc = vc as! PlayerDetailMediaViewController
             vc.playerDetailViewModel = playerDetails
             vc.configureView()
-            //viewContainerHeight.constant = vc.view.frame.size.height
+            
         }
     }
     
