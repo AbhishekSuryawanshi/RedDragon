@@ -37,6 +37,7 @@ struct CellIdentifier {
     
     //Player Details
     static let playerDetailTabsCell               = ""
+
     
     // Bets
     static let homeTitleCollectionVc             = "HomeTitleCollectionVc"
@@ -44,6 +45,12 @@ struct CellIdentifier {
     static let betMatchTableVC                   = "BetMatchTableVC"
     static let betWinTableVC                     = "BetWinTableVC"
     static let betLoseTableVC                    = "BetLoseTableVC"
+
+    static let matchesTableViewCell               = "MatchesTableViewCell"
+    static let playerStatsCollectionViewCell      = "PlayerStatsCollectionViewCell"
+    static let playerLeagueCollectionViewCell     = "PlayerLeaguesCollectionViewCell"
+    static let playerStatsTableViewCell           = "PlayerStatsTableViewCell"
+
 }
 
 

@@ -9,6 +9,8 @@ import UIKit
 
 class MediaView: UIView {
 
+    @IBOutlet weak var playImgView: UIImageView!
+    @IBOutlet weak var mediaDetailTitleLbl: UILabel!
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var mediaDetailTxtView: UITextView!
     @IBOutlet weak var dateLbl: UILabel!
