@@ -16,6 +16,7 @@ struct ErrorMessage {
     static let invalidEmail                = "Invalid email"
     static let invalidPhone                = "Invalid phone number"
     static let incorrectPassword           = "Incorrect password"
+    static let incorrectOTP                = "Incorrect verification code"
     static let passwordCondition           = "Password must have more than 8 characters and should contain at least 1 Uppercase letter, 1 Lowercase letter, 1 number and 1 Special character"
     static var emailEmptyAlert             = "Please enter your email"
     static var nameEmptyAlert              = "Please enter your full name"

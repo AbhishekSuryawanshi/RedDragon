@@ -112,6 +112,9 @@ extension ResetPasswordVC {
         
         if let dataResponse = response?.response {
             self.view.makeToast(dataResponse.messages?.first)
+            Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (timer) in
+                self.presentingViewController?.presentedViewController?.presentingViewController?.dismiss(animated: true, completion: nil)//.presentedViewController?
+            }
         } else {
             if let errorResponse = response?.error {
                 self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)

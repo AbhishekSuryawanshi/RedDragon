@@ -8,11 +8,11 @@
 import Foundation
 
 struct LoginResponse: Codable {
-    let response: UserResponse?
-    let error: UserResponse?
+    let response: UserData?
+    let error: UserData?
 }
 
-struct UserResponse: Codable {
+struct UserData: Codable {
     let code: Int?
     let messages: [String]?
     let data: User?

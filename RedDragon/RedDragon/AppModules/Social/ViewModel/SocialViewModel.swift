@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SocialLeagueVM: APIServiceManager<[SocialLeague]> {
+class SocialLeagueVM: APIServiceManager<SocialLeagueResponse> {
     init () {}
     static let shared = SocialLeagueVM()
     
@@ -21,7 +21,7 @@ class SocialLeagueVM: APIServiceManager<[SocialLeague]> {
     }
 }
 
-class SocialTeamVM: APIServiceManager<[SocialTeam]> {
+class SocialTeamVM: APIServiceManager<SocialTeamResponse> {
     init () {}
     static let shared = SocialTeamVM()
     var teamArray: [SocialTeam] = []

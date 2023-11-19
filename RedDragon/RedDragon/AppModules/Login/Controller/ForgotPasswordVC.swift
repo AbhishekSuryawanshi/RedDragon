@@ -49,13 +49,12 @@ class ForgotPasswordVC: UIViewController {
     // MARK: - Button Actions
     
     @IBAction func continueButtonTapped(_ sender: UIButton) {
-        self.presentOverViewController(ResetPasswordVC.self, storyboardName: StoryboardName.login)
-//        if validate() {
-//            let param: [String: Any] = [
-//                "email": emailTextfield.text!
-//            ]
-//            ForgotPasswordVM.shared.forgotPasswordAsyncCall(parameters: param)
-//        }
+        if validate() {
+            let param: [String: Any] = [
+                "email": emailTextfield.text!
+            ]
+            ForgotPasswordVM.shared.forgotPasswordAsyncCall(parameters: param)
+        }
     }
 }
 
@@ -82,9 +81,12 @@ extension ForgotPasswordVC {
     func execute_onResponseData(_ response: LoginResponse?) {
         
         if let dataResponse = response?.response {
+            ///Show "otp sent" message from server and collect otp from VerificationVC
             self.view.makeToast(dataResponse.messages?.first)
-            Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (timer) in
-                Loader.activityIndicator.stopAnimating()
+            Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (timer) in
+                self.presentOverViewController(VerificationVC.self, storyboardName: StoryboardName.login) { vc in
+                    vc.pushFrom = .forgotPass
+                }
             }
         } else {
             if let errorResponse = response?.error {
