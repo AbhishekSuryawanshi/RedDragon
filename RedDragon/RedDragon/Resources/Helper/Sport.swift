@@ -54,7 +54,7 @@ public enum Sports: String, CaseIterable {
 
 public enum BetsTitleCollectionView : String{
     
-    case All = "All"
+    case All = "UpComing"
     case Live = "Live"
     case Win = "Win"
     case Lose = "Lose"
@@ -62,7 +62,7 @@ public enum BetsTitleCollectionView : String{
     var title : String{
         switch self {
         case .All:
-            return "All".localized
+            return "UpComing".localized
         case .Live:
             return "Live".localized
         case .Win:
