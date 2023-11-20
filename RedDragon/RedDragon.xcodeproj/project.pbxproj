@@ -11,6 +11,8 @@
 		085385C02B079F7F00C4E953 /* SubstituteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085385BE2B079F7F00C4E953 /* SubstituteTableViewCell.swift */; };
 		085385C12B079F7F00C4E953 /* SubstituteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085385BF2B079F7F00C4E953 /* SubstituteTableViewCell.xib */; };
 		41846BC02B08A9000020F503 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41846BBF2B08A9000020F503 /* UIColor+Extension.swift */; };
+		41846BC32B0B395B0020F503 /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 41846BC22B0B395B0020F503 /* YouTubePlayerKit */; };
+		41846BCC2B0B80F20020F503 /* PlayerDetailYoutubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41846BCB2B0B80F20020F503 /* PlayerDetailYoutubeViewController.swift */; };
 		41BB287C2B0247A60080E63F /* PlayerDetailProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BB287B2B0247A60080E63F /* PlayerDetailProfileViewController.swift */; };
 		41BB287F2B0609AA0080E63F /* PlayerLeaguesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BB287D2B0609AA0080E63F /* PlayerLeaguesCollectionViewCell.swift */; };
 		41BB28802B0609AA0080E63F /* PlayerLeaguesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41BB287E2B0609AA0080E63F /* PlayerLeaguesCollectionViewCell.xib */; };
@@ -237,6 +239,7 @@
 		085385BE2B079F7F00C4E953 /* SubstituteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstituteTableViewCell.swift; sourceTree = "<group>"; };
 		085385BF2B079F7F00C4E953 /* SubstituteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubstituteTableViewCell.xib; sourceTree = "<group>"; };
 		41846BBF2B08A9000020F503 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		41846BCB2B0B80F20020F503 /* PlayerDetailYoutubeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailYoutubeViewController.swift; sourceTree = "<group>"; };
 		41BB287B2B0247A60080E63F /* PlayerDetailProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailProfileViewController.swift; sourceTree = "<group>"; };
 		41BB287D2B0609AA0080E63F /* PlayerLeaguesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerLeaguesCollectionViewCell.swift; sourceTree = "<group>"; };
 		41BB287E2B0609AA0080E63F /* PlayerLeaguesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerLeaguesCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -455,6 +458,7 @@
 				4728736B2AEA7E360011F00F /* SDWebImageMapKit in Frameworks */,
 				47C8C9572AF0D3A900448D96 /* TOCropViewController in Frameworks */,
 				49B2114F2B0B488B00E1C58E /* RealmSwift in Frameworks */,
+				41846BC32B0B395B0020F503 /* YouTubePlayerKit in Frameworks */,
 				472873702AEA7E3F0011F00F /* NVActivityIndicatorViewExtended in Frameworks */,
 				472873692AEA7E360011F00F /* SDWebImage in Frameworks */,
 				47C8C9602AF1191700448D96 /* Kingfisher in Frameworks */,
@@ -509,6 +513,7 @@
 				49BC7EB62AFE0C900006EEB5 /* PlayerDetailMatchesViewController.swift */,
 				493D21162AFE102E00045672 /* PlayerDetailMediaViewController.swift */,
 				493D21172AFE102E00045672 /* PlayerDetailStatsViewController.swift */,
+				41846BCB2B0B80F20020F503 /* PlayerDetailYoutubeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1338,6 +1343,7 @@
 				49B2114C2B0B488B00E1C58E /* Realm */,
 				49B2114E2B0B488B00E1C58E /* RealmSwift */,
 				49310AF62B0BA02F00AFCBCA /* Shuffle */,
+				41846BC22B0B395B0020F503 /* YouTubePlayerKit */,
 			);
 			productName = RedDragon;
 			productReference = 49B0B9E42AE68F0700A9D235 /* RedDragon.app */;
@@ -1381,6 +1387,7 @@
 				E9DDB61C2B049AF1004C8ACF /* XCRemoteSwiftPackageReference "SideMenu" */,
 				49B2114B2B0B488B00E1C58E /* XCRemoteSwiftPackageReference "realm-swift" */,
 				49310AF52B0BA02F00AFCBCA /* XCRemoteSwiftPackageReference "Shuffle" */,
+				41846BC12B0B395B0020F503 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
 			);
 			productRefGroup = 49B0B9E52AE68F0700A9D235 /* Products */;
 			projectDirPath = "";
@@ -1475,6 +1482,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				47A1AB2D2AECE5ED00F1BD13 /* UserDefaultsExtension.swift in Sources */,
+				41846BCC2B0B80F20020F503 /* PlayerDetailYoutubeViewController.swift in Sources */,
 				4703F8E22B08E6BA00276F3E /* ResponseModel.swift in Sources */,
 				41EB79CE2AF37BA000D068F7 /* PlayerProfileTopView.swift in Sources */,
 				47E7C8432AEFBD6400D054A8 /* PostModel.swift in Sources */,
@@ -1867,6 +1875,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		41846BC12B0B395B0020F503 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SvenTiigi/YouTubePlayerKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.4;
+			};
+		};
 		41EB79D92AF38D3F00D068F7 /* XCRemoteSwiftPackageReference "DDSpiderChart" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dadalar/DDSpiderChart";
@@ -1958,6 +1974,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		41846BC22B0B395B0020F503 /* YouTubePlayerKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 41846BC12B0B395B0020F503 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */;
+			productName = YouTubePlayerKit;
+		};
 		41EB79DA2AF38D3F00D068F7 /* DDSpiderChart */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 41EB79D92AF38D3F00D068F7 /* XCRemoteSwiftPackageReference "DDSpiderChart" */;
