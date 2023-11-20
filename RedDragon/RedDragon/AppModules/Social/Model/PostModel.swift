@@ -7,6 +7,17 @@
 
 import UIKit
 
+struct SocialPostResponse: Codable {
+    let response: SocialPostData?
+    let error: SocialPostData?
+}
+
+struct SocialPostData: Codable {
+    let code: Int?
+    let messages: [String]?
+    let data: [SocialPost]?
+}
+
 struct SocialPost: Codable {
     
     var id: Int = 0 //It can be poll id or post id check "type"

@@ -16,7 +16,6 @@ class CountryCodeListVC: UIViewController {
     @IBOutlet weak var contentTableView: UITableView!
     @IBOutlet weak var searchTextField: UITextField!
     
-    
     weak var delegate:CountryDelegate?
     var countryListArray: [CountryModel] = []
     var countryArray: [CountryModel] = []

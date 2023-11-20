@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SocialPostListVM: APIServiceManager<[SocialPost]> {
+class SocialPostListVM: APIServiceManager<SocialPostResponse> {
     init () {}
     static let shared = SocialPostListVM()
     

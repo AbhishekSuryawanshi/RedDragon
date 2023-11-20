@@ -104,6 +104,40 @@ class SocialVC: UIViewController {
         }
     }
     
+    func searchData(text: String) {
+        if text.count > 0 {
+            let dataDict:[String: Any] = ["status": true,
+                                          "text": searchTextField.text!]
+            NotificationCenter.default.post(name: NSNotification.socialSearchEnable, object: nil, userInfo: dataDict)
+            
+            leagueArray = SocialLeagueVM.shared.leagueArray
+            leagueArray = leagueArray.filter({(item: SocialLeague) -> Bool in
+                if item.enName.lowercased().range(of: text.lowercased()) != nil {
+                    return true
+                }
+                if item.cnName.lowercased().range(of: text.lowercased()) != nil {
+                    return true
+                }
+                return false
+            })
+            leagueView.isHidden = leagueArray.count == 0 ? true : false
+            leagueCollectionView.reloadData()
+            
+            teamArray = SocialTeamVM.shared.teamArray
+            teamArray = teamArray.filter({(item: SocialTeam) -> Bool in
+                if item.enName.lowercased().range(of: text.lowercased()) != nil {
+                    return true
+                }
+                if item.cnName.lowercased().range(of: text.lowercased()) != nil {
+                    return true
+                }
+                return false
+            })
+            teamView.isHidden = teamArray.count == 0 ? true : false
+            teamsCollectionView.reloadData()
+        }
+    }
+    
     // MARK: - Button Actions
     @IBAction func searchButtonTapped(_ sender: UIButton) {
         tagView.isHidden = true
@@ -140,19 +174,19 @@ class SocialVC: UIViewController {
     }
     
     @IBAction func createPostButtonTapped(_ sender: UIButton) {
-        self.tabBarController?.tabBar.isHidden = true
-        presentOverViewController(LoginVC.self, storyboardName: StoryboardName.login)
-       
-        /*
-         guard let token = UserDefaults.standard.token else {
-             self.customAlertView_2Actions(title: "Login / Sign Up".localized, description: ErrorMessage.loginRequires.localized) {
-                 //ToDo
-                 // self.logoutAndRootToLoginVC()
-             }
-             return
-         }
-         navigateToViewController(PostCreateVC.self, storyboardName: StoryboardName.social, animationType: .autoReverse(presenting: .zoom))
-         */
+        guard let token = UserDefaults.standard.token, token != "" else {
+            self.customAlertView_2Actions(title: "Login / Sign Up".localized, description: ErrorMessage.loginRequires.localized) {
+                /// Show login page to login/register new user
+                /// hide tabbar before presenting a viewcontroller
+                /// show tabbar while dismissing a presented viewcontroller in delegate
+                self.tabBarController?.tabBar.isHidden = true
+                self.presentOverViewController(LoginVC.self, storyboardName: StoryboardName.login) { vc in
+                    vc.delegate = self
+                }
+            }
+            return
+        }
+        navigateToViewController(PostCreateVC.self, storyboardName: StoryboardName.social, animationType: .autoReverse(presenting: .zoom))
     }
 }
 
@@ -167,11 +201,8 @@ extension SocialVC {
         SocialLeagueVM.shared.$responseData
             .receive(on: DispatchQueue.main)
             .dropFirst()
-            .sink(receiveValue: { [weak self] leagueData in
-                SocialLeagueVM.shared.leagueArray = leagueData ?? []
-                self?.leagueArray = leagueData ?? []
-                self?.leagueCollectionView.reloadData()
-                SocialTeamVM.shared.fetchTeamListAsyncCall()
+            .sink(receiveValue: { [weak self] response in
+                self?.execute_onLeagueResponseData(response)
             })
             .store(in: &cancellable)
         
@@ -182,45 +213,34 @@ extension SocialVC {
         SocialTeamVM.shared.$responseData
             .receive(on: DispatchQueue.main)
             .dropFirst()
-            .sink(receiveValue: { [weak self] teamData in
-                SocialTeamVM.shared.teamArray = teamData ?? []
-                self?.teamArray = teamData ?? []
-                self?.teamsCollectionView.reloadData()
+            .sink(receiveValue: { [weak self] response in
+                self?.execute_onTeamResponseData(response)
             })
             .store(in: &cancellable)
     }
     
-    func searchData(text: String) {
-        if text.count > 0 {
-            let dataDict:[String: Any] = ["status": true,
-                                          "text": searchTextField.text!]
-            NotificationCenter.default.post(name: NSNotification.socialSearchEnable, object: nil, userInfo: dataDict)
-            
-            leagueArray = SocialLeagueVM.shared.leagueArray
-            leagueArray = leagueArray.filter({(item: SocialLeague) -> Bool in
-                if item.enName.lowercased().range(of: text.lowercased()) != nil {
-                    return true
-                }
-                if item.cnName.lowercased().range(of: text.lowercased()) != nil {
-                    return true
-                }
-                return false
-            })
-            leagueView.isHidden = leagueArray.count == 0 ? true : false
-            leagueCollectionView.reloadData()
-            
-            teamArray = SocialTeamVM.shared.teamArray
-            teamArray = teamArray.filter({(item: SocialTeam) -> Bool in
-                if item.enName.lowercased().range(of: text.lowercased()) != nil {
-                    return true
-                }
-                if item.cnName.lowercased().range(of: text.lowercased()) != nil {
-                    return true
-                }
-                return false
-            })
-            teamView.isHidden = teamArray.count == 0 ? true : false
-            teamsCollectionView.reloadData()
+    func execute_onLeagueResponseData(_ response: SocialLeagueResponse?) {
+        if let dataResponse = response?.response {
+            SocialLeagueVM.shared.leagueArray = dataResponse.data ?? []
+            self.leagueArray = dataResponse.data ?? []
+            self.leagueCollectionView.reloadData()
+            SocialTeamVM.shared.fetchTeamListAsyncCall()
+        } else {
+            if let errorResponse = response?.error {
+              self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+            }
+        }
+    }
+    
+    func execute_onTeamResponseData(_ response: SocialTeamResponse?) {
+        if let dataResponse = response?.response {
+            SocialTeamVM.shared.teamArray = dataResponse.data ?? []
+            self.teamArray = dataResponse.data ?? []
+            self.teamsCollectionView.reloadData()
+        } else {
+            if let errorResponse = response?.error {
+                self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+            }
         }
     }
 }
@@ -233,8 +253,18 @@ extension SocialVC: UICollectionViewDataSource {
         } else if collectionView == headerCollectionView {
             return socialHeaderSegment.allCases.count
         } else if collectionView == leagueCollectionView {
+            if leagueArray.count == 0 {
+                collectionView.setEmptyMessage(ErrorMessage.leaguesEmptyAlert)
+            } else {
+                collectionView.restore()
+            }
             return leagueArray.count
         } else if collectionView == teamsCollectionView {
+            if teamArray.count == 0 {
+                collectionView.setEmptyMessage(ErrorMessage.teamEmptyAlert)
+            } else {
+                collectionView.restore()
+            }
             return teamArray.count
         } else {
             return socialHeaderSegment.allCases.count
@@ -348,8 +378,8 @@ extension SocialVC: UITextFieldDelegate {
     }
 }
 
-// MARK: - Custom Delegate
-
+// MARK: - Custom Delegates
+/// PostListVCDelegate to set the height of view
 extension SocialVC: PostListVCDelegate {
     func postList(height: CGFloat, count: Int) {
         containerHeightConstraint.constant = height
@@ -358,10 +388,22 @@ extension SocialVC: PostListVCDelegate {
         }
     }
 }
-
+/// LayoutDelegate to set the width of hashtags in its collectionview
 extension SocialVC: LayoutDelegate {
     func cellSize(indexPath: IndexPath) -> CGSize {
         let width = tagsArray[indexPath.row].size(OfFont: fontRegular(13)).width
         return CGSize(width: width + 10, height: 26)
+    }
+}
+/// LoginVCDelegate to show hided tabbar and refresh postlist vc
+extension SocialVC: LoginVCDelegate {
+    func viewControllerDismissed() {
+        self.tabBarController?.tabBar.isHidden = false
+        
+        ViewEmbedder.embed(withIdentifier: "PostListVC", storyboard: UIStoryboard(name: StoryboardName.social, bundle: nil)
+                           , parent: self, container: postContainerView) { vc in
+            let vc = vc as! PostListVC
+            vc.delegate = self
+        }
     }
 }

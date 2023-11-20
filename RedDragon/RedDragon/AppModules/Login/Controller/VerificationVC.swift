@@ -66,21 +66,29 @@ class VerificationVC: UIViewController {
     
     // MARK: - Button Actions
     @IBAction func submitButtonTapped(_ sender: UIButton) {
-      
+        
         if otpEntered {
-            let param: [String: Any] = [
-                "phone": phoneNumber,
-                "email": email,
-                "code": otpValue
-            ]
-            UserVerifyVM.shared.verificationAsyncCall(parameters: param)
+            
+            if pushFrom == .forgotPass {
+                /// Api call handled ResetPasswordVC
+                self.presentOverViewController(ResetPasswordVC.self, storyboardName: StoryboardName.login) { vc in
+                    vc.verificationCode = self.otpValue
+                }
+            } else {
+                
+                let param: [String: Any] = [
+                    "phone": phoneNumber,
+                    "email": email,
+                    "code": otpValue
+                ]
+                UserVerifyVM.shared.verificationAsyncCall(parameters: param)
+            }
         }
     }
 }
 
 // MARK: - API Services
 extension VerificationVC {
-    
     func fetchLoginViewModel() {
         //response of otp verification
         UserVerifyVM.shared.showError = { [weak self] error in
@@ -93,7 +101,7 @@ extension VerificationVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.execute_onResponseData(response)
+                self?.execute_onVerifyResponseData(response)
             })
             .store(in: &cancellable)
         
@@ -108,27 +116,42 @@ extension VerificationVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                if let errorResponse = response?.error {
-                    self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
-                }
+                self?.execute_onResendResponseData(response)
             })
             .store(in: &cancellable)
     }
     
-    func execute_onResponseData(_ response: LoginResponse?) {
+    func execute_onVerifyResponseData(_ response: LoginResponse?) {
         
         if let dataResponse = response?.response {
             if let user = dataResponse.data {
-                ///User verified
-                UserDefaults.standard.user = user
-                UserDefaults.standard.token = user.token
-                
-                switch self.pushFrom {
-                case .register, .forgotPass:
-                    self.presentingViewController?.presentedViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-                default:
-                    self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+                if user.otpVerified == 1 {
+                    ///User verified
+                    UserDefaults.standard.user = user
+                    UserDefaults.standard.token = user.token
+                    
+                    switch self.pushFrom {
+                    case .register:
+                        self.presentingViewController?.presentedViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+                    default: //.login 
+                        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+                    }
+                } else {
+                    self.view.makeToast(ErrorMessage.incorrectOTP)
                 }
+            }
+        } else {
+            if let errorResponse = response?.error {
+                self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+            }
+        }
+    }
+    
+    func execute_onResendResponseData(_ response: LoginResponse?) {
+        
+        if let dataResponse = response?.response {
+            if let user = dataResponse.data {
+                self.view.makeToast(dataResponse.messages?.first)
             }
         } else {
             if let errorResponse = response?.error {

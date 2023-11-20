@@ -8,6 +8,10 @@
 import UIKit
 import Combine
 
+protocol LoginVCDelegate:AnyObject {
+    func viewControllerDismissed()
+}
+
 class LoginVC: UIViewController {
     
     @IBOutlet weak var bgView: UIView!
@@ -17,6 +21,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var bottomTextView: UITextView!
     
+    weak var delegate:LoginVCDelegate?
     var cancellable = Set<AnyCancellable>()
     var countryCode = "0"
     
@@ -30,11 +35,15 @@ class LoginVC: UIViewController {
         bgView.roundCornersWithBorderLayer(cornerRadii: 30, corners: [.topLeft, .topRight], bound: bgView.bounds)
         bgView.applyShadow(radius: 10, opacity: 1)
     }
+   
+    override func viewWillDisappear(_ animated: Bool) {
+        delegate?.viewControllerDismissed()
+    }
     
     func initialSettings() {
         self.view.addSubview(Loader.activityIndicator)
+        Loader.activityIndicator.stopAnimating()
         fetchLoginViewModel()
-        
         ///set deafult value for country code
         countryCode = "+971"
         countryCodeButton.setTitle(countryCode, for: .normal)

@@ -7,6 +7,17 @@
 
 import Foundation
 
+struct SocialLeagueResponse: Codable {
+    let response: SocialLeagueData?
+    let error: SocialLeagueData?
+}
+
+struct SocialLeagueData: Codable {
+    let code: Int?
+    let messages: [String]?
+    let data: [SocialLeague]?
+}
+
 struct SocialLeague: Codable {
     var id: String  = ""
     var cnName: String  = ""
@@ -35,6 +46,17 @@ struct SocialLeague: Codable {
         enAlias = try (container.decodeIfPresent(String.self, forKey: .enAlias) ?? "")
         logoURL = try (container.decodeIfPresent(String.self, forKey: .logoURL) ?? "")
     }
+}
+
+struct SocialTeamResponse: Codable {
+    let response: SocialTeamData?
+    let error: SocialTeamData?
+}
+
+struct SocialTeamData: Codable {
+    let code: Int?
+    let messages: [String]?
+    let data: [SocialTeam]?
 }
 
 struct SocialTeam: Codable {

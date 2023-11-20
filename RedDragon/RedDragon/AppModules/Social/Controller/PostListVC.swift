@@ -28,7 +28,8 @@ class PostListVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        guard let token = UserDefaults.standard.token else {
+        //refresh placeholder text
+        guard let token = UserDefaults.standard.token, token != ""  else {
             listTableView.reloadData()
             return
         }
@@ -50,10 +51,6 @@ class PostListVC: UIViewController {
     }
     
     func loadFunctionality() {
-        //self.view.addSubview(Loader.activityIndicator)
-        if UserDefaults.standard.token ?? "" == "" {
-            execute_onResponseData([]) //set initial view for guest user login
-        }
         nibInitialization()
         fetchPostViewModel()
         makeNetworkCall()
@@ -214,8 +211,8 @@ extension PostListVC {
         SocialPostListVM.shared.$responseData
             .receive(on: DispatchQueue.main)
             .dropFirst()
-            .sink(receiveValue: { [weak self] postData in
-                self?.execute_onResponseData(postData ?? [])
+            .sink(receiveValue: { [weak self] response in
+                self?.execute_onPostListResponseData(response)
             })
             .store(in: &cancellable)
         
@@ -265,33 +262,39 @@ extension PostListVC {
             .store(in: &cancellable)
     }
     
-    func execute_onResponseData(_ postData: [SocialPost]) {
-        ///Posts and polls comes in separate order, so we have to apply date filter
-        postArray = postData
-        postArray = postArray.sorted(by: { $0.updatedTime.compare($1.updatedTime) == .orderedDescending })
-        allPostArray = postArray
-        var hashTagAttay: [String] = []
-        for post in self.postArray {
-            let descriptnTextArray = post.descriptn.split(separator: " ")
-            for text in descriptnTextArray {
-                if text.contains("#") {
-                    hashTagAttay.append(String(text))
+    func execute_onPostListResponseData(_ response: SocialPostResponse?) {
+        if let dataResponse = response?.response {
+            ///Posts and polls comes in separate order, so we have to apply date filter
+            postArray = dataResponse.data ?? []
+            postArray = postArray.sorted(by: { $0.updatedTime.compare($1.updatedTime) == .orderedDescending })
+            allPostArray = postArray
+            var hashTagAttay: [String] = []
+            for post in self.postArray {
+                let descriptnTextArray = post.descriptn.split(separator: " ")
+                for text in descriptnTextArray {
+                    if text.contains("#") {
+                        hashTagAttay.append(String(text))
+                    }
                 }
             }
+            ///Remove duplicates
+            let filteredArray = Array(Set(hashTagAttay))
+            let dataDict:[String: Any] = ["data": filteredArray]
+            NotificationCenter.default.post(name: NSNotification.refreshHashTags, object: nil, userInfo: dataDict)
+            calculateContentHeight()
+            listTableView.reloadData()
+            
+            ///set placeholder for tableview
+    //        if postArray.count == 0 {
+    //            listTableView.setEmptyMessage(UserDefaults.standard.token ?? "" == "" ? StringConstants.postsEmptyLoginAlert : ErrorMessage.dataNotFound)
+    //        } else {
+    //            listTableView.restore()
+    //        }
+        } else {
+            if let errorResponse = response?.error {
+                self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+            }
         }
-        ///Remove duplicates
-        let filteredArray = Array(Set(hashTagAttay))
-        let dataDict:[String: Any] = ["data": filteredArray]
-        NotificationCenter.default.post(name: NSNotification.refreshHashTags, object: nil, userInfo: dataDict)
-        calculateContentHeight()
-        listTableView.reloadData()
-        
-        ///set placeholder for tableview
-//        if postArray.count == 0 {
-//            listTableView.setEmptyMessage(UserDefaults.standard.token ?? "" == "" ? StringConstants.postsEmptyLoginAlert : ErrorMessage.dataNotFound)
-//        } else {
-//            listTableView.restore()
-//        }
     }
 }
 
