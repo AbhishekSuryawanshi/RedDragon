@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Je7-Wa-Ps8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="U0w-ao-aWV">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -76,6 +76,7 @@
                             <constraint firstItem="FyO-ZD-hOX" firstAttribute="bottom" secondItem="B0v-iq-naK" secondAttribute="bottom" id="w2o-r1-8z6"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="8Ul-6i-YlM"/>
                     <connections>
                         <outlet property="playerDetailCollectionView" destination="O00-PJ-OZC" id="3Xa-FQ-ZkC"/>
                         <outlet property="playerProfileView" destination="k5s-Sl-kWb" id="j3L-aB-Zob"/>
@@ -84,7 +85,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3dt-yq-RaX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-680.15267175572512" y="-35.211267605633807"/>
+            <point key="canvasLocation" x="246.56488549618319" y="-35.211267605633807"/>
         </scene>
         <!--Player Detail Profile View Controller-->
         <scene sceneID="Fyu-Lu-phL">
@@ -198,7 +199,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d9q-u4-J6g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="82" y="-35"/>
+            <point key="canvasLocation" x="1008.3969465648854" y="-35.211267605633807"/>
         </scene>
         <!--Player Detail Matches View Controller-->
         <scene sceneID="4F9-lz-crM">
@@ -232,7 +233,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SbO-yg-Lgo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="875.57251908396938" y="-34.507042253521128"/>
+            <point key="canvasLocation" x="1802.2900763358778" y="-34.507042253521128"/>
         </scene>
         <!--Player Detail Stats View Controller-->
         <scene sceneID="ZSO-n7-dZr">
@@ -289,7 +290,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9mA-5n-mYY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1664.885496183206" y="-35.211267605633807"/>
+            <point key="canvasLocation" x="2591.6030534351144" y="-35.211267605633807"/>
         </scene>
         <!--Player Detail Media View Controller-->
         <scene sceneID="Ogo-Zw-0vb">
@@ -341,7 +342,39 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1m7-YZ-PrV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2472.5190839694656" y="-35.211267605633807"/>
+            <point key="canvasLocation" x="3399.2366412213737" y="-35.211267605633807"/>
+        </scene>
+        <!--Player Detail Youtube View Controller-->
+        <scene sceneID="Sw5-JC-gN9">
+            <objects>
+                <viewController storyboardIdentifier="PlayerDetailYoutubeViewController" id="1JP-cb-uAl" customClass="PlayerDetailYoutubeViewController" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Hsl-zt-wB9">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="hRf-Cc-Dhd"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xLC-3I-3EZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4266.4122137404574" y="-35.211267605633807"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="8ZT-hU-VdM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" navigationBarHidden="YES" id="U0w-ao-aWV" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="snV-wC-D8j">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Je7-Wa-Ps8" kind="relationship" relationship="rootViewController" id="JY1-w0-fuA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DVK-j9-sFc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-680.15267175572512" y="-35.211267605633807"/>
         </scene>
     </scenes>
     <resources>

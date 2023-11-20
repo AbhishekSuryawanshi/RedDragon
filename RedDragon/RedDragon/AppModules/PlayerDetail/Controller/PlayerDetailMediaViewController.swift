@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import YouTubePlayerKit
 
 class PlayerDetailMediaViewController: UIViewController {
 
@@ -18,12 +19,38 @@ class PlayerDetailMediaViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
     }
+    
+    @objc func playVideo(sender: UIButton){
+        let video = playerDetailViewModel?.responseData?.data?.medias?[sender.tag].video ?? ""
+        let configuration = YouTubePlayer.Configuration(
+            // Define which fullscreen mode should be used (system or web)
+            fullscreenMode: .system,
+            // Custom action to perform when a URL gets opened
+           
+            // Enable auto play
+            autoPlay: true,
+            // Hide controls
+            showControls: true,
+            // Enable loop
+            loopEnabled: true
+        )
+        let youTubePlayer = YouTubePlayer(
+            source: .url(video),
+            configuration: configuration
+        )
+        
+        let youTubePlayerViewController = YouTubePlayerViewController(
+            player: youTubePlayer
+        )
+        self.present(youTubePlayerViewController, animated: true)
+        
+    }
+    
     
     func configureView() {
         loadFunctionality()
@@ -47,6 +74,7 @@ class PlayerDetailMediaViewController: UIViewController {
         mediaTopView.mediaImg.sd_setImage(with: URL(string: playerDetailViewModel?.responseData?.data?.medias?[0].preview ?? ""))
         mediaTopView.mediaDetailTxtView.text = playerDetailViewModel?.responseData?.data?.medias?[0].subtitle
         mediaTopView.mediaTitleLbl.text = playerDetailViewModel?.responseData?.data?.medias?[0].title
+        mediaTopView.playBtn.addTarget(self, action: #selector(playVideo), for: .touchUpInside)
     }
 }
 
@@ -62,6 +90,9 @@ extension PlayerDetailMediaViewController: UICollectionViewDelegate, UICollectio
         cell.mediaImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
         cell.mediaImgView.sd_setImage(with: URL(string: playerDetailViewModel?.responseData?.data?.medias?[indexPath.row].preview ?? ""))
         cell.mediaDetailTitle.text = playerDetailViewModel?.responseData?.data?.medias?[indexPath.row].title
+        cell.playBtn.tag = indexPath.row
+        cell.playBtn.addTarget(self, action: #selector(playVideo), for: .touchUpInside)
+        
         return cell
     }
     
