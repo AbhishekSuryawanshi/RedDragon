@@ -20,13 +20,19 @@ class DiscoverViewController: UIViewController {
     // MARK: - Navigation
 
      @IBAction func btnGoToBets(_ sender: Any) {
-    
          self.goToBets()
      }
     
+    @IBAction func btnGoToMeet(_ sender: Any) {
+        self.goToMeet()
+    }
     
-    func goToBets(){        
+    func goToBets(){
         navigateToViewController(BetHomeVc.self, storyboardName: StoryboardName.bets, animationType: .autoReverse(presenting: .zoom))
+    }
+    
+    func goToMeet(){
+        navigateToViewController(MeetHomeVC.self, storyboardName: StoryboardName.meet, animationType: .autoReverse(presenting: .zoom))
     }
      
 }

@@ -25,12 +25,22 @@
                                     <action selector="btnGoToBets:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="VsP-mK-41t"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KrJ-vA-92H">
+                                <rect key="frame" x="118" y="109" width="79" height="30"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Go To Meet"/>
+                                <connections>
+                                    <action selector="btnGoToMeet:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="52T-bR-TVw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="woW-GK-C6H" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="9W1-Gz-jlO"/>
                             <constraint firstItem="woW-GK-C6H" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="50" id="DMF-WX-3re"/>
+                            <constraint firstItem="KrJ-vA-92H" firstAttribute="top" secondItem="woW-GK-C6H" secondAttribute="top" id="Ftk-eq-D0n"/>
+                            <constraint firstItem="KrJ-vA-92H" firstAttribute="leading" secondItem="woW-GK-C6H" secondAttribute="trailing" constant="23" id="VSS-8e-lKG"/>
                         </constraints>
                     </view>
                 </viewController>
