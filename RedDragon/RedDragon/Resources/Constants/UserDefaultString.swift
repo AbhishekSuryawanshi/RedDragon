@@ -14,6 +14,7 @@ struct UserDefaultString {
     static let title        = "title"
     static let description  = "description"
     static let user         = "user"
+    static let lastAPICallDateKey  = "LastAPICallDate"
 }
 
 struct DefaultToken {

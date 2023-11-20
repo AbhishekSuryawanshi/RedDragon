@@ -18,7 +18,6 @@ struct URLConstants {
     
     
     // MARK: -  Login
-    
     static let login               = baseURL + "login"
     static let register            = baseURL + "register"
     static let verifyOTP           = baseURL + "verifyotp"
@@ -27,14 +26,14 @@ struct URLConstants {
     static let resetpassword       = baseURL + "resetpassword"
     
     // MARK: -  Database
-    
     static let databaseBaseURL     = "https://datasport.one/api/v1/sportscore/data/"
     static let leagueDetail        = databaseBaseURL + "league.php"
     static let databaseMatchDetail = databaseBaseURL + "match.php"
     
+    // MARK: - CardGame
+    static let allPlayersList      = "https://datasport.one/api/v1/sportscore/data/player_filter.php"
     
     // MARK: -  Social
-    
     static let socialBaseURL       = baseURL + "euro5league/"
    
     //Match
@@ -59,10 +58,8 @@ struct URLConstants {
     //Image
     static let postImage           = socialBaseURL + "resource/img"
     
-    
     // MARK: - PlayerDetail
     static let playerDetail        = databaseBaseURL + "player.php"
-    
     
     //Bets
     static let betAllMatches     = "https://amberic.top/app8/api/bet/" + "match/get"

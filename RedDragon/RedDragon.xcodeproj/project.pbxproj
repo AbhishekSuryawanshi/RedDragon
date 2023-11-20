@@ -171,6 +171,13 @@
 		49B0BA502AE6A83800A9D235 /* APIServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B0BA4F2AE6A83800A9D235 /* APIServiceManager.swift */; };
 		49B0BA522AE6AA1A00A9D235 /* UserDefaultString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B0BA512AE6AA1A00A9D235 /* UserDefaultString.swift */; };
 		49B0BA542AE6AB2E00A9D235 /* HTTPHeaderFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B0BA532AE6AB2E00A9D235 /* HTTPHeaderFile.swift */; };
+		49B211412B0B364E00E1C58E /* CardGame.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49B211402B0B364E00E1C58E /* CardGame.storyboard */; };
+		49B211442B0B43E300E1C58E /* AllPlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B211432B0B43E300E1C58E /* AllPlayersViewController.swift */; };
+		49B211482B0B470E00E1C58E /* FootballPlayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B211472B0B470E00E1C58E /* FootballPlayers.swift */; };
+		49B2114A2B0B471A00E1C58E /* RealmPlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B211492B0B471A00E1C58E /* RealmPlayerData.swift */; };
+		49B2114D2B0B488B00E1C58E /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 49B2114C2B0B488B00E1C58E /* Realm */; };
+		49B2114F2B0B488B00E1C58E /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 49B2114E2B0B488B00E1C58E /* RealmSwift */; };
+		49B211512B0B4AEF00E1C58E /* AllFootballPlayersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B211502B0B4AEF00E1C58E /* AllFootballPlayersViewModel.swift */; };
 		49B837372B04A28000CD9E26 /* StatisticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B837352B04A28000CD9E26 /* StatisticsTableViewCell.swift */; };
 		49B837382B04A28000CD9E26 /* StatisticsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49B837362B04A28000CD9E26 /* StatisticsTableViewCell.xib */; };
 		49B8373B2B04E2E700CD9E26 /* MediaCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B837392B04E2E700CD9E26 /* MediaCollectionViewCell.swift */; };
@@ -374,6 +381,11 @@
 		49B0BA4F2AE6A83800A9D235 /* APIServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceManager.swift; sourceTree = "<group>"; };
 		49B0BA512AE6AA1A00A9D235 /* UserDefaultString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultString.swift; sourceTree = "<group>"; };
 		49B0BA532AE6AB2E00A9D235 /* HTTPHeaderFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaderFile.swift; sourceTree = "<group>"; };
+		49B211402B0B364E00E1C58E /* CardGame.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CardGame.storyboard; sourceTree = "<group>"; };
+		49B211432B0B43E300E1C58E /* AllPlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPlayersViewController.swift; sourceTree = "<group>"; };
+		49B211472B0B470E00E1C58E /* FootballPlayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballPlayers.swift; sourceTree = "<group>"; };
+		49B211492B0B471A00E1C58E /* RealmPlayerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmPlayerData.swift; sourceTree = "<group>"; };
+		49B211502B0B4AEF00E1C58E /* AllFootballPlayersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFootballPlayersViewModel.swift; sourceTree = "<group>"; };
 		49B837352B04A28000CD9E26 /* StatisticsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsTableViewCell.swift; sourceTree = "<group>"; };
 		49B837362B04A28000CD9E26 /* StatisticsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatisticsTableViewCell.xib; sourceTree = "<group>"; };
 		49B837392B04E2E700CD9E26 /* MediaCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -425,6 +437,7 @@
 			files = (
 				4728736B2AEA7E360011F00F /* SDWebImageMapKit in Frameworks */,
 				47C8C9572AF0D3A900448D96 /* TOCropViewController in Frameworks */,
+				49B2114F2B0B488B00E1C58E /* RealmSwift in Frameworks */,
 				472873702AEA7E3F0011F00F /* NVActivityIndicatorViewExtended in Frameworks */,
 				472873692AEA7E360011F00F /* SDWebImage in Frameworks */,
 				47C8C9602AF1191700448D96 /* Kingfisher in Frameworks */,
@@ -434,6 +447,7 @@
 				47C8C9552AF0D3A900448D96 /* CropViewController in Frameworks */,
 				472873792AEA7E920011F00F /* Toast in Frameworks */,
 				E9DDB61E2B049AF1004C8ACF /* SideMenu in Frameworks */,
+				49B2114D2B0B488B00E1C58E /* Realm in Frameworks */,
 				472873762AEA7E4F0011F00F /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -962,6 +976,7 @@
 				47FC33D72AEA4C9000FABED4 /* Social */,
 				494D7B6C2AE8E96E00488E27 /* Database */,
 				49E6DE832AF38E3D00A0DDC3 /* MatchDetail */,
+				49B211382B0B345900E1C58E /* CardGame */,
 				E9DDB62B2B049BAF004C8ACF /* Discover */,
 			);
 			path = AppModules;
@@ -973,6 +988,58 @@
 				49B0BA4F2AE6A83800A9D235 /* APIServiceManager.swift */,
 			);
 			path = CommonServiceManager;
+			sourceTree = "<group>";
+		};
+		49B211382B0B345900E1C58E /* CardGame */ = {
+			isa = PBXGroup;
+			children = (
+				49B2113D2B0B34D300E1C58E /* Storyboard */,
+				49B2113C2B0B34CC00E1C58E /* Model */,
+				49B2113B2B0B34A400E1C58E /* View */,
+				49B2113A2B0B349B00E1C58E /* ViewModel */,
+				49B211392B0B349400E1C58E /* Controller */,
+			);
+			path = CardGame;
+			sourceTree = "<group>";
+		};
+		49B211392B0B349400E1C58E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				49B211432B0B43E300E1C58E /* AllPlayersViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		49B2113A2B0B349B00E1C58E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				49B211502B0B4AEF00E1C58E /* AllFootballPlayersViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		49B2113B2B0B34A400E1C58E /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		49B2113C2B0B34CC00E1C58E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				49B211472B0B470E00E1C58E /* FootballPlayers.swift */,
+				49B211492B0B471A00E1C58E /* RealmPlayerData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		49B2113D2B0B34D300E1C58E /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				49B211402B0B364E00E1C58E /* CardGame.storyboard */,
+			);
+			path = Storyboard;
 			sourceTree = "<group>";
 		};
 		49E6DE832AF38E3D00A0DDC3 /* MatchDetail */ = {
@@ -1186,6 +1253,8 @@
 				47C8C95F2AF1191700448D96 /* Kingfisher */,
 				41EB79DA2AF38D3F00D068F7 /* DDSpiderChart */,
 				E9DDB61D2B049AF1004C8ACF /* SideMenu */,
+				49B2114C2B0B488B00E1C58E /* Realm */,
+				49B2114E2B0B488B00E1C58E /* RealmSwift */,
 			);
 			productName = RedDragon;
 			productReference = 49B0B9E42AE68F0700A9D235 /* RedDragon.app */;
@@ -1227,6 +1296,7 @@
 				47C8C95E2AF1191700448D96 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				41EB79D92AF38D3F00D068F7 /* XCRemoteSwiftPackageReference "DDSpiderChart" */,
 				E9DDB61C2B049AF1004C8ACF /* XCRemoteSwiftPackageReference "SideMenu" */,
+				49B2114B2B0B488B00E1C58E /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 49B0B9E52AE68F0700A9D235 /* Products */;
 			projectDirPath = "";
@@ -1301,6 +1371,7 @@
 				E9129B9B2B05FC960073A407 /* BetLoseTableVC.xib in Resources */,
 				E9DDB6302B049BAF004C8ACF /* Discover.storyboard in Resources */,
 				474D99422AE7F30D009499D0 /* Roboto-BoldItalic.ttf in Resources */,
+				49B211412B0B364E00E1C58E /* CardGame.storyboard in Resources */,
 				41EB79D32AF37BA000D068F7 /* PlayerProfileTopView.xib in Resources */,
 				41EB79E32AF3B71100D068F7 /* PlayerDetailView.xib in Resources */,
 				E9DDB6432B04E387004C8ACF /* BetMatchTableVC.xib in Resources */,
@@ -1330,6 +1401,7 @@
 				4703F8D82B089E4300276F3E /* UserModel.swift in Sources */,
 				47E7C8532AEFE4A400D054A8 /* GrowingTextView.swift in Sources */,
 				E9DDB6372B04B4CA004C8ACF /* Bets.swift in Sources */,
+				49B211482B0B470E00E1C58E /* FootballPlayers.swift in Sources */,
 				494D7B7C2AE9317F00488E27 /* LeagueDetailModel.swift in Sources */,
 				494B37E52AEA3BD700FB9BCD /* PMAlertController.swift in Sources */,
 				49B0BA232AE698B200A9D235 /* UIString+Extension.swift in Sources */,
@@ -1349,6 +1421,7 @@
 				49A822BB2B04FC27007752C2 /* RecentMatchTableViewCell.swift in Sources */,
 				47AECA8A2B01E7D800166292 /* TagsCVLayout.swift in Sources */,
 				474D99492AE7F42B009499D0 /* IBDesignable+Extension.swift in Sources */,
+				49B2114A2B0B471A00E1C58E /* RealmPlayerData.swift in Sources */,
 				494B37E92AEA3EC500FB9BCD /* ImageConstants.swift in Sources */,
 				49B0B9E82AE68F0700A9D235 /* AppDelegate.swift in Sources */,
 				49F3EECF2AE7AC580095CAC6 /* Navigation.swift in Sources */,
@@ -1426,6 +1499,7 @@
 				47E7C84B2AEFBF8D00D054A8 /* PostListVC.swift in Sources */,
 				47C8C9512AF0CAB700448D96 /* SingleImageCollectionViewCell.swift in Sources */,
 				49B0BA522AE6AA1A00A9D235 /* UserDefaultString.swift in Sources */,
+				49B211512B0B4AEF00E1C58E /* AllFootballPlayersViewModel.swift in Sources */,
 				49F3429D2AF23CC70057C147 /* EventsTableViewCell.swift in Sources */,
 				E9DDB6352B04B474004C8ACF /* BetsHomeViewModel.swift in Sources */,
 				47A1AB312AED3CA300F1BD13 /* PostTableViewCell.swift in Sources */,
@@ -1443,6 +1517,7 @@
 				4943184C2AE7A222007F7292 /* LoaderAnimation.swift in Sources */,
 				494318502AE7A2A1007F7292 /* ZoomAnimation.swift in Sources */,
 				49E6DE8E2AF3BE4B00A0DDC3 /* MatchDetailsViewModel.swift in Sources */,
+				49B211442B0B43E300E1C58E /* AllPlayersViewController.swift in Sources */,
 				E9DDB6332B04B05B004C8ACF /* Sport.swift in Sources */,
 				49E6DE8C2AF38F7000A0DDC3 /* MatchDetail.swift in Sources */,
 				49F65E432AF6222D000F9E96 /* MatchTabsCollectionViewCell.swift in Sources */,
@@ -1762,6 +1837,14 @@
 				minimumVersion = 7.10.0;
 			};
 		};
+		49B2114B2B0B488B00E1C58E /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		E9DDB61C2B049AF1004C8ACF /* XCRemoteSwiftPackageReference "SideMenu" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jonkykong/SideMenu.git";
@@ -1827,6 +1910,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 47C8C95E2AF1191700448D96 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		49B2114C2B0B488B00E1C58E /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 49B2114B2B0B488B00E1C58E /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		49B2114E2B0B488B00E1C58E /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 49B2114B2B0B488B00E1C58E /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 		E9DDB61D2B049AF1004C8ACF /* SideMenu */ = {
 			isa = XCSwiftPackageProductDependency;
