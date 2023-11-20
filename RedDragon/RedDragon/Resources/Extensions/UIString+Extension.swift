@@ -119,6 +119,16 @@ extension String {
         label.sizeToFit()
         return label.frame.height
     }
+    
+    func getFormattedDate(from inputDateformat: String, andConvertTo outputDateFormat: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = inputDateformat
+        guard let date = formatter.date(from: self) else { return "" }
+
+        formatter.dateFormat = outputDateFormat
+        let outputDate = formatter.string(from: date)
+        return outputDate
+    }
 }
 
 // MARK: - NSMutableAttributedString

@@ -9,7 +9,7 @@ import UIKit
 
 class SideMenuVc: UIViewController {
     
-    var viewModel = BetsHomeViewModel()
+    var viewModel = BetMatchesHomeViewModel()
     
     @IBOutlet var tableView: UITableView!
     

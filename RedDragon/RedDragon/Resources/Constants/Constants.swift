@@ -15,7 +15,7 @@ let screenHeight = UIScreen.main.bounds.height
 
 // MARK: - Date and Time
 enum dateFormat: String {
-    case yyyyMMddHHmm         = "yyyy-MM-dd HH:mm" 
+    case yyyyMMddHHmm         = "yyyy-MM-dd HH:mm.s" 
     case ddMMyyyyWithTimeZone = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     case ddMMMyyyyhhmma       = "d MMM yyyy . hh:mm a"
     case ddMMyyyy             = "dd-MM-yyyy"
@@ -24,6 +24,7 @@ enum dateFormat: String {
     case hhmmaddMMMyyyy2      = "hh:mm a - dd/MM/yyyy"
     case hmma                 = "hh:mm a"
     case edmmmHHmm            = "E, d MMM HH:mm"
+    case mmmdhm            = "MMM d, h:mm a"
 }
 
 func formatDate(date: Date?, with outputFormat: dateFormat)-> String

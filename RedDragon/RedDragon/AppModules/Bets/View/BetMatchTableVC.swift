@@ -32,18 +32,70 @@ class BetMatchTableVC: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configurCell(match: MatchesList){
+    // for all match
+    func configurCell(match: MatchesList, isLive : Bool){
         
         leagueLable.text = match.league
         homeName.text = match.matches?.first?.homeTeam
         awayName.text = match.matches?.first?.awayTeam
-        oddsLable1.text = match.matches?.first?.odds1Value ?? "0"
-        oddsLable2.text = match.matches?.first?.odds2Value ?? "0"
-        oddsLable3.text = match.matches?.first?.odds3Value ?? "0"
-       // score.text = match.matches?.first?.homeScore ?? "0" + (match.matches?.first?.awayScore ?? "0")
+        if (match.matches!.first!.odds1Value!.isEmpty) {
+            oddsLable1.text = "1"
+        }else{
+            oddsLable1.text = match.matches?.first?.odds1Value ?? "1"
+        }
         
-        dateLable.text = getDate(slug: (match.matches?.first?.slug)!, time: (match.matches?.first?.time)!)
+        if (match.matches!.first!.odds2Value!.isEmpty) {
+            oddsLable2.text = "1"
+        }else{
+            oddsLable2.text = match.matches?.first?.odds2Value ?? "1"
+        }
+        
+        if (match.matches!.first!.odds3Value!.isEmpty) {
+            oddsLable3.text = "1"
+        }else{
+            oddsLable3.text = match.matches?.first?.odds3Value ?? "1"
+        }
+        
+        if isLive{
+            dateLable.text = "Live".localized
+            score.text = "\(match.matches?.first?.homeScore ?? "0") : \(match.matches?.first?.awayScore ?? "0")"
+        }else{
+            dateLable.text = getDate(slug: (match.matches?.first?.slug)!, time: (match.matches?.first?.time)!)
+        }
     }
+    
+    // for live matches
+    func configureCell(match: Matches, isLive : Bool){
+
+        leagueLable.text = match.matchState
+        homeName.text = match.homeTeam
+        awayName.text = match.awayTeam
+        if (match.odds1Value!.isEmpty) {
+            oddsLable1.text = "1"
+        }else{
+            oddsLable1.text = match.odds1Value ?? "1"
+        }
+        
+        if (match.odds2Value!.isEmpty){
+            oddsLable2.text = "1"
+        }else{
+            oddsLable2.text = match.odds2Value ?? "1"
+        }
+        
+        if (match.odds3Value!.isEmpty){
+            oddsLable3.text = "1"
+        }else{
+            oddsLable3.text = match.odds3Value ?? "1"
+        }
+
+        if isLive{
+            dateLable.text = ""
+            score.text = "\(match.homeScore ?? "0") : \(match.awayScore ?? "0")"
+        }else{
+            dateLable.text = getDate(slug: (match.slug)!, time: (match.time)!)
+        }
+    }
+    
     
     func getDate(slug : String, time : String) ->  String{
         var date = ""

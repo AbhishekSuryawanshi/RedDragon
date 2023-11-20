@@ -12,9 +12,13 @@ import Combine
 
 class BetHomeVc: UIViewController {
     
-    var viewModel = BetsHomeViewModel()
+    var viewModelBet = BetsHomeViewModel()
+    var viewModel = BetMatchesHomeViewModel()
     var selectedType : BetsTitleCollectionView = .All
     var matchesList : [MatchesList]?
+    var liveMatchesList : [MatchesList]?
+    var winBets: [BetItem]? = []
+    var loseBets: [BetItem]? = []
     private var fetchCurrentLanguageCode = String()
     private var cancellable = Set<AnyCancellable>()
 
@@ -30,6 +34,7 @@ class BetHomeVc: UIViewController {
         configureLanguage()
         networkCall()
         fetchBetMetches()
+        fetchBets()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,7 +50,33 @@ class BetHomeVc: UIViewController {
     }
     
     func networkCall(){
-        viewModel.fetchAllBetsAsyncCall(sport: .football, lang: fetchCurrentLanguageCode == "en" ? "en" : "zh")
+        switch (selectedType){
+            
+        case .All:
+            if matchesList?.count ?? 0 > 0 {
+                tableView.reloadData()
+            }else{
+                viewModel.fetchAllMatchesAsyncCall(sport: .football, lang: fetchCurrentLanguageCode == "en" ? "en" : "zh", day: "tommorow")
+            }
+        case .Live:
+            if liveMatchesList?.count ?? 0 > 0 {
+                tableView.reloadData()
+            }else{
+                viewModel.fetchAllMatchesAsyncCall(sport: .football, lang: fetchCurrentLanguageCode == "en" ? "en" : "zh", day: "today")
+            }
+        case .Win:
+            if winBets?.count ?? 0 > 0 {
+                tableView.reloadData()
+            }else{
+                viewModelBet.fetchAllBetsAsyncCall()
+            }
+        case .Lose:
+            if loseBets?.count ?? 0 > 0 {
+                tableView.reloadData()
+            }else{
+                viewModelBet.fetchAllBetsAsyncCall()
+            }
+        }
     }
 
     // MARK: - Navigation
@@ -57,9 +88,11 @@ class BetHomeVc: UIViewController {
      
 }
 
+// collection view
 extension BetHomeVc : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.homeTitles.count
+            return viewModel.homeTitles.count
+    
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -70,15 +103,26 @@ extension BetHomeVc : UICollectionViewDelegate, UICollectionViewDataSource, UICo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedType = viewModel.homeTitles[indexPath.row]
-        tableView.reloadData()
+        networkCall()
     }
     
 }
 
-
+// tableview
 extension BetHomeVc : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return matchesList?.count ?? 0
+        switch (selectedType){
+            
+        case .All:
+            return matchesList?.count ?? 0
+        case .Live:
+            return liveMatchesList?.count ?? 0
+        case.Win:
+            return winBets?.count ?? 0
+        case.Lose:
+            return loseBets?.count ?? 0
+        }
+       
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -86,29 +130,46 @@ extension BetHomeVc : UITableViewDelegate, UITableViewDataSource {
         switch(selectedType){
         case .All:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.betMatchTableVC) as! BetMatchTableVC
-            cell.configurCell(match: matchesList![indexPath.row])
+            cell.configurCell(match: matchesList![indexPath.row], isLive: false)
+            return cell
+            
+        case .Live:
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.betMatchTableVC) as! BetMatchTableVC
+            cell.configurCell(match: liveMatchesList![indexPath.row], isLive: true)
             return cell
             
         case .Win:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.betWinTableVC) as! BetWinTableVC
-            
+            cell.configureCell(item: winBets?[indexPath.row])
             return cell
             
         case .Lose:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.betLoseTableVC) as! BetLoseTableVC
-            
-            return cell
-            
-        default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.betMatchTableVC) as! BetMatchTableVC
-        
+            cell.configureCell(item: loseBets?[indexPath.row])
             return cell
         }
         
       
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch(selectedType){
+        case .All:
+            navigateToViewController(MatchesListViewController.self, storyboardName: StoryboardName.bets,  animationType: .autoReverse(presenting: .zoom), configure: { vc in
+                vc.isLive = false
+                vc.matchesList = self.matchesList![indexPath.row].matches
+            })
+        case .Live:
+            navigateToViewController(MatchesListViewController.self, storyboardName: StoryboardName.bets,  animationType: .autoReverse(presenting: .zoom), configure: { vc in
+                vc.isLive = true
+                vc.matchesList = self.liveMatchesList![indexPath.row].matches
+            })
+            
+        default:
+            print("coming")
+            
+        }
+    }
     
 }
 
@@ -132,12 +193,48 @@ extension BetHomeVc {
                 .store(in: &cancellable)
         }
         
+        ///fetch view model for bets
+        func fetchBets() {
+            viewModelBet.showError = { [weak self] error in
+                self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            }
+            viewModelBet.displayLoader = { [weak self] value in
+                self?.showLoader(value)
+            }
+            viewModelBet.$responseData
+                .receive(on: DispatchQueue.main)
+                .dropFirst()
+                .sink(receiveValue: { [weak self] bets in
+                    self?.loopWithCompletion(bets!, closure: {
+                        self?.tableView.reloadData()
+                    })
+                })
+                .store(in: &cancellable)
+        }
+        
         func execute_onResponseData(_ matches: MatchListModel) {
           
-            matchesList = matches.data
+            if selectedType == .All{
+                matchesList = matches.data
+            }else{
+                liveMatchesList = matches.data
+            }
            tableView.reloadData()
        
         }
+    
+    func loopWithCompletion(_ bets: BetListModel, closure: @escaping () -> ()) {
+        if bets.bets?.count ?? 0 > 0 {
+            for bet in bets.bets!{
+                if bet.betStatus == "1"{
+                    self.winBets?.append(bet)
+                }else{
+                    self.loseBets?.append(bet)
+                }
+            }
+            closure()
+        }
+    }
     
     func configureLanguage() {
         var lang = UserDefaults.standard.string(forKey: UserDefaultString.language) ?? "en"
