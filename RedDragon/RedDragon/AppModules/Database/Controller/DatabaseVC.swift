@@ -104,7 +104,6 @@ class DatabaseVC: UIViewController {
     
     @IBAction func seasonButton(_ sender: Any) {
         presentToStoryboard("PlayerDetail", identifier: "PlayerDetailViewController")
-
     }
 }
 
