@@ -164,7 +164,6 @@ extension MeetHomeVC: SwipeCardStackDataSource, SwipeCardStackDelegate {
       for direction in card.swipeDirections {
         card.setOverlay(SwipeCardOverlay(direction: direction), forDirection: direction)
       }
-
       let model = arrayOfUsers[index]
       card.content = SwipeCardContentView(withImageURLString: model.profileImg ?? "")
       card.footer = SwipeCardFooterView(withTitle: "\(model.name ?? "")", subtitle: model.location)
