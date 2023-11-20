@@ -126,6 +126,76 @@
             </objects>
             <point key="canvasLocation" x="1066.4122137404579" y="4.9295774647887329"/>
         </scene>
+        <!--Matches List View Controller-->
+        <scene sceneID="6Ff-0D-jp3">
+            <objects>
+                <viewController storyboardIdentifier="MatchesListViewController" id="oVU-7M-YFw" customClass="MatchesListViewController" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DLf-DV-Wfg">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="th4-iC-oOM">
+                                <rect key="frame" x="10" y="120" width="373" height="697"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="oVU-7M-YFw" id="Drg-18-0U2"/>
+                                    <outlet property="delegate" destination="oVU-7M-YFw" id="vDQ-3g-Ten"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3hT-gp-RFB" userLabel="topView">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="110"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TnU-sD-aLG">
+                                        <rect key="frame" x="0.0" y="50" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="akj-fS-gNZ"/>
+                                            <constraint firstAttribute="width" constant="60" id="unx-8K-owE"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="left_arrow"/>
+                                        <connections>
+                                            <action selector="backClicked:" destination="oVU-7M-YFw" eventType="touchUpInside" id="b5v-TJ-TDZ"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bets" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ng1-fI-e4U">
+                                        <rect key="frame" x="178.33333333333334" y="69.333333333333329" width="36.333333333333343" height="21.333333333333329"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="base"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="Ine-70-ApJ"/>
+                                    <constraint firstItem="TnU-sD-aLG" firstAttribute="leading" secondItem="3hT-gp-RFB" secondAttribute="leading" id="LAa-mG-e8J"/>
+                                    <constraint firstItem="Ng1-fI-e4U" firstAttribute="centerX" secondItem="3hT-gp-RFB" secondAttribute="centerX" id="Vie-q2-pJ9"/>
+                                    <constraint firstItem="Ng1-fI-e4U" firstAttribute="centerY" secondItem="TnU-sD-aLG" secondAttribute="centerY" id="ao4-ab-M6T"/>
+                                    <constraint firstAttribute="bottom" secondItem="TnU-sD-aLG" secondAttribute="bottom" id="w1c-Xo-il6"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="bCm-NU-cBd"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="bCm-NU-cBd" firstAttribute="trailing" secondItem="th4-iC-oOM" secondAttribute="trailing" constant="10" id="A7A-UV-Gkf"/>
+                            <constraint firstItem="th4-iC-oOM" firstAttribute="top" secondItem="3hT-gp-RFB" secondAttribute="bottom" constant="10" id="F3S-SD-1gA"/>
+                            <constraint firstItem="th4-iC-oOM" firstAttribute="leading" secondItem="bCm-NU-cBd" secondAttribute="leading" constant="10" id="Upo-VS-Tmi"/>
+                            <constraint firstItem="3hT-gp-RFB" firstAttribute="trailing" secondItem="bCm-NU-cBd" secondAttribute="trailing" id="WPI-hw-eba"/>
+                            <constraint firstItem="bCm-NU-cBd" firstAttribute="bottom" secondItem="th4-iC-oOM" secondAttribute="bottom" constant="1" id="eNB-D5-Yvo"/>
+                            <constraint firstItem="3hT-gp-RFB" firstAttribute="top" secondItem="DLf-DV-Wfg" secondAttribute="top" id="ztg-Mx-DiQ"/>
+                            <constraint firstItem="3hT-gp-RFB" firstAttribute="leading" secondItem="bCm-NU-cBd" secondAttribute="leading" id="zze-Nm-mza"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="th4-iC-oOM" id="Zev-Pw-KoZ"/>
+                        <outlet property="titLELABLE" destination="Ng1-fI-e4U" id="ZK8-dd-UZz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bfm-E4-TNP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1064.885496183206" y="734.50704225352115"/>
+        </scene>
         <!--Side Menu Vc-->
         <scene sceneID="2jc-px-9Io">
             <objects>

@@ -8,6 +8,18 @@
 import UIKit
 
 class BetMatchTableVC: UITableViewCell {
+    
+    @IBOutlet var oddsLable3: UILabel!
+    @IBOutlet var oddsLable2: UILabel!
+    @IBOutlet var oddsLable1: UILabel!
+    @IBOutlet var awayName: UILabel!
+    @IBOutlet var homeName: UILabel!
+    @IBOutlet var imgHome: UIImageView!
+    @IBOutlet var imgAway: UIImageView!
+    @IBOutlet var score: UILabel!
+    @IBOutlet var dateLable: UILabel!
+    @IBOutlet var leagueLable: UILabel!
+
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,4 +32,82 @@ class BetMatchTableVC: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    // for all match
+    func configurCell(match: MatchesList, isLive : Bool){
+        
+        leagueLable.text = match.league
+        homeName.text = match.matches?.first?.homeTeam
+        awayName.text = match.matches?.first?.awayTeam
+        if (match.matches!.first!.odds1Value!.isEmpty) {
+            oddsLable1.text = "1"
+        }else{
+            oddsLable1.text = match.matches?.first?.odds1Value ?? "1"
+        }
+        
+        if (match.matches!.first!.odds2Value!.isEmpty) {
+            oddsLable2.text = "1"
+        }else{
+            oddsLable2.text = match.matches?.first?.odds2Value ?? "1"
+        }
+        
+        if (match.matches!.first!.odds3Value!.isEmpty) {
+            oddsLable3.text = "1"
+        }else{
+            oddsLable3.text = match.matches?.first?.odds3Value ?? "1"
+        }
+        
+        if isLive{
+            dateLable.text = "Live".localized
+            score.text = "\(match.matches?.first?.homeScore ?? "0") : \(match.matches?.first?.awayScore ?? "0")"
+        }else{
+            dateLable.text = getDate(slug: (match.matches?.first?.slug)!, time: (match.matches?.first?.time)!)
+        }
+    }
+    
+    // for live matches
+    func configureCell(match: Matches, isLive : Bool){
+
+        leagueLable.text = match.matchState
+        homeName.text = match.homeTeam
+        awayName.text = match.awayTeam
+        if (match.odds1Value!.isEmpty) {
+            oddsLable1.text = "1"
+        }else{
+            oddsLable1.text = match.odds1Value ?? "1"
+        }
+        
+        if (match.odds2Value!.isEmpty){
+            oddsLable2.text = "1"
+        }else{
+            oddsLable2.text = match.odds2Value ?? "1"
+        }
+        
+        if (match.odds3Value!.isEmpty){
+            oddsLable3.text = "1"
+        }else{
+            oddsLable3.text = match.odds3Value ?? "1"
+        }
+
+        if isLive{
+            dateLable.text = ""
+            score.text = "\(match.homeScore ?? "0") : \(match.awayScore ?? "0")"
+        }else{
+            dateLable.text = getDate(slug: (match.slug)!, time: (match.time)!)
+        }
+    }
+    
+    
+    func getDate(slug : String, time : String) ->  String{
+        var date = ""
+     
+        let result = slug.split(separator: "-")
+        date = "\(result[0])-\(result[1])-\(result[2])"
+        
+        date = "\(date) \(time)"
+        
+        let dateFormate = DateFormatter()
+        dateFormate.dateFormat = dateFormat.yyyyMMddHHmm.rawValue
+        date = formatDate(date: dateFormate.date(from: date), with: dateFormat.edmmmHHmm)
+        return date
+    }
 }

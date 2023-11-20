@@ -61,6 +61,10 @@ struct URLConstants {
     
     
     // MARK: - PlayerDetail
-    
     static let playerDetail        = databaseBaseURL + "player.php"
+    
+    
+    //Bets
+    static let betAllMatches     = "https://amberic.top/app8/api/bet/" + "match/get"
+    static let allBets           = "https://amberic.top/app8/api/bet/" + "play/get"
 }

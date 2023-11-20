@@ -62,7 +62,7 @@ public enum BetsTitleCollectionView : String{
     var title : String{
         switch self {
         case .All:
-            return "All".localized
+            return "UpComing".localized
         case .Live:
             return "Live".localized
         case .Win:
