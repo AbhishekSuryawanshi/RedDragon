@@ -114,6 +114,7 @@
 		47FC33E12AEA4DAC00FABED4 /* HeaderTopCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FC33DF2AEA4DAC00FABED4 /* HeaderTopCollectionViewCell.swift */; };
 		47FC33E22AEA4DAC00FABED4 /* HeaderTopCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47FC33E02AEA4DAC00FABED4 /* HeaderTopCollectionViewCell.xib */; };
 		47FC33E42AEA50BE00FABED4 /* SocialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FC33E32AEA50BE00FABED4 /* SocialVC.swift */; };
+		49310AF72B0BA02F00AFCBCA /* Shuffle in Frameworks */ = {isa = PBXBuildFile; productRef = 49310AF62B0BA02F00AFCBCA /* Shuffle */; };
 		493D21182AFE102E00045672 /* PlayerDetailMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493D21162AFE102E00045672 /* PlayerDetailMediaViewController.swift */; };
 		493D21192AFE102E00045672 /* PlayerDetailStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493D21172AFE102E00045672 /* PlayerDetailStatsViewController.swift */; };
 		493D21252AFE122000045672 /* PlayerStatsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493D21232AFE122000045672 /* PlayerStatsCollectionViewCell.swift */; };
@@ -463,6 +464,7 @@
 				47C8C9552AF0D3A900448D96 /* CropViewController in Frameworks */,
 				472873792AEA7E920011F00F /* Toast in Frameworks */,
 				E9DDB61E2B049AF1004C8ACF /* SideMenu in Frameworks */,
+				49310AF72B0BA02F00AFCBCA /* Shuffle in Frameworks */,
 				49B2114D2B0B488B00E1C58E /* Realm in Frameworks */,
 				472873762AEA7E4F0011F00F /* IQKeyboardManagerSwift in Frameworks */,
 			);
@@ -1335,6 +1337,7 @@
 				E9DDB61D2B049AF1004C8ACF /* SideMenu */,
 				49B2114C2B0B488B00E1C58E /* Realm */,
 				49B2114E2B0B488B00E1C58E /* RealmSwift */,
+				49310AF62B0BA02F00AFCBCA /* Shuffle */,
 			);
 			productName = RedDragon;
 			productReference = 49B0B9E42AE68F0700A9D235 /* RedDragon.app */;
@@ -1377,6 +1380,7 @@
 				41EB79D92AF38D3F00D068F7 /* XCRemoteSwiftPackageReference "DDSpiderChart" */,
 				E9DDB61C2B049AF1004C8ACF /* XCRemoteSwiftPackageReference "SideMenu" */,
 				49B2114B2B0B488B00E1C58E /* XCRemoteSwiftPackageReference "realm-swift" */,
+				49310AF52B0BA02F00AFCBCA /* XCRemoteSwiftPackageReference "Shuffle" */,
 			);
 			productRefGroup = 49B0B9E52AE68F0700A9D235 /* Products */;
 			projectDirPath = "";
@@ -1927,6 +1931,14 @@
 				minimumVersion = 7.10.0;
 			};
 		};
+		49310AF52B0BA02F00AFCBCA /* XCRemoteSwiftPackageReference "Shuffle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mac-gallagher/Shuffle.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		49B2114B2B0B488B00E1C58E /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift";
@@ -2000,6 +2012,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 47C8C95E2AF1191700448D96 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		49310AF62B0BA02F00AFCBCA /* Shuffle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 49310AF52B0BA02F00AFCBCA /* XCRemoteSwiftPackageReference "Shuffle" */;
+			productName = Shuffle;
 		};
 		49B2114C2B0B488B00E1C58E /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;

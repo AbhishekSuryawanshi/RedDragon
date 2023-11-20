@@ -167,7 +167,6 @@ extension MeetHomeVC: SwipeCardStackDataSource, SwipeCardStackDelegate {
       let model = arrayOfUsers[index]
       card.content = SwipeCardContentView(withImageURLString: model.profileImg ?? "")
       card.footer = SwipeCardFooterView(withTitle: "\(model.name ?? "")", subtitle: model.location)
-
       return card
     }
 
