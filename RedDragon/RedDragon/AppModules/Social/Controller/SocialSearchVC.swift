@@ -40,10 +40,10 @@ class SocialSearchVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        refreshForLocalization()
+        refreshPage()
     }
     
-    func refreshForLocalization() {
+    func refreshPage() {
         Loader.activityIndicator.startAnimating()
         seeAllButton.isHidden = matchArray.count == 0 ? true : false
     }
@@ -115,20 +115,32 @@ extension SocialSearchVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.allMatchArray = response?.data ?? []
-                print("load..... match \(Date())")
-                self?.matchArray = Array(self?.allMatchArray.prefix(3) ?? [])
-                self?.matchTableView.reloadData()
-                self?.loadPostsView()
-                self?.seeAllButton.isHidden = self?.matchArray.count == 0 ? true : false
-                self?.seeAllButton.setImage(.downArrow2, for: .normal)
-                if self?.matchArray.count == 0 {
-                    self?.matchTableView.setEmptyMessage(ErrorMessage.matchEmptyAlert)
-                } else {
-                    self?.matchTableView.restore()
-                }
+                self?.execute_onResponseData(response)
             })
             .store(in: &cancellable)
+    }
+    
+    func execute_onResponseData(_ response: SocialMatchResponse?) {
+        allMatchArray.removeAll()
+        matchArray.removeAll()
+        if let dataResponse = response?.response {
+            allMatchArray = dataResponse.data ?? []
+            matchArray = Array(allMatchArray.prefix(3))
+        } else {
+            if let errorResponse = response?.error {
+                self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+            }
+        }
+        
+        matchTableView.reloadData()
+        loadPostsView()
+        seeAllButton.isHidden = matchArray.count == 0 ? true : false
+        seeAllButton.setImage(.downArrow2, for: .normal)
+        if matchArray.count == 0 {
+            matchTableView.setEmptyMessage(ErrorMessage.matchEmptyAlert)
+        } else {
+            matchTableView.restore()
+        }
     }
 }
 
@@ -157,13 +169,11 @@ extension SocialSearchVC: PostListVCDelegate {
     func postList(height: CGFloat, count: Int) {
         headerSubLabel.text = "\(count) " + (count < 2 ? "Post" : "Posts")
         containerHeightConstraint.constant = height
-        print("load..... post \(Date())")
         if searchEnable {
             searchEnable = false
             NotificationCenter.default.post(name: NSNotification.socialSearchEnable, object: nil, userInfo: searchDataDict)
         }
         Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (timer) in
-            print("load..... post loader \(Date())")
             Loader.activityIndicator.stopAnimating()
         }
     }

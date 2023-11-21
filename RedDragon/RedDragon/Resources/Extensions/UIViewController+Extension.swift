@@ -23,17 +23,17 @@ extension UIViewController {
     func customAlertView(title: String, description: String, image: String){
         let alertVC = PMAlertController(title: title, description: description, image: UIImage(named: image), style: .alert)
         alertVC.addAction(PMAlertAction(title: StringConstants.dismiss.localized, style: .default, action: { () in
-                    print("Capture action dismiss")
-                }))
+            print("Capture action dismiss")
+        }))
         self.present(alertVC, animated: true, completion: nil)
     }
     
     func customAlertView_2Actions(title: String, description: String, image: UIImage = UIImage.alert, okBTNTitle: String = StringConstants.continue_, okAction:@escaping () -> Void) {
         let alertVC = PMAlertController(title: title.localized, description: description.localized, image: image, style: .alert)
         alertVC.addAction(PMAlertAction(title: okBTNTitle.localized, style: .default, action: { () in
-                    print("Capture continue action")
+            print("Capture continue action")
             okAction()
-                }))
+        }))
         alertVC.addAction(PMAlertAction(title: StringConstants.dismiss.localized, style: .cancel))
         self.present(alertVC, animated: true, completion: nil)
     }
@@ -50,7 +50,7 @@ extension UIViewController {
             }
         }
     }
-
+    
     /// __Alert action function for multiple action buttons
     func customAlertView(title: String, description: String, image: String, actions: [PMAlertAction]) {
         let alertVC = PMAlertController(title: title, description: description, image: UIImage(named: image), style: .alert)
@@ -63,21 +63,59 @@ extension UIViewController {
     //Use
     /*
      let okAction = PMAlertAction(title: "OK", style: .default) {
-         print("OK button tapped")
+     print("OK button tapped")
      }
-
+     
      let cancelAction = PMAlertAction(title: "Cancel", style: .cancel) {
-         print("Cancel button tapped")
+     print("Cancel button tapped")
      }
-
+     
      customAlertView(title: "Alert Title", description: "Alert Description", image: "alertImage", actions: [okAction, cancelAction])
-
+     
      */
-
+    
     
     func defineTableViewNibCell(tableView: UITableView, cellName: String) {
         let nib = UINib(nibName: cellName, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellName)
+    }
+    
+    func formatNumber(_ number: Double) -> String {
+        let thousand = 1000.0
+        let million = 1000000.0
+        let billion = 1000000000.0
+
+        if number >= billion {
+            return String(format: "%.1fB", number / billion)
+        } else if number >= million {
+            return String(format: "%.1fM", number / million)
+        } else if number >= thousand {
+            return String(format: "%.1fK", number / thousand)
+        } else {
+            return "\(Int(number))"
+        }
+    }
+    
+    func valueFromAbbreviation(_ valueString: String) -> Double? {
+        // Define the suffixes and their respective multipliers
+        let suffixes: [Character: Double] = [
+            "K": 1e3, // Thousand
+            "M": 1e6, // Million
+            "B": 1e9, // Billion
+            "T": 1e12 // Trillion
+        ]
+        var result: Double?
+        // Extract the numerical value from the input string
+        let numericalValue = valueString.dropLast()
+        // Check if the last character is a valid suffix
+        if let suffix = valueString.last,
+           let multiplier = suffixes[suffix] {
+            // Attempt to convert the numerical value to a Double
+            if let numericalDouble = Double(numericalValue) {
+                result = numericalDouble * multiplier
+            }
+        }
+        return result
     }
     
 }

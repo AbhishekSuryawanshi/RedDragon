@@ -22,9 +22,6 @@
         <array key="Montserrat-Regular.ttf">
             <string>Montserrat-Regular</string>
         </array>
-        <array key="Montserrat-SemiBold.ttf">
-            <string>Montserrat-SemiBold</string>
-        </array>
         <array key="Roboto-Bold.ttf">
             <string>Roboto-Bold</string>
         </array>
@@ -752,12 +749,12 @@
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mPm-Xf-gi9">
                                         <rect key="frame" x="58" y="23" width="305" height="0.0"/>
-                                        <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="14"/>
-                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="16"/>
+                                        <color key="textColor" name="blue4"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IED-8z-nat">
-                                        <rect key="frame" x="58" y="31" width="305" height="0.0"/>
+                                        <rect key="frame" x="58" y="24" width="305" height="0.0"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -771,7 +768,7 @@
                                     <constraint firstItem="xh2-u5-ce6" firstAttribute="top" secondItem="V6n-Po-NMx" secondAttribute="top" constant="8" id="OuB-WF-1cn"/>
                                     <constraint firstItem="mPm-Xf-gi9" firstAttribute="centerY" secondItem="V6n-Po-NMx" secondAttribute="centerY" constant="-10" id="ZXj-gf-FFt"/>
                                     <constraint firstItem="IED-8z-nat" firstAttribute="trailing" secondItem="mPm-Xf-gi9" secondAttribute="trailing" id="eYJ-S6-Zcq"/>
-                                    <constraint firstItem="IED-8z-nat" firstAttribute="top" secondItem="mPm-Xf-gi9" secondAttribute="bottom" constant="8" id="er8-co-lv9"/>
+                                    <constraint firstItem="IED-8z-nat" firstAttribute="top" secondItem="mPm-Xf-gi9" secondAttribute="bottom" constant="1" id="er8-co-lv9"/>
                                     <constraint firstItem="IED-8z-nat" firstAttribute="leading" secondItem="mPm-Xf-gi9" secondAttribute="leading" id="lqy-2Z-uFy"/>
                                     <constraint firstAttribute="height" constant="66" id="qe0-Ud-Zan"/>
                                     <constraint firstAttribute="bottom" secondItem="xh2-u5-ce6" secondAttribute="bottom" constant="8" id="tYE-mW-xR1"/>
@@ -1176,8 +1173,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="qo8-3b-qmG">
-                                <rect key="frame" x="15" y="119" width="363" height="629"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="qo8-3b-qmG">
+                                <rect key="frame" x="15" y="119" width="363" height="634"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SocialCommentTableViewCell" rowHeight="89" id="5Mb-GY-U4i" customClass="SocialCommentTableViewCell" customModule="RedDragon" customModuleProvider="target">
@@ -1279,14 +1276,14 @@
                                     <outlet property="delegate" destination="Vsz-5q-DBT" id="kOc-GE-D5I"/>
                                 </connections>
                             </tableView>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HDq-NR-qsw" userLabel="bottomView">
-                                <rect key="frame" x="0.0" y="743" width="393" height="109"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HDq-NR-qsw" userLabel="bottomView">
+                                <rect key="frame" x="0.0" y="748" width="393" height="104"/>
                                 <subviews>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2h6-N3-naM">
-                                        <rect key="frame" x="15" y="15" width="363" height="45"/>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2h6-N3-naM">
+                                        <rect key="frame" x="15" y="15" width="363" height="40"/>
                                         <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TGe-gi-WDt" customClass="GrowingTextView" customModule="RedDragon" customModuleProvider="target">
-                                                <rect key="frame" x="10" y="5" width="308" height="35"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TGe-gi-WDt" customClass="GrowingTextView" customModule="RedDragon" customModuleProvider="target">
+                                                <rect key="frame" x="10" y="5" width="308" height="30"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
@@ -1367,8 +1364,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Shadow3" translatesAutoresizingMaskIntoConstraints="NO" id="cwb-98-rgc">
-                                <rect key="frame" x="0.0" y="731" width="393" height="12"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Shadow3" translatesAutoresizingMaskIntoConstraints="NO" id="cwb-98-rgc">
+                                <rect key="frame" x="0.0" y="736" width="393" height="12"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -1672,14 +1669,6 @@
             <point key="canvasLocation" x="748.85496183206101" y="-23.239436619718312"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="MkM-G1-GVJ">
-            <size key="intrinsicContentSize" width="-1" height="30"/>
-        </designable>
-        <designable name="TGe-gi-WDt">
-            <size key="intrinsicContentSize" width="-1" height="30"/>
-        </designable>
-    </designables>
     <resources>
         <image name="Shadow3" width="375" height="8"/>
         <image name="add_1" width="24" height="24"/>
@@ -1704,6 +1693,9 @@
         </namedColor>
         <namedColor name="blue3">
             <color red="0.12941176470588237" green="0.47058823529411764" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="blue4">
+            <color red="0.0" green="0.396078431372549" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="gray1">
             <color red="0.75294117647058822" green="0.75294117647058822" blue="0.75294117647058822" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1733,7 +1725,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

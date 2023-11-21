@@ -83,6 +83,7 @@ class PostTableViewCell: UITableViewCell {
         
         userImageView.setImage(imageStr: model.userImage, placeholder: .placeholderUser)
         userNameLabel.text = "\(model.firstName) \(model.lastName)"
+        userNameLabel.textColor = detailPage ? .blue4 : .black
         dateLabel.text = model.updatedTime.formatDate2(inputFormat: .ddMMyyyyWithTimeZone)
         imageBgView.isHidden = model.postImages.count == 0
         matchBgView.borderColor = .lightGray

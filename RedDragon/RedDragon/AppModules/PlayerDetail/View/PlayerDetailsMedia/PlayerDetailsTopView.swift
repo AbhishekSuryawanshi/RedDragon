@@ -13,7 +13,6 @@ class PlayerDetailsTopView: UIView {
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var playBtn: UIButton!
     @IBOutlet var contentView: UIView!
-    
     @IBOutlet weak var mediaDetailTxtView: UITextView!
     @IBOutlet weak var mediaImg: UIImageView!
     

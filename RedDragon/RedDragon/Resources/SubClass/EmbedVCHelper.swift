@@ -36,6 +36,15 @@ class ViewEmbedder {
     /// Use this fuction to this functionality
     /// Pass storyboard Id, storyboard name, current view controller object / self , container view object
     
+    /*
+     eg: -
+     ViewEmbedder.embed(withIdentifier: "PostListVC", storyboard: UIStoryboard(name: StoryboardName.social, bundle: nil)
+                        , parent: self, container: postContainerView) { vc in
+         let vc = vc as! PostListVC
+         vc.delegate = self
+     }
+     */
+    
     class func embed(withIdentifier id:String, storyboard: UIStoryboard, parent:UIViewController, container:UIView, completion:((UIViewController)->Void)? = nil){
         
         let vc = storyboard.instantiateViewController(withIdentifier: id)

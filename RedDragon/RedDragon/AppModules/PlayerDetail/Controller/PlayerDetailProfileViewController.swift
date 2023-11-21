@@ -95,7 +95,6 @@ class PlayerDetailProfileViewController: UIViewController {
         spiderChartView.addDataSet(values: removeCharacterFromString(valArr: skillVal), color: UIColor.yellow1, animated: true) // Add first data set
         spiderChartView.backgroundColor = .white
         playerSkillView.spiderView.color = .gray
-       // playerSkillView.spiderView.backgroundColor = .white
         playerSkillView.backgroundColor = .white
         playerSkillView.addSubview(spiderChartView)
     }
@@ -107,35 +106,43 @@ class PlayerDetailProfileViewController: UIViewController {
         return attributedString
     }
     
+    @objc func seeAllMatches(){
+        navigateToViewController(PlayerDetailMatchesViewController.self, storyboardName: StoryboardName.playerDetail, animationType: .autoReverse(presenting: .zoom))
+    }
+    
     func configureLastMatchesView(){
-      //  for i in 0 ..< (playerDetailViewModel?.responseData?.data?.events?.count ?? 0){
-            for var j in 0 ..< (playerDetailViewModel?.responseData?.data?.events?[0].matches?.count ?? 0){
-                if j < 1{
-                    playerLastMatches.leagueImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
-                    playerLastMatches.leagueImgView.sd_setImage(with: URL(string: playerDetailViewModel?.responseData?.data?.events?[0].leagueLogo ?? ""))
-                    playerLastMatches.leagueNameLbl.text = playerDetailViewModel?.responseData?.data?.events?[0].leagueName
-                    playerLastMatches.roundLbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].round
-                    playerLastMatches.team1Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].homeName
-                    playerLastMatches.team2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].awayName
-                    playerLastMatches.team1ScoreLbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].homeScore
-                    playerLastMatches.team2ScoreLbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].awayScore
-                    playerLastMatches.dateLbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].date
-                    j = j+1
-                    playerLastMatches.league2ImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
-                    playerLastMatches.league2ImgView.sd_setImage(with: URL(string: playerDetailViewModel?.responseData?.data?.events?[0].leagueLogo ?? ""))
-                    playerLastMatches.leagueName2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].leagueName
-                    playerLastMatches.round2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].round
-                    playerLastMatches.team1Lbl2.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].homeName
-                    playerLastMatches.team2Lbl2.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].awayName
-                    playerLastMatches.team1Score2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].homeScore
-                    playerLastMatches.team2Score2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].awayScore
-                    playerLastMatches.date2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].date
+        playerLastMatches.seeAllBtn.addTarget(self, action: #selector(seeAllMatches), for: .touchUpInside)
+        for var j in 0 ..< (playerDetailViewModel?.responseData?.data?.events?[0].matches?.count ?? 0){
+            if j < 1{
+                playerLastMatches.leagueImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
+                playerLastMatches.leagueImgView.sd_setImage(with: URL(string: playerDetailViewModel?.responseData?.data?.events?[0].leagueLogo ?? ""))
+                playerLastMatches.leagueNameLbl.text = playerDetailViewModel?.responseData?.data?.events?[0].leagueName
+                playerLastMatches.roundLbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].round
+                playerLastMatches.team1Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].homeName
+                playerLastMatches.team2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].awayName
+                playerLastMatches.team1ScoreLbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].homeScore
+                playerLastMatches.team2ScoreLbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].awayScore
+                playerLastMatches.dateLbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].date
+                j = j+1
+                playerLastMatches.league2ImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
+                playerLastMatches.league2ImgView.sd_setImage(with: URL(string: playerDetailViewModel?.responseData?.data?.events?[0].leagueLogo ?? ""))
+                playerLastMatches.leagueName2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].leagueName
+                playerLastMatches.round2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].round
+                playerLastMatches.team1Lbl2.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].homeName
+                playerLastMatches.team2Lbl2.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].awayName
+                playerLastMatches.team1Score2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].homeScore
+                playerLastMatches.team2Score2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].awayScore
+                playerLastMatches.date2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].date
                 }
             }
-       // }
+    }
+    
+    @objc func seeAllMedia(){
+        navigateToViewController(PlayerDetailMediaViewController.self, storyboardName: StoryboardName.playerDetail, animationType: .autoReverse(presenting: .zoom))
     }
     
     func configureMediaView(){
+        playerMediaDetails.seeAllBtn.addTarget(self, action: #selector(seeAllMedia), for: .touchUpInside)
         for i in 0 ..< (playerDetailViewModel?.responseData?.data?.medias?.count ?? 0){
             playerMediaDetails.mediaImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
             playerMediaDetails.mediaImgView.sd_setImage(with: URL(string: playerDetailViewModel?.responseData?.data?.medias?[i].preview ?? ""))

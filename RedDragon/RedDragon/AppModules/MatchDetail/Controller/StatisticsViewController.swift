@@ -27,6 +27,14 @@ class StatisticsViewController: UIViewController {
         nibInitialization()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = 0
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
     func nibInitialization() {
         defineTableViewNibCell(tableView: tableView, cellName: CellIdentifier.statisticTableViewCell)
         collectionview.register(CellIdentifier.mediaCollectionView)

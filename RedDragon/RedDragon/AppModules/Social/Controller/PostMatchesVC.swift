@@ -40,7 +40,7 @@ class PostMatchesVC: UIViewController {
         setupGestureRecognizers()
     }
     override func viewDidAppear(_ animated: Bool) {
-        refreshForLocalization()
+        refreshPage()
         
         ///Show matches of first league
         ///League list already loaded in scoial vc
@@ -53,7 +53,7 @@ class PostMatchesVC: UIViewController {
         leagueCollectionView.register(CellIdentifier.singleImageCollectionViewCell)
     }
     
-    func refreshForLocalization() {
+    func refreshPage() {
         leagueLabeL.text = "Leagues".localized
         selectMatchLabeL.text = "Select match".localized
     }
@@ -89,10 +89,21 @@ extension PostMatchesVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                SocialMatchVM.shared.matchArray = response?.data ?? []
-                self?.listTableView.reloadData()
+                SocialMatchVM.shared.matchArray.removeAll()
+                self?.execute_onResponseData(response)
             })
             .store(in: &cancellable)
+    }
+    
+    func execute_onResponseData(_ response: SocialMatchResponse?) {
+        if let dataResponse = response?.response {
+            SocialMatchVM.shared.matchArray = dataResponse.data ?? []
+        } else {
+            if let errorResponse = response?.error {
+                self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+            }
+        }
+        listTableView.reloadData()
     }
 }
 
@@ -153,7 +164,6 @@ extension PostMatchesVC: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.matchTableViewCell, for: indexPath) as! MatchTableViewCell
         cell.setCellValues(model: SocialMatchVM.shared.matchArray[indexPath.row])
         return cell
-        
     }
 }
 

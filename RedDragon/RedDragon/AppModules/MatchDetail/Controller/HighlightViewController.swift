@@ -32,6 +32,11 @@ class HighlightViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         symbolCollectionView.reloadData()
+        if #available(iOS 15.0, *) {
+            highlightTableView.sectionHeaderTopPadding = 0
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     func configureView(progressData: [Progress]?) {

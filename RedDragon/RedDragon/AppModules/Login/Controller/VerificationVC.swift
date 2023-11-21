@@ -45,11 +45,14 @@ class VerificationVC: UIViewController {
         fetchLoginViewModel()
         
         topTextLabel.text = "A verification code has been sent \nto your mobile number"
-        let bottomFormatedText = NSMutableAttributedString()
-        bottomFormatedText.regular("Didn’t receive the code? ", size: 15).bold("Resend", size: 15)
-        bottomFormatedText.addUnderLine(textToFind: "Resend")
-        bottomFormatedText.addLink(textToFind: "Resend", linkURL: "resend")
-        bottomTextView.attributedText = bottomFormatedText
+        ///For forgot password, resent api will not work, It require authentication
+        if pushFrom != .forgotPass {
+            let bottomFormatedText = NSMutableAttributedString()
+            bottomFormatedText.regular("Didn’t receive the code? ", size: 15).bold("Resend", size: 15)
+            bottomFormatedText.addUnderLine(textToFind: "Resend")
+            bottomFormatedText.addLink(textToFind: "Resend", linkURL: "resend")
+            bottomTextView.attributedText = bottomFormatedText
+        }
         otpTextFieldView.fieldSize = (screenWidth - 100) / 6
         otpTextFieldView.delegate = self
         otpTextFieldView.initializeUI()
@@ -83,6 +86,8 @@ class VerificationVC: UIViewController {
                 ]
                 UserVerifyVM.shared.verificationAsyncCall(parameters: param)
             }
+        } else {
+            self.view.makeToast(ErrorMessage.otpEmptyAlert)
         }
     }
 }
@@ -129,13 +134,8 @@ extension VerificationVC {
                     ///User verified
                     UserDefaults.standard.user = user
                     UserDefaults.standard.token = user.token
-                    
-                    switch self.pushFrom {
-                    case .register:
-                        self.presentingViewController?.presentedViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-                    default: //.login 
-                        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-                    }
+                    //go back to tabbar
+                    NotificationCenter.default.post(name: NSNotification.dismissLoginVC, object: nil)
                 } else {
                     self.view.makeToast(ErrorMessage.incorrectOTP)
                 }
@@ -150,9 +150,7 @@ extension VerificationVC {
     func execute_onResendResponseData(_ response: LoginResponse?) {
         
         if let dataResponse = response?.response {
-            if let user = dataResponse.data {
-                self.view.makeToast(dataResponse.messages?.first)
-            }
+            self.view.makeToast(dataResponse.messages?.first)
         } else {
             if let errorResponse = response?.error {
                 self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)

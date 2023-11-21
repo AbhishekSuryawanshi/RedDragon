@@ -28,7 +28,7 @@ class HTTPSClient: HTTPSClientProtocol {
         
         let _response = try? JSONSerialization.jsonObject(with: data, options: [])
         let responseDictionary = _response as? [String: Any]
-        print("[Response] :==> \(request.url)\n\(responseDictionary ?? [:])")
+        print("[Response] :==> \(responseDictionary ?? [:])")
         
         // Check if the HTTP response status code is within the success range (200-399).
         guard let res = urlResponse as? HTTPURLResponse, 200..<407 ~= res.statusCode else {

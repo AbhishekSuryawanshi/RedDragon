@@ -23,7 +23,7 @@ class PostDetailVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        refreshForLocalization()
+        refreshPage()
     }
     
     override func viewDidLayoutSubviews() {
@@ -48,7 +48,7 @@ class PostDetailVC: UIViewController {
         value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
     }
     
-    func refreshForLocalization() {
+    func refreshPage() {
         headerLabel.text = "Post".localized
         commentTextView.placeholder = "Add a comment".localized
     }
@@ -120,8 +120,14 @@ extension PostDetailVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                SocialLikeCommentListVM.shared.commentsArray = response ?? []
-                self?.postModel.commentCount = SocialLikeCommentListVM.shared.commentsArray.count
+                if let dataResponse = response?.response {
+                    SocialLikeCommentListVM.shared.commentsArray = dataResponse.data ?? []
+                    self?.postModel.commentCount = SocialLikeCommentListVM.shared.commentsArray.count
+                } else {
+                    if let errorResponse = response?.error {
+                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                    }
+                }
                 self?.listTableView.reloadData()
             })
             .store(in: &cancellable)
@@ -137,8 +143,14 @@ extension PostDetailVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.commentTextView.text = ""
-                SocialLikeCommentListVM.shared.fetchCommentListAsyncCall(postId: self?.postModel.id ?? 0)
+                if let dataResponse = response?.response {
+                    self?.commentTextView.text = ""
+                    SocialLikeCommentListVM.shared.fetchCommentListAsyncCall(postId: self?.postModel.id ?? 0)
+                } else {
+                    if let errorResponse = response?.error {
+                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                    }
+                }
             })
             .store(in: &cancellable)
         
@@ -153,7 +165,13 @@ extension PostDetailVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                SocialLikeCommentListVM.shared.fetchCommentListAsyncCall(postId: self?.postModel.id ?? 0)
+                if let dataResponse = response?.response {
+                    SocialLikeCommentListVM.shared.fetchCommentListAsyncCall(postId: self?.postModel.id ?? 0)
+                } else {
+                    if let errorResponse = response?.error {
+                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                    }
+                }
             })
             .store(in: &cancellable)
         
@@ -168,13 +186,17 @@ extension PostDetailVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                //todo 
-               // if (response?.message ?? "").lowercased().contains("success"),
+                if let dataResponse = response?.response {
                     if let status = self?.postModel.liked {
-                    ///update like status and likecount in post model
-                    self?.postModel.liked = !status
-                    self?.postModel.likeCount = status ? (self?.postModel.likeCount ?? 0) - 1 : (self?.postModel.likeCount ?? 0) + 1
-                    self?.listTableView.reloadData()
+                        ///update like status and likecount in post model
+                        self?.postModel.liked = !status
+                        self?.postModel.likeCount = status ? (self?.postModel.likeCount ?? 0) - 1 : (self?.postModel.likeCount ?? 0) + 1
+                        self?.listTableView.reloadData()
+                    }
+                } else {
+                    if let errorResponse = response?.error {
+                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                    }
                 }
             })
             .store(in: &cancellable)

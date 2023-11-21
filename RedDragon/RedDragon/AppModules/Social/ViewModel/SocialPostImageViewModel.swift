@@ -1,14 +1,14 @@
 //
-//  ImageViewModel.swift
+//  SocialPostImageViewModel.swift
 //  RedDragon
 //
-//  Created by Qasr01 on 03/11/2023.
+//  Created by Qasr01 on 21/11/2023.
 //
 
 import Foundation
 
-class PostImageViewModel: ObservableObject {
-    static let shared = PostImageViewModel()
+class SocialPostImageViewModel: ObservableObject {
+    static let shared = SocialPostImageViewModel()
     
     @Published private(set) var userImage: String?
     let session: URLSession
@@ -42,6 +42,11 @@ class PostImageViewModel: ObservableObject {
         bodyData.append("--\(boundary)--\r\n".data(using: .utf8)!)
         
         request.httpBody = bodyData
+       
+        if let userToken = UserDefaults.standard.token, userToken != ""  {
+            request.setValue("Bearer " + userToken, forHTTPHeaderField: "Authorization")
+        }
+        print("[Request] :==>\(URLConstants.postImage)\n[Token] :==>\(UserDefaults.standard.token ?? "")")
         
         return request
     }
@@ -63,10 +68,17 @@ class PostImageViewModel: ObservableObject {
         Task { @MainActor in
             displayLoader?(true)
             do {
-                let responseData = try await fetchUploadedImageURL(imageName: imageName, imageData: imageData)
+                /*
+                 
+                 */
+                let responseData = try await self.fetchUploadedImageURL(imageName: imageName, imageData: imageData)
+                                
                 var imageModel = ImageResponse()
                 if responseData != "" {
                     let jsonData = Data(responseData.utf8)
+                    let _response = try? JSONSerialization.jsonObject(with: jsonData, options: [])
+                    let responseDictionary = _response as? [String: Any]
+                    print("[Response] :==> \(responseDictionary ?? [:])")
                     let decoder = JSONDecoder()
                     do {
                         imageModel = try decoder.decode(ImageResponse.self, from: jsonData)
@@ -99,7 +111,7 @@ class PostImageViewModel: ObservableObject {
         } else {
             // let statusCodeMessage = showStatusCodeMeaning(for: statusCode)
             // throw CustomErrors.general(message: statusCodeMessage)
-            throw CustomErrors.noData
+           throw CustomErrors.noData
         }
     }
 }

@@ -35,14 +35,18 @@ class LoginVC: UIViewController {
         bgView.roundCornersWithBorderLayer(cornerRadii: 30, corners: [.topLeft, .topRight], bound: bgView.bounds)
         bgView.applyShadow(radius: 10, opacity: 1)
     }
-   
+    
     override func viewWillDisappear(_ animated: Bool) {
         delegate?.viewControllerDismissed()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func initialSettings() {
         self.view.addSubview(Loader.activityIndicator)
-        Loader.activityIndicator.stopAnimating()
+        // Loader.activityIndicator.stopAnimating()
         fetchLoginViewModel()
         ///set deafult value for country code
         countryCode = "+971"
@@ -58,6 +62,8 @@ class LoginVC: UIViewController {
         bottomFormatedText.addUnderLine(textToFind: "Register")
         bottomFormatedText.addLink(textToFind: " Register", linkURL: "register")
         bottomTextView.attributedText = bottomFormatedText
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dismissLoginVC), name: NSNotification.dismissLoginVC, object: nil)
     }
     
     func showLoader(_ value: Bool) {
@@ -76,6 +82,11 @@ class LoginVC: UIViewController {
             return false
         }
         return true
+    }
+    
+    @objc func dismissLoginVC() {
+        self.dismiss(animated: true)
+        self.dismiss(animated: true)
     }
     
     // MARK: - Button Actions
@@ -123,7 +134,9 @@ extension LoginVC {
     func execute_onResponseData(_ response: LoginResponse?) {
         if let dataResponse = response?.response {
             if let user = dataResponse.data {
+                
                 if user.otpVerified == 0 {
+                    UserDefaults.standard.token = user.token //required for resend api
                     self.presentOverViewController(VerificationVC.self, storyboardName: StoryboardName.login) { vc in
                         vc.email = user.email
                         vc.phoneNumber = user.phoneNumber

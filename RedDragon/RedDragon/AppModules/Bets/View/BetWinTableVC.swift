@@ -33,7 +33,6 @@ class BetWinTableVC: UITableViewCell {
         homeName.text = item?.homeTeam
         awayName.text = item?.awayTeam
         sportLable.text = item?.sport?.capitalized.localized ?? "NA"
-    
         
 
         guard let betAmountString = item?.betAmount, let betAmount = Float(betAmountString), let oddValueString = item?.betOddValue, let betOddValue = Float(oddValueString) else { return }
@@ -43,9 +42,7 @@ class BetWinTableVC: UITableViewCell {
         
        
         dateLable.text = item?.betDatetime?.getFormattedDate(from:  dateFormat.yyyyMMddHHmm.rawValue, andConvertTo: dateFormat.mmmdhm.rawValue)
-    
-          
-            winLoseAmount.text = "\(item?.betAmount ?? "0")"
+        winLoseAmount.text = "\(item?.betAmount ?? "0")"
   
         
     }

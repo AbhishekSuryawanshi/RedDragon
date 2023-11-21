@@ -14,7 +14,7 @@ enum PollCellType {
 }
 
 class SocialPollTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var leftView: UIView!
     @IBOutlet weak var leftLabel: UILabel!
     @IBOutlet weak var rightLabel: UILabel!
@@ -28,14 +28,14 @@ class SocialPollTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
     
     func configure(type: PollCellType, poll: Poll, pollCount: Int = 0) {
-      
+        
         closeButton.isHidden = type == .createPost ? false : true
         pollStackView.borderWidth = type == .createPost ? 0 : 1
         leftView.borderWidth = type == .createPost ? 1 : 0
@@ -58,6 +58,5 @@ class SocialPollTableViewCell: UITableViewCell {
         leftLabel.textColor = type == .pollAnswer ? .black : .yellow2
         leftLabel.textAlignment = type == .pollQuestien ? .center : .left
         leftLabel.text = poll.title
-        
     }
 }

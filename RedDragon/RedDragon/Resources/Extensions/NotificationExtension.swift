@@ -10,4 +10,5 @@ import Foundation
 extension NSNotification {
     static let socialSearchEnable  = Notification.Name("socialSearchEnable")
     static let refreshHashTags     = Notification.Name("refreshHashTags")
+    static let dismissLoginVC      = Notification.Name("dismissLoginVC")
 }

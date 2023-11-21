@@ -37,6 +37,8 @@ struct URLConstants {
     static let socialBaseURL       = baseURL + "euro5league/"
    
     //Match
+    static let socialPublicLeague  = "https://muheh.com/euro5leagues/api/league/list"
+    static let socialPublicTeam    = "https://muheh.com/euro5leagues/api/team/list"
     static let socialLeague        = socialBaseURL + "league/list"
     static let socialTeam          = socialBaseURL + "team/list"
     static let socialMatch         = socialBaseURL + "match/list"
@@ -64,4 +66,9 @@ struct URLConstants {
     //Bets
     static let betAllMatches     = "https://amberic.top/app8/api/bet/" + "match/get"
     static let allBets           = "https://amberic.top/app8/api/bet/" + "play/get"
+    
+    // MARK: -  Meet
+    
+    static let meetBaseURL         = "https://kicktin.com/vinder/api/"
+    static let meetUserList        = meetBaseURL + "listuser"
 }
