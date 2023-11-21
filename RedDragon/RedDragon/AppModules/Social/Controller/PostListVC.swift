@@ -209,9 +209,9 @@ extension PostListVC {
         SocialPostListVM.shared.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
-//        SocialPostListVM.shared.displayLoader = { [weak self] value in
-//            self?.showLoader(value)
-//        }
+        //        SocialPostListVM.shared.displayLoader = { [weak self] value in
+        //            self?.showLoader(value)
+        //        }
         SocialPostListVM.shared.$responseData
             .receive(on: DispatchQueue.main)
             .dropFirst()
@@ -231,7 +231,13 @@ extension PostListVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                SocialPostListVM.shared.fetchPostListAsyncCall()
+                if let dataResponse = response?.response {
+                    SocialPostListVM.shared.fetchPostListAsyncCall()
+                } else {
+                    if let errorResponse = response?.error {
+                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                    }
+                }
             })
             .store(in: &cancellable)
         
@@ -246,7 +252,13 @@ extension PostListVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                SocialPostListVM.shared.fetchPostListAsyncCall()
+                if let dataResponse = response?.response {
+                    SocialPostListVM.shared.fetchPostListAsyncCall()
+                } else {
+                    if let errorResponse = response?.error {
+                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                    }
+                }
             })
             .store(in: &cancellable)
         
@@ -261,12 +273,18 @@ extension PostListVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                SocialPostListVM.shared.fetchPostListAsyncCall()
+                if let dataResponse = response?.response {
+                    SocialPostListVM.shared.fetchPostListAsyncCall()
+                } else {
+                    if let errorResponse = response?.error {
+                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                    }
+                }
             })
             .store(in: &cancellable)
     }
     
-    func execute_onPostListResponseData(_ response: SocialPostResponse?) {
+    func execute_onPostListResponseData(_ response: SocialPostListResponse?) {
         postArray.removeAll()
         allPostArray.removeAll()
         if let dataResponse = response?.response {
@@ -289,11 +307,11 @@ extension PostListVC {
             NotificationCenter.default.post(name: NSNotification.refreshHashTags, object: nil, userInfo: dataDict)
             
             ///set placeholder for tableview
-    //        if postArray.count == 0 {
-    //            listTableView.setEmptyMessage(UserDefaults.standard.token ?? "" == "" ? StringConstants.postsEmptyLoginAlert : ErrorMessage.dataNotFound)
-    //        } else {
-    //            listTableView.restore()
-    //        }
+            //        if postArray.count == 0 {
+            //            listTableView.setEmptyMessage(UserDefaults.standard.token ?? "" == "" ? StringConstants.postsEmptyLoginAlert : ErrorMessage.dataNotFound)
+            //        } else {
+            //            listTableView.restore()
+            //        }
         } else {
             if let errorResponse = response?.error {
                 self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)

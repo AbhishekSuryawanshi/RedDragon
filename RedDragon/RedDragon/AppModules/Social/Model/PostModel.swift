@@ -7,12 +7,12 @@
 
 import UIKit
 
-struct SocialPostResponse: Codable {
-    let response: SocialPostData?
-    let error: SocialPostData?
+struct SocialPostListResponse: Codable {
+    let response: SocialPostListData?
+    let error: SocialPostListData?
 }
 
-struct SocialPostData: Codable {
+struct SocialPostListData: Codable {
     let code: Int?
     let messages: [String]?
     let data: [SocialPost]?
@@ -75,7 +75,7 @@ struct SocialPost: Codable {
         case option_1Count = "option_1_count"
         case option_2Count = "option_2_count"
         case option_3Count = "option_3_count"
-       // case option_3 = "question"
+        // case option_3 = "question"
     }
     
     public init () {}
@@ -134,7 +134,7 @@ struct SocialPost: Codable {
         if option_3Count != 0 {
             print("========")
         }
-       
+        
         if option_1 != "" {
             let poll_1 = Poll(title: option_1, count: option_1Count)
             pollArray.append(poll_1)
@@ -172,7 +172,19 @@ struct SocialPostImage: Codable {
     }
 }
 
-struct Social: Codable {
+///Used for like and comments in social module
+struct SocialCommentResponse: Codable {
+    let response: SocialCommentData?
+    let error: SocialCommentData?
+}
+
+struct SocialCommentData: Codable {
+    let code: Int?
+    let messages: [String]?
+    let data: [SocialComment]?
+}
+
+struct SocialComment: Codable {
     var id: Int = 0 //comment or like id
     var postId: Int = 0
     var updatedTime: String = ""
@@ -197,10 +209,6 @@ struct Social: Codable {
         user  = try (container.decodeIfPresent(User.self, forKey: .user) ?? User())
         comment  = try (container.decodeIfPresent(String.self, forKey: .comment) ?? "")
     }
-}
-
-struct BasicResponsee: Codable {
-    let message: String?
 }
 
 struct ImageResponse: Codable {

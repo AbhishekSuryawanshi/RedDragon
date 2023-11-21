@@ -2,7 +2,7 @@
 //  ResponseModel.swift
 //  RedDragon
 //
-//  Created by Qasr01 on 18/11/2023.
+//  Created by Qasr01 on 21/11/2023.
 //
 
 import Foundation
@@ -16,4 +16,3 @@ struct BasicResponse: Codable {
     let code: Int?
     let messages: [String]?
 }
-
