@@ -71,4 +71,5 @@ struct URLConstants {
     
     static let meetBaseURL         = "https://kicktin.com/vinder/api/"
     static let meetUserList        = meetBaseURL + "listuser"
+    static let meetLikedUser       = meetBaseURL + "user/like"
 }
