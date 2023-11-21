@@ -88,10 +88,6 @@ extension LineupViewController {
             imageView.contentMode = .scaleAspectFit
             newView.addSubview(imageView)
             
-            imageView.layer.cornerRadius = 15
-            imageView.layer.masksToBounds = true
-            imageView.clipsToBounds = true
-            
             // Set fixed width and height constraints for the view
             newView.translatesAutoresizingMaskIntoConstraints = false
             newView.widthAnchor.constraint(equalToConstant: 30).isActive = true
@@ -99,14 +95,13 @@ extension LineupViewController {
             
             // Set constraints for the UIImageView to fill the entire newView
             imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.leadingAnchor.constraint(equalTo: newView.leadingAnchor).isActive = true
-            imageView.trailingAnchor.constraint(equalTo: newView.trailingAnchor).isActive = true
-            imageView.topAnchor.constraint(equalTo: newView.topAnchor).isActive = true
-            imageView.bottomAnchor.constraint(equalTo: newView.bottomAnchor).isActive = true
+            imageView.centerXAnchor.constraint(equalTo: newView.centerXAnchor).isActive = true
+            imageView.centerYAnchor.constraint(equalTo: newView.centerYAnchor).isActive = true
+            imageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+            imageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
             
-            newView.layer.cornerRadius = 15
-            newView.layer.masksToBounds = true
-            newView.clipsToBounds = true
+            imageView.layer.cornerRadius = 15
+            imageView.clipsToBounds = true
             
             // Add the new view to the stack view
             stackView.addArrangedSubview(newView)
