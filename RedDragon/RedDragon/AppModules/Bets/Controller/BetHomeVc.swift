@@ -12,6 +12,7 @@ import Combine
 
 class BetHomeVc: UIViewController {
     
+    @IBOutlet var pointsLable: UILabel!
     var viewModelBet = BetsHomeViewModel()
     var viewModel = BetMatchesHomeViewModel()
     var selectedType : BetsTitleCollectionView = .All
@@ -86,6 +87,10 @@ class BetHomeVc: UIViewController {
          self.present(menu, animated: true)
      }
      
+    
+    @IBAction func goToPoints(_ sender: Any) {
+        navigateToViewController(PointsVc.self, storyboardName: StoryboardName.bets, animationType: .autoReverse(presenting: .zoom))
+    }
 }
 
 // collection view

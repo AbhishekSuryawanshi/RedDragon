@@ -9,6 +9,7 @@ import UIKit
 
 class BetMatchTableVC: UITableViewCell {
     
+    @IBOutlet var imgLeague: UIImageView!
     @IBOutlet var oddsLable3: UILabel!
     @IBOutlet var oddsLable2: UILabel!
     @IBOutlet var oddsLable1: UILabel!
@@ -36,6 +37,7 @@ class BetMatchTableVC: UITableViewCell {
     func configurCell(match: MatchesList, isLive : Bool){
         
         leagueLable.text = match.league
+        imgLeague.setImage(imageStr: match.logo ?? "", placeholder: UIImage(named: "placeholderTeam"))
         homeName.text = match.matches?.first?.homeTeam
         awayName.text = match.matches?.first?.awayTeam
         if (match.matches!.first!.odds1Value!.isEmpty) {

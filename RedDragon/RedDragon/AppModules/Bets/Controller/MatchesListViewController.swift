@@ -44,4 +44,12 @@ extension MatchesListViewController : UITableViewDelegate, UITableViewDataSource
         
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if isLive{
+            navigateToViewController(PlaceBetVc.self, storyboardName: StoryboardName.bets,  animationType: .autoReverse(presenting: .zoom), configure: { vc in
+                vc.betItem = self.matchesList?[indexPath.row]
+            })
+        }
+    }
+    
 }
