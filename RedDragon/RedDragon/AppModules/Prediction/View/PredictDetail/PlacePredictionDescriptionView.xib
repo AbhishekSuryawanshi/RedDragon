@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Bold.ttf">
+            <string>Roboto-Bold</string>
+        </array>
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlacePredictionDescription" customModule="RedDragon" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="hPf-o5-t0f"/>
+                <outlet property="descriptionLbl" destination="YWg-MT-BEN" id="0ud-V0-MXG"/>
+                <outlet property="descriptionTxtView" destination="nMX-zw-Lui" id="IgR-5w-AGf"/>
+                <outlet property="publishPredictionBtn" destination="3UV-5u-b4A" id="kk2-et-x3p"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="222"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YWg-MT-BEN">
+                    <rect key="frame" x="10" y="10" width="73" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="5A5-mY-dTV"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="14"/>
+                    <color key="textColor" name="base"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nMX-zw-Lui">
+                    <rect key="frame" x="10" y="37" width="373" height="130"/>
+                    <color key="backgroundColor" red="0.97254901960784312" green="0.92156862745098034" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="130" id="bOu-2a-XB5"/>
+                    </constraints>
+                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                    <color key="textColor" systemColor="labelColor"/>
+                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3UV-5u-b4A">
+                    <rect key="frame" x="10" y="177" width="373" height="35"/>
+                    <color key="backgroundColor" name="base"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="LA7-ky-Sce"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Publish Prediction">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="YWg-MT-BEN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="9qa-ue-DML"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="3UV-5u-b4A" secondAttribute="trailing" constant="10" id="KYD-aI-7ZR"/>
+                <constraint firstItem="3UV-5u-b4A" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="L4V-a5-Z14"/>
+                <constraint firstItem="nMX-zw-Lui" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="S0t-JD-6Lx"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="nMX-zw-Lui" secondAttribute="trailing" constant="10" id="VYb-ah-g1P"/>
+                <constraint firstItem="YWg-MT-BEN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="XB4-fY-sbz"/>
+                <constraint firstAttribute="bottom" secondItem="3UV-5u-b4A" secondAttribute="bottom" constant="10" id="aKe-6x-psa"/>
+                <constraint firstItem="nMX-zw-Lui" firstAttribute="top" secondItem="YWg-MT-BEN" secondAttribute="bottom" constant="10" id="kLA-7a-ZRO"/>
+                <constraint firstItem="3UV-5u-b4A" firstAttribute="top" secondItem="nMX-zw-Lui" secondAttribute="bottom" constant="10" id="yOV-m8-cVP"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="6.8702290076335872" y="237.32394366197184"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="base">
+            <color red="0.7160000205039978" green="0.093999996781349182" blue="0.054000001400709152" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
