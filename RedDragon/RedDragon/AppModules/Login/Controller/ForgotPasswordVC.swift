@@ -28,6 +28,7 @@ class ForgotPasswordVC: UIViewController {
     
     func initialSettings() {
         self.view.addSubview(Loader.activityIndicator)
+        emailTextfield.placeholder = "Email".localized
         fetchLoginViewModel()
     }
 
@@ -83,7 +84,7 @@ extension ForgotPasswordVC {
         if let dataResponse = response?.response {
             ///Show "otp sent" message from server and collect otp from VerificationVC
             self.view.makeToast(dataResponse.messages?.first)
-            Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (timer) in
+            Timer.scheduledTimer(withTimeInterval: 4, repeats: false) { (timer) in
                 self.presentOverViewController(VerificationVC.self, storyboardName: StoryboardName.login) { vc in
                     vc.pushFrom = .forgotPass
                 }

@@ -40,10 +40,10 @@ class SocialSearchVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        refreshForLocalization()
+        refreshPage()
     }
     
-    func refreshForLocalization() {
+    func refreshPage() {
         Loader.activityIndicator.startAnimating()
         seeAllButton.isHidden = matchArray.count == 0 ? true : false
     }

@@ -15,7 +15,8 @@ class HeaderTopCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
+   /// To use single underline label cell
     func configureUnderLineCell(title: String, selected: Bool) {
         var formatedText = NSMutableAttributedString()
         formatedText = selected ? formatedText.bold(title, size: 17) : formatedText.regular(title, size: 17)
@@ -25,6 +26,7 @@ class HeaderTopCollectionViewCell: UICollectionViewCell {
         titleLabel.textColor = .white
     }
     
+    /// To use single label cell
     func configureTagCell(title: String) {
         titleLabel.text = title
         titleLabel.font = fontRegular(13)

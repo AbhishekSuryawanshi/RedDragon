@@ -33,6 +33,7 @@ struct StringConstants {
     static var pollCreateSuccess    = "Your Poll has been Added"
     static var pollUpdateSuccess    = "Your Poll has been updated"
     static var deleteAlert          = "Are you sure you want to delete?"
+    static var logoutAlert          = "Are you sure you want to logout?"
     
     //Custom Alert
     static let dismiss              = "Dismiss"

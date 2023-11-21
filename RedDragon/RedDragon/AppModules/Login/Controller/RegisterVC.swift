@@ -158,6 +158,7 @@ extension RegisterVC {
         if let dataResponse = response?.response {
             if let user = dataResponse.data {
                 ///User registered, now verify OTP
+              UserDefaults.standard.token = user.token //required for resend api
                 self.presentOverViewController(VerificationVC.self, storyboardName: StoryboardName.login) { vc in
                     vc.email = user.email
                     vc.phoneNumber = user.phoneNumber

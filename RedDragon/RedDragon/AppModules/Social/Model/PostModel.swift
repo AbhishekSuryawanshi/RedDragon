@@ -132,7 +132,7 @@ struct SocialPost: Codable {
         }
         pollArray.removeAll()
         if option_3Count != 0 {
-            print("======== ---")
+            print("========")
         }
        
         if option_1 != "" {
