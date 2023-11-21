@@ -217,6 +217,10 @@
 		E9129B9A2B05FC960073A407 /* BetLoseTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9129B982B05FC960073A407 /* BetLoseTableVC.swift */; };
 		E9129B9B2B05FC960073A407 /* BetLoseTableVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9129B992B05FC960073A407 /* BetLoseTableVC.xib */; };
 		E96DC2522B08AC120013F315 /* MatchesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96DC2512B08AC120013F315 /* MatchesListViewController.swift */; };
+		E9C657212B0B67A800833D37 /* PlaceBetVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C657202B0B67A800833D37 /* PlaceBetVc.swift */; };
+		E9C657232B0B73CC00833D37 /* PointsVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C657222B0B73CC00833D37 /* PointsVc.swift */; };
+		E9C657262B0B783E00833D37 /* PointsItemTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C657242B0B783E00833D37 /* PointsItemTableVC.swift */; };
+		E9C657272B0B783E00833D37 /* PointsItemTableVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9C657252B0B783E00833D37 /* PointsItemTableVC.xib */; };
 		E9DDB61E2B049AF1004C8ACF /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = E9DDB61D2B049AF1004C8ACF /* SideMenu */; };
 		E9DDB6282B049BA2004C8ACF /* BetStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9DDB6222B049BA2004C8ACF /* BetStoryboard.storyboard */; };
 		E9DDB6292B049BA2004C8ACF /* SideMenuVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DDB6242B049BA2004C8ACF /* SideMenuVc.swift */; };
@@ -434,6 +438,10 @@
 		E9129B982B05FC960073A407 /* BetLoseTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetLoseTableVC.swift; sourceTree = "<group>"; };
 		E9129B992B05FC960073A407 /* BetLoseTableVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BetLoseTableVC.xib; sourceTree = "<group>"; };
 		E96DC2512B08AC120013F315 /* MatchesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesListViewController.swift; sourceTree = "<group>"; };
+		E9C657202B0B67A800833D37 /* PlaceBetVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceBetVc.swift; sourceTree = "<group>"; };
+		E9C657222B0B73CC00833D37 /* PointsVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsVc.swift; sourceTree = "<group>"; };
+		E9C657242B0B783E00833D37 /* PointsItemTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsItemTableVC.swift; sourceTree = "<group>"; };
+		E9C657252B0B783E00833D37 /* PointsItemTableVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PointsItemTableVC.xib; sourceTree = "<group>"; };
 		E9DDB6222B049BA2004C8ACF /* BetStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BetStoryboard.storyboard; sourceTree = "<group>"; };
 		E9DDB6242B049BA2004C8ACF /* SideMenuVc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuVc.swift; sourceTree = "<group>"; };
 		E9DDB6252B049BA2004C8ACF /* BetHomeVc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetHomeVc.swift; sourceTree = "<group>"; };
@@ -1231,7 +1239,6 @@
 			isa = PBXGroup;
 			children = (
 				E9DDB6342B04B474004C8ACF /* BetsHomeViewModel.swift */,
-				E96DC2512B08AC120013F315 /* MatchesListViewController.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1247,8 +1254,11 @@
 		E9DDB6232B049BA2004C8ACF /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E96DC2512B08AC120013F315 /* MatchesListViewController.swift */,
 				E9DDB6242B049BA2004C8ACF /* SideMenuVc.swift */,
 				E9DDB6252B049BA2004C8ACF /* BetHomeVc.swift */,
+				E9C657202B0B67A800833D37 /* PlaceBetVc.swift */,
+				E9C657222B0B73CC00833D37 /* PointsVc.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1274,6 +1284,8 @@
 				E9129B952B05F5560073A407 /* BetWinTableVC.xib */,
 				E9129B982B05FC960073A407 /* BetLoseTableVC.swift */,
 				E9129B992B05FC960073A407 /* BetLoseTableVC.xib */,
+				E9C657242B0B783E00833D37 /* PointsItemTableVC.swift */,
+				E9C657252B0B783E00833D37 /* PointsItemTableVC.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1450,6 +1462,7 @@
 				49B0B9EF2AE68F0700A9D235 /* Main.storyboard in Resources */,
 				474D993C2AE7F30D009499D0 /* Roboto-Light.ttf in Resources */,
 				493D21292AFE125600045672 /* PlayerDetailsMediaCollectionViewCell.xib in Resources */,
+				E9C657272B0B783E00833D37 /* PointsItemTableVC.xib in Resources */,
 				49F65E442AF6222D000F9E96 /* MatchTabsCollectionViewCell.xib in Resources */,
 				4716B11A2AEF8D6B003582A9 /* MatchTableViewCell.xib in Resources */,
 				E9129B9B2B05FC960073A407 /* BetLoseTableVC.xib in Resources */,
@@ -1504,6 +1517,8 @@
 				472873552AEA7A780011F00F /* HeaderBottom_1CollectionViewCell.swift in Sources */,
 				4760AFBD2AF9203000646EC7 /* SocialCommentTableViewCell.swift in Sources */,
 				4784E3F12AECDCC000C96085 /* SocialViewModel.swift in Sources */,
+				E9C657212B0B67A800833D37 /* PlaceBetVc.swift in Sources */,
+				E9C657232B0B73CC00833D37 /* PointsVc.swift in Sources */,
 				47C8C95D2AF116D700448D96 /* ImageZoomVC.swift in Sources */,
 				49B04A602AFA6FD300B440AA /* ExpertViewController.swift in Sources */,
 				49A822BB2B04FC27007752C2 /* RecentMatchTableViewCell.swift in Sources */,
@@ -1576,6 +1591,7 @@
 				47C3B7202B04D5DA00E12A4D /* CountryListTableViewCell.swift in Sources */,
 				49D0853B2AEFD47300A835B7 /* LeagueCollectionViewCell.swift in Sources */,
 				47E2FACF2AFE6BAE00DBEFE6 /* SocialSearchVC.swift in Sources */,
+				E9C657262B0B783E00833D37 /* PointsItemTableVC.swift in Sources */,
 				41EB79DD2AF398DF00D068F7 /* SpiderChartView.swift in Sources */,
 				47FC33E42AEA50BE00FABED4 /* SocialVC.swift in Sources */,
 				47FC33E12AEA4DAC00FABED4 /* HeaderTopCollectionViewCell.swift in Sources */,
