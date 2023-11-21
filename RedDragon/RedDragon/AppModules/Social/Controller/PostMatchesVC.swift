@@ -40,7 +40,7 @@ class PostMatchesVC: UIViewController {
         setupGestureRecognizers()
     }
     override func viewDidAppear(_ animated: Bool) {
-        refreshForLocalization()
+        refreshPage()
         
         ///Show matches of first league
         ///League list already loaded in scoial vc
@@ -53,7 +53,7 @@ class PostMatchesVC: UIViewController {
         leagueCollectionView.register(CellIdentifier.singleImageCollectionViewCell)
     }
     
-    func refreshForLocalization() {
+    func refreshPage() {
         leagueLabeL.text = "Leagues".localized
         selectMatchLabeL.text = "Select match".localized
     }

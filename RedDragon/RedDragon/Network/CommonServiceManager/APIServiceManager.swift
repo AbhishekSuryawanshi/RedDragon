@@ -53,6 +53,7 @@ class APIServiceManager<ResponseModel: Decodable>: ObservableObject {
                     allHeaders = allHeaders.merging(authorizationToken, uniquingKeysWith: { $1 })
                 }
             }
+            print("[Request] :==> \(method.rawValue)  \(urlString)\n[Token] :==>\(UserDefaults.standard.token ?? "")\n[Parameter] :==>\(parameters ?? [:])")
             for (key, value) in allHeaders {
                 request.setValue(value, forHTTPHeaderField: key)
             }

@@ -33,6 +33,9 @@ class ResetPasswordVC: UIViewController {
     
     func initialSettings() {
         self.view.addSubview(Loader.activityIndicator)
+        phoneTextField.placeholder = "Phone Number".localized
+        passwordTextField.placeholder = "Password".localized
+        confirmPasswordTextfield.placeholder = "Confirm Password".localized
         fetchLoginViewModel()
         
         ///set deafult value for country code
@@ -113,11 +116,17 @@ extension ResetPasswordVC {
         if let dataResponse = response?.response {
             self.view.makeToast(dataResponse.messages?.first)
             Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (timer) in
-                self.presentingViewController?.presentedViewController?.presentingViewController?.dismiss(animated: true, completion: nil)//.presentedViewController?
+                NotificationCenter.default.post(name: NSNotification.dismissLoginVC, object: nil)
             }
         } else {
             if let errorResponse = response?.error {
-                self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                let okAction = PMAlertAction(title: "OK", style: .default) {
+                    /// Wrong otp, go back to verification vc
+                    if (errorResponse.messages?.first ?? "").lowercased().contains("verification code") {
+                        self.dismiss(animated: true)
+                    }
+                }
+                self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage, actions: [okAction])
             }
         }
     }

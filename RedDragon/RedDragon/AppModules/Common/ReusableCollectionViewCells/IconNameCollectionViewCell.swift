@@ -14,7 +14,7 @@ enum IconNameCellStyle {
 }
 
 class IconNameCollectionViewCell: UICollectionViewCell {
-
+    
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var iconImageWidthConstraint: NSLayoutConstraint!
@@ -22,9 +22,8 @@ class IconNameCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
+    
     func configure(title: String, iconName: String = "", style: IconNameCellStyle) {
         /// 3 IconNameCellStyle added
         /// cell view's border, icon size, title font depends on "style", check and change accordingly
@@ -36,7 +35,6 @@ class IconNameCollectionViewCell: UICollectionViewCell {
         iconImageWidthConstraint.constant = style == .team ? (0.7 * 60) : 60
         
         iconImageView.cornerRadius = iconImageWidthConstraint.constant / 2
-        print(iconImageView.cornerRadius)
         iconImageView.clipsToBounds = true
         
         //Check image or url, placeholder image

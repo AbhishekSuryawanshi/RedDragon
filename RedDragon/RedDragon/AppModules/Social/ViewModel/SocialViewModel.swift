@@ -21,6 +21,20 @@ class SocialLeagueVM: APIServiceManager<SocialLeagueResponse> {
     }
 }
 
+class SocialPublicLeagueVM: APIServiceManager<[SocialLeague]> {
+    init () {}
+    static let shared = SocialPublicLeagueVM()
+    
+    var leagueArray: [SocialLeague] = []
+    
+    ///function to fetch league list for social module
+    func fetchLeagueListAsyncCall() {
+        let urlString   = URLConstants.socialPublicLeague
+        let method      = RequestType.get
+        asyncCall(urlString: urlString, method: method, parameters: nil)
+    }
+}
+
 class SocialTeamVM: APIServiceManager<SocialTeamResponse> {
     init () {}
     static let shared = SocialTeamVM()
@@ -30,6 +44,20 @@ class SocialTeamVM: APIServiceManager<SocialTeamResponse> {
     ///Send leagueId parameter to get teams of that league
     func fetchTeamListAsyncCall() {
         let urlString   = URLConstants.socialTeam
+        let method      = RequestType.get
+        asyncCall(urlString: urlString, method: method, parameters: nil)
+    }
+}
+
+class SocialPublicTeamVM: APIServiceManager<[SocialTeam]> {
+    init () {}
+    static let shared = SocialPublicTeamVM()
+    var teamArray: [SocialTeam] = []
+    
+    ///function to fetch team list for social module
+    ///Send leagueId parameter to get teams of that league
+    func fetchTeamListAsyncCall() {
+        let urlString   = URLConstants.socialPublicTeam
         let method      = RequestType.get
         asyncCall(urlString: urlString, method: method, parameters: nil)
     }

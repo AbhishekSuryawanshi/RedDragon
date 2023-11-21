@@ -23,7 +23,7 @@ class PostDetailVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        refreshForLocalization()
+        refreshPage()
     }
     
     override func viewDidLayoutSubviews() {
@@ -48,7 +48,7 @@ class PostDetailVC: UIViewController {
         value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
     }
     
-    func refreshForLocalization() {
+    func refreshPage() {
         headerLabel.text = "Post".localized
         commentTextView.placeholder = "Add a comment".localized
     }

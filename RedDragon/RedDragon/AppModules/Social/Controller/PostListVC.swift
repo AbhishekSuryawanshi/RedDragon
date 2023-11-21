@@ -28,11 +28,6 @@ class PostListVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        //refresh placeholder text
-        guard let token = UserDefaults.standard.token, token != ""  else {
-            listTableView.reloadData()
-            return
-        }
         loadFunctionality()
     }
     
@@ -53,7 +48,16 @@ class PostListVC: UIViewController {
     func loadFunctionality() {
         nibInitialization()
         fetchPostViewModel()
-        makeNetworkCall()
+        
+        if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
+            makeNetworkCall()
+        } else {
+            ///Refresh for login or logout user
+            postArray.removeAll()
+            allPostArray.removeAll()
+            calculateContentHeight()
+            listTableView.reloadData()
+        }
     }
     
     @objc func searchEnable(notification: Notification) {
@@ -263,6 +267,8 @@ extension PostListVC {
     }
     
     func execute_onPostListResponseData(_ response: SocialPostResponse?) {
+        postArray.removeAll()
+        allPostArray.removeAll()
         if let dataResponse = response?.response {
             ///Posts and polls comes in separate order, so we have to apply date filter
             postArray = dataResponse.data ?? []
@@ -281,8 +287,6 @@ extension PostListVC {
             let filteredArray = Array(Set(hashTagAttay))
             let dataDict:[String: Any] = ["data": filteredArray]
             NotificationCenter.default.post(name: NSNotification.refreshHashTags, object: nil, userInfo: dataDict)
-            calculateContentHeight()
-            listTableView.reloadData()
             
             ///set placeholder for tableview
     //        if postArray.count == 0 {
@@ -295,6 +299,8 @@ extension PostListVC {
                 self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
             }
         }
+        calculateContentHeight()
+        listTableView.reloadData()
     }
 }
 
