@@ -80,4 +80,42 @@ extension UIViewController {
         tableView.register(nib, forCellReuseIdentifier: cellName)
     }
     
+    func formatNumber(_ number: Double) -> String {
+        let thousand = 1000.0
+        let million = 1000000.0
+        let billion = 1000000000.0
+
+        if number >= billion {
+            return String(format: "%.1fB", number / billion)
+        } else if number >= million {
+            return String(format: "%.1fM", number / million)
+        } else if number >= thousand {
+            return String(format: "%.1fK", number / thousand)
+        } else {
+            return "\(Int(number))"
+        }
+    }
+    
+    func valueFromAbbreviation(_ valueString: String) -> Double? {
+        // Define the suffixes and their respective multipliers
+        let suffixes: [Character: Double] = [
+            "K": 1e3, // Thousand
+            "M": 1e6, // Million
+            "B": 1e9, // Billion
+            "T": 1e12 // Trillion
+        ]
+        var result: Double?
+        // Extract the numerical value from the input string
+        let numericalValue = valueString.dropLast()
+        // Check if the last character is a valid suffix
+        if let suffix = valueString.last,
+           let multiplier = suffixes[suffix] {
+            // Attempt to convert the numerical value to a Double
+            if let numericalDouble = Double(numericalValue) {
+                result = numericalDouble * multiplier
+            }
+        }
+        return result
+    }
+    
 }
