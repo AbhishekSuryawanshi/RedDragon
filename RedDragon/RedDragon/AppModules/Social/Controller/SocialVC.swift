@@ -456,7 +456,6 @@ extension SocialVC: LayoutDelegate {
 /// LoginVCDelegate to show hided tabbar and refresh postlist vc
 extension SocialVC: LoginVCDelegate {
     func viewControllerDismissed() {
-        self.tabBarController?.tabBar.isHidden = false
-        loadFunctionality()
+        refreshPage()
     }
 }

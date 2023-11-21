@@ -92,7 +92,7 @@ class PostCreateVC: UIViewController {
         
         if let user = UserDefaults.standard.user {
             userImageView.setImage(imageStr: user.profileImg, placeholder: .placeholderUser)
-            userNameLabel.text = user.fullName
+            userNameLabel.text = user.name
         }
         dateLabel.text = Date().formatDate(outputFormat: dateFormat.hhmmaddMMMyyyy)
         setfeedImageCVLayout(collectionview: self.imageCollectionView, imageCount: imageArray.count)
@@ -320,7 +320,7 @@ class PostCreateVC: UIViewController {
 // MARK: - API Services
 extension PostCreateVC {
     func fetchImageViewModel() {
-        PostImageViewModel.shared.$userImage
+        SocialPostImageViewModel.shared.$userImage
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
@@ -343,10 +343,16 @@ extension PostCreateVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.view.makeToast(self?.isForEdit ?? true ? StringConstants.postUpdateSuccess : StringConstants.postCreateSuccess)
-                
-                Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (timer) in
-                    self?.navigationController?.popViewController(animated: true)
+                if let dataResponse = response?.response {
+                    self?.view.makeToast(self?.isForEdit ?? true ? StringConstants.postUpdateSuccess : StringConstants.postCreateSuccess)
+                    
+                    Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (timer) in
+                        self?.navigationController?.popViewController(animated: true)
+                    }
+                } else {
+                    if let errorResponse = response?.error {
+                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                    }
                 }
             })
             .store(in: &cancellable)
@@ -362,10 +368,16 @@ extension PostCreateVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.view.makeToast(self?.isForEdit ?? true ? StringConstants.pollUpdateSuccess : StringConstants.pollCreateSuccess)
-                
-                Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (timer) in
-                    self?.navigationController?.popViewController(animated: true)
+                if let dataResponse = response?.response {
+                    self?.view.makeToast(self?.isForEdit ?? true ? StringConstants.pollUpdateSuccess : StringConstants.pollCreateSuccess)
+                    
+                    Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (timer) in
+                        self?.navigationController?.popViewController(animated: true)
+                    }
+                } else {
+                    if let errorResponse = response?.error {
+                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                    }
                 }
             })
             .store(in: &cancellable)
@@ -381,8 +393,14 @@ extension PostCreateVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.postModel.type = "POLL"
-                self?.postButtonTapped(UIButton())
+                if let dataResponse = response?.response {
+                    self?.postModel.type = "POLL"
+                    self?.postButtonTapped(UIButton())
+                } else {
+                    if let errorResponse = response?.error {
+                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                    }
+                }
             })
             .store(in: &cancellable)
     }
@@ -461,7 +479,7 @@ extension PostCreateVC: ImagePickerDelegate, UINavigationControllerDelegate {
     func finishedPickingImage(image: UIImage, imageName: String) {
         if let imageData = image.jpegData(compressionQuality: 0.8) {
             // Pass the image data and image name to your view model for uploading
-            PostImageViewModel.shared.imageAsyncCall(imageName: imageName, imageData: imageData)
+            SocialPostImageViewModel.shared.imageAsyncCall(imageName: imageName, imageData: imageData)
         }
     }
     

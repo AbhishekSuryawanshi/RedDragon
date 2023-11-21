@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 class ForgotPasswordVC: UIViewController {
-
+    
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var emailTextfield: UITextField!
     
@@ -31,7 +31,7 @@ class ForgotPasswordVC: UIViewController {
         emailTextfield.placeholder = "Email".localized
         fetchLoginViewModel()
     }
-
+    
     func showLoader(_ value: Bool) {
         value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
     }

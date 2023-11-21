@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SocialPostListVM: APIServiceManager<SocialPostResponse> {
+class SocialPostListVM: APIServiceManager<SocialPostListResponse> {
     init () {}
     static let shared = SocialPostListVM()
     
@@ -39,7 +39,7 @@ class SocialPostListVM: APIServiceManager<SocialPostResponse> {
     }
 }
 
-class SocialPostVM: APIServiceManager<SocialPost> {
+class SocialPostVM: APIServiceManager<BasicAPIResponse> {
     init () {}
     static let shared = SocialPostVM()
     
@@ -75,10 +75,10 @@ class SocialPollVM: APIServiceManager<BasicAPIResponse> {
     }
 }
 
-class SocialLikeCommentListVM: APIServiceManager<[Social]> {
+class SocialLikeCommentListVM: APIServiceManager<SocialCommentResponse> {
     init () {}
     static let shared = SocialLikeCommentListVM()
-    var commentsArray: [Social] = []
+    var commentsArray: [SocialComment] = []
     
     ///function to fetch post comment list for social module
     func fetchCommentListAsyncCall(postId: Int) {

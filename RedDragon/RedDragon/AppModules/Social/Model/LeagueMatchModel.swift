@@ -114,7 +114,14 @@ struct SocialTeam: Codable {
 }
 
 struct SocialMatchResponse: Codable {
-    var data: [SocialMatch] = []
+    let response: SocialMatchData?
+    let error: SocialMatchData?
+}
+
+struct SocialMatchData: Codable {
+    let code: Int?
+    let messages: [String]?
+    let data: [SocialMatch]?
 }
 
 struct SocialMatch: Codable {

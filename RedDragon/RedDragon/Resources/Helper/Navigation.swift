@@ -43,7 +43,6 @@ extension UIViewController {
         let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: identifier ?? String(describing: viewController)) as! T
         vc.modalPresentationStyle = .overCurrentContext
-       // vc.hero.
         configure?(vc)
         present(vc, animated: true)
     }

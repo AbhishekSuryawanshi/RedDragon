@@ -9,14 +9,13 @@ import UIKit
 import Kingfisher
 
 class ImageZoomVC: UIViewController {
-
+    
     @IBOutlet weak var imageScrollView: ImageScrollView!
     
     var imageUrl = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         ///Get image from url and show in scroll view
         UIImageView().kf.setImage(with: URL(string: imageUrl)) { result in
@@ -28,7 +27,7 @@ class ImageZoomVC: UIViewController {
             }
         }
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         ///Hide tabbar
         self.tabBarController?.tabBar.isHidden = true

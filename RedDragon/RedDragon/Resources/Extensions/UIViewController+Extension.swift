@@ -23,17 +23,17 @@ extension UIViewController {
     func customAlertView(title: String, description: String, image: String){
         let alertVC = PMAlertController(title: title, description: description, image: UIImage(named: image), style: .alert)
         alertVC.addAction(PMAlertAction(title: StringConstants.dismiss.localized, style: .default, action: { () in
-                    print("Capture action dismiss")
-                }))
+            print("Capture action dismiss")
+        }))
         self.present(alertVC, animated: true, completion: nil)
     }
     
     func customAlertView_2Actions(title: String, description: String, image: UIImage = UIImage.alert, okBTNTitle: String = StringConstants.continue_, okAction:@escaping () -> Void) {
         let alertVC = PMAlertController(title: title.localized, description: description.localized, image: image, style: .alert)
         alertVC.addAction(PMAlertAction(title: okBTNTitle.localized, style: .default, action: { () in
-                    print("Capture continue action")
+            print("Capture continue action")
             okAction()
-                }))
+        }))
         alertVC.addAction(PMAlertAction(title: StringConstants.dismiss.localized, style: .cancel))
         self.present(alertVC, animated: true, completion: nil)
     }
@@ -50,7 +50,7 @@ extension UIViewController {
             }
         }
     }
-
+    
     /// __Alert action function for multiple action buttons
     func customAlertView(title: String, description: String, image: String, actions: [PMAlertAction]) {
         let alertVC = PMAlertController(title: title, description: description, image: UIImage(named: image), style: .alert)
@@ -63,17 +63,17 @@ extension UIViewController {
     //Use
     /*
      let okAction = PMAlertAction(title: "OK", style: .default) {
-         print("OK button tapped")
+     print("OK button tapped")
      }
-
+     
      let cancelAction = PMAlertAction(title: "Cancel", style: .cancel) {
-         print("Cancel button tapped")
+     print("Cancel button tapped")
      }
-
+     
      customAlertView(title: "Alert Title", description: "Alert Description", image: "alertImage", actions: [okAction, cancelAction])
-
+     
      */
-
+    
     
     func defineTableViewNibCell(tableView: UITableView, cellName: String) {
         let nib = UINib(nibName: cellName, bundle: nil)
@@ -117,5 +117,4 @@ extension UIViewController {
         }
         return result
     }
-    
 }

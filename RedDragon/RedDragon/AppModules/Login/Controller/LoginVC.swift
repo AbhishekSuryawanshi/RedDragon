@@ -35,7 +35,7 @@ class LoginVC: UIViewController {
         bgView.roundCornersWithBorderLayer(cornerRadii: 30, corners: [.topLeft, .topRight], bound: bgView.bounds)
         bgView.applyShadow(radius: 10, opacity: 1)
     }
-   
+    
     override func viewWillDisappear(_ animated: Bool) {
         delegate?.viewControllerDismissed()
     }
@@ -46,7 +46,7 @@ class LoginVC: UIViewController {
     
     func initialSettings() {
         self.view.addSubview(Loader.activityIndicator)
-       // Loader.activityIndicator.stopAnimating()
+        // Loader.activityIndicator.stopAnimating()
         fetchLoginViewModel()
         ///set deafult value for country code
         countryCode = "+971"

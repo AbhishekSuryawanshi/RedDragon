@@ -23,7 +23,6 @@ struct User: Codable {
     var name: String = ""
     var email: String = ""
     var username: String = ""
-    var fullName: String = ""
     var phoneNumber: String = ""
     var profileImg: String = ""
     var createdAt: String = ""
