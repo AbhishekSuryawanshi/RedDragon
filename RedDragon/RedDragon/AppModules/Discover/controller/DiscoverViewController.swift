@@ -20,6 +20,9 @@ class DiscoverViewController: UIViewController {
     }
     
     // MARK: - Navigation
+    @IBAction func goToPredictions(_ sender: Any) {
+        goToPredict()
+    }
     
     @IBAction func btnGoToBets(_ sender: Any) {
         self.goToBets()
@@ -42,6 +45,10 @@ class DiscoverViewController: UIViewController {
     
     func goToMeet(){
         navigateToViewController(MeetDashboardVC.self, storyboardName: StoryboardName.meet, animationType: .autoReverse(presenting: .zoom))
+    }
+    
+    func goToPredict(){
+        navigateToViewController(HomePredictionViewController.self, storyboardName: StoryboardName.prediction, animationType: .autoReverse(presenting: .zoom))
     }
 }
 
