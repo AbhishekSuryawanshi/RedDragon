@@ -32,11 +32,11 @@ class PointsItemTableVC: UITableViewCell {
         guard var amount = Double(transaction?.amount ?? "0") else { return }
         
         if  amount > 1 {
-            imgStatus.image = UIImage(named: "win_arrow")
+            imgStatus.image = UIImage(named: ImageConstants.winArrow)
          //   statusLable.text = "Successfull"
             amountLable.text = "\(amount)"
         }else{
-            imgStatus.image = UIImage(named: "lose_arrow")
+            imgStatus.image = UIImage(named: ImageConstants.loseArrow)
          //   statusLable.text = "Successfull"
             amountLable.text = "\(amount)"
         }

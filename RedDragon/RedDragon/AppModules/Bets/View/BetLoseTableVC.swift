@@ -42,8 +42,8 @@ class BetLoseTableVC: UITableViewCell {
         winningLable.text = "\(betAmount * betOddValue)"
         
        
-        dateLable.text = item?.betDatetime?.getFormattedDate(from:  dateFormat.yyyyMMddHHmm.rawValue, andConvertTo: dateFormat.mmmdhm.rawValue)
-    
+        dateLable.text = item?.betDatetime?.getFormattedDate(from:  dateFormat.yyyyMMddHHmmss.rawValue, andConvertTo: dateFormat.mmmdhm.rawValue)
+
           
             winLoseAmount.text = "\(item?.betAmount ?? "0")"
   

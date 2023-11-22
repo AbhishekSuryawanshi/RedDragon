@@ -13,14 +13,14 @@ class PointsVc: UIViewController {
     var viewModel = PointsViewModel()
     private var cancellable = Set<AnyCancellable>()
     var walletList : [Transaction]? = []
-
+    
     @IBOutlet var tableView: UITableView!
     @IBOutlet var amountLable: UILabel!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         networkCall()
         fetchWalletPoints()
@@ -28,11 +28,15 @@ class PointsVc: UIViewController {
         tableView.register(CellIdentifier.pointsItemTableVC)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        addActivityIndicator()
+    }
+    
     func networkCall(){
         viewModel.fetchPointsAsyncCall()
     }
     
-
+    
 }
 
 // tableview
@@ -70,11 +74,12 @@ extension PointsVc {
     }
     
     func execute_onResponseData(_ points: WalletBalanceModel) {
-      
-       walletList = points.data
+        
+        walletList = points.data
         amountLable.text = points.wallet
-       tableView.reloadData()
-   
+        UserDefaults.standard.points = points.wallet
+        tableView.reloadData()
+        
     }
     
     func showLoader(_ value: Bool) {

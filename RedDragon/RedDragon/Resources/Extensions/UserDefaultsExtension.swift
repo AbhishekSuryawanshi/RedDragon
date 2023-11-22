@@ -29,6 +29,16 @@ extension UserDefaults {
         }
     }
     
+    var points: String? {
+        get {
+            return value(forKey: UserDefaultString.points) as? String
+        }
+        set {
+            set(newValue, forKey: UserDefaultString.points)
+            synchronize()
+        }
+    }
+    
     var sport: String? {
         get {
             return value(forKey: UserDefaultString.sport) as? String

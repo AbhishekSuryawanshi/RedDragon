@@ -42,6 +42,8 @@ class BetHomeVc: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        // set points from user defaults
+        pointsLable.text = UserDefaults.standard.points ?? "00"
         addActivityIndicator()
     }
 
@@ -51,6 +53,7 @@ class BetHomeVc: UIViewController {
         tableView.register(CellIdentifier.betLoseTableVC)
         collectionView.register(CellIdentifier.homeTitleCollectionVc)
         collectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .left)
+
     }
     
     func networkCall(){
@@ -60,13 +63,13 @@ class BetHomeVc: UIViewController {
             if matchesList?.count ?? 0 > 0 {
                 tableView.reloadData()
             }else{
-                viewModel.fetchAllMatchesAsyncCall(sport: UserDefaults.standard.sport ?? "football", lang: fetchCurrentLanguageCode == "en" ? "en" : "zh", day: "tommorow")
+                viewModel.fetchAllMatchesAsyncCall(sport: UserDefaults.standard.sport ?? Sports.football.title.lowercased(), lang: fetchCurrentLanguageCode == "en" ? "en" : "zh", day: "tommorow")
             }
         case .Live:
             if liveMatchesList?.count ?? 0 > 0 {
                 tableView.reloadData()
             }else{
-                viewModel.fetchAllMatchesAsyncCall(sport: UserDefaults.standard.sport ?? "football", lang: fetchCurrentLanguageCode == "en" ? "en" : "zh", day: "today")
+                viewModel.fetchAllMatchesAsyncCall(sport: UserDefaults.standard.sport ?? Sports.football.title.lowercased(), lang: fetchCurrentLanguageCode == "en" ? "en" : "zh", day: "today")
             }
         case .Win:
             if winBets?.count ?? 0 > 0 {
@@ -85,9 +88,9 @@ class BetHomeVc: UIViewController {
     
     @objc func selectedSport(){
         // when user update sport type from side menu
+        matchesList?.removeAll()
+        liveMatchesList?.removeAll()
         if selectedType == .All || selectedType == .Live {
-            matchesList?.removeAll()
-            liveMatchesList?.removeAll()
             networkCall()
         }
     }
@@ -95,8 +98,7 @@ class BetHomeVc: UIViewController {
     // MARK: - Navigation
 
      @IBAction func btnMenu(_ sender: Any) {
-        let menu = self.storyboard?.instantiateViewController(withIdentifier: "SideNav") as! SideMenuNavigationController
-         self.present(menu, animated: true)
+         presentOverViewController(SideMenuNavigationController.self, storyboardName: StoryboardName.bets, identifier: "SideNav")
      }
      
     
@@ -174,16 +176,18 @@ extension BetHomeVc : UITableViewDelegate, UITableViewDataSource {
         case .All:
             navigateToViewController(MatchesListViewController.self, storyboardName: StoryboardName.bets,  animationType: .autoReverse(presenting: .zoom), configure: { vc in
                 vc.isLive = false
-                vc.matchesList = self.matchesList![indexPath.row].matches
+                vc.matches = self.matchesList![indexPath.row].matches
+                vc.matchesList = self.matchesList![indexPath.row]
             })
         case .Live:
             navigateToViewController(MatchesListViewController.self, storyboardName: StoryboardName.bets,  animationType: .autoReverse(presenting: .zoom), configure: { vc in
                 vc.isLive = true
-                vc.matchesList = self.liveMatchesList![indexPath.row].matches
+                vc.matches = self.liveMatchesList![indexPath.row].matches
+                vc.matchesList = self.liveMatchesList![indexPath.row]
             })
             
         default:
-            print("coming")
+            print("N/A")
             
         }
     }

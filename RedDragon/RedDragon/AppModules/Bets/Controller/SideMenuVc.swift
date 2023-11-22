@@ -13,7 +13,6 @@ class SideMenuVc: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +25,7 @@ class SideMenuVc: UIViewController {
     func initial(){
         tableView.register(CellIdentifier.menuItemTableVC)
         
-        switch(UserDefaults.standard.sport?.lowercased() ?? "football"){
+        switch(UserDefaults.standard.sport?.lowercased() ?? Sports.football.title.lowercased()){
         case Sports.football.title.lowercased():
             tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
         case Sports.basketball.title.lowercased():
