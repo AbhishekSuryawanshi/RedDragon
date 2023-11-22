@@ -12,8 +12,10 @@ class MeetExploreVC: UIViewController {
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var viewContainer: UIView!
     var arrayOfUsers = [MeetUser]()
+    var arrayOfMatchUsers = [MeetUser]()
     var cancellable = Set<AnyCancellable>()
     private var userVM: MeetUserViewModel?
+    private var myMatchUserVM: MeetMyMatchUserViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +24,10 @@ class MeetExploreVC: UIViewController {
     
     // MARK: - Methods
     func performInitialSetup() {
+        addActivityIndicator()
         makeNetworkCall()
-        fetchMeetUserViewModel()
+        fetchViewModelResponse()
+      
     }
     
     func showLoader(_ value: Bool) {
@@ -32,12 +36,14 @@ class MeetExploreVC: UIViewController {
     
     func makeNetworkCall() {
         userVM = MeetUserViewModel()
+        myMatchUserVM = MeetMyMatchUserViewModel()
         userVM?.fetchMeetUserListAsyncCall()
+        myMatchUserVM?.fetchMyMatchUserAsyncCall()
     }
     
     // MARK: - Segment Control Actions
     @IBAction func segmentControlValueChanged(_ sender: UISegmentedControl) {
-        if self.segmentControl.selectedSegmentIndex == 0{
+        if self.segmentControl.selectedSegmentIndex == 0 {
             embedExploreUsersVC()
         }else{
             embedMyMatchesVC()
@@ -52,7 +58,7 @@ extension MeetExploreVC {
     }
     
     ///fetch view model for user list
-    func fetchMeetUserViewModel() {
+    func fetchViewModelResponse() {
         userVM?.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
@@ -66,24 +72,41 @@ extension MeetExploreVC {
                 self?.execute_onUserListResponseData(userList!)
             })
             .store(in: &cancellable)
+        
+        myMatchUserVM?.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] userList in
+                self?.execute_onMyMatchUserListResponseData(userList!)
+            })
+            .store(in: &cancellable)
     }
     
     func execute_onUserListResponseData(_ userList: MeetUserListModel) {
         arrayOfUsers = userList.response?.data ?? []
+        embedExploreUsersVC() // default First segment selected
+    }
+    
+    func execute_onMyMatchUserListResponseData(_ userList: MeetUserListModel) {
+        arrayOfMatchUsers = userList.response?.data ?? []
     }
 }
+
 // MARK: - Functions to add Child controllers in Parent View
 extension MeetExploreVC {
     func embedExploreUsersVC() {
-        ViewEmbedder.embed(withIdentifier: "ExploreUsersVC", storyboard: UIStoryboard(name: StoryboardName.meet, bundle: nil), parent: self, container: viewContainer) { vc in
+        let childVC = ExploreUsersVC(nibName: "ExploreUsersVC" , bundle: nil)
+        ViewEmbedder.embedXIBController(childVC: childVC, parentVC: self, container: viewContainer) { vc in
             let vc = vc as! ExploreUsersVC
             vc.configureUsers(users: self.arrayOfUsers)
         }
     }
     
     func embedMyMatchesVC() {
-        ViewEmbedder.embed(withIdentifier: "MyMatchVC", storyboard: UIStoryboard(name: StoryboardName.meet, bundle: nil), parent: self, container: viewContainer) { vc in
+        let childVC = MyMatchVC(nibName: "MyMatchVC" , bundle: nil)
+        ViewEmbedder.embedXIBController(childVC: childVC, parentVC: self, container: viewContainer) { vc in
             let vc = vc as! MyMatchVC
+            vc.configureUsers(users: self.arrayOfMatchUsers)
         }
     }
 }

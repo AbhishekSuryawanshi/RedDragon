@@ -64,12 +64,12 @@ struct URLConstants {
     static let playerDetail        = databaseBaseURL + "player.php"
     
     //Bets
-    static let betAllMatches     = "https://amberic.top/app8/api/bet/" + "match/get"
-    static let allBets           = "https://amberic.top/app8/api/bet/" + "play/get"
+    static let betAllMatches       = "https://amberic.top/app8/api/bet/" + "match/get"
+    static let allBets             = "https://amberic.top/app8/api/bet/" + "play/get"
     
     // MARK: -  Meet
-    
     static let meetBaseURL         = "https://kicktin.com/vinder/api/"
     static let meetUserList        = meetBaseURL + "listuser"
     static let meetLikedUser       = meetBaseURL + "user/like"
+    static let meetMyMatchUser     = meetBaseURL + "user/mymatch/list"
 }
