@@ -52,7 +52,7 @@ class AllPlayersViewController: UIViewController {
     }
 
     @IBAction func backButton(_ sender: Any) {
-        self.navigationController?.popToRootViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: false)
     }
     
     @objc private func textFieldDidChange(_ textField: UITextField) {
@@ -61,7 +61,7 @@ class AllPlayersViewController: UIViewController {
     }
 }
 
-/// __Players View model
+/// __fetch Players View model 
 extension AllPlayersViewController {
     
     func fetchAllPlayersViewModel() {
@@ -131,4 +131,25 @@ extension AllPlayersViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         animateTabelCell(tableView, willDisplay: cell, forRowAt: indexPath)
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as? AllPlayersTableViewCell
+        cell?.playerImageView.heroID = nil
+        cell?.playerNameLabel.heroID = nil
+        
+        if let player = allPlayersVM?.filteredPlayers[indexPath.row] ?? allPlayersVM?.allPlayers?.data[indexPath.row] {
+            
+            navigateToViewController(CardGamePlayerDetailVC.self, storyboardName: StoryboardName.cardGame) { vc in
+                vc.slug = player.slug
+//                vc.defaultImage = player.photo
+//                vc.playerName = player.name
+//                vc.position = player.positionName
+//                vc.value = player.marketValue
+//                //hero transmission
+//                cell?.playerImageView.heroID = player.photo
+//                cell?.playerNameLabel.heroID = player.name
+            }
+        }
+    }
+    
 }

@@ -31,7 +31,7 @@ struct URLConstants {
     static let databaseMatchDetail = databaseBaseURL + "match.php"
     
     // MARK: - CardGame
-    static let allPlayersList      = "https://datasport.one/api/v1/sportscore/data/player_filter.php"
+    static let cardGame_allPlayersList = databaseBaseURL + "player_filter.php"
     
     // MARK: -  Social
     static let socialBaseURL       = baseURL + "euro5league/"
