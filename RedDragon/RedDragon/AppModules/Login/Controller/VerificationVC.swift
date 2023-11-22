@@ -41,7 +41,6 @@ class VerificationVC: UIViewController {
     }
     
     func initialSettings() {
-        self.view.addSubview(Loader.activityIndicator)
         fetchLoginViewModel()
         
         topTextLabel.text = "A verification code has been sent \nto your mobile number"
@@ -64,7 +63,7 @@ class VerificationVC: UIViewController {
     }
     
     func showLoader(_ value: Bool) {
-        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
+        value ? startLoader() : stopLoader()
     }
     
     // MARK: - Button Actions

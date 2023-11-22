@@ -56,6 +56,8 @@
 		4703F8D82B089E4300276F3E /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4703F8D72B089E4300276F3E /* UserModel.swift */; };
 		4703F8DA2B08D6F000276F3E /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4703F8D92B08D6F000276F3E /* ForgotPasswordVC.swift */; };
 		4703F8DC2B08D70A00276F3E /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4703F8DB2B08D70A00276F3E /* ResetPasswordVC.swift */; };
+		4710646C2B0DE3C700E9C0AC /* LoaderHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4710646B2B0DE3C700E9C0AC /* LoaderHelper.swift */; };
+		471064752B0DEDDA00E9C0AC /* loader_1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 471064722B0DEDDA00E9C0AC /* loader_1.gif */; };
 		4716B1192AEF8D6B003582A9 /* MatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4716B1172AEF8D6B003582A9 /* MatchTableViewCell.swift */; };
 		4716B11A2AEF8D6B003582A9 /* MatchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4716B1182AEF8D6B003582A9 /* MatchTableViewCell.xib */; };
 		472873552AEA7A780011F00F /* HeaderBottom_1CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472873532AEA7A780011F00F /* HeaderBottom_1CollectionViewCell.swift */; };
@@ -324,6 +326,8 @@
 		4703F8D72B089E4300276F3E /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		4703F8D92B08D6F000276F3E /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
 		4703F8DB2B08D70A00276F3E /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
+		4710646B2B0DE3C700E9C0AC /* LoaderHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderHelper.swift; sourceTree = "<group>"; };
+		471064722B0DEDDA00E9C0AC /* loader_1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loader_1.gif; sourceTree = "<group>"; };
 		4716B1172AEF8D6B003582A9 /* MatchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchTableViewCell.swift; sourceTree = "<group>"; };
 		4716B1182AEF8D6B003582A9 /* MatchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MatchTableViewCell.xib; sourceTree = "<group>"; };
 		472873532AEA7A780011F00F /* HeaderBottom_1CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderBottom_1CollectionViewCell.swift; sourceTree = "<group>"; };
@@ -700,6 +704,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		4710646F2B0DED7E00E9C0AC /* Loader */ = {
+			isa = PBXGroup;
+			children = (
+				471064722B0DEDDA00E9C0AC /* loader_1.gif */,
+				4710646B2B0DE3C700E9C0AC /* LoaderHelper.swift */,
+			);
+			path = Loader;
+			sourceTree = "<group>";
+		};
 		4716B11B2AEF982F003582A9 /* SubClass */ = {
 			isa = PBXGroup;
 			children = (
@@ -736,6 +749,7 @@
 		474D994A2AE7F6EB009499D0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4710646F2B0DED7E00E9C0AC /* Loader */,
 				47C3B7112B04D40500E12A4D /* PhoneCountryCode */,
 				4716B11B2AEF982F003582A9 /* SubClass */,
 				474D992D2AE7F2F6009499D0 /* Fonts */,
@@ -1682,6 +1696,7 @@
 				474D993B2AE7F30D009499D0 /* Roboto-Italic.ttf in Resources */,
 				474D993D2AE7F30D009499D0 /* Roboto-Black.ttf in Resources */,
 				41EB79EB2AF4E21500D068F7 /* MediaView.xib in Resources */,
+				471064752B0DEDDA00E9C0AC /* loader_1.gif in Resources */,
 				49B0B9EF2AE68F0700A9D235 /* Main.storyboard in Resources */,
 				41E2AB502B0CBBE4005425CF /* PredictionDetailTopView.xib in Resources */,
 				474D993C2AE7F30D009499D0 /* Roboto-Light.ttf in Resources */,
@@ -1794,6 +1809,7 @@
 				E9DDB6422B04E387004C8ACF /* BetMatchTableVC.swift in Sources */,
 				49B0BA412AE6A29A00A9D235 /* Validations.swift in Sources */,
 				49B04A5C2AFA6F3900B440AA /* OddsViewController.swift in Sources */,
+				4710646C2B0DE3C700E9C0AC /* LoaderHelper.swift in Sources */,
 				6A5F2BA12B0CE10300AB6A98 /* MeetUserTableViewCell.swift in Sources */,
 				4716B1192AEF8D6B003582A9 /* MatchTableViewCell.swift in Sources */,
 				47C8C9622AF119A800448D96 /* ImageScrollView.swift in Sources */,

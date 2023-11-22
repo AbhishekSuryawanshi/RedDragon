@@ -38,7 +38,6 @@ class RegisterVC: UIViewController {
     }
     
     func initialSettings() {
-        self.view.addSubview(Loader.activityIndicator)
         fetchLoginViewModel()
         
         ///set deafult value for country code
@@ -66,7 +65,7 @@ class RegisterVC: UIViewController {
     }
     
     func showLoader(_ value: Bool) {
-        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
+        value ? startLoader() : stopLoader()
     }
     
     func validate() -> Bool {

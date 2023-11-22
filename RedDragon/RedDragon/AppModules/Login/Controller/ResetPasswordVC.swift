@@ -32,7 +32,6 @@ class ResetPasswordVC: UIViewController {
     }
     
     func initialSettings() {
-        self.view.addSubview(Loader.activityIndicator)
         phoneTextField.placeholder = "Phone Number".localized
         passwordTextField.placeholder = "Password".localized
         confirmPasswordTextfield.placeholder = "Confirm Password".localized
@@ -45,7 +44,7 @@ class ResetPasswordVC: UIViewController {
     }
     
     func showLoader(_ value: Bool) {
-        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
+        value ? startLoader() : stopLoader()
     }
     
     func validate() -> Bool {

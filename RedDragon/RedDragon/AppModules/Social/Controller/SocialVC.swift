@@ -37,6 +37,7 @@ class SocialVC: UIViewController {
     var tagsArray: [String] = []
     var leagueArray: [SocialLeague] = []
     var teamArray: [SocialTeam] = []
+    var refreshLeagueList = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +54,6 @@ class SocialVC: UIViewController {
     }
     
     func initialSettings() {
-        self.view.addSubview(Loader.activityIndicator)
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshHashTagView(notification:)), name: NSNotification.refreshHashTags, object: nil)
         nibInitialization()
         fetchSocialViewModel()
@@ -64,22 +64,6 @@ class SocialVC: UIViewController {
         tagCollectionView.collectionViewLayout = tagLayout
     }
     
-    func loadFunctionality() {
-        tagView.isHidden = true
-        Loader.activityIndicator.startAnimating()
-        ViewEmbedder.embed(withIdentifier: "PostListVC", storyboard: UIStoryboard(name: StoryboardName.social, bundle: nil)
-                           , parent: self, container: postContainerView) { vc in
-            let vc = vc as! PostListVC
-            vc.delegate = self
-        }
-        
-        if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
-            SocialLeagueVM.shared.fetchLeagueListAsyncCall()
-        } else {
-            SocialPublicLeagueVM.shared.fetchLeagueListAsyncCall()
-        }
-    }
-    
     func refreshPage() {
         self.tabBarController?.tabBar.isHidden = false
         headerCVLeadingConstraint.constant = 60
@@ -88,6 +72,25 @@ class SocialVC: UIViewController {
         teamLabel.text = "Teams".localized
         createPostButton.setTitle("Create a Post".localized, for: .normal)
         searchTextField.placeholder = "Search".localized
+    }
+    
+    func loadFunctionality() {
+        tagView.isHidden = true
+        startLoader()
+        ViewEmbedder.embed(withIdentifier: "PostListVC", storyboard: UIStoryboard(name: StoryboardName.social, bundle: nil)
+                           , parent: self, container: postContainerView) { vc in
+            let vc = vc as! PostListVC
+            vc.delegate = self
+        }
+        
+        if refreshLeagueList {
+            refreshLeagueList = false
+            if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
+                SocialLeagueVM.shared.fetchLeagueListAsyncCall()
+            } else {
+                SocialPublicLeagueVM.shared.fetchLeagueListAsyncCall()
+            }
+        }
     }
     
     func nibInitialization() {
@@ -261,9 +264,6 @@ extension SocialVC {
     }
     
     func execute_onLeagueResponseData(_ response: SocialLeagueResponse?) {
-        leagueArray.removeAll()
-        teamArray.removeAll()
-        teamsCollectionView.reloadData()
         if let dataResponse = response?.response {
             SocialLeagueVM.shared.leagueArray = dataResponse.data ?? []
             self.leagueArray = dataResponse.data ?? []
@@ -441,9 +441,7 @@ extension SocialVC: UITextFieldDelegate {
 extension SocialVC: PostListVCDelegate {
     func postList(height: CGFloat, count: Int) {
         containerHeightConstraint.constant = height
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (timer) in
-            Loader.activityIndicator.stopAnimating()
-        }
+        stopLoader()
     }
 }
 /// LayoutDelegate to set the width of hashtags in its collectionview
@@ -456,6 +454,7 @@ extension SocialVC: LayoutDelegate {
 /// LoginVCDelegate to show hided tabbar and refresh postlist vc
 extension SocialVC: LoginVCDelegate {
     func viewControllerDismissed() {
+        refreshLeagueList = true
         refreshPage()
     }
 }

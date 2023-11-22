@@ -70,7 +70,6 @@ class PostCreateVC: UIViewController {
     }
     
     func initialSettings() {
-        self.view.addSubview(Loader.activityIndicator)
         ///Hide tabbar
         self.tabBarController?.tabBar.isHidden = true
         nibInitialization()
@@ -85,7 +84,7 @@ class PostCreateVC: UIViewController {
     }
     
     func showLoader(_ value: Bool) {
-        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
+        value ? startLoader() : stopLoader()
     }
     
     func setValue() {
@@ -118,14 +117,12 @@ class PostCreateVC: UIViewController {
         pollAddButtonHeightConstraint.constant = 47
         
         if isForEdit {
-            //ToDo
-            //dateLabel.text = postModel.updatedTime.formatDate2(inputFormat: .ddMMyyyyWithTimeZone)
+            dateLabel.text = postModel.updatedTime.formatDate2(inputFormat: .ddMMyyyyWithTimeZone)
             if  postModel.type == "POLL" {
                 currentPostType = .poll
-                
-                //                questientTxtView.text = postModel.question
-                //                option1TF.text = postModel.option_1
-                //                option2TF.text = postModel.option_2
+                contentTxtView.text = postModel.question
+                pollArray = postModel.pollArray
+                setPollView()
             } else {
                 if postModel.matchDetail != "" { // POST Match
                     currentPostType = .match
@@ -233,14 +230,18 @@ class PostCreateVC: UIViewController {
         SocialDeleteVM.shared.deletePollOrPost(type: .post, id: postModel.id)
     }
     
+    func setPollView() {
+        pollTableView.reloadData()
+        pollFieldHeightConstraint.constant = pollArray.count < 2 ? 37 : 0
+        pollAddButtonHeightConstraint.constant = pollArray.count < 2 ? 47 : 0
+    }
+    
     // MARK: - Button Actions
     
     @objc func removePollBTNTapped(sender: UIButton) {
         self.customAlertView_2Actions(title: StringConstants.deleteAlert, description: "") {
             self.pollArray.remove(at: sender.tag)
-            self.pollTableView.reloadData()
-            self.pollFieldHeightConstraint.constant = self.pollArray.count < 2 ? 37 : 0
-            self.pollAddButtonHeightConstraint.constant = self.pollArray.count < 2 ? 47 : 0
+            self.setPollView()
         }
     }
     
@@ -272,10 +273,7 @@ class PostCreateVC: UIViewController {
         pollTextField.endEditing(true)
         pollArray.append(Poll(title: pollTextField.text!, count: 0))
         pollTextField.text = ""
-        pollTableView.reloadData()
-        pollFieldHeightConstraint.constant = pollArray.count < 2 ? 37 : 0
-        pollAddButtonHeightConstraint.constant = pollArray.count < 2 ? 47 : 0
-        
+        setPollView()
     }
     
     @IBAction func postButtonTapped(_ sender: UIButton) {
