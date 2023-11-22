@@ -189,7 +189,7 @@ struct SocialComment: Codable {
     var postId: Int = 0
     var updatedTime: String = ""
     var createdTime: String = ""
-    var user = User()
+    var user = SocialUser()
     var comment: String = ""
     
     enum CodingKeys: String, CodingKey {
@@ -202,12 +202,38 @@ struct SocialComment: Codable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id  = try (container.decodeIfPresent(Int.self, forKey: .id) ?? 0)
-        postId  = try (container.decodeIfPresent(Int.self, forKey: .postId) ?? 0)
+        id = try (container.decodeIfPresent(Int.self, forKey: .id) ?? 0)
+        postId = try (container.decodeIfPresent(Int.self, forKey: .postId) ?? 0)
         updatedTime = try (container.decodeIfPresent(String.self, forKey: .updatedTime) ?? "")
         createdTime = try (container.decodeIfPresent(String.self, forKey: .createdTime) ?? "")
-        user  = try (container.decodeIfPresent(User.self, forKey: .user) ?? User())
-        comment  = try (container.decodeIfPresent(String.self, forKey: .comment) ?? "")
+        user = try (container.decodeIfPresent(SocialUser.self, forKey: .user) ?? SocialUser())
+        comment = try (container.decodeIfPresent(String.self, forKey: .comment) ?? "")
+    }
+}
+
+struct SocialUser: Codable {
+    var id: Int? = 0
+    var firstName: String = ""
+    var lastName: String = ""
+    var email: String = ""
+    var image: String = ""
+    
+    enum CodingKeys: String, CodingKey {
+        case id, email
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case image = "profile_image"
+    }
+    
+    public init () {}
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try (container.decodeIfPresent(Int.self, forKey: .id) ?? 0)
+        email = try (container.decodeIfPresent(String.self, forKey: .email) ?? "")
+        firstName = try (container.decodeIfPresent(String.self, forKey: .firstName) ?? "")
+        lastName = try (container.decodeIfPresent(String.self, forKey: .lastName) ?? "")
+        image = try (container.decodeIfPresent(String.self, forKey: .image) ?? "")
     }
 }
 

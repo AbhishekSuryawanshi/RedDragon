@@ -34,7 +34,6 @@ class PostMatchesVC: UIViewController {
     }
     
     func initialSettings() {
-        self.view.addSubview(Loader.activityIndicator)
         nibInitialization()
         fetchSocialViewModel()
         setupGestureRecognizers()
@@ -59,7 +58,7 @@ class PostMatchesVC: UIViewController {
     }
     
     func showLoader(_ value: Bool) {
-        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
+        value ? startLoader() : stopLoader()
     }
     
     private func setupGestureRecognizers() {
