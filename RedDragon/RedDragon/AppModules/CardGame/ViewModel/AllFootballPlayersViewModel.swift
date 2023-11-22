@@ -135,7 +135,7 @@ class AllFootballPlayersViewModel: ObservableObject {
                                        value: Int,
                                        limit: Int,
                                        lowerBound: Int) -> URLRequest? {
-        guard let url = URL(string: URLConstants.allPlayersList) else { return nil }
+        guard let url = URL(string: URLConstants.cardGame_allPlayersList) else { return nil }
         var request = URLRequest(url: url)
         request.httpMethod = RequestType.post.rawValue
         let parameters: [String: Any] = [
