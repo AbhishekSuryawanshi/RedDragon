@@ -23,6 +23,8 @@ struct ErrorMessage {
     static var userNameEmptyAlert          = "Please enter your user name"
     static var phoneEmptyAlert             = "Please enter your phone number"
     static var passwordEmptyAlert          = "Please enter a password"
+    static var amountEmptyAlert            = "Please enter amount first"
+    static var oddsEmptyAlert              = "Please choose odds first"
     static var confirmPasswordEmptyAlert   = "Please confirm your password"
     static var termsAlert                  = "Confirm your acceptance of the terms and conditions"
     static var passwordNotmatchedAlert     = "Passwords do not match"

@@ -13,7 +13,6 @@ class SideMenuVc: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +24,24 @@ class SideMenuVc: UIViewController {
 
     func initial(){
         tableView.register(CellIdentifier.menuItemTableVC)
-        tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
+        
+        switch(UserDefaults.standard.sport?.lowercased() ?? Sports.football.title.lowercased()){
+        case Sports.football.title.lowercased():
+            tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
+        case Sports.basketball.title.lowercased():
+            tableView.selectRow(at: IndexPath(row: 1, section: 0), animated: true, scrollPosition: .none)
+        case Sports.tennis.title.lowercased():
+            tableView.selectRow(at: IndexPath(row: 2, section: 0), animated: true, scrollPosition: .none)
+        case Sports.handball.title.lowercased():
+            tableView.selectRow(at: IndexPath(row: 3, section: 0), animated: true, scrollPosition: .none)
+        case Sports.hockey.title.lowercased():
+            tableView.selectRow(at: IndexPath(row: 4, section: 0), animated: true, scrollPosition: .none)
+        case Sports.volleyball.title.lowercased():
+            tableView.selectRow(at: IndexPath(row: 5, section: 0), animated: true, scrollPosition: .none)
+            
+        default:
+            tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
+        }
     }
 }
 
@@ -44,6 +60,10 @@ extension SideMenuVc : UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        UserDefaults.standard.sport = viewModel.sports[indexPath.row].title.lowercased()
+        NotificationCenter.default.post(name: NSNotification.selectedSport, object: nil)
+        self.dismiss(animated: true)
+    }
     
 }

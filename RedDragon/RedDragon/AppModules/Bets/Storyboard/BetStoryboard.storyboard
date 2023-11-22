@@ -206,20 +206,21 @@
                                             <action selector="backClicked:" destination="oVU-7M-YFw" eventType="touchUpInside" id="b5v-TJ-TDZ"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bets" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ng1-fI-e4U">
-                                        <rect key="frame" x="178.33333333333334" y="69.333333333333329" width="36.333333333333343" height="21.333333333333329"/>
-                                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WiU-2C-nnK">
+                                        <rect key="frame" x="184.66666666666666" y="68" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="2xG-VW-7mE"/>
+                                            <constraint firstAttribute="width" constant="24" id="zO8-gd-ggk"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" name="base"/>
                                 <constraints>
+                                    <constraint firstItem="WiU-2C-nnK" firstAttribute="centerY" secondItem="TnU-sD-aLG" secondAttribute="centerY" id="Ac8-ml-rOu"/>
                                     <constraint firstAttribute="height" constant="110" id="Ine-70-ApJ"/>
                                     <constraint firstItem="TnU-sD-aLG" firstAttribute="leading" secondItem="3hT-gp-RFB" secondAttribute="leading" id="LAa-mG-e8J"/>
-                                    <constraint firstItem="Ng1-fI-e4U" firstAttribute="centerX" secondItem="3hT-gp-RFB" secondAttribute="centerX" id="Vie-q2-pJ9"/>
-                                    <constraint firstItem="Ng1-fI-e4U" firstAttribute="centerY" secondItem="TnU-sD-aLG" secondAttribute="centerY" id="ao4-ab-M6T"/>
                                     <constraint firstAttribute="bottom" secondItem="TnU-sD-aLG" secondAttribute="bottom" id="w1c-Xo-il6"/>
+                                    <constraint firstItem="WiU-2C-nnK" firstAttribute="centerX" secondItem="3hT-gp-RFB" secondAttribute="centerX" id="z80-ei-LtI"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -236,8 +237,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="imgSports" destination="WiU-2C-nnK" id="gNH-ea-7ux"/>
                         <outlet property="tableView" destination="th4-iC-oOM" id="Zev-Pw-KoZ"/>
-                        <outlet property="titLELABLE" destination="Ng1-fI-e4U" id="ZK8-dd-UZz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bfm-E4-TNP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -329,7 +330,7 @@
                                                             <constraint firstAttribute="width" constant="4" id="hkC-jJ-GJr"/>
                                                         </constraints>
                                                     </view>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L8y-ou-sPQ">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="teamLogo" translatesAutoresizingMaskIntoConstraints="NO" id="L8y-ou-sPQ">
                                                         <rect key="frame" x="12" y="0.0" width="36" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="36" id="6aY-SK-FGv"/>
@@ -366,7 +367,7 @@
                                                             <constraint firstAttribute="width" constant="4" id="wwt-g2-ccZ"/>
                                                         </constraints>
                                                     </view>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="auA-bx-eRY">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="teamLogo" translatesAutoresizingMaskIntoConstraints="NO" id="auA-bx-eRY">
                                                         <rect key="frame" x="127.33333333333334" y="0.0" width="36" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="36" id="T2A-FZ-GXc"/>
@@ -506,6 +507,9 @@
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="6"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" name="base"/>
+                                                    </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JYi-UU-aJL">
@@ -547,6 +551,9 @@
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="6"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" name="yellow2"/>
+                                                    </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8OU-nx-gqk">
@@ -587,6 +594,9 @@
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="6"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" name="blue2"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
@@ -729,6 +739,9 @@
                     <connections>
                         <outlet property="amountPlaced" destination="Wfk-Nf-fhP" id="xAd-Vq-Ewm"/>
                         <outlet property="awayName" destination="fzD-Ma-6HQ" id="Qmf-b8-xuA"/>
+                        <outlet property="bgViewOne" destination="2ah-Wb-nbY" id="gq6-bk-XyK"/>
+                        <outlet property="bgViewThree" destination="8OU-nx-gqk" id="cFm-hX-iWe"/>
+                        <outlet property="bgViewTwo" destination="JYi-UU-aJL" id="bE2-VO-pCm"/>
                         <outlet property="estWinAmount" destination="bgH-2w-ap3" id="Zn0-wf-mYS"/>
                         <outlet property="etAmount" destination="VSo-li-qbc" id="qwn-T9-P6B"/>
                         <outlet property="homeName" destination="wbu-dD-fNi" id="7g4-cB-VNW"/>
@@ -740,6 +753,7 @@
                         <outlet property="oddsLable2" destination="4ZM-P5-3hu" id="Tvg-MP-1Fa"/>
                         <outlet property="oddsLable3" destination="yCt-Ac-O8d" id="Gg7-Va-4IR"/>
                         <outlet property="score" destination="Hh5-aj-BVn" id="PQs-Hh-ZGQ"/>
+                        <outlet property="titleLable" destination="1Nu-QN-yu6" id="7RU-Fu-nVo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HGA-ja-gzi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -964,6 +978,7 @@
         <image name="left_arrow" width="12" height="20.333333969116211"/>
         <image name="menu" width="24" height="24.333333969116211"/>
         <image name="placeholderTeam" width="36" height="36"/>
+        <image name="teamLogo" width="24" height="24"/>
         <namedColor name="base">
             <color red="0.7160000205039978" green="0.093999996781349182" blue="0.054000001400709152" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
