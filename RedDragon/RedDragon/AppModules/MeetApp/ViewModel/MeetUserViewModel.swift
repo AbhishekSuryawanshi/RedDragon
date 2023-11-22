@@ -27,4 +27,14 @@ class MeetLikedUserViewModel: APIServiceManager<MeetLikedUserModel> {
     }
 }
 
+class MeetMyMatchUserViewModel: APIServiceManager<MeetUserListModel> {
+    
+    ///function to post like user
+    func fetchMyMatchUserAsyncCall() {
+        let urlString   = URLConstants.meetMyMatchUser
+        let method      = RequestType.get
+        asyncCall(urlString: urlString, method: method, parameters: nil, isGuestUser: true)
+    }
+}
+
 

@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ExploreUsersVC" customModule="RedDragon" customModuleProvider="target">
             <connections>
+                <outlet property="tableView" destination="vks-oc-guY" id="nRM-Gp-RGL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,17 +20,21 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vks-oc-guY">
-                    <rect key="frame" x="0.0" y="59" width="393" height="793"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vks-oc-guY">
+                    <rect key="frame" x="12" y="79" width="369" height="773"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="LeF-ap-XCW"/>
+                        <outlet property="delegate" destination="-1" id="TOW-2C-rpm"/>
+                    </connections>
                 </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="vks-oc-guY" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="8Ud-qN-q3W"/>
-                <constraint firstItem="vks-oc-guY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="lJQ-ds-EaX"/>
-                <constraint firstItem="vks-oc-guY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="mBV-ZP-qcs"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="vks-oc-guY" secondAttribute="trailing" constant="12" id="QDv-JR-7Gd"/>
+                <constraint firstItem="vks-oc-guY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="lJQ-ds-EaX"/>
+                <constraint firstItem="vks-oc-guY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="mBV-ZP-qcs"/>
                 <constraint firstAttribute="bottom" secondItem="vks-oc-guY" secondAttribute="bottom" id="vBZ-U9-4Pu"/>
             </constraints>
             <point key="canvasLocation" x="130.53435114503816" y="-12.67605633802817"/>

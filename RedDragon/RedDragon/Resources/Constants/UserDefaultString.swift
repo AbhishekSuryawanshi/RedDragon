@@ -19,5 +19,5 @@ struct UserDefaultString {
 
 struct DefaultToken {
   //  static let guestUser    = "1|EFDo4k2fYsjp3Lx676NK1z28CGLuCayNqDypLWXt"
-    static let guestUser    = "101|XMCA1bzlO6Yxv8AKIVoqSJQO0EMPE09gyqwMHKOG9aea0678"
+    static let guestUser    = "112|SExzcUL2Sd08yEVfGraxFQizdzHvvxgHlu1Br3Gx5be467af"
 }
