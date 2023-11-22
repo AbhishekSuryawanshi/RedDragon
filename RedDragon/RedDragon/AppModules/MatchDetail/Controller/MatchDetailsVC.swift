@@ -28,10 +28,10 @@ class MatchDetailsVC: UIViewController {
     private var matchTabsArray = [String]()
     var matchSlug: String?
     var leagueName: String?
+    var sports: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,9 +66,16 @@ class MatchDetailsVC: UIViewController {
     }
     
     func makeNetworkCall() {
+        /// __parateters__
+        ///slug: "2023-02-21-liverpool-real-madrid" //matchSlug ?? ""
+        ///sports: sports ?? ""
         matchDetailViewModel?.fetchMatchDetailAsyncCall(lang: fetchCurrentLanguageCode == "en" ? "en" : "zh",
                                                         slug: "2023-02-21-liverpool-real-madrid",
-                                                        sports: "football") //2023-02-21-liverpool-real-madrid //matchSlug ?? ""
+                                                        sports: "football")
+    }
+    
+    @IBAction func backButton(_ sender: Any) {
+        self.navigationController?.popToRootViewController(animated: true)
     }
 }
 
@@ -122,14 +129,15 @@ extension MatchDetailsVC: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == 0 {
+        switch indexPath.item {
+        case 0:
             embedHighlightVC()
-        }
-        else if indexPath.item == 1 {
+        case 1:
             embedStatisticVC()
-        }
-        else if indexPath.item == 2 {
+        case 2:
             embedLineupVC()
+        default:
+            break
         }
     }
 }
@@ -163,7 +171,6 @@ extension MatchDetailsVC {
         ViewEmbedder.embed(withIdentifier: "HighlightViewController", storyboard: UIStoryboard(name: StoryboardName.matchDetail, bundle: nil), parent: self, container: viewContainer) { [self] vc in
             let vc = vc as! HighlightViewController
             vc.configureView(progressData: matchDetailViewModel?.responseData?.data.progress)
-            //viewContainerHeight.constant = vc.view.frame.size.height
         }
     }
     
@@ -173,7 +180,6 @@ extension MatchDetailsVC {
             vc.configureStatisticView(statisticData: self?.matchDetailViewModel?.responseData?.data.statistics)
             vc.configureMediaData(mediaData: self?.matchDetailViewModel?.responseData?.data.medias)
             vc.configureEventsData(recentMatches: self?.matchDetailViewModel?.responseData?.data.homeEvents)
-            //self?.viewContainerHeight.constant = vc.view.frame.size.height
         }
     }
     

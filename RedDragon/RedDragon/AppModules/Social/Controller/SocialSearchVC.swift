@@ -44,13 +44,12 @@ class SocialSearchVC: UIViewController {
     }
     
     func refreshPage() {
-        Loader.activityIndicator.startAnimating()
+        startLoader()
         seeAllButton.isHidden = matchArray.count == 0 ? true : false
     }
     
     func initialSettings() {
         nibInitialization()
-        self.view.addSubview(Loader.activityIndicator)
         
         fetchSocialViewModel()
         /// Add hashtag for header label
@@ -173,8 +172,6 @@ extension SocialSearchVC: PostListVCDelegate {
             searchEnable = false
             NotificationCenter.default.post(name: NSNotification.socialSearchEnable, object: nil, userInfo: searchDataDict)
         }
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (timer) in
-            Loader.activityIndicator.stopAnimating()
-        }
+        stopLoader()
     }
 }

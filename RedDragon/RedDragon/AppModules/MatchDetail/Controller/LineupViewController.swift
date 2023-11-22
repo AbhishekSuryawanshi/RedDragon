@@ -164,6 +164,7 @@ extension LineupViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        animateTabelCell(tableView, willDisplay: cell, forRowAt: indexPath)
         tableViewHeight.constant = self.tableView.contentSize.height
     }
 }

@@ -45,8 +45,6 @@ class LoginVC: UIViewController {
     }
     
     func initialSettings() {
-        self.view.addSubview(Loader.activityIndicator)
-        // Loader.activityIndicator.stopAnimating()
         fetchLoginViewModel()
         ///set deafult value for country code
         countryCode = "+971"
@@ -67,7 +65,7 @@ class LoginVC: UIViewController {
     }
     
     func showLoader(_ value: Bool) {
-        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
+        value ? startLoader() : stopLoader()
     }
     
     func validate() -> Bool {

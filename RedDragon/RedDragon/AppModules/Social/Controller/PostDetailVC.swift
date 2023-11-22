@@ -31,7 +31,6 @@ class PostDetailVC: UIViewController {
     }
     
     func initialSettings() {
-        self.view.addSubview(Loader.activityIndicator)
         ///Hide tabbar
         self.tabBarController?.tabBar.isHidden = true
         nibInitialization()
@@ -45,7 +44,7 @@ class PostDetailVC: UIViewController {
     }
     
     func showLoader(_ value: Bool) {
-        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
+        value ? startLoader() : stopLoader()
     }
     
     func refreshPage() {
@@ -54,7 +53,7 @@ class PostDetailVC: UIViewController {
     }
     
     func shareAction(model: SocialPost, image: UIImage) {
-        Loader.activityIndicator.stopAnimating()
+        stopLoader()
         DispatchQueue.main.async {
             let vc = UIActivityViewController(activityItems: [image, "\n\n\("Dive into this story via the RedDragon app".localized) \n\(model.descriptn) \n\("Stay connected to the latest in football, basketball, tennis, and other sports with us. Install it from the App Store to find more news.".localized) \n\n \(URLConstants.appstore)"], applicationActivities: [])
             if let popoverController = vc.popoverPresentationController {
@@ -83,7 +82,7 @@ class PostDetailVC: UIViewController {
     }
     
     @objc func shareButtonTapped(sender: UIButton) {
-        Loader.activityIndicator.startAnimating()
+        startLoader()
         var shareImage = UIImage() //ToDo add app logo
         if postModel.postImages.count > 0 {
             UIImageView().kf.setImage(with: URL(string: postModel.postImages.first ?? "")) { result in

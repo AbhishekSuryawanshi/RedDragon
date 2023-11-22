@@ -27,13 +27,12 @@ class ForgotPasswordVC: UIViewController {
     }
     
     func initialSettings() {
-        self.view.addSubview(Loader.activityIndicator)
         emailTextfield.placeholder = "Email".localized
         fetchLoginViewModel()
     }
     
     func showLoader(_ value: Bool) {
-        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
+        value ? startLoader() : stopLoader()
     }
     
     func validate() -> Bool {

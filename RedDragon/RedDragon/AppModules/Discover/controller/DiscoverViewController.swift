@@ -41,7 +41,7 @@ class DiscoverViewController: UIViewController {
     }
     
     func goToMeet(){
-        navigateToViewController(MeetHomeVC.self, storyboardName: StoryboardName.meet, animationType: .autoReverse(presenting: .zoom))
+        navigateToViewController(MeetDashboardVC.self, storyboardName: StoryboardName.meet, animationType: .autoReverse(presenting: .zoom))
     }
 }
 

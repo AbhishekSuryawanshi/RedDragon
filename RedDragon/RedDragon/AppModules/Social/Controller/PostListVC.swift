@@ -40,7 +40,6 @@ class PostListVC: UIViewController {
     }
     
     func initialSettings() {
-        self.view.addSubview(Loader.activityIndicator)
         nibInitialization()
         NotificationCenter.default.addObserver(self, selector: #selector(self.searchEnable(notification:)), name: NSNotification.socialSearchEnable, object: nil)
     }
@@ -85,7 +84,7 @@ class PostListVC: UIViewController {
     }
     
     func showLoader(_ value: Bool) {
-        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
+        value ? startLoader() : stopLoader()
     }
     
     func calculateContentHeight() {
@@ -120,7 +119,7 @@ class PostListVC: UIViewController {
     }
     
     func shareAction(model: SocialPost, image: UIImage) {
-        Loader.activityIndicator.stopAnimating()
+        stopLoader()
         let vc = UIActivityViewController(activityItems: [image, "\n\n\("Dive into this story via the RedDragon app".localized) \n\(model.descriptn) \n\("Stay connected to the latest in football, basketball, tennis, and other sports with us. Install it from the App Store to find more news.".localized) \n\n \(URLConstants.appstore)"], applicationActivities: [])
         if let popoverController = vc.popoverPresentationController {
             popoverController.sourceView = self.listTableView
@@ -167,7 +166,7 @@ class PostListVC: UIViewController {
     }
     
     @objc func shareButtonTapped(sender: UIButton) {
-        Loader.activityIndicator.startAnimating()
+        startLoader()
         let postModel = postArray[sender.tag]
         var shareImage = UIImage() //ToDo add app logo
         if postModel.postImages.count > 0 {

@@ -31,7 +31,7 @@ struct URLConstants {
     static let databaseMatchDetail = databaseBaseURL + "match.php"
     
     // MARK: - CardGame
-    static let allPlayersList      = "https://datasport.one/api/v1/sportscore/data/player_filter.php"
+    static let cardGame_allPlayersList = databaseBaseURL + "player_filter.php"
     
     // MARK: -  Social
     static let socialBaseURL       = baseURL + "euro5league/"
@@ -64,11 +64,14 @@ struct URLConstants {
     static let playerDetail        = databaseBaseURL + "player.php"
     
     //Bets
-    static let betAllMatches     = "https://amberic.top/app8/api/bet/" + "match/get"
-    static let allBets           = "https://amberic.top/app8/api/bet/" + "play/get"
+    static let betAllMatches      = "https://amberic.top/app8/api/bet/" + "match/get"
+    static let allBets            = "https://amberic.top/app8/api/bet/" + "play/get"
+    static let points             = "https://amberic.top/app8/api/bet/" + "account/wallet"
+    static let placeBet             = "https://amberic.top/app8/api/bet/" + "play/create"
     
     // MARK: -  Meet
-    
     static let meetBaseURL         = "https://kicktin.com/vinder/api/"
     static let meetUserList        = meetBaseURL + "listuser"
+    static let meetLikedUser       = meetBaseURL + "user/like"
+    static let meetMyMatchUser     = meetBaseURL + "user/mymatch/list"
 }

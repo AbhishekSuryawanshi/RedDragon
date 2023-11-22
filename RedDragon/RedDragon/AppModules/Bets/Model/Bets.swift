@@ -189,3 +189,17 @@ struct BetItem : Codable {
         case betDatetime = "bet_datetime"
     }
 }
+
+
+struct BetSuccessModel : Decodable{
+    
+    let status: Int?
+    let message: String?
+    
+    private enum CodingKeys: String, CodingKey {
+        case status = "status"
+        case message = "message"
+    
+}
+    
+}

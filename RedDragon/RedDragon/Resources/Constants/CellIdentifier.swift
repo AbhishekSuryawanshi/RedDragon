@@ -53,6 +53,9 @@ struct CellIdentifier {
     //CardGame
     static let allPlayersTableCell              = "AllPlayersTableViewCell"
 
+    //Meet
+    static let meetUserTableViewCell            = "MeetUserTableViewCell"
+    static let matchesCollectionViewCell            = "MatchesCollectionViewCell"
 }
 
 
