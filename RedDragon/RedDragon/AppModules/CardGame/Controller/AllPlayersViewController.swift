@@ -127,4 +127,8 @@ extension AllPlayersViewController: UITableViewDelegate, UITableViewDataSource {
         cell.heroID = nil
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        animateTabelCell(tableView, willDisplay: cell, forRowAt: indexPath)
+    }
 }
