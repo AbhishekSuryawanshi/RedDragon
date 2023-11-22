@@ -8,6 +8,7 @@
 import Foundation
 
 struct UserDefaultString {
+    static let sport        = "selected_sport"
     static let language     = "app_language"
     static let guestUser    = "guestUser"
     static let token        = "token"

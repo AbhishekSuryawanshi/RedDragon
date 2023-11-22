@@ -40,16 +40,16 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="Xi8-ai-dFG">
-                                <rect key="frame" x="45" y="5" width="131.33333333333334" height="34"/>
+                                <rect key="frame" x="45" y="5" width="135.66666666666666" height="34"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have won Bet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mg1-O2-sFH">
-                                        <rect key="frame" x="0.0" y="0.0" width="131.33333333333334" height="17.666666666666668"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="135.66666666666666" height="17.666666666666668"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13 Nov 2023, 11:54 am" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WhE-yS-q1Y">
-                                        <rect key="frame" x="0.0" y="18.666666666666664" width="131.33333333333334" height="15.333333333333336"/>
+                                        <rect key="frame" x="0.0" y="18.666666666666664" width="135.66666666666666" height="15.333333333333336"/>
                                         <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="13"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -60,7 +60,7 @@
                                 <rect key="frame" x="388.33333333333331" y="4.3333333333333321" width="76.666666666666686" height="35.333333333333343"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-200" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K8R-3c-bDE">
-                                        <rect key="frame" x="22.666666666666686" y="0.0" width="31.666666666666671" height="17.666666666666668"/>
+                                        <rect key="frame" x="23" y="0.0" width="31" height="17.666666666666668"/>
                                         <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="15"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -94,6 +94,13 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="amountLable" destination="K8R-3c-bDE" id="W8A-YZ-aiZ"/>
+                <outlet property="dateLable" destination="WhE-yS-q1Y" id="v9V-Ot-H6C"/>
+                <outlet property="imgStatus" destination="adr-ai-pFS" id="xCp-B1-vll"/>
+                <outlet property="statusLable" destination="55f-4c-rZ3" id="cEh-Iu-soQ"/>
+                <outlet property="titleLable" destination="Mg1-O2-sFH" id="c6x-3n-6rV"/>
+            </connections>
             <point key="canvasLocation" x="231.29770992366412" y="29.225352112676056"/>
         </tableViewCell>
     </objects>

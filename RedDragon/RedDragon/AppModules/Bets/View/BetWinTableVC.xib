@@ -55,15 +55,15 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="placeholderTeam" translatesAutoresizingMaskIntoConstraints="NO" id="Cvw-V4-tF6">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderTeam" translatesAutoresizingMaskIntoConstraints="NO" id="Cvw-V4-tF6">
                                 <rect key="frame" x="370" y="45.666666666666664" width="18" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="18" id="Gim-oL-OOJ"/>
                                     <constraint firstAttribute="height" constant="18" id="ZqP-7w-9n0"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLk-O5-TYe">
-                                <rect key="frame" x="323.66666666666669" y="45.666666666666671" width="36.333333333333314" height="17.666666666666664"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLk-O5-TYe">
+                                <rect key="frame" x="323.66666666666669" y="45.666666666666664" width="36.333333333333314" height="17.666666666666664"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -139,6 +139,11 @@
                                     <constraint firstItem="aJa-6g-Xbg" firstAttribute="centerY" secondItem="JOj-H4-Rrg" secondAttribute="centerY" id="fXC-Fv-nSw"/>
                                     <constraint firstItem="QDT-6d-edd" firstAttribute="centerY" secondItem="JOj-H4-Rrg" secondAttribute="centerY" id="mn1-ZG-sKK"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="vMP-RC-Rm7">
                                 <rect key="frame" x="11" y="101" width="377" height="34"/>
@@ -302,6 +307,7 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Cvw-V4-tF6" firstAttribute="top" secondItem="TgR-MT-8gv" secondAttribute="top" id="20d-YY-afO"/>
                             <constraint firstItem="JOj-H4-Rrg" firstAttribute="leading" secondItem="KyS-en-SxT" secondAttribute="leading" constant="11" id="2cc-jd-swq"/>
                             <constraint firstItem="SO0-eu-4Kg" firstAttribute="centerX" secondItem="KyS-en-SxT" secondAttribute="centerX" id="4mF-bW-giV"/>
                             <constraint firstItem="uWO-7J-NwB" firstAttribute="leading" secondItem="KyS-en-SxT" secondAttribute="leading" constant="11" id="6gX-d1-Isx"/>

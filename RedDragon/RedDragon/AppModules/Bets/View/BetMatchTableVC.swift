@@ -40,29 +40,32 @@ class BetMatchTableVC: UITableViewCell {
         imgLeague.setImage(imageStr: match.logo ?? "", placeholder: UIImage(named: "placeholderTeam"))
         homeName.text = match.matches?.first?.homeTeam
         awayName.text = match.matches?.first?.awayTeam
-        if (match.matches!.first!.odds1Value!.isEmpty) {
+        guard let matchs = match.matches?.first else{
+            return
+        }
+        if (matchs.odds1Value!.isEmpty) {
             oddsLable1.text = "1"
         }else{
-            oddsLable1.text = match.matches?.first?.odds1Value ?? "1"
+            oddsLable1.text = matchs.odds1Value ?? "1"
         }
         
-        if (match.matches!.first!.odds2Value!.isEmpty) {
+        if (matchs.odds2Value!.isEmpty) {
             oddsLable2.text = "1"
         }else{
-            oddsLable2.text = match.matches?.first?.odds2Value ?? "1"
+            oddsLable2.text = matchs.odds2Value ?? "1"
         }
         
-        if (match.matches!.first!.odds3Value!.isEmpty) {
+        if (matchs.odds3Value ?? "" == "") {
             oddsLable3.text = "1"
         }else{
-            oddsLable3.text = match.matches?.first?.odds3Value ?? "1"
+            oddsLable3.text = matchs.odds3Value ?? "1"
         }
         
         if isLive{
             dateLable.text = "Live".localized
-            score.text = "\(match.matches?.first?.homeScore ?? "0") : \(match.matches?.first?.awayScore ?? "0")"
+            score.text = "\(matchs.homeScore ?? "0") : \(matchs.awayScore ?? "0")"
         }else{
-            dateLable.text = getDate(slug: (match.matches?.first?.slug)!, time: (match.matches?.first?.time)!)
+            dateLable.text = getDate(slug: (matchs.slug)!, time: (matchs.time)!)
         }
     }
     

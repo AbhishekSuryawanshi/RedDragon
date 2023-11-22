@@ -36,6 +36,9 @@ class BetHomeVc: UIViewController {
         networkCall()
         fetchBetMetches()
         fetchBets()
+        
+        // notification
+        NotificationCenter.default.addObserver(self, selector: #selector(selectedSport), name: NSNotification.selectedSport, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,13 +60,13 @@ class BetHomeVc: UIViewController {
             if matchesList?.count ?? 0 > 0 {
                 tableView.reloadData()
             }else{
-                viewModel.fetchAllMatchesAsyncCall(sport: .football, lang: fetchCurrentLanguageCode == "en" ? "en" : "zh", day: "tommorow")
+                viewModel.fetchAllMatchesAsyncCall(sport: UserDefaults.standard.sport ?? "football", lang: fetchCurrentLanguageCode == "en" ? "en" : "zh", day: "tommorow")
             }
         case .Live:
             if liveMatchesList?.count ?? 0 > 0 {
                 tableView.reloadData()
             }else{
-                viewModel.fetchAllMatchesAsyncCall(sport: .football, lang: fetchCurrentLanguageCode == "en" ? "en" : "zh", day: "today")
+                viewModel.fetchAllMatchesAsyncCall(sport: UserDefaults.standard.sport ?? "football", lang: fetchCurrentLanguageCode == "en" ? "en" : "zh", day: "today")
             }
         case .Win:
             if winBets?.count ?? 0 > 0 {
@@ -77,6 +80,15 @@ class BetHomeVc: UIViewController {
             }else{
                 viewModelBet.fetchAllBetsAsyncCall()
             }
+        }
+    }
+    
+    @objc func selectedSport(){
+        // when user update sport type from side menu
+        if selectedType == .All || selectedType == .Live {
+            matchesList?.removeAll()
+            liveMatchesList?.removeAll()
+            networkCall()
         }
     }
 
@@ -93,7 +105,7 @@ class BetHomeVc: UIViewController {
     }
 }
 
-// collection view
+// collection view for titles
 extension BetHomeVc : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
             return viewModel.homeTitles.count

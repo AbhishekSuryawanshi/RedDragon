@@ -16,7 +16,7 @@ class BetMatchesHomeViewModel : APIServiceManager<MatchListModel> {
     
     
     //function to fetch All Bet matches
-    func fetchAllMatchesAsyncCall(sport : Sports, lang: String, day : String) {
+    func fetchAllMatchesAsyncCall(sport : String, lang: String, day : String) {
         let urlString   = URLConstants.betAllMatches
         let method      = RequestType.post
         var myTime : Date?
@@ -35,7 +35,7 @@ class BetMatchesHomeViewModel : APIServiceManager<MatchListModel> {
             let params: [String: Any] = [
                 "lang": lang,
                 "date": tomorrowDate,
-                "sport": sport.rawValue.lowercased(),
+                "sport": sport,
                 "live" : true,
                 "session": "17ba0791499db908433b80f37c5fbc89b870084b-eeb2319c2c71c4ad5636e0a27ae5a98852275a53" // hard code should to change
             ]
@@ -45,7 +45,7 @@ class BetMatchesHomeViewModel : APIServiceManager<MatchListModel> {
             let params: [String: Any] = [
                 "lang": lang,
                 "date": tomorrowDate,
-                "sport": sport.rawValue.lowercased(),
+                "sport": sport,
                 "session": "17ba0791499db908433b80f37c5fbc89b870084b-eeb2319c2c71c4ad5636e0a27ae5a98852275a53" // hard code should to change
             ]
             asyncCall(urlString: urlString, method: method, parameters: params)
