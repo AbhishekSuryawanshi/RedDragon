@@ -7,8 +7,13 @@
 
 import Foundation
 
-// MARK: - PredictionMatchesModelElement
-struct PredictionMatchesModelElement: Codable {
+// MARK: - PredictionMatchesModel
+struct PredictionMatchesModel: Codable {
+    var data: [PredictionData]?
+}
+
+// MARK: - Datum
+struct PredictionData: Codable {
     var league, leagueSlug, section: String?
     var logo: String?
     var startDate, endDate: String?
@@ -64,6 +69,7 @@ struct PredictionMatch: Codable {
 enum MatchState: String, Codable {
     case canceled = "canceled"
     case finished = "finished"
+    case live = "live"
     case notstarted = "notstarted"
     case postponed = "postponed"
     case resultOnly = "result only"
@@ -76,5 +82,4 @@ enum OddsIndicator: String, Codable {
     case up = "up"
 }
 
-typealias PredictionMatchesModel = [PredictionMatchesModelElement]
 
