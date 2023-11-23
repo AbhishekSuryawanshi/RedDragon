@@ -46,10 +46,10 @@ class DatabaseVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        nibInitialization()
         setupLeagues()
         loadFunctionality()
         makeNetworkCall()
-        nibInitialization()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,6 +83,8 @@ class DatabaseVC: UIViewController {
     }
     
     func nibInitialization() {
+        let nib = UINib(nibName: CellIdentifier.leagueNamesCollectionCell, bundle: nil)
+        leaguesCollectionView.register(nib, forCellWithReuseIdentifier: CellIdentifier.leagueNamesCollectionCell)
         defineTableViewNibCell(tableView: tableView, cellName: CellIdentifier.standingTableCell)
         defineTableViewNibCell(tableView: tableView, cellName: CellIdentifier.eventsTableCell)
         defineTableViewNibCell(tableView: seasonPerformanceTabelView, cellName: CellIdentifier.seasonPerfoemanceTableCell)

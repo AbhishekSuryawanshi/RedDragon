@@ -2,7 +2,7 @@
 //  LeagueCollectionViewCell.swift
 //  RedDragon
 //
-//  Created by QASR02 on 30/10/2023.
+//  Created by QASR02 on 23/11/2023.
 //
 
 import UIKit
