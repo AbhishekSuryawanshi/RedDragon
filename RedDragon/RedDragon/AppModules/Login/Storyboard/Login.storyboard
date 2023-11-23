@@ -254,7 +254,7 @@
                                                             <action selector="createAccountButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="t8u-kL-Fcm"/>
                                                         </connections>
                                                     </button>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uMe-9t-HjP">
+                                                    <textView clipsSubviews="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uMe-9t-HjP">
                                                         <rect key="frame" x="196.66666666666666" y="615" width="0.0" height="33"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" name="base"/>
@@ -400,10 +400,10 @@
                                         <rect key="frame" x="0.0" y="44" width="393" height="629"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H4H-r1-ChP">
-                                                <rect key="frame" x="0.0" y="0.0" width="393" height="897"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="882"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cE0-A9-auP">
-                                                        <rect key="frame" x="25" y="0.0" width="343" height="645"/>
+                                                        <rect key="frame" x="25" y="0.0" width="343" height="630"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hw5-qC-mFm">
                                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="120"/>
@@ -824,7 +824,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oX7-y4-vxA">
-                                                                <rect key="frame" x="0.0" y="570" width="343" height="75"/>
+                                                                <rect key="frame" x="0.0" y="570" width="343" height="60"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H5T-g8-b8Y">
                                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -841,8 +841,8 @@
                                                                             <action selector="termsButtonTapped:" destination="Kzm-2D-KDF" eventType="touchUpInside" id="YJd-Un-72L"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Confirm your acceptance of the terms and conditions" translatesAutoresizingMaskIntoConstraints="NO" id="Lof-oU-3UU">
-                                                                        <rect key="frame" x="50" y="0.0" width="293" height="75"/>
+                                                                    <textView clipsSubviews="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Confirm your acceptance of the terms and conditions" translatesAutoresizingMaskIntoConstraints="NO" id="Lof-oU-3UU">
+                                                                        <rect key="frame" x="50" y="0.0" width="293" height="60"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -853,22 +853,33 @@
                                                                             <outlet property="delegate" destination="Kzm-2D-KDF" id="c8q-60-AaW"/>
                                                                         </connections>
                                                                     </textView>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lm2-d7-Il4">
+                                                                        <rect key="frame" x="70" y="8" width="263" height="42"/>
+                                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                        <connections>
+                                                                            <action selector="termsTextButtonTapped:" destination="Kzm-2D-KDF" eventType="touchUpInside" id="A0i-ZH-9gy"/>
+                                                                        </connections>
+                                                                    </button>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
+                                                                    <constraint firstItem="lm2-d7-Il4" firstAttribute="leading" secondItem="Lof-oU-3UU" secondAttribute="leading" constant="20" id="4f4-x9-nIc"/>
                                                                     <constraint firstItem="H5T-g8-b8Y" firstAttribute="top" secondItem="oX7-y4-vxA" secondAttribute="top" id="9oH-7k-zTm"/>
                                                                     <constraint firstItem="Lof-oU-3UU" firstAttribute="leading" secondItem="oX7-y4-vxA" secondAttribute="leading" constant="50" id="HBm-1J-DPD"/>
                                                                     <constraint firstAttribute="trailing" secondItem="Lof-oU-3UU" secondAttribute="trailing" id="WTW-c6-GYn"/>
-                                                                    <constraint firstAttribute="height" constant="75" id="bR3-xf-5FO"/>
+                                                                    <constraint firstAttribute="height" constant="60" id="bR3-xf-5FO"/>
+                                                                    <constraint firstItem="lm2-d7-Il4" firstAttribute="top" secondItem="Lof-oU-3UU" secondAttribute="top" constant="8" id="fTW-8E-Gd1"/>
                                                                     <constraint firstItem="H5T-g8-b8Y" firstAttribute="leading" secondItem="oX7-y4-vxA" secondAttribute="leading" id="jQE-S6-jzs"/>
                                                                     <constraint firstItem="Lof-oU-3UU" firstAttribute="top" secondItem="oX7-y4-vxA" secondAttribute="top" id="uWE-Se-pdJ"/>
+                                                                    <constraint firstItem="lm2-d7-Il4" firstAttribute="bottom" secondItem="Lof-oU-3UU" secondAttribute="bottom" constant="-10" id="vIU-Ms-1GJ"/>
                                                                     <constraint firstAttribute="bottom" secondItem="Lof-oU-3UU" secondAttribute="bottom" id="y9E-OT-dIG"/>
+                                                                    <constraint firstItem="lm2-d7-Il4" firstAttribute="trailing" secondItem="Lof-oU-3UU" secondAttribute="trailing" constant="-10" id="ykJ-Og-GGD"/>
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
                                                     </stackView>
                                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y4f-8Q-IjO">
-                                                        <rect key="frame" x="25" y="699" width="343" height="45"/>
+                                                        <rect key="frame" x="25" y="684" width="343" height="45"/>
                                                         <color key="backgroundColor" name="base"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="45" id="Ecg-N9-6h3"/>
@@ -886,7 +897,7 @@
                                                         </connections>
                                                     </button>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="e1u-Nr-AsH">
-                                                        <rect key="frame" x="196.66666666666666" y="764" width="0.0" height="33"/>
+                                                        <rect key="frame" x="196.66666666666666" y="749" width="0.0" height="33"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" name="base"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1832,7 +1843,7 @@
         <image name="wallPaper3" width="218.66667175292969" height="204"/>
         <image name="wallPaper4" width="220.66667175292969" height="204"/>
         <namedColor name="base">
-            <color red="0.7160000205039978" green="0.093999996781349182" blue="0.054000001400709152" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.71764705882352942" green="0.094117647058823528" blue="0.054901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="gray2">
             <color red="0.80784313725490198" green="0.76470588235294112" blue="0.75294117647058822" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -88,7 +88,7 @@ struct SocialPost: Codable {
         
         isVisible = try (container.decodeIfPresent(Int.self, forKey: .isVisible) ?? 0)
         leagueId = try (container.decodeIfPresent(String.self, forKey: .leagueId) ?? "")
-        userId = try (container.decodeIfPresent(Int.self, forKey: .userId) ?? 0)
+        userId = try (container.decodeIfPresent(Int.self, forKey: .userId) ?? 0) // check bottom, type == "POLL", userId = user_id
         userImage = try (container.decodeIfPresent(String.self, forKey: .userImage) ?? "")
         firstName = try (container.decodeIfPresent(String.self, forKey: .firstName) ?? "")
         lastName = try (container.decodeIfPresent(String.self, forKey: .lastName) ?? "")
@@ -97,7 +97,7 @@ struct SocialPost: Codable {
         
         matchDetail = try (container.decodeIfPresent(String.self, forKey: .matchDetail) ?? "")
         if matchDetail != "" {
-            let jsonData = Data(matchDetail.utf8)//matchDetail.data(using: .utf8)!
+            let jsonData = Data(matchDetail.utf8)
             let decoder = JSONDecoder()
             do {
                 matchModel = try decoder.decode(SocialMatch.self, from: jsonData)
@@ -237,17 +237,14 @@ struct SocialUser: Codable {
     }
 }
 
-struct ImageResponse: Codable {
-    var postImage: String = ""
-    
-    public init () {}
-    
-    enum CodingKeys: String, CodingKey {
-        case postImage = "url"
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        postImage = try (container.decodeIfPresent(String.self, forKey: .postImage) ?? "")
-    }
+struct SocialPostImageResponse: Codable {
+    let response: SocialPostImageData?
+    let error: SocialPostImageData?
 }
+
+struct SocialPostImageData: Codable {
+    let code: Int?
+    let messages: [String]?
+    let data: SocialPostImage?
+}
+

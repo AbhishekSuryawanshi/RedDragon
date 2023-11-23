@@ -12,7 +12,7 @@ struct URLConstants {
     static let appstore            = "https://apps.apple.com/app/id\(appStoreID)"
     static let appReview           = "itms-apps://itunes.apple.com/app/id\(appStoreID)?mt=8&action=write-review"
     static let privacyPolicy       = ""
-    static let terms               = ""
+    static let terms               = "https://pitchstories.wordpress.com/terms-of-use/"
     
     static let baseURL             = "http://157.245.159.136:5072/api/"
     
@@ -35,10 +35,11 @@ struct URLConstants {
     
     // MARK: -  Social
     static let socialBaseURL       = baseURL + "euro5league/"
+    static let euro5leagueBaseURL  = "https://muheh.com/euro5leagues/"
    
     //Match
-    static let socialPublicLeague  = "https://muheh.com/euro5leagues/api/league/list"
-    static let socialPublicTeam    = "https://muheh.com/euro5leagues/api/team/list"
+    static let socialPublicLeague  = euro5leagueBaseURL + "api/league/list"
+    static let socialPublicTeam    = euro5leagueBaseURL + "api/team/list"
     static let socialLeague        = socialBaseURL + "league/list"
     static let socialTeam          = socialBaseURL + "team/list"
     static let socialMatch         = socialBaseURL + "match/list"
