@@ -40,6 +40,12 @@ extension ExploreUsersVC: UITableViewDataSource, UITableViewDelegate {
         return tableCell(indexPath: indexPath)
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigateToViewController(MeetUserDetailVC.self, storyboardName: StoryboardName.meet, animationType: .autoReverse(presenting: .zoom)) {
+            vc in
+            vc.selectedUserId = self.users[indexPath.row].id ?? 0
+        }
+    }
 }
 
 extension ExploreUsersVC {

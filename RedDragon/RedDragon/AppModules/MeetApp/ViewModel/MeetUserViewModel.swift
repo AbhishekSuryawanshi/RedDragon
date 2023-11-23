@@ -17,6 +17,16 @@ class MeetUserViewModel: APIServiceManager<MeetUserListModel> {
     }
 }
 
+class MeetUserDetailViewModel: APIServiceManager<MeetUserDetailModel> {
+    
+    ///function to fetch user list
+    func fetchMeetUserDetailAsyncCall(userID: Int) {
+        let urlString   = URLConstants.meetUserList + "?id=\(userID)"
+        let method      = RequestType.get
+        asyncCall(urlString: urlString, method: method, parameters: nil, isGuestUser: true)
+    }
+}
+
 class MeetLikedUserViewModel: APIServiceManager<MeetLikedUserModel> {
     
     ///function to post like user
