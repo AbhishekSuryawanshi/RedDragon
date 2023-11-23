@@ -24,14 +24,12 @@ class MeetExploreVC: UIViewController {
     
     // MARK: - Methods
     func performInitialSetup() {
-        addActivityIndicator()
         makeNetworkCall()
         fetchViewModelResponse()
-      
     }
     
     func showLoader(_ value: Bool) {
-        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
+        value ? startLoader() : stopLoader()
     }
     
     func makeNetworkCall() {
@@ -53,10 +51,6 @@ class MeetExploreVC: UIViewController {
 
 // MARK: - Network Related Response
 extension MeetExploreVC {
-    func addActivityIndicator() {
-        self.view.addSubview(Loader.activityIndicator)
-    }
-    
     ///fetch view model for user list
     func fetchViewModelResponse() {
         userVM?.showError = { [weak self] error in
