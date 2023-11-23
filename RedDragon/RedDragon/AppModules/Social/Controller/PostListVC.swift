@@ -207,6 +207,7 @@ extension PostListVC {
         ///fetch post and poll list
         SocialPostListVM.shared.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.execute_onPostListResponseData(nil)
         }
         //        SocialPostListVM.shared.displayLoader = { [weak self] value in
         //            self?.showLoader(value)

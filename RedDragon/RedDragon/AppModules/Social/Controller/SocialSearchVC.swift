@@ -61,6 +61,7 @@ class SocialSearchVC: UIViewController {
         logoView.isHidden = !showMatches
         matchView.isHidden = !showMatches
         logoShadowView.applyShadow(radius: 3, opacity: 0.9, offset: CGSize(width: 1 , height: 1))
+        matchTitleLabel.text = ""
         if showMatches {
             if teamModel.id == "" {
                 logoImageView.setImage(imageStr: leagueModel.logoURL, placeholder: .placeholderTeam)
@@ -87,6 +88,10 @@ class SocialSearchVC: UIViewController {
         }
     }
     
+    func showLoader(_ value: Bool) {
+        value ? startLoader() : stopLoader()
+    }
+    
     // MARK: - Button Action
     
     @IBAction func seeAllButtonTapped(_ sender: UIButton) {
@@ -97,7 +102,6 @@ class SocialSearchVC: UIViewController {
             matchArray = allMatchArray
             seeAllButton.setImage(.upArrow, for: .normal)
         }
-        
         matchTableView.reloadData()
     }
 }
@@ -108,8 +112,11 @@ extension SocialSearchVC {
         ///fetch match list
         SocialMatchVM.shared.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.execute_onResponseData(nil)
         }
-        
+        SocialMatchVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
         SocialMatchVM.shared.$responseData
             .receive(on: DispatchQueue.main)
             .dropFirst()
@@ -135,6 +142,7 @@ extension SocialSearchVC {
         loadPostsView()
         seeAllButton.isHidden = matchArray.count == 0 ? true : false
         seeAllButton.setImage(.downArrow2, for: .normal)
+        
         if matchArray.count == 0 {
             matchTableView.setEmptyMessage(ErrorMessage.matchEmptyAlert)
         } else {
@@ -146,7 +154,7 @@ extension SocialSearchVC {
 // MARK: - TableView Delegate
 extension SocialSearchVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        matchHeightConstraint.constant = matchArray.count == 0 ? 300 : (CGFloat(matchArray.count * 83) + 50)
+        matchHeightConstraint.constant = matchArray.count == 0 ? 170 : (CGFloat(matchArray.count * 83) + 50)
         return matchArray.count
     }
     

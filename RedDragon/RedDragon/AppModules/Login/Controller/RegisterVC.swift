@@ -60,7 +60,7 @@ class RegisterVC: UIViewController {
         bottomTextView.attributedText = bottomFormatedText
         let termsFormatedText = NSMutableAttributedString()
         termsFormatedText.regular("Confirm your acceptance of the", size: 14).bold(" Terms and Conditions", size: 15)
-        bottomFormatedText.addLink(textToFind: " Terms and Conditions", linkURL: URLConstants.terms)
+        bottomFormatedText.addLink(textToFind: "Confirm your acceptance of the Terms and Conditions", linkURL: URLConstants.terms)
         termsTextView.attributedText = termsFormatedText
     }
     
@@ -112,6 +112,11 @@ class RegisterVC: UIViewController {
         sender.isSelected = !sender.isSelected
     }
     
+    @IBAction func termsTextButtonTapped(_ sender: UIButton) {
+        guard let url = URL(string: URLConstants.terms) else { return }
+        UIApplication.shared.open(url)
+    }
+    
     @IBAction func countryCodeButtonTapped(_ sender: UIButton) {
         let countryVC = CountryCodeListVC()
         countryVC.delegate = self
@@ -157,7 +162,7 @@ extension RegisterVC {
         if let dataResponse = response?.response {
             if let user = dataResponse.data {
                 ///User registered, now verify OTP
-              UserDefaults.standard.token = user.token //required for resend api
+                UserDefaults.standard.token = user.token //required for resend api
                 self.presentOverViewController(VerificationVC.self, storyboardName: StoryboardName.login) { vc in
                     vc.email = user.email
                     vc.phoneNumber = user.phoneNumber
@@ -201,15 +206,14 @@ extension RegisterVC: UITextFieldDelegate {
 
 //MARK: UITextView Delegates
 extension RegisterVC: UITextViewDelegate {
-    
-    public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         switch URL.absoluteString {
         case "signIn":
             self.dismiss(animated: true)
         default:
             //ToDo
             ///check terms url
-            // guard let url = URL(string: URL.absoluteString) else { return }
+            //guard let url = URL(string: URL.absoluteString) else { return }
             UIApplication.shared.open(URL)
         }
         return false

@@ -30,7 +30,7 @@ class SocialPostListVM: APIServiceManager<SocialPostListResponse> {
         let contentHeight = contentText.heightOfString2(width: screenWidth - 40, font: fontRegular(15))
         let imageHeight = model.postImages.count == 0 ? 0 : screenWidth //screenWidth - 30
         let matchHeight:CGFloat = model.matchDetail == "" ? 0 : 110
-        var pollHeight: CGFloat = model.type == "POLL" ? CGFloat(40 + (model.pollArray.count * 60)) : 0
+        let pollHeight: CGFloat = model.type == "POLL" ? CGFloat(40 + (model.pollArray.count * 60)) : 0
         let commentHeight:CGFloat = model.type == "POLL" ? 0 : 50
         
         let totalHeight = userDetailHeight + contentHeight + imageHeight + matchHeight + pollHeight + commentHeight

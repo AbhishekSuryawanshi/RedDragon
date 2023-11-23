@@ -68,12 +68,8 @@ class SocialPostImageViewModel: ObservableObject {
         Task { @MainActor in
             displayLoader?(true)
             do {
-                /*
-                 
-                 */
                 let responseData = try await self.fetchUploadedImageURL(imageName: imageName, imageData: imageData)
                                 
-                var imageModel = ImageResponse()
                 if responseData != "" {
                     let jsonData = Data(responseData.utf8)
                     let _response = try? JSONSerialization.jsonObject(with: jsonData, options: [])
@@ -81,9 +77,16 @@ class SocialPostImageViewModel: ObservableObject {
                     print("[Response] :==> \(responseDictionary ?? [:])")
                     let decoder = JSONDecoder()
                     do {
-                        imageModel = try decoder.decode(ImageResponse.self, from: jsonData)
-                        userImage = URLConstants.socialBaseURL + imageModel.postImage
+                        let imageResponse = try decoder.decode(SocialPostImageResponse.self, from: jsonData)
+                        if let dataResponse = imageResponse.response {
+                            userImage = URLConstants.euro5leagueBaseURL + (dataResponse.data?.imageUrl ?? "")
+                        } else {
+                            if let errorResponse = imageResponse.error {
+                                showError?(errorResponse.messages?.first ?? CustomErrors.unknown.description)
+                            }
+                        }
                     } catch {
+                        showError?(CustomErrors.invalidJSON.description)
                     }
                 }
             } catch {
