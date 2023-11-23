@@ -18,4 +18,5 @@ struct StoryboardName {
     static let bets         = "BetStoryboard"
     static let meet         = "Meet"
     static let prediction   = "Prediction"
+    static let streetMatches = "StreetMatches"
 }
