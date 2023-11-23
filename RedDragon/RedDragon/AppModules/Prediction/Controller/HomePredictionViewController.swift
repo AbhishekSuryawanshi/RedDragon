@@ -117,28 +117,29 @@ extension HomePredictionViewController {
             .store(in: &cancellable)
     }
     
-    func renderResponseData(data: [PredictionMatchesModelElement]) {
+    func renderResponseData(data: PredictionMatchesModel) {
         let data = data
         UIView.animate(withDuration: 1.0) { [self] in
-            upcomingLeagueNameLbl1.text = data[0].league
+            upcomingLeagueNameLbl1.text = data.data?[0].league
             upcomingLeagueImgView1.sd_imageIndicator = SDWebImageActivityIndicator.white
-            upcomingLeagueImgView1.sd_setImage(with: URL(string: data[0].logo ?? ""))
-            upcomingTeam1Lbl1.text = data[0].matches?[0].homeTeam
-            upcomingTeam2Lbl1.text = data[0].matches?[0].awayTeam
+            upcomingLeagueImgView1.sd_setImage(with: URL(string: data.data?[0].logo ?? ""))
+            upcomingTeam1Lbl1.text = data.data?[0].matches?[0].homeTeam
+            upcomingTeam2Lbl1.text = data.data?[0].matches?[0].awayTeam
             
-            if data[1] != nil{
-                upcomingLeagueNameLbl2.text = data[1].league
+            
+            if data.data?[1] != nil{
+                upcomingLeagueNameLbl2.text = data.data?[1].league
                 upcomingLeagueImgView2.sd_imageIndicator = SDWebImageActivityIndicator.white
-                upcomingLeagueImgView2.sd_setImage(with: URL(string: data[1].logo ?? ""))
-                upcomingTeam1Lbl2.text = data[1].matches?[0].homeTeam
-                upcomingTeam2Lbl2.text = data[1].matches?[0].awayTeam
+                upcomingLeagueImgView2.sd_setImage(with: URL(string: data.data?[1].logo ?? ""))
+                upcomingTeam1Lbl2.text = data.data?[1].matches?[0].homeTeam
+                upcomingTeam2Lbl2.text = data.data?[1].matches?[0].awayTeam
             }
-            if data[2] != nil{
-                upcomingLeagueNameLbl3.text = data[2].league
+            if data.data?[2] != nil{
+                upcomingLeagueNameLbl3.text = data.data?[2].league
                 upcomingLeagueImgView3.sd_imageIndicator = SDWebImageActivityIndicator.white
-                upcomingLeagueImgView3.sd_setImage(with: URL(string: data[2].logo ?? ""))
-                upcomingTeam1Lbl3.text = data[2].matches?[0].homeTeam
-                upcomingteam2Lbl3.text = data[2].matches?[0].awayTeam
+                upcomingLeagueImgView3.sd_setImage(with: URL(string: data.data?[2].logo ?? ""))
+                upcomingTeam1Lbl3.text = data.data?[2].matches?[0].homeTeam
+                upcomingteam2Lbl3.text = data.data?[2].matches?[0].awayTeam
             }
                 
             

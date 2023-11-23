@@ -7,13 +7,12 @@
 
 import Foundation
 
-class PredictionViewModel: APIServiceManager<[PredictionMatchesModelElement]> {
+class PredictionViewModel: APIServiceManager<PredictionMatchesModel> {
     
     ///fetch prediction matches data
     func fetchPredictionMatchesAsyncCall(lang: String, date: String, sportType: String) {
         let url     = URLConstants.predictionBaseURL + URLConstants.getMatchesList
         let method  = RequestType.get
-       // let parameters: [String: Any] = ["sportType":sportType, "lang": lang, "date": date]
         // Add the query parameters to the URL components
                 let queryItems = [
                     URLQueryItem(name: "sportType", value: sportType),
