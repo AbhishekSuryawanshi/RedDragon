@@ -13,8 +13,7 @@ class PredictUpcomingTableViewCell: UITableViewCell {
     @IBOutlet weak var team2Lbl: UILabel!
     @IBOutlet weak var dateTimeLbl: UILabel!
     @IBOutlet weak var team1Lbl: UILabel!
-    @IBOutlet weak var leagueNameLbl: UILabel!
-    @IBOutlet weak var leagueImgView: UIImageView!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

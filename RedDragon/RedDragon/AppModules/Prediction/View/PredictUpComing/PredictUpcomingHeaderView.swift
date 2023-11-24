@@ -1,20 +1,18 @@
 //
-//  PlacePredictionView.swift
+//  PredictUpcomingHeaderView.swift
 //  RedDragon
 //
-//  Created by Ali on 11/21/23.
+//  Created by Ali on 11/24/23.
 //
 
 import UIKit
 
-class PlacePredictionView: UIView {
+class PredictUpcomingHeaderView: UIView {
 
-    @IBOutlet weak var awayBtn: UIButton!
-    @IBOutlet weak var drawBtn: UIButton!
-    @IBOutlet weak var homeBtn: UIButton!
-    @IBOutlet weak var placePredictionLbl: UILabel!
+    @IBOutlet weak var leagueNameLbl: UILabel!
+    @IBOutlet weak var leagueImgView: UIImageView!
     @IBOutlet var contentView: UIView!
-   
+    
     override init(frame: CGRect) {
            super.init(frame: frame)
            commonInit()
@@ -26,9 +24,8 @@ class PlacePredictionView: UIView {
        }
        
        func commonInit() {
-           Bundle.main.loadNibNamed("PlacePredictionView", owner: self, options: nil)
+           Bundle.main.loadNibNamed("PredictUpcomingHeaderView", owner: self, options: nil)
            contentView.fixInView(self)
        }
-
 
 }
