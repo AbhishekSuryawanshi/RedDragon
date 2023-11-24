@@ -60,7 +60,7 @@ extension String {
             } else if Calendar.current.isDateInYesterday(date) {
                 return "Yesterday".localized + ", \(dateFormatterPrint.string(from: date))"
             } else {
-                dateFormatterPrint.dateFormat = dateFormat.ddMMMyyyyhhmma.rawValue
+                dateFormatterPrint.dateFormat = dateFormat.ddMMMyyyyhmma.rawValue
                 return dateFormatterPrint.string(from: date)
             }
         } else {

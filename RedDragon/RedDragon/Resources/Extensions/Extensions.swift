@@ -8,6 +8,8 @@
 import UIKit
 import SDWebImage
 
+///We will remove this file
+/*
 extension UIView {
     /// To curve the sides of view
     /// add suitable corners in "corners" as [.topLeft, .topRight, .bottomLeft, .bottomRight, .allCorners]
@@ -251,3 +253,5 @@ extension Array {
         }
     }
 }
+
+*/

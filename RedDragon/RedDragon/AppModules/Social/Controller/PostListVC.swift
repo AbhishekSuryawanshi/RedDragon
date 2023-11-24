@@ -131,7 +131,9 @@ class PostListVC: UIViewController {
     // MARK: - Button Actions
     @objc func moreButtonTapped(sender: UIButton) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        if let user = UserDefaults.standard.user, user.id == postArray[sender.tag].userId {// app user
+        /// RedDragon user id and local app (euro5League for social module) user ids are different
+        /// When a user created in RedDragon, same user created as a new user in euro5League api (PitchStories app)
+        if let user = UserDefaults.standard.user, user.appDataIDs.euro5LeagueUserId == postArray[sender.tag].userId {// app user
             let action1 = UIAlertAction(title: "Edit Post".localized, style: .default , handler:{ (UIAlertAction) in
                 self.navigateToViewController(PostCreateVC.self, storyboardName: StoryboardName.social, animationType: .autoReverse(presenting: .zoom)) { vc in
                     vc.isForEdit = true

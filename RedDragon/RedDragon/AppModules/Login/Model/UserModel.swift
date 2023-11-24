@@ -29,9 +29,10 @@ struct User: Codable {
     var updatedAt: String = ""
     var otpVerified: Int = 0
     var token: String = ""
+    var appDataIDs = LocalAppUserID()
     
     enum CodingKeys: String, CodingKey {
-        case id, email, username
+        case id, email, username, appDataIDs
         case name = "full_name"
         case phoneNumber = "phone_number"
         case createdAt = "created_at"
@@ -55,5 +56,33 @@ struct User: Codable {
         otpVerified = try container.decodeIfPresent(Int.self, forKey: .otpVerified) ?? 0
         profileImg = try container.decodeIfPresent(String.self, forKey: .profileImg) ?? ""
         token = try container.decodeIfPresent(String.self, forKey: .token) ?? ""
+        appDataIDs = try container.decodeIfPresent(LocalAppUserID.self, forKey: .appDataIDs) ?? LocalAppUserID()
+    }
+}
+
+struct LocalAppUserID: Codable {
+    var sportCardUserId: Int = 0
+    var euro5LeagueUserId: Int = 0
+    var predictMatchUserId: Int = 0
+    var streetMatchUserId: Int = 0
+    var vinderUserId: Int = 0
+    
+    enum CodingKeys: String, CodingKey {
+        case sportCardUserId = "sport-card_userid"
+        case euro5LeagueUserId = "euro5-league_userid"
+        case predictMatchUserId = "predict-match_userid"
+        case streetMatchUserId = "street-match_userid"
+        case vinderUserId = "vinder_userid"
+    }
+    
+    public init () {}
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        sportCardUserId = try container.decodeIfPresent(Int.self, forKey: .sportCardUserId) ?? 0
+        euro5LeagueUserId = try container.decodeIfPresent(Int.self, forKey: .euro5LeagueUserId) ?? 0
+        predictMatchUserId = try container.decodeIfPresent(Int.self, forKey: .predictMatchUserId) ?? 0
+        streetMatchUserId = try container.decodeIfPresent(Int.self, forKey: .streetMatchUserId) ?? 0
+        vinderUserId = try container.decodeIfPresent(Int.self, forKey: .vinderUserId) ?? 0
     }
 }
