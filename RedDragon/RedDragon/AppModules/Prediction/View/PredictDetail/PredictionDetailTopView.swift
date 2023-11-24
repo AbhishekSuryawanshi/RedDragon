@@ -9,6 +9,7 @@ import UIKit
 
 class PredictionDetailTopView: UIView {
 
+    @IBOutlet weak var viewForStackView: UIView!
     @IBOutlet weak var progressStackView: UIStackView!
     @IBOutlet weak var team2Lbl: UILabel!
     @IBOutlet weak var dateLbl: UILabel!
@@ -18,6 +19,20 @@ class PredictionDetailTopView: UIView {
     @IBOutlet weak var selectedMatchLbl: UILabel!
     @IBOutlet var contentView: UIView!
     
+    override init(frame: CGRect) {
+           super.init(frame: frame)
+           commonInit()
+       }
+       
+       required init?(coder aDecoder: NSCoder) {
+           super.init(coder: aDecoder)
+           commonInit()
+       }
+       
+       func commonInit() {
+           Bundle.main.loadNibNamed("PredictionDetailTopView", owner: self, options: nil)
+           contentView.fixInView(self)
+       }
 
 }
 

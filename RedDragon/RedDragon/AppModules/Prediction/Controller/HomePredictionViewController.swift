@@ -58,8 +58,10 @@ class HomePredictionViewController: UIViewController {
     @IBOutlet weak var sportsSelectionView: UIView!
     @IBOutlet weak var predictionTopView: TopView!
     
-    var sportsArr = ["FootBall" , "BasketBall"]
+    var sportsArr = ["FootBall" , "BasketBall", "Cricket", "Tennis", "Esports"]
+    var selectedMatch: PredictionData?
     private var predictionMatchesViewModel: PredictionViewModel?
+    var predictionsModel: PredictionMatchesModel?
     private var cancellable = Set<AnyCancellable>()
     
     override func viewDidLoad() {
@@ -95,11 +97,43 @@ class HomePredictionViewController: UIViewController {
     func showLoader(_ value: Bool) {
         value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
     }
+    
+    @objc func predictBtn1(){
+        navigateToViewController(PredictionDetailsViewController.self, storyboardName: StoryboardName.prediction) { vc in
+            self.selectedMatch = self.predictionMatchesViewModel?.responseData?.data?[self.upcomingPredictBtn1.tag]
+            vc.selectedMatch = self.selectedMatch
+                }
+    }
+    
+    @objc func predictBtn2(){
+        navigateToViewController(PredictionDetailsViewController.self, storyboardName: StoryboardName.prediction) { vc in
+            self.selectedMatch = self.predictionMatchesViewModel?.responseData?.data?[self.upcomingPredictBtn2.tag]
+            vc.selectedMatch = self.selectedMatch
+                }
+    }
+    
+    @objc func predictBtn3(){
+        navigateToViewController(PredictionDetailsViewController.self, storyboardName: StoryboardName.prediction) { vc in
+            self.selectedMatch = self.predictionMatchesViewModel?.responseData?.data?[self.upcomingPredictBtn3.tag]
+            vc.selectedMatch = self.selectedMatch
+        }
+    }
+    
+    @objc func upcomingSeeAll(){
+        navigateToViewController(UpComingMatchesViewController.self, storyboardName: StoryboardName.prediction) { vc in
+           
+            vc.predictionMatchesModel = self.predictionsModel
+        }
+    }
+    
+    @objc func placedPredictionSeeAll(){
+        
+    }
 
 }
 
 extension HomePredictionViewController {
-    ///fetch viewModel for Player details
+    ///fetch viewModel for match prediction
     func fetchPredictionMatchesViewModel() {
         predictionMatchesViewModel = PredictionViewModel()
         predictionMatchesViewModel?.showError = { [weak self] error in
@@ -118,34 +152,43 @@ extension HomePredictionViewController {
     }
     
     func renderResponseData(data: PredictionMatchesModel) {
-        let data = data
+        predictionsModel = data
+        let data = data.data
         UIView.animate(withDuration: 1.0) { [self] in
-            upcomingLeagueNameLbl1.text = data.data?[0].league
+            upcomingLeagueNameLbl1.text = data?[0].league
             upcomingLeagueImgView1.sd_imageIndicator = SDWebImageActivityIndicator.white
-            upcomingLeagueImgView1.sd_setImage(with: URL(string: data.data?[0].logo ?? ""))
-            upcomingTeam1Lbl1.text = data.data?[0].matches?[0].homeTeam
-            upcomingTeam2Lbl1.text = data.data?[0].matches?[0].awayTeam
+            upcomingLeagueImgView1.sd_setImage(with: URL(string: data?[0].logo ?? ""))
+            upcomingTeam1Lbl1.text = data?[0].matches?[0].homeTeam
+            upcomingTeam2Lbl1.text = data?[0].matches?[0].awayTeam
+            upcomingdateLbl1.text = Date().formatDate(outputFormat: dateFormat(rawValue: "yyyy-MM-dd")!) + " | " + (data?[0].matches?[0].time ?? "")
+            upcomingPredictBtn1.tag = 0
             
+            upcomingPredictBtn1.addTarget(self, action: #selector(predictBtn1), for: .touchUpInside)
+            seeAllBtn.addTarget(self, action: #selector(upcomingSeeAll), for: .touchUpInside)
             
-            if data.data?[1] != nil{
-                upcomingLeagueNameLbl2.text = data.data?[1].league
+            if data?[1] != nil{
+                upcomingLeagueNameLbl2.text = data?[1].league
                 upcomingLeagueImgView2.sd_imageIndicator = SDWebImageActivityIndicator.white
-                upcomingLeagueImgView2.sd_setImage(with: URL(string: data.data?[1].logo ?? ""))
-                upcomingTeam1Lbl2.text = data.data?[1].matches?[0].homeTeam
-                upcomingTeam2Lbl2.text = data.data?[1].matches?[0].awayTeam
+                upcomingLeagueImgView2.sd_setImage(with: URL(string: data?[1].logo ?? ""))
+                upcomingTeam1Lbl2.text = data?[1].matches?[0].homeTeam
+                upcomingTeam2Lbl2.text = data?[1].matches?[0].awayTeam
+                upcomingdateLbl2.text = Date().formatDate(outputFormat: dateFormat(rawValue: "yyyy-MM-dd")!) + " | " + (data?[1].matches?[0].time ?? "")
+                upcomingPredictBtn2.tag = 1
+                upcomingPredictBtn2.addTarget(self, action: #selector(predictBtn2), for: .touchUpInside)
             }
-            if data.data?[2] != nil{
-                upcomingLeagueNameLbl3.text = data.data?[2].league
+            if data?[2] != nil{
+                upcomingLeagueNameLbl3.text = data?[2].league
                 upcomingLeagueImgView3.sd_imageIndicator = SDWebImageActivityIndicator.white
-                upcomingLeagueImgView3.sd_setImage(with: URL(string: data.data?[2].logo ?? ""))
-                upcomingTeam1Lbl3.text = data.data?[2].matches?[0].homeTeam
-                upcomingteam2Lbl3.text = data.data?[2].matches?[0].awayTeam
+                upcomingLeagueImgView3.sd_setImage(with: URL(string: data?[2].logo ?? ""))
+                upcomingTeam1Lbl3.text = data?[2].matches?[0].homeTeam
+                upcomingteam2Lbl3.text = data?[2].matches?[0].awayTeam
+                upcomingdateLbl3.text = Date().formatDate(outputFormat: dateFormat(rawValue: "yyyy-MM-dd")!) + " | " + (data?[2].matches?[0].time ?? "")
+                upcomingPredictBtn3.tag = 2
+                upcomingPredictBtn3.addTarget(self, action: #selector(predictBtn3), for: .touchUpInside)
             }
                 
-            
-            
-            
         }
+        
     }
 }
 

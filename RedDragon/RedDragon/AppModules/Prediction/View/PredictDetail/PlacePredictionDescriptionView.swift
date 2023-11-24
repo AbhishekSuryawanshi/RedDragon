@@ -1,5 +1,5 @@
 //
-//  PlacePredictionView.swift
+//  PlacePredictionDescription.swift
 //  RedDragon
 //
 //  Created by Ali on 11/21/23.
@@ -7,14 +7,13 @@
 
 import UIKit
 
-class PlacePredictionView: UIView {
+class PlacePredictionDescriptionView: UIView {
 
-    @IBOutlet weak var awayBtn: UIButton!
-    @IBOutlet weak var drawBtn: UIButton!
-    @IBOutlet weak var homeBtn: UIButton!
-    @IBOutlet weak var placePredictionLbl: UILabel!
+    @IBOutlet weak var publishPredictionBtn: UIButton!
+    @IBOutlet weak var descriptionTxtView: UITextView!
+    @IBOutlet weak var descriptionLbl: UILabel!
     @IBOutlet var contentView: UIView!
-   
+    
     override init(frame: CGRect) {
            super.init(frame: frame)
            commonInit()
@@ -26,9 +25,8 @@ class PlacePredictionView: UIView {
        }
        
        func commonInit() {
-           Bundle.main.loadNibNamed("PlacePredictionView", owner: self, options: nil)
+           Bundle.main.loadNibNamed("PlacePredictionDescriptionView", owner: self, options: nil)
            contentView.fixInView(self)
        }
-
 
 }

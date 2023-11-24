@@ -21,4 +21,19 @@ class TopView: UIView {
     @IBOutlet weak var usernameLbl: UILabel!
     @IBOutlet weak var userImgView: UIImageView!
     
+    override init(frame: CGRect) {
+           super.init(frame: frame)
+           commonInit()
+       }
+       
+       required init?(coder aDecoder: NSCoder) {
+           super.init(coder: aDecoder)
+           commonInit()
+       }
+       
+       func commonInit() {
+           Bundle.main.loadNibNamed("TopView", owner: self, options: nil)
+           contentView.fixInView(self)
+       }
+    
 }
