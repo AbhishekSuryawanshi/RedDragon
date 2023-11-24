@@ -106,7 +106,7 @@ class PostCreateVC: UIViewController {
         contentTxtView.placeholder = ErrorMessage.textEmptyAlert.localized
         contentTxtView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         contentTxtView.delegate = self
-        contentTxtView.minHeight = 40
+        contentTxtView.minHeight = 60
         contentTxtView.maxHeight = 400
         postButton.setTitle(isForEdit ? "Save".localized : "Post".localized, for: .normal)
         pollTextField.placeholder = "Add Choice".localized
@@ -285,11 +285,10 @@ class PostCreateVC: UIViewController {
                     checkPostorPoll(){}
                     return
                 }
-                
                 let param: [String: Any] = [
                     "question": contentTxtView.text!,
                     "league_id": SocialLeagueVM.shared.leagueArray.first?.id ?? "4zp5rzghp5q82w1",
-                    "user_id": String(UserDefaults.standard.user?.id ?? 0),
+                    "user_id": String(UserDefaults.standard.user?.appDataIDs.euro5LeagueUserId ?? 0), ///Pass user id of euroleague
                     "option_1": pollArray[0].title,
                     "option_2": pollArray[1].title,
                     "answer": "0",

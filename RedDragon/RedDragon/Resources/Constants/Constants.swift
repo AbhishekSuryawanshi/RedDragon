@@ -18,12 +18,12 @@ enum dateFormat: String {
     case yyyyMMddHHmm         = "yyyy-MM-dd HH:mm" 
     case yyyyMMddHHmmss       = "yyyy-MM-dd HH:mm:ss"  // 2023-04-30 16:00:00
     case ddMMyyyyHHmm         = "yyyy/MM/dd HH:mm:ss"
-    case ddMMyyyyWithTimeZone = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-    case ddMMMyyyyhhmma       = "d MMM yyyy . hh:mm a"
+    case ddMMyyyyWithTimeZone = "yyyy-MM-dd'T'HH:mm:ss.SSSZ" // 2023-09-30T13:27:38.000000Z
+    case ddMMMyyyyhmma        = "d MMM yyyy . h:mm a" // 11 Nov 2023 . 5:12 PM
     case ddMMyyyy             = "dd-MM-yyyy"
-    case ddMMyyyy2            = "dd/MM/yyyy"
+    case ddMMyyyy2            = "dd/MM/yyyy" // 12/08/2023
     case hhmmaddMMMyyyy       = "hh:mm a | d MMMM yyyy"
-    case hhmmaddMMMyyyy2      = "hh:mm a - dd/MM/yyyy"
+    case hhmmaddMMMyyyy2      = "hh:mm a - dd/MM/yyyy" // 11.00 PM - 03/11/2023
     case hmma                 = "hh:mm a"
     case edmmmHHmm            = "E, d"
   //  case edmmmHHmm            = "E, d MMM HH:mm"
