@@ -11,7 +11,6 @@ class ExploreEventsTableViewCell: UITableViewCell {
     
     // MARK: - Outlets & Properties
     
-    @IBOutlet weak var viewBtn: UIButton!
     @IBOutlet weak var eventImgView: UIImageView!
     @IBOutlet weak var eventNameLbl: UILabel!
     @IBOutlet weak var eventCreatedByUserLbl: UILabel!

@@ -11,11 +11,11 @@ import Combine
 class MeetEventVC: UIViewController {
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var viewContainer: UIView!
-    var arrayOfUsers = [MeetUser]()
-    var arrayOfMatchUsers = [MeetUser]()
+    var hotEventsArray = [MeetEvent]()
+    var allEventsArray = [MeetEvent]()
     var cancellable = Set<AnyCancellable>()
-    private var userVM: MeetUserViewModel?
-    private var myMatchUserVM: MeetMyMatchUserViewModel?
+    private var hotEventVM: MeetHotEventViewModel?
+    private var allEventVM: MeetAllEventViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,8 @@ class MeetEventVC: UIViewController {
     // MARK: - Methods
     func performInitialSetup() {
         makeNetworkCall()
-        fetchViewModelResponse()
+        fetchHotEventVM()
+        fetchAllEventVM()
     }
     
     func showLoader(_ value: Bool) {
@@ -33,10 +34,10 @@ class MeetEventVC: UIViewController {
     }
     
     func makeNetworkCall() {
-        userVM = MeetUserViewModel()
-        myMatchUserVM = MeetMyMatchUserViewModel()
-        userVM?.fetchMeetUserListAsyncCall()
-        myMatchUserVM?.fetchMyMatchUserAsyncCall()
+        hotEventVM = MeetHotEventViewModel()
+        allEventVM = MeetAllEventViewModel()
+        hotEventVM?.fetchMeetHotEventListAsyncCall()
+        allEventVM?.fetchMeetAllEventListAsyncCall()
     }
     
     // MARK: - Segment Control Actions
@@ -51,38 +52,40 @@ class MeetEventVC: UIViewController {
 
 // MARK: - Network Related Response
 extension MeetEventVC {
-    ///fetch view model for user list
-    func fetchViewModelResponse() {
-        userVM?.showError = { [weak self] error in
+    ///fetch view model for event list
+    func fetchHotEventVM() {
+        hotEventVM?.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
-        userVM?.displayLoader = { [weak self] value in
+        hotEventVM?.displayLoader = { [weak self] value in
             self?.showLoader(value)
         }
-        userVM?.$responseData
+        hotEventVM?.$responseData
             .receive(on: DispatchQueue.main)
             .dropFirst()
-            .sink(receiveValue: { [weak self] userList in
-                self?.execute_onUserListResponseData(userList!)
-            })
-            .store(in: &cancellable)
-        
-        myMatchUserVM?.$responseData
-            .receive(on: DispatchQueue.main)
-            .dropFirst()
-            .sink(receiveValue: { [weak self] userList in
-                self?.execute_onMyMatchUserListResponseData(userList!)
+            .sink(receiveValue: { [weak self] eventList in
+                self?.execute_onHotEventListResponseData(eventList!)
             })
             .store(in: &cancellable)
     }
     
-    func execute_onUserListResponseData(_ userList: MeetUserListModel) {
-        arrayOfUsers = userList.response?.data ?? []
+    func fetchAllEventVM() {
+        allEventVM?.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] eventList in
+                self?.execute_onAllEventListResponseData(eventList!)
+            })
+            .store(in: &cancellable)
+    }
+    
+    func execute_onHotEventListResponseData(_ eventList: MeetEventListModel) {
+        hotEventsArray = eventList.response?.data ?? []
+    }
+    
+    func execute_onAllEventListResponseData(_ eventList: MeetEventListModel) {
+        allEventsArray = eventList.response?.data ?? []
         embedExploreEventsVC() // default First segment selected
-    }
-    
-    func execute_onMyMatchUserListResponseData(_ userList: MeetUserListModel) {
-        arrayOfMatchUsers = userList.response?.data ?? []
     }
 }
 
@@ -92,7 +95,7 @@ extension MeetEventVC {
         let childVC = ExploreEventsVC(nibName: "ExploreEventsVC" , bundle: nil)
         ViewEmbedder.embedXIBController(childVC: childVC, parentVC: self, container: viewContainer) { vc in
             let vc = vc as! ExploreEventsVC
-          //  vc.configureUsers(users: self.arrayOfUsers)
+            vc.configureEvents(hotEvents: self.hotEventsArray, allEvents: self.allEventsArray)
         }
     }
     

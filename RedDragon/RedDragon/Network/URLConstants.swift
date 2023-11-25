@@ -69,10 +69,12 @@ struct URLConstants {
     static let allBets            = baseURL + "bet/play/get"
     static let points             = baseURL + "bet/account/wallet"
     static let placeBet           = baseURL + "bet/play/create"
-    
+
     // MARK: -  Meet
     static let meetBaseURL         = "https://kicktin.com/vinder/api/"
     static let meetUserList        = meetBaseURL + "listuser"
+    static let meetHotEventList    = meetBaseURL + "events/hot"
+    static let meetAllEventList    = meetBaseURL + "event/list"
     static let meetLikedUser       = meetBaseURL + "user/like"
     static let meetMyMatchUser     = meetBaseURL + "user/mymatch/list"
     
