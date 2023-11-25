@@ -59,6 +59,7 @@ struct CellIdentifier {
 
     //Meet
     static let meetUserTableViewCell            = "MeetUserTableViewCell"
+    static let exploreEventsTableViewCell       = "ExploreEventsTableViewCell"
     static let matchesCollectionViewCell        = "MatchesCollectionViewCell"
     
     //StreetMatches
