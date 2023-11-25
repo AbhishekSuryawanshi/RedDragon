@@ -164,8 +164,8 @@ extension PlaceBetVc {
     
     func handleError(_ error :  ErrorResponse?){
         if let error = error {
-            if error.messages.first != "Unauthorized user" {
-                self.customAlertView(title: ErrorMessage.alert.localized, description: error.messages.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+            if error.messages?.first != "Unauthorized user" {
+                self.customAlertView(title: ErrorMessage.alert.localized, description: error.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
             }
             else{
                 self.customAlertView_2Actions(title: "Login / Sign Up".localized, description: ErrorMessage.loginRequires.localized) {

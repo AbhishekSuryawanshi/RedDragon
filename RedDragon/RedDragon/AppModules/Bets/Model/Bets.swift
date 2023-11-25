@@ -31,17 +31,6 @@ struct MatchResponse: Codable {
     }
 
 }
-struct ErrorResponse: Codable {
-
-    let code: Int?
-    let messages: [String]
-
-    private enum CodingKeys: String, CodingKey {
-        case code = "code"
-        case messages = "messages"
-    }
-
-}
 
 
 // MARK: - MatchesList
