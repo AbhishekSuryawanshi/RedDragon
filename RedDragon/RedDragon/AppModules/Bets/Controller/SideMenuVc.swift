@@ -19,7 +19,6 @@ class SideMenuVc: UIViewController {
 
         // Do any additional setup after loading the view.
         initial()
-
     }
 
     func initial(){

@@ -14,7 +14,6 @@ class PointsViewModel : APIServiceManager<WalletBalanceModel> {
         let urlString   = URLConstants.points
         let method      = RequestType.post
         let params: [String: Any] = [
-            "session": DefaultToken.session,
             "offset" : 0
         ]
         

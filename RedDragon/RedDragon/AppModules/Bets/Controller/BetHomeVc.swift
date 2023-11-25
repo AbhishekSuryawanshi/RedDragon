@@ -44,7 +44,6 @@ class BetHomeVc: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         // set points from user defaults
         pointsLable.text = UserDefaults.standard.points ?? "00"
-        addActivityIndicator()
     }
 
     func initial(){
@@ -235,18 +234,22 @@ extension BetHomeVc {
         
         func execute_onResponseData(_ matches: MatchListModel) {
           
+            if let matchList = matches.response?.data{
             if selectedType == .All{
-                matchesList = matches.data
+                matchesList = matches.response?.data
             }else{
-                liveMatchesList = matches.data
+                liveMatchesList = matches.response?.data
             }
            tableView.reloadData()
+            }else{
+                handleError(matches.error)
+            }
        
         }
     
     func loopWithCompletion(_ bets: BetListModel, closure: @escaping () -> ()) {
-        if bets.bets?.count ?? 0 > 0 {
-            for bet in bets.bets!{
+        if let betsList = bets.response?.data?.bets {
+            for bet in betsList {
                 if bet.betStatus == "1"{
                     self.winBets?.append(bet)
                 }else{
@@ -254,6 +257,8 @@ extension BetHomeVc {
                 }
             }
             closure()
+        }else{
+            handleError(bets.error)
         }
     }
     
@@ -264,10 +269,32 @@ extension BetHomeVc {
     }
     
     func showLoader(_ value: Bool) {
-        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
-    }
+            value ? startLoader() : stopLoader()
+        }
     
-    func addActivityIndicator() {
-        self.view.addSubview(Loader.activityIndicator)
+    func handleError(_ error :  ErrorResponse?){
+        if let error = error {
+            if error.messages?.first != "Unauthorized user" {
+                self.customAlertView(title: ErrorMessage.alert.localized, description: error.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+            }
+            else{
+                self.customAlertView_2Actions(title: "Login / Sign Up".localized, description: ErrorMessage.loginRequires.localized) {
+                    /// Show login page to login/register new user
+                    self.presentOverViewController(LoginVC.self, storyboardName: StoryboardName.login) { vc in
+                        vc.delegate = self
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+
+
+/// LoginVCDelegate to refresh data with login user
+extension BetHomeVc: LoginVCDelegate {
+    func viewControllerDismissed() {
+      networkCall()
     }
 }
