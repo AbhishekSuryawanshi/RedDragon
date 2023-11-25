@@ -9,16 +9,40 @@ import Foundation
 
 // MARK: - MatchListModel
 struct MatchListModel: Codable {
-    let status: Int?
-    let message: String?
-    let data: [MatchesList]?
-    
+    let response: MatchResponse?
+    let error :  ErrorResponse?
+
     private enum CodingKeys: String, CodingKey {
-            case status = "status"
-            case message = "message"
-            case data = "data"
-        }
+        case response = "response"
+        case error = "error"
+    }
 }
+
+struct MatchResponse: Codable {
+
+    let code: Int?
+    let messages: [String]?
+    let data: [MatchesList]?
+
+    private enum CodingKeys: String, CodingKey {
+        case code = "code"
+        case messages = "messages"
+        case data = "data"
+    }
+
+}
+struct ErrorResponse: Codable {
+
+    let code: Int?
+    let messages: [String]
+
+    private enum CodingKeys: String, CodingKey {
+        case code = "code"
+        case messages = "messages"
+    }
+
+}
+
 
 // MARK: - MatchesList
 struct MatchesList: Codable {
@@ -119,6 +143,32 @@ struct BetDetail: Codable {
 
 struct BetListModel : Codable {
     
+    let response: BetResponse?
+    let error :  ErrorResponse?
+
+    private enum CodingKeys: String, CodingKey {
+        case response = "response"
+        case error = "error"
+    }
+    
+}
+
+struct BetResponse: Codable {
+
+    let code: Int?
+    let messages: [String]?
+    let data: BetList?
+
+    private enum CodingKeys: String, CodingKey {
+        case code = "code"
+        case messages = "messages"
+        case data = "data"
+    }
+
+}
+
+struct BetList : Codable {
+    
     let status: Int?
     let message: String?
     let bets: [BetItem]?
@@ -191,7 +241,32 @@ struct BetItem : Codable {
 }
 
 
-struct BetSuccessModel : Decodable{
+struct BetSuccessModel : Codable{
+    
+    let response: BetSuccessResponse?
+    let error :  ErrorResponse?
+
+    private enum CodingKeys: String, CodingKey {
+        case response = "response"
+        case error = "error"
+    }
+}
+
+struct BetSuccessResponse: Codable {
+
+    let code: Int?
+    let messages: [String]?
+    let data: BetSuccess?
+
+    private enum CodingKeys: String, CodingKey {
+        case code = "code"
+        case messages = "messages"
+        case data = "data"
+    }
+
+}
+
+struct BetSuccess : Codable{
     
     let status: Int?
     let message: String?

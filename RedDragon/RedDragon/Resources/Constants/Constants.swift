@@ -30,14 +30,14 @@ enum dateFormat: String {
     case mmmdhm            = "MMM d, h:mm a"
 }
 
-func formatDate(date: Date?, with outputFormat: dateFormat)-> String
-{
-    if date == nil
-    {
-        return ""
-    }
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = outputFormat.rawValue
-    dateFormatter.locale = Locale(identifier: "en")
-    return dateFormatter.string(from: date!)
-}
+//func formatDate(date: Date?, with outputFormat: dateFormat)-> String
+//{
+//    if date == nil
+//    {
+//        return ""
+//    }
+//    let dateFormatter = DateFormatter()
+//    dateFormatter.dateFormat = outputFormat.rawValue
+//    dateFormatter.locale = Locale(identifier: "en")
+//    return dateFormatter.string(from: date!)
+//}

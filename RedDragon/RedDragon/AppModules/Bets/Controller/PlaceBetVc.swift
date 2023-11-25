@@ -45,11 +45,6 @@ class PlaceBetVc: UIViewController {
         clicks()
         onPlaceBet()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        addActivityIndicator()
-    }
-    
 
     func setValues(){
         
@@ -156,15 +151,31 @@ extension PlaceBetVc {
     }
     
     func execute_onResponseData(_ response: BetSuccessModel) {
-        self.customAlertView(title: ErrorMessage.success.localized, description: response.message ??  "", image: ImageConstants.successImage)
+        if let response = response.response {
+            self.customAlertView(title: ErrorMessage.success.localized, description: response.data?.message ??  "", image: ImageConstants.successImage)
+        }else{
+            handleError(response.error)
+        }
     }
     
     func showLoader(_ value: Bool) {
-        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
-    }
+            value ? startLoader() : stopLoader()
+        }
     
-    func addActivityIndicator() {
-        self.view.addSubview(Loader.activityIndicator)
+    func handleError(_ error :  ErrorResponse?){
+        if let error = error {
+            if error.messages.first != "Unauthorized user" {
+                self.customAlertView(title: ErrorMessage.alert.localized, description: error.messages.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+            }
+            else{
+                self.customAlertView_2Actions(title: "Login / Sign Up".localized, description: ErrorMessage.loginRequires.localized) {
+                    /// Show login page to login/register new user
+                    self.presentOverViewController(LoginVC.self, storyboardName: StoryboardName.login)
+                }
+            }
+        }
     }
     
 }
+
+

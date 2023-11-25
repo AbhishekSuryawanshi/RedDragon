@@ -112,7 +112,7 @@ class BetMatchTableVC: UITableViewCell {
         
         let dateFormate = DateFormatter()
         dateFormate.dateFormat = dateFormat.yyyyMMddHHmm.rawValue
-        date = formatDate(date: dateFormate.date(from: date), with: dateFormat.edmmmHHmm)
+        date =  dateFormate.date(from: date)!.formatDate(outputFormat: dateFormat.edmmmHHmm)
         return date
     }
 }
