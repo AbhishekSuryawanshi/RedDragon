@@ -28,7 +28,7 @@ class CardGamePlayerDetailVC: UIViewController {
     @IBOutlet weak var marketPriceLabel: UILabel!
     @IBOutlet weak var priceNumberLabel: UILabel!
     @IBOutlet weak var playerSkillView: SpiderChartView!
-    
+    @IBOutlet weak var statCollectionView: UICollectionView!
     
     var cancellable = Set<AnyCancellable>()
     var playerDetailVM: PlayerDetailViewModel?
@@ -52,8 +52,13 @@ class CardGamePlayerDetailVC: UIViewController {
     }
     
     private func loadFunctionality() {
+        nibInitialization()
         addActivityIndicator()
         fetchPlayerViewModel()
+    }
+    
+    private func nibInitialization() {
+        statCollectionView.register(CellIdentifier.statisticCell)
     }
     
     private func makeNetworkCall() {
@@ -82,7 +87,7 @@ extension CardGamePlayerDetailVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] details in
-                print(details as Any)
+                self?.statCollectionView.reloadData()
                 self?.presentData()
             })
             .store(in: &cancellable)
@@ -96,12 +101,6 @@ extension CardGamePlayerDetailVC {
         updateTeamInto(data: data)
         updateMarketAndRating(data: data)
         configureChartsView()
-//        updatePlayerRating(data: data)
-//        updateCosmosView(data: data)
-//        
-//        leagueCountLabel.text = "\(data.statistics.count)"
-//        numberOfLeagues_countLabel.text = "\(data.statistics.count)"
-        
     }
     
     private func updateTeamInto(data: PlayerDetailData) {
@@ -197,5 +196,35 @@ extension CardGamePlayerDetailVC {
             skillNum.append(((Float(val) ?? 0.0)/100.0))
         }
         return skillNum
+    }
+}
+
+extension CardGamePlayerDetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return playerDetailVM?.responseData?.data?.statistics?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let data = playerDetailVM?.responseData else { return UICollectionViewCell() }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.statisticCell, for: indexPath) as! StatisticsCollectionViewCell
+        cell.configuration(with: data, cellForItemAt: indexPath)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.bounds.width/1 - 0, height: 280)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        animateCollectionView(collectionView, willDisplay: cell, forItemAt: indexPath, animateDuration: 0.4)
     }
 }

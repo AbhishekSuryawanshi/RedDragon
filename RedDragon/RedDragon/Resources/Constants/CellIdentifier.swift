@@ -52,6 +52,7 @@ struct CellIdentifier {
 
     //CardGame
     static let allPlayersTableCell              = "AllPlayersTableViewCell"
+    static let statisticCell                    = "StatisticsCollectionViewCell"
     
     //Prediction
     

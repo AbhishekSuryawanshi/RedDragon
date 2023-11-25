@@ -2,14 +2,13 @@
 //  StatisticsCollectionViewCell.swift
 //  RedDragon
 //
-//  Created by QASR02 on 24/11/2023.
+//  Created by QASR02 on 25/11/2023.
 //
 
 import UIKit
 
 class StatisticsCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var leagueNameLabel: UILabel!
     @IBOutlet weak var totalPlayerLabel: UILabel!
     @IBOutlet weak var goalsLabel: UILabel!
     @IBOutlet weak var penaltyGoalsLabel: UILabel!
@@ -27,7 +26,7 @@ class StatisticsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var freeKick_countLabel: UILabel!
     @IBOutlet weak var yellowCard_countLabel: UILabel!
     @IBOutlet weak var redCard_countLabel: UILabel!
-        
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -47,8 +46,8 @@ class StatisticsCollectionViewCell: UICollectionViewCell {
         checkLocalisation()
         
         let leagueStatistic = statistics.data?.statistics?[indexPath.row]
-        leagueNameLabel.text = leagueStatistic?.league
-
+        //leagueNameLabel.text = leagueStatistic?.league
+        
         if let data = leagueStatistic?.data {
             for item in data {
                 switch item.section {
@@ -63,7 +62,7 @@ class StatisticsCollectionViewCell: UICollectionViewCell {
                             }
                         }
                     }
-
+                    
                 case StringConstants.attacking.fixedLocaized:
                     if let attackingData = item.data {
                         for attackingItem in attackingData {
@@ -78,7 +77,7 @@ class StatisticsCollectionViewCell: UICollectionViewCell {
                             }
                         }
                     }
-
+                    
                 case StringConstants.passes.fixedLocaized:
                     if let passesData = item.data {
                         for passesItem in passesData {
@@ -87,7 +86,7 @@ class StatisticsCollectionViewCell: UICollectionViewCell {
                             }
                         }
                     }
-
+                    
                 case StringConstants.cards.fixedLocaized:
                     if let cardsData = item.data {
                         for cardsItem in cardsData {
@@ -99,7 +98,7 @@ class StatisticsCollectionViewCell: UICollectionViewCell {
                             }
                         }
                     }
-
+                    
                 default:
                     break
                 }
@@ -107,5 +106,4 @@ class StatisticsCollectionViewCell: UICollectionViewCell {
         }
     }
 
-    
 }
