@@ -132,12 +132,35 @@ extension BetHomeVc : UITableViewDelegate, UITableViewDataSource {
         switch (selectedType){
             
         case .All:
+            if matchesList?.count == 0 {
+                tableView.setEmptyMessage(ErrorMessage.matchEmptyAlert)
+            } else {
+                tableView.restore()
+            }
             return matchesList?.count ?? 0
+            
         case .Live:
+            if liveMatchesList?.count == 0 {
+                tableView.setEmptyMessage(ErrorMessage.matchEmptyAlert)
+            } else {
+                tableView.restore()
+            }
             return liveMatchesList?.count ?? 0
+            
         case.Win:
+            if winBets?.count == 0 {
+                tableView.setEmptyMessage(ErrorMessage.betsEmptyAlert)
+            } else {
+                tableView.restore()
+            }
             return winBets?.count ?? 0
+            
         case.Lose:
+            if loseBets?.count == 0 {
+                tableView.setEmptyMessage(ErrorMessage.betsEmptyAlert)
+            } else {
+                tableView.restore()
+            }
             return loseBets?.count ?? 0
         }
        

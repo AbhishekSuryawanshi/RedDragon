@@ -46,4 +46,5 @@ struct ErrorMessage {
     static var leaguesEmptyAlert           = "No Leagues found"
     static var teamEmptyAlert              = "No Teams found"
     static var matchEmptyAlert             = "No Matches found"
+    static var betsEmptyAlert              = "No Bets found"
 }
