@@ -62,6 +62,8 @@
 		4703F8D82B089E4300276F3E /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4703F8D72B089E4300276F3E /* UserModel.swift */; };
 		4703F8DA2B08D6F000276F3E /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4703F8D92B08D6F000276F3E /* ForgotPasswordVC.swift */; };
 		4703F8DC2B08D70A00276F3E /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4703F8DB2B08D70A00276F3E /* ResetPasswordVC.swift */; };
+		47051F112B14687E004D190A /* GossipVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47051F102B14687E004D190A /* GossipVC.swift */; };
+		47051F142B146C95004D190A /* MarqueeLabel in Frameworks */ = {isa = PBXBuildFile; productRef = 47051F132B146C95004D190A /* MarqueeLabel */; };
 		4710646C2B0DE3C700E9C0AC /* LoaderHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4710646B2B0DE3C700E9C0AC /* LoaderHelper.swift */; };
 		471064752B0DEDDA00E9C0AC /* loader_1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 471064722B0DEDDA00E9C0AC /* loader_1.gif */; };
 		47163AE32B108DD200235FC6 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47163AE22B108DD200235FC6 /* UIView+Extension.swift */; };
@@ -185,6 +187,7 @@
 		49631A1A2AFA4CA200BE84BB /* SymbolsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49631A192AFA4CA200BE84BB /* SymbolsCollectionViewCell.swift */; };
 		496A9AB32B0F200900274FC6 /* LeagueCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496A9AB12B0F200900274FC6 /* LeagueCollectionViewCell.swift */; };
 		496A9AB42B0F200900274FC6 /* LeagueCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496A9AB22B0F200900274FC6 /* LeagueCollectionViewCell.xib */; };
+
 		49A822BB2B04FC27007752C2 /* RecentMatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A822B92B04FC27007752C2 /* RecentMatchTableViewCell.swift */; };
 		49A822BC2B04FC27007752C2 /* RecentMatchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49A822BA2B04FC27007752C2 /* RecentMatchTableViewCell.xib */; };
 		49B04A562AFA6DCE00B440AA /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B04A552AFA6DCE00B440AA /* StatisticsViewController.swift */; };
@@ -375,6 +378,7 @@
 		4703F8D72B089E4300276F3E /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		4703F8D92B08D6F000276F3E /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
 		4703F8DB2B08D70A00276F3E /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
+		47051F102B14687E004D190A /* GossipVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GossipVC.swift; sourceTree = "<group>"; };
 		4710646B2B0DE3C700E9C0AC /* LoaderHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderHelper.swift; sourceTree = "<group>"; };
 		471064722B0DEDDA00E9C0AC /* loader_1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loader_1.gif; sourceTree = "<group>"; };
 		47163AE22B108DD200235FC6 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -630,6 +634,7 @@
 			files = (
 				6A5F2B862B0C97C200AB6A98 /* Gifu in Frameworks */,
 				4728736B2AEA7E360011F00F /* SDWebImageMapKit in Frameworks */,
+				47051F142B146C95004D190A /* MarqueeLabel in Frameworks */,
 				47C8C9572AF0D3A900448D96 /* TOCropViewController in Frameworks */,
 				49B2114F2B0B488B00E1C58E /* RealmSwift in Frameworks */,
 				41846BC32B0B395B0020F503 /* YouTubePlayerKit in Frameworks */,
@@ -968,6 +973,7 @@
 			isa = PBXGroup;
 			children = (
 				47CB0E192B11DA9B0070744B /* NewsModuleVC.swift */,
+				47051F102B14687E004D190A /* GossipVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1893,6 +1899,7 @@
 				49310AF62B0BA02F00AFCBCA /* Shuffle */,
 				41846BC22B0B395B0020F503 /* YouTubePlayerKit */,
 				6A5F2B852B0C97C200AB6A98 /* Gifu */,
+				47051F132B146C95004D190A /* MarqueeLabel */,
 			);
 			productName = RedDragon;
 			productReference = 49B0B9E42AE68F0700A9D235 /* RedDragon.app */;
@@ -1938,6 +1945,7 @@
 				49310AF52B0BA02F00AFCBCA /* XCRemoteSwiftPackageReference "Shuffle" */,
 				41846BC12B0B395B0020F503 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
 				6A5F2B842B0C97C200AB6A98 /* XCRemoteSwiftPackageReference "Gifu" */,
+				47051F122B146C95004D190A /* XCRemoteSwiftPackageReference "MarqueeLabel" */,
 			);
 			productRefGroup = 49B0B9E52AE68F0700A9D235 /* Products */;
 			projectDirPath = "";
@@ -2244,6 +2252,7 @@
 				49B0BA432AE6A31600A9D235 /* CoreAnimation.swift in Sources */,
 				47AE9C9B2B03AE9E00C271FB /* RegisterVC.swift in Sources */,
 				49B0BA542AE6AB2E00A9D235 /* HTTPHeaderFile.swift in Sources */,
+				47051F112B14687E004D190A /* GossipVC.swift in Sources */,
 				49631A182AFA44E100BE84BB /* HighlightViewController.swift in Sources */,
 				E96DC2522B08AC120013F315 /* MatchesListViewController.swift in Sources */,
 				49BC7EB32AFE0C1C0006EEB5 /* MatchDetailsVC.swift in Sources */,
@@ -2527,6 +2536,14 @@
 				minimumVersion = 0.6.0;
 			};
 		};
+		47051F122B146C95004D190A /* XCRemoteSwiftPackageReference "MarqueeLabel" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/cbpowell/MarqueeLabel.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.0;
+			};
+		};
 		472873672AEA7E360011F00F /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
@@ -2627,6 +2644,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 41EB79D92AF38D3F00D068F7 /* XCRemoteSwiftPackageReference "DDSpiderChart" */;
 			productName = DDSpiderChart;
+		};
+		47051F132B146C95004D190A /* MarqueeLabel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 47051F122B146C95004D190A /* XCRemoteSwiftPackageReference "MarqueeLabel" */;
+			productName = MarqueeLabel;
 		};
 		472873682AEA7E360011F00F /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
