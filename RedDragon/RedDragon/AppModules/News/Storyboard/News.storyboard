@@ -35,10 +35,10 @@
                                             <action selector="backClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="7ei-xa-8J2"/>
                                         </connections>
                                     </button>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="X4t-Ph-JzF">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="white" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="X4t-Ph-JzF">
                                         <rect key="frame" x="60" y="59" width="333" height="60"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zs4-Lg-fq7">
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="zs4-Lg-fq7">
                                             <size key="itemSize" width="128" height="128"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -64,10 +64,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="83P-3e-0Ng">
                                 <rect key="frame" x="0.0" y="119" width="393" height="40"/>
                                 <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1qd-Cs-Mdf">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="white" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1qd-Cs-Mdf">
                                         <rect key="frame" x="15" y="0.0" width="363" height="40"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DNP-vC-qYZ">
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="DNP-vC-qYZ">
                                             <size key="itemSize" width="128" height="128"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -148,6 +148,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="containerView" destination="GT4-IW-lEG" id="RcW-Gf-GBU"/>
                         <outlet property="headerCollectionView" destination="X4t-Ph-JzF" id="1aa-TV-2Av"/>
                         <outlet property="searchTextField" destination="SML-7a-V5f" id="D3C-wi-1I0"/>
                         <outlet property="sportsCollectionView" destination="1qd-Cs-Mdf" id="WcK-iT-0vP"/>
@@ -157,20 +158,20 @@
             </objects>
             <point key="canvasLocation" x="140" y="-23"/>
         </scene>
-        <!--GossipVC-->
-        <scene sceneID="VZj-oe-1fK">
+        <!--NewsVC-->
+        <scene sceneID="6wi-93-Sj3">
             <objects>
-                <viewController storyboardIdentifier="GossipVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RXp-UV-agG" customClass="GossipVC" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="c63-O3-XyE">
+                <viewController storyboardIdentifier="NewsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fx3-3B-M7a" customClass="NewsVC" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0py-qe-QkI">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="B6O-nQ-fHZ"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="0Bm-hc-lf1"/>
+                        <color key="backgroundColor" name="blue1"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yIz-qW-0cM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ac2-K2-IcT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="815" y="-23"/>
+            <point key="canvasLocation" x="879" y="-23"/>
         </scene>
     </scenes>
     <resources>
@@ -178,6 +179,9 @@
         <image name="left_arrow" width="12" height="20.333333969116211"/>
         <namedColor name="base">
             <color red="0.71764705882352942" green="0.094117647058823528" blue="0.054901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="blue1">
+            <color red="0.77647058823529413" green="0.90588235294117647" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="wheat8">
             <color red="1" green="0.85490196078431369" blue="0.83529411764705885" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
