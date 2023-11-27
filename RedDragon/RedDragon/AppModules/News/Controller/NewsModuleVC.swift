@@ -1,20 +1,21 @@
 //
-//  ExploreEventsVC.swift
+//  NewsModuleVC.swift
 //  RedDragon
 //
-//  Created by iOS Dev on 21/11/2023.
+//  Created by Qasr01 on 25/11/2023.
 //
 
 import UIKit
 
-class ExploreEventsVC: UIViewController {
+class NewsModuleVC: UIViewController {
 
+    @IBOutlet weak var gossipButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        gossipButton.setTitle(<#T##title: String?##String?#>, for: .normal)
         // Do any additional setup after loading the view.
     }
-
+    
 
     /*
     // MARK: - Navigation

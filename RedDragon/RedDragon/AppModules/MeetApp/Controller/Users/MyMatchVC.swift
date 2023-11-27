@@ -38,20 +38,18 @@ extension MyMatchVC: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return collectionCell(indexPath: indexPath)
-        
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-                
         return CGSize(width: (self.collectionView.frame.width/3)-10, height: 130)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let otherVCObj = UserDetailVC(nibName: enumViewControllerIdentifier.userDetailVC.rawValue, bundle: nil)
-//        otherVCObj.selectedUserId = self.users[indexPath.row].id ?? 0
-//        self.navigationController?.pushViewController(otherVCObj, animated: true)
+        navigateToViewController(MeetUserDetailVC.self, storyboardName: StoryboardName.meet, animationType: .autoReverse(presenting: .zoom)) {
+            vc in
+            vc.selectedUserId = self.users[indexPath.row].id ?? 0
+        }
     }
-    
 }
 
 extension MyMatchVC {
@@ -69,7 +67,6 @@ extension MyMatchVC {
 //        }else {
 //            cell.locationIcon.isHidden = false
 //        }
-        
         return cell
     }
 }

@@ -70,8 +70,8 @@ class MatchDetailsVC: UIViewController {
         ///slug: "2023-02-21-liverpool-real-madrid" //matchSlug ?? ""
         ///sports: sports ?? ""
         matchDetailViewModel?.fetchMatchDetailAsyncCall(lang: fetchCurrentLanguageCode == "en" ? "en" : "zh",
-                                                        slug: "2023-02-21-liverpool-real-madrid",
-                                                        sports: "football")
+                                                        slug: matchSlug ?? "",
+                                                        sports: sports ?? "")
     }
     
     @IBAction func backButton(_ sender: Any) {

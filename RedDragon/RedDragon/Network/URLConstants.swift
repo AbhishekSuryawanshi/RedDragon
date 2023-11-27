@@ -12,7 +12,7 @@ struct URLConstants {
     static let appstore            = "https://apps.apple.com/app/id\(appStoreID)"
     static let appReview           = "itms-apps://itunes.apple.com/app/id\(appStoreID)?mt=8&action=write-review"
     static let privacyPolicy       = ""
-    static let terms               = ""
+    static let terms               = "https://pitchstories.wordpress.com/terms-of-use/"
     
     static let baseURL             = "http://157.245.159.136:5072/api/"
     
@@ -35,10 +35,11 @@ struct URLConstants {
     
     // MARK: -  Social
     static let socialBaseURL       = baseURL + "euro5league/"
+    static let euro5leagueBaseURL  = "https://muheh.com/euro5leagues/"
    
     //Match
-    static let socialPublicLeague  = "https://muheh.com/euro5leagues/api/league/list"
-    static let socialPublicTeam    = "https://muheh.com/euro5leagues/api/team/list"
+    static let socialPublicLeague  = euro5leagueBaseURL + "api/league/list"
+    static let socialPublicTeam    = euro5leagueBaseURL + "api/team/list"
     static let socialLeague        = socialBaseURL + "league/list"
     static let socialTeam          = socialBaseURL + "team/list"
     static let socialMatch         = socialBaseURL + "match/list"
@@ -64,14 +65,22 @@ struct URLConstants {
     static let playerDetail        = databaseBaseURL + "player.php"
     
     //Bets
-    static let betAllMatches      = "https://amberic.top/app8/api/bet/" + "match/get"
-    static let allBets            = "https://amberic.top/app8/api/bet/" + "play/get"
-    static let points             = "https://amberic.top/app8/api/bet/" + "account/wallet"
-    static let placeBet             = "https://amberic.top/app8/api/bet/" + "play/create"
-    
+    static let betAllMatches      = baseURL + "bet/match/get"
+    static let allBets            = baseURL + "bet/play/get"
+    static let points             = baseURL + "bet/account/wallet"
+    static let placeBet           = baseURL + "bet/play/create"
+
     // MARK: -  Meet
     static let meetBaseURL         = "https://kicktin.com/vinder/api/"
     static let meetUserList        = meetBaseURL + "listuser"
+    static let meetHotEventList    = meetBaseURL + "events/hot"
+    static let meetAllEventList    = meetBaseURL + "event/list"
     static let meetLikedUser       = meetBaseURL + "user/like"
     static let meetMyMatchUser     = meetBaseURL + "user/mymatch/list"
+    
+    
+    // MARK: - StreetMatches
+    static let streetMatchesBaseURL = "https://trkick.com/stm/api/"
+    static let streetHome = streetMatchesBaseURL + "home/data"
+    
 }

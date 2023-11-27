@@ -52,11 +52,21 @@ struct CellIdentifier {
 
     //CardGame
     static let allPlayersTableCell              = "AllPlayersTableViewCell"
+    static let statisticCell                    = "StatisticsCollectionViewCell"
+    
+    //Prediction
+    
+    static let predictUpcomingTableViewCell     = "PredictUpcomingTableViewCell"
 
     //Meet
     static let meetUserTableViewCell            = "MeetUserTableViewCell"
-    static let matchesCollectionViewCell            = "MatchesCollectionViewCell"
+    static let exploreEventsTableViewCell       = "ExploreEventsTableViewCell"
+    static let matchesCollectionViewCell        = "MatchesCollectionViewCell"
+    
+    //StreetMatches
+    static let stadiumTableViewCell            = "StadiumTableViewCell"
+    static let streetMatchTableViewCell        = "StreetMatchTableViewCell"
+    static let feedsTableViewCell              = "FeedsTableViewCell"
+    
+    
 }
-
-
-

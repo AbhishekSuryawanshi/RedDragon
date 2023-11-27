@@ -141,13 +141,13 @@ extension AllPlayersViewController: UITableViewDelegate, UITableViewDataSource {
             
             navigateToViewController(CardGamePlayerDetailVC.self, storyboardName: StoryboardName.cardGame) { vc in
                 vc.slug = player.slug
-//                vc.defaultImage = player.photo
-//                vc.playerName = player.name
-//                vc.position = player.positionName
-//                vc.value = player.marketValue
-//                //hero transmission
-//                cell?.playerImageView.heroID = player.photo
-//                cell?.playerNameLabel.heroID = player.name
+                vc.defaultImage = player.photo
+                vc.playerName = player.name
+                vc.position = player.positionName
+                vc.value = player.marketValue
+                //hero transmission
+                cell?.playerImageView.heroID = player.photo
+                cell?.playerNameLabel.heroID = player.name
             }
         }
     }

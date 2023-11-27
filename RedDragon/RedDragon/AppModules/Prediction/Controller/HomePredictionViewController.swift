@@ -9,6 +9,7 @@ import UIKit
 
 class HomePredictionViewController: UIViewController {
 
+    @IBOutlet weak var sportsCollectionView: UICollectionView!
     @IBOutlet weak var predictionsTimeLbl3: UILabel!
     @IBOutlet weak var predictionsTeamWinLbl3: UILabel!
     @IBOutlet weak var predictionsTeam2Lbl3: UILabel!
@@ -54,12 +55,45 @@ class HomePredictionViewController: UIViewController {
     @IBOutlet weak var upcomingMatchesLbl: UILabel!
     @IBOutlet weak var sportsSelectionView: UIView!
     @IBOutlet weak var predictionTopView: TopView!
+    
+    var sportsArr = ["FootBall" , "BasketBall"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureView()
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
+    
+    func configureView() {
+        loadFunctionality()
+        
+    }
+    
+    func loadFunctionality() {
+        nibInitialization()
+    }
+    
+    func nibInitialization() {
+      //  sportsCollectionView.register(CellIdentifier.leagueNamesCollectionCell)
        
+    }
+
+}
+
+/*extension HomePredictionViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return sportsArr.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.leagueNamesCollectionCell, for: indexPath) as! LeagueCollectionViewCell
+        cell.leagueName.text = sportsArr[indexPath.row]
+        return cell
     }
     
     
-
-}
+}*/

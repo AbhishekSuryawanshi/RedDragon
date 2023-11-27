@@ -20,6 +20,9 @@ class DiscoverViewController: UIViewController {
     }
     
     // MARK: - Navigation
+    @IBAction func goToPredictions(_ sender: Any) {
+        goToPredict()
+    }
     
     @IBAction func btnGoToBets(_ sender: Any) {
         self.goToBets()
@@ -27,6 +30,11 @@ class DiscoverViewController: UIViewController {
     
     @IBAction func btnGoToMeet(_ sender: Any) {
         self.goToMeet()
+    }
+    
+    
+    @IBAction func toStreetMatches(_ sender: Any) {
+        goToStreetMatches()
     }
     
     @IBAction func logoutButtonTapped(_ sender: UIButton) {
@@ -42,6 +50,14 @@ class DiscoverViewController: UIViewController {
     
     func goToMeet(){
         navigateToViewController(MeetDashboardVC.self, storyboardName: StoryboardName.meet, animationType: .autoReverse(presenting: .zoom))
+    }
+    
+    func goToPredict(){
+        navigateToViewController(HomePredictionViewController.self, storyboardName: StoryboardName.prediction, animationType: .autoReverse(presenting: .zoom))
+    }
+    
+    func goToStreetMatches(){
+        navigateToViewController(StreetMatchesDashboardVC.self, storyboardName: StoryboardName.streetMatches, animationType: .autoReverse(presenting: .zoom))
     }
 }
 

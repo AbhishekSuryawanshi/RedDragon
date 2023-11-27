@@ -237,7 +237,7 @@ extension PostDetailVC: UITableViewDelegate {
         } else {
             let model = SocialLikeCommentListVM.shared.commentsArray[indexPath.row - 1]
             let height = model.comment.heightOfString2(width: screenWidth - 90, font: fontRegular(13))
-            if (UserDefaults.standard.user?.id ?? 0) == model.user.id {
+            if (UserDefaults.standard.user?.appDataIDs.euro5LeagueUserId ?? 0) == model.user.id {
                 return height + 75
             } else {
                 return height + 53

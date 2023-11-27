@@ -37,7 +37,7 @@ class BetMatchesHomeViewModel : APIServiceManager<MatchListModel> {
                 "date": tomorrowDate,
                 "sport": sport,
                 "live" : true,
-                "session": DefaultToken.session
+                
             ]
             asyncCall(urlString: urlString, method: method, parameters: params)
             
@@ -46,7 +46,6 @@ class BetMatchesHomeViewModel : APIServiceManager<MatchListModel> {
                 "lang": lang,
                 "date": tomorrowDate,
                 "sport": sport,
-                "session": DefaultToken.session
             ]
             asyncCall(urlString: urlString, method: method, parameters: params)
             }
@@ -61,7 +60,6 @@ class BetMatchesHomeViewModel : APIServiceManager<MatchListModel> {
         let urlString   = URLConstants.allBets
         let method      = RequestType.post
         let params: [String: Any] = [
-            "session": DefaultToken.session,
             "offset" : 0
         ]
         

@@ -31,7 +31,8 @@ class SocialCommentTableViewCell: UITableViewCell {
         commentLabel.text = model.comment
         deleteButton.setTitle("Delete".localized, for: .normal)
         deleteButton.tag = _index
-        deleteButtonHeightConstaint.constant = (UserDefaults.standard.user?.id ?? 0) == model.user.id ? 25 : 0
+        ///Pass user id of user in euroleague
+        deleteButtonHeightConstaint.constant = (UserDefaults.standard.user?.appDataIDs.euro5LeagueUserId ?? 0) == model.user.id ? 25 : 0
     }
 }
 

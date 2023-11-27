@@ -28,10 +28,6 @@ class PointsVc: UIViewController {
         tableView.register(CellIdentifier.pointsItemTableVC)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        addActivityIndicator()
-    }
-    
     func networkCall(){
         viewModel.fetchPointsAsyncCall()
     }
@@ -74,19 +70,42 @@ extension PointsVc {
     }
     
     func execute_onResponseData(_ points: WalletBalanceModel) {
-        
-        walletList = points.data
-        amountLable.text = points.wallet
-        UserDefaults.standard.points = points.wallet
-        tableView.reloadData()
+        if let list = points.response?.data?.data {
+            walletList = list
+            amountLable.text = points.response?.data?.wallet
+            UserDefaults.standard.points = points.response?.data?.wallet
+            tableView.reloadData()
+        }else{
+            handleError(points.error)
+        }
         
     }
     
     func showLoader(_ value: Bool) {
-        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
-    }
+            value ? startLoader() : stopLoader()
+        }
     
-    func addActivityIndicator() {
-        self.view.addSubview(Loader.activityIndicator)
+    func handleError(_ error :  ErrorResponse?){
+        if let error = error {
+            if error.messages?.first != "Unauthorized user" {
+                self.customAlertView(title: ErrorMessage.alert.localized, description: error.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+            }
+            else{
+                self.customAlertView_2Actions(title: "Login / Sign Up".localized, description: ErrorMessage.loginRequires.localized) {
+                    /// Show login page to login/register new user
+                    self.presentOverViewController(LoginVC.self, storyboardName: StoryboardName.login) { vc in
+                        vc.delegate = self
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+/// LoginVCDelegate to refresh data with login user
+extension PointsVc : LoginVCDelegate {
+    func viewControllerDismissed() {
+      networkCall()
     }
 }

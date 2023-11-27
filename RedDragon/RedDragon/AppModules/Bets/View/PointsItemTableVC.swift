@@ -20,10 +20,10 @@ class PointsItemTableVC: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
@@ -33,18 +33,16 @@ class PointsItemTableVC: UITableViewCell {
         
         if  amount > 1 {
             imgStatus.image = UIImage(named: ImageConstants.winArrow)
-         //   statusLable.text = "Successfull"
             amountLable.text = "\(amount)"
         }else{
             imgStatus.image = UIImage(named: ImageConstants.loseArrow)
-         //   statusLable.text = "Successfull"
             amountLable.text = "\(amount)"
         }
         
         let dateFormats = DateFormatter()
-            // 2023-06-02 17:54:02
         dateFormats.dateFormat = dateFormat.yyyyMMddHHmmss.rawValue
-        dateLable.text = formatDate(date: dateFormats.date(from: transaction?.created ?? ""), with: .ddMMyyyyHHmm)
+        dateLable.text = dateFormats.date(from: transaction?.created ?? "")!.formatDate(outputFormat: dateFormat.ddMMyyyyHHmm)
+        
     }
     
 }

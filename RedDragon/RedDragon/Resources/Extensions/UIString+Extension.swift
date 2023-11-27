@@ -60,7 +60,7 @@ extension String {
             } else if Calendar.current.isDateInYesterday(date) {
                 return "Yesterday".localized + ", \(dateFormatterPrint.string(from: date))"
             } else {
-                dateFormatterPrint.dateFormat = dateFormat.ddMMMyyyyhhmma.rawValue
+                dateFormatterPrint.dateFormat = dateFormat.ddMMMyyyyhmma.rawValue
                 return dateFormatterPrint.string(from: date)
             }
         } else {
@@ -84,6 +84,27 @@ extension String {
             lang = "zh-Hans"
         }
         //lang = (lang == "en-US") ? "en" : lang
+        let path = Bundle.main.path(forResource: lang, ofType: "lproj")
+        let bundle = Bundle(path: path!)
+        
+        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
+    }
+    
+    ///here, we are considering only English and Chinese localization to match keyword from the API data, since we have only en and zh langugae "key:value" data in the API response
+    var fixedLocaized: String {
+        if let _ = UserDefaults.standard.string(forKey: UserDefaultString.language) {} else {
+            // we set a default, just in case
+            UserDefaults.standard.set("en", forKey: UserDefaultString.language)
+            UserDefaults.standard.synchronize()
+        }
+        
+        var lang = UserDefaults.standard.string(forKey: UserDefaultString.language) ?? "en"
+        if lang.contains("zh") {
+            lang = "zh-Hans"
+        }
+        else {
+            lang = "en"
+        }
         let path = Bundle.main.path(forResource: lang, ofType: "lproj")
         let bundle = Bundle(path: path!)
         

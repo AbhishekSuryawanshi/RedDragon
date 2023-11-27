@@ -8,6 +8,30 @@
 import Foundation
 
 struct WalletBalanceModel : Codable {
+    let response: Response?
+    let error :  ErrorResponse?
+
+    private enum CodingKeys: String, CodingKey {
+        case response = "response"
+        case error = "error"
+    }
+}
+
+struct Response: Codable {
+
+    let code: Int?
+    let messages: [String]?
+    let data: WalletBalance?
+
+    private enum CodingKeys: String, CodingKey {
+        case code = "code"
+        case messages = "messages"
+        case data = "data"
+    }
+
+}
+
+struct WalletBalance : Codable {
     let status: Int?
     let message: String?
     let wallet: String?

@@ -27,12 +27,9 @@ class MeetHomeVC: UIViewController {
         performInitialSetup()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        addActivityIndicator()
-    }
-    
     // MARK: - Methods
     func performInitialSetup() {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         cardStack.delegate = self
         cardStack.dataSource = self
         gifContainerView.isHidden = true
@@ -41,7 +38,7 @@ class MeetHomeVC: UIViewController {
     }
     
     func showLoader(_ value: Bool) {
-        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
+        value ? startLoader() : stopLoader()
     }
     
     func makeNetworkCall() {
@@ -67,9 +64,6 @@ class MeetHomeVC: UIViewController {
 
 // MARK: - Network Related Response
 extension MeetHomeVC {
-    func addActivityIndicator() {
-        self.view.addSubview(Loader.activityIndicator)
-    }
     
     ///fetch view model for user list
     func fetchMeetUserViewModel() {
@@ -157,6 +151,9 @@ extension MeetHomeVC: SwipeCardStackDataSource, SwipeCardStackDelegate {
     }
     
     func cardStack(_ cardStack: SwipeCardStack, didSelectCardAt index: Int) {
-        print("Card tapped")
+        navigateToViewController(MeetUserDetailVC.self, storyboardName: StoryboardName.meet, animationType: .autoReverse(presenting: .zoom)) {
+            vc in
+            vc.selectedUserId = self.arrayOfUsers[index].id ?? 0
+        }
     }
 }

@@ -42,16 +42,41 @@
                                     <action selector="logoutButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="3BN-Y7-CO1"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4of-Y3-zgw">
+                                <rect key="frame" x="20" y="743" width="75" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="QL7-fa-5b6"/>
+                                    <constraint firstAttribute="height" constant="35" id="XY2-vr-pId"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Predictions"/>
+                                <connections>
+                                    <action selector="goToPredictions:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="NKn-4I-DXT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fIJ-gc-UhF">
+                                <rect key="frame" x="20" y="153" width="105" height="30"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Street Matches"/>
+                                <connections>
+                                    <action selector="toStreetMatches:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="yZG-P3-jJ7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="TDC-KQ-L84" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="50" id="3l1-7U-7dJ"/>
                             <constraint firstItem="woW-GK-C6H" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="9W1-Gz-jlO"/>
+                            <constraint firstItem="4of-Y3-zgw" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="CxS-ei-f6S"/>
                             <constraint firstItem="woW-GK-C6H" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="50" id="DMF-WX-3re"/>
                             <constraint firstItem="KrJ-vA-92H" firstAttribute="top" secondItem="woW-GK-C6H" secondAttribute="top" id="Ftk-eq-D0n"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="TDC-KQ-L84" secondAttribute="trailing" constant="10" id="LXZ-Rs-lqn"/>
                             <constraint firstItem="KrJ-vA-92H" firstAttribute="leading" secondItem="woW-GK-C6H" secondAttribute="trailing" constant="23" id="VSS-8e-lKG"/>
+                            <constraint firstItem="fIJ-gc-UhF" firstAttribute="leading" secondItem="woW-GK-C6H" secondAttribute="leading" id="rNE-Fy-c0M"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="4of-Y3-zgw" secondAttribute="bottom" constant="40" id="w8P-tw-5zI"/>
+                            <constraint firstItem="fIJ-gc-UhF" firstAttribute="top" secondItem="woW-GK-C6H" secondAttribute="bottom" constant="14" id="zgj-RZ-180"/>
                         </constraints>
                     </view>
                 </viewController>
