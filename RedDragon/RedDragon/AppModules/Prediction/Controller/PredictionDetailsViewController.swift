@@ -13,6 +13,8 @@ class PredictionDetailsViewController: UIViewController {
     @IBOutlet weak var placePredictionDescriptionView: PlacePredictionDescriptionView!
     @IBOutlet weak var predictionPlaceView: PlacePredictionView!
     @IBOutlet weak var predictionDetailTopView: PredictionDetailTopView!
+    var selectedUpComingMatch: PredictionData?
+    var selectedUpComingPosition: Int = 0
     
     var selectedMatch: PredictionData?
     
@@ -26,15 +28,26 @@ class PredictionDetailsViewController: UIViewController {
         configureTopView()
         setupProgressView()
         configurePlacePredictionView()
+        
     }
     
     func configureTopView(){
-        predictionDetailTopView.leagueNameLbl.text = selectedMatch?.league
-        predictionDetailTopView.leagueImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
-        predictionDetailTopView.leagueImgView.sd_setImage(with: URL(string: selectedMatch?.logo ?? ""))
-        predictionDetailTopView.team1Lbl.text = selectedMatch?.matches?[0].homeTeam
-        predictionDetailTopView.team2Lbl.text = selectedMatch?.matches?[0].awayTeam
-        predictionDetailTopView.dateLbl.text = Date().formatDate(outputFormat: dateFormat(rawValue: "yyyy-MM-dd")!) + " | " + (selectedMatch?.matches?[0].time)!
+        if selectedUpComingMatch != nil{
+            predictionDetailTopView.leagueNameLbl.text = selectedUpComingMatch?.league
+            predictionDetailTopView.leagueImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
+            predictionDetailTopView.leagueImgView.sd_setImage(with: URL(string: selectedUpComingMatch?.logo ?? ""))
+            predictionDetailTopView.team1Lbl.text = selectedUpComingMatch?.matches?[selectedUpComingPosition].homeTeam
+            predictionDetailTopView.team2Lbl.text = selectedUpComingMatch?.matches?[selectedUpComingPosition].awayTeam
+            predictionDetailTopView.dateLbl.text = Date().formatDate(outputFormat: dateFormat(rawValue: "yyyy-MM-dd")!) + " | " + (selectedUpComingMatch?.matches?[selectedUpComingPosition].time)!
+        }
+        else{
+            predictionDetailTopView.leagueNameLbl.text = selectedMatch?.league
+            predictionDetailTopView.leagueImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
+            predictionDetailTopView.leagueImgView.sd_setImage(with: URL(string: selectedMatch?.logo ?? ""))
+            predictionDetailTopView.team1Lbl.text = selectedMatch?.matches?[0].homeTeam
+            predictionDetailTopView.team2Lbl.text = selectedMatch?.matches?[0].awayTeam
+            predictionDetailTopView.dateLbl.text = Date().formatDate(outputFormat: dateFormat(rawValue: "yyyy-MM-dd")!) + " | " + (selectedMatch?.matches?[0].time)!
+        }
         
     }
     
