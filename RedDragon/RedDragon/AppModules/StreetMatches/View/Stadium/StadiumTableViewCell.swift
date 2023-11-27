@@ -31,5 +31,4 @@ class StadiumTableViewCell: UITableViewCell {
         lblDescription.text = obj?.description
         lblLocation.text = obj?.address
     }
-    
 }
