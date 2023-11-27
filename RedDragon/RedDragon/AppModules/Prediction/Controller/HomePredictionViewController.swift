@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Combine
+import SDWebImage
 
 class HomePredictionViewController: UIViewController {
 
@@ -57,6 +59,8 @@ class HomePredictionViewController: UIViewController {
     @IBOutlet weak var predictionTopView: TopView!
     
     var sportsArr = ["FootBall" , "BasketBall"]
+    private var predictionMatchesViewModel: PredictionViewModel?
+    private var cancellable = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +74,9 @@ class HomePredictionViewController: UIViewController {
     
     func configureView() {
         loadFunctionality()
+        fetchPredictionMatchesViewModel()
+        makeNetworkCall()
+        
         
     }
     
@@ -78,13 +85,89 @@ class HomePredictionViewController: UIViewController {
     }
     
     func nibInitialization() {
-      //  sportsCollectionView.register(CellIdentifier.leagueNamesCollectionCell)
+        sportsCollectionView.register(CellIdentifier.leagueNamesCollectionCell)
        
+    }
+    
+    func makeNetworkCall() {
+        predictionMatchesViewModel?.fetchPredictionMatchesAsyncCall(lang: "en", date: "2023-11-23", sportType: "football")
+    }
+    func showLoader(_ value: Bool) {
+        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
     }
 
 }
 
-/*extension HomePredictionViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+extension HomePredictionViewController {
+    ///fetch viewModel for Player details
+    func fetchPredictionMatchesViewModel() {
+        predictionMatchesViewModel = PredictionViewModel()
+        predictionMatchesViewModel?.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        predictionMatchesViewModel?.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        predictionMatchesViewModel?.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] data in
+                self?.renderResponseData(data: data!)
+            })
+            .store(in: &cancellable)
+    }
+    
+    func renderResponseData(data: [PredictionMatchesModelElement]) {
+        let data = data
+        UIView.animate(withDuration: 1.0) { [self] in
+            upcomingLeagueNameLbl1.text = data[0].league
+            upcomingLeagueImgView1.sd_imageIndicator = SDWebImageActivityIndicator.white
+            upcomingLeagueImgView1.sd_setImage(with: URL(string: data[0].logo ?? ""))
+            upcomingTeam1Lbl1.text = data[0].matches?[0].homeTeam
+            upcomingTeam2Lbl1.text = data[0].matches?[0].awayTeam
+            
+            if data[1] != nil{
+                upcomingLeagueNameLbl2.text = data[1].league
+                upcomingLeagueImgView2.sd_imageIndicator = SDWebImageActivityIndicator.white
+                upcomingLeagueImgView2.sd_setImage(with: URL(string: data[1].logo ?? ""))
+                upcomingTeam1Lbl2.text = data[1].matches?[0].homeTeam
+                upcomingTeam2Lbl2.text = data[1].matches?[0].awayTeam
+            }
+            if data[2] != nil{
+                upcomingLeagueNameLbl3.text = data[2].league
+                upcomingLeagueImgView3.sd_imageIndicator = SDWebImageActivityIndicator.white
+                upcomingLeagueImgView3.sd_setImage(with: URL(string: data[2].logo ?? ""))
+                upcomingTeam1Lbl3.text = data[2].matches?[0].homeTeam
+                upcomingteam2Lbl3.text = data[2].matches?[0].awayTeam
+            }
+                
+            
+            
+            
+        }
+    }
+}
+
+extension HomePredictionViewController {
+    func addActivityIndicator() {
+        self.view.addSubview(Loader.activityIndicator)
+    }
+    
+    func configureUI() {
+        addActivityIndicator()
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    func configureLanguage() {
+        var lang = UserDefaults.standard.string(forKey: UserDefaultString.language) ?? "en"
+        lang = (lang == "en-US") ? "en" : lang
+        // fetchCurrentLanguageCode = lang
+    }
+}
+    
+
+
+extension HomePredictionViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return sportsArr.count
     }
@@ -96,4 +179,6 @@ class HomePredictionViewController: UIViewController {
     }
     
     
-}*/
+}
+
+
