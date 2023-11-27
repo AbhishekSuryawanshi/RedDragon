@@ -15,6 +15,7 @@ struct URLConstants {
     static let terms               = "https://pitchstories.wordpress.com/terms-of-use/"
     
     static let baseURL             = "http://157.245.159.136:5072/api/"
+    static let predictionBaseURL   = "http://45.76.178.21:5069/"
     
     
     // MARK: -  Login
@@ -78,9 +79,15 @@ struct URLConstants {
     static let meetLikedUser       = meetBaseURL + "user/like"
     static let meetMyMatchUser     = meetBaseURL + "user/mymatch/list"
     
+
     
     // MARK: - StreetMatches
     static let streetMatchesBaseURL = "https://trkick.com/stm/api/"
     static let streetHome = streetMatchesBaseURL + "home/data"
     
+
+    // MARK: - Prediction
+    
+    static let getMatchesList       = "api/match/list?"
+
 }
