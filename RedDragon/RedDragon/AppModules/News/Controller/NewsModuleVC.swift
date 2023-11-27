@@ -12,7 +12,7 @@ class NewsModuleVC: UIViewController {
     @IBOutlet weak var gossipButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        gossipButton.setTitle(<#T##title: String?##String?#>, for: .normal)
+        //gossipButton.setTitle(<#T##title: String?##String?#>, for: .normal)
         // Do any additional setup after loading the view.
     }
     
