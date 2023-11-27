@@ -44,6 +44,12 @@ class DiscoverViewController: UIViewController {
         }
     }
     
+    @IBAction func newsButtonTapped(_ sender: UIButton) {
+        self.tabBarController?.tabBar.isHidden = true
+        navigateToViewController(NewsModuleVC.self, storyboardName: StoryboardName.news, identifier: "NewsModuleVC")
+    }
+    
+    
     func goToBets(){
         navigateToViewController(BetHomeVc.self, storyboardName: StoryboardName.bets, animationType: .autoReverse(presenting: .zoom))
     }

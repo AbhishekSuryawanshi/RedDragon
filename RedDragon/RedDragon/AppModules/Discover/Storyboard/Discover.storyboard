@@ -34,12 +34,29 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TDC-KQ-L84">
-                                <rect key="frame" x="333" y="109" width="50" height="30"/>
+                                <rect key="frame" x="313" y="109" width="70" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="cUp-ga-8wm"/>
+                                    <constraint firstAttribute="height" constant="30" id="giP-un-LWR"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Logout"/>
                                 <connections>
                                     <action selector="logoutButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="3BN-Y7-CO1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qdf-64-zxY">
+                                <rect key="frame" x="313" y="149" width="70" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="gYE-yR-Yxf"/>
+                                    <constraint firstAttribute="height" constant="30" id="pGD-U2-7KC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="News"/>
+                                <connections>
+                                    <action selector="newsButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Wdj-Cc-Erm"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4of-Y3-zgw">
@@ -69,11 +86,14 @@
                         <constraints>
                             <constraint firstItem="TDC-KQ-L84" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="50" id="3l1-7U-7dJ"/>
                             <constraint firstItem="woW-GK-C6H" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="9W1-Gz-jlO"/>
+                            <constraint firstItem="Qdf-64-zxY" firstAttribute="trailing" secondItem="TDC-KQ-L84" secondAttribute="trailing" id="Bhc-65-DMP"/>
                             <constraint firstItem="4of-Y3-zgw" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="CxS-ei-f6S"/>
                             <constraint firstItem="woW-GK-C6H" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="50" id="DMF-WX-3re"/>
                             <constraint firstItem="KrJ-vA-92H" firstAttribute="top" secondItem="woW-GK-C6H" secondAttribute="top" id="Ftk-eq-D0n"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="TDC-KQ-L84" secondAttribute="trailing" constant="10" id="LXZ-Rs-lqn"/>
+                            <constraint firstItem="Qdf-64-zxY" firstAttribute="top" secondItem="TDC-KQ-L84" secondAttribute="bottom" constant="10" id="QGd-sd-5hA"/>
                             <constraint firstItem="KrJ-vA-92H" firstAttribute="leading" secondItem="woW-GK-C6H" secondAttribute="trailing" constant="23" id="VSS-8e-lKG"/>
+                            <constraint firstItem="Qdf-64-zxY" firstAttribute="leading" secondItem="TDC-KQ-L84" secondAttribute="leading" id="nt3-Di-Iuu"/>
                             <constraint firstItem="fIJ-gc-UhF" firstAttribute="leading" secondItem="woW-GK-C6H" secondAttribute="leading" id="rNE-Fy-c0M"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="4of-Y3-zgw" secondAttribute="bottom" constant="40" id="w8P-tw-5zI"/>
                             <constraint firstItem="fIJ-gc-UhF" firstAttribute="top" secondItem="woW-GK-C6H" secondAttribute="bottom" constant="14" id="zgj-RZ-180"/>
