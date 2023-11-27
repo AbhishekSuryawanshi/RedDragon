@@ -8,15 +8,17 @@
 import Foundation
 
 struct StoryboardName {
-    static let main         = "Main"
-    static let login        = "Login"
-    static let social       = "Social"
-    static let database     = "Database"
-    static let matchDetail  = "MatchDetail"
-    static let cardGame     = "CardGame"
-    static let playerDetail = "PlayerDetail"
-    static let bets         = "BetStoryboard"
-    static let meet         = "Meet"
-    static let prediction   = "Prediction"
-    static let streetMatches = "StreetMatches"
+    static let main           = "Main"
+    static let login          = "Login"
+    static let social         = "Social"
+    static let database       = "Database"
+    static let matchDetail    = "MatchDetail"
+    static let cardGame       = "CardGame"
+    static let playerDetail   = "PlayerDetail"
+    static let bets           = "BetStoryboard"
+    static let meet           = "Meet"
+    static let prediction     = "Prediction"
+    static let streetMatches  = "StreetMatches"
+    static let news           = "News"
 }
+

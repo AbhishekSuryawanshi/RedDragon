@@ -133,6 +133,12 @@
 		47C8C95D2AF116D700448D96 /* ImageZoomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C8C95C2AF116D700448D96 /* ImageZoomVC.swift */; };
 		47C8C9602AF1191700448D96 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 47C8C95F2AF1191700448D96 /* Kingfisher */; };
 		47C8C9622AF119A800448D96 /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C8C9612AF119A800448D96 /* ImageScrollView.swift */; };
+		47CB0E0F2B11D7DE0070744B /* News.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47CB0E0E2B11D7DE0070744B /* News.storyboard */; };
+		47CB0E112B11D8510070744B /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB0E102B11D8510070744B /* NewsModel.swift */; };
+		47CB0E152B11D9610070744B /* NewsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB0E132B11D9610070744B /* NewsCollectionViewCell.swift */; };
+		47CB0E162B11D9610070744B /* NewsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47CB0E142B11D9610070744B /* NewsCollectionViewCell.xib */; };
+		47CB0E182B11D9870070744B /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB0E172B11D9870070744B /* NewsViewModel.swift */; };
+		47CB0E1A2B11DA9B0070744B /* NewsModuleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB0E192B11DA9B0070744B /* NewsModuleVC.swift */; };
 		47E2FACF2AFE6BAE00DBEFE6 /* SocialSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E2FACE2AFE6BAE00DBEFE6 /* SocialSearchVC.swift */; };
 		47E3E50B2B05F61C00B43994 /* OTPFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E3E50A2B05F61C00B43994 /* OTPFieldView.swift */; };
 		47E3E50D2B064F1500B43994 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E3E50C2B064F1500B43994 /* LoginViewModel.swift */; };
@@ -427,6 +433,12 @@
 		47C8C95A2AF0D9B600448D96 /* EmbedVCHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbedVCHelper.swift; sourceTree = "<group>"; };
 		47C8C95C2AF116D700448D96 /* ImageZoomVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageZoomVC.swift; sourceTree = "<group>"; };
 		47C8C9612AF119A800448D96 /* ImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
+		47CB0E0E2B11D7DE0070744B /* News.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = News.storyboard; sourceTree = "<group>"; };
+		47CB0E102B11D8510070744B /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
+		47CB0E132B11D9610070744B /* NewsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCollectionViewCell.swift; sourceTree = "<group>"; };
+		47CB0E142B11D9610070744B /* NewsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsCollectionViewCell.xib; sourceTree = "<group>"; };
+		47CB0E172B11D9870070744B /* NewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewModel.swift; sourceTree = "<group>"; };
+		47CB0E192B11DA9B0070744B /* NewsModuleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModuleVC.swift; sourceTree = "<group>"; };
 		47E2FACE2AFE6BAE00DBEFE6 /* SocialSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSearchVC.swift; sourceTree = "<group>"; };
 		47E3E50A2B05F61C00B43994 /* OTPFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPFieldView.swift; sourceTree = "<group>"; };
 		47E3E50C2B064F1500B43994 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -934,6 +946,67 @@
 			path = PhoneCountryCode;
 			sourceTree = "<group>";
 		};
+		47CB0E082B11D6A10070744B /* News */ = {
+			isa = PBXGroup;
+			children = (
+				47CB0E0D2B11D6F30070744B /* Storyboard */,
+				47CB0E0C2B11D6E90070744B /* Model */,
+				47CB0E0B2B11D6DA0070744B /* View */,
+				47CB0E0A2B11D6CF0070744B /* ViewModel */,
+				47CB0E092B11D6BE0070744B /* Controller */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		47CB0E092B11D6BE0070744B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				47CB0E192B11DA9B0070744B /* NewsModuleVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		47CB0E0A2B11D6CF0070744B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				47CB0E172B11D9870070744B /* NewsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		47CB0E0B2B11D6DA0070744B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				47CB0E122B11D9120070744B /* CollectioViewCells */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		47CB0E0C2B11D6E90070744B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				47CB0E102B11D8510070744B /* NewsModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		47CB0E0D2B11D6F30070744B /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				47CB0E0E2B11D7DE0070744B /* News.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		47CB0E122B11D9120070744B /* CollectioViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				47CB0E132B11D9610070744B /* NewsCollectionViewCell.swift */,
+				47CB0E142B11D9610070744B /* NewsCollectionViewCell.xib */,
+			);
+			path = CollectioViewCells;
+			sourceTree = "<group>";
+		};
 		47FC33D72AEA4C9000FABED4 /* Social */ = {
 			isa = PBXGroup;
 			children = (
@@ -1287,6 +1360,7 @@
 				E9DDB62B2B049BAF004C8ACF /* Discover */,
 				6A213FE72B0B2F4800F52E69 /* MeetApp */,
 				ADD339802B0F423500B91101 /* StreetMatches */,
+				47CB0E082B11D6A10070744B /* News */,
 			);
 			path = AppModules;
 			sourceTree = "<group>";
@@ -1905,6 +1979,7 @@
 				ADD339962B0F7C7800B91101 /* StreetMatchTableViewCell.xib in Resources */,
 				ADD575432B10DB7C004FFDF4 /* StreetHomeHeaderTableViewCell.xib in Resources */,
 				41EB79CC2AF37BA000D068F7 /* PlayerDetail.storyboard in Resources */,
+				47CB0E162B11D9610070744B /* NewsCollectionViewCell.xib in Resources */,
 				49B8373C2B04E2E700CD9E26 /* MediaCollectionViewCell.xib in Resources */,
 				41BB28882B064F7A0080E63F /* PlayerStatsTableViewCell.xib in Resources */,
 				496A9AB42B0F200900274FC6 /* LeagueCollectionViewCell.xib in Resources */,
@@ -1937,6 +2012,7 @@
 				41EB79D22AF37BA000D068F7 /* PlayerStatsView.xib in Resources */,
 				49B0B9F12AE68F0800A9D235 /* Assets.xcassets in Resources */,
 				ADD3398C2B0F5DAB00B91101 /* StadiumTableViewCell.xib in Resources */,
+				47CB0E0F2B11D7DE0070744B /* News.storyboard in Resources */,
 				49DCA7C22B0C90DD005902AF /* CardGame.storyboard in Resources */,
 				474D993B2AE7F30D009499D0 /* Roboto-Italic.ttf in Resources */,
 				474D993D2AE7F30D009499D0 /* Roboto-Black.ttf in Resources */,
@@ -2095,15 +2171,18 @@
 				49C22E612AFCF3D500B0340A /* HighlightTableViewCell.swift in Sources */,
 				49B04A5A2AFA6EF900B440AA /* BetsViewController.swift in Sources */,
 				6A213FF02B0B3C5100F52E69 /* MeetHomeVC.swift in Sources */,
+				47CB0E112B11D8510070744B /* NewsModel.swift in Sources */,
 				493D212E2AFE126400045672 /* PlayerDetailsTopView.swift in Sources */,
 				47E7C8512AEFD2F400D054A8 /* PostMatchesVC.swift in Sources */,
 				49EA0AF22B0258F30003D469 /* PlayerDetailViewModel.swift in Sources */,
 				41E726772B0DF53900D2BFB5 /* PredictionHistoryViewController.swift in Sources */,
 				6A5F2B882B0CA19100AB6A98 /* MeetDashboardVC.swift in Sources */,
 				41BB287C2B0247A60080E63F /* PlayerDetailProfileViewController.swift in Sources */,
+				47CB0E182B11D9870070744B /* NewsViewModel.swift in Sources */,
 				49B0BA042AE6919800A9D235 /* Reachability.swift in Sources */,
 				ADD575422B10DB7C004FFDF4 /* StreetHomeHeaderTableViewCell.swift in Sources */,
 				49B04A582AFA6E1200B440AA /* LineupViewController.swift in Sources */,
+				47CB0E152B11D9610070744B /* NewsCollectionViewCell.swift in Sources */,
 				E9B1A0032B0DEB8D00B96664 /* PlaceBetViewModel.swift in Sources */,
 				47E3E50B2B05F61C00B43994 /* OTPFieldView.swift in Sources */,
 				41EB79E12AF3B70100D068F7 /* PlayerDetailView.swift in Sources */,
@@ -2138,6 +2217,7 @@
 				47C8C9512AF0CAB700448D96 /* SingleImageCollectionViewCell.swift in Sources */,
 				49B0BA522AE6AA1A00A9D235 /* UserDefaultString.swift in Sources */,
 				49B211512B0B4AEF00E1C58E /* AllFootballPlayersViewModel.swift in Sources */,
+				47CB0E1A2B11DA9B0070744B /* NewsModuleVC.swift in Sources */,
 				49F3429D2AF23CC70057C147 /* EventsTableViewCell.swift in Sources */,
 				AD5331AB2B10904200C97FE4 /* StreetHome.swift in Sources */,
 				E9DDB6352B04B474004C8ACF /* BetsHomeViewModel.swift in Sources */,
