@@ -44,7 +44,7 @@ class APIServiceManager<ResponseModel: Decodable>: ObservableObject {
             var allHeaders = HTTPHeader.commonHeaders
 
             if isGuestUser {
-                let guestUserToken = DefaultToken.guestUser
+                let guestUserToken = DefaultToken.guestPredictionUser
                 let authorizationToken = HTTPHeader.createAuthorizationHeader(token: guestUserToken)
                 allHeaders = allHeaders.merging(authorizationToken, uniquingKeysWith: { $1 })
             } else {

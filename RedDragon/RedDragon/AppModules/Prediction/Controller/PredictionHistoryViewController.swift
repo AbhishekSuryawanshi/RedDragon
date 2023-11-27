@@ -12,6 +12,7 @@ class PredictionHistoryViewController: UIViewController {
     @IBOutlet weak var predictionMatchesTableView: UITableView!
     @IBOutlet weak var datesCollectionView: UICollectionView!
     @IBOutlet weak var sportsCollectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
