@@ -397,7 +397,7 @@
                                             </view>
                                         </subviews>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Match Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4P0-Ov-sSx">
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Match Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4P0-Ov-sSx">
                                         <rect key="frame" x="0.0" y="115" width="141.66666666666666" height="30"/>
                                         <color key="backgroundColor" name="base"/>
                                         <constraints>
@@ -439,7 +439,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Experts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HYO-JD-rCJ">
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Experts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HYO-JD-rCJ">
                                         <rect key="frame" x="219.66666666666663" y="115" width="141.33333333333337" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="rIP-Lw-3A0"/>
@@ -744,11 +744,13 @@
                         <outlet property="bgViewTwo" destination="JYi-UU-aJL" id="bE2-VO-pCm"/>
                         <outlet property="estWinAmount" destination="bgH-2w-ap3" id="Zn0-wf-mYS"/>
                         <outlet property="etAmount" destination="VSo-li-qbc" id="qwn-T9-P6B"/>
+                        <outlet property="expertsLable" destination="HYO-JD-rCJ" id="fIJ-wn-HKn"/>
                         <outlet property="homeName" destination="wbu-dD-fNi" id="7g4-cB-VNW"/>
                         <outlet property="imgAway" destination="auA-bx-eRY" id="Y5h-oh-tRa"/>
                         <outlet property="imgHome" destination="L8y-ou-sPQ" id="SYq-Sz-vHS"/>
                         <outlet property="imgLeague" destination="TAU-eC-NFu" id="AH4-kM-xmt"/>
                         <outlet property="leagueLable" destination="COd-5X-b4T" id="9qO-Yf-gkc"/>
+                        <outlet property="matchDetails" destination="4P0-Ov-sSx" id="KNH-ee-Fea"/>
                         <outlet property="oddsLable1" destination="4EP-Ma-I7s" id="Fet-u1-8jm"/>
                         <outlet property="oddsLable2" destination="4ZM-P5-3hu" id="Tvg-MP-1Fa"/>
                         <outlet property="oddsLable3" destination="yCt-Ac-O8d" id="Gg7-Va-4IR"/>
@@ -820,8 +822,8 @@
                                                 <color key="textColor" name="blue2"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12,567,893" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ycF-bO-8Dr">
-                                                <rect key="frame" x="26.333333333333329" y="56.666666666666657" width="126.99999999999999" height="30"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ycF-bO-8Dr">
+                                                <rect key="frame" x="57.666666666666664" y="56.666666666666657" width="64.666666666666686" height="30"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="25"/>
                                                 <color key="textColor" name="blue2"/>
                                                 <nil key="highlightedColor"/>

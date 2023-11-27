@@ -41,6 +41,7 @@ class DiscoverViewController: UIViewController {
         self.customAlertView_2Actions(title: "Logout".localized, description: StringConstants.logoutAlert.localized) {
             UserDefaults.standard.user = nil
             UserDefaults.standard.token = nil
+            UserDefaults.standard.points = nil
         }
     }
     
