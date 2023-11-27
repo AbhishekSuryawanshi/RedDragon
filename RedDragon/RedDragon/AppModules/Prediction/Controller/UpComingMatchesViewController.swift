@@ -18,7 +18,7 @@ class UpComingMatchesViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
     }
@@ -40,6 +40,13 @@ class UpComingMatchesViewController: UIViewController {
        
     }
     
+    @objc func predictBtnAction(sender: UIButton){
+        navigateToViewController(PredictionDetailsViewController.self, storyboardName: StoryboardName.prediction) { vc in
+         //   self.predictionMatchesModel?.data
+          
+                }
+    }
+    
 }
 
 extension UpComingMatchesViewController: UICollectionViewDelegate, UICollectionViewDataSource{
@@ -52,8 +59,7 @@ extension UpComingMatchesViewController: UICollectionViewDelegate, UICollectionV
         cell.titleLable.text = dateArr[indexPath.row]
         return cell
     }
-    
-    
+
 }
 
 extension UpComingMatchesViewController: UITableViewDelegate, UITableViewDataSource{
@@ -67,9 +73,10 @@ extension UpComingMatchesViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.predictUpcomingTableViewCell, for: indexPath) as! PredictUpcomingTableViewCell
-        cell.team1Lbl.text = predictionMatchesModel?.data?[indexPath.section].matches?[indexPath.row].homeTeam
-        cell.team2Lbl.text = predictionMatchesModel?.data?[indexPath.section].matches?[indexPath.row].awayTeam
-        cell.dateTimeLbl.text = predictionMatchesModel?.data?[indexPath.section].matches?[indexPath.row].time
+        cell.configCell(predictionData: predictionMatchesModel?.data?[indexPath.section], row: indexPath.row)
+      
+        
+      //  cell.predictBtn.addTarget(self, action: #selector(predictBtnAction), for: .touchUpInside)
         return cell
     }
     
@@ -78,7 +85,6 @@ extension UpComingMatchesViewController: UITableViewDelegate, UITableViewDataSou
         headerView.leagueImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
         headerView.leagueImgView.sd_setImage(with: URL(string: predictionMatchesModel?.data?[section].logo ?? ""))
         headerView.leagueNameLbl.text = predictionMatchesModel?.data?[section].league
-        
         return headerView
     }
     

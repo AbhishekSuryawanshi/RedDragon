@@ -71,7 +71,10 @@ class HomePredictionViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = #colorLiteral(red: 0.7333333333, green: 0.09803921569, blue: 0.06274509804, alpha: 1)
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        self.navigationController?.isNavigationBarHidden = false
     }
     
     func configureView() {
