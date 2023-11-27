@@ -188,11 +188,15 @@
 		494D7B7A2AE92F4700488E27 /* DatabaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494D7B792AE92F4700488E27 /* DatabaseViewModel.swift */; };
 		494D7B7C2AE9317F00488E27 /* LeagueDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494D7B7B2AE9317F00488E27 /* LeagueDetailModel.swift */; };
 		494D7B842AE94AF300488E27 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494D7B832AE94AF300488E27 /* UIViewController+Extension.swift */; };
+		49581AF52B14A2CB00048189 /* CardGameMyTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49581AF42B14A2CB00048189 /* CardGameMyTeamVC.swift */; };
+		49581AF72B14BE5E00048189 /* MyTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49581AF62B14BE5E00048189 /* MyTeam.swift */; };
+		49581AF92B14BFEC00048189 /* MyTeamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49581AF82B14BFEC00048189 /* MyTeamViewModel.swift */; };
+		49581AFC2B14CC1800048189 /* MyTeamCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49581AFA2B14CC1800048189 /* MyTeamCollectionViewCell.swift */; };
+		49581AFD2B14CC1800048189 /* MyTeamCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49581AFB2B14CC1800048189 /* MyTeamCollectionViewCell.xib */; };
 		49631A182AFA44E100BE84BB /* HighlightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49631A172AFA44E100BE84BB /* HighlightViewController.swift */; };
 		49631A1A2AFA4CA200BE84BB /* SymbolsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49631A192AFA4CA200BE84BB /* SymbolsCollectionViewCell.swift */; };
 		496A9AB32B0F200900274FC6 /* LeagueCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496A9AB12B0F200900274FC6 /* LeagueCollectionViewCell.swift */; };
 		496A9AB42B0F200900274FC6 /* LeagueCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496A9AB22B0F200900274FC6 /* LeagueCollectionViewCell.xib */; };
-
 		49A822BB2B04FC27007752C2 /* RecentMatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A822B92B04FC27007752C2 /* RecentMatchTableViewCell.swift */; };
 		49A822BC2B04FC27007752C2 /* RecentMatchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49A822BA2B04FC27007752C2 /* RecentMatchTableViewCell.xib */; };
 		49B04A562AFA6DCE00B440AA /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B04A552AFA6DCE00B440AA /* StatisticsViewController.swift */; };
@@ -498,6 +502,11 @@
 		494D7B792AE92F4700488E27 /* DatabaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseViewModel.swift; sourceTree = "<group>"; };
 		494D7B7B2AE9317F00488E27 /* LeagueDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueDetailModel.swift; sourceTree = "<group>"; };
 		494D7B832AE94AF300488E27 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		49581AF42B14A2CB00048189 /* CardGameMyTeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGameMyTeamVC.swift; sourceTree = "<group>"; };
+		49581AF62B14BE5E00048189 /* MyTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTeam.swift; sourceTree = "<group>"; };
+		49581AF82B14BFEC00048189 /* MyTeamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTeamViewModel.swift; sourceTree = "<group>"; };
+		49581AFA2B14CC1800048189 /* MyTeamCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTeamCollectionViewCell.swift; sourceTree = "<group>"; };
+		49581AFB2B14CC1800048189 /* MyTeamCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyTeamCollectionViewCell.xib; sourceTree = "<group>"; };
 		49631A172AFA44E100BE84BB /* HighlightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightViewController.swift; sourceTree = "<group>"; };
 		49631A192AFA4CA200BE84BB /* SymbolsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolsCollectionViewCell.swift; sourceTree = "<group>"; };
 		496A9AB12B0F200900274FC6 /* LeagueCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1420,6 +1429,7 @@
 			children = (
 				49B211432B0B43E300E1C58E /* AllPlayersViewController.swift */,
 				49DB68F42B0E319300921791 /* CardGamePlayerDetailVC.swift */,
+				49581AF42B14A2CB00048189 /* CardGameMyTeamVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1428,6 +1438,7 @@
 			isa = PBXGroup;
 			children = (
 				49B211502B0B4AEF00E1C58E /* AllFootballPlayersViewModel.swift */,
+				49581AF82B14BFEC00048189 /* MyTeamViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1439,6 +1450,8 @@
 				49F72D2E2B0CCE3D004E60DF /* AllPlayersTableViewCell.xib */,
 				493138012B147133000E167B /* StatCollectionViewCell.swift */,
 				493138022B147133000E167B /* StatCollectionViewCell.xib */,
+				49581AFA2B14CC1800048189 /* MyTeamCollectionViewCell.swift */,
+				49581AFB2B14CC1800048189 /* MyTeamCollectionViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1448,6 +1461,7 @@
 			children = (
 				49B211472B0B470E00E1C58E /* FootballPlayers.swift */,
 				49B211492B0B471A00E1C58E /* RealmPlayerData.swift */,
+				49581AF62B14BE5E00048189 /* MyTeam.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2064,6 +2078,7 @@
 				49F65E442AF6222D000F9E96 /* MatchTabsCollectionViewCell.xib in Resources */,
 				419658242B0CF18000730D9F /* PredictResultTopView.xib in Resources */,
 				ADD339912B0F6DB700B91101 /* FeedsTableViewCell.xib in Resources */,
+				49581AFD2B14CC1800048189 /* MyTeamCollectionViewCell.xib in Resources */,
 				41846BDA2B0C7E050020F503 /* TopView.xib in Resources */,
 				4716B11A2AEF8D6B003582A9 /* MatchTableViewCell.xib in Resources */,
 				E9129B9B2B05FC960073A407 /* BetLoseTableVC.xib in Resources */,
@@ -2135,6 +2150,7 @@
 				6A2140282B0B7C1100F52E69 /* MeetUserViewModel.swift in Sources */,
 				47ACEB812B0CB811001AD0EB /* SocialPostImageViewModel.swift in Sources */,
 				49B0BA4B2AE6A52800A9D235 /* HTTPSClient.swift in Sources */,
+				49581AF92B14BFEC00048189 /* MyTeamViewModel.swift in Sources */,
 				AD5331A92B10770000C97FE4 /* StreetMatchHomeVC.swift in Sources */,
 				472873552AEA7A780011F00F /* HeaderBottom_1CollectionViewCell.swift in Sources */,
 				4760AFBD2AF9203000646EC7 /* SocialCommentTableViewCell.swift in Sources */,
@@ -2153,6 +2169,7 @@
 				49B2114A2B0B471A00E1C58E /* RealmPlayerData.swift in Sources */,
 				49DB68F52B0E319300921791 /* CardGamePlayerDetailVC.swift in Sources */,
 				494B37E92AEA3EC500FB9BCD /* ImageConstants.swift in Sources */,
+				49581AFC2B14CC1800048189 /* MyTeamCollectionViewCell.swift in Sources */,
 				49B0B9E82AE68F0700A9D235 /* AppDelegate.swift in Sources */,
 				49F3EECF2AE7AC580095CAC6 /* Navigation.swift in Sources */,
 				474D99472AE7F353009499D0 /* Fonts+Extra.swift in Sources */,
@@ -2191,6 +2208,7 @@
 				6A5F2BA12B0CE10300AB6A98 /* MeetUserTableViewCell.swift in Sources */,
 				4716B1192AEF8D6B003582A9 /* MatchTableViewCell.swift in Sources */,
 				6A4A7B432B11C23F00231EA2 /* MeetEventViewModel.swift in Sources */,
+				49581AF52B14A2CB00048189 /* CardGameMyTeamVC.swift in Sources */,
 				47C8C9622AF119A800448D96 /* ImageScrollView.swift in Sources */,
 				E9DDB62A2B049BA2004C8ACF /* BetHomeVc.swift in Sources */,
 				49B0BA1D2AE6976500A9D235 /* URLConstants.swift in Sources */,
@@ -2249,6 +2267,7 @@
 				41EB79CF2AF37BA000D068F7 /* TeamsView.swift in Sources */,
 				47E3E50D2B064F1500B43994 /* LoginViewModel.swift in Sources */,
 				41EB79D12AF37BA000D068F7 /* PlayerStatsView.swift in Sources */,
+				49581AF72B14BE5E00048189 /* MyTeam.swift in Sources */,
 				49B0BA452AE6A37F00A9D235 /* StringConstants.swift in Sources */,
 				49B04A5E2AFA6F7A00B440AA /* AnalysisViewController.swift in Sources */,
 				47C8C9592AF0D3FB00448D96 /* ImagePickerHelper.swift in Sources */,

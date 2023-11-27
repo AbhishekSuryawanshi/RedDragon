@@ -75,7 +75,7 @@ class MatchDetailsVC: UIViewController {
             matchDetailViewModel?.fetchMatchDetailAsyncCall(lang: fetchCurrentLanguageCode == "en" ? "en" : "zh",
                                                             slug: matchSlug ?? "",
                                                             sports: sports ?? "")
-        }else{
+        } else{
             tennisDetailViewModel?.fetchMatchDetailAsyncCall(lang: fetchCurrentLanguageCode == "en" ? "en" : "zh",
                                                             slug: matchSlug ?? "",
                                                             sports: sports ?? "")

@@ -55,6 +55,14 @@ class AllPlayersViewController: UIViewController {
         self.navigationController?.popToRootViewController(animated: false)
     }
     
+    @IBAction func teamButton(_ sender: Any) {
+        presentToViewController(CardGameMyTeamVC.self, storyboardName: StoryboardName.cardGame)
+    }
+    
+    @IBAction func leaderboardButton(_ sender: Any) {
+    }
+    
+    
     @objc private func textFieldDidChange(_ textField: UITextField) {
         allPlayersVM?.setSearchText(searchTextField.text ?? "")
         tableView.reloadData()
