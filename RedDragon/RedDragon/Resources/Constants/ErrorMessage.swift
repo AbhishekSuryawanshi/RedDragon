@@ -47,4 +47,12 @@ struct ErrorMessage {
     static var teamEmptyAlert              = "No Teams found"
     static var matchEmptyAlert             = "No Matches found"
     static var betsEmptyAlert              = "No Bets found"
+    
+    static let addPlayer                   = "Looks like you haven't bought any players yet, please buy a player to play the game"
+    static let playerListUnavailable       = "Players list unavailable"
+    static let userIDNotFound              = "Unable to get user ID"
+    static let lowBudget                   = "Low Budget"
+    static let insufficientBudget          = "Sorry, you don't have sufficient budget to buy this player"
+    static let addPlayerToPlay             = "Please add a minimum of 11 players to your team to play the game"
+    static let playerAlreadyUsed           = "Your team already has this player"
 }

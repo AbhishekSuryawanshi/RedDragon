@@ -13,10 +13,9 @@ struct URLConstants {
     static let appReview           = "itms-apps://itunes.apple.com/app/id\(appStoreID)?mt=8&action=write-review"
     static let privacyPolicy       = ""
     static let terms               = "https://pitchstories.wordpress.com/terms-of-use/"
-    
     static let baseURL             = "http://157.245.159.136:5072/api/"
     static let predictionBaseURL   = "http://45.76.178.21:5069/"
-    
+    static let cardGameBaseURL     = "https://amberic.top/sport-api-card"
     
     // MARK: -  Login
     static let login               = baseURL + "login"
@@ -33,6 +32,7 @@ struct URLConstants {
     
     // MARK: - CardGame
     static let cardGame_allPlayersList = databaseBaseURL + "player_filter.php"
+    static let buyPlayer           = cardGameBaseURL + "/api/user/players"
     
     // MARK: -  Social
     static let socialBaseURL       = baseURL + "euro5league/"
@@ -79,15 +79,11 @@ struct URLConstants {
     static let meetLikedUser       = meetBaseURL + "user/like"
     static let meetMyMatchUser     = meetBaseURL + "user/mymatch/list"
     
-
-    
     // MARK: - StreetMatches
     static let streetMatchesBaseURL = "https://trkick.com/stm/api/"
     static let streetHome = streetMatchesBaseURL + "home/data"
-    
 
     // MARK: - Prediction
-    
     static let getMatchesList       = "api/match/list?"
 
 }
