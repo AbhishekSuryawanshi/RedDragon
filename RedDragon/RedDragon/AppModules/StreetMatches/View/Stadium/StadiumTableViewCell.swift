@@ -27,6 +27,9 @@ class StadiumTableViewCell: UITableViewCell {
     
     func configureCell(obj:Stadium?){
         imgStadium.setImage(imageStr: obj?.imgsUrls.first ?? "", placeholder: .placeholder1)
+        lblStadium.text = obj?.name
+        lblDescription.text = obj?.description
+        lblLocation.text = obj?.address
     }
     
 }

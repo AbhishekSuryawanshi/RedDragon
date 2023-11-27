@@ -95,6 +95,7 @@ extension StreetMatchHomeVC:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.stadiumTableViewCell, for: indexPath) as! StadiumTableViewCell
+            cell.configureCell(obj: homeData?.stadiums[indexPath.row])
             return cell
         }
         else if indexPath.section == 1{
