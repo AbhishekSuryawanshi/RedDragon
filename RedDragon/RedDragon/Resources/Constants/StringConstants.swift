@@ -66,11 +66,23 @@ struct StringConstants {
     static let penalty              = "Penalty"
     static let minutesAdded         = "Minutes Added"
     
-    
     //PlayerDetails
     static let profile              = "Profile"
     static let matches              = "Matches"
     static let stats                = "Stats"
     static let media                = "Media"
+    static let minuitesPerGame      = "Minutes per game"
+    static let attacking            = "Attacking"
+    static let goals                = "Goals"
+    static let penaltyGoals         = "Penalty goals"
+    static let freeKicksGoals       = "Free kick goals"
+    
+    //Player API data
+    static let totalPlayed          = "Total played"
+    static let passes               = "Passes"
+    static let accuratePerGame      = "Accurate per game"
+    static let cards                = "Cards"
+    static let yellow               = "Yellow"
+    static let red                  = "Red"
 }
 
