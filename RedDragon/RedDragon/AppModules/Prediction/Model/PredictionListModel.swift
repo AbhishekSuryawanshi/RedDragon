@@ -33,7 +33,7 @@ struct PredictionListModelElement: Codable {
     }
 }
 
-// MARK: - User
+// MARK: - PredictionUser
 struct PredictionUser: Codable {
     var id: Int?
     var name, email: String?
