@@ -24,6 +24,7 @@ class MatchDetailsVC: UIViewController {
     
     private var cancellable = Set<AnyCancellable>()
     private var matchDetailViewModel: MatchDetailsViewModel?
+    private var tennisDetailViewModel: TennisDetailsViewModel?
     private var fetchCurrentLanguageCode = String()
     private var matchTabsArray = [String]()
     var matchSlug: String?
@@ -44,6 +45,7 @@ class MatchDetailsVC: UIViewController {
         configureUI()
         configureLanguage()
         fetchMatchDetailsViewModel()
+        fetchTennisDetailsViewModel()
         makeNetworkCall()
     }
     
@@ -69,13 +71,19 @@ class MatchDetailsVC: UIViewController {
         /// __parateters__
         ///slug: "2023-02-21-liverpool-real-madrid" //matchSlug ?? ""
         ///sports: sports ?? ""
-        matchDetailViewModel?.fetchMatchDetailAsyncCall(lang: fetchCurrentLanguageCode == "en" ? "en" : "zh",
-                                                        slug: matchSlug ?? "",
-                                                        sports: sports ?? "")
+        if sports == Sports.football.title.lowercased() {
+            matchDetailViewModel?.fetchMatchDetailAsyncCall(lang: fetchCurrentLanguageCode == "en" ? "en" : "zh",
+                                                            slug: matchSlug ?? "",
+                                                            sports: sports ?? "")
+        }else{
+            tennisDetailViewModel?.fetchMatchDetailAsyncCall(lang: fetchCurrentLanguageCode == "en" ? "en" : "zh",
+                                                            slug: matchSlug ?? "",
+                                                            sports: sports ?? "")
+        }
     }
     
     @IBAction func backButton(_ sender: Any) {
-        self.navigationController?.popToRootViewController(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
@@ -98,6 +106,24 @@ extension MatchDetailsVC {
             .store(in: &cancellable)
     }
     
+    ///fetch viewModel for Match details
+    func fetchTennisDetailsViewModel() {
+        tennisDetailViewModel = TennisDetailsViewModel()
+        tennisDetailViewModel?.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        tennisDetailViewModel?.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        tennisDetailViewModel?.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] data in
+                self?.renderResponseData(data: data!)
+            })
+            .store(in: &cancellable)
+    }
+    
     func renderResponseData(data: MatchDetail) {
         let data = data.data
         UIView.animate(withDuration: 1.0) { [self] in
@@ -110,6 +136,23 @@ extension MatchDetailsVC {
             awayTeamNameLabel.text = data.awayTeamName
             scoreLabel.text = "\(data.homeScore) - \(data.awayScore)"
             firstHalfScoreLabel.text = "\(StringConstants.firstHalf)(\(data.home1StHalf)-\(data.away1StHalf))"
+            highlightFirstIndex_collectionView()
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func renderResponseData(data: TennisMatchDetail) {
+        let data = data.data
+        UIView.animate(withDuration: 1.0) { [self] in
+            leagueNameLabel.text = leagueName
+            homeTeamImageView.sd_imageIndicator = SDWebImageActivityIndicator.white
+            awayTeamImageView.sd_imageIndicator = SDWebImageActivityIndicator.white
+            homeTeamImageView.sd_setImage(with: URL(string: data.homeTeamImage ?? ImageConstants.placeHolderTeam))
+            awayTeamImageView.sd_setImage(with: URL(string: data.awayTeamImage ?? ImageConstants.placeHolderTeam))
+            homeTeamNameLabel.text = data.homeTeamName
+            awayTeamNameLabel.text = data.awayTeamName
+            scoreLabel.text = "\(data.homeScore ?? "0") - \(data.awayScore ?? "0")"
+          //  firstHalfScoreLabel.text = "\(StringConstants.firstHalf)(\(data.home1StHalf)-\(data.away1StHalf))"
             highlightFirstIndex_collectionView()
             self.view.layoutIfNeeded()
         }
