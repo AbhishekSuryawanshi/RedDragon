@@ -9,22 +9,71 @@ import UIKit
 
 class NewsModuleVC: UIViewController {
 
-    @IBOutlet weak var gossipButton: UIButton!
+    @IBOutlet weak var headerCollectionView: UICollectionView!
+    @IBOutlet weak var sportsCollectionView: UICollectionView!
+    @IBOutlet weak var searchTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //gossipButton.setTitle(<#T##title: String?##String?#>, for: .normal)
-        // Do any additional setup after loading the view.
+
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func initialSettings() {
+        
     }
-    */
+    
+    func nibInitialization() {
+        headerCollectionView.register(CellIdentifier.headerTopCollectionViewCell)
+        sportsCollectionView.register(CellIdentifier.iconNameCollectionViewCell)
+    }
+}
 
+// MARK: - CollectionView Delegates
+extension NewsModuleVC: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.headerTopCollectionViewCell, for: indexPath) as! HeaderTopCollectionViewCell
+        return cell
+    }
+}
+
+extension NewsModuleVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+       
+    }
+}
+
+extension NewsModuleVC: UICollectionViewDelegateFlowLayout {
+   
+}
+
+
+// MARK: - TextField Delegate
+extension NewsModuleVC: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text,
+           let textRange = Range(range, in: text) {
+            let searchText = text.replacingCharacters(in: textRange,with: string)
+            print("searchText  \(searchText)")
+            //  searchData(text: searchText)
+        }
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        //searchData(text: searchTextField.text!)
+        return true
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        textField.text = ""
+        textField.resignFirstResponder()
+        //searchData(text: searchTextField.text!)
+        return true
+    }
+    
 }
