@@ -8,6 +8,38 @@
 import UIKit
 import Combine
 
+enum StreetMatchStates:String{
+    case NOT_STARTED = "NOT_STARTED"
+    case FINISHED =  "FINISHED"
+    var description:String{
+        switch self{
+        case .NOT_STARTED:
+            return "Upcoming".localized
+        case .FINISHED:
+            return "Finished".localized
+        }
+    }
+}
+
+enum FeedsType:String{
+    
+    case searchTeam = "SEARCH_TEAM"
+    case searchPlayer = "SEARCH_PLAYERS"
+    case challengeTeam = "CHALLENGE_TEAM"
+    
+    var description:String{
+        switch self{
+        case .searchTeam:
+            return "Search Team".localized
+        case .searchPlayer:
+            return "Search Players".localized
+        case .challengeTeam:
+            return "Challenge Team".localized
+        }
+    }
+    
+}
+
 class StreetMatchHomeVC: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -95,14 +127,17 @@ extension StreetMatchHomeVC:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.stadiumTableViewCell, for: indexPath) as! StadiumTableViewCell
+            cell.configureCell(obj: homeData?.stadiums[indexPath.row])
             return cell
         }
         else if indexPath.section == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.feedsTableViewCell, for: indexPath) as! FeedsTableViewCell
+            cell.configureCell(obj: homeData?.events[indexPath.row])
             return cell
         }
         else{
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.streetMatchTableViewCell, for: indexPath) as! StreetMatchTableViewCell
+            cell.configureCell(obj: homeData?.matches[indexPath.row])
             return cell
         }
     }

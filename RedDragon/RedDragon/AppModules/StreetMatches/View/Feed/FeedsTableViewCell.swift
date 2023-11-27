@@ -29,4 +29,20 @@ class FeedsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func configureCell(obj:StreetEvent?){
+        imgFeed.setImage(imageStr: obj?.eventImgURL ?? "")
+        imgUser.setImage(imageStr: obj?.creatorImgURL ?? "")
+        let tp = FeedsType(rawValue: obj?.type ?? "")
+        lblTitle.text = tp?.description
+        lblDate.text = obj?.createdAt
+        lblPost.text = obj?.description
+        lblUser.text = obj?.creatorName
+        lblLocation.text = obj?.address
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat.ddMMyyyyWithTimeZone.rawValue
+        if let dt1 = dateFormatter.date(from: obj?.createdAt ?? "") {
+            lblDate.text = dt1.formatDate(outputFormat: .ddMMyyyy)
+        }
+    }
+    
 }

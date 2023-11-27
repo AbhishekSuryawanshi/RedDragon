@@ -17,6 +17,7 @@ class NewsModuleVC: UIViewController {
     @IBOutlet weak var headerCollectionView: UICollectionView!
     @IBOutlet weak var sportsCollectionView: UICollectionView!
     @IBOutlet weak var searchTextField: UITextField!
+
     @IBOutlet weak var containerView: UIView!
     
     let sportsTypeArray: [SportsType] = [.all, .football, .basketball, .tennis, .eSports]
@@ -48,21 +49,25 @@ class NewsModuleVC: UIViewController {
     func nibInitialization() {
         headerCollectionView.register(CellIdentifier.headerTopCollectionViewCell)
         sportsCollectionView.register(CellIdentifier.headerTopCollectionViewCell)
+
     }
 }
 
 // MARK: - CollectionView Delegates
 extension NewsModuleVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+
         if collectionView == headerCollectionView {
             return NewsHeaders.allCases.count
         } else {
             return sportsTypeArray.count
         }
+
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.headerTopCollectionViewCell, for: indexPath) as! HeaderTopCollectionViewCell
+
         
         if collectionView == headerCollectionView {
             cell.configureUnderLineCell(title: NewsHeaders.allCases[indexPath.row].rawValue, selected: NewsHeaders.allCases[indexPath.row] == contentType)
@@ -98,6 +103,7 @@ extension NewsModuleVC: UICollectionViewDelegateFlowLayout {
 }
 
 
+
 // MARK: - TextField Delegate
 extension NewsModuleVC: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -105,6 +111,7 @@ extension NewsModuleVC: UITextFieldDelegate {
            let textRange = Range(range, in: text) {
             let searchText = text.replacingCharacters(in: textRange,with: string)
             print("searchText  \(searchText)")
+
         }
         return true
     }
@@ -121,4 +128,5 @@ extension NewsModuleVC: UITextFieldDelegate {
         //searchData(text: searchTextField.text!)
         return true
     }
+
 }

@@ -29,4 +29,16 @@ class StreetMatchTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func configureCell(obj:StreetMatch?){
+        lblLocation.text = obj?.address
+        lblHome.text = obj?.homeTeam.name
+        imgHome.setImage(imageStr: obj?.homeTeam.logoImgURL ?? "")
+        imgAway.setImage(imageStr: obj?.awayTeam.logoImgURL ?? "")
+        lblAway.text = obj?.awayTeam.name
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat.yyyyMMddHHmmss.rawValue
+        if let dt1 = dateFormatter.date(from: obj?.scheduleTime ?? "") {
+            lblTime.text = dt1.formatDate(outputFormat: .ddMMMyyyyhmma)
+        }
+    }
 }
