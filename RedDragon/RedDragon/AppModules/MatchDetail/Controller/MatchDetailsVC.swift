@@ -52,11 +52,7 @@ class MatchDetailsVC: UIViewController {
     func matchTabsData() {
         matchTabsArray = [StringConstants.highlight.localized,
                           StringConstants.stat.localized,
-                          StringConstants.lineup.localized,
-                          StringConstants.bets.localized,
-                          StringConstants.odds.localized,
-                          StringConstants.analysis.localized,
-                          StringConstants.expert.localized ]
+                          StringConstants.lineup.localized]
     }
     
     func nibInitialization() {

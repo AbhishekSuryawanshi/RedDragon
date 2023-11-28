@@ -60,6 +60,7 @@ class AllPlayersViewController: UIViewController {
     }
     
     @IBAction func leaderboardButton(_ sender: Any) {
+        presentToViewController(LeaderboardViewController.self, storyboardName: StoryboardName.cardGame)
     }
     
     

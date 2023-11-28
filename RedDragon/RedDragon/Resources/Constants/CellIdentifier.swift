@@ -14,12 +14,12 @@ struct CellIdentifier {
     static let iconNameCollectionViewCell       = "IconNameCollectionViewCell"
     static let singleImageCollectionViewCell    = "SingleImageCollectionViewCell"
     static let matchTabsCollectionViewCell      = "MatchTabsCollectionViewCell"
+    static let commentTableViewCell             = "CommentTableViewCell"
     
     //Social
     static let postTableViewCell                = "PostTableViewCell"
     static let matchTableViewCell               = "MatchTableViewCell"
     static let socialPollTableViewCell          = "SocialPollTableViewCell"
-    static let socialCommentTableViewCell       = "SocialCommentTableViewCell"
     
     //Database
     static let leagueNamesCollectionCell        = "LeagueCollectionViewCell"
@@ -54,9 +54,9 @@ struct CellIdentifier {
     static let allPlayersTableCell              = "AllPlayersTableViewCell"
     static let statisticCell                    = "StatCollectionViewCell"
     static let myTeamCell                       = "MyTeamCollectionViewCell"
+    static let leaderboardCell                  = "LeaderboardTableViewCell"
     
     //Prediction
-    
     static let predictUpcomingTableViewCell     = "PredictUpcomingTableViewCell"
 
     //Meet
@@ -65,13 +65,16 @@ struct CellIdentifier {
     static let matchesCollectionViewCell        = "MatchesCollectionViewCell"
     
     //StreetMatches
+
     static let stadiumTableViewCell            = "StadiumTableViewCell"
     static let streetMatchTableViewCell        = "StreetMatchTableViewCell"
     static let feedsTableViewCell              = "FeedsTableViewCell"
     static let streetHomeHeaderTableViewCell   = "StreetHomeHeaderTableViewCell"
     static let selectionCollectionViewCell     = "SelectionCollectionViewCell"
+  
     
-    
-    
-    
+    //News
+    static let newsCollectionViewCell           = "NewsCollectionViewCell"
+    static let newsTableViewCell                = "NewsTableViewCell"
+    static let newsVideoCollectionViewCell      = "NewsVideoCollectionViewCell"
 }
