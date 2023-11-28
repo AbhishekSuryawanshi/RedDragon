@@ -58,11 +58,11 @@ extension StreetMatchesDashboardVC: UICollectionViewDataSource, UICollectionView
         case 0:
             embedStreetMatchHomeVC()
         case 1:
-            embedMeetExploreVC()
+            embedStadiumsVC()
         case 2:
-            embedMeetEventVC()
+            embedStreetMatchEventsVC()
         default:
-            embedMeetChatVC()
+            embedStreetMatchesVC()
         }
         collectionView.reloadData()
     }
@@ -85,25 +85,25 @@ extension StreetMatchesDashboardVC {
     
     func embedStreetMatchHomeVC() {
         ViewEmbedder.embed(withIdentifier: "StreetMatchHomeVC", storyboard: UIStoryboard(name: StoryboardName.streetMatches, bundle: nil), parent: self, container: viewContainer) { vc in
-            let vc = vc as! StreetMatchHomeVC
+            //let vc = vc as! StreetMatchHomeVC
         }
     }
     
-    func embedMeetExploreVC() {
-        ViewEmbedder.embed(withIdentifier: "MeetExploreVC", storyboard: UIStoryboard(name: StoryboardName.meet, bundle: nil), parent: self, container: viewContainer) { vc in
-            let vc = vc as! MeetExploreVC
+    func embedStadiumsVC() {
+        ViewEmbedder.embed(withIdentifier: "StreetMatchStadiumVC", storyboard: UIStoryboard(name: StoryboardName.streetMatches, bundle: nil), parent: self, container: viewContainer) { vc in
+            //let vc = vc as! StreetMatchStadiumVC
         }
     }
     
-    func embedMeetEventVC() {
-        ViewEmbedder.embed(withIdentifier: "MeetEventVC", storyboard: UIStoryboard(name: StoryboardName.meet, bundle: nil), parent: self, container: viewContainer) { vc in
-            let vc = vc as! MeetEventVC
+    func embedStreetMatchEventsVC() {
+        ViewEmbedder.embed(withIdentifier: "StreetMatchEventsVC", storyboard: UIStoryboard(name: StoryboardName.streetMatches, bundle: nil), parent: self, container: viewContainer) { vc in
+            
         }
     }
     
-    func embedMeetChatVC() {
-        ViewEmbedder.embed(withIdentifier: "MeetChatVC", storyboard: UIStoryboard(name: StoryboardName.meet, bundle: nil), parent: self, container: viewContainer) { vc in
-            let vc = vc as! MeetChatVC
+    func embedStreetMatchesVC() {
+        ViewEmbedder.embed(withIdentifier: "StreetMatchesVC", storyboard: UIStoryboard(name: StoryboardName.streetMatches, bundle: nil), parent: self, container: viewContainer) { vc in
+           // let vc = vc as! StreetMatchesVC
         }
     }
 }

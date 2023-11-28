@@ -68,6 +68,10 @@ struct CellIdentifier {
     static let stadiumTableViewCell            = "StadiumTableViewCell"
     static let streetMatchTableViewCell        = "StreetMatchTableViewCell"
     static let feedsTableViewCell              = "FeedsTableViewCell"
+    static let streetHomeHeaderTableViewCell   = "StreetHomeHeaderTableViewCell"
+    static let selectionCollectionViewCell     = "SelectionCollectionViewCell"
+    
+    
     
     
 }
