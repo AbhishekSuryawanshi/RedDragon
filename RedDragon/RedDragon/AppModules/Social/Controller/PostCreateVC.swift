@@ -161,7 +161,7 @@ class PostCreateVC: UIViewController {
             switch currentPostType {
             case .photo:
                 if imageArray.count < 5 {
-                    showNewImageActionSheet()
+                  //  showNewImageActionSheet(sourceView: imageCollectionView)
                 } else {
                     self.customAlertView(title: ErrorMessage.photoMaxCountAlert.localized, description: "", image: ImageConstants.alertImage)
                 }
@@ -480,27 +480,27 @@ extension PostCreateVC: ImagePickerDelegate, UINavigationControllerDelegate {
         }
     }
     
-    func showNewImageActionSheet() {
-        let alert = UIAlertController(title: "Upload Image".localized, message: "", preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Camera".localized, style: .default , handler:{ (UIAlertAction)in
-            let imagePicker = ImagePicker(viewController: self)
-            imagePicker .delegate = self
-            imagePicker .checkCameraAuthorization()
-        }))
-        alert.addAction(UIAlertAction(title: "Photo Library".localized, style: .default , handler:{ (UIAlertAction)in
-            let imagePicker = ImagePicker(viewController: self)
-            imagePicker .delegate = self
-            imagePicker .checkLibraryAuthorization()
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel , handler:{ (UIAlertAction)in
-            print("User click Delete button")
-        }))
-        if let popoverController = alert.popoverPresentationController {
-            popoverController.sourceView = self.imageCollectionView
-            popoverController.sourceRect = self.imageCollectionView.bounds
-        }
-        self.present(alert, animated: true, completion: {})
-    }
+//    func showNewImageActionSheet() {
+//        let alert = UIAlertController(title: "Upload Image".localized, message: "", preferredStyle: .actionSheet)
+//        alert.addAction(UIAlertAction(title: "Camera".localized, style: .default , handler:{ (UIAlertAction)in
+//            let imagePicker = ImagePicker(viewController: self)
+//            imagePicker .delegate = self
+//            imagePicker .checkCameraAuthorization()
+//        }))
+//        alert.addAction(UIAlertAction(title: "Photo Library".localized, style: .default , handler:{ (UIAlertAction)in
+//            let imagePicker = ImagePicker(viewController: self)
+//            imagePicker .delegate = self
+//            imagePicker .checkLibraryAuthorization()
+//        }))
+//        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel , handler:{ (UIAlertAction)in
+//            print("User click Delete button")
+//        }))
+//        if let popoverController = alert.popoverPresentationController {
+//            popoverController.sourceView = self.imageCollectionView
+//            popoverController.sourceRect = self.imageCollectionView.bounds
+//        }
+//        self.present(alert, animated: true, completion: {})
+//    }
 }
 
 //MARK: - Custom Delegate

@@ -18,4 +18,10 @@ extension UIImageView {
             self.sd_setImage(with: URL(string: imageStr))
         }
     }
+    
+    func zoomAnimation() {
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.repeat, .autoreverse]) {
+            self.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        }
+    }
 }

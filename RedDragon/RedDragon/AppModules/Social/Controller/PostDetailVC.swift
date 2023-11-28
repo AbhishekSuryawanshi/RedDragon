@@ -41,6 +41,7 @@ class PostDetailVC: UIViewController {
     
     func nibInitialization() {
         listTableView.register(CellIdentifier.postTableViewCell)
+        listTableView.register(CellIdentifier.commentTableViewCell)
     }
     
     func showLoader(_ value: Bool) {
@@ -220,8 +221,8 @@ extension PostDetailVC: UITableViewDataSource {
             return cell
         } else {
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.socialCommentTableViewCell, for: indexPath) as! SocialCommentTableViewCell
-            cell.configure(model: SocialLikeCommentListVM.shared.commentsArray[indexPath.row - 1], _index: indexPath.row - 1)
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.commentTableViewCell, for: indexPath) as! CommentTableViewCell
+            cell.configureSocialComments(model: SocialLikeCommentListVM.shared.commentsArray[indexPath.row - 1], _index: indexPath.row - 1)
             cell.deleteButton.addTarget(self, action: #selector(deleteCommentBTNTapped(sender:)), for: .touchUpInside)
             return cell
         }
