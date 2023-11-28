@@ -32,7 +32,6 @@ class CardGameMyTeamVC: UIViewController {
         nibInitialization()
         addActivityIndicator()
         fetchMyTeamViewModel()
-        makeNetworkCall()
     }
     
     private func nibInitialization() {
@@ -54,10 +53,6 @@ class CardGameMyTeamVC: UIViewController {
 
 extension CardGameMyTeamVC {
     
-    private func makeNetworkCall() {
-        teamListVM?.fetchmyTeamAsyncCall()
-    }
-    
     private func fetchMyTeamViewModel() {
         teamListVM?.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.error.localized, description: error, image: ImageConstants.alertImage)
@@ -73,6 +68,8 @@ extension CardGameMyTeamVC {
                 self?.collectionView.reloadData()
             })
             .store(in: &cancellabel)
+        
+        teamListVM?.fetchmyTeamAsyncCall()
     }
 }
 
