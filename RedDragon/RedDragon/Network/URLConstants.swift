@@ -66,10 +66,10 @@ struct URLConstants {
     static let playerDetail        = databaseBaseURL + "player.php"
     
     //Bets
-    static let betAllMatches      = baseURL + "bet/match/get"
-    static let allBets            = baseURL + "bet/play/get"
-    static let points             = baseURL + "bet/account/wallet"
-    static let placeBet           = baseURL + "bet/play/create"
+    static let betAllMatches       = baseURL + "bet/match/get"
+    static let allBets             = baseURL + "bet/play/get"
+    static let points              = baseURL + "bet/account/wallet"
+    static let placeBet            = baseURL + "bet/play/create"
 
     // MARK: -  Meet
     static let meetBaseURL         = "https://kicktin.com/vinder/api/"
@@ -81,9 +81,11 @@ struct URLConstants {
     
     // MARK: - StreetMatches
     static let streetMatchesBaseURL = "https://trkick.com/stm/api/"
-    static let streetHome = streetMatchesBaseURL + "home/data"
+    static let streetHome          = streetMatchesBaseURL + "home/data"
 
     // MARK: - Prediction
-    static let getMatchesList       = "api/match/list?"
-
+    static let getMatchesList      = "api/match/list?"
+    
+    // MARK: - News
+    static let newsGossips         = "https://datasport.one/api/v1/news/data.php"
 }
