@@ -32,7 +32,8 @@ struct URLConstants {
     
     // MARK: - CardGame
     static let cardGame_allPlayersList = databaseBaseURL + "player_filter.php"
-    static let buyPlayer           = cardGameBaseURL + "/api/user/players"
+    static let cardGame_buyPlayer   = cardGameBaseURL + "/api/user/players"
+    static let cardGame_leaderboard = cardGameBaseURL + "/api/user/list"
     
     // MARK: -  Social
     static let socialBaseURL       = baseURL + "euro5league/"
