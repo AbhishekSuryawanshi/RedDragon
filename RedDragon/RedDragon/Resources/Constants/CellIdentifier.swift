@@ -65,9 +65,13 @@ struct CellIdentifier {
     static let matchesCollectionViewCell        = "MatchesCollectionViewCell"
     
     //StreetMatches
-    static let stadiumTableViewCell             = "StadiumTableViewCell"
-    static let streetMatchTableViewCell         = "StreetMatchTableViewCell"
-    static let feedsTableViewCell               = "FeedsTableViewCell"
+
+    static let stadiumTableViewCell            = "StadiumTableViewCell"
+    static let streetMatchTableViewCell        = "StreetMatchTableViewCell"
+    static let feedsTableViewCell              = "FeedsTableViewCell"
+    static let streetHomeHeaderTableViewCell   = "StreetHomeHeaderTableViewCell"
+    static let selectionCollectionViewCell     = "SelectionCollectionViewCell"
+  
     
     //News
     static let newsCollectionViewCell           = "NewsCollectionViewCell"

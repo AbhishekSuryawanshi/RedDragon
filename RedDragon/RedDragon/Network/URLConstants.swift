@@ -82,7 +82,16 @@ struct URLConstants {
     
     // MARK: - StreetMatches
     static let streetMatchesBaseURL = "https://trkick.com/stm/api/"
+
+    static let streetHome = streetMatchesBaseURL + "home/data"
+    static let stadiumList = streetMatchesBaseURL + "stadium/list"
+    static let eventsList = streetMatchesBaseURL + "event/list"
+    static let streetMatchesList = streetMatchesBaseURL + "match/list"
+    
+
+
     static let streetHome          = streetMatchesBaseURL + "home/data"
+
 
     // MARK: - Prediction
     static let getMatchesList      = "api/match/list?"
