@@ -9,6 +9,12 @@ import UIKit
 
 class PredictionDetailTopView: UIView {
 
+    @IBOutlet weak var awayPercentValueLbl: UILabel!
+    @IBOutlet weak var awayLbl: UILabel!
+    @IBOutlet weak var drawPercentValueLbl: UILabel!
+    @IBOutlet weak var drawLbl: UILabel!
+    @IBOutlet weak var homePercentValueLbl: UILabel!
+    @IBOutlet weak var homeLbl: UILabel!
     @IBOutlet weak var viewForStackView: UIView!
     @IBOutlet weak var progressStackView: UIStackView!
     @IBOutlet weak var team2Lbl: UILabel!
