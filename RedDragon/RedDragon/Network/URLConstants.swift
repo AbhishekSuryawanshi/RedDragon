@@ -87,15 +87,15 @@ struct URLConstants {
     static let stadiumList = streetMatchesBaseURL + "stadium/list"
     static let eventsList = streetMatchesBaseURL + "event/list"
     static let streetMatchesList = streetMatchesBaseURL + "match/list"
-    
-
-
-    static let streetHome          = streetMatchesBaseURL + "home/data"
 
 
     // MARK: - Prediction
-    static let getMatchesList      = "api/match/list?"
+
+    static let getMatchesList       = "api/match/list?"
+    static let postMatchPrediction  = "api/predict"
+    static let matchDetail          = "api/match"
     
     // MARK: - News
     static let newsGossips         = "https://datasport.one/api/v1/news/data.php"
+
 }

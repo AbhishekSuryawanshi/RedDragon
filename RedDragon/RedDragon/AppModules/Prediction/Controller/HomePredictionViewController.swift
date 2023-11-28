@@ -82,7 +82,6 @@ class HomePredictionViewController: UIViewController {
         fetchPredictionMatchesViewModel()
         makeNetworkCall()
         
-        
     }
     
     func loadFunctionality() {
@@ -95,7 +94,7 @@ class HomePredictionViewController: UIViewController {
     }
     
     func makeNetworkCall() {
-        predictionMatchesViewModel?.fetchPredictionMatchesAsyncCall(lang: "en", date: "2023-11-23", sportType: "football")
+        predictionMatchesViewModel?.fetchPredictionMatchesAsyncCall(lang: "en", date: Date().formatDate(outputFormat: dateFormat.yyyyMMdd), sportType: "football")
     }
     func showLoader(_ value: Bool) {
         value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()

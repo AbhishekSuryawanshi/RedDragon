@@ -8,7 +8,11 @@
 import Foundation
 
 // MARK: - PredictionMatchDetailModelElement
-struct PredictionMatchDetailModelElement: Codable {
+struct PredictionMatchDetailModel: Codable {
+    var data: [PredictionMatchDetailModelElementData]?
+}
+// MARK: - PredictionMatchDetailModelElement
+struct PredictionMatchDetailModelElementData: Codable {
     var sport, sectionName, sectionSlug, leagueName: String?
     var leagueSlug, homeTeamName, homeTeamSlug: String?
     var homeTeamImage: String?
@@ -27,6 +31,7 @@ struct PredictionMatchDetailModelElement: Codable {
     var statistics: [PredictionsStatistic]?
     var series: PredictionsSeries?
     var progress: [PredictionsProgress]?
+    var predPercnt: PredictionMatchDetailPercnt?
 
     enum CodingKeys: String, CodingKey {
         case sport
@@ -60,6 +65,7 @@ struct PredictionMatchDetailModelElement: Codable {
         case homeLineup = "home_lineup"
         case awayLineup = "away_lineup"
         case statistics, series, progress
+        case predPercnt = "pred_percnt"
     }
 }
 
@@ -204,4 +210,20 @@ struct StatisticData: Codable {
     }
 }
 
-typealias PredictionMatchDetailModel = [PredictionMatchDetailModelElement]
+// MARK: - PredPercnt
+struct PredictionMatchDetailPercnt: Codable {
+    var allCnt: Int?
+    var winStats: WinStatsMatch?
+}
+
+// MARK: - WinStats
+struct WinStatsMatch: Codable {
+    var homeTeamPrcnt, awayTeamPrcnt, drawPrcnt: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case homeTeamPrcnt = "home_team_prcnt"
+        case awayTeamPrcnt = "away_team_prcnt"
+        case drawPrcnt = "draw_prcnt"
+    }
+}
+

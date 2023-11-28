@@ -28,3 +28,34 @@ class PredictionViewModel: APIServiceManager<PredictionMatchesModel> {
         asyncCall(urlString: (urlComponents?.string)!, method: method, parameters: nil, isGuestUser: true)
     }
 }
+
+class MakePredictionViewModel: APIServiceManager<PredictionMakeModel> {
+    
+    ///fetch make prediction data
+    func fetchMakePredictionAsyncCall(matchID: String, predictionTeam: String, comment: String) {
+        let url     = URLConstants.predictionBaseURL + URLConstants.postMatchPrediction
+        let method  = RequestType.post
+        let parameters: [String: Any] = ["match_id": matchID, "predicted_team": predictionTeam, "comment": comment]
+        asyncCall(urlString: url, method: method, parameters: parameters, isGuestUser: true, anyDefaultToken: "108|HOAfqPcOxKaCS4dzAMgBvsN5tScJNhskT4w3iSeZee09c5cb")
+    }
+}
+
+class PredictionDetailViewModel: APIServiceManager<PredictionMatchDetailModel> {
+    
+    ///fetch prediction matches data
+    func fetchPredictionMatchesDetailAsyncCall(lang: String, matchID: String, sport: String) {
+        let url     = URLConstants.predictionBaseURL + URLConstants.matchDetail + "/\(matchID)/\(sport)/details"
+        let method  = RequestType.get
+        // Add the query parameters to the URL components
+                let queryItems = [
+                   URLQueryItem(name: "lang", value: lang),
+                    
+                ]
+                var urlComponents = URLComponents(string: url)
+                urlComponents?.queryItems = queryItems
+                
+                guard let url = urlComponents?.url else {return  }
+        
+        asyncCall(urlString: (urlComponents?.string)!, method: method, parameters: nil, isGuestUser: true)
+    }
+}

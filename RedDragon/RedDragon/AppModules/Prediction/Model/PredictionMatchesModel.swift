@@ -32,17 +32,18 @@ struct PredictionData: Codable {
 // MARK: - Match
 struct PredictionMatch: Codable {
     var slug, time: String?
-    var matchState: MatchState?
+    var matchState: String?
     var countDown, homeTeam, awayTeam, homeScore: String?
     var awayScore, homeFirstHalfScore, homeSecondHalfScore, awayFirstHalfScore: String?
     var awaySecondHalfScore: String?
-    var odds1_Indicator: OddsIndicator?
+    var odds1_Indicator: String?
     var odds1_Value: String?
-    var odds2_Indicator: OddsIndicator?
+    var odds2_Indicator: String?
     var odds2_Value: String?
-    var odds3_Indicator: OddsIndicator?
+    var odds3_Indicator: String?
     var odds3_Value: String?
     var lineup: Bool?
+    var predStats: PredictionMatchStats?
 
     enum CodingKeys: String, CodingKey {
         case slug, time
@@ -63,23 +64,26 @@ struct PredictionMatch: Codable {
         case odds3_Indicator = "odds_3_indicator"
         case odds3_Value = "odds_3_value"
         case lineup
+        case predStats = "pred_stats"
     }
 }
 
-enum MatchState: String, Codable {
-    case canceled = "canceled"
-    case finished = "finished"
-    case live = "live"
-    case notstarted = "notstarted"
-    case postponed = "postponed"
-    case resultOnly = "result only"
+// MARK: - PredStats
+struct PredictionMatchStats: Codable {
+    var allCnt: Int?
+    var winStats: WinStats?
+    var drawCnt: Int?
 }
 
-enum OddsIndicator: String, Codable {
-    case down = "down"
-    case empty = ""
-    case noChanges = "no-changes"
-    case up = "up"
+// MARK: - WinStats
+struct WinStats: Codable {
+    var homeTeamCnt, awayTeamCnt: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case homeTeamCnt = "home_team_cnt"
+        case awayTeamCnt = "away_team_cnt"
+    }
 }
+
 
 

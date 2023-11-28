@@ -11,6 +11,9 @@
 		085385C02B079F7F00C4E953 /* SubstituteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085385BE2B079F7F00C4E953 /* SubstituteTableViewCell.swift */; };
 		085385C12B079F7F00C4E953 /* SubstituteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085385BF2B079F7F00C4E953 /* SubstituteTableViewCell.xib */; };
 		41119D922B14D97300797C84 /* PredictionMatchDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41119D912B14D97300797C84 /* PredictionMatchDetailModel.swift */; };
+		4137D57B2B15BFA9007CF84E /* PredictionMakeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4137D57A2B15BFA9007CF84E /* PredictionMakeModel.swift */; };
+		4137D57D2B163AB8007CF84E /* PredictionDetailCommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4137D57C2B163AB8007CF84E /* PredictionDetailCommentsView.swift */; };
+		4137D57F2B163ACE007CF84E /* PredictionDetailCommentsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4137D57E2B163ACE007CF84E /* PredictionDetailCommentsView.xib */; };
 		41846BC02B08A9000020F503 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41846BBF2B08A9000020F503 /* UIColor+Extension.swift */; };
 		41846BC32B0B395B0020F503 /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 41846BC22B0B395B0020F503 /* YouTubePlayerKit */; };
 		41846BCC2B0B80F20020F503 /* PlayerDetailYoutubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41846BCB2B0B80F20020F503 /* PlayerDetailYoutubeViewController.swift */; };
@@ -361,6 +364,9 @@
 		085385BE2B079F7F00C4E953 /* SubstituteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstituteTableViewCell.swift; sourceTree = "<group>"; };
 		085385BF2B079F7F00C4E953 /* SubstituteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubstituteTableViewCell.xib; sourceTree = "<group>"; };
 		41119D912B14D97300797C84 /* PredictionMatchDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionMatchDetailModel.swift; sourceTree = "<group>"; };
+		4137D57A2B15BFA9007CF84E /* PredictionMakeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionMakeModel.swift; sourceTree = "<group>"; };
+		4137D57C2B163AB8007CF84E /* PredictionDetailCommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionDetailCommentsView.swift; sourceTree = "<group>"; };
+		4137D57E2B163ACE007CF84E /* PredictionDetailCommentsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PredictionDetailCommentsView.xib; sourceTree = "<group>"; };
 		41846BBF2B08A9000020F503 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		41846BCB2B0B80F20020F503 /* PlayerDetailYoutubeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailYoutubeViewController.swift; sourceTree = "<group>"; };
 		41846BD32B0C7D7A0020F503 /* Prediction.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Prediction.storyboard; sourceTree = "<group>"; };
@@ -759,6 +765,7 @@
 				41B5C9F82B0F298C000A7A59 /* PredictionMatchesModel.swift */,
 				41B5C9FE2B11DEE3000A7A59 /* PredictionListModel.swift */,
 				41119D912B14D97300797C84 /* PredictionMatchDetailModel.swift */,
+				4137D57A2B15BFA9007CF84E /* PredictionMakeModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -809,6 +816,8 @@
 				419658182B0CDF5C00730D9F /* PlacePredictionView.xib */,
 				4196581A2B0CE27E00730D9F /* PlacePredictionDescriptionView.swift */,
 				4196581C2B0CE29C00730D9F /* PlacePredictionDescriptionView.xib */,
+				4137D57C2B163AB8007CF84E /* PredictionDetailCommentsView.swift */,
+				4137D57E2B163ACE007CF84E /* PredictionDetailCommentsView.xib */,
 			);
 			path = PredictDetail;
 			sourceTree = "<group>";
@@ -2161,6 +2170,7 @@
 				474D993C2AE7F30D009499D0 /* Roboto-Light.ttf in Resources */,
 				493D21292AFE125600045672 /* PlayerDetailsMediaCollectionViewCell.xib in Resources */,
 				41E726752B0DE75400D2BFB5 /* PredictHistoryTableViewCell.xib in Resources */,
+				4137D57F2B163ACE007CF84E /* PredictionDetailCommentsView.xib in Resources */,
 				E9C657272B0B783E00833D37 /* PointsItemTableVC.xib in Resources */,
 				49F65E442AF6222D000F9E96 /* MatchTabsCollectionViewCell.xib in Resources */,
 				419658242B0CF18000730D9F /* PredictResultTopView.xib in Resources */,
@@ -2229,6 +2239,7 @@
 				49631A1A2AFA4CA200BE84BB /* SymbolsCollectionViewCell.swift in Sources */,
 				47E7C8552AEFE4C200D054A8 /* FeedCVLayout.swift in Sources */,
 				41E7266F2B0DD3C100D2BFB5 /* PredictUpcomingTableViewCell.swift in Sources */,
+				4137D57D2B163AB8007CF84E /* PredictionDetailCommentsView.swift in Sources */,
 				ADD339902B0F6DB700B91101 /* FeedsTableViewCell.swift in Sources */,
 				6A2140222B0B730C00F52E69 /* SwipeCardFooterView.swift in Sources */,
 				41B5C9FF2B11DEE3000A7A59 /* PredictionListModel.swift in Sources */,
@@ -2356,6 +2367,7 @@
 				41846BD62B0C7DA70020F503 /* HomePredictionViewController.swift in Sources */,
 				49EA0AF02B0258E90003D469 /* PlayerDetailModel.swift in Sources */,
 				4703F8DC2B08D70A00276F3E /* ResetPasswordVC.swift in Sources */,
+				4137D57B2B15BFA9007CF84E /* PredictionMakeModel.swift in Sources */,
 				47C3B7202B04D5DA00E12A4D /* CountryListTableViewCell.swift in Sources */,
 				6A08D65E2B0F808700E1AE7C /* MeetEventModel.swift in Sources */,
 				6A5F2B8E2B0CB7D500AB6A98 /* MeetChatVC.swift in Sources */,
