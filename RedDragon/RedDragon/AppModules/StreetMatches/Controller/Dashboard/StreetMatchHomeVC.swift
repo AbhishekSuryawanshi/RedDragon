@@ -60,6 +60,11 @@ class StreetMatchHomeVC: UIViewController {
         makeNetworkCall()
     }
     
+    
+    @IBAction func actionCreate(_ sender: Any) {
+        presentOverViewController(ChooseOptionsVC.self,storyboardName: StoryboardName.streetMatches)
+    }
+    
     func nibInitialization() {
         defineTableViewNibCell(tableView: tableView, cellName: CellIdentifier.stadiumTableViewCell)
         defineTableViewNibCell(tableView: tableView, cellName: CellIdentifier.feedsTableViewCell)
