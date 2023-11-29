@@ -11,8 +11,9 @@ struct GossipListResponse: Codable {
     let status: Int?
     let message: String?
     var data: GossipListData?
-    var category: [String] = []
-    var source: [String] = []
+    var category: [String]? = []
+    var source: [String]? = []
+    
 }
 
 struct GossipResponse: Codable {
@@ -24,15 +25,15 @@ struct GossipResponse: Codable {
 struct GossipListData: Codable {
     var source: String?
     var category: String?
-    var data: [Gossip] = []
+    var data: [Gossip]? = []
 }
 
 struct Gossip: Codable {
-    var title: String = ""
-    var slug: String = ""
-    var content: String = ""
-    var source: String = ""
-    var category: String = ""
+    var title: String? = ""
+    var slug: String? = ""
+    var content: String? = ""
+    var source: String? = ""
+    var category: String? = ""
     var mediaSource: [String] = []
     
     enum CodingKeys: String, CodingKey {

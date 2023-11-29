@@ -57,6 +57,7 @@ class PostCreateVC: UIViewController {
     /// poll - Post contains text and poll details, type = "POLL"
     
     var cancellable = Set<AnyCancellable>()
+    let imageVM = SocialPostImageVM()
     var currentPostType: SocialPostType = .none
     var selectedMatch = SocialMatch()
     var imageArray: [String] = []
@@ -317,7 +318,13 @@ class PostCreateVC: UIViewController {
 // MARK: - API Services
 extension PostCreateVC {
     func fetchImageViewModel() {
-        SocialPostImageVM.shared.$responseData
+        imageVM.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        imageVM.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        imageVM.$responseData
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
@@ -483,7 +490,7 @@ extension PostCreateVC: ImagePickerDelegate, UINavigationControllerDelegate {
     func finishedPickingImage(image: UIImage, imageName: String) {
         if let imageData = image.jpegData(compressionQuality: 0.8) {
             // Pass the image data and image name to your view model for uploading
-            SocialPostImageVM.shared.uploadImageAsyncCall(imageName: imageName, imageData: imageData)
+            imageVM.uploadImageAsyncCall(imageName: imageName, imageData: imageData)
         }
     }
 }

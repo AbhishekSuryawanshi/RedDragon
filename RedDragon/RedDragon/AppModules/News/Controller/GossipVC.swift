@@ -17,10 +17,10 @@ class GossipVC: UIViewController {
     @IBOutlet weak var leagueCollectionView: UICollectionView!
     
     var cancellable = Set<AnyCancellable>()
-    var refreshLeagueList = true
     var isPagination = false
     var publishersArray: [String] = []
     var gossipsArray: [Gossip] = []
+    var leagueArray: [SocialLeague] = []
     var pageNum = 1
     
     override func viewDidLoad() {
@@ -29,9 +29,10 @@ class GossipVC: UIViewController {
     }
     
     func initialSettings() {
+        nibInitialization()
         
         /// breakng news view
-        topMarqueeLabel.text = "UIView.AnimationOptions.curveEaseInOut, .repeat, .autoreverse]"
+        topMarqueeLabel.text = "......comng soon....."
         topMarqueeLabel.type = .continuous
         topMarqueeLabel.speed = .duration(5)
         topMarqueeLabel.animationCurve = .linear
@@ -42,14 +43,19 @@ class GossipVC: UIViewController {
         fetchSocialViewModel()
         fetchGossipViewModel()
         
-        ///get league list
-        if refreshLeagueList {
-            refreshLeagueList = false
-            SocialPublicLeagueVM.shared.fetchLeagueListAsyncCall()
-        }
+        SocialPublicLeagueVM.shared.fetchLeagueListAsyncCall()
         getNewsList(pageNum: 1, source: "")
     }
     
+    func nibInitialization() {
+        publisherCollectionView.register(CellIdentifier.iconNameCollectionViewCell)
+        leagueCollectionView.register(CellIdentifier.iconNameCollectionViewCell)
+        
+    }
+}
+
+// MARK: - API Services
+extension GossipVC {
     func getNewsList(pageNum: Int, source: String) {
         let param: [String: Any] = [
             "page": pageNum,
@@ -58,10 +64,7 @@ class GossipVC: UIViewController {
         ]
         GossipListVM.shared.fetchNewsListAsyncCall(params: param)
     }
-}
-
-// MARK: - API Services
-extension GossipVC {
+    
     func fetchSocialViewModel() {
         ///fetch public league list / euro 5 league
         SocialPublicLeagueVM.shared.showError = { [weak self] error in
@@ -71,9 +74,8 @@ extension GossipVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                SocialPublicLeagueVM.shared.leagueArray = response ?? []
-                
-            })
+                self?.leagueArray = response ?? []
+             })
             .store(in: &cancellable)
     }
     
@@ -99,14 +101,69 @@ extension GossipVC {
             GossipListVM.shared.gossipsArray.removeAll()
         }
         
-        if response?.status == 1 {
-            if (response?.data?.data ?? []).count > 0 {
-                self.gossipsArray.append(contentsOf: response?.data?.data ?? [])
-                GossipListVM.shared.gossipsArray = self.gossipsArray
-                self.isPagination = false
+        if (response?.data?.data ?? []).count > 0 {
+            self.gossipsArray.append(contentsOf: response?.data?.data ?? [])
+            GossipListVM.shared.gossipsArray = self.gossipsArray
+            self.isPagination = false
+        }
+        
+        publisherCollectionView.reloadData()
+        leagueCollectionView.reloadData()
+    }
+}
+
+
+// MARK: - CollectionView Delegates
+extension GossipVC: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == publisherCollectionView {
+            if publishersArray.count == 0 {
+                collectionView.setEmptyMessage(ErrorMessage.dataNotFound)
+            } else {
+                collectionView.restore()
             }
+            return publishersArray.count
+        } else if collectionView == leagueCollectionView {
+            if leagueArray.count == 0 {
+                collectionView.setEmptyMessage(ErrorMessage.leaguesEmptyAlert)
+            } else {
+                collectionView.restore()
+            }
+            return leagueArray.count
         } else {
-            self.view.makeToast(response?.message ?? CustomErrors.noData.description)
+            return 0
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == publisherCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.iconNameCollectionViewCell, for: indexPath) as! IconNameCollectionViewCell
+            let publisher = publishersArray[indexPath.row].getNewsSource()
+            cell.configure(title: publisher.0, iconImage: publisher.1)
+            return cell
+        } else if collectionView == leagueCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.iconNameCollectionViewCell, for: indexPath) as! IconNameCollectionViewCell
+            let model = leagueArray[indexPath.row]
+            cell.configure(title: UserDefaults.standard.language == "en" ? model.enName : model.cnName, iconName: model.logoURL, imageWidth: (0.7 * 60), placeHolderImage: .placeholderLeague)
+            return cell
+        } else {
+            return UICollectionViewCell()
+        }
+    }
+}
+
+extension GossipVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+}
+
+extension GossipVC: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == publisherCollectionView || collectionView == leagueCollectionView {
+            return CGSize(width: 75, height: 112)
+        } else {
+            return CGSize(width: 0, height: 0)
         }
     }
 }
