@@ -161,7 +161,7 @@ class PostCreateVC: UIViewController {
             switch currentPostType {
             case .photo:
                 if imageArray.count < 5 {
-                  //  showNewImageActionSheet(sourceView: imageCollectionView)
+                    showNewImageActionSheet(sourceView: imageCollectionView)
                 } else {
                     self.customAlertView(title: ErrorMessage.photoMaxCountAlert.localized, description: "", image: ImageConstants.alertImage)
                 }
@@ -317,12 +317,19 @@ class PostCreateVC: UIViewController {
 // MARK: - API Services
 extension PostCreateVC {
     func fetchImageViewModel() {
-        SocialPostImageViewModel.shared.$userImage
+        SocialPostImageVM.shared.$responseData
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.imageArray.append(response ?? "")
-                self?.setImageView()
+                if let dataResponse = response?.response {
+                    let postImage = URLConstants.euro5leagueBaseURL + (dataResponse.data?.imageUrl ?? "")
+                    self?.imageArray.append(postImage)
+                    self?.setImageView()
+                } else {
+                    if let errorResponse = response?.error {
+                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                    }
+                }
             })
             .store(in: &cancellable)
     }
@@ -476,31 +483,9 @@ extension PostCreateVC: ImagePickerDelegate, UINavigationControllerDelegate {
     func finishedPickingImage(image: UIImage, imageName: String) {
         if let imageData = image.jpegData(compressionQuality: 0.8) {
             // Pass the image data and image name to your view model for uploading
-            SocialPostImageViewModel.shared.imageAsyncCall(imageName: imageName, imageData: imageData)
+            SocialPostImageVM.shared.uploadImageAsyncCall(imageName: imageName, imageData: imageData)
         }
     }
-    
-//    func showNewImageActionSheet() {
-//        let alert = UIAlertController(title: "Upload Image".localized, message: "", preferredStyle: .actionSheet)
-//        alert.addAction(UIAlertAction(title: "Camera".localized, style: .default , handler:{ (UIAlertAction)in
-//            let imagePicker = ImagePicker(viewController: self)
-//            imagePicker .delegate = self
-//            imagePicker .checkCameraAuthorization()
-//        }))
-//        alert.addAction(UIAlertAction(title: "Photo Library".localized, style: .default , handler:{ (UIAlertAction)in
-//            let imagePicker = ImagePicker(viewController: self)
-//            imagePicker .delegate = self
-//            imagePicker .checkLibraryAuthorization()
-//        }))
-//        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel , handler:{ (UIAlertAction)in
-//            print("User click Delete button")
-//        }))
-//        if let popoverController = alert.popoverPresentationController {
-//            popoverController.sourceView = self.imageCollectionView
-//            popoverController.sourceRect = self.imageCollectionView.bounds
-//        }
-//        self.present(alert, animated: true, completion: {})
-//    }
 }
 
 //MARK: - Custom Delegate
