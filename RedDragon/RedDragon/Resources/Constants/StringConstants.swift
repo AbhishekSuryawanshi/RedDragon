@@ -84,5 +84,8 @@ struct StringConstants {
     static let cards                = "Cards"
     static let yellow               = "Yellow"
     static let red                  = "Red"
+    
+    //Card Game
+    static let score                = "Score"
 }
 

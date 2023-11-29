@@ -42,17 +42,33 @@ class LineupViewController: UIViewController {
 
 extension LineupViewController {
     func configureHomeLineupView(homeLineup: Lineup?) {
+        guard let lineup = homeLineup?.playerMain else {
+            return
+        }
+        
         let positionIdentifiers = ["G", "D", "M", "F"]
         let stackViews: [UIStackView] = [gHomeStackView, dHomeStackView, mHomeStackView, fHomeStackView].compactMap { $0 }
         
-        configureLineupView(lineup: homeLineup, positionIdentifiers: positionIdentifiers, stackViews: stackViews)
+        if lineup.isEmpty {
+            customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.dataNotFound.localized, image: ImageConstants.alertImage)
+        } else {
+            configureLineupView(lineup: homeLineup, positionIdentifiers: positionIdentifiers, stackViews: stackViews)
+        }
     }
 
     func configureAwayLineupView(awayLineup: Lineup?) {
+        guard let lineup = awayLineup?.playerMain else {
+            return
+        }
+        
         let positionIdentifiers = ["G", "D", "M", "F"]
         let stackViews: [UIStackView] = [gAwayStackView, dAwayStackView, mAwayStackView, fAwayStackView].compactMap { $0 }
         
-        configureLineupView(lineup: awayLineup, positionIdentifiers: positionIdentifiers, stackViews: stackViews)
+        if lineup.isEmpty {
+            customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.dataNotFound.localized, image: ImageConstants.alertImage)
+        } else {
+            configureLineupView(lineup: awayLineup, positionIdentifiers: positionIdentifiers, stackViews: stackViews)
+        }
     }
 
     func configureLineupView(lineup: Lineup?, positionIdentifiers: [String], stackViews: [UIStackView]) {

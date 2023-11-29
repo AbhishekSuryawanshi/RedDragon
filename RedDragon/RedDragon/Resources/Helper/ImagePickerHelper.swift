@@ -140,3 +140,27 @@ extension UIImage {
         return scaledImage!
     }
 }
+
+extension UIViewController {
+    func showNewImageActionSheet(sourceView: UIView) {
+        let alert = UIAlertController(title: "Upload Image".localized, message: "", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Camera".localized, style: .default , handler:{ (UIAlertAction)in
+            let imagePicker = ImagePicker(viewController: self)
+            imagePicker .delegate = self as? ImagePickerDelegate
+            imagePicker .checkCameraAuthorization()
+        }))
+        alert.addAction(UIAlertAction(title: "Photo Library".localized, style: .default , handler:{ (UIAlertAction)in
+            let imagePicker = ImagePicker(viewController: self)
+            imagePicker .delegate = self as? ImagePickerDelegate
+            imagePicker .checkLibraryAuthorization()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel , handler:{ (UIAlertAction)in
+            print("User click Delete button")
+        }))
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = sourceView
+            popoverController.sourceRect = sourceView.bounds
+        }
+        self.present(alert, animated: true, completion: {})
+    }
+}

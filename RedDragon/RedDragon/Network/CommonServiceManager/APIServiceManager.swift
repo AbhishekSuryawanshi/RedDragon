@@ -29,7 +29,7 @@ class APIServiceManager<ResponseModel: Decodable>: ObservableObject {
     private func makeURLRequest(urlString: String, 
                                 method: RequestType,
                                 parameters: [String: Any]?,
-                                isGuestUser: Bool) -> URLRequest? {
+                                isGuestUser: Bool, anyDefaultToken: String) -> URLRequest? {
        
         guard let url = URL(string: urlString) else { return nil }
 
@@ -44,7 +44,7 @@ class APIServiceManager<ResponseModel: Decodable>: ObservableObject {
             var allHeaders = HTTPHeader.commonHeaders
 
             if isGuestUser {
-                let guestUserToken = DefaultToken.guestUser
+                let guestUserToken = anyDefaultToken.isEmpty ? DefaultToken.guestPredictionUser : anyDefaultToken
                 let authorizationToken = HTTPHeader.createAuthorizationHeader(token: guestUserToken)
                 allHeaders = allHeaders.merging(authorizationToken, uniquingKeysWith: { $1 })
             } else {
@@ -67,8 +67,8 @@ class APIServiceManager<ResponseModel: Decodable>: ObservableObject {
     private func fetchExecuteFunction(urlString: String, 
                                       method: RequestType,
                                       parameters: [String: Any]?,
-                                      isGuestUser: Bool) async throws -> ResponseModel {
-        guard let urlRequest = makeURLRequest(urlString: urlString, method: method, parameters: parameters, isGuestUser: isGuestUser) else {
+                                      isGuestUser: Bool, anyDefaultToken: String) async throws -> ResponseModel {
+        guard let urlRequest = makeURLRequest(urlString: urlString, method: method, parameters: parameters, isGuestUser: isGuestUser, anyDefaultToken: anyDefaultToken) else {
             throw CustomErrors.invalidRequest
         }
         return try await network.executeAsync(with: urlRequest)
@@ -86,7 +86,7 @@ class APIServiceManager<ResponseModel: Decodable>: ObservableObject {
     func asyncCall(urlString: String, 
                    method: RequestType,
                    parameters: [String: Any]?,
-                   isGuestUser: Bool = false) {
+                   isGuestUser: Bool = false, anyDefaultToken: String = "") {
         
         guard Reachability.isConnectedToNetwork() else {
             showError?(ErrorMessage.networkAlert.localized)
@@ -95,9 +95,9 @@ class APIServiceManager<ResponseModel: Decodable>: ObservableObject {
         Task { @MainActor in
             displayLoader?(true)
             do {
-                let response = try await fetchExecuteFunction(urlString: urlString, method: method, parameters: parameters, isGuestUser: isGuestUser)
+                let response = try await fetchExecuteFunction(urlString: urlString, method: method, parameters: parameters, isGuestUser: isGuestUser, anyDefaultToken: anyDefaultToken)
                 responseData = response
-               // print(responseData as Any)
+               print(responseData as Any)
             } catch {
                 showError?(error.localizedDescription)
             }

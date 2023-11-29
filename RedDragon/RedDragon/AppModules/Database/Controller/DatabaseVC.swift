@@ -237,6 +237,7 @@ extension DatabaseVC: UITableViewDelegate, UITableViewDataSource {
                 navigateToViewController(MatchDetailsVC.self, storyboardName: StoryboardName.matchDetail) { [self] vc in
                     vc.matchSlug = self.databaseVM?.responseData?.data.events[0].matches[indexPath.row].slug
                     vc.leagueName = selectedLeagueName?.isEmpty == false ? selectedLeagueName : "Premier League"
+                    vc.sports = "football"
                 }
             }
         }

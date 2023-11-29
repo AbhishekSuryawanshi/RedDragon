@@ -13,8 +13,10 @@ class PredictUpcomingTableViewCell: UITableViewCell {
     @IBOutlet weak var team2Lbl: UILabel!
     @IBOutlet weak var dateTimeLbl: UILabel!
     @IBOutlet weak var team1Lbl: UILabel!
-    @IBOutlet weak var leagueNameLbl: UILabel!
-    @IBOutlet weak var leagueImgView: UIImageView!
+    var match: PredictionMatch?
+    var predictionData: PredictionData?
+    var position = 0
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,4 +28,20 @@ class PredictUpcomingTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func configCell(predictionData: PredictionData?, row: Int){
+        self.predictionData = predictionData
+        self.team1Lbl.text = predictionData?.matches?[row].homeTeam
+        self.team2Lbl.text = predictionData?.matches?[row].awayTeam
+        self.dateTimeLbl.text = predictionData?.matches?[row].time
+        match = predictionData?.matches?[row]
+        position = row
+    }
+    
+    @IBAction func predictBtnAction(_ sender: Any) {
+        parentContainerViewController()?.navigateToViewController(PredictionDetailsViewController.self, storyboardName: StoryboardName.prediction, animationType: .autoReverse(presenting: .zoom), configure: {vc in
+            vc.selectedUpComingMatch = self.predictionData
+            vc.selectedUpComingPosition = self.position
+            
+        })
+    }
 }

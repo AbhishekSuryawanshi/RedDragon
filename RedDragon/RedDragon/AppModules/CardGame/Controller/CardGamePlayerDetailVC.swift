@@ -207,7 +207,7 @@ extension CardGamePlayerDetailVC: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let data = playerDetailVM?.responseData else { return UICollectionViewCell() }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.statisticCell, for: indexPath) as! StatisticsCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.statisticCell, for: indexPath) as! StatCollectionViewCell
         cell.configuration(with: data, cellForItemAt: indexPath)
         return cell
     }

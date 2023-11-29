@@ -1,13 +1,13 @@
 //
-//  StatisticsCollectionViewCell.swift
+//  StatCollectionViewCell.swift
 //  RedDragon
 //
-//  Created by QASR02 on 25/11/2023.
+//  Created by QASR02 on 27/11/2023.
 //
 
 import UIKit
 
-class StatisticsCollectionViewCell: UICollectionViewCell {
+class StatCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var totalPlayerLabel: UILabel!
     @IBOutlet weak var goalsLabel: UILabel!
@@ -32,14 +32,14 @@ class StatisticsCollectionViewCell: UICollectionViewCell {
     }
     
     func checkLocalisation() {
-//        totalPlayerLabel.text = StringConstants.totalMatches.localized
-//        goalsLabel.text = StringConstants.goals.localized
-//        penaltyGoalsLabel.text = StringConstants.penaltyGoals.localized
-//        minuitesPerGameLabel.text = StringConstants.minuitesPerGame.localized
-//        accuratePassesLabel.text = StringConstants.accuratePasses.localized
-//        freeKickLabel.text = StringConstants.freeKicksGoals.localized
-//        yelloCarLabel.text = StringConstants.yellowCard.localized
-//        redCardLabel.text = StringConstants.redCard.localized
+        //        totalPlayerLabel.text = StringConstants.totalMatches.localized
+        //        goalsLabel.text = StringConstants.goals.localized
+        //        penaltyGoalsLabel.text = StringConstants.penaltyGoals.localized
+        //        minuitesPerGameLabel.text = StringConstants.minuitesPerGame.localized
+        //        accuratePassesLabel.text = StringConstants.accuratePasses.localized
+        //        freeKickLabel.text = StringConstants.freeKicksGoals.localized
+        //        yelloCarLabel.text = StringConstants.yellowCard.localized
+        //        redCardLabel.text = StringConstants.redCard.localized
     }
     
     func configuration(with statistics: PlayerDetailModel, cellForItemAt indexPath: IndexPath) {
@@ -105,5 +105,5 @@ class StatisticsCollectionViewCell: UICollectionViewCell {
             }
         }
     }
-
+    
 }

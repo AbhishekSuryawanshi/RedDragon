@@ -10,6 +10,9 @@ import Combine
 
 class PlaceBetVc: UIViewController {
     
+    
+    @IBOutlet var expertsLable: UILabel!
+    @IBOutlet var matchDetails: UILabel!
     @IBOutlet var titleLable: UILabel!
     @IBOutlet var bgViewThree: UIView!
     @IBOutlet var bgViewTwo: UIView!
@@ -100,9 +103,17 @@ class PlaceBetVc: UIViewController {
     //handle clicks
     
     func clicks(){
+        matchDetails.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(goToMatchDetails)))
         bgViewOne.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(selectFirstOdd)))
         bgViewTwo.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(selectSecondOdd)))
         bgViewThree.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(selectThirdOdd)))
+    }
+    
+    @objc func goToMatchDetails(){
+        navigateToViewController(MatchDetailsVC.self, storyboardName: StoryboardName.matchDetail, animationType: .autoReverse(presenting: .zoom)){ vc in
+            vc.matchSlug = self.betItem?.slug
+            vc.sports = UserDefaults.standard.sport ?? Sports.football.title.lowercased()
+        }
     }
     
     @objc func selectFirstOdd(){

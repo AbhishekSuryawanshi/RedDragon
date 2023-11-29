@@ -118,4 +118,19 @@ extension UIViewController {
         return result
     }
     
+    public func showDiscoverTabOnDismiss() {
+        if let window = UIApplication.shared.windows.first {
+            window.rootViewController?.dismiss(animated: false, completion: {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                if let tabBarController = storyboard.instantiateViewController(withIdentifier: "TabView") as? UITabBarController {
+                    let viewControllerIndexToShow = 4
+                    if viewControllerIndexToShow < tabBarController.viewControllers?.count ?? 0 {
+                        tabBarController.selectedIndex = viewControllerIndexToShow
+                        window.rootViewController?.present(tabBarController, animated: true, completion: nil)
+                    }
+                }
+            })
+        }
+    }
+    
 }

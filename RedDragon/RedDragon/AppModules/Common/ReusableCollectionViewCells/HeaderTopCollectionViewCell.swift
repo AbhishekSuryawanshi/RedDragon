@@ -17,19 +17,19 @@ class HeaderTopCollectionViewCell: UICollectionViewCell {
     }
     
    /// To use single underline label cell
-    func configureUnderLineCell(title: String, selected: Bool) {
+    func configureUnderLineCell(title: String, selected: Bool, textColor: UIColor = .white, fontSize: CGFloat = 17) {
         var formatedText = NSMutableAttributedString()
-        formatedText = selected ? formatedText.bold(title, size: 17) : formatedText.regular(title, size: 17)
+        formatedText = selected ? formatedText.bold(title, size: fontSize) : formatedText.regular(title, size: fontSize)
         ///pass true to "remove" key to remove underline
         formatedText.addUnderLine(textToFind: title, remove: !selected)
         titleLabel.attributedText = formatedText
-        titleLabel.textColor = .white
+        titleLabel.textColor = textColor
     }
     
     /// To use single label cell
-    func configureTagCell(title: String) {
+    func configureTagCell(title: String, textColor: UIColor = .black, font: UIFont = fontRegular(13)) {
         titleLabel.text = title
-        titleLabel.font = fontRegular(13)
-        titleLabel.textColor = .black
+        titleLabel.font = font
+        titleLabel.textColor = textColor
     }
 }

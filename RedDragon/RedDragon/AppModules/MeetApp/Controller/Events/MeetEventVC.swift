@@ -13,9 +13,13 @@ class MeetEventVC: UIViewController {
     @IBOutlet weak var viewContainer: UIView!
     var hotEventsArray = [MeetEvent]()
     var allEventsArray = [MeetEvent]()
+    var myUpcomingEventsArray = [MeetEvent]()
+    var myPastEventsArray = [MeetEvent]()
     var cancellable = Set<AnyCancellable>()
     private var hotEventVM: MeetHotEventViewModel?
     private var allEventVM: MeetAllEventViewModel?
+    private var myUpcomingEventVM: MeetMyUpcomingEventViewModel?
+    private var myPastEventVM: MeetMyPastEventViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +31,8 @@ class MeetEventVC: UIViewController {
         makeNetworkCall()
         fetchHotEventVM()
         fetchAllEventVM()
+        fetchMyUpcomingEventVM()
+        fetchMyPastEventVM()
     }
     
     func showLoader(_ value: Bool) {
@@ -36,8 +42,13 @@ class MeetEventVC: UIViewController {
     func makeNetworkCall() {
         hotEventVM = MeetHotEventViewModel()
         allEventVM = MeetAllEventViewModel()
+        myUpcomingEventVM = MeetMyUpcomingEventViewModel()
+        myPastEventVM = MeetMyPastEventViewModel()
+        
         hotEventVM?.fetchMeetHotEventListAsyncCall()
         allEventVM?.fetchMeetAllEventListAsyncCall()
+        myUpcomingEventVM?.fetchMeetMyUpcomingEventListAsyncCall()
+        myPastEventVM?.fetchMeetMyPastEventListAsyncCall()
     }
     
     // MARK: - Segment Control Actions
@@ -64,7 +75,7 @@ extension MeetEventVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] eventList in
-                self?.execute_onHotEventListResponseData(eventList!)
+                self?.execute_onHotEventListResponse(eventList!)
             })
             .store(in: &cancellable)
     }
@@ -74,18 +85,46 @@ extension MeetEventVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] eventList in
-                self?.execute_onAllEventListResponseData(eventList!)
+                self?.execute_onAllEventListResponse(eventList!)
             })
             .store(in: &cancellable)
     }
     
-    func execute_onHotEventListResponseData(_ eventList: MeetEventListModel) {
+    func fetchMyUpcomingEventVM() {
+        myUpcomingEventVM?.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] eventList in
+                self?.execute_onMyUpcomingEventResponse(eventList!)
+            })
+            .store(in: &cancellable)
+    }
+    
+    func fetchMyPastEventVM() {
+        myPastEventVM?.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] eventList in
+                self?.execute_onMyPastEventListResponse(eventList!)
+            })
+            .store(in: &cancellable)
+    }
+    
+    func execute_onHotEventListResponse(_ eventList: MeetEventListModel) {
         hotEventsArray = eventList.response?.data ?? []
     }
     
-    func execute_onAllEventListResponseData(_ eventList: MeetEventListModel) {
+    func execute_onAllEventListResponse(_ eventList: MeetEventListModel) {
         allEventsArray = eventList.response?.data ?? []
         embedExploreEventsVC() // default First segment selected
+    }
+    
+    func execute_onMyUpcomingEventResponse(_ eventList: MeetEventListModel) {
+        myUpcomingEventsArray = eventList.response?.data ?? []
+    }
+    
+    func execute_onMyPastEventListResponse(_ eventList: MeetEventListModel) {
+        myPastEventsArray = eventList.response?.data ?? []
     }
 }
 
@@ -103,7 +142,7 @@ extension MeetEventVC {
         let childVC = MyEventsVC(nibName: "MyEventsVC" , bundle: nil)
         ViewEmbedder.embedXIBController(childVC: childVC, parentVC: self, container: viewContainer) { vc in
             let vc = vc as! MyEventsVC
-          //  vc.configureUsers(users: self.arrayOfMatchUsers)
+            vc.configureEvents(upcomingEvents: self.myUpcomingEventsArray, pastEvents: self.myPastEventsArray)
         }
     }
 }
