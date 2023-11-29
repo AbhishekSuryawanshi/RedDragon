@@ -19,6 +19,7 @@ class GossipVC: UIViewController {
     var cancellable = Set<AnyCancellable>()
     var refreshLeagueList = true
     var isPagination = false
+    var publishersArray: [String] = []
     var gossipsArray: [Gossip] = []
     var pageNum = 1
     
@@ -46,13 +47,13 @@ class GossipVC: UIViewController {
             refreshLeagueList = false
             SocialPublicLeagueVM.shared.fetchLeagueListAsyncCall()
         }
-        getNewsList(pageNum: 1)
+        getNewsList(pageNum: 1, source: "")
     }
     
-    func getNewsList(pageNum: Int) {
+    func getNewsList(pageNum: Int, source: String) {
         let param: [String: Any] = [
             "page": pageNum,
-            "source": "thehindu",
+            "source": source,
             "category": "football"
         ]
         GossipListVM.shared.fetchNewsListAsyncCall(params: param)
@@ -71,7 +72,7 @@ extension GossipVC {
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
                 SocialPublicLeagueVM.shared.leagueArray = response ?? []
-        
+                
             })
             .store(in: &cancellable)
     }
@@ -91,6 +92,8 @@ extension GossipVC {
     }
     
     func execute_onGossipsResponseData(_ response: GossipListResponse?) {
+        publishersArray = response?.source ?? []
+        
         if self.pageNum == 1 {
             gossipsArray.removeAll()
             GossipListVM.shared.gossipsArray.removeAll()

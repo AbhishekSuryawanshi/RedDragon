@@ -11,6 +11,8 @@ struct GossipListResponse: Codable {
     let status: Int?
     let message: String?
     var data: GossipListData?
+    var category: [String] = []
+    var source: [String] = []
 }
 
 struct GossipResponse: Codable {
