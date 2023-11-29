@@ -107,7 +107,6 @@ extension StreetMatchesVC:UICollectionViewDelegate,UICollectionViewDataSource,UI
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
             let w = UIScreen.main.bounds.width - 35
             return CGSize(width: w/CGFloat(types.count), height: 40)
     }
@@ -124,5 +123,26 @@ extension StreetMatchesVC:UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.streetMatchTableViewCell, for: indexPath) as! StreetMatchTableViewCell
         cell.configureCell(obj: matchList?[indexPath.row])
         return cell
+    }
+}
+
+extension StreetMatchesVC:UISearchBarDelegate{
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchStreetMatches(searchText: searchText)
+    }
+    func searchStreetMatches(searchText:String){
+        if searchText == ""{
+            matchList = originalMatchesList
+            tableView.reloadData()
+            searchBar.endEditing(true)
+        }
+        else{
+            matchList?.removeAll()
+            matchList = originalMatchesList?.filter{($0.homeTeam.name.lowercased().contains(searchText.lowercased()) ) || ($0.awayTeam.name.lowercased().contains(searchText.lowercased()) )}
+            tableView.reloadData()
+        }
     }
 }

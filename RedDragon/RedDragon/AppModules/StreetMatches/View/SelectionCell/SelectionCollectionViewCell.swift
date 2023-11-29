@@ -1,9 +1,4 @@
-//
-//  SelectionCollectionViewCell.swift
-//  Area Sports
-//
-//  Created by Remya on 3/11/23.
-//
+
 
 import UIKit
 
