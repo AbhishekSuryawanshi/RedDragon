@@ -17,7 +17,6 @@ class ExploreEventsTableViewCell: UITableViewCell {
     @IBOutlet weak var noOfPeopleJoinedLbl: UILabel!
     @IBOutlet weak var dateTimeLbl: UILabel!
     
-
     // MARK: - Methods
     override func awakeFromNib() {
         super.awakeFromNib()
