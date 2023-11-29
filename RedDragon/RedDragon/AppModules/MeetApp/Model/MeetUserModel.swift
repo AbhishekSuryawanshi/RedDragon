@@ -88,3 +88,12 @@ struct ImageURLS: Codable {
     }
 }
 
+// MARK: - Events List
+struct MeetUserSportsInterestModel: Decodable {
+    let response: MeetUserSportsInterestList?
+}
+
+struct MeetUserSportsInterestList: Decodable {
+    let messages: [String]?
+    let data: [SportsInterest]?
+}

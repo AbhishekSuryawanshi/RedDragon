@@ -27,7 +27,7 @@ class MultipartAPIServiceManager<ResponseModel: Decodable>: ObservableObject {
     
     // Create a URL request with optional authorization token for different types of users.
     private func makeURLRequest(urlString: String,
-                                params: [String: Any]?, isGuestUser: Bool, anyDefaultToken: String, imageName: String, imageData: Data) -> URLRequest? {
+                                params: [String: Any]?, isGuestUser: Bool, anyDefaultToken: String, imageName: String, imageData: Data, imageKey: String) -> URLRequest? {
         
         guard let url = URL(string: urlString) else { return nil }
         
@@ -48,7 +48,7 @@ class MultipartAPIServiceManager<ResponseModel: Decodable>: ObservableObject {
             }
         }
         bodyData.append("--\(boundary + lineBreak)")
-        bodyData.append("Content-Disposition: form-data; name=\"img\"; filename=\"\(imageName)\"\(lineBreak)")
+        bodyData.append("Content-Disposition: form-data; name=\"\(imageKey)\"; filename=\"\(imageName)\"\(lineBreak)")
         bodyData.append("Content-Type: image/jpeg\(lineBreak)\(lineBreak)")
         bodyData.append(imageData)
         bodyData.append(lineBreak)
@@ -64,23 +64,21 @@ class MultipartAPIServiceManager<ResponseModel: Decodable>: ObservableObject {
                 request.setValue("Bearer " + userToken, forHTTPHeaderField: "Authorization")
             }
         }
-        
         print("[Request] :==>\(URLConstants.postImage)\n[Token] :==>\(UserDefaults.standard.token ?? "")")
-        
         return request
     }
     
     // Asynchronously fetch and execute a network request.
     private func fetchExecuteFunction(urlString: String,
-                                      params: [String: Any]?, isGuestUser: Bool, anyDefaultToken: String, imageName: String, imageData: Data) async throws -> ResponseModel {
-        guard let urlRequest = makeURLRequest(urlString: urlString, params: params, isGuestUser: isGuestUser, anyDefaultToken: anyDefaultToken, imageName: imageName, imageData: imageData) else {
+                                      params: [String: Any]?, isGuestUser: Bool, anyDefaultToken: String, imageName: String, imageData: Data, imageKey: String) async throws -> ResponseModel {
+        guard let urlRequest = makeURLRequest(urlString: urlString, params: params, isGuestUser: isGuestUser, anyDefaultToken: anyDefaultToken, imageName: imageName, imageData: imageData, imageKey: imageKey) else {
             throw CustomErrors.invalidRequest
         }
         return try await network.executeAsync(with: urlRequest)
     }
     
     // Asynchronously perform an API call with optional parameters.
-    func asyncCall(urlString: String, params: [String: Any]?, isGuestUser: Bool = false, anyDefaultToken: String = "", imageName: String, imageData: Data) {
+    func asyncCall(urlString: String, params: [String: Any]?, isGuestUser: Bool = false, anyDefaultToken: String = "", imageName: String, imageData: Data, imageKey: String) {
         
         guard Reachability.isConnectedToNetwork() else {
             showError?(ErrorMessage.networkAlert.localized)
@@ -89,7 +87,7 @@ class MultipartAPIServiceManager<ResponseModel: Decodable>: ObservableObject {
         Task { @MainActor in
             displayLoader?(true)
             do {
-                let response = try await fetchExecuteFunction(urlString: urlString, params: params, isGuestUser: isGuestUser, anyDefaultToken: anyDefaultToken, imageName: imageName, imageData: imageData)
+                let response = try await fetchExecuteFunction(urlString: urlString, params: params, isGuestUser: isGuestUser, anyDefaultToken: anyDefaultToken, imageName: imageName, imageData: imageData, imageKey: imageKey)
                 responseData = response
                 // print(responseData as Any)
             } catch {

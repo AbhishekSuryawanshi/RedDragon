@@ -56,6 +56,15 @@ struct ErrorMessage {
     static let insufficientBudget          = "Sorry, you don't have sufficient budget to buy this player"
     static let addPlayerToPlay             = "Please add a minimum of 11 players to your team to play the game"
     static let playerAlreadyUsed           = "Your team already has this player"
+    
     static let betPlacedSuccess            = "Bet Placed Successfully"
     static let betPlacedAlready            = "Bet Already Placed"
+    
+    static let eventTitleEmptyAlert        = "Please enter event title"
+    static let eventDescEmptyAlert         = "Please enter event description"
+    static let eventImageEmptyAlert        = "Please enter event image"
+    static let eventStartDateEmptyAlert    = "Please enter event start date"
+    static let eventStartTimeEmptyAlert    = "Please enter event start time"
+    static let eventLocationEmptyAlert     = "Please enter event location"
+    static let eventPriceEmptyAlert        = "Please enter event location"
 }
