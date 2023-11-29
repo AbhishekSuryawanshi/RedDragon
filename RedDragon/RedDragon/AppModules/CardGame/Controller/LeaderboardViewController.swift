@@ -42,15 +42,15 @@ class LeaderboardViewController: UIViewController {
     }
     
     @IBAction func backButton(_ sender: Any) {
-        dismiss(animated: true)
+        self.navigationController?.popToRootViewController(animated: false)
     }
     
     @IBAction func playerButton(_ sender: Any) {
-        dismiss(animated: true)
+        navigateToViewController(AllPlayersViewController.self, storyboardName: StoryboardName.cardGame)
     }
     
     @IBAction func teamButton(_ sender: Any) {
-        presentToViewController(CardGameMyTeamVC.self, storyboardName: StoryboardName.cardGame)
+        navigateToViewController(CardGameMyTeamVC.self, storyboardName: StoryboardName.cardGame)
     }
     
     func loadFunctionality() {

@@ -12,7 +12,7 @@ class MyTeamViewModel: APIServiceManager<MyTeam> {
     func fetchmyTeamAsyncCall() {
         let url = URLConstants.cardGame_buyPlayer
         let method = RequestType.get
-        asyncCall(urlString: url, method: method, parameters: nil, anyDefaultToken: DefaultToken.guestUserCardGame)
+        asyncCall(urlString: url, method: method, parameters: nil, isGuestUser: true, anyDefaultToken: DefaultToken.guestUserCardGame)
     }
     
 }

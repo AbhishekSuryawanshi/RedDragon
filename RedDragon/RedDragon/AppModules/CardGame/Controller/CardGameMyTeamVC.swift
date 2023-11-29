@@ -39,14 +39,15 @@ class CardGameMyTeamVC: UIViewController {
     }
     
     @IBAction func backButton(_ sender: Any) {
-        dismiss(animated: true)
+        self.navigationController?.popToRootViewController(animated: false)
     }
     
     @IBAction func playerButton(_ sender: Any) {
-        dismiss(animated: true)
+        navigateToViewController(AllPlayersViewController.self, storyboardName: StoryboardName.cardGame)
     }
     
     @IBAction func leaderboardButton(_ sender: Any) {
+        navigateToViewController(LeaderboardViewController.self, storyboardName: StoryboardName.cardGame)
     }
     
 }
@@ -54,6 +55,7 @@ class CardGameMyTeamVC: UIViewController {
 extension CardGameMyTeamVC {
     
     private func fetchMyTeamViewModel() {
+        teamListVM = MyTeamViewModel()
         teamListVM?.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.error.localized, description: error, image: ImageConstants.alertImage)
         }
@@ -69,6 +71,10 @@ extension CardGameMyTeamVC {
             })
             .store(in: &cancellabel)
         
+        makeAyncCall()
+    }
+    
+    private func makeAyncCall() {
         teamListVM?.fetchmyTeamAsyncCall()
     }
 }
@@ -112,15 +118,15 @@ extension CardGameMyTeamVC: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: collectionView.bounds.width/2 - 5, height: 140)
+        CGSize(width: collectionView.bounds.width/3 - 5, height: 130)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        return 8
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        return 5
     }
     
     ///sell player API call

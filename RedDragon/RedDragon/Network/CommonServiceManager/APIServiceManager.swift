@@ -97,7 +97,7 @@ class APIServiceManager<ResponseModel: Decodable>: ObservableObject {
             do {
                 let response = try await fetchExecuteFunction(urlString: urlString, method: method, parameters: parameters, isGuestUser: isGuestUser, anyDefaultToken: anyDefaultToken)
                 responseData = response
-               // print(responseData as Any)
+               print(responseData as Any)
             } catch {
                 showError?(error.localizedDescription)
             }
