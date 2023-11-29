@@ -34,6 +34,7 @@ struct CellIdentifier {
     static let mediaCollectionView              = "MediaCollectionViewCell"
     static let recentMatchTableCell             = "RecentMatchTableViewCell"
     static let substituteTableCell              = "SubstituteTableViewCell"
+    static let analysisTableViewCell            = "AnalysisTableViewCell"
     
     //Player Details
     static let matchesTableViewCell             = "MatchesTableViewCell"
