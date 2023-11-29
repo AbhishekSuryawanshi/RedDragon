@@ -58,7 +58,7 @@ class HomePredictionViewController: UIViewController {
     @IBOutlet weak var sportsSelectionView: UIView!
     @IBOutlet weak var predictionTopView: TopView!
     
-    var sportsArr = ["FootBall" , "BasketBall", "Cricket", "Tennis", "Esports"]
+    var sportsArr = ["football" , "basketball"]
     var selectedMatch: PredictionData?
     private var predictionMatchesViewModel: PredictionViewModel?
     var predictionsModel: PredictionMatchesModel?
@@ -80,7 +80,7 @@ class HomePredictionViewController: UIViewController {
     func configureView() {
         loadFunctionality()
         fetchPredictionMatchesViewModel()
-        makeNetworkCall()
+        makeNetworkCall(sport: "football")
         
     }
     
@@ -93,8 +93,8 @@ class HomePredictionViewController: UIViewController {
        
     }
     
-    func makeNetworkCall() {
-        predictionMatchesViewModel?.fetchPredictionMatchesAsyncCall(lang: "en", date: Date().formatDate(outputFormat: dateFormat.yyyyMMdd), sportType: "football")
+    func makeNetworkCall(sport: String) {
+        predictionMatchesViewModel?.fetchPredictionMatchesAsyncCall(lang: "en", date: Date().formatDate(outputFormat: dateFormat.yyyyMMdd), sportType: sport)
     }
     func showLoader(_ value: Bool) {
         value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
@@ -213,7 +213,7 @@ extension HomePredictionViewController {
     
 
 
-extension HomePredictionViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+extension HomePredictionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return sportsArr.count
     }
@@ -223,6 +223,16 @@ extension HomePredictionViewController: UICollectionViewDelegate, UICollectionVi
         cell.leagueName.text = sportsArr[indexPath.row]
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        fetchPredictionMatchesViewModel()
+        makeNetworkCall(sport: sportsArr[indexPath.row])
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: screenWidth / 2, height: 15)
+    }
+    
     
     
 }

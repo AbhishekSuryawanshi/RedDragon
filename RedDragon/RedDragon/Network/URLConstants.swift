@@ -29,6 +29,7 @@ struct URLConstants {
     static let databaseBaseURL     = "https://datasport.one/api/v1/sportscore/data/"
     static let leagueDetail        = databaseBaseURL + "league.php"
     static let databaseMatchDetail = databaseBaseURL + "match.php"
+    static let analysisURL         = "api/predict/list?"
     
     // MARK: - CardGame
     static let cardGame_allPlayersList = databaseBaseURL + "player_filter.php"
@@ -96,6 +97,7 @@ struct URLConstants {
     static let getMatchesList       = "api/match/list?"
     static let postMatchPrediction  = "api/predict"
     static let matchDetail          = "api/match"
+    
     
     // MARK: - News
     static let newsGossips         = "https://datasport.one/api/v1/news/data.php"

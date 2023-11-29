@@ -11,12 +11,15 @@ import Combine
 
 class UpComingMatchesViewController: UIViewController {
 
+    @IBOutlet weak var sportsCollectionView: UICollectionView!
     @IBOutlet weak var dateCollectionView: UICollectionView!
     @IBOutlet weak var upcomingMatchesTableView: UITableView!
     
     var dateArr: [String]? = []
     private var predictionMatchesViewModel: PredictionViewModel?
     var predictionMatchesModel: PredictionMatchesModel?
+    var sportsArr = ["football" , "basketball"]
+    var selectedSports = ""
     
     private var cancellable = Set<AnyCancellable>()
    
@@ -38,8 +41,12 @@ class UpComingMatchesViewController: UIViewController {
     
     func nibInitialization() {
         dateCollectionView.register(CellIdentifier.homeTitleCollectionVc)
+        sportsCollectionView.register(CellIdentifier.leagueNamesCollectionCell)
         upcomingMatchesTableView.register(CellIdentifier.predictUpcomingTableViewCell)
+        sportsCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .left)
         dateCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .left)
+        selectedSports = sportsArr[0]
+        
        
     }
     
@@ -52,15 +59,15 @@ class UpComingMatchesViewController: UIViewController {
         }
     }
     
-    func makeNetworkCall(date: String?) {
-        predictionMatchesViewModel?.fetchPredictionMatchesAsyncCall(lang: "en", date: date ?? "", sportType: "football")
+    func makeNetworkCall(date: String?, sport: String) {
+        predictionMatchesViewModel?.fetchPredictionMatchesAsyncCall(lang: "en", date: date ?? "", sportType: sport)
     }
     
     @objc func predictBtnAction(sender: UIButton){
-        navigateToViewController(PredictionDetailsViewController.self, storyboardName: StoryboardName.prediction) { vc in
+        navigateToViewController(PredictionDetailsViewController.self, storyboardName: StoryboardName.prediction, animationType: .autoReverse(presenting: .zoom), configure: { vc in
          //   self.predictionMatchesModel?.data
           
-        }
+        })
     }
     
     func showLoader(_ value: Bool) {
@@ -69,20 +76,56 @@ class UpComingMatchesViewController: UIViewController {
     
 }
 
-extension UpComingMatchesViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+extension UpComingMatchesViewController: UICollectionViewDelegate, UICollectionViewDataSource , UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dateArr?.count ?? 0
+        if collectionView == dateCollectionView{
+            return dateArr?.count ?? 0
+        }
+        if collectionView == sportsCollectionView{
+            return sportsArr.count
+        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.homeTitleCollectionVc, for: indexPath) as! HomeTitleCollectionVc
-        cell.titleLable.text = dateArr?[indexPath.row]
-        return cell
+        if collectionView == dateCollectionView{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.homeTitleCollectionVc, for: indexPath) as! HomeTitleCollectionVc
+            cell.titleLable.text = dateArr?[indexPath.row]
+            return cell
+        }
+        if collectionView == sportsCollectionView{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.leagueNamesCollectionCell, for: indexPath) as! LeagueCollectionViewCell
+            cell.leagueName.text = sportsArr[indexPath.row]
+            return cell
+        }
+        else{
+            return UICollectionViewCell()
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        fetchPredictionMatchesViewModel()
-        makeNetworkCall(date: dateArr?[indexPath.row])
+        if collectionView == dateCollectionView{
+            fetchPredictionMatchesViewModel()
+            makeNetworkCall(date: dateArr?[indexPath.row], sport: selectedSports)
+        }
+        if collectionView == sportsCollectionView{
+            fetchPredictionMatchesViewModel()
+            selectedSports = sportsArr[indexPath.row]
+            makeNetworkCall(date: dateArr?[indexPath.row], sport: sportsArr[indexPath.row])
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == sportsCollectionView{
+            return CGSize(width: screenWidth / 2, height: 30)
+        }
+        if collectionView == dateCollectionView{
+            return CGSize(width: 80, height: 40)
+        }
+        else{
+            return CGSize(width: 0, height: 0)
+        }
     }
 
 }
@@ -101,6 +144,14 @@ extension UpComingMatchesViewController: UITableViewDelegate, UITableViewDataSou
         cell.configCell(predictionData: predictionMatchesModel?.data?[indexPath.section], row: indexPath.row)
       
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigateToViewController(MatchDetailsVC.self, storyboardName: StoryboardName.matchDetail, animationType: .autoReverse(presenting: .zoom), configure:{ vc in
+            vc.isFromPrediction = true
+            vc.matchSlug = self.predictionMatchesModel?.data?[indexPath.section].matches?[indexPath.row].slug
+            vc.sports = self.selectedSports
+        })
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

@@ -14,6 +14,9 @@
 		4137D57B2B15BFA9007CF84E /* PredictionMakeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4137D57A2B15BFA9007CF84E /* PredictionMakeModel.swift */; };
 		4137D57D2B163AB8007CF84E /* PredictionDetailCommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4137D57C2B163AB8007CF84E /* PredictionDetailCommentsView.swift */; };
 		4137D57F2B163ACE007CF84E /* PredictionDetailCommentsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4137D57E2B163ACE007CF84E /* PredictionDetailCommentsView.xib */; };
+		4137D5822B172F09007CF84E /* AnalysisTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4137D5802B172F09007CF84E /* AnalysisTableViewCell.swift */; };
+		4137D5832B172F09007CF84E /* AnalysisTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4137D5812B172F09007CF84E /* AnalysisTableViewCell.xib */; };
+		4137D5852B174B6D007CF84E /* AnalysisModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4137D5842B174B6D007CF84E /* AnalysisModel.swift */; };
 		41846BC02B08A9000020F503 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41846BBF2B08A9000020F503 /* UIColor+Extension.swift */; };
 		41846BC32B0B395B0020F503 /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 41846BC22B0B395B0020F503 /* YouTubePlayerKit */; };
 		41846BCC2B0B80F20020F503 /* PlayerDetailYoutubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41846BCB2B0B80F20020F503 /* PlayerDetailYoutubeViewController.swift */; };
@@ -380,6 +383,9 @@
 		4137D57A2B15BFA9007CF84E /* PredictionMakeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionMakeModel.swift; sourceTree = "<group>"; };
 		4137D57C2B163AB8007CF84E /* PredictionDetailCommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionDetailCommentsView.swift; sourceTree = "<group>"; };
 		4137D57E2B163ACE007CF84E /* PredictionDetailCommentsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PredictionDetailCommentsView.xib; sourceTree = "<group>"; };
+		4137D5802B172F09007CF84E /* AnalysisTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisTableViewCell.swift; sourceTree = "<group>"; };
+		4137D5812B172F09007CF84E /* AnalysisTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnalysisTableViewCell.xib; sourceTree = "<group>"; };
+		4137D5842B174B6D007CF84E /* AnalysisModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisModel.swift; sourceTree = "<group>"; };
 		41846BBF2B08A9000020F503 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		41846BCB2B0B80F20020F503 /* PlayerDetailYoutubeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailYoutubeViewController.swift; sourceTree = "<group>"; };
 		41846BD32B0C7D7A0020F503 /* Prediction.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Prediction.storyboard; sourceTree = "<group>"; };
@@ -1641,6 +1647,8 @@
 				49A822BA2B04FC27007752C2 /* RecentMatchTableViewCell.xib */,
 				085385BE2B079F7F00C4E953 /* SubstituteTableViewCell.swift */,
 				085385BF2B079F7F00C4E953 /* SubstituteTableViewCell.xib */,
+				4137D5802B172F09007CF84E /* AnalysisTableViewCell.swift */,
+				4137D5812B172F09007CF84E /* AnalysisTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1650,6 +1658,7 @@
 			children = (
 				49E6DE8B2AF38F7000A0DDC3 /* MatchDetail.swift */,
 				E973A70F2B146FD70061A36D /* TenninsMatchDetail.swift */,
+				4137D5842B174B6D007CF84E /* AnalysisModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2219,6 +2228,7 @@
 				E9129B972B05F5560073A407 /* BetWinTableVC.xib in Resources */,
 				6A08D66B2B0F83F400E1AE7C /* ExploreEventsTableViewCell.xib in Resources */,
 				474D99522AE7FB1D009499D0 /* Colors.xcassets in Resources */,
+				4137D5832B172F09007CF84E /* AnalysisTableViewCell.xib in Resources */,
 				6A5F2B9E2B0CC37D00AB6A98 /* MyEventsVC.xib in Resources */,
 				AD16664E2B1763E1001C0770 /* SportsCollectionViewCell.xib in Resources */,
 				49DDB4752AF0E3E2000F9AFB /* SeasonPerformanceTableViewCell.xib in Resources */,
@@ -2352,6 +2362,7 @@
 				49B0B9E82AE68F0700A9D235 /* AppDelegate.swift in Sources */,
 				47FE16342B15B539009043D2 /* GossipViewModel.swift in Sources */,
 				49F3EECF2AE7AC580095CAC6 /* Navigation.swift in Sources */,
+				4137D5852B174B6D007CF84E /* AnalysisModel.swift in Sources */,
 				49E223C72B15D47200A7202C /* Leaderboard.swift in Sources */,
 				474D99472AE7F353009499D0 /* Fonts+Extra.swift in Sources */,
 				49B04A562AFA6DCE00B440AA /* StatisticsViewController.swift in Sources */,
@@ -2373,6 +2384,7 @@
 				6A2140232B0B730C00F52E69 /* TinderCardModel.swift in Sources */,
 				AD3B55512B15C61C007B14F7 /* StreetMatchStadiumVC.swift in Sources */,
 				494D7B842AE94AF300488E27 /* UIViewController+Extension.swift in Sources */,
+				4137D5822B172F09007CF84E /* AnalysisTableViewCell.swift in Sources */,
 				49D085382AEF863D00A835B7 /* StandingsTableViewCell.swift in Sources */,
 				E93C6C052B0C88D80042657B /* WalletBalanceModel.swift in Sources */,
 				47C3B7142B04D43500E12A4D /* CountryCodeListVC.swift in Sources */,
