@@ -56,11 +56,11 @@ class AllPlayersViewController: UIViewController {
     }
     
     @IBAction func teamButton(_ sender: Any) {
-        presentToViewController(CardGameMyTeamVC.self, storyboardName: StoryboardName.cardGame)
+        navigateToViewController(CardGameMyTeamVC.self, storyboardName: StoryboardName.cardGame)
     }
     
     @IBAction func leaderboardButton(_ sender: Any) {
-        presentToViewController(LeaderboardViewController.self, storyboardName: StoryboardName.cardGame)
+        navigateToViewController(LeaderboardViewController.self, storyboardName: StoryboardName.cardGame)
     }
     
     
