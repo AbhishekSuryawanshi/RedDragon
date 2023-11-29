@@ -54,6 +54,12 @@ extension UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    public func navigateToXIBViewController<T: UIViewController>(_ viewController: T.Type, nibName: String, animationType: HeroDefaultAnimationType = .zoomOut, configure: ((T) -> Void)? = nil) {
+        
+        let vc = viewController.init(nibName: nibName, bundle: nil)
+        configureViewControllerAnimation(vc, animationType: animationType, configure: configure)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 //MARK: above functions can be use like:--

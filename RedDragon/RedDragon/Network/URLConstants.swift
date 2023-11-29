@@ -77,6 +77,8 @@ struct URLConstants {
     static let meetUserList        = meetBaseURL + "listuser"
     static let meetHotEventList    = meetBaseURL + "events/hot"
     static let meetAllEventList    = meetBaseURL + "event/list"
+    static let meetMyUpcomingEvent = meetBaseURL + "events/upcoming"
+    static let meetMyPastEvent     = meetBaseURL + "events/past"
     static let meetLikedUser       = meetBaseURL + "user/like"
     static let meetMyMatchUser     = meetBaseURL + "user/mymatch/list"
     

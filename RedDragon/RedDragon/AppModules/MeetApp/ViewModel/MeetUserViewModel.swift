@@ -13,7 +13,7 @@ class MeetUserViewModel: APIServiceManager<MeetUserListModel> {
     func fetchMeetUserListAsyncCall() {
         let urlString   = URLConstants.meetUserList + "?pagination=false"
         let method      = RequestType.get
-        asyncCall(urlString: urlString, method: method, parameters: nil, isGuestUser: true)
+        asyncCall(urlString: urlString, method: method, parameters: nil, isGuestUser: true, anyDefaultToken: DefaultToken.guestUser)
     }
 }
 
@@ -23,7 +23,7 @@ class MeetUserDetailViewModel: APIServiceManager<MeetUserDetailModel> {
     func fetchMeetUserDetailAsyncCall(userID: Int) {
         let urlString   = URLConstants.meetUserList + "?id=\(userID)"
         let method      = RequestType.get
-        asyncCall(urlString: urlString, method: method, parameters: nil, isGuestUser: true)
+        asyncCall(urlString: urlString, method: method, parameters: nil, isGuestUser: true, anyDefaultToken: DefaultToken.guestUser)
     }
 }
 
@@ -33,7 +33,7 @@ class MeetLikedUserViewModel: APIServiceManager<MeetLikedUserModel> {
     func postLikeUserAsyncCall(parameters: [String: Any]) {
         let urlString   = URLConstants.meetLikedUser
         let method      = RequestType.post
-        asyncCall(urlString: urlString, method: method, parameters: parameters, isGuestUser: true)
+        asyncCall(urlString: urlString, method: method, parameters: parameters, isGuestUser: true, anyDefaultToken: DefaultToken.guestUser)
     }
 }
 
@@ -43,7 +43,7 @@ class MeetMyMatchUserViewModel: APIServiceManager<MeetUserListModel> {
     func fetchMyMatchUserAsyncCall() {
         let urlString   = URLConstants.meetMyMatchUser
         let method      = RequestType.get
-        asyncCall(urlString: urlString, method: method, parameters: nil, isGuestUser: true)
+        asyncCall(urlString: urlString, method: method, parameters: nil, isGuestUser: true, anyDefaultToken: DefaultToken.guestUser)
     }
 }
 
