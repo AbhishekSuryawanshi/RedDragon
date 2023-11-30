@@ -47,6 +47,7 @@ struct CellIdentifier {
     static let homeTitleCollectionVc            = "HomeTitleCollectionVc"
     static let menuItemTableVC                  = "MenuItemTableVC"
     static let betMatchTableVC                  = "BetMatchTableVC"
+    static let betLeagueTableVC                  = "BetLeagueTableVC"
     static let betWinTableVC                    = "BetWinTableVC"
     static let betLoseTableVC                   = "BetLoseTableVC"
     static let pointsItemTableVC                = "PointsItemTableVC"

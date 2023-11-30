@@ -47,6 +47,7 @@ class BetHomeVc: UIViewController {
     }
 
     func initial(){
+        tableView.register(CellIdentifier.betLeagueTableVC)
         tableView.register(CellIdentifier.betMatchTableVC)
         tableView.register(CellIdentifier.betWinTableVC)
         tableView.register(CellIdentifier.betLoseTableVC)
@@ -170,12 +171,14 @@ extension BetHomeVc : UITableViewDelegate, UITableViewDataSource {
         
         switch(selectedType){
         case .All:
-            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.betMatchTableVC) as! BetMatchTableVC
+           // let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.betMatchTableVC) as! BetMatchTableVC
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.betLeagueTableVC) as! BetLeagueTableVC
             cell.configurCell(match: matchesList![indexPath.row], isLive: false)
             return cell
             
         case .Live:
-            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.betMatchTableVC) as! BetMatchTableVC
+          //  let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.betMatchTableVC) as! BetMatchTableVC
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.betLeagueTableVC) as! BetLeagueTableVC
             cell.configurCell(match: liveMatchesList![indexPath.row], isLive: true)
             return cell
             
