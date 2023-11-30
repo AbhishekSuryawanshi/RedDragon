@@ -11,6 +11,7 @@ import Combine
 class PlaceBetVc: UIViewController {
     
     
+    @IBOutlet var btnBetTitle: UIButton!
     @IBOutlet var expertsLable: UILabel!
     @IBOutlet var matchDetails: UILabel!
     @IBOutlet var titleLable: UILabel!
@@ -37,6 +38,7 @@ class PlaceBetVc: UIViewController {
     var oddIndex = "-"
     var viewModel = PlaceBetViewModel()
     var cancellable = Set<AnyCancellable>()
+    var day = "today"
     
     
 
@@ -53,6 +55,10 @@ class PlaceBetVc: UIViewController {
         
         guard let match = betItem else{
             return
+        }
+        
+        if match.betDetail?.betPlaced ?? false {
+            btnBetTitle.setTitle(ErrorMessage.betPlacedAlready, for: .normal)
         }
         
         titleLable.text = UserDefaults.standard.sport ?? Sports.football.title
@@ -94,8 +100,14 @@ class PlaceBetVc: UIViewController {
             self.view.makeToast(ErrorMessage.oddsEmptyAlert, duration: 3.0, position: .bottom)
         }else{
             
-            // network call
-            viewModel.placeBet(oddIndex: oddIndex, betAmount: etAmount.text ?? "0.0", slug: betItem?.slug ?? "N/A")
+            if btnBetTitle.titleLabel?.text == ErrorMessage.betPlacedSuccess || btnBetTitle.titleLabel?.text == ErrorMessage.betPlacedAlready{
+                self.view.makeToast(ErrorMessage.betPlacedAlready, duration: 3.0, position: .bottom)
+
+            }else{
+                
+                // network call
+                viewModel.placeBet(oddIndex: oddIndex, betAmount: etAmount.text ?? "0.0", slug: betItem?.slug ?? "N/A", day: day)
+            }
         }
     }
     
@@ -162,8 +174,13 @@ extension PlaceBetVc {
     }
     
     func execute_onResponseData(_ response: BetSuccessModel) {
-        if let response = response.response {
-            self.customAlertView(title: ErrorMessage.success.localized, description: response.data?.message ??  "", image: ImageConstants.successImage)
+        if let response = response.response?.data?.message {
+            if response.lowercased().contains("successfully"){
+                self.customAlertView(title: ErrorMessage.success.localized, description: response, image: ImageConstants.successImage)
+                btnBetTitle.setTitle(ErrorMessage.betPlacedSuccess, for: .normal)
+            }else{
+                self.view.makeToast(response, duration: 3.0, position: .bottom)
+            }
         }else{
             handleError(response.error)
         }

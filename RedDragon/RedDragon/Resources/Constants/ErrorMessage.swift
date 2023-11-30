@@ -24,6 +24,7 @@ struct ErrorMessage {
     static var phoneEmptyAlert             = "Please enter your phone number"
     static var passwordEmptyAlert          = "Please enter a password"
     static var amountEmptyAlert            = "Please enter amount first"
+    static var onlyLiveMatches             = "Bet can not be placed"
     static var oddsEmptyAlert              = "Please choose odds first"
     static var confirmPasswordEmptyAlert   = "Please confirm your password"
     static var termsAlert                  = "Confirm your acceptance of the terms and conditions"
@@ -55,4 +56,6 @@ struct ErrorMessage {
     static let insufficientBudget          = "Sorry, you don't have sufficient budget to buy this player"
     static let addPlayerToPlay             = "Please add a minimum of 11 players to your team to play the game"
     static let playerAlreadyUsed           = "Your team already has this player"
+    static let betPlacedSuccess            = "Bet Placed Successfully"
+    static let betPlacedAlready            = "Bet Already Placed"
 }

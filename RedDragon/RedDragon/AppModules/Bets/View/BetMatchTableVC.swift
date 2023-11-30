@@ -97,7 +97,8 @@ class BetMatchTableVC: UITableViewCell {
             dateLable.text = match.matchState
             score.text = "\(match.homeScore ?? "0") : \(match.awayScore ?? "0")"
         }else{
-            dateLable.text = getDate(slug: (match.slug)!, time: (match.time)!)
+           // dateLable.text = getDate(slug: (match.slug)!, time: (match.time)!)
+            dateLable.text = match.matchState
         }
     }
     
