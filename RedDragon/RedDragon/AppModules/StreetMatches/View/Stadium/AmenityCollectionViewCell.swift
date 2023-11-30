@@ -24,7 +24,7 @@ class AmenityCollectionViewCell: UICollectionViewCell {
     func handleSelection(){
         callSelection?()
         if isSelected{
-            imgSelection.image = UIImage(named: "tick1")
+            imgSelection.image = UIImage(named: "tick")
         }
         
     }

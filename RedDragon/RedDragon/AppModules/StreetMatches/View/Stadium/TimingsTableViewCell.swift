@@ -18,8 +18,9 @@ class TimingsTableViewCell: UITableViewCell {
     }
     
     
-//    func configureCell(obj:LocalTimings?){
-//        lblDay.text = obj?.day.localized
-//        lblTime.text = (obj?.from ?? "") + " " + "To".localized  + " " + (obj?.to ?? "")
-//    }
+    func configureCell(obj:LocalTimings?){
+        lblDay.text = obj?.day.localized
+        lblTime.text = (obj?.from ?? "") + " " + "To".localized  + " " + (obj?.to ?? "")
+    }
+    
 }
