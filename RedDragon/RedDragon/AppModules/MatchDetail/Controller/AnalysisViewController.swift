@@ -17,6 +17,8 @@ class AnalysisViewController: UIViewController {
     private var analysisModel: AnalysisModel?
     private var cancellable = Set<AnyCancellable>()
     var matchSlug = ""
+    var data: MatchDataClass?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +64,16 @@ extension AnalysisViewController: UITableViewDataSource, UITableViewDelegate{
         cell.userImgView.sd_setImage(with: URL(string: analysisModel?.data?[indexPath.row].user?.imgURL ?? ""))
         cell.nameLbl.text = analysisModel?.data?[indexPath.row].user?.name
         cell.descriptionTxtView.text = analysisModel?.data?[indexPath.row].comments
+        cell.selectionStyle = .none
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigateToViewController(PredictionResultViewController.self, storyboardName: StoryboardName.prediction, animationType: .autoReverse(presenting: .zoom), configure: { vc in
+            vc.data = self.data
+            //vc.configureTopView()
+             
+           })
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -14,6 +14,7 @@ class PredictionDetailsViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var placePredictionDescriptionView: PlacePredictionDescriptionView!
     @IBOutlet weak var predictionPlaceView: PlacePredictionView!
     @IBOutlet weak var predictionDetailTopView: PredictionDetailTopView!
+    
     private var makePredictionViewModel: MakePredictionViewModel?
     private var predictionDetailViewModel: PredictionDetailViewModel?
     private var cancellable = Set<AnyCancellable>()
@@ -23,6 +24,7 @@ class PredictionDetailsViewController: UIViewController, UITextViewDelegate {
     
     var selectedUpComingPosition: Int = 0
     var isSelected = ""
+    var sport = ""
     
     
     var selectedMatch: PredictionData?
@@ -35,7 +37,6 @@ class PredictionDetailsViewController: UIViewController, UITextViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         configureTopView()
-       // setupProgressView()
         configurePlacePredictionView()
         configurePlacePredictionDescriptionView()
         fetchMatchDetailViewModel()
@@ -80,27 +81,32 @@ class PredictionDetailsViewController: UIViewController, UITextViewDelegate {
     
     func makeNetworkCall2(){
         if selectedUpComingMatch != nil{
-            predictionDetailViewModel?.fetchPredictionMatchesDetailAsyncCall(lang: "en", matchID: selectedUpComingMatch?.matches?[selectedUpComingPosition].slug ?? "", sport: "football")
+            predictionDetailViewModel?.fetchPredictionMatchesDetailAsyncCall(lang: "en", matchID: selectedUpComingMatch?.matches?[selectedUpComingPosition].slug ?? "", sport: sport)
         }
         else{
-            predictionDetailViewModel?.fetchPredictionMatchesDetailAsyncCall(lang: "en", matchID: selectedMatch?.matches?[0].slug ?? "", sport: "football")
+            predictionDetailViewModel?.fetchPredictionMatchesDetailAsyncCall(lang: "en", matchID: selectedMatch?.matches?[0].slug ?? "", sport: sport)
         }
     }
     
     func makeNetworkCall(){
         
         if selectedUpComingMatch != nil{
-            makePredictionViewModel?.fetchMakePredictionAsyncCall(matchID: selectedUpComingMatch?.matches?[selectedUpComingPosition].slug ?? "", predictionTeam: isSelected, comment: self.placePredictionDescriptionView.descriptionTxtView.text)
+            makePredictionViewModel?.fetchMakePredictionAsyncCall(matchID: selectedUpComingMatch?.matches?[selectedUpComingPosition].slug ?? "", predictionTeam: isSelected, comment: self.placePredictionDescriptionView.descriptionTxtView.text, sportType: sport)
         }
         else{
-            makePredictionViewModel?.fetchMakePredictionAsyncCall(matchID: selectedMatch?.matches?[0].slug ?? "", predictionTeam: isSelected, comment: self.placePredictionDescriptionView.descriptionTxtView.text)
+            makePredictionViewModel?.fetchMakePredictionAsyncCall(matchID: selectedMatch?.matches?[0].slug ?? "", predictionTeam: isSelected, comment: self.placePredictionDescriptionView.descriptionTxtView.text, sportType: sport)
         }
     }
     
     @objc func publishPredictionBtnAction(){
         if isSelected != ""{
-            fetchMakePredictionViewModel()
-            makeNetworkCall()
+            if self.placePredictionDescriptionView.descriptionTxtView.text == ""{
+                customAlertView(title: "Alert", description: "Please write description", image: "")
+            }
+            else{
+                fetchMakePredictionViewModel()
+                makeNetworkCall()
+            }
         }
         else{
             customAlertView(title: "Alert", description: "Please Select a team", image: "")
@@ -157,7 +163,6 @@ class PredictionDetailsViewController: UIViewController, UITextViewDelegate {
         view3.frame.size = CGSize(width: (predictionDetailTopView.progressStackView.frame.width / 100) * CGFloat(winstats?.awayTeamPrcnt ?? 0), height: predictionDetailTopView.progressStackView.frame.height)
         view3.backgroundColor = UIColor.init(hex: "BB1910")
         view3.translatesAutoresizingMaskIntoConstraints = false
-        
         
         predictionDetailTopView.homeLbl.text = "Home"
         predictionDetailTopView.homePercentValueLbl.text = "\(winstats?.homeTeamPrcnt ?? 0)" + "%"

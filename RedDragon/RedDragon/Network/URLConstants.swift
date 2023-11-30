@@ -97,6 +97,7 @@ struct URLConstants {
     static let getMatchesList       = "api/match/list?"
     static let postMatchPrediction  = "api/predict"
     static let matchDetail          = "api/match"
+    static let predictionList       = "api/predict/list/withMatch?"
     
     
     // MARK: - News
