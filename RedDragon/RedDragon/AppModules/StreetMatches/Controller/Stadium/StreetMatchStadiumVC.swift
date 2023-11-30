@@ -68,7 +68,6 @@ extension StreetMatchStadiumVC:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return stadiumList?.count ?? 0
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,6 +76,16 @@ extension StreetMatchStadiumVC:UITableViewDelegate,UITableViewDataSource{
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        openDetails(index: indexPath.row)
+        
+    }
+    
+    func openDetails(index:Int){
+        navigateToViewController(StadiumDetailsVC.self,storyboardName: StoryboardName.streetMatches) { vc in
+            vc.stadium = self.stadiumList?[index]
+        }
+    }
 }
 
 
