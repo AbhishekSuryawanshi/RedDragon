@@ -65,6 +65,7 @@ class UpComingMatchesViewController: UIViewController {
     
     @objc func predictBtnAction(sender: UIButton){
         navigateToViewController(PredictionDetailsViewController.self, storyboardName: StoryboardName.prediction, animationType: .autoReverse(presenting: .zoom), configure: { vc in
+            vc.sport = self.selectedSports
          //   self.predictionMatchesModel?.data
           
         })

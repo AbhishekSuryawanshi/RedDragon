@@ -254,6 +254,7 @@ extension MatchDetailsVC {
         ViewEmbedder.embed(withIdentifier: "AnalysisViewController", storyboard: UIStoryboard(name: StoryboardName.matchDetail, bundle: nil), parent: self, container: viewContainer) { [weak self] vc in
             let vc = vc as! AnalysisViewController
             vc.matchSlug =  self?.matchSlug ?? ""
+            vc.data = self?.matchDetailViewModel?.responseData?.data
             vc.configureView()
         }
     }

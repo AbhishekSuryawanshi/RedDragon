@@ -7,15 +7,22 @@
 
 import Foundation
 
-// MARK: - PredictionListModelElement
-struct PredictionListModelElement: Codable {
+// MARK: - PredictionListModel
+struct PredictionListModel: Codable {
+    var data: [PredictionsData]?
+}
+
+struct PredictionsData: Codable {
     var id, userID: Int?
     var matchID, winnerTeam, predictedTeam: String?
     var winnerScore, loserScore, isSuccess: Int?
     var createdAt, updatedAt: String?
-    var comments: JSONNull?
+    var comments: String?
+    var predictedVia: String?
+    var sportType: String?
     var user: PredictionUser?
     var loggedIn: Bool?
+    var matchDetail: PredictionMatchDetail
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -28,8 +35,49 @@ struct PredictionListModelElement: Codable {
         case isSuccess = "is_success"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
-        case comments, user
+        case comments, user, sportType
+        case predictedVia = "predicted_via"
         case loggedIn = "logged_in"
+        case matchDetail = "match_detail"
+    }
+}
+
+// MARK: - MatchDetail
+struct PredictionMatchDetail: Codable {
+    var sport, sectionName, sectionSlug, leagueName: String?
+    var leagueSlug, homeTeamName, homeTeamSlug: String?
+    var homeTeamImage: String?
+    var homeTeamIndicator1, homeTeamIndicator2, awayTeamName, awayTeamSlug: String?
+    var awayTeamImage: String?
+    var awayTeamIndicator1, awayTeamIndicator2, matchDatetime, matchState: String?
+    var countDown, homeScore, home1StHalf, home2NdHalf: String?
+    var awayScore, away1StHalf, away2NdHalf: String?
+
+    enum CodingKeys: String, CodingKey {
+        case sport
+        case sectionName = "section_name"
+        case sectionSlug = "section_slug"
+        case leagueName = "league_name"
+        case leagueSlug = "league_slug"
+        case homeTeamName = "home_team_name"
+        case homeTeamSlug = "home_team_slug"
+        case homeTeamImage = "home_team_image"
+        case homeTeamIndicator1 = "home_team_indicator_1"
+        case homeTeamIndicator2 = "home_team_indicator_2"
+        case awayTeamName = "away_team_name"
+        case awayTeamSlug = "away_team_slug"
+        case awayTeamImage = "away_team_image"
+        case awayTeamIndicator1 = "away_team_indicator_1"
+        case awayTeamIndicator2 = "away_team_indicator_2"
+        case matchDatetime = "match_datetime"
+        case matchState = "match_state"
+        case countDown = "count_down"
+        case homeScore = "home_score"
+        case home1StHalf = "home_1st_half"
+        case home2NdHalf = "home_2nd_half"
+        case awayScore = "away_score"
+        case away1StHalf = "away_1st_half"
+        case away2NdHalf = "away_2nd_half"
     }
 }
 
@@ -38,7 +86,7 @@ struct PredictionUser: Codable {
     var id: Int?
     var name, email: String?
     var emailVerifiedAt: JSONNull?
-    var createdAt, updatedAt: String?
+    var createdAt, updatedAt, signupVia: String?
     var imgURL: JSONNull?
     var predStats: PredStats?
 
@@ -47,6 +95,7 @@ struct PredictionUser: Codable {
         case emailVerifiedAt = "email_verified_at"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case signupVia = "signup_via"
         case imgURL = "img_url"
         case predStats = "pred_stats"
     }
@@ -56,8 +105,6 @@ struct PredictionUser: Codable {
 struct PredStats: Codable {
     var allCnt, successCnt, unsuccessCnt, coins: Int?
 }
-
-typealias PredictionListModel = [PredictionListModelElement]
 
 // MARK: - Encode/decode helpers
 
