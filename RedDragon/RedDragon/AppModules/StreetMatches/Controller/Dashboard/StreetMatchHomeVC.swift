@@ -167,12 +167,23 @@ extension StreetMatchHomeVC:UITableViewDelegate,UITableViewDataSource{
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0{
+            openDetails(index: indexPath.row)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.streetHomeHeaderTableViewCell) as! StreetHomeHeaderTableViewCell
         cell.lblTitle.text = headers[section]
         return cell
     }
     
+    func openDetails(index:Int){
+        navigateToViewController(StadiumDetailsVC.self,storyboardName: StoryboardName.streetMatches) { vc in
+            vc.stadium = self.homeData?.stadiums[index]
+        }
+    }
     
 }
 

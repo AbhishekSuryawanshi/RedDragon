@@ -146,7 +146,6 @@ class StadiumDetailsVC: UIViewController {
             timings = try JSONDecoder().decode([LocalTimings].self, from: data)
         }
         catch{
-            
         }
         collectionViewSports.reloadData()
         collectionViewAmenities.reloadData()
