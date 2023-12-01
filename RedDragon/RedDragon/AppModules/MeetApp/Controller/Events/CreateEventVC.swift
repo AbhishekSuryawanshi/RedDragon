@@ -49,6 +49,7 @@ class CreateEventVC: UIViewController {
         makeNetworkCall()
         fetchMeetUserSportsInterestViewModel()
         priceSegmentAction(priceSegmentControl)
+        successView.isHidden = true
     }
     
     func nibInitialization() {
@@ -135,17 +136,26 @@ class CreateEventVC: UIViewController {
     }
     
     @IBAction func createEventBtnAction(_ sender: Any) {
-        geocodeAddress(address: locationTextField.text!)
-        
+        var priceString = priceTextField.text ?? "0"
+        if priceString == ""{
+            priceString = "0"
+        }
+        price = Float(priceString)!
         eventRequest =
         MeetEvent(name: eventTitleTextField.text!, description: eventDescTextView.text!, interestId: sportsInterestArray[self.selectedCellRow].id!, latitude: latitude, longitude: longitude, date: startEventDateTextField.text!, time: startEventTimeTextField.text!, address: locationTextField.text!, isPaid: isPaid, price: price)
         
-        var dict = eventRequest.dictionary
-        
+        let dict = eventRequest.dictionary
+
         if validate() {
+            geocodeAddress(address: locationTextField.text!)
             meetCreateEventVM = MeetCreateEventVM()
             meetCreateEventVM?.postCreateEventAsyncCall(params: dict, imageName: selectedImage!.0, imageData: selectedImage!.1)
+            fetchCreateEventViewModelResponse()
         }
+    }
+    
+    @IBAction func successAlertDoneBtnAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 //MARK: - ImagePicker Delegate
@@ -199,9 +209,31 @@ extension CreateEventVC {
             .store(in: &cancellable)
     }
     
+    func fetchCreateEventViewModelResponse() {
+        meetCreateEventVM?.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        meetCreateEventVM?.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        meetCreateEventVM?.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] detail in
+                self?.execute_onCreateEventResponseData(detail!)
+            })
+            .store(in: &cancellable)
+    }
+    
     func execute_onUserSportInterestListResponse(_ interestList: MeetUserSportsInterestModel) {
         self.sportsInterestArray = interestList.response?.data ?? []
         collectionView.reloadData()
+    }
+    
+    func execute_onCreateEventResponseData(_ detail: MeetEventDetailModel) {
+        if detail.response?.code == 200 {
+            successView.isHidden = false
+        }
     }
     
     private func collectionCell(indexPath:IndexPath) -> HeaderBottom_1CollectionViewCell {

@@ -14,7 +14,6 @@ class MeetHotEventViewModel: APIServiceManager<MeetEventListModel> {
         let method      = RequestType.get
         asyncCall(urlString: urlString, method: method, parameters: nil, isGuestUser: true, anyDefaultToken: DefaultToken.guestUser)
     }
-    
 }
 
 class MeetAllEventViewModel: APIServiceManager<MeetEventListModel> {
@@ -48,7 +47,15 @@ class MeetCreateEventVM: MultipartAPIServiceManager<MeetEventDetailModel> {
     ///function to upload image for a post for social module
     func postCreateEventAsyncCall(params: [String:Any], imageName: String, imageData: Data) {
         let urlString   = URLConstants.meetCreateEvent
-        let method      = RequestType.post
-        asyncCall(urlString: urlString, params: params, imageName: imageName, imageData: imageData, imageKey: "banner")
+        asyncCall(urlString: urlString, params: params,isGuestUser: true, anyDefaultToken: DefaultToken.guestUser, imageName: imageName, imageData: imageData, imageKey: "banner")
+    }
+}
+
+class MeetEventDetailViewModel: APIServiceManager<MeetEventDetailModel> {
+    ///function to fetch all event list
+    func fetchMeetEventDetailAsyncCall(eventID: Int) {
+        let urlString   = URLConstants.meetAllEventList + "?event_id=\(eventID)"
+        let method      = RequestType.get
+        asyncCall(urlString: urlString, method: method, parameters: nil, isGuestUser: true, anyDefaultToken: DefaultToken.guestUser)
     }
 }
