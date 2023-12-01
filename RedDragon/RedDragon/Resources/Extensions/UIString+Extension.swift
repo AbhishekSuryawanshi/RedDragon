@@ -162,7 +162,7 @@ extension String {
         case "fansided":
             return ("FanSided", .fanSidedLogo)
         case "esports":
-            return ("eSports", .placeholder1)
+            return ("eSports", .aiSportLogo)
         default:
             return ("", .placeholder1)
         }
