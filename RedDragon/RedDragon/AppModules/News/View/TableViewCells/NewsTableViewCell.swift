@@ -24,4 +24,9 @@ class NewsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func configureGossipCell(model: Gossip) {
+        newsImageView.setImage(imageStr: model.mediaSource.last ?? "", placeholder: .empty)
+        titleLabel.text = model.title
+    }
+    
 }

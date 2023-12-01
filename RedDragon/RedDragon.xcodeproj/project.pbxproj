@@ -135,6 +135,9 @@
 		47B3E9972AF22BDC008BB827 /* SocialPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B3E9962AF22BDC008BB827 /* SocialPostViewModel.swift */; };
 		47B3E99A2AF25F70008BB827 /* SocialPollTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B3E9982AF25F70008BB827 /* SocialPollTableViewCell.swift */; };
 		47B3E99B2AF25F70008BB827 /* SocialPollTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47B3E9992AF25F70008BB827 /* SocialPollTableViewCell.xib */; };
+		47BBF5052B19B3A500CDE3D9 /* CHIPageControl in Frameworks */ = {isa = PBXBuildFile; productRef = 47BBF5042B19B3A500CDE3D9 /* CHIPageControl */; };
+		47C18F7B2B1A0B8700DC1B11 /* ESportsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C18F7A2B1A0B8700DC1B11 /* ESportsModel.swift */; };
+		47C18F7D2B1A103800DC1B11 /* VideosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C18F7C2B1A103800DC1B11 /* VideosModel.swift */; };
 		47C3B7142B04D43500E12A4D /* CountryCodeListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C3B7122B04D43500E12A4D /* CountryCodeListVC.swift */; };
 		47C3B7152B04D43500E12A4D /* CountryCodeListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47C3B7132B04D43500E12A4D /* CountryCodeListVC.xib */; };
 		47C3B71B2B04D4C000E12A4D /* FlagKit.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47C3B71A2B04D4C000E12A4D /* FlagKit.xcassets */; };
@@ -500,6 +503,8 @@
 		47B3E9962AF22BDC008BB827 /* SocialPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialPostViewModel.swift; sourceTree = "<group>"; };
 		47B3E9982AF25F70008BB827 /* SocialPollTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialPollTableViewCell.swift; sourceTree = "<group>"; };
 		47B3E9992AF25F70008BB827 /* SocialPollTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialPollTableViewCell.xib; sourceTree = "<group>"; };
+		47C18F7A2B1A0B8700DC1B11 /* ESportsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESportsModel.swift; sourceTree = "<group>"; };
+		47C18F7C2B1A103800DC1B11 /* VideosModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosModel.swift; sourceTree = "<group>"; };
 		47C3B7122B04D43500E12A4D /* CountryCodeListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodeListVC.swift; sourceTree = "<group>"; };
 		47C3B7132B04D43500E12A4D /* CountryCodeListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CountryCodeListVC.xib; sourceTree = "<group>"; };
 		47C3B71A2B04D4C000E12A4D /* FlagKit.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = FlagKit.xcassets; sourceTree = "<group>"; };
@@ -760,6 +765,7 @@
 				472873732AEA7E470011F00F /* Hero in Frameworks */,
 				4728736E2AEA7E3F0011F00F /* NVActivityIndicatorView in Frameworks */,
 				47C8C9552AF0D3A900448D96 /* CropViewController in Frameworks */,
+				47BBF5052B19B3A500CDE3D9 /* CHIPageControl in Frameworks */,
 				472873792AEA7E920011F00F /* Toast in Frameworks */,
 				E9DDB61E2B049AF1004C8ACF /* SideMenu in Frameworks */,
 				49310AF72B0BA02F00AFCBCA /* Shuffle in Frameworks */,
@@ -1134,6 +1140,8 @@
 			children = (
 				47CB0E102B11D8510070744B /* NewsModel.swift */,
 				47FE163D2B15ECBF009043D2 /* GossipModel.swift */,
+				47C18F7A2B1A0B8700DC1B11 /* ESportsModel.swift */,
+				47C18F7C2B1A103800DC1B11 /* VideosModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2121,6 +2129,7 @@
 				41846BC22B0B395B0020F503 /* YouTubePlayerKit */,
 				6A5F2B852B0C97C200AB6A98 /* Gifu */,
 				47051F132B146C95004D190A /* MarqueeLabel */,
+				47BBF5042B19B3A500CDE3D9 /* CHIPageControl */,
 			);
 			productName = RedDragon;
 			productReference = 49B0B9E42AE68F0700A9D235 /* RedDragon.app */;
@@ -2167,6 +2176,7 @@
 				41846BC12B0B395B0020F503 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
 				6A5F2B842B0C97C200AB6A98 /* XCRemoteSwiftPackageReference "Gifu" */,
 				47051F122B146C95004D190A /* XCRemoteSwiftPackageReference "MarqueeLabel" */,
+				47BBF5032B19B3A500CDE3D9 /* XCRemoteSwiftPackageReference "CHIPageControl" */,
 			);
 			productRefGroup = 49B0B9E52AE68F0700A9D235 /* Products */;
 			projectDirPath = "";
@@ -2373,6 +2383,7 @@
 				47163AE32B108DD200235FC6 /* UIView+Extension.swift in Sources */,
 				47C8C95D2AF116D700448D96 /* ImageZoomVC.swift in Sources */,
 				49B04A602AFA6FD300B440AA /* ExpertViewController.swift in Sources */,
+				47C18F7B2B1A0B8700DC1B11 /* ESportsModel.swift in Sources */,
 				49A822BB2B04FC27007752C2 /* RecentMatchTableViewCell.swift in Sources */,
 				47FE163E2B15ECBF009043D2 /* GossipModel.swift in Sources */,
 				47AECA8A2B01E7D800166292 /* TagsCVLayout.swift in Sources */,
@@ -2538,6 +2549,7 @@
 				49B0BA472AE6A3E800A9D235 /* StoryboardName.swift in Sources */,
 				4943184C2AE7A222007F7292 /* LoaderAnimation.swift in Sources */,
 				47163AEF2B1090C700235FC6 /* Array+Extension.swift in Sources */,
+				47C18F7D2B1A103800DC1B11 /* VideosModel.swift in Sources */,
 				494318502AE7A2A1007F7292 /* ZoomAnimation.swift in Sources */,
 				49E6DE8E2AF3BE4B00A0DDC3 /* MatchDetailsViewModel.swift in Sources */,
 				49B211442B0B43E300E1C58E /* AllPlayersViewController.swift in Sources */,
@@ -2716,9 +2728,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GST3AB35D8;
+				DEVELOPMENT_TEAM = TXN6T998WP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RedDragon/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "RedDragon would like to access your camera to upload profile picture and post images";
@@ -2735,6 +2748,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.RedDragon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2749,9 +2763,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GST3AB35D8;
+				DEVELOPMENT_TEAM = TXN6T998WP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RedDragon/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "RedDragon would like to access your camera to upload profile picture and post images";
@@ -2768,6 +2783,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.RedDragon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
@@ -2861,6 +2877,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.0.1;
+			};
+		};
+		47BBF5032B19B3A500CDE3D9 /* XCRemoteSwiftPackageReference "CHIPageControl" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ChiliLabs/CHIPageControl.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.1;
 			};
 		};
 		47C8C9532AF0D3A900448D96 /* XCRemoteSwiftPackageReference "TOCropViewController" */ = {
@@ -2963,6 +2987,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 472873772AEA7E920011F00F /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
+		};
+		47BBF5042B19B3A500CDE3D9 /* CHIPageControl */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 47BBF5032B19B3A500CDE3D9 /* XCRemoteSwiftPackageReference "CHIPageControl" */;
+			productName = CHIPageControl;
 		};
 		47C8C9542AF0D3A900448D96 /* CropViewController */ = {
 			isa = XCSwiftPackageProductDependency;

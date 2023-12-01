@@ -32,3 +32,51 @@ class GossipVM: APIServiceManager<GossipResponse> {
         asyncCall(urlString: urlString, method: method, parameters: params)
     }
 }
+
+class ESportsListVM: APIServiceManager<ESportsList> {
+    init () {}
+    static let shared = ESportsListVM()
+    
+    ///function to fetch e sports for gossips in news module
+    func fetchESportsListAsyncCall() {
+        let urlString   = URLConstants.eSportsList
+        let method      = RequestType.get
+        asyncCall(urlString: urlString, method: method, parameters: nil)
+    }
+}
+
+class ESportsDetailVM: APIServiceManager<ESportsDetail> {
+    init () {}
+    static let shared = ESportsDetailVM()
+    
+    ///function to fetch e sports detail for gossips in news module
+    func fetchESportsDetailAsyncCall(id: Int) {
+        let urlString   = URLConstants.eSportsDetail + "\(id)"
+        let method      = RequestType.get
+        asyncCall(urlString: urlString, method: method, parameters: nil)
+    }
+}
+
+class GossipVideoListVM: APIServiceManager<GossipVideoResponse> {
+    init () {}
+    static let shared = GossipVideoListVM()
+    
+    ///function to fetch videos for gossips in news module
+    func fetchESportsListAsyncCall() {
+        let urlString   = URLConstants.videosList
+        let method      = RequestType.get
+        asyncCall(urlString: urlString, method: method, parameters: nil)
+    }
+}
+
+class GossipVideoVM: APIServiceManager<GossipVideoResponse> {
+    init () {}
+    static let shared = GossipVideoVM()
+    
+    ///function to fetch videos for gossips in news module
+    func fetchESportsListAsyncCall(id: Int) {
+        let urlString   = URLConstants.videosBaseURL + "\(id)"
+        let method      = RequestType.get
+        asyncCall(urlString: urlString, method: method, parameters: nil)
+    }
+}

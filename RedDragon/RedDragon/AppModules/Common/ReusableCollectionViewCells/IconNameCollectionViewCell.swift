@@ -18,7 +18,7 @@ class IconNameCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    func configure(title: String, iconName: String = "", iconImage: UIImage = .placeholder1, imageWidth: CGFloat = 60, borderWidth: CGFloat = 1, font: UIFont = fontMedium(11), placeHolderImage: UIImage = .placeholder1) {
+    func configure(title: String, iconName: String = "", iconImage: UIImage = .placeholderPost, imageWidth: CGFloat = 60, borderWidth: CGFloat = 1, font: UIFont = fontMedium(11), placeHolderImage: UIImage = .placeholderPost) {
         
         bgView.borderWidth = borderWidth
         

@@ -102,5 +102,12 @@ struct URLConstants {
     
     // MARK: - News
     static let newsGossips         = "https://datasport.one/api/v1/news/data.php"
-
+    static let eSportsBaseURL      = "http://199.241.1.88:7001/"
+    static let eSportsList         = eSportsBaseURL + "api/esports-news-list"
+    static let eSportsDetail       = eSportsBaseURL + "specific-esports-news/"
+    static let videosBaseURL       = "https://zeyuapi.com/v1/video/"
+    static let videosList          = videosBaseURL + "recommend"
+    static let videosThumbnail     = "https://34433tiyu.com/"
+    
+    
 }
