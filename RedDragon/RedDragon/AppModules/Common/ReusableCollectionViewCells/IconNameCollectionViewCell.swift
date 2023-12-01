@@ -7,12 +7,6 @@
 
 import UIKit
 
-enum IconNameCellStyle {
-    case league
-    case team
-    case services
-}
-
 class IconNameCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var bgView: UIView!
@@ -24,20 +18,23 @@ class IconNameCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    func configure(title: String, iconName: String = "", style: IconNameCellStyle) {
-        /// 3 IconNameCellStyle added
-        /// cell view's border, icon size, title font depends on "style", check and change accordingly
+    func configure(title: String, iconName: String = "", iconImage: UIImage = .placeholder1, imageWidth: CGFloat = 60, borderWidth: CGFloat = 1, font: UIFont = fontMedium(11), placeHolderImage: UIImage = .placeholder1) {
         
-        bgView.borderWidth = style == .services ? 0 : 1
+        bgView.borderWidth = borderWidth
         
         titleLabel.text = title
-        titleLabel.font = fontMedium(style == .services ? 13 : 11)
-        iconImageWidthConstraint.constant = style == .team ? (0.7 * 60) : 60
+        titleLabel.font = font
+        /// width 60 fixed for bgView
+        /// pass this (0.7 * 60) for small image in middle, refer SocialVC - teamsCollectionView
+        iconImageWidthConstraint.constant = imageWidth
         
         iconImageView.cornerRadius = iconImageWidthConstraint.constant / 2
         iconImageView.clipsToBounds = true
         
-        //Check image or url, placeholder image
-        iconImageView.setImage(imageStr: iconName, placeholder: (style == .league ? .placeholderLeague : (style == .team ? .placeholderTeam : nil)))
+        if iconName == "" {
+            iconImageView.image = iconImage
+        } else {
+            iconImageView.setImage(imageStr: iconName, placeholder: placeHolderImage)
+        }
     }
 }

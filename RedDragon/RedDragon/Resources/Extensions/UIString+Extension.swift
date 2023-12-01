@@ -150,6 +150,23 @@ extension String {
         let outputDate = formatter.string(from: date)
         return outputDate
     }
+    
+    func getNewsSource() -> (String, UIImage) {
+        switch self {
+        case "thehindu":
+            return ("The Hindu", .theHinduLogo)
+        case "handball-planet":
+            return ("Handball Planet", .handBallPlanetLogo)
+        case "worldofvolley":
+            return ("WorldofVolley", .worldofVolleyLogo)
+        case "fansided":
+            return ("FanSided", .fanSidedLogo)
+        case "esports":
+            return ("eSports", .placeholder1)
+        default:
+            return ("", .placeholder1)
+        }
+    }
 }
 
 // MARK: - NSMutableAttributedString
