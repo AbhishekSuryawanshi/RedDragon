@@ -29,6 +29,7 @@ class UserProfileViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var inviteToPlayButton: UIButton!
     @IBOutlet weak var budgetLabel: UILabel!
+    @IBOutlet weak var teamCollectionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
     var cancellable = Set<AnyCancellable>()
@@ -99,6 +100,9 @@ extension UserProfileViewController {
             .sink(receiveValue: { [weak self] detail in
                 self?.loadData()
                 self?.collectionView.reloadData()
+                if detail?.players.count != 0 {
+                    self?.teamCollectionViewHeight.constant = 120
+                }
             })
             .store(in: &cancellable)
     }
@@ -164,7 +168,6 @@ extension UserProfileViewController {
     
     private func loadFunctionality() {
         initialize()
-        loadData()
         checkLocalisation()
         nibInitialization()
     }
@@ -177,6 +180,8 @@ extension UserProfileViewController {
     private func initialize() {
         navigationController?.setNavigationBarHidden(true, animated: true)
         self.view.addSubview(Loader.activityIndicator)
+        teamCollectionViewHeight.constant = 0
+        view.layoutIfNeeded()
     }
     
     private func showLoader(_ value: Bool) {
@@ -273,7 +278,7 @@ extension UserProfileViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        animateTabelCell(tableView, willDisplay: cell, forRowAt: indexPath)
+        //animateTabelCell(tableView, willDisplay: cell, forRowAt: indexPath)
         tableViewHeight.constant = self.tableView.contentSize.height
     }
 }
