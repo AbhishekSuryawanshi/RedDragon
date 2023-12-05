@@ -82,7 +82,6 @@ extension LeaderboardViewController {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] data in
-                print(data as Any)
                 self?.tableView.reloadData()
                 self?.firstThreeUsersData(data: data)
             })
@@ -144,12 +143,16 @@ extension LeaderboardViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        navigateToViewController(LeaderboardDetailViewController.self, storyboardName: Storyboard.leaderboard) { [self] vc in
-//            vc.userID = leaderboardViewModel?.filteredLeader[indexPath.row].id ?? leaderboardViewModel?.leaderboardData?[indexPath.row].id ?? 0
-//        }
+        navigateToViewController(UserProfileViewController.self, storyboardName: StoryboardName.cardGame) { [self] vc in
+            vc.userID = leaderboardVM?.responseData?[indexPath.row].id ?? 0
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        animateTabelCell(tableView, willDisplay: cell, forRowAt: indexPath)
     }
 }
