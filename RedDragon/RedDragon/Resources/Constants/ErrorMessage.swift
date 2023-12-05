@@ -68,3 +68,7 @@ struct ErrorMessage {
     static let eventLocationEmptyAlert     = "Please enter event location"
     static let eventPriceEmptyAlert        = "Please enter event location"
 }
+
+struct SuccessMessage {
+    static let successfullyLikedUser       = "User liked successfully"
+}

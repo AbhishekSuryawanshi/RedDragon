@@ -86,6 +86,7 @@ struct URLConstants {
     static let meetSportsInterest  = meetBaseURL + "user/sports/interest/list"
     static let meetMyMatchUser     = meetBaseURL + "user/mymatch/list"
     static let meetCreateEvent     = meetBaseURL + "user/events/add"
+    static let meetJoinEvent       = meetBaseURL + "user/events/join"
     
     // MARK: - StreetMatches
     static let streetMatchesBaseURL = "https://trkick.com/stm/api/"
@@ -115,6 +116,6 @@ struct URLConstants {
     static let videosBaseURL       = "https://zeyuapi.com/v1/video/"
     static let videosList          = videosBaseURL + "recommend"
     static let videosThumbnail     = "https://34433tiyu.com/"
-    
+    static let chatTokenURL        = "https://grullo-chihuahua-4284.twil.io/chat-token"
     
 }

@@ -321,8 +321,20 @@
 		6A5F2BA22B0CE10300AB6A98 /* MeetUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A5F2BA02B0CE10300AB6A98 /* MeetUserTableViewCell.xib */; };
 		6A93C99E2B1729C6009087DC /* MeetUserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A93C99D2B1729C6009087DC /* MeetUserProfileViewModel.swift */; };
 		6A947A822B1EFDA600A00788 /* TwilioChatClient in Frameworks */ = {isa = PBXBuildFile; productRef = 6A947A812B1EFDA600A00788 /* TwilioChatClient */; };
-		6A947A862B1F082000A00788 /* TwilioAccessManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A947A842B1F04D000A00788 /* TwilioAccessManager.framework */; };
-		6A947A872B1F082000A00788 /* TwilioAccessManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6A947A842B1F04D000A00788 /* TwilioAccessManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6A947A8B2B1F0DDF00A00788 /* ChatListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A947A8A2B1F0DDF00A00788 /* ChatListModel.swift */; };
+		6A947A932B1F2A0C00A00788 /* ChatListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A947A8D2B1F2A0C00A00788 /* ChatListTableViewCell.xib */; };
+		6A947A942B1F2A0C00A00788 /* ReceiverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A947A8E2B1F2A0C00A00788 /* ReceiverTableViewCell.swift */; };
+		6A947A952B1F2A0C00A00788 /* ReceiverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A947A8F2B1F2A0C00A00788 /* ReceiverTableViewCell.xib */; };
+		6A947A962B1F2A0C00A00788 /* SenderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A947A902B1F2A0C00A00788 /* SenderTableViewCell.swift */; };
+		6A947A972B1F2A0C00A00788 /* ChatListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A947A912B1F2A0C00A00788 /* ChatListTableViewCell.swift */; };
+		6A947A982B1F2A0C00A00788 /* SenderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A947A922B1F2A0C00A00788 /* SenderTableViewCell.xib */; };
+		6A947A9A2B1F2C9300A00788 /* ChatDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A947A992B1F2C9300A00788 /* ChatDetailVC.swift */; };
+		6A947A9E2B1F325C00A00788 /* ChatListTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A947A9C2B1F325C00A00788 /* ChatListTV.swift */; };
+		6A947A9F2B1F325C00A00788 /* ChatDetailTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A947A9D2B1F325C00A00788 /* ChatDetailTV.swift */; };
+		6A947AA52B1F33DB00A00788 /* DateTodayFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A947AA12B1F33DA00A00788 /* DateTodayFormatter.swift */; };
+		6A947AA62B1F33DB00A00788 /* ChannelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A947AA22B1F33DB00A00788 /* ChannelManager.swift */; };
+		6A947AA72B1F33DB00A00788 /* MessagingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A947AA32B1F33DB00A00788 /* MessagingManager.swift */; };
+		6A947AA82B1F33DB00A00788 /* TokenRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A947AA42B1F33DB00A00788 /* TokenRequestHandler.swift */; };
 		6AB18E372B187B7B00287A9C /* EventDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB18E352B187B7B00287A9C /* EventDetailVC.swift */; };
 		6AB18E382B187B7B00287A9C /* EventDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AB18E362B187B7B00287A9C /* EventDetailVC.xib */; };
 		6AD21DCB2B15B3100043D7C2 /* MyEventsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD21DC92B15B3100043D7C2 /* MyEventsCollectionViewCell.swift */; };
@@ -414,7 +426,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6A947A872B1F082000A00788 /* TwilioAccessManager.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -721,7 +732,20 @@
 		6A5F2B9F2B0CE10300AB6A98 /* MeetUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetUserTableViewCell.swift; sourceTree = "<group>"; };
 		6A5F2BA02B0CE10300AB6A98 /* MeetUserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MeetUserTableViewCell.xib; sourceTree = "<group>"; };
 		6A93C99D2B1729C6009087DC /* MeetUserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetUserProfileViewModel.swift; sourceTree = "<group>"; };
-		6A947A842B1F04D000A00788 /* TwilioAccessManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwilioAccessManager.framework; sourceTree = "<group>"; };
+		6A947A8A2B1F0DDF00A00788 /* ChatListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListModel.swift; sourceTree = "<group>"; };
+		6A947A8D2B1F2A0C00A00788 /* ChatListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatListTableViewCell.xib; sourceTree = "<group>"; };
+		6A947A8E2B1F2A0C00A00788 /* ReceiverTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiverTableViewCell.swift; sourceTree = "<group>"; };
+		6A947A8F2B1F2A0C00A00788 /* ReceiverTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReceiverTableViewCell.xib; sourceTree = "<group>"; };
+		6A947A902B1F2A0C00A00788 /* SenderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SenderTableViewCell.swift; sourceTree = "<group>"; };
+		6A947A912B1F2A0C00A00788 /* ChatListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListTableViewCell.swift; sourceTree = "<group>"; };
+		6A947A922B1F2A0C00A00788 /* SenderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SenderTableViewCell.xib; sourceTree = "<group>"; };
+		6A947A992B1F2C9300A00788 /* ChatDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDetailVC.swift; sourceTree = "<group>"; };
+		6A947A9C2B1F325C00A00788 /* ChatListTV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListTV.swift; sourceTree = "<group>"; };
+		6A947A9D2B1F325C00A00788 /* ChatDetailTV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDetailTV.swift; sourceTree = "<group>"; };
+		6A947AA12B1F33DA00A00788 /* DateTodayFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTodayFormatter.swift; sourceTree = "<group>"; };
+		6A947AA22B1F33DB00A00788 /* ChannelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelManager.swift; sourceTree = "<group>"; };
+		6A947AA32B1F33DB00A00788 /* MessagingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagingManager.swift; sourceTree = "<group>"; };
+		6A947AA42B1F33DB00A00788 /* TokenRequestHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenRequestHandler.swift; sourceTree = "<group>"; };
 		6AB18E352B187B7B00287A9C /* EventDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailVC.swift; sourceTree = "<group>"; };
 		6AB18E362B187B7B00287A9C /* EventDetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventDetailVC.xib; sourceTree = "<group>"; };
 		6AD21DC92B15B3100043D7C2 /* MyEventsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEventsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -812,7 +836,6 @@
 			files = (
 				6A5F2B862B0C97C200AB6A98 /* Gifu in Frameworks */,
 				4728736B2AEA7E360011F00F /* SDWebImageMapKit in Frameworks */,
-				6A947A862B1F082000A00788 /* TwilioAccessManager.framework in Frameworks */,
 				47051F142B146C95004D190A /* MarqueeLabel in Frameworks */,
 				47C8C9572AF0D3A900448D96 /* TOCropViewController in Frameworks */,
 				49B2114F2B0B488B00E1C58E /* RealmSwift in Frameworks */,
@@ -1830,7 +1853,10 @@
 		6A08D6672B0F834F00E1AE7C /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				6A947AA02B1F33C200A00788 /* Twilio Chat */,
+				6A947A9B2B1F2DE100A00788 /* TableView */,
 				6A5F2B8D2B0CB7D500AB6A98 /* MeetChatVC.swift */,
+				6A947A992B1F2C9300A00788 /* ChatDetailVC.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1838,7 +1864,6 @@
 		6A213FE72B0B2F4800F52E69 /* MeetApp */ = {
 			isa = PBXGroup;
 			children = (
-				6A947A892B1F0CE800A00788 /* Framework */,
 				6A5F2B812B0C91FD00AB6A98 /* GifAssets */,
 				6A213FE82B0B342C00F52E69 /* Storyboard */,
 				6A213FEC2B0B34C400F52E69 /* Model */,
@@ -1870,6 +1895,7 @@
 		6A213FEA2B0B34A800F52E69 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6A947A8C2B1F265900A00788 /* Chat */,
 				6A08D6642B0F827F00E1AE7C /* Events */,
 				6A08D6632B0F827500E1AE7C /* Users */,
 			);
@@ -1890,6 +1916,7 @@
 		6A213FEC2B0B34C400F52E69 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6A947A8A2B1F0DDF00A00788 /* ChatListModel.swift */,
 				6A2140252B0B75F800F52E69 /* MeetUserModel.swift */,
 				6A08D65D2B0F808700E1AE7C /* MeetEventModel.swift */,
 			);
@@ -1915,12 +1942,37 @@
 			path = GifAssets;
 			sourceTree = "<group>";
 		};
-		6A947A892B1F0CE800A00788 /* Framework */ = {
+		6A947A8C2B1F265900A00788 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				6A947A842B1F04D000A00788 /* TwilioAccessManager.framework */,
+				6A947A912B1F2A0C00A00788 /* ChatListTableViewCell.swift */,
+				6A947A8D2B1F2A0C00A00788 /* ChatListTableViewCell.xib */,
+				6A947A8E2B1F2A0C00A00788 /* ReceiverTableViewCell.swift */,
+				6A947A8F2B1F2A0C00A00788 /* ReceiverTableViewCell.xib */,
+				6A947A902B1F2A0C00A00788 /* SenderTableViewCell.swift */,
+				6A947A922B1F2A0C00A00788 /* SenderTableViewCell.xib */,
 			);
-			path = Framework;
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		6A947A9B2B1F2DE100A00788 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				6A947A9D2B1F325C00A00788 /* ChatDetailTV.swift */,
+				6A947A9C2B1F325C00A00788 /* ChatListTV.swift */,
+			);
+			path = TableView;
+			sourceTree = "<group>";
+		};
+		6A947AA02B1F33C200A00788 /* Twilio Chat */ = {
+			isa = PBXGroup;
+			children = (
+				6A947AA22B1F33DB00A00788 /* ChannelManager.swift */,
+				6A947AA12B1F33DA00A00788 /* DateTodayFormatter.swift */,
+				6A947AA32B1F33DB00A00788 /* MessagingManager.swift */,
+				6A947AA42B1F33DB00A00788 /* TokenRequestHandler.swift */,
+			);
+			path = "Twilio Chat";
 			sourceTree = "<group>";
 		};
 		AD31C4F82B1770A500DC879D /* Stadium */ = {
@@ -2299,6 +2351,7 @@
 				41BB28842B064C8F0080E63F /* PlayerStatsTableViewHeader.xib in Resources */,
 				47C3B7212B04D5DA00E12A4D /* CountryListTableViewCell.xib in Resources */,
 				6A5F2B962B0CC31900AB6A98 /* MyMatchVC.xib in Resources */,
+				6A947A952B1F2A0C00A00788 /* ReceiverTableViewCell.xib in Resources */,
 				474D99402AE7F30D009499D0 /* Roboto-ThinItalic.ttf in Resources */,
 				47AE9C9F2B03AECF00C271FB /* Login.storyboard in Resources */,
 				49DCA7C02B0C8A54005902AF /* CardGame.xcassets in Resources */,
@@ -2364,6 +2417,7 @@
 				6A5F2B9A2B0CC34700AB6A98 /* ExploreEventsVC.xib in Resources */,
 				E9380B9C2B15EEC0007AEB3D /* BetLeagueTableVC.xib in Resources */,
 				49A9D9E82B1F48DE00C4A1A1 /* YourMatchesTableCell.xib in Resources */,
+				6A947A932B1F2A0C00A00788 /* ChatListTableViewCell.xib in Resources */,
 				474D993F2AE7F30D009499D0 /* Roboto-Thin.ttf in Resources */,
 				41EB79D22AF37BA000D068F7 /* PlayerStatsView.xib in Resources */,
 				49B0B9F12AE68F0800A9D235 /* Assets.xcassets in Resources */,
@@ -2379,6 +2433,7 @@
 				49B0B9EF2AE68F0700A9D235 /* Main.storyboard in Resources */,
 				41E2AB502B0CBBE4005425CF /* PredictionDetailTopView.xib in Resources */,
 				47FE163C2B15C073009043D2 /* CommentTableViewCell.xib in Resources */,
+				6A947A982B1F2A0C00A00788 /* SenderTableViewCell.xib in Resources */,
 				474D993C2AE7F30D009499D0 /* Roboto-Light.ttf in Resources */,
 				493D21292AFE125600045672 /* PlayerDetailsMediaCollectionViewCell.xib in Resources */,
 				41E726752B0DE75400D2BFB5 /* PredictHistoryTableViewCell.xib in Resources */,
@@ -2435,6 +2490,7 @@
 				496A9AB32B0F200900274FC6 /* LeagueCollectionViewCell.swift in Sources */,
 				49B8373B2B04E2E700CD9E26 /* MediaCollectionViewCell.swift in Sources */,
 				E9DDB63E2B04D3B1004C8ACF /* HomeTitleCollectionVc.swift in Sources */,
+				6A947AA52B1F33DB00A00788 /* DateTodayFormatter.swift in Sources */,
 				AD2E94D22B19EC1F00FA3276 /* CreateStadiumVC.swift in Sources */,
 				41E726742B0DE75400D2BFB5 /* PredictHistoryTableViewCell.swift in Sources */,
 				085385C02B079F7F00C4E953 /* SubstituteTableViewCell.swift in Sources */,
@@ -2447,8 +2503,10 @@
 				6A2140212B0B730C00F52E69 /* SwipeCardOverlay.swift in Sources */,
 				AD3B55602B1607E7007B14F7 /* SelectionCollectionViewCell.swift in Sources */,
 				E9DDB6372B04B4CA004C8ACF /* Bets.swift in Sources */,
+				6A947A9F2B1F325C00A00788 /* ChatDetailTV.swift in Sources */,
 				49B211482B0B470E00E1C58E /* FootballPlayers.swift in Sources */,
 				494D7B7C2AE9317F00488E27 /* LeagueDetailModel.swift in Sources */,
+				6A947AA62B1F33DB00A00788 /* ChannelManager.swift in Sources */,
 				494B37E52AEA3BD700FB9BCD /* PMAlertController.swift in Sources */,
 				49B0BA232AE698B200A9D235 /* UIString+Extension.swift in Sources */,
 				41B5C9F72B0F2898000A7A59 /* PredictionViewModel.swift in Sources */,
@@ -2481,6 +2539,7 @@
 				4784E3F12AECDCC000C96085 /* SocialViewModel.swift in Sources */,
 				E9C657212B0B67A800833D37 /* PlaceBetVc.swift in Sources */,
 				E9C657232B0B73CC00833D37 /* PointsVc.swift in Sources */,
+				6A947A972B1F2A0C00A00788 /* ChatListTableViewCell.swift in Sources */,
 				41E2AB4E2B0CBBD1005425CF /* PredictionDetailTopView.swift in Sources */,
 				4196582A2B0CFA0C00730D9F /* PredictionResultViewController.swift in Sources */,
 				47163AE72B108EDA00235FC6 /* UTableCollectionView+Extension.swift in Sources */,
@@ -2499,6 +2558,7 @@
 				49581AFC2B14CC1800048189 /* MyTeamCollectionViewCell.swift in Sources */,
 				49B0B9E82AE68F0700A9D235 /* AppDelegate.swift in Sources */,
 				47FE16342B15B539009043D2 /* GossipViewModel.swift in Sources */,
+				6A947AA72B1F33DB00A00788 /* MessagingManager.swift in Sources */,
 				49F3EECF2AE7AC580095CAC6 /* Navigation.swift in Sources */,
 				4137D5852B174B6D007CF84E /* AnalysisModel.swift in Sources */,
 				49E223C72B15D47200A7202C /* Leaderboard.swift in Sources */,
@@ -2547,6 +2607,7 @@
 				6AB18E372B187B7B00287A9C /* EventDetailVC.swift in Sources */,
 				6A5F2BA12B0CE10300AB6A98 /* MeetUserTableViewCell.swift in Sources */,
 				4716B1192AEF8D6B003582A9 /* MatchTableViewCell.swift in Sources */,
+				6A947A942B1F2A0C00A00788 /* ReceiverTableViewCell.swift in Sources */,
 				6A4A7B432B11C23F00231EA2 /* MeetEventViewModel.swift in Sources */,
 				49581AF52B14A2CB00048189 /* CardGameMyTeamVC.swift in Sources */,
 				41119D922B14D97300797C84 /* PredictionMatchDetailModel.swift in Sources */,
@@ -2555,6 +2616,7 @@
 				E9DDB62A2B049BA2004C8ACF /* BetHomeVc.swift in Sources */,
 				49B0BA1D2AE6976500A9D235 /* URLConstants.swift in Sources */,
 				AD7BA6D42B0F89BA00F14453 /* StreetMatchesDashboardVC.swift in Sources */,
+				6A947A9A2B1F2C9300A00788 /* ChatDetailVC.swift in Sources */,
 				E9DDB6312B049BAF004C8ACF /* DiscoverViewController.swift in Sources */,
 				AD3B55532B15CBA6007B14F7 /* StadiumListViewModel.swift in Sources */,
 				ADCE38572B1F351B00727F0F /* TimeSelector.swift in Sources */,
@@ -2587,7 +2649,9 @@
 				47E7C8512AEFD2F400D054A8 /* PostMatchesVC.swift in Sources */,
 				49EA0AF22B0258F30003D469 /* PlayerDetailViewModel.swift in Sources */,
 				41E726772B0DF53900D2BFB5 /* PredictionHistoryViewController.swift in Sources */,
+				6A947A962B1F2A0C00A00788 /* SenderTableViewCell.swift in Sources */,
 				47051F1E2B14C101004D190A /* NewsTableViewCell.swift in Sources */,
+				6A947A9E2B1F325C00A00788 /* ChatListTV.swift in Sources */,
 				6A5F2B882B0CA19100AB6A98 /* MeetDashboardVC.swift in Sources */,
 				41BB287C2B0247A60080E63F /* PlayerDetailProfileViewController.swift in Sources */,
 				47CB0E182B11D9870070744B /* NewsViewModel.swift in Sources */,
@@ -2618,6 +2682,7 @@
 				41EB79DD2AF398DF00D068F7 /* SpiderChartView.swift in Sources */,
 				E93C6C032B0C7F8A0042657B /* PointsViewModel.swift in Sources */,
 				47FC33E42AEA50BE00FABED4 /* SocialVC.swift in Sources */,
+				6A947A8B2B1F0DDF00A00788 /* ChatListModel.swift in Sources */,
 				47FC33E12AEA4DAC00FABED4 /* HeaderTopCollectionViewCell.swift in Sources */,
 				41EB79CF2AF37BA000D068F7 /* TeamsView.swift in Sources */,
 				47E3E50D2B064F1500B43994 /* LoginViewModel.swift in Sources */,
@@ -2641,6 +2706,7 @@
 				AD3B555B2B1602DB007B14F7 /* StreetMatchesViewModel.swift in Sources */,
 				49F3429D2AF23CC70057C147 /* EventsTableViewCell.swift in Sources */,
 				AD5331AB2B10904200C97FE4 /* StreetHome.swift in Sources */,
+				6A947AA82B1F33DB00A00788 /* TokenRequestHandler.swift in Sources */,
 				E9DDB6352B04B474004C8ACF /* BetsHomeViewModel.swift in Sources */,
 				49F72D2F2B0CCE3D004E60DF /* AllPlayersTableViewCell.swift in Sources */,
 				47A1AB312AED3CA300F1BD13 /* PostTableViewCell.swift in Sources */,
