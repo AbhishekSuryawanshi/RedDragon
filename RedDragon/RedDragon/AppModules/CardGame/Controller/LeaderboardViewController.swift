@@ -143,8 +143,15 @@ extension LeaderboardViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigateToViewController(UserProfileViewController.self, storyboardName: StoryboardName.cardGame) { [self] vc in
-            vc.userID = leaderboardVM?.responseData?[indexPath.row].id ?? 0
+        guard let data = leaderboardVM?.responseData else {
+            return
+        }
+        if data[indexPath.row].name == "Guest User" {
+            customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.dataNotFound.localized, image: ImageConstants.alertImage)
+        } else {
+            navigateToViewController(UserProfileViewController.self, storyboardName: StoryboardName.cardGame) { [self] vc in
+                vc.userID = leaderboardVM?.responseData?[indexPath.row].id ?? 0
+            }
         }
     }
     
