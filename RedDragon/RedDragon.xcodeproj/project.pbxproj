@@ -320,6 +320,9 @@
 		6A5F2BA12B0CE10300AB6A98 /* MeetUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5F2B9F2B0CE10300AB6A98 /* MeetUserTableViewCell.swift */; };
 		6A5F2BA22B0CE10300AB6A98 /* MeetUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A5F2BA02B0CE10300AB6A98 /* MeetUserTableViewCell.xib */; };
 		6A93C99E2B1729C6009087DC /* MeetUserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A93C99D2B1729C6009087DC /* MeetUserProfileViewModel.swift */; };
+		6A947A822B1EFDA600A00788 /* TwilioChatClient in Frameworks */ = {isa = PBXBuildFile; productRef = 6A947A812B1EFDA600A00788 /* TwilioChatClient */; };
+		6A947A862B1F082000A00788 /* TwilioAccessManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A947A842B1F04D000A00788 /* TwilioAccessManager.framework */; };
+		6A947A872B1F082000A00788 /* TwilioAccessManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6A947A842B1F04D000A00788 /* TwilioAccessManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6AB18E372B187B7B00287A9C /* EventDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB18E352B187B7B00287A9C /* EventDetailVC.swift */; };
 		6AB18E382B187B7B00287A9C /* EventDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AB18E362B187B7B00287A9C /* EventDetailVC.xib */; };
 		6AD21DCB2B15B3100043D7C2 /* MyEventsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD21DC92B15B3100043D7C2 /* MyEventsCollectionViewCell.swift */; };
@@ -403,6 +406,20 @@
 		E9DDB6422B04E387004C8ACF /* BetMatchTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DDB6402B04E387004C8ACF /* BetMatchTableVC.swift */; };
 		E9DDB6432B04E387004C8ACF /* BetMatchTableVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9DDB6412B04E387004C8ACF /* BetMatchTableVC.xib */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6A947A882B1F082000A00788 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6A947A872B1F082000A00788 /* TwilioAccessManager.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		085385BC2B0785EF00C4E953 /* Matches.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Matches.xcassets; sourceTree = "<group>"; };
@@ -704,6 +721,7 @@
 		6A5F2B9F2B0CE10300AB6A98 /* MeetUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetUserTableViewCell.swift; sourceTree = "<group>"; };
 		6A5F2BA02B0CE10300AB6A98 /* MeetUserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MeetUserTableViewCell.xib; sourceTree = "<group>"; };
 		6A93C99D2B1729C6009087DC /* MeetUserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetUserProfileViewModel.swift; sourceTree = "<group>"; };
+		6A947A842B1F04D000A00788 /* TwilioAccessManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwilioAccessManager.framework; sourceTree = "<group>"; };
 		6AB18E352B187B7B00287A9C /* EventDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailVC.swift; sourceTree = "<group>"; };
 		6AB18E362B187B7B00287A9C /* EventDetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventDetailVC.xib; sourceTree = "<group>"; };
 		6AD21DC92B15B3100043D7C2 /* MyEventsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEventsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -794,6 +812,7 @@
 			files = (
 				6A5F2B862B0C97C200AB6A98 /* Gifu in Frameworks */,
 				4728736B2AEA7E360011F00F /* SDWebImageMapKit in Frameworks */,
+				6A947A862B1F082000A00788 /* TwilioAccessManager.framework in Frameworks */,
 				47051F142B146C95004D190A /* MarqueeLabel in Frameworks */,
 				47C8C9572AF0D3A900448D96 /* TOCropViewController in Frameworks */,
 				49B2114F2B0B488B00E1C58E /* RealmSwift in Frameworks */,
@@ -803,6 +822,7 @@
 				47C8C9602AF1191700448D96 /* Kingfisher in Frameworks */,
 				41EB79DB2AF38D3F00D068F7 /* DDSpiderChart in Frameworks */,
 				472873732AEA7E470011F00F /* Hero in Frameworks */,
+				6A947A822B1EFDA600A00788 /* TwilioChatClient in Frameworks */,
 				4728736E2AEA7E3F0011F00F /* NVActivityIndicatorView in Frameworks */,
 				47C8C9552AF0D3A900448D96 /* CropViewController in Frameworks */,
 				47BBF5052B19B3A500CDE3D9 /* CHIPageControl in Frameworks */,
@@ -1818,6 +1838,7 @@
 		6A213FE72B0B2F4800F52E69 /* MeetApp */ = {
 			isa = PBXGroup;
 			children = (
+				6A947A892B1F0CE800A00788 /* Framework */,
 				6A5F2B812B0C91FD00AB6A98 /* GifAssets */,
 				6A213FE82B0B342C00F52E69 /* Storyboard */,
 				6A213FEC2B0B34C400F52E69 /* Model */,
@@ -1892,6 +1913,14 @@
 				6A5F2B822B0C922E00AB6A98 /* match.gif */,
 			);
 			path = GifAssets;
+			sourceTree = "<group>";
+		};
+		6A947A892B1F0CE800A00788 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				6A947A842B1F04D000A00788 /* TwilioAccessManager.framework */,
+			);
+			path = Framework;
 			sourceTree = "<group>";
 		};
 		AD31C4F82B1770A500DC879D /* Stadium */ = {
@@ -2164,6 +2193,7 @@
 				49B0B9E02AE68F0700A9D235 /* Sources */,
 				49B0B9E12AE68F0700A9D235 /* Frameworks */,
 				49B0B9E22AE68F0700A9D235 /* Resources */,
+				6A947A882B1F082000A00788 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2190,6 +2220,7 @@
 				6A5F2B852B0C97C200AB6A98 /* Gifu */,
 				47051F132B146C95004D190A /* MarqueeLabel */,
 				47BBF5042B19B3A500CDE3D9 /* CHIPageControl */,
+				6A947A812B1EFDA600A00788 /* TwilioChatClient */,
 			);
 			productName = RedDragon;
 			productReference = 49B0B9E42AE68F0700A9D235 /* RedDragon.app */;
@@ -2237,6 +2268,7 @@
 				6A5F2B842B0C97C200AB6A98 /* XCRemoteSwiftPackageReference "Gifu" */,
 				47051F122B146C95004D190A /* XCRemoteSwiftPackageReference "MarqueeLabel" */,
 				47BBF5032B19B3A500CDE3D9 /* XCRemoteSwiftPackageReference "CHIPageControl" */,
+				6A947A802B1EFDA600A00788 /* XCRemoteSwiftPackageReference "twilio-chat-ios" */,
 			);
 			productRefGroup = 49B0B9E52AE68F0700A9D235 /* Products */;
 			projectDirPath = "";
@@ -2814,7 +2846,12 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TXN6T998WP;
+				DEVELOPMENT_TEAM = 3G9D5YD37N;
+				EXCLUDED_ARCHS = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/RedDragon/AppModules/MeetApp/Controller/Chat",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RedDragon/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "RedDragon would like to access your camera to upload profile picture and post images";
@@ -2849,7 +2886,12 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TXN6T998WP;
+				DEVELOPMENT_TEAM = 3G9D5YD37N;
+				EXCLUDED_ARCHS = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/RedDragon/AppModules/MeetApp/Controller/Chat",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RedDragon/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "RedDragon would like to access your camera to upload profile picture and post images";
@@ -3010,6 +3052,14 @@
 				minimumVersion = 3.2.2;
 			};
 		};
+		6A947A802B1EFDA600A00788 /* XCRemoteSwiftPackageReference "twilio-chat-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twilio/twilio-chat-ios";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		E9DDB61C2B049AF1004C8ACF /* XCRemoteSwiftPackageReference "SideMenu" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jonkykong/SideMenu.git";
@@ -3110,6 +3160,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6A5F2B842B0C97C200AB6A98 /* XCRemoteSwiftPackageReference "Gifu" */;
 			productName = Gifu;
+		};
+		6A947A812B1EFDA600A00788 /* TwilioChatClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6A947A802B1EFDA600A00788 /* XCRemoteSwiftPackageReference "twilio-chat-ios" */;
+			productName = TwilioChatClient;
 		};
 		E9DDB61D2B049AF1004C8ACF /* SideMenu */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import TwilioChatClient
+import TwilioAccessManager
 
 class MeetChatVC: UIViewController {
 
