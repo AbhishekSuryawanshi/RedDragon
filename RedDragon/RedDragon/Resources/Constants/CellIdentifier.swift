@@ -78,6 +78,8 @@ struct CellIdentifier {
     static let amenityCollectionViewCell       = "AmenityCollectionViewCell"
     static let sportsCollectionViewCell        = "SportsCollectionViewCell"
     static let imageSliderCollectionViewCell   = "ImageSliderCollectionViewCell"
+    static let hoursTableViewCell              = "HoursTableViewCell"
+    static let stadiumImageCollectionViewCell  = "StadiumImageCollectionViewCell"
     
     //News
     static let newsCollectionViewCell           = "NewsCollectionViewCell"

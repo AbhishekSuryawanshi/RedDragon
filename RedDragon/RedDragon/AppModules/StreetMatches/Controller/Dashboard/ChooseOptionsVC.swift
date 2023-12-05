@@ -16,10 +16,12 @@ class ChooseOptionsVC: UIViewController {
     }
    
     @IBAction func actionTapCreateStadium(_ sender: Any) {
-        
+         let nav = self.presentingViewController as? UINavigationController
+        let vc = UIStoryboard(name: StoryboardName.streetMatches, bundle: nil).instantiateViewController(withIdentifier: "CreateStadiumVC")
+        nav?.pushViewController(vc, animated: true)
+        self.dismiss(animated: false)
     }
     
-
     @IBAction func actionClose(_ sender: Any) {
         self.dismiss(animated: true)
     }

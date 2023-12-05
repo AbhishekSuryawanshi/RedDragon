@@ -90,6 +90,9 @@ struct URLConstants {
     static let stadiumList = streetMatchesBaseURL + "stadium/list"
     static let eventsList = streetMatchesBaseURL + "event/list"
     static let streetMatchesList = streetMatchesBaseURL + "match/list"
+    static let stadiums = streetMatchesBaseURL + "stadium"
+    static let streetUploadImage = streetMatchesBaseURL + "resource/img/upload"
+    
 
 
     // MARK: - Prediction

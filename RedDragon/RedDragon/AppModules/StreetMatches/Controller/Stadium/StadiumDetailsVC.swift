@@ -30,6 +30,19 @@ enum SportTypes:String{
             return UIImage(named: "street_cricket")
         }
     }
+    
+    var imageWhite:UIImage?{
+        switch self{
+        case .Football:
+            return UIImage(named: "street_football_white")
+        case .Basketball:
+            return UIImage(named: "street_basketball_white")
+        case .Tennis:
+            return UIImage(named: "street_tennis_white")
+        case .Cricket:
+            return UIImage(named: "street_cricket_white")
+        }
+    }
 }
 enum Amenities:String{
     case Parking = "Parking"
