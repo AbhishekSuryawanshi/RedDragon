@@ -14,6 +14,7 @@ class SocialPostImageVM: MultipartAPIServiceManager<SocialPostImageResponse> {
     ///function to upload image for a post for social module
     func uploadImageAsyncCall(imageName: String, imageData: Data) {
         let urlString   = URLConstants.postImage
-        asyncCall(urlString: urlString, params: nil, imageName: imageName, imageData: imageData)
+        asyncCall(urlString: urlString, params: nil, imageName: imageName, imageData: imageData, imageKey: "img")
     }
 }
+

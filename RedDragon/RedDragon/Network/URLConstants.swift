@@ -81,7 +81,9 @@ struct URLConstants {
     static let meetMyUpcomingEvent = meetBaseURL + "events/upcoming"
     static let meetMyPastEvent     = meetBaseURL + "events/past"
     static let meetLikedUser       = meetBaseURL + "user/like"
+    static let meetSportsInterest  = meetBaseURL + "user/sports/interest/list"
     static let meetMyMatchUser     = meetBaseURL + "user/mymatch/list"
+    static let meetCreateEvent     = meetBaseURL + "user/events/add"
     
     // MARK: - StreetMatches
     static let streetMatchesBaseURL = "https://trkick.com/stm/api/"

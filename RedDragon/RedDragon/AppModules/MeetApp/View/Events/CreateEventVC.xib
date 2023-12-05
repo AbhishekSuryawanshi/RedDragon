@@ -20,14 +20,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateEventVC" customModule="RedDragon" customModuleProvider="target">
             <connections>
+                <outlet property="collectionView" destination="ES7-GL-NOe" id="MAC-n2-Gx2"/>
                 <outlet property="eventDescTextView" destination="0OU-U3-gQI" id="y6X-rJ-0i2"/>
                 <outlet property="eventImgView" destination="0R7-re-Sdm" id="a2O-ZQ-V6A"/>
                 <outlet property="eventTitleTextField" destination="06E-ug-tm8" id="j1v-Ir-Owr"/>
                 <outlet property="locationTextField" destination="ULi-U9-c7c" id="z9J-Bw-xxb"/>
-                <outlet property="priceSwitch" destination="keR-OT-JJC" id="Mq1-PO-hNV"/>
+                <outlet property="priceSegmentControl" destination="rLZ-jd-hMJ" id="36C-b3-8ej"/>
                 <outlet property="priceTextField" destination="gdt-em-Erj" id="zCb-GL-K1b"/>
                 <outlet property="priceView" destination="mW8-Yl-BAW" id="0Lt-Sk-xnl"/>
-                <outlet property="sportsCollectionView" destination="ES7-GL-NOe" id="9ft-c6-HHu"/>
                 <outlet property="startEventDateTextField" destination="1SG-Kv-YHB" id="jTW-tw-aMJ"/>
                 <outlet property="startEventTimeTextField" destination="DdV-Bx-lBt" id="IEE-fl-vjl"/>
                 <outlet property="successView" destination="cnY-lO-cvG" id="YHm-0s-Fe0"/>
@@ -104,6 +104,10 @@
                                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             </collectionViewFlowLayout>
+                                                            <connections>
+                                                                <outlet property="dataSource" destination="-1" id="QYa-Ea-ytb"/>
+                                                                <outlet property="delegate" destination="-1" id="cCs-fd-Vz9"/>
+                                                            </connections>
                                                         </collectionView>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -231,6 +235,9 @@
                                                             <rect key="frame" x="10" y="38.333333333333314" width="353" height="95"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                            <connections>
+                                                                <action selector="addEventImageBtnAction:" destination="-1" eventType="touchUpInside" id="Z2b-hR-iIH"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -264,7 +271,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="169" height="53"/>
                                                                     <subviews>
                                                                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="dd/mm/yyyy" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1SG-Kv-YHB">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="169" height="53"/>
+                                                                            <rect key="frame" x="5" y="0.0" width="164" height="53"/>
                                                                             <color key="textColor" name="brown1"/>
                                                                             <fontDescription key="fontDescription" name="Urbanist-Medium" family="Urbanist" pointSize="14"/>
                                                                             <textInputTraits key="textInputTraits"/>
@@ -285,7 +292,7 @@
                                                                         <constraint firstAttribute="trailing" secondItem="1SG-Kv-YHB" secondAttribute="trailing" id="Upm-Qg-jja"/>
                                                                         <constraint firstItem="fK2-nr-Cxj" firstAttribute="centerY" secondItem="2eR-qy-3VM" secondAttribute="centerY" id="V1X-R4-QWh"/>
                                                                         <constraint firstAttribute="trailing" secondItem="fK2-nr-Cxj" secondAttribute="trailing" constant="12" id="c05-wR-Gfz"/>
-                                                                        <constraint firstItem="1SG-Kv-YHB" firstAttribute="leading" secondItem="2eR-qy-3VM" secondAttribute="leading" id="ihu-2r-GzY"/>
+                                                                        <constraint firstItem="1SG-Kv-YHB" firstAttribute="leading" secondItem="2eR-qy-3VM" secondAttribute="leading" constant="5" id="ihu-2r-GzY"/>
                                                                         <constraint firstAttribute="height" constant="53" id="zRC-Wg-wN5"/>
                                                                     </constraints>
                                                                     <userDefinedRuntimeAttributes>
@@ -304,7 +311,7 @@
                                                                     <rect key="frame" x="184" y="0.0" width="169" height="53"/>
                                                                     <subviews>
                                                                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="hh:mm:ss" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DdV-Bx-lBt">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="169" height="53"/>
+                                                                            <rect key="frame" x="5" y="0.0" width="164" height="53"/>
                                                                             <color key="textColor" name="brown1"/>
                                                                             <fontDescription key="fontDescription" name="Urbanist-Medium" family="Urbanist" pointSize="14"/>
                                                                             <textInputTraits key="textInputTraits"/>
@@ -326,7 +333,7 @@
                                                                         <constraint firstAttribute="trailing" secondItem="DdV-Bx-lBt" secondAttribute="trailing" id="YnS-61-Q7u"/>
                                                                         <constraint firstItem="6kC-Mr-nAE" firstAttribute="centerY" secondItem="YQQ-wn-uu2" secondAttribute="centerY" id="aiQ-bW-VfC"/>
                                                                         <constraint firstAttribute="trailing" secondItem="6kC-Mr-nAE" secondAttribute="trailing" constant="12" id="gtK-qL-Gly"/>
-                                                                        <constraint firstItem="DdV-Bx-lBt" firstAttribute="leading" secondItem="YQQ-wn-uu2" secondAttribute="leading" id="htm-76-Lwy"/>
+                                                                        <constraint firstItem="DdV-Bx-lBt" firstAttribute="leading" secondItem="YQQ-wn-uu2" secondAttribute="leading" constant="5" id="htm-76-Lwy"/>
                                                                     </constraints>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -411,23 +418,34 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="373" height="45"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Price *" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJM-Tc-djr">
-                                                                            <rect key="frame" x="10" y="14.666666666666629" width="79.666666666666671" height="15.666666666666664"/>
+                                                                            <rect key="frame" x="10" y="14.666666666666629" width="253" height="15.666666666666664"/>
                                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                                                             <color key="textColor" name="black1"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="keR-OT-JJC">
-                                                                            <rect key="frame" x="314" y="7" width="51" height="31"/>
-                                                                            <color key="onTintColor" name="base"/>
-                                                                        </switch>
+                                                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rLZ-jd-hMJ">
+                                                                            <rect key="frame" x="283" y="7" width="80" height="32"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="80" id="reb-Dq-TZp"/>
+                                                                            </constraints>
+                                                                            <segments>
+                                                                                <segment title="Free"/>
+                                                                                <segment title="Paid"/>
+                                                                            </segments>
+                                                                            <color key="selectedSegmentTintColor" name="base"/>
+                                                                            <connections>
+                                                                                <action selector="priceSegmentAction:" destination="-1" eventType="valueChanged" id="QYn-0W-sBa"/>
+                                                                            </connections>
+                                                                        </segmentedControl>
                                                                     </subviews>
                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="trailing" secondItem="keR-OT-JJC" secondAttribute="trailing" constant="10" id="U75-Aw-NxG"/>
-                                                                        <constraint firstItem="keR-OT-JJC" firstAttribute="centerY" secondItem="dJM-Tc-djr" secondAttribute="centerY" id="VZq-sf-CLi"/>
+                                                                        <constraint firstItem="dJM-Tc-djr" firstAttribute="centerY" secondItem="15T-se-ii5" secondAttribute="centerY" id="H3W-Hg-t8z"/>
+                                                                        <constraint firstItem="rLZ-jd-hMJ" firstAttribute="leading" secondItem="dJM-Tc-djr" secondAttribute="trailing" constant="20" id="OkB-Yr-r5j"/>
                                                                         <constraint firstItem="dJM-Tc-djr" firstAttribute="leading" secondItem="15T-se-ii5" secondAttribute="leading" constant="10" id="aH2-Ms-MNf"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="rLZ-jd-hMJ" secondAttribute="trailing" constant="10" id="auM-v7-AqO"/>
+                                                                        <constraint firstItem="rLZ-jd-hMJ" firstAttribute="centerY" secondItem="dJM-Tc-djr" secondAttribute="centerY" id="m50-xM-7lR"/>
                                                                         <constraint firstAttribute="height" constant="45" id="rjA-3y-b0J"/>
-                                                                        <constraint firstItem="keR-OT-JJC" firstAttribute="centerY" secondItem="15T-se-ii5" secondAttribute="centerY" id="wLO-Ce-j9Z"/>
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mW8-Yl-BAW">
@@ -572,6 +590,9 @@
                                             <real key="value" value="6"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="successAlertDoneBtnAction:" destination="-1" eventType="touchUpInside" id="nd6-t9-7Rs"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

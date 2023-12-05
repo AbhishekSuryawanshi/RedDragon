@@ -55,9 +55,9 @@ extension MyEventsVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        navigateToViewController(MeetUserDetailVC.self, storyboardName: StoryboardName.meet, animationType: .autoReverse(presenting: .zoom)) {
+        navigateToXIBViewController(EventDetailVC.self, nibName: "EventDetailVC") {
             vc in
-            //vc.selectedUserId = self.users[indexPath.row].id ?? 0
+            vc.selectedEventId = self.upcomingEventsArray[indexPath.row].eventId ?? 0
         }
     }
 }
@@ -74,6 +74,13 @@ extension MyEventsVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 74.0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigateToXIBViewController(EventDetailVC.self, nibName: "EventDetailVC") {
+            vc in
+            vc.selectedEventId = self.pastEventsArray[indexPath.row].eventId ?? 0
+        }
     }
 }
 

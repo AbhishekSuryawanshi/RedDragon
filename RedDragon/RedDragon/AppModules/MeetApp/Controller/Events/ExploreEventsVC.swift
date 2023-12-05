@@ -63,6 +63,21 @@ extension ExploreEventsVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 74.0
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            navigateToXIBViewController(EventDetailVC.self, nibName: "EventDetailVC") {
+                vc in
+                vc.selectedEventId = self.hotEventsArray[indexPath.row].eventId ?? 0
+            }
+        default:
+            navigateToXIBViewController(EventDetailVC.self, nibName: "EventDetailVC") {
+                vc in
+                vc.selectedEventId = self.allEventsArray[indexPath.row].eventId ?? 0
+            }
+        }
+    }
 }
 
 extension ExploreEventsVC {
