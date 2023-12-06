@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toast
 import Combine
 import SDWebImage
 
@@ -62,12 +63,16 @@ class UserProfileViewController: UIViewController {
             customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.loginRequires.localized, image: ImageConstants.alertImage)
         }
         else {
-            let players = leaderboardDetailsVM?.responseData?.players
-            if players?.count ?? 0 >= 11 {
-                againstComputer = false
-                UserDefaults.standard.set(false, forKey: "gameEnd")
-                fetchMyTeamViewModel()
-                fetchOpponentPlayersID(leaderboardDetailsVM?.responseData)
+            if leaderboardDetailsVM?.responseData?.players.count == 0 {
+                self.view.makeToast(ErrorMessage.noPlayers.localized, duration: 2.0, position: .center)
+            } else {
+                let players = leaderboardDetailsVM?.responseData?.players
+                if players?.count ?? 0 >= 11 {
+                    againstComputer = false
+                    UserDefaults.standard.set(false, forKey: "gameEnd")
+                    fetchMyTeamViewModel()
+                    fetchOpponentPlayersID(leaderboardDetailsVM?.responseData)
+                }
             }
         }
     }
@@ -89,7 +94,7 @@ extension UserProfileViewController {
     func fetchViewModel() {
         leaderboardDetailsVM = LeaderboardDetailViewModel()
         leaderboardDetailsVM?.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         leaderboardDetailsVM?.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -110,7 +115,7 @@ extension UserProfileViewController {
     func fetchMyTeamViewModel() {
         teamListVM = MyTeamViewModel()
         teamListVM?.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         teamListVM?.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -229,7 +234,7 @@ extension UserProfileViewController: UICollectionViewDataSource, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if leaderboardDetailsVM?.responseData?.players.count == 0 {
-            customAlertView(title: ErrorMessage.dataNotFound.localized, description: ErrorMessage.playerListUnavailable.localized, image: ImageConstants.alertImage)
+            self.view.makeToast(ErrorMessage.playerListUnavailable.localized, duration: 2.0, position: .center)
         }
         return leaderboardDetailsVM?.responseData?.players.count ?? 0
     }
@@ -278,7 +283,6 @@ extension UserProfileViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        //animateTabelCell(tableView, willDisplay: cell, forRowAt: indexPath)
         tableViewHeight.constant = self.tableView.contentSize.height
     }
 }

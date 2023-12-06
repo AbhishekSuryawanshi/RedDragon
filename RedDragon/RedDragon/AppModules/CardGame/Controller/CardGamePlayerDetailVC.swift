@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Toast
+import Hero
 import Combine
 import SDWebImage
 import DDSpiderChart
@@ -29,6 +31,7 @@ class CardGamePlayerDetailVC: UIViewController {
     @IBOutlet weak var priceNumberLabel: UILabel!
     @IBOutlet weak var playerSkillView: SpiderChartView!
     @IBOutlet weak var statCollectionView: UICollectionView!
+    @IBOutlet weak var buyButton: UIButton!
     
     var cancellable = Set<AnyCancellable>()
     var playerDetailVM: PlayerDetailViewModel?
@@ -70,6 +73,9 @@ class CardGamePlayerDetailVC: UIViewController {
     @IBAction func backButton(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func buyPlayerButton(_ sender: Any) {
+    }
 }
 
 /// __fetch Players View model
@@ -81,7 +87,10 @@ extension CardGamePlayerDetailVC {
             self?.showLoader(value)
         }
         playerDetailVM?.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(ErrorMessage.dataNotFound.localized, duration: 2.0, position: .center)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                self?.navigationController?.popViewController(animated: true)
+            }
         }
         playerDetailVM?.$responseData
             .receive(on: DispatchQueue.main)
@@ -146,6 +155,10 @@ extension CardGamePlayerDetailVC {
         playerNameLabel.text = playerName
         positionLabel.text = position
         labelRoundedCorner()
+        
+        let marketValue = Int(value)
+        let value = formatNumber(Double(marketValue ?? 0))
+        buyButton.setTitle("Buy for \(value)", for: .normal)
     }
     
     private func labelRoundedCorner() {

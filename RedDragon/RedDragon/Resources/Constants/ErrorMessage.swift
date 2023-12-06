@@ -50,6 +50,7 @@ struct ErrorMessage {
     static var betsEmptyAlert              = "No Bets found"
     
     static let addPlayer                   = "Looks like you haven't bought any players yet, please buy a player to play the game"
+    static let noPlayers                   = "Currently, this user has no players"
     static let playerListUnavailable       = "Players list unavailable"
     static let userIDNotFound              = "Unable to get user ID"
     static let lowBudget                   = "Low Budget"
