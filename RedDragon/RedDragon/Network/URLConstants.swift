@@ -37,6 +37,7 @@ struct URLConstants {
     static let cardGame_leaderboard = cardGameBaseURL + "/api/user/list"
     static let leaderboardDetail    = cardGameBaseURL + "/api/user/"
     static let yourMatches          = cardGameBaseURL + "/api/matches"
+    static let updateUserInfo       = cardGameBaseURL + "/api/user/info"
     
     // MARK: -  Social
     static let socialBaseURL       = baseURL + "euro5league/"

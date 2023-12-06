@@ -217,6 +217,12 @@
 		49631A1A2AFA4CA200BE84BB /* SymbolsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49631A192AFA4CA200BE84BB /* SymbolsCollectionViewCell.swift */; };
 		496A9AB32B0F200900274FC6 /* LeagueCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496A9AB12B0F200900274FC6 /* LeagueCollectionViewCell.swift */; };
 		496A9AB42B0F200900274FC6 /* LeagueCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496A9AB22B0F200900274FC6 /* LeagueCollectionViewCell.xib */; };
+		4988F72B2B20591000905CDD /* CardGamePopup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4988F72A2B20591000905CDD /* CardGamePopup.storyboard */; };
+		4988F72D2B20592800905CDD /* BuyPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988F72C2B20592800905CDD /* BuyPlayerViewController.swift */; };
+		4988F7302B20685100905CDD /* BuyPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988F72F2B20685100905CDD /* BuyPlayerViewModel.swift */; };
+		4988F7342B2068BE00905CDD /* ResponseMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988F7332B2068BE00905CDD /* ResponseMessage.swift */; };
+		4988F7372B2084A700905CDD /* BudgetCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988F7362B2084A700905CDD /* BudgetCalculation.swift */; };
+		4988F7392B2084FC00905CDD /* UpdateInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988F7382B2084FC00905CDD /* UpdateInfoViewModel.swift */; };
 		49A822BB2B04FC27007752C2 /* RecentMatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A822B92B04FC27007752C2 /* RecentMatchTableViewCell.swift */; };
 		49A822BC2B04FC27007752C2 /* RecentMatchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49A822BA2B04FC27007752C2 /* RecentMatchTableViewCell.xib */; };
 		49A9D9DC2B1F000000C4A1A1 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A9D9DB2B1F000000C4A1A1 /* UserProfileViewController.swift */; };
@@ -628,6 +634,12 @@
 		49631A192AFA4CA200BE84BB /* SymbolsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolsCollectionViewCell.swift; sourceTree = "<group>"; };
 		496A9AB12B0F200900274FC6 /* LeagueCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueCollectionViewCell.swift; sourceTree = "<group>"; };
 		496A9AB22B0F200900274FC6 /* LeagueCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeagueCollectionViewCell.xib; sourceTree = "<group>"; };
+		4988F72A2B20591000905CDD /* CardGamePopup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CardGamePopup.storyboard; sourceTree = "<group>"; };
+		4988F72C2B20592800905CDD /* BuyPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyPlayerViewController.swift; sourceTree = "<group>"; };
+		4988F72F2B20685100905CDD /* BuyPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyPlayerViewModel.swift; sourceTree = "<group>"; };
+		4988F7332B2068BE00905CDD /* ResponseMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseMessage.swift; sourceTree = "<group>"; };
+		4988F7362B2084A700905CDD /* BudgetCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetCalculation.swift; sourceTree = "<group>"; };
+		4988F7382B2084FC00905CDD /* UpdateInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateInfoViewModel.swift; sourceTree = "<group>"; };
 		49A822B92B04FC27007752C2 /* RecentMatchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMatchTableViewCell.swift; sourceTree = "<group>"; };
 		49A822BA2B04FC27007752C2 /* RecentMatchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentMatchTableViewCell.xib; sourceTree = "<group>"; };
 		49A9D9DB2B1F000000C4A1A1 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
@@ -1461,6 +1473,39 @@
 			path = Storyboard;
 			sourceTree = "<group>";
 		};
+		4988F72E2B20681B00905CDD /* BuyAndSell */ = {
+			isa = PBXGroup;
+			children = (
+				4988F72F2B20685100905CDD /* BuyPlayerViewModel.swift */,
+				4988F7382B2084FC00905CDD /* UpdateInfoViewModel.swift */,
+			);
+			path = BuyAndSell;
+			sourceTree = "<group>";
+		};
+		4988F7312B20685900905CDD /* BuyAndSell */ = {
+			isa = PBXGroup;
+			children = (
+				4988F72C2B20592800905CDD /* BuyPlayerViewController.swift */,
+			);
+			path = BuyAndSell;
+			sourceTree = "<group>";
+		};
+		4988F7322B20686F00905CDD /* BuyAndSell */ = {
+			isa = PBXGroup;
+			children = (
+				4988F7332B2068BE00905CDD /* ResponseMessage.swift */,
+			);
+			path = BuyAndSell;
+			sourceTree = "<group>";
+		};
+		4988F7352B20848600905CDD /* BudgetCalculation */ = {
+			isa = PBXGroup;
+			children = (
+				4988F7362B2084A700905CDD /* BudgetCalculation.swift */,
+			);
+			path = BudgetCalculation;
+			sourceTree = "<group>";
+		};
 		49B0B9DB2AE68F0700A9D235 = {
 			isa = PBXGroup;
 			children = (
@@ -1564,6 +1609,7 @@
 		49B0BA002AE690D200A9D235 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				4988F7352B20848600905CDD /* BudgetCalculation */,
 				494B37E42AEA3BD700FB9BCD /* PMAlertAction.swift */,
 				494B37E22AEA3BD700FB9BCD /* PMAlertController.swift */,
 				494B37E32AEA3BD700FB9BCD /* PMAlertController.xib */,
@@ -1637,6 +1683,7 @@
 				49581AF42B14A2CB00048189 /* CardGameMyTeamVC.swift */,
 				49E223C42B15CBB600A7202C /* LeaderboardViewController.swift */,
 				49A9D9DB2B1F000000C4A1A1 /* UserProfileViewController.swift */,
+				4988F7312B20685900905CDD /* BuyAndSell */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1649,6 +1696,7 @@
 				49E223C82B15D4B800A7202C /* LeaderboardViewModel.swift */,
 				49A9D9DD2B1F2C4C00C4A1A1 /* LeaderboardDetailViewModel.swift */,
 				49A9D9E12B1F3E2B00C4A1A1 /* MatchesViewModel.swift */,
+				4988F72E2B20681B00905CDD /* BuyAndSell */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1679,6 +1727,7 @@
 				49E223C62B15D47200A7202C /* Leaderboard.swift */,
 				49A9D9DF2B1F2C6C00C4A1A1 /* LeaderboardDetail.swift */,
 				49A9D9E32B1F3E4C00C4A1A1 /* Matches.swift */,
+				4988F7322B20686F00905CDD /* BuyAndSell */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1687,6 +1736,7 @@
 			isa = PBXGroup;
 			children = (
 				49DCA7C12B0C90DD005902AF /* CardGame.storyboard */,
+				4988F72A2B20591000905CDD /* CardGamePopup.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -2456,6 +2506,7 @@
 				49B0BA3C2AE69A4D00A9D235 /* InfoPlist.strings in Resources */,
 				49F72D302B0CCE3D004E60DF /* AllPlayersTableViewCell.xib in Resources */,
 				493D21332AFE127F00045672 /* MatchesTableViewCell.xib in Resources */,
+				4988F72B2B20591000905CDD /* CardGamePopup.storyboard in Resources */,
 				493D21342AFE127F00045672 /* MatchesHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2514,14 +2565,17 @@
 				419658262B0CF86C00730D9F /* PredictResultDescriptionView.swift in Sources */,
 				47163AE92B108F0B00235FC6 /* Date+Extension.swift in Sources */,
 				49631A1A2AFA4CA200BE84BB /* SymbolsCollectionViewCell.swift in Sources */,
+				4988F72D2B20592800905CDD /* BuyPlayerViewController.swift in Sources */,
 				47E7C8552AEFE4C200D054A8 /* FeedCVLayout.swift in Sources */,
 				41E7266F2B0DD3C100D2BFB5 /* PredictUpcomingTableViewCell.swift in Sources */,
 				AD93101A2B186713005E4DAF /* Local Timings.swift in Sources */,
 				4137D57D2B163AB8007CF84E /* PredictionDetailCommentsView.swift in Sources */,
 				ADD339902B0F6DB700B91101 /* FeedsTableViewCell.swift in Sources */,
+				4988F7392B2084FC00905CDD /* UpdateInfoViewModel.swift in Sources */,
 				6A2140222B0B730C00F52E69 /* SwipeCardFooterView.swift in Sources */,
 				41B5C9FF2B11DEE3000A7A59 /* PredictionListModel.swift in Sources */,
 				41E2AB4B2B0CBB73005425CF /* PredictionDetailsViewController.swift in Sources */,
+				4988F7302B20685100905CDD /* BuyPlayerViewModel.swift in Sources */,
 				47AE9C992B03AE8800C271FB /* VerificationVC.swift in Sources */,
 				493D21252AFE122000045672 /* PlayerStatsCollectionViewCell.swift in Sources */,
 				41BB287F2B0609AA0080E63F /* PlayerLeaguesCollectionViewCell.swift in Sources */,
@@ -2588,6 +2642,7 @@
 				4137D5822B172F09007CF84E /* AnalysisTableViewCell.swift in Sources */,
 				49D085382AEF863D00A835B7 /* StandingsTableViewCell.swift in Sources */,
 				E93C6C052B0C88D80042657B /* WalletBalanceModel.swift in Sources */,
+				4988F7372B2084A700905CDD /* BudgetCalculation.swift in Sources */,
 				47C3B7142B04D43500E12A4D /* CountryCodeListVC.swift in Sources */,
 				6A08D66A2B0F83F400E1AE7C /* ExploreEventsTableViewCell.swift in Sources */,
 				494D7B752AE8F4CB00488E27 /* DatabaseVC.swift in Sources */,
@@ -2695,6 +2750,7 @@
 				493D21182AFE102E00045672 /* PlayerDetailMediaViewController.swift in Sources */,
 				47FE163B2B15C073009043D2 /* CommentTableViewCell.swift in Sources */,
 				47E7C84B2AEFBF8D00D054A8 /* PostListVC.swift in Sources */,
+				4988F7342B2068BE00905CDD /* ResponseMessage.swift in Sources */,
 				47163AEB2B108F2900235FC6 /* Int+Extension.swift in Sources */,
 				41846BD82B0C7DF20020F503 /* TopView.swift in Sources */,
 				47C8C9512AF0CAB700448D96 /* SingleImageCollectionViewCell.swift in Sources */,

@@ -75,6 +75,21 @@ class CardGamePlayerDetailVC: UIViewController {
     }
     
     @IBAction func buyPlayerButton(_ sender: Any) {
+        print(UserDefaults.standard.token as Any)
+        print(UserDefaults.standard.budget as Any)
+        if ((UserDefaults.standard.token ?? "") != "") {
+            let marketValue = Int(value)
+            presentToViewController(BuyPlayerViewController.self, storyboardName: StoryboardName.cardGamePopup, animationType: .fade) { [self] vc in
+                vc.image = defaultImage
+                vc.name = playerName
+                vc.position = position
+                vc.value = formatNumber(Double(marketValue ?? 0))
+                vc.slug = playerDetailVM?.responseData?.data?.teamSlug
+                vc.playerID = playerDetailVM?.responseData?.data?.playerID
+            }
+        } else {
+            customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.loginRequires.localized, image: ImageConstants.alertImage)
+        }
     }
 }
 
@@ -149,6 +164,9 @@ extension CardGamePlayerDetailVC {
     private func updateUI() {
         playerImageView.heroID = defaultImage
         playerNameLabel.heroID = playerName
+        
+        let userBudget = UserDefaults.standard.budget
+        userPointsLabel.text = "\(formatNumber(Double(userBudget!)))"
         
         playerImageView.sd_imageIndicator = SDWebImageActivityIndicator.white
         playerImageView.sd_setImage(with: URL(string: defaultImage))

@@ -57,6 +57,7 @@ struct ErrorMessage {
     static let insufficientBudget          = "Sorry, you don't have sufficient budget to buy this player"
     static let addPlayerToPlay             = "Please add a minimum of 11 players to your team to play the game"
     static let playerAlreadyUsed           = "Your team already has this player"
+    static let playerBuyed                 = "Player bought successfully!!"
     
     static let betPlacedSuccess            = "Bet Placed Successfully"
     static let betPlacedAlready            = "Bet Already Placed"
