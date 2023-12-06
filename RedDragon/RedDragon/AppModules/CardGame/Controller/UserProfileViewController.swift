@@ -16,8 +16,6 @@ class UserProfileViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var scoreLabelView: UIView!
-    @IBOutlet weak var ratingPercentCountLabel: UILabel!
-    @IBOutlet weak var ratingView: UIView!
     @IBOutlet weak var winLabel: UILabel!
     @IBOutlet weak var winCountLabel: UILabel!
     @IBOutlet weak var lossLabel: UILabel!
@@ -175,6 +173,7 @@ extension UserProfileViewController {
         initialize()
         checkLocalisation()
         nibInitialization()
+        labelRoundedCorner()
     }
     
     private func nibInitialization() {
@@ -191,6 +190,13 @@ extension UserProfileViewController {
     
     private func showLoader(_ value: Bool) {
         value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
+    }
+    
+    private func labelRoundedCorner() {
+        scoreLabelView.borderColor = #colorLiteral(red: 0.7895337343, green: 0.174926281, blue: 0.06877139956, alpha: 1)
+        scoreLabelView.borderWidth = 1.0
+        scoreLabelView.layer.cornerRadius = 13
+        scoreLabelView.clipsToBounds = true
     }
     
     private func makeNetworkCall() {
