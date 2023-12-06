@@ -17,6 +17,7 @@ struct UserDefaultString {
     static let description  = "description"
     static let user         = "user"
     static let lastAPICallDateKey  = "LastAPICallDate"
+    static let cardGame_budget = "budget"
 }
 
 struct DefaultToken {
