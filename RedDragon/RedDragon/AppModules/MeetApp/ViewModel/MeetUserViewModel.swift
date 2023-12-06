@@ -47,4 +47,3 @@ class MeetMyMatchUserViewModel: APIServiceManager<MeetUserListModel> {
     }
 }
 
-

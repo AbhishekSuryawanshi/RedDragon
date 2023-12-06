@@ -116,7 +116,9 @@ extension MeetEventVC {
     
     func execute_onAllEventListResponse(_ eventList: MeetEventListModel) {
         allEventsArray = eventList.response?.data ?? []
-        embedExploreEventsVC() // default First segment selected
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
+            self.embedExploreEventsVC() // default First segment selected
+        }
     }
     
     func execute_onMyUpcomingEventResponse(_ eventList: MeetEventListModel) {

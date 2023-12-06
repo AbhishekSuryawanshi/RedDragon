@@ -34,10 +34,6 @@ class CardGameMyTeamVC: UIViewController {
         fetchMyTeamViewModel()
     }
     
-    private func nibInitialization() {
-        collectionView.register(CellIdentifier.myTeamCell)
-    }
-    
     @IBAction func backButton(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: false)
     }
@@ -66,7 +62,6 @@ extension CardGameMyTeamVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] team in
-                print(team as Any)
                 self?.collectionView.reloadData()
             })
             .store(in: &cancellabel)
@@ -88,6 +83,10 @@ extension CardGameMyTeamVC {
     
     private func showLoader(_ value: Bool) {
         value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
+    }
+    
+    private func nibInitialization() {
+        collectionView.register(CellIdentifier.myTeamCell)
     }
 }
 

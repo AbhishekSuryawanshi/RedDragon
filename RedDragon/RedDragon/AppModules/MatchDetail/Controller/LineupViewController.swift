@@ -80,7 +80,6 @@ extension LineupViewController {
             let filteredData = lineupData.filter { $0[4].contains(positionIdentifier) }
             let imageNames = filteredData.map { $0[2] }
             
-            print("\(positionIdentifier) = \(filteredData.count)")
             createViews(viewCount: filteredData.count, imageNames: imageNames, stackView: stackView)
         }
     }

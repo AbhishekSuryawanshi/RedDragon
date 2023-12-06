@@ -35,6 +35,8 @@ struct URLConstants {
     static let cardGame_allPlayersList = databaseBaseURL + "player_filter.php"
     static let cardGame_buyPlayer   = cardGameBaseURL + "/api/user/players"
     static let cardGame_leaderboard = cardGameBaseURL + "/api/user/list"
+    static let leaderboardDetail    = cardGameBaseURL + "/api/user/"
+    static let yourMatches          = cardGameBaseURL + "/api/matches"
     
     // MARK: -  Social
     static let socialBaseURL       = baseURL + "euro5league/"
@@ -81,7 +83,9 @@ struct URLConstants {
     static let meetMyUpcomingEvent = meetBaseURL + "events/upcoming"
     static let meetMyPastEvent     = meetBaseURL + "events/past"
     static let meetLikedUser       = meetBaseURL + "user/like"
+    static let meetSportsInterest  = meetBaseURL + "user/sports/interest/list"
     static let meetMyMatchUser     = meetBaseURL + "user/mymatch/list"
+    static let meetCreateEvent     = meetBaseURL + "user/events/add"
     
     // MARK: - StreetMatches
     static let streetMatchesBaseURL = "https://trkick.com/stm/api/"
