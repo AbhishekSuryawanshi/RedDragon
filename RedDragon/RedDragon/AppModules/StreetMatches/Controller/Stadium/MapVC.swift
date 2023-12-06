@@ -16,7 +16,6 @@ class MapVC: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     var locationManager: CLLocationManager!
-    var delg:SetLocationDelegate?
     var delegate:SetLocationDelegate?
     var address = ""
     var lat = ""
@@ -33,7 +32,7 @@ class MapVC: UIViewController {
     
     
     @IBAction func actionSetLocation(_ sender: Any) {
-        delg?.sendChosenLocation(address: address, lat: lat, long: long)
+        delegate?.sendChosenLocation(address: address, lat: lat, long: long)
         navigationController?.popViewController(animated: true)
         
     }

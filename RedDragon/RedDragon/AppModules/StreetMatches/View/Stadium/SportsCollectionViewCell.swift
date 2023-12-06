@@ -12,5 +12,19 @@ class SportsCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    
+    func setupCell(selected:Bool,sport:SportTypes){
+        if selected{
+            backView.backgroundColor = .base
+            lblSport.textColor = .white
+            imgIcon.image = sport.imageWhite
+            
+        }
+        else{
+            backView.backgroundColor = .white
+            lblSport.textColor = .base
+            imgIcon.image = sport.image
+        }
+    }
 
 }

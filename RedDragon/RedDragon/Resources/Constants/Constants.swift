@@ -31,6 +31,7 @@ enum dateFormat: String {
     case edmmmHHmm            = "E, d"
   //  case edmmmHHmm            = "E, d MMM HH:mm"
     case mmmdhm            = "MMM d, h:mm a"
+    case hhmmssa           = "h:mm:ss aa"
 }
 
 //func formatDate(date: Date?, with outputFormat: dateFormat)-> String
