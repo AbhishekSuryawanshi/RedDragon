@@ -14,17 +14,20 @@ class MeetChatVC: UIViewController, ChatListTVDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var chatListTableView: ChatListTV!
- //   @IBOutlet weak var emptyView: UIView!
+    @IBOutlet weak var segmentControl: UISegmentedControl!
 
     weak var chatTableDelegate: ChatListTVDelegate?
     var channels: [TCHChannel] = []
     var searchText = String()
     var filteredUserArray = [MeetUser]()
-    var arrayOfChatUsers = [MeetUser]()
+    var users = [MeetUser]()
     let dispatchGroup = DispatchGroup()
-    var userVM: MeetUserViewModel!
+    private var userVM: MeetUserViewModel!
+    private var myMatchUserVM: MeetMyMatchUserViewModel?
     var usersArray = [MeetUser]()
+    var myMatchUsersArray = [MeetUser]()
     var cancellable = Set<AnyCancellable>()
+    var chatUsersArray = [MeetUser]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,12 +41,7 @@ class MeetChatVC: UIViewController, ChatListTVDelegate {
         callToViewModelToFetchUser()
         chatListTableView.didSelect = didSelect
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
-    
+   
     func showLoader(_ value: Bool) {
         value ? startLoader() : stopLoader()
     }
@@ -51,16 +49,19 @@ class MeetChatVC: UIViewController, ChatListTVDelegate {
     //MARK:- View setup
     func callToViewModelToFetchUser(){
         userVM = MeetUserViewModel()
+        myMatchUserVM = MeetMyMatchUserViewModel()
         userVM?.fetchMeetUserListAsyncCall()
+        myMatchUserVM?.fetchMyMatchUserAsyncCall()
         fetchMeetUserViewModel()
     }
     
     // MARK: - Segment Control Actions
     @IBAction func segmentControlValueChanged(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            
+            self.users = chatUsersArray
         }else{
-           
+            self.users = myMatchUsersArray
+            //chatListTableView.displayData(data: filteredUserArray, channels: [])
         }
     }
     
@@ -125,7 +126,7 @@ class MeetChatVC: UIViewController, ChatListTVDelegate {
             chatListTableView.isHidden = true
         }else {
             var nonBlock : [Int] = []
-            arrayOfChatUsers.removeAll()
+            users.removeAll()
             chatListTableView.isHidden = false
         //    emptyView.isHidden = true
             
@@ -133,7 +134,7 @@ class MeetChatVC: UIViewController, ChatListTVDelegate {
                     for user in usersArray {
                         if user.id == id {
                             nonBlock.append(id)
-                            arrayOfChatUsers.append(user)
+                            users.append(user)
                         }
                     }
                 }
@@ -144,7 +145,8 @@ class MeetChatVC: UIViewController, ChatListTVDelegate {
                 }
             }
             
-            self.filteredUserArray = arrayOfChatUsers
+            self.filteredUserArray = users
+            self.chatUsersArray = users
             chatListTableView.displayData(data: filteredUserArray, channels: self.channels)
         }
     }
@@ -168,26 +170,39 @@ extension MeetChatVC {
                 self?.execute_onUserListResponseData(userList!)
             })
             .store(in: &cancellable)
+        
+        myMatchUserVM?.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] userList in
+                self?.execute_onMyMatchUserListResponseData(userList!)
+            })
+            .store(in: &cancellable)
     }
     
     func execute_onUserListResponseData(_ userList: MeetUserListModel) {
         usersArray = userList.response?.data ?? []
         getRecentChatList()
     }
+    
+    func execute_onMyMatchUserListResponseData(_ userList: MeetUserListModel) {
+        myMatchUsersArray = userList.response?.data ?? []
+    }
 }
+
 extension MeetChatVC: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-            
+        segmentControlValueChanged(segmentControl)
+       
         if searchText.isEmpty {
-            self.filteredUserArray = self.arrayOfChatUsers
+            self.filteredUserArray = self.users
             self.chatListTableView.displayData(data: self.filteredUserArray, channels: self.channels)
             searchBar.perform(#selector(self.resignFirstResponder), with: nil, afterDelay: 0.1)
             return
-           
-
+    
             }else if searchText.count >= 1 {
-                    filteredUserArray = arrayOfChatUsers.filter({ (chatUser) -> Bool in
+                    filteredUserArray = users.filter({ (chatUser) -> Bool in
                         let tmp: NSString = NSString.init(string: chatUser.name ?? "")
                         let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
                         return range.location != NSNotFound
