@@ -1,9 +1,4 @@
-//
-//  TeamCollectionViewCell.swift
-//  Area Sports
-//
-//  Created by Remya on 8/12/23.
-//
+
 
 import UIKit
 

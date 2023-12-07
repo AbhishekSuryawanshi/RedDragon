@@ -91,8 +91,5 @@ struct StringConstants {
     
     //Card Game
     static let score                = "Score"
-    static let currentBudget        = "Your current budget is"
-    static let cancel               = "Cancel"
-    static let buy                  = "Buy"
 }
 

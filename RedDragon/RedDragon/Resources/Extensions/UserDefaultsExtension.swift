@@ -49,16 +49,6 @@ extension UserDefaults {
         }
     }
     
-    var budget: Int? {
-        get {
-            return value(forKey: UserDefaultString.cardGame_budget) as? Int
-        }
-        set {
-            set(newValue, forKey: UserDefaultString.cardGame_budget)
-            synchronize()
-        }
-    }
-    
     
     func clearSpecifiedItems() {
         removeObject(forKey: UserDefaultString.token)

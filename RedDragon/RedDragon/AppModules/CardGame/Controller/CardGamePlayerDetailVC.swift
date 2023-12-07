@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import Toast
-import Hero
 import Combine
 import SDWebImage
 import DDSpiderChart
@@ -31,7 +29,6 @@ class CardGamePlayerDetailVC: UIViewController {
     @IBOutlet weak var priceNumberLabel: UILabel!
     @IBOutlet weak var playerSkillView: SpiderChartView!
     @IBOutlet weak var statCollectionView: UICollectionView!
-    @IBOutlet weak var buyButton: UIButton!
     
     var cancellable = Set<AnyCancellable>()
     var playerDetailVM: PlayerDetailViewModel?
@@ -73,24 +70,6 @@ class CardGamePlayerDetailVC: UIViewController {
     @IBAction func backButton(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
-    
-    @IBAction func buyPlayerButton(_ sender: Any) {
-        print(UserDefaults.standard.token as Any)
-        print(UserDefaults.standard.budget as Any)
-        if ((UserDefaults.standard.token ?? "") != "") {
-            let marketValue = Int(value)
-            presentToViewController(BuyPlayerViewController.self, storyboardName: StoryboardName.cardGamePopup, animationType: .fade) { [self] vc in
-                vc.image = defaultImage
-                vc.name = playerName
-                vc.position = position
-                vc.value = formatNumber(Double(marketValue ?? 0))
-                vc.slug = playerDetailVM?.responseData?.data?.teamSlug
-                vc.playerID = playerDetailVM?.responseData?.data?.playerID
-            }
-        } else {
-            customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.loginRequires.localized, image: ImageConstants.alertImage)
-        }
-    }
 }
 
 /// __fetch Players View model
@@ -102,10 +81,7 @@ extension CardGamePlayerDetailVC {
             self?.showLoader(value)
         }
         playerDetailVM?.showError = { [weak self] error in
-            self?.view.makeToast(ErrorMessage.dataNotFound.localized, duration: 2.0, position: .center)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                self?.navigationController?.popViewController(animated: true)
-            }
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
         playerDetailVM?.$responseData
             .receive(on: DispatchQueue.main)
@@ -165,18 +141,11 @@ extension CardGamePlayerDetailVC {
         playerImageView.heroID = defaultImage
         playerNameLabel.heroID = playerName
         
-        let userBudget = UserDefaults.standard.budget
-        userPointsLabel.text = "\(formatNumber(Double(userBudget!)))"
-        
         playerImageView.sd_imageIndicator = SDWebImageActivityIndicator.white
         playerImageView.sd_setImage(with: URL(string: defaultImage))
         playerNameLabel.text = playerName
         positionLabel.text = position
         labelRoundedCorner()
-        
-        let marketValue = Int(value)
-        let value = formatNumber(Double(marketValue ?? 0))
-        buyButton.setTitle("Buy for \(value)", for: .normal)
     }
     
     private func labelRoundedCorner() {

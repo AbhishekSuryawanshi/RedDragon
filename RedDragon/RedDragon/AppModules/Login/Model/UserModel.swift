@@ -30,10 +30,9 @@ struct User: Codable {
     var otpVerified: Int = 0
     var token: String = ""
     var appDataIDs = LocalAppUserID()
-    var affAppData: AffAppData?
     
     enum CodingKeys: String, CodingKey {
-        case id, email, username, appDataIDs, affAppData
+        case id, email, username, appDataIDs
         case name = "full_name"
         case phoneNumber = "phone_number"
         case createdAt = "created_at"
@@ -58,20 +57,7 @@ struct User: Codable {
         profileImg = try container.decodeIfPresent(String.self, forKey: .profileImg) ?? ""
         token = try container.decodeIfPresent(String.self, forKey: .token) ?? ""
         appDataIDs = try container.decodeIfPresent(LocalAppUserID.self, forKey: .appDataIDs) ?? LocalAppUserID()
-        affAppData = try container.decodeIfPresent(AffAppData.self, forKey: .affAppData)
     }
-}
-
-struct AffAppData: Codable {
-    var sportCard: SportCard?
-
-    enum CodingKeys: String, CodingKey {
-        case sportCard = "sport-card"
-    }
-}
-
-struct SportCard: Codable {
-    let budget: String
 }
 
 struct LocalAppUserID: Codable {

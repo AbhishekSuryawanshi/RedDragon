@@ -25,7 +25,6 @@ class EventDetailVC: UIViewController {
     var selectedEventId = Int()
     var cancellable = Set<AnyCancellable>()
     var event: MeetEvent?
-    var joinEventVM: MeetJoinEventViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,9 +48,7 @@ class EventDetailVC: UIViewController {
     
     // MARK: - Button Actions
     @IBAction func joinEventBtnAction(_ sender: Any) {
-        joinEventVM = MeetJoinEventViewModel()
-        joinEventVM?.postJoinEventAsyncCall(eventID: selectedEventId)
-        fetchJoinEventViewModelResponse()
+       
     }
 }
 
@@ -98,24 +95,6 @@ extension EventDetailVC {
         }else{
             self.eventPriceLbl.text = "Paid".localized+" $\(event?.price ?? 0.0)"
         }
-    }
-    
-    func fetchJoinEventViewModelResponse() {
-        joinEventVM?.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
-        }
-        joinEventVM?.displayLoader = { [weak self] value in
-            self?.showLoader(value)
-        }
-        joinEventVM?.$responseData
-            .receive(on: DispatchQueue.main)
-            .dropFirst()
-            .sink(receiveValue: { [weak self] eventDetail in
-                if eventDetail?.response?.code == 200 {
-                    self?.view.makeToast(eventDetail?.response?.messages?.first ?? "")
-                }
-            })
-          .store(in: &cancellable)
     }
 }
 

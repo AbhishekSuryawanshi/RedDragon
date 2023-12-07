@@ -1,9 +1,4 @@
-//
-//  TeamCollectionTableViewCell.swift
-//  Area Sports
-//
-//  Created by Remya on 8/12/23.
-//
+
 
 import UIKit
 
@@ -23,14 +18,14 @@ class TeamCollectionTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        collectionView.register(UINib(nibName: "TeamCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "teamCollectionViewCell")
+        collectionView.register(CellIdentifier.teamCollectionViewCell)
         collectionView.delegate = self
         collectionView.dataSource = self
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        
 
         // Configure the view for the selected state
     }
@@ -44,7 +39,7 @@ extension TeamCollectionTableViewCell:UICollectionViewDelegate,UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teamCollectionViewCell", for: indexPath) as! TeamCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.teamCollectionViewCell, for: indexPath) as! TeamCollectionViewCell
         cell.configureCell(obj: teams?[indexPath.row])
         return cell
     }
@@ -54,7 +49,7 @@ extension TeamCollectionTableViewCell:UICollectionViewDelegate,UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = CGSize(width: 120, height: 130)
+        let size = CGSize(width: 120, height: 115)
         return size
     }
     

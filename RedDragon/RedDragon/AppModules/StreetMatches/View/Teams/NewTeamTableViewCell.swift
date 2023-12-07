@@ -1,9 +1,3 @@
-//
-//  NewTeamTableViewCell.swift
-//  Area Sports
-//
-//  Created by Remya on 9/26/23.
-//
 
 import UIKit
 

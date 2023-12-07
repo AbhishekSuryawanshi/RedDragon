@@ -50,9 +50,17 @@ class StreetTeamsViewController: UIViewController {
    
     func initialSetup(){
         
-       
+        nibInitialization()
         configureViewModel()
       
+    }
+    
+    func nibInitialization() {
+        defineTableViewNibCell(tableView: tableView, cellName: CellIdentifier.teamCollectionTableViewCell)
+        defineTableViewNibCell(tableView: tableView, cellName: CellIdentifier.newTeamTableViewCell)
+        defineTableViewNibCell(tableView: tableView, cellName: CellIdentifier.streetHomeHeaderTableViewCell)
+        
+        
     }
     
     func showLoader(_ value: Bool) {
@@ -114,7 +122,6 @@ class StreetTeamsViewController: UIViewController {
         fixedEmpty.text = "No Teams Found!".localized
         btnCreateTeam.setTitle("Create Team".localized, for: .normal)
         searchBar.placeholder = "Search".localized
-        searchBar.searchTextField.placeHolderColor = .white
         headers = ["My Teams".localized,"All Teams".localized]
 
     }
@@ -128,9 +135,11 @@ extension StreetTeamsViewController:UITableViewDelegate,UITableViewDataSource{
         return getSectionCount()
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 && (myTeams?.count ?? 0 > 0){
-            
-            return 1
+        if !isSearchMode{
+            if section == 0 && (myTeams?.count ?? 0 > 0){
+                
+                return 1
+            }
         }
         return teams?.count ?? 0
     }
@@ -138,7 +147,7 @@ extension StreetTeamsViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if !isSearchMode{
             if indexPath.section == 0 && (myTeams?.count ?? 0 > 0){
-                let cell = tableView.dequeueReusableCell(withIdentifier: "teamCollectionTableViewCell") as! TeamCollectionTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.teamCollectionTableViewCell) as! TeamCollectionTableViewCell
                 cell.teams = myTeams
                 cell.passTeam = { [weak self] team in
                     self?.gotoTeamDetails(team: team)
@@ -146,7 +155,7 @@ extension StreetTeamsViewController:UITableViewDelegate,UITableViewDataSource{
                 return cell
             }
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "newTeamTableViewCell") as! NewTeamTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.newTeamTableViewCell) as! NewTeamTableViewCell
         cell.configureCell(obj: teams?[indexPath.row])
         return cell
     }
@@ -157,7 +166,12 @@ extension StreetTeamsViewController:UITableViewDelegate,UITableViewDataSource{
         
     }
     
-    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.streetHomeHeaderTableViewCell) as! StreetHomeHeaderTableViewCell
+        cell.lblTitle.text = headers[section]
+        cell.btnMore.isHidden = true
+        return cell
+    }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 && (myTeams?.count ?? 0 == 0){
@@ -209,7 +223,7 @@ extension StreetTeamsViewController:UISearchBarDelegate{
         }
         else{
             isSearchMode = true
-            teams?.removeAll()
+            //teams?.removeAll()
             teams = teams_Original?.filter{$0.name.lowercased().contains(searchText.lowercased())}
             tableView.reloadData()
         }

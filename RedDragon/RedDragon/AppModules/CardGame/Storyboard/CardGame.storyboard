@@ -13,7 +13,7 @@
         <!--All Players View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="AllPlayersViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="AllPlayersViewController" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AllPlayersViewController" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="AllPlayersViewController" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -166,19 +166,19 @@
         <!--Card Game Player DetailVC-->
         <scene sceneID="3tc-f7-eO8">
             <objects>
-                <viewController storyboardIdentifier="CardGamePlayerDetailVC" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="y6w-t8-VFL" customClass="CardGamePlayerDetailVC" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CardGamePlayerDetailVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="y6w-t8-VFL" customClass="CardGamePlayerDetailVC" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xn3-Ug-pJP">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="1080"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="1020"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XoZ-We-CLW">
-                                <rect key="frame" x="0.0" y="59" width="393" height="1021"/>
+                                <rect key="frame" x="0.0" y="59" width="393" height="961"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lnI-Oy-8Jh">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1021"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="961"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C1f-NL-kEy">
-                                                <rect key="frame" x="0.0" y="0.0" width="393" height="1021"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="961"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ixa-NS-vUc">
                                                         <rect key="frame" x="156.66666666666666" y="0.0" width="80" height="80"/>
@@ -475,6 +475,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="11X-B8-i5U" secondAttribute="trailing" id="N20-h9-n53"/>
                                                     <constraint firstAttribute="trailing" secondItem="GBU-GQ-Iht" secondAttribute="trailing" constant="30" id="OLa-nx-Lgq"/>
                                                     <constraint firstAttribute="trailing" secondItem="384-f3-gpd" secondAttribute="trailing" priority="250" constant="331" id="Q6m-Ec-8bo"/>
+                                                    <constraint firstAttribute="bottom" secondItem="lGS-SS-f3r" secondAttribute="bottom" constant="37" id="Qpr-Kg-PhN"/>
                                                     <constraint firstItem="tM5-Qg-n1T" firstAttribute="leading" secondItem="C1f-NL-kEy" secondAttribute="leading" constant="20" symbolic="YES" id="SGc-r6-0pM"/>
                                                     <constraint firstItem="pGK-5C-yCF" firstAttribute="top" secondItem="puw-Mq-MCW" secondAttribute="bottom" constant="8" symbolic="YES" id="U1a-xH-tnj"/>
                                                     <constraint firstAttribute="trailing" secondItem="BhS-rR-vGA" secondAttribute="trailing" constant="20" symbolic="YES" id="VO6-LB-Vql"/>
@@ -500,7 +501,6 @@
                                                     <constraint firstItem="BhS-rR-vGA" firstAttribute="top" secondItem="2pe-5l-6Se" secondAttribute="bottom" constant="8" symbolic="YES" id="wMI-LX-XDD"/>
                                                     <constraint firstAttribute="trailing" secondItem="tM5-Qg-n1T" secondAttribute="trailing" constant="20" symbolic="YES" id="zTM-hq-9E4"/>
                                                     <constraint firstItem="GBU-GQ-Iht" firstAttribute="leading" secondItem="C1f-NL-kEy" secondAttribute="leading" constant="10" id="zUY-43-Hlr"/>
-                                                    <constraint firstAttribute="bottom" secondItem="lGS-SS-f3r" secondAttribute="bottom" constant="97" id="zjo-JR-sWu"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -537,44 +537,21 @@
                                     <action selector="backButton:" destination="y6w-t8-VFL" eventType="touchUpInside" id="2oM-L4-QWh"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="40w-pj-wai">
-                                <rect key="frame" x="116.66666666666669" y="980" width="160" height="36"/>
-                                <color key="backgroundColor" red="0.0" green="0.396078431372549" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="36" id="M1s-aT-KYD"/>
-                                    <constraint firstAttribute="width" constant="160" id="guD-bC-JmM"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="16"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Buy"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="buyPlayerButton:" destination="y6w-t8-VFL" eventType="touchUpInside" id="hd2-fS-wqg"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1rD-Dm-CHw"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="1rD-Dm-CHw" firstAttribute="bottom" secondItem="40w-pj-wai" secondAttribute="bottom" constant="30" id="25Z-LA-E5k"/>
                             <constraint firstItem="dGX-Na-JPZ" firstAttribute="top" secondItem="1rD-Dm-CHw" secondAttribute="top" id="4x2-av-4W9"/>
                             <constraint firstAttribute="bottom" secondItem="XoZ-We-CLW" secondAttribute="bottom" id="7fu-KH-Zdv"/>
-                            <constraint firstItem="40w-pj-wai" firstAttribute="centerX" secondItem="XoZ-We-CLW" secondAttribute="centerX" id="Fou-Od-jhm"/>
                             <constraint firstItem="XoZ-We-CLW" firstAttribute="leading" secondItem="1rD-Dm-CHw" secondAttribute="leading" id="NDb-pT-wSK"/>
                             <constraint firstItem="XoZ-We-CLW" firstAttribute="top" secondItem="1rD-Dm-CHw" secondAttribute="top" id="jCq-0g-1eD"/>
                             <constraint firstItem="dGX-Na-JPZ" firstAttribute="leading" secondItem="1rD-Dm-CHw" secondAttribute="leading" constant="15" id="liG-xO-qpU"/>
                             <constraint firstItem="XoZ-We-CLW" firstAttribute="trailing" secondItem="1rD-Dm-CHw" secondAttribute="trailing" id="n3Z-sY-FGL"/>
                         </constraints>
                     </view>
-                    <size key="freeformSize" width="393" height="1080"/>
+                    <size key="freeformSize" width="393" height="1020"/>
                     <connections>
                         <outlet property="aboutDataLabel" destination="puw-Mq-MCW" id="9CM-sI-Q1P"/>
-                        <outlet property="buyButton" destination="40w-pj-wai" id="cPZ-OW-7H9"/>
                         <outlet property="countryImageView" destination="VnR-Iu-JRF" id="lvG-HX-3EP"/>
                         <outlet property="countryNameLabel" destination="UyW-sd-LDo" id="OKr-Lq-CTa"/>
                         <outlet property="marketPriceLabel" destination="WaH-Er-Cwo" id="6Zs-EI-104"/>
@@ -600,7 +577,7 @@
         <!--Card Game My TeamVC-->
         <scene sceneID="NaF-I2-ADX">
             <objects>
-                <viewController storyboardIdentifier="CardGameMyTeamVC" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gVw-4r-8sf" customClass="CardGameMyTeamVC" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CardGameMyTeamVC" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gVw-4r-8sf" customClass="CardGameMyTeamVC" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="t1Y-US-myf">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -810,7 +787,7 @@
         <!--Leaderboard View Controller-->
         <scene sceneID="g7l-V7-vbP">
             <objects>
-                <viewController storyboardIdentifier="LeaderboardViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ad6-Sx-Kkr" customClass="LeaderboardViewController" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LeaderboardViewController" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ad6-Sx-Kkr" customClass="LeaderboardViewController" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Mec-LA-uJq">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1168,7 +1145,7 @@
         <!--User Profile View Controller-->
         <scene sceneID="hPk-kL-rQt">
             <objects>
-                <viewController storyboardIdentifier="UserProfileViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ua4-Kk-VIm" customClass="UserProfileViewController" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ua4-Kk-VIm" customClass="UserProfileViewController" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="frm-vH-bbG">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1201,7 +1178,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="o8I-pc-ibs">
-                                                <rect key="frame" x="153" y="114" width="87" height="26"/>
+                                                <rect key="frame" x="107" y="114" width="179" height="26"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yGZ-Vs-Na8">
                                                         <rect key="frame" x="0.0" y="0.0" width="87" height="26"/>
@@ -1219,6 +1196,24 @@
                                                             <constraint firstItem="Uw1-Bw-6kw" firstAttribute="centerX" secondItem="yGZ-Vs-Na8" secondAttribute="centerX" id="2Kr-Lj-DGz"/>
                                                             <constraint firstItem="Uw1-Bw-6kw" firstAttribute="centerY" secondItem="yGZ-Vs-Na8" secondAttribute="centerY" id="Hix-7O-8UZ"/>
                                                             <constraint firstItem="Uw1-Bw-6kw" firstAttribute="leading" secondItem="yGZ-Vs-Na8" secondAttribute="leading" constant="8" id="dCN-kT-YGI"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ErJ-FQ-by3">
+                                                        <rect key="frame" x="92" y="0.0" width="87" height="26"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oaj-eg-KIE">
+                                                                <rect key="frame" x="8" y="5" width="71" height="16.333333333333332"/>
+                                                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
+                                                                <color key="textColor" red="0.73333333329999995" green="0.098039215690000001" blue="0.062745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="oaj-eg-KIE" secondAttribute="trailing" constant="8" id="FGc-cC-DSW"/>
+                                                            <constraint firstItem="oaj-eg-KIE" firstAttribute="centerY" secondItem="ErJ-FQ-by3" secondAttribute="centerY" id="IaR-j0-uU4"/>
+                                                            <constraint firstItem="oaj-eg-KIE" firstAttribute="centerX" secondItem="ErJ-FQ-by3" secondAttribute="centerX" id="ZMC-VN-5pg"/>
+                                                            <constraint firstItem="oaj-eg-KIE" firstAttribute="leading" secondItem="ErJ-FQ-by3" secondAttribute="leading" constant="8" id="j8o-4c-vrZ"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -1525,6 +1520,8 @@
                         <outlet property="lossLabel" destination="MU1-S5-sPg" id="O7G-bh-vQh"/>
                         <outlet property="nameLabel" destination="Rac-df-bqN" id="ikM-fj-WxO"/>
                         <outlet property="previousMatchesLabel" destination="G6O-4j-JRe" id="h3K-D0-1Ni"/>
+                        <outlet property="ratingPercentCountLabel" destination="oaj-eg-KIE" id="QGu-5N-6F1"/>
+                        <outlet property="ratingView" destination="ErJ-FQ-by3" id="fwa-dw-EdJ"/>
                         <outlet property="scoreLabel" destination="Uw1-Bw-6kw" id="ZTq-3g-tnQ"/>
                         <outlet property="scoreLabelView" destination="yGZ-Vs-Na8" id="7jC-dw-I3e"/>
                         <outlet property="tableView" destination="Wvh-1m-EmR" id="86a-U7-rzi"/>
