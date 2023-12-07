@@ -14,5 +14,16 @@ class MyTeamViewModel: APIServiceManager<MyTeam> {
         let method = RequestType.get
         asyncCall(urlString: url, method: method, parameters: nil, isGuestUser: true, anyDefaultToken: DefaultToken.guestUserCardGame)
     }
+}
+
+extension MyTeamViewModel {
     
+    //MARK: Sell player function
+    
+    func sellPlayerAsyncCall(playerID: Int) {
+        let url = URLConstants.removePlayer
+        let method = RequestType.delete
+        let parameter: [String: Any] = ["playerId": playerID]
+        asyncCall(urlString: url, method: method, parameters: parameter, isGuestUser: true, anyDefaultToken: DefaultToken.guestUserCardGame)
+    }
 }

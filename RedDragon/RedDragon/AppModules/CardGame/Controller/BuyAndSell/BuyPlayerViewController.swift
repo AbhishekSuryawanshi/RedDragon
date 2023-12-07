@@ -11,6 +11,11 @@ import Toast
 import Combine
 import SDWebImage
 
+/// define protocol for delegate
+protocol ControllerDelegate: AnyObject {
+    func controllerDismissed()
+}
+
 class BuyPlayerViewController: UIViewController {
     
     @IBOutlet weak var playerImage: UIImageView!
@@ -34,6 +39,7 @@ class BuyPlayerViewController: UIViewController {
     var buyPlayerVM: BuyPlayerViewModel?
     var budgetClass = BudgetCalculation()
     var updateInfoVM = UpdateInfoViewModel()
+    weak var delegate: ControllerDelegate? ///declare delagate property
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,8 +69,6 @@ class BuyPlayerViewController: UIViewController {
     @IBAction func cancelButton(_ sender: Any) {
         dismiss(animated: true)
     }
-    
-
 }
 
 /// __Fetch View model data
@@ -162,16 +166,13 @@ extension BuyPlayerViewController {
         for i in 0..<data.count {
             myTeam.append(data[i].playerID)
         }
-        print(myTeam)
     }
     
     func checkUserBudget() {
         guard let playerValue = valueFromAbbreviation(value ?? "") else {
-            //print("Invalid value format")
             return
         }
         let userBudget = UserDefaults.standard.budget!
-        
         Double(userBudget) > playerValue ? makeNetworkCall() : self.view.makeToast(ErrorMessage.insufficientBudget.localized, duration: 2.0, position: .center)
     }
     
@@ -187,6 +188,11 @@ extension BuyPlayerViewController {
         let newUserBudget = calculateBudget()
         makeNetworkCall_toUpdateBudget(newUserBudget)
         UserDefaults.standard.budget = Int(newUserBudget)
-        customAlertView(title: ErrorMessage.success.localized, description: ErrorMessage.playerBuyed.localized, image: "cardGame_success")
+        self.view.makeToast(ErrorMessage.playerBuyed.localized, duration: 2.0, position: .center)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            /// Notify the delegate
+            self.delegate?.controllerDismissed()
+            self.dismiss(animated: true)
+        }
     }
 }

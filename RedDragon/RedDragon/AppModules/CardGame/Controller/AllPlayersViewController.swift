@@ -20,7 +20,7 @@ class AllPlayersViewController: UIViewController {
     var cancellable = Set<AnyCancellable>()
     var allPlayersVM: AllFootballPlayersViewModel?
     var fetchCurrentLanguageCode = String()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadFunctionality()
@@ -50,7 +50,7 @@ class AllPlayersViewController: UIViewController {
     func showLoader(_ value: Bool) {
         value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
     }
-
+    
     @IBAction func backButton(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: false)
     }
@@ -62,7 +62,6 @@ class AllPlayersViewController: UIViewController {
     @IBAction func leaderboardButton(_ sender: Any) {
         navigateToViewController(LeaderboardViewController.self, storyboardName: StoryboardName.cardGame)
     }
-    
     
     @objc private func textFieldDidChange(_ textField: UITextField) {
         allPlayersVM?.setSearchText(searchTextField.text ?? "")

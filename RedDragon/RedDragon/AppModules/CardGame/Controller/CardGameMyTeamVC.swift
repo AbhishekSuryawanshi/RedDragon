@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toast
 import Combine
 
 class CardGameMyTeamVC: UIViewController {
@@ -15,13 +16,18 @@ class CardGameMyTeamVC: UIViewController {
     @IBOutlet weak var friendsLabel: UILabel!
     @IBOutlet weak var myTeaamLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var budgetLabel: UILabel!
+    @IBOutlet weak var budgetView: UIView!
     
     var cancellabel = Set<AnyCancellable>()
     var teamListVM: MyTeamViewModel?
+    var budgetClass = BudgetCalculation()
+    var updateInfoVM = UpdateInfoViewModel()
+    var playerSoldOut: Bool? = nil
+    var userBudget_afterPlayerSold: Double? = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,9 +35,11 @@ class CardGameMyTeamVC: UIViewController {
     }
     
     private func loadFunctionality() {
+        budgetView.isHidden = true
         nibInitialization()
         addActivityIndicator()
         fetchMyTeamViewModel()
+        fetchUserUpdatedBudget()
     }
     
     @IBAction func backButton(_ sender: Any) {
@@ -63,6 +71,10 @@ extension CardGameMyTeamVC {
             .dropFirst()
             .sink(receiveValue: { [weak self] team in
                 self?.collectionView.reloadData()
+                ///API call to update user budget
+                if self?.playerSoldOut == true {
+                    self?.makeNetworkCall_toUpdateBudget(self?.userBudget_afterPlayerSold ?? 0)
+                }
             })
             .store(in: &cancellabel)
         
@@ -71,6 +83,21 @@ extension CardGameMyTeamVC {
     
     private func makeAyncCall() {
         teamListVM?.fetchmyTeamAsyncCall()
+    }
+    
+    ///user budget update model
+    func fetchUserUpdatedBudget() {
+        updateInfoVM.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink { [weak self] response in
+                self?.budgetView.isHidden = false
+                self?.playerSoldOut = nil
+                let budget = UserDefaults.standard.budget!
+                self?.budgetLabel.text = "\(self?.formatNumber(Double(budget)) ?? "0")"
+                self?.view.makeToast(ErrorMessage.playerRemoved.localized, duration: 2.0, position: .bottom)
+            }
+            .store(in: &cancellabel)
     }
 }
 
@@ -130,12 +157,30 @@ extension CardGameMyTeamVC: UICollectionViewDelegate, UICollectionViewDataSource
     
     ///sell player API call
     @objc func sellPlayerFunction(sender: UIButton) {
-//        teamListVM?.sellPlayerAsyncCall(playerID: teamListVM?.responseData?[sender.tag].playerID ?? 0)
-//        playerSoldOut = true
-//        userBudget_afterPlayerSold = calculateBudget(Double(teamListVM?.responseData?[sender.tag].marketValue ?? "") ?? 0)
-//        DispatchQueue.main.async { [self] in
-//            budgetLabel.text = "\(formatNumber(Double(userBudget_afterPlayerSold!)))"
-//        }
+        teamListVM?.sellPlayerAsyncCall(playerID: teamListVM?.responseData?[sender.tag].playerID ?? 0)
+        playerSoldOut = true
+        userBudget_afterPlayerSold = calculateBudget(Double(teamListVM?.responseData?[sender.tag].marketValue ?? "") ?? 0)
+        DispatchQueue.main.async { [self] in
+            budgetLabel.text = "\(formatNumber(Double(userBudget_afterPlayerSold!)))"
+        }
     }
 }
+
+extension CardGameMyTeamVC {
+    
+    ///calculate user budget after selling player
+    func calculateBudget(_ playerValue: Double) -> Double {
+        let userBudget = UserDefaults.standard.budget!
+        let userFinalBudget = budgetClass.performOperation(Double(userBudget), playerValue, operation: +)
+        return userFinalBudget
+    }
+    
+    ///make network call to update user budget
+    func makeNetworkCall_toUpdateBudget(_ userFinalBudget: Double) {
+        updateInfoVM.updateBudgetAsyncCall(budget: Int(userFinalBudget))
+        UserDefaults.standard.budget = Int(userFinalBudget)
+    }
+    
+}
+
 
