@@ -693,14 +693,25 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mse-wu-fE3">
+                                                <rect key="frame" x="0.0" y="0.0" width="171.66666666666666" height="60"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <connections>
+                                                    <action selector="playAgainstComputer:" destination="gVw-4r-8sf" eventType="touchUpInside" id="URi-uM-tKl"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="0.87843137250000003" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="BJ6-Ng-qlI" firstAttribute="centerY" secondItem="l4x-9B-AWJ" secondAttribute="centerY" id="26s-3D-rLi"/>
+                                            <constraint firstItem="mse-wu-fE3" firstAttribute="leading" secondItem="l4x-9B-AWJ" secondAttribute="leading" id="8eO-Ez-4qD"/>
                                             <constraint firstAttribute="trailing" secondItem="BJ6-Ng-qlI" secondAttribute="trailing" constant="25" id="CVu-zY-N6b"/>
                                             <constraint firstItem="EKi-tu-Zv4" firstAttribute="leading" secondItem="l4x-9B-AWJ" secondAttribute="leading" id="SF2-x3-2FP"/>
+                                            <constraint firstItem="mse-wu-fE3" firstAttribute="top" secondItem="l4x-9B-AWJ" secondAttribute="top" id="eF6-2X-70Y"/>
                                             <constraint firstItem="EKi-tu-Zv4" firstAttribute="top" secondItem="l4x-9B-AWJ" secondAttribute="top" constant="5" id="eWe-AV-zeo"/>
                                             <constraint firstAttribute="bottom" secondItem="EKi-tu-Zv4" secondAttribute="bottom" constant="5" id="nqU-I6-PBn"/>
+                                            <constraint firstAttribute="bottom" secondItem="mse-wu-fE3" secondAttribute="bottom" id="pVb-co-xz7"/>
+                                            <constraint firstAttribute="trailing" secondItem="mse-wu-fE3" secondAttribute="trailing" id="s0p-ne-cRp"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -720,14 +731,25 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PF0-ak-QYi">
+                                                <rect key="frame" x="0.0" y="0.0" width="171.33333333333334" height="60"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <connections>
+                                                    <action selector="playAgainstFriends:" destination="gVw-4r-8sf" eventType="touchUpInside" id="bvm-5m-djW"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="0.85490196080000003" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="Zj4-YY-lgF" firstAttribute="centerY" secondItem="Vsd-vO-Slh" secondAttribute="centerY" id="0vx-W8-nAf"/>
+                                            <constraint firstItem="PF0-ak-QYi" firstAttribute="top" secondItem="Vsd-vO-Slh" secondAttribute="top" id="2HK-yi-OGS"/>
+                                            <constraint firstAttribute="trailing" secondItem="PF0-ak-QYi" secondAttribute="trailing" id="6w9-ns-WLg"/>
                                             <constraint firstItem="Zj4-YY-lgF" firstAttribute="leading" secondItem="Vsd-vO-Slh" secondAttribute="leading" constant="25" id="JpJ-I9-k8q"/>
                                             <constraint firstItem="yK7-Yl-KDu" firstAttribute="top" secondItem="Vsd-vO-Slh" secondAttribute="top" constant="5" id="Na0-ND-uEA"/>
                                             <constraint firstAttribute="bottom" secondItem="yK7-Yl-KDu" secondAttribute="bottom" constant="5" id="SZn-OK-mgO"/>
+                                            <constraint firstItem="PF0-ak-QYi" firstAttribute="leading" secondItem="Vsd-vO-Slh" secondAttribute="leading" id="T1C-Bg-e4k"/>
                                             <constraint firstAttribute="trailing" secondItem="yK7-Yl-KDu" secondAttribute="trailing" id="TVQ-Jl-7ol"/>
+                                            <constraint firstAttribute="bottom" secondItem="PF0-ak-QYi" secondAttribute="bottom" id="oPi-fs-iNm"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">

@@ -54,6 +54,12 @@ class CardGameMyTeamVC: UIViewController {
         navigateToViewController(LeaderboardViewController.self, storyboardName: StoryboardName.cardGame)
     }
     
+    @IBAction func playAgainstComputer(_ sender: Any) {
+    }
+    
+    @IBAction func playAgainstFriends(_ sender: Any) {
+        navigateToViewController(LeaderboardViewController.self, storyboardName: StoryboardName.cardGame)
+    }
 }
 
 extension CardGameMyTeamVC {
