@@ -51,6 +51,9 @@ class BuyPlayerViewController: UIViewController {
         }
         if myTeam.contains(specificPlayerID) {
             self.view.makeToast(ErrorMessage.playerAlreadyUsed.localized, duration: 2.0, position: .center)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                self.dismiss(animated: true)
+            }
         } else {
             ///check user budget first, before buying player
             checkUserBudget()
