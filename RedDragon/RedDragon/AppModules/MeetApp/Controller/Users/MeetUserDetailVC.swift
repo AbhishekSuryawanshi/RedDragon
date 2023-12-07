@@ -14,12 +14,15 @@ class MeetUserDetailVC: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var aboutLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var startConversationButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
+    
     private var userVM: MeetUserDetailViewModel?
     var cancellable = Set<AnyCancellable>()
     var selectedUserId = Int()
     var userDetail: MeetUser?
     var sportsInterestArray = [SportsInterest]()
+    var isMyMatchUser: Bool? = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +34,7 @@ class MeetUserDetailVC: UIViewController {
         nibInitialization()
         makeNetworkCall()
         fetchMeetUserDetailViewModel()
+        startConversationButton.isHidden = isMyMatchUser! ? false : true
     }
     
     func nibInitialization() {
@@ -44,6 +48,18 @@ class MeetUserDetailVC: UIViewController {
     func makeNetworkCall() {
         userVM = MeetUserDetailViewModel()
         userVM?.fetchMeetUserDetailAsyncCall(userID: selectedUserId)
+    }
+    
+    // MARK: - Button Actions
+
+    @IBAction func startConversationBtnAction(_ sender: UIButton) {
+        let receiverName = userDetail?.name ?? userDetail?.email ?? ""
+        let receiverImage = userDetail?.profileImg ?? ""
+        let receiverID = userDetail?.id ?? 0
+        
+        DispatchQueue.main.async {
+            ChannelManager.sharedManager.initialiseChatWith(userID: String(receiverID), userName: receiverName, userImage: receiverImage,fromViewController: self)
+         }
     }
 }
 

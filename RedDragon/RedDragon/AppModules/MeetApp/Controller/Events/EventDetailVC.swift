@@ -98,6 +98,9 @@ extension EventDetailVC {
         }else{
             self.eventPriceLbl.text = "Paid".localized+" $\(event?.price ?? 0.0)"
         }
+        
+        self.eventPriceLbl.text = event?.isPaid == 0 ? "Free".localized : "Paid".localized + " $\(event?.price ?? 0.0)"
+        self.joinEventBtn.isHidden = event?.joined ?? false ? true : false
     }
     
     func fetchJoinEventViewModelResponse() {

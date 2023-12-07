@@ -78,16 +78,16 @@ struct URLConstants {
 
     // MARK: -  Meet
     static let meetBaseURL         = "https://kicktin.com/vinder/api/"
-    static let meetUserList        = meetBaseURL + "listuser"
-    static let meetHotEventList    = meetBaseURL + "events/hot"
-    static let meetAllEventList    = meetBaseURL + "event/list"
-    static let meetMyUpcomingEvent = meetBaseURL + "events/upcoming"
-    static let meetMyPastEvent     = meetBaseURL + "events/past"
-    static let meetLikedUser       = meetBaseURL + "user/like"
-    static let meetSportsInterest  = meetBaseURL + "user/sports/interest/list"
-    static let meetMyMatchUser     = meetBaseURL + "user/mymatch/list"
-    static let meetCreateEvent     = meetBaseURL + "user/events/add"
-    static let meetJoinEvent       = meetBaseURL + "user/events/join"
+    static let meetUserList        = baseURL + "vinder/listuser"
+    static let meetHotEventList    = baseURL + "vinder/events/hot"
+    static let meetAllEventList    = baseURL + "vinder/event/list"
+    static let meetMyUpcomingEvent = baseURL + "vinder/events/upcoming"
+    static let meetMyPastEvent     = baseURL + "vinder/events/past"
+    static let meetLikedUser       = baseURL + "vinder/user/like"
+    static let meetSportsInterest  = baseURL + "vinder/sports/interest/list"
+    static let meetMyMatchUser     = baseURL + "vinder/user/mymatch/list"
+    static let meetCreateEvent     = baseURL + "vinder/user/events/add"
+    static let meetJoinEvent       = baseURL + "vinder/user/events/join"
     
     // MARK: - StreetMatches
     static let streetMatchesBaseURL = "https://trkick.com/stm/api/"

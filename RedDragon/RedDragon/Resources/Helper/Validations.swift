@@ -23,7 +23,7 @@ extension UIViewController {
     
     public func isValidPhone(validate phone: String) -> Bool {
         let phoneNum = phone.components(separatedBy: CharacterSet.decimalDigits.inverted).joined(separator: "")
-        if phoneNum.count < 10 {
+        if phoneNum.count < 8 {
             return false
         } else {
             return true

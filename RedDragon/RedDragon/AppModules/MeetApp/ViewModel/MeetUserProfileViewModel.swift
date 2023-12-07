@@ -13,7 +13,7 @@ class MeetUserSportsInterestViewModel: APIServiceManager<MeetUserSportsInterestM
     func fetchSportsInterestAsyncCall() {
         let urlString   = URLConstants.meetSportsInterest
         let method      = RequestType.get
-        asyncCall(urlString: urlString, method: method, parameters: nil, isGuestUser: true, anyDefaultToken: DefaultToken.guestUser)
+        asyncCall(urlString: urlString, method: method, parameters: nil)
     }
 }
 

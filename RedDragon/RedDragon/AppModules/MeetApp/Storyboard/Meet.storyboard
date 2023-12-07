@@ -398,23 +398,8 @@
                                     <outlet property="delegate" destination="zYv-3K-CNj" id="SGh-19-bhR"/>
                                 </connections>
                             </searchBar>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jtK-ML-rd3">
-                                <rect key="frame" x="40" y="127" width="313" height="36"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="aQR-3E-qSa"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="All Messages"/>
-                                    <segment title="My Matches"/>
-                                </segments>
-                                <color key="selectedSegmentTintColor" name="yellow4"/>
-                                <connections>
-                                    <action selector="segmentControlValueChanged:" destination="wST-vr-DA2" eventType="valueChanged" id="ayI-yj-290"/>
-                                    <action selector="segmentControlValueChanged:" destination="zYv-3K-CNj" eventType="valueChanged" id="qqA-qY-tM3"/>
-                                </connections>
-                            </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="e7h-6V-Dpq" customClass="ChatListTV" customModule="RedDragon" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="182" width="393" height="670"/>
+                                <rect key="frame" x="0.0" y="135" width="393" height="717"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 <connections>
@@ -429,11 +414,8 @@
                             <constraint firstItem="dnL-qn-eJo" firstAttribute="leading" secondItem="lOd-4D-vpx" secondAttribute="leading" id="0Ik-GZ-8oA"/>
                             <constraint firstAttribute="bottom" secondItem="e7h-6V-Dpq" secondAttribute="bottom" id="8jo-Nl-E6m"/>
                             <constraint firstItem="dnL-qn-eJo" firstAttribute="top" secondItem="lOd-4D-vpx" secondAttribute="top" id="GSY-Z5-QUG"/>
-                            <constraint firstItem="e7h-6V-Dpq" firstAttribute="top" secondItem="jtK-ML-rd3" secondAttribute="bottom" constant="20" id="e4s-kq-Xzc"/>
-                            <constraint firstItem="lOd-4D-vpx" firstAttribute="trailing" secondItem="jtK-ML-rd3" secondAttribute="trailing" constant="40" id="i94-cO-daT"/>
+                            <constraint firstItem="e7h-6V-Dpq" firstAttribute="top" secondItem="dnL-qn-eJo" secondAttribute="bottom" constant="20" id="Usi-1a-Ftp"/>
                             <constraint firstItem="dnL-qn-eJo" firstAttribute="trailing" secondItem="lOd-4D-vpx" secondAttribute="trailing" id="jYr-rB-gwz"/>
-                            <constraint firstItem="jtK-ML-rd3" firstAttribute="leading" secondItem="lOd-4D-vpx" secondAttribute="leading" constant="40" id="kBP-Jf-AXl"/>
-                            <constraint firstItem="jtK-ML-rd3" firstAttribute="top" secondItem="dnL-qn-eJo" secondAttribute="bottom" constant="12" id="mvy-28-U5N"/>
                             <constraint firstItem="e7h-6V-Dpq" firstAttribute="leading" secondItem="lOd-4D-vpx" secondAttribute="leading" id="nbe-rq-FA3"/>
                             <constraint firstItem="e7h-6V-Dpq" firstAttribute="trailing" secondItem="lOd-4D-vpx" secondAttribute="trailing" id="qDF-rh-ra2"/>
                         </constraints>
@@ -650,11 +632,33 @@
                                             </view>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LLj-GY-cOy">
+                                        <rect key="frame" x="76.666666666666686" y="510.66666666666663" width="240" height="44"/>
+                                        <color key="backgroundColor" name="base"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="240" id="Xmg-LQ-QFE"/>
+                                            <constraint firstAttribute="height" constant="44" id="yoz-FD-Ehl"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                        <color key="tintColor" name="base"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Start Conversation"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="startConversationBtnAction:" destination="DLt-WS-TPh" eventType="touchUpInside" id="bdH-Sf-VcJ"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="tCF-lE-DAW" firstAttribute="leading" secondItem="SDy-Sm-TV9" secondAttribute="leading" constant="15" id="0d8-mh-3wb"/>
                                     <constraint firstAttribute="trailing" secondItem="tCF-lE-DAW" secondAttribute="trailing" constant="15" id="28K-7A-RsG"/>
+                                    <constraint firstItem="LLj-GY-cOy" firstAttribute="centerX" secondItem="SDy-Sm-TV9" secondAttribute="centerX" id="XNu-Lp-NBx"/>
+                                    <constraint firstAttribute="bottom" secondItem="LLj-GY-cOy" secondAttribute="bottom" constant="80" id="tvV-sR-hWj"/>
                                     <constraint firstItem="tCF-lE-DAW" firstAttribute="top" secondItem="SDy-Sm-TV9" secondAttribute="top" constant="20" id="xby-TV-mwg"/>
                                 </constraints>
                             </view>
@@ -681,6 +685,7 @@
                         <outlet property="locationLabel" destination="LhE-QZ-2Kf" id="nnC-Vi-VjD"/>
                         <outlet property="nameLabel" destination="aTz-iz-Y5d" id="hxR-qf-dDg"/>
                         <outlet property="profileImageView" destination="Pib-YU-QIY" id="KZu-Sf-DON"/>
+                        <outlet property="startConversationButton" destination="LLj-GY-cOy" id="UQu-gA-1IB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uwP-wX-CYc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -962,9 +967,6 @@
         </namedColor>
         <namedColor name="wheat4">
             <color red="0.92549019607843142" green="0.83529411764705885" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="yellow4">
-            <color red="1" green="0.8784313725490196" blue="0.54117647058823526" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -47,6 +47,7 @@ extension MyMatchVC: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         navigateToViewController(MeetUserDetailVC.self, storyboardName: StoryboardName.meet, animationType: .autoReverse(presenting: .zoom)) {
             vc in
+            vc.isMyMatchUser = true
             vc.selectedUserId = self.users[indexPath.row].id ?? 0
         }
     }
