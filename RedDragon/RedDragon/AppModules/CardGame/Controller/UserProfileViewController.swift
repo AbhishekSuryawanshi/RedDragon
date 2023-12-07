@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Toast
 import Combine
 import SDWebImage
 
@@ -16,6 +15,8 @@ class UserProfileViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var scoreLabelView: UIView!
+    @IBOutlet weak var ratingPercentCountLabel: UILabel!
+    @IBOutlet weak var ratingView: UIView!
     @IBOutlet weak var winLabel: UILabel!
     @IBOutlet weak var winCountLabel: UILabel!
     @IBOutlet weak var lossLabel: UILabel!
@@ -61,16 +62,12 @@ class UserProfileViewController: UIViewController {
             customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.loginRequires.localized, image: ImageConstants.alertImage)
         }
         else {
-            if leaderboardDetailsVM?.responseData?.players.count == 0 {
-                self.view.makeToast(ErrorMessage.noPlayers.localized, duration: 2.0, position: .center)
-            } else {
-                let players = leaderboardDetailsVM?.responseData?.players
-                if players?.count ?? 0 >= 11 {
-                    againstComputer = false
-                    UserDefaults.standard.set(false, forKey: "gameEnd")
-                    fetchMyTeamViewModel()
-                    fetchOpponentPlayersID(leaderboardDetailsVM?.responseData)
-                }
+            let players = leaderboardDetailsVM?.responseData?.players
+            if players?.count ?? 0 >= 11 {
+                againstComputer = false
+                UserDefaults.standard.set(false, forKey: "gameEnd")
+                fetchMyTeamViewModel()
+                fetchOpponentPlayersID(leaderboardDetailsVM?.responseData)
             }
         }
     }
@@ -92,7 +89,7 @@ extension UserProfileViewController {
     func fetchViewModel() {
         leaderboardDetailsVM = LeaderboardDetailViewModel()
         leaderboardDetailsVM?.showError = { [weak self] error in
-            self?.view.makeToast(error, duration: 2.0, position: .center)
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
         leaderboardDetailsVM?.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -113,7 +110,7 @@ extension UserProfileViewController {
     func fetchMyTeamViewModel() {
         teamListVM = MyTeamViewModel()
         teamListVM?.showError = { [weak self] error in
-            self?.view.makeToast(error, duration: 2.0, position: .center)
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
         teamListVM?.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -173,7 +170,6 @@ extension UserProfileViewController {
         initialize()
         checkLocalisation()
         nibInitialization()
-        labelRoundedCorner()
     }
     
     private func nibInitialization() {
@@ -190,13 +186,6 @@ extension UserProfileViewController {
     
     private func showLoader(_ value: Bool) {
         value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
-    }
-    
-    private func labelRoundedCorner() {
-        scoreLabelView.borderColor = #colorLiteral(red: 0.7895337343, green: 0.174926281, blue: 0.06877139956, alpha: 1)
-        scoreLabelView.borderWidth = 1.0
-        scoreLabelView.layer.cornerRadius = 13
-        scoreLabelView.clipsToBounds = true
     }
     
     private func makeNetworkCall() {
@@ -240,7 +229,7 @@ extension UserProfileViewController: UICollectionViewDataSource, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if leaderboardDetailsVM?.responseData?.players.count == 0 {
-            self.view.makeToast(ErrorMessage.playerListUnavailable.localized, duration: 2.0, position: .center)
+            customAlertView(title: ErrorMessage.dataNotFound.localized, description: ErrorMessage.playerListUnavailable.localized, image: ImageConstants.alertImage)
         }
         return leaderboardDetailsVM?.responseData?.players.count ?? 0
     }
@@ -289,6 +278,7 @@ extension UserProfileViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        //animateTabelCell(tableView, willDisplay: cell, forRowAt: indexPath)
         tableViewHeight.constant = self.tableView.contentSize.height
     }
 }

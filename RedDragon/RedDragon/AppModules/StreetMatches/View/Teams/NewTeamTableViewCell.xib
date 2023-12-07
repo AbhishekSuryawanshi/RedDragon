@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Medium.ttf">
+            <string>Roboto-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="131" id="KGk-i7-Jjw" customClass="NewTeamTableViewCell" customModule="RedDragon" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="346" height="131"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="346" height="131"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pio-Kk-seI">
+                        <rect key="frame" x="0.0" y="0.0" width="346" height="116"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="teamSample" translatesAutoresizingMaskIntoConstraints="NO" id="odK-24-0TE">
+                                <rect key="frame" x="8" y="8" width="44" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="jg4-XY-itq"/>
+                                    <constraint firstAttribute="height" constant="56" id="myn-8R-p9B"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0UI-6Q-aXj">
+                                <rect key="frame" x="60" y="10.000000000000002" width="23" height="16.666666666666671"/>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
+                                <color key="textColor" name="black1"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="locationYellow" translatesAutoresizingMaskIntoConstraints="NO" id="oYl-Xb-Wkf">
+                                <rect key="frame" x="60" y="36.666666666666664" width="15" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="51G-Rc-dQO"/>
+                                    <constraint firstAttribute="width" constant="15" id="Q5B-NN-W3N"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4PE-E7-Zlk">
+                                <rect key="frame" x="79" y="36.666666666666664" width="4" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" name="yellow3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zwk-xC-z3Y">
+                                <rect key="frame" x="8" y="115" width="338" height="1"/>
+                                <color key="backgroundColor" name="gray1"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="KUj-5E-ij3"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="4PE-E7-Zlk" firstAttribute="trailing" secondItem="0UI-6Q-aXj" secondAttribute="trailing" id="3b3-L3-ctN"/>
+                            <constraint firstAttribute="trailing" secondItem="zwk-xC-z3Y" secondAttribute="trailing" id="5n3-mo-27b"/>
+                            <constraint firstItem="4PE-E7-Zlk" firstAttribute="leading" secondItem="oYl-Xb-Wkf" secondAttribute="trailing" constant="4" id="IaP-jL-Ycw"/>
+                            <constraint firstAttribute="bottom" secondItem="zwk-xC-z3Y" secondAttribute="bottom" id="OeD-Ly-PHD"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0UI-6Q-aXj" secondAttribute="trailing" constant="8" id="R87-XZ-Med"/>
+                            <constraint firstItem="4PE-E7-Zlk" firstAttribute="top" secondItem="oYl-Xb-Wkf" secondAttribute="top" id="TSE-sO-ixI"/>
+                            <constraint firstItem="odK-24-0TE" firstAttribute="leading" secondItem="Pio-Kk-seI" secondAttribute="leading" constant="8" id="XXh-U1-F7c"/>
+                            <constraint firstItem="oYl-Xb-Wkf" firstAttribute="top" secondItem="0UI-6Q-aXj" secondAttribute="bottom" constant="10" id="Y1k-dE-9vr"/>
+                            <constraint firstItem="0UI-6Q-aXj" firstAttribute="leading" secondItem="odK-24-0TE" secondAttribute="trailing" constant="8" id="bkz-aK-XNn"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="odK-24-0TE" secondAttribute="bottom" constant="8" id="etT-Ni-e7B"/>
+                            <constraint firstItem="0UI-6Q-aXj" firstAttribute="top" secondItem="odK-24-0TE" secondAttribute="top" constant="2" id="fZA-q2-8iR"/>
+                            <constraint firstItem="odK-24-0TE" firstAttribute="top" secondItem="Pio-Kk-seI" secondAttribute="top" constant="8" id="knx-jP-8Fr"/>
+                            <constraint firstItem="oYl-Xb-Wkf" firstAttribute="leading" secondItem="0UI-6Q-aXj" secondAttribute="leading" id="krY-oO-f2o"/>
+                            <constraint firstItem="zwk-xC-z3Y" firstAttribute="leading" secondItem="odK-24-0TE" secondAttribute="leading" id="uJn-Cb-vbg"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="4PE-E7-Zlk" secondAttribute="bottom" constant="8" id="vXc-VH-8RN"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Pio-Kk-seI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Yiv-yY-d3D"/>
+                    <constraint firstAttribute="trailing" secondItem="Pio-Kk-seI" secondAttribute="trailing" id="afI-3z-N6x"/>
+                    <constraint firstItem="Pio-Kk-seI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ezI-hs-YVJ"/>
+                    <constraint firstAttribute="bottom" secondItem="Pio-Kk-seI" secondAttribute="bottom" constant="15" id="mup-Jf-CSP"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="imgLogo" destination="odK-24-0TE" id="y9l-Wm-ECV"/>
+                <outlet property="lblLocation" destination="4PE-E7-Zlk" id="uKe-Ce-Q2g"/>
+                <outlet property="lblTeam" destination="0UI-6Q-aXj" id="6HS-5i-VYf"/>
+            </connections>
+            <point key="canvasLocation" x="149.61832061068702" y="-1.7605633802816902"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="locationYellow" width="33" height="32"/>
+        <image name="teamSample" width="115.66666412353516" height="162.33332824707031"/>
+        <namedColor name="black1">
+            <color red="0.12549019607843137" green="0.10196078431372549" blue="0.098039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="gray1">
+            <color red="0.75294117647058822" green="0.75294117647058822" blue="0.75294117647058822" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="yellow3">
+            <color red="0.45490196078431372" green="0.35686274509803922" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

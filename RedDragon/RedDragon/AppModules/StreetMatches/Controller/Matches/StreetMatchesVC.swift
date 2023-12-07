@@ -30,7 +30,7 @@ class StreetMatchesVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         nibInitialization()
-        fetchStadiumListViewModel()
+        configureViewModel()
         makeNetworkCall(offset: "")
         collectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .left)
     }
@@ -44,7 +44,7 @@ class StreetMatchesVC: UIViewController {
          value ? startLoader() : stopLoader()
     }
     
-    func fetchStadiumListViewModel() {
+    func configureViewModel() {
         matchListVM = StreetMatchesViewModel()
         matchListVM?.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
@@ -123,6 +123,12 @@ extension StreetMatchesVC:UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.streetMatchTableViewCell, for: indexPath) as! StreetMatchTableViewCell
         cell.configureCell(obj: matchList?[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigateToViewController(StreetMatchesDetailsVC.self,storyboardName: StoryboardName.streetMatches) { vc in
+            vc.matchID = self.matchList?[indexPath.row].id
+        }
     }
 }
 

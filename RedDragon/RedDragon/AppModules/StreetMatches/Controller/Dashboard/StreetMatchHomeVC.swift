@@ -169,7 +169,13 @@ extension StreetMatchHomeVC:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0{
-            openDetails(index: indexPath.row)
+            openStadiumDetails(index: indexPath.row)
+        }
+        else if indexPath.section == 1{
+            
+        }
+        else{
+            openMatchDetails(index: indexPath.row)
         }
     }
     
@@ -179,11 +185,19 @@ extension StreetMatchHomeVC:UITableViewDelegate,UITableViewDataSource{
         return cell
     }
     
-    func openDetails(index:Int){
+    func openStadiumDetails(index:Int){
         navigateToViewController(StadiumDetailsVC.self,storyboardName: StoryboardName.streetMatches) { vc in
             vc.stadium = self.homeData?.stadiums[index]
         }
     }
+    
+    
+    func openMatchDetails(index:Int){
+        navigateToViewController(StreetMatchesDetailsVC.self,storyboardName: StoryboardName.streetMatches) { vc in
+            vc.matchID = self.homeData?.matches[index].id
+        }
+    }
+    
     
 }
 

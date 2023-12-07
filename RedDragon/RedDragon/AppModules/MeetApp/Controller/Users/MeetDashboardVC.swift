@@ -18,7 +18,6 @@ class MeetDashboardVC: UIViewController {
     @IBOutlet weak var headerCollectionView: UICollectionView!
     @IBOutlet weak var viewContainer: UIView!
     var selectedSegment: meetHeaderSegment = .home
-    var MessagingClientClass = MessagingManager.self
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,16 +28,6 @@ class MeetDashboardVC: UIViewController {
     func performInitialSetup() {
         nibInitialization()
         highlightFirstIndex_collectionView()
-        
-        let MessagingManager = self.MessagingClientClass.sharedManager()
-        let userID = "6"
-        MessagingManager.loginWith(identity: userID) { (sucess, error) in
-            if sucess {
-                // print("User get login with Twilio")
-            }else {
-                // print("ERROR WITH TWILIO LOGIN")
-            }
-        }
     }
     
     func nibInitialization() {
@@ -91,18 +80,26 @@ extension MeetDashboardVC {
     }
     
     func embedMeetHomeVC() {
-        ViewEmbedder.embed(withIdentifier: "MeetHomeVC", storyboard: UIStoryboard(name: StoryboardName.meet, bundle: nil), parent: self, container: viewContainer)
+        ViewEmbedder.embed(withIdentifier: "MeetHomeVC", storyboard: UIStoryboard(name: StoryboardName.meet, bundle: nil), parent: self, container: viewContainer) { vc in
+            let vc = vc as! MeetHomeVC
+        }
     }
     
     func embedMeetExploreVC() {
-        ViewEmbedder.embed(withIdentifier: "MeetExploreVC", storyboard: UIStoryboard(name: StoryboardName.meet, bundle: nil), parent: self, container: viewContainer)
+        ViewEmbedder.embed(withIdentifier: "MeetExploreVC", storyboard: UIStoryboard(name: StoryboardName.meet, bundle: nil), parent: self, container: viewContainer) { vc in
+            let vc = vc as! MeetExploreVC
+        }
     }
     
     func embedMeetEventVC() {
-        ViewEmbedder.embed(withIdentifier: "MeetEventVC", storyboard: UIStoryboard(name: StoryboardName.meet, bundle: nil), parent: self, container: viewContainer)
+        ViewEmbedder.embed(withIdentifier: "MeetEventVC", storyboard: UIStoryboard(name: StoryboardName.meet, bundle: nil), parent: self, container: viewContainer) { vc in
+            let vc = vc as! MeetEventVC
+        }
     }
     
     func embedMeetChatVC() {
-        ViewEmbedder.embed(withIdentifier: "MeetChatVC", storyboard: UIStoryboard(name: StoryboardName.meet, bundle: nil), parent: self, container: viewContainer)
+        ViewEmbedder.embed(withIdentifier: "MeetChatVC", storyboard: UIStoryboard(name: StoryboardName.meet, bundle: nil), parent: self, container: viewContainer) { vc in
+            let vc = vc as! MeetChatVC
+        }
     }
 }
