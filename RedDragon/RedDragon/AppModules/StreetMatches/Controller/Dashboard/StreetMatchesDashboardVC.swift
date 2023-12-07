@@ -12,7 +12,6 @@ enum streetMatchesHeaderSegment: String, CaseIterable {
     case stadiums = "Stadiums"
     case feeds = "Feeds"
     case matches = "Matches"
-    case teams = "Teams"
     
 }
 
@@ -62,10 +61,6 @@ extension StreetMatchesDashboardVC: UICollectionViewDataSource, UICollectionView
             embedStadiumsVC()
         case 2:
             embedStreetMatchEventsVC()
-        case 3:
-            embedStreetMatchesVC()
-        case 4:
-            embedStreetTeamsVC()
         default:
             embedStreetMatchesVC()
         }
@@ -111,11 +106,4 @@ extension StreetMatchesDashboardVC {
            // let vc = vc as! StreetMatchesVC
         }
     }
-    
-    func embedStreetTeamsVC() {
-        ViewEmbedder.embed(withIdentifier: "StreetTeamsViewController", storyboard: UIStoryboard(name: StoryboardName.streetMatches, bundle: nil), parent: self, container: viewContainer) { vc in
-           // let vc = vc as! StreetTeamsViewController
-        }
-    }
-   
 }

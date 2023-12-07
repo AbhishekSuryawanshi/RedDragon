@@ -7,6 +7,14 @@
 
 import Foundation
 
+struct JoinOrInviteMeetEventRequest: Codable {
+    var eventId: Int?
+    
+    enum CodingKeys: String, CodingKey {
+        case eventId = "event_id"
+    }
+}
+
 // MARK: - Events List
 struct MeetEventListModel: Codable {
     let response: MeetEventList?

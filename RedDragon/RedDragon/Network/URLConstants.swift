@@ -37,6 +37,7 @@ struct URLConstants {
     static let cardGame_leaderboard = cardGameBaseURL + "/api/user/list"
     static let leaderboardDetail    = cardGameBaseURL + "/api/user/"
     static let yourMatches          = cardGameBaseURL + "/api/matches"
+    static let updateUserInfo       = cardGameBaseURL + "/api/user/info"
     
     // MARK: -  Social
     static let socialBaseURL       = baseURL + "euro5league/"
@@ -86,6 +87,7 @@ struct URLConstants {
     static let meetSportsInterest  = meetBaseURL + "user/sports/interest/list"
     static let meetMyMatchUser     = meetBaseURL + "user/mymatch/list"
     static let meetCreateEvent     = meetBaseURL + "user/events/add"
+    static let meetJoinEvent       = meetBaseURL + "user/events/join"
     
     // MARK: - StreetMatches
     static let streetMatchesBaseURL = "https://trkick.com/stm/api/"
@@ -96,8 +98,6 @@ struct URLConstants {
     static let streetMatchesList = streetMatchesBaseURL + "match/list"
     static let stadiums = streetMatchesBaseURL + "stadium"
     static let streetUploadImage = streetMatchesBaseURL + "resource/img/upload"
-    static let streetMatches = streetMatchesBaseURL + "match"
-    static let streetTeamList = streetMatchesBaseURL + "team/list"
     
 
 
@@ -117,6 +117,6 @@ struct URLConstants {
     static let videosBaseURL       = "https://zeyuapi.com/v1/video/"
     static let videosList          = videosBaseURL + "recommend"
     static let videosThumbnail     = "https://34433tiyu.com/"
-    
+    static let chatTokenURL        = "https://grullo-chihuahua-4284.twil.io/chat-token"
     
 }
