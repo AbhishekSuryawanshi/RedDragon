@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyMatchVC" customModule="RedDragon" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="Mnm-47-Cbx" id="D0P-SD-LvX"/>
+                <outlet property="searchBar" destination="Aqi-2f-k3M" id="Vy5-yD-gaG"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,8 +21,15 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Aqi-2f-k3M">
+                    <rect key="frame" x="0.0" y="59" width="393" height="56"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="7yj-vI-ujj"/>
+                    </connections>
+                </searchBar>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Mnm-47-Cbx">
-                    <rect key="frame" x="12" y="79" width="369" height="773"/>
+                    <rect key="frame" x="12" y="129" width="369" height="723"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="JoW-S3-fxI">
                         <size key="itemSize" width="128" height="128"/>
@@ -39,9 +47,12 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Mnm-47-Cbx" secondAttribute="trailing" constant="12" id="8tE-FT-zgu"/>
-                <constraint firstItem="Mnm-47-Cbx" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="MqK-cZ-8H8"/>
+                <constraint firstItem="Aqi-2f-k3M" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="B5O-ci-hJa"/>
+                <constraint firstItem="Aqi-2f-k3M" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Qbu-pn-1ab"/>
                 <constraint firstItem="Mnm-47-Cbx" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="RiP-bu-uDa"/>
                 <constraint firstAttribute="bottom" secondItem="Mnm-47-Cbx" secondAttribute="bottom" id="i3A-qy-iFb"/>
+                <constraint firstItem="Aqi-2f-k3M" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="mJu-Wg-Jo0"/>
+                <constraint firstItem="Mnm-47-Cbx" firstAttribute="top" secondItem="Aqi-2f-k3M" secondAttribute="bottom" constant="14" id="vZd-dg-8iG"/>
             </constraints>
             <point key="canvasLocation" x="130.53435114503816" y="-11.267605633802818"/>
         </view>

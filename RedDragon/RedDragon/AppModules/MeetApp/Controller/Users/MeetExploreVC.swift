@@ -11,6 +11,7 @@ import Combine
 class MeetExploreVC: UIViewController {
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var viewContainer: UIView!
+    
     var arrayOfUsers = [MeetUser]()
     var arrayOfMatchUsers = [MeetUser]()
     var cancellable = Set<AnyCancellable>()
@@ -104,3 +105,4 @@ extension MeetExploreVC {
         }
     }
 }
+

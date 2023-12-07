@@ -66,12 +66,12 @@ class CreateEventVC: UIViewController {
     }
     
     func geocodeAddress(address: String) {
-        geocoder.geocodeAddressString(address) {
+        geocoder.geocodeAddressString(address) { [self]
             placemarks, error in
             let placemark = placemarks?.first
             self.latitude = (placemark?.location?.coordinate.latitude) ?? 0.0
             self.longitude = (placemark?.location?.coordinate.longitude) ?? 0.0
-            // print("Lat: \(lat), Lon: \(lon)")
+            print("Lat: \(latitude), Lon: \(self.longitude)")
         }
     }
     
@@ -145,7 +145,7 @@ class CreateEventVC: UIViewController {
             }
             price = Float(priceString)!
             eventRequest =
-            MeetEvent(name: eventTitleTextField.text!, description: eventDescTextView.text!, interestId: sportsInterestArray[self.selectedCellRow].id!, latitude: 37.785834, longitude: -122.406417, date: startEventDateTextField.text!, time: startEventTimeTextField.text!, address: locationTextField.text!, isPaid: isPaid, price: price)
+            MeetEvent(name: eventTitleTextField.text!, description: eventDescTextView.text!, interestId: sportsInterestArray[self.selectedCellRow].id!, latitude: latitude, longitude: longitude, date: startEventDateTextField.text!, time: startEventTimeTextField.text!, address: locationTextField.text!, isPaid: isPaid, price: price)
             print(eventRequest as Any)
             let dict = eventRequest.dictionary
             meetCreateEventVM = MeetCreateEventVM()

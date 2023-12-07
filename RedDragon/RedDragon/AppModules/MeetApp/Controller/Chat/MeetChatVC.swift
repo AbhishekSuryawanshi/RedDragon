@@ -84,7 +84,7 @@ class MeetChatVC: UIViewController, ChatListTVDelegate {
     func checkforChannels() {
         
         var arrUserIDs = [Int]()
-        let userID = "6"
+        let userID = "\(UserDefaults.standard.user?.appDataIDs.vinderUserId ?? 0)"
         var count = 0
         
         for channel in ChannelManager.sharedManager.channels {

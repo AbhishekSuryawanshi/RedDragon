@@ -338,15 +338,8 @@
                                             <action selector="segmentControlValueChanged:" destination="EAt-h4-Yi0" eventType="valueChanged" id="8bj-G8-9OJ"/>
                                         </connections>
                                     </segmentedControl>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="sGr-oy-hoS">
-                                        <rect key="frame" x="0.0" y="35" width="393" height="56"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="EAt-h4-Yi0" id="t6q-lz-D3r"/>
-                                        </connections>
-                                    </searchBar>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tpg-gV-z82">
-                                        <rect key="frame" x="0.0" y="91" width="393" height="702"/>
+                                        <rect key="frame" x="0.0" y="35" width="393" height="758"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                 </subviews>
@@ -354,13 +347,10 @@
                                 <constraints>
                                     <constraint firstItem="c5S-xN-WNn" firstAttribute="leading" secondItem="C1g-bd-1kC" secondAttribute="leading" id="3UO-Le-Rnc"/>
                                     <constraint firstAttribute="bottom" secondItem="tpg-gV-z82" secondAttribute="bottom" id="7aA-05-imy"/>
-                                    <constraint firstItem="sGr-oy-hoS" firstAttribute="leading" secondItem="C1g-bd-1kC" secondAttribute="leading" id="Nm2-eL-M10"/>
                                     <constraint firstItem="c5S-xN-WNn" firstAttribute="top" secondItem="C1g-bd-1kC" secondAttribute="top" id="Nwc-mf-YSz"/>
                                     <constraint firstAttribute="trailing" secondItem="c5S-xN-WNn" secondAttribute="trailing" id="apr-yF-Tbf"/>
                                     <constraint firstAttribute="trailing" secondItem="tpg-gV-z82" secondAttribute="trailing" id="d6E-BS-ahe"/>
-                                    <constraint firstItem="tpg-gV-z82" firstAttribute="top" secondItem="sGr-oy-hoS" secondAttribute="bottom" id="gmT-9p-56d"/>
-                                    <constraint firstAttribute="trailing" secondItem="sGr-oy-hoS" secondAttribute="trailing" id="ilY-oF-5J4"/>
-                                    <constraint firstItem="sGr-oy-hoS" firstAttribute="top" secondItem="c5S-xN-WNn" secondAttribute="bottom" id="nP1-C6-FdB"/>
+                                    <constraint firstItem="tpg-gV-z82" firstAttribute="top" secondItem="c5S-xN-WNn" secondAttribute="bottom" id="q0P-V5-JQB"/>
                                     <constraint firstItem="tpg-gV-z82" firstAttribute="leading" secondItem="C1g-bd-1kC" secondAttribute="leading" id="r2x-ci-6aP"/>
                                 </constraints>
                             </view>
@@ -717,30 +707,20 @@
                                             <action selector="segmentControlValueChanged:" destination="wST-vr-DA2" eventType="valueChanged" id="uCS-nF-67g"/>
                                         </connections>
                                     </segmentedControl>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="mvA-sn-MN0">
-                                        <rect key="frame" x="0.0" y="35" width="393" height="56"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="wST-vr-DA2" id="zKD-ha-QPV"/>
-                                        </connections>
-                                    </searchBar>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c9g-yG-Ax7">
-                                        <rect key="frame" x="0.0" y="91" width="393" height="702"/>
+                                        <rect key="frame" x="0.0" y="35" width="393" height="758"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="c9g-yG-Ax7" secondAttribute="bottom" id="2nG-8H-Q29"/>
-                                    <constraint firstItem="mvA-sn-MN0" firstAttribute="leading" secondItem="MFR-PO-jvZ" secondAttribute="leading" id="9Ml-Yf-o9q"/>
                                     <constraint firstAttribute="trailing" secondItem="xt8-3d-TyY" secondAttribute="trailing" id="DvN-MN-23f"/>
-                                    <constraint firstAttribute="trailing" secondItem="mvA-sn-MN0" secondAttribute="trailing" id="Ljo-fj-4Eh"/>
-                                    <constraint firstItem="c9g-yG-Ax7" firstAttribute="top" secondItem="mvA-sn-MN0" secondAttribute="bottom" id="Qlz-FV-hfh"/>
                                     <constraint firstItem="c9g-yG-Ax7" firstAttribute="leading" secondItem="MFR-PO-jvZ" secondAttribute="leading" id="S8e-9J-i2Y"/>
                                     <constraint firstAttribute="trailing" secondItem="c9g-yG-Ax7" secondAttribute="trailing" id="fGP-0e-ZJn"/>
-                                    <constraint firstItem="mvA-sn-MN0" firstAttribute="top" secondItem="xt8-3d-TyY" secondAttribute="bottom" id="gFJ-Rx-Ir6"/>
                                     <constraint firstItem="xt8-3d-TyY" firstAttribute="leading" secondItem="MFR-PO-jvZ" secondAttribute="leading" id="peM-Ou-r5I"/>
                                     <constraint firstItem="xt8-3d-TyY" firstAttribute="top" secondItem="MFR-PO-jvZ" secondAttribute="top" id="tZ3-w2-SfH"/>
+                                    <constraint firstItem="c9g-yG-Ax7" firstAttribute="top" secondItem="xt8-3d-TyY" secondAttribute="bottom" id="z40-P3-1EU"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -938,6 +918,11 @@
             <point key="canvasLocation" x="3604" y="-23"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="izI-K1-IvX">
+            <size key="intrinsicContentSize" width="-1" height="30"/>
+        </designable>
+    </designables>
     <resources>
         <image name="Shadow3" width="375" height="8"/>
         <image name="close_1" width="23" height="23"/>

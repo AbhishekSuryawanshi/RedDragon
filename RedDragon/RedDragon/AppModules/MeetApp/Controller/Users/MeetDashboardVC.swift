@@ -31,7 +31,7 @@ class MeetDashboardVC: UIViewController {
         highlightFirstIndex_collectionView()
         
         let MessagingManager = self.MessagingClientClass.sharedManager()
-        let userID = "6"
+        let userID = "\(UserDefaults.standard.user?.appDataIDs.vinderUserId ?? 0)"
         MessagingManager.loginWith(identity: userID) { (sucess, error) in
             if sucess {
                 // print("User get login with Twilio")

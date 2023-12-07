@@ -136,7 +136,7 @@ class ChannelManager: NSObject {
         
         let storyboard = UIStoryboard(name: "Meet", bundle: Bundle.main)
         let chatDetailVC = storyboard.instantiateViewController(withIdentifier: "ChatDetailVC") as! ChatDetailVC
-        let CurrentUserID = 6
+        let CurrentUserID = UserDefaults.standard.user?.appDataIDs.vinderUserId ?? 0
         let channelName = ChannelManager.sharedManager.createChat(UInt64(exactly: CurrentUserID)!, UInt64(userID)!)
         
         ChannelManager.sharedManager.createChannelWithName(name: channelName) { (isSucess, channel) in

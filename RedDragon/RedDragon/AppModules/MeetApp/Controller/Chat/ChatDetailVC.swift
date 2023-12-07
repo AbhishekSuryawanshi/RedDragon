@@ -46,7 +46,7 @@ class ChatDetailVC: UIViewController {
 //            self.dismiss(animated: true)
 //        }
         commentTextView.textContainerInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
-        nameLbl.text = name
+        nameLbl.text = name.capitalized
    //     CommonFxns.setImage(imageView: profileImgView, urlString: receiverImage, placeHolder: UIImage(named: "smallDefaultUserProfileImg"))
         channel?.delegate = self
         self.chatDetailTableView.channel = channel

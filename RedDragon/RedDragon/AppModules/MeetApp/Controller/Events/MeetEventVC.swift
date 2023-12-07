@@ -11,6 +11,7 @@ import Combine
 class MeetEventVC: UIViewController {
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var viewContainer: UIView!
+   
     var hotEventsArray = [MeetEvent]()
     var allEventsArray = [MeetEvent]()
     var myUpcomingEventsArray = [MeetEvent]()
@@ -20,7 +21,7 @@ class MeetEventVC: UIViewController {
     private var allEventVM: MeetAllEventViewModel?
     private var myUpcomingEventVM: MeetMyUpcomingEventViewModel?
     private var myPastEventVM: MeetMyPastEventViewModel?
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         performInitialSetup()
