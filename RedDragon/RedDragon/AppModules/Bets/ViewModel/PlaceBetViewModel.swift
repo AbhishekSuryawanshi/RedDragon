@@ -10,17 +10,21 @@ import Foundation
 class PlaceBetViewModel : APIServiceManager<BetSuccessModel> {
     
     // function to place bet
-    func placeBet(oddIndex : String, betAmount : String, slug : String){
+    func placeBet(oddIndex : String, betAmount : String, slug : String, day : String){
+        var myTime : Date?
         
-        // get today date
-        let myTime = Date.today
+        if day == "today"{
+            myTime = Date.today
+        }else{
+            myTime = Date.tomorrow
+        }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        let todaysDate = dateFormatter.string(from: myTime)
+        let date = dateFormatter.string(from: myTime!)
+        
         
         let params = [
-            "session" : DefaultToken.session,
-            "date" : todaysDate,
+            "date" : date,
             "sport" : UserDefaults.standard.sport ?? "football",
             "slug" : slug,
             "odd_index" : oddIndex,

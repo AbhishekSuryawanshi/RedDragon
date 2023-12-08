@@ -45,6 +45,10 @@ struct StringConstants {
     static let win                  = "Win"
     static let lose                 = "Lose"
     static let draw                 = "Draw"
+    static let loss                 = "Loss"
+    static let totalGames           = "Total Games"
+    static let inviteToPlay         = "Invite to play"
+    static let marketValue          = "Market value"
     
     //Match Tabs
     static let highlight            = "Highlight"
@@ -87,5 +91,8 @@ struct StringConstants {
     
     //Card Game
     static let score                = "Score"
+    static let currentBudget        = "Your current budget is"
+    static let cancel               = "Cancel"
+    static let buy                  = "Buy"
 }
 

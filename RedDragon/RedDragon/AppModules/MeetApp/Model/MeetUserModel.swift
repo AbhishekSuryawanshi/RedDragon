@@ -34,7 +34,7 @@ struct MeetLikedUserModel: Codable {
 }
 
 struct MeetLikedUser: Codable {
-    let messages: String?
+    let messages: [String]?
     let data: MeetUser?
 }
 
@@ -88,3 +88,12 @@ struct ImageURLS: Codable {
     }
 }
 
+// MARK: - Events List
+struct MeetUserSportsInterestModel: Decodable {
+    let response: MeetUserSportsInterestList?
+}
+
+struct MeetUserSportsInterestList: Decodable {
+    let messages: [String]?
+    let data: [SportsInterest]?
+}

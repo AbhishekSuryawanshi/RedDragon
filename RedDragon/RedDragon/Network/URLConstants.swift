@@ -29,11 +29,16 @@ struct URLConstants {
     static let databaseBaseURL     = "https://datasport.one/api/v1/sportscore/data/"
     static let leagueDetail        = databaseBaseURL + "league.php"
     static let databaseMatchDetail = databaseBaseURL + "match.php"
+    static let analysisURL         = "api/predict/list?"
     
     // MARK: - CardGame
     static let cardGame_allPlayersList = databaseBaseURL + "player_filter.php"
     static let cardGame_buyPlayer   = cardGameBaseURL + "/api/user/players"
+    static let removePlayer         = cardGameBaseURL + "/api/user/player"
     static let cardGame_leaderboard = cardGameBaseURL + "/api/user/list"
+    static let leaderboardDetail    = cardGameBaseURL + "/api/user/"
+    static let yourMatches          = cardGameBaseURL + "/api/matches"
+    static let updateUserInfo       = cardGameBaseURL + "/api/user/info"
     
     // MARK: -  Social
     static let socialBaseURL       = baseURL + "euro5league/"
@@ -74,13 +79,16 @@ struct URLConstants {
 
     // MARK: -  Meet
     static let meetBaseURL         = "https://kicktin.com/vinder/api/"
-    static let meetUserList        = meetBaseURL + "listuser"
-    static let meetHotEventList    = meetBaseURL + "events/hot"
-    static let meetAllEventList    = meetBaseURL + "event/list"
-    static let meetMyUpcomingEvent = meetBaseURL + "events/upcoming"
-    static let meetMyPastEvent     = meetBaseURL + "events/past"
-    static let meetLikedUser       = meetBaseURL + "user/like"
-    static let meetMyMatchUser     = meetBaseURL + "user/mymatch/list"
+    static let meetUserList        = baseURL + "vinder/listuser"
+    static let meetHotEventList    = baseURL + "vinder/events/hot"
+    static let meetAllEventList    = baseURL + "vinder/event/list"
+    static let meetMyUpcomingEvent = baseURL + "vinder/events/upcoming"
+    static let meetMyPastEvent     = baseURL + "vinder/events/past"
+    static let meetLikedUser       = baseURL + "vinder/user/like"
+    static let meetSportsInterest  = baseURL + "vinder/sports/interest/list"
+    static let meetMyMatchUser     = baseURL + "vinder/user/mymatch/list"
+    static let meetCreateEvent     = baseURL + "vinder/user/events/add"
+    static let meetJoinEvent       = baseURL + "vinder/user/events/join"
     
     // MARK: - StreetMatches
     static let streetMatchesBaseURL = "https://trkick.com/stm/api/"
@@ -89,6 +97,9 @@ struct URLConstants {
     static let stadiumList = streetMatchesBaseURL + "stadium/list"
     static let eventsList = streetMatchesBaseURL + "event/list"
     static let streetMatchesList = streetMatchesBaseURL + "match/list"
+    static let stadiums = streetMatchesBaseURL + "stadium"
+    static let streetUploadImage = streetMatchesBaseURL + "resource/img/upload"
+    
 
 
     // MARK: - Prediction
@@ -96,8 +107,17 @@ struct URLConstants {
     static let getMatchesList       = "api/match/list?"
     static let postMatchPrediction  = "api/predict"
     static let matchDetail          = "api/match"
+    static let predictionList       = "api/predict/list/withMatch?"
+    
     
     // MARK: - News
     static let newsGossips         = "https://datasport.one/api/v1/news/data.php"
-
+    static let eSportsBaseURL      = "http://199.241.1.88:7001/"
+    static let eSportsList         = eSportsBaseURL + "api/esports-news-list"
+    static let eSportsDetail       = eSportsBaseURL + "specific-esports-news/"
+    static let videosBaseURL       = "https://zeyuapi.com/v1/video/"
+    static let videosList          = videosBaseURL + "recommend"
+    static let videosThumbnail     = "https://34433tiyu.com/"
+    static let chatTokenURL        = "https://grullo-chihuahua-4284.twil.io/chat-token"
+    
 }

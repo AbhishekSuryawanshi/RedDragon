@@ -135,6 +135,7 @@ extension LoginVC {
                 
                 if user.otpVerified == 0 {
                     UserDefaults.standard.token = user.token //required for resend api
+                    UserDefaults.standard.budget = Int(user.affAppData?.sportCard?.budget ?? "200000000")
                     self.presentOverViewController(VerificationVC.self, storyboardName: StoryboardName.login) { vc in
                         vc.email = user.email
                         vc.phoneNumber = user.phoneNumber
@@ -144,6 +145,7 @@ extension LoginVC {
                 } else {
                     UserDefaults.standard.user = user
                     UserDefaults.standard.token = user.token
+                    UserDefaults.standard.budget = Int(user.affAppData?.sportCard?.budget ?? "200000000")
                     self.dismiss(animated: true)
                 }
             }

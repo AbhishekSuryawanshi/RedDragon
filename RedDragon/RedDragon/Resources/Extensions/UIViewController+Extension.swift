@@ -20,10 +20,11 @@ extension UIViewController {
         view.clipsToBounds = false
     }
     
-    func customAlertView(title: String, description: String, image: String){
+    func customAlertView(title: String, description: String, image: String,completion:(()->Void)? = nil){
         let alertVC = PMAlertController(title: title, description: description, image: UIImage(named: image), style: .alert)
         alertVC.addAction(PMAlertAction(title: StringConstants.dismiss.localized, style: .default, action: { () in
             print("Capture action dismiss")
+            completion?()
         }))
         self.present(alertVC, animated: true, completion: nil)
     }

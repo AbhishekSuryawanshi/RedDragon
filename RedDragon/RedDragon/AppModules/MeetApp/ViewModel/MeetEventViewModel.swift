@@ -8,14 +8,12 @@
 import Foundation
 
 class MeetHotEventViewModel: APIServiceManager<MeetEventListModel> {
-    
     ///function to fetch hot event list
     func fetchMeetHotEventListAsyncCall() {
         let urlString   = URLConstants.meetHotEventList + "?pagination=false"
         let method      = RequestType.get
-        asyncCall(urlString: urlString, method: method, parameters: nil, isGuestUser: true, anyDefaultToken: DefaultToken.guestUser)
+        asyncCall(urlString: urlString, method: method, parameters: nil)
     }
-    
 }
 
 class MeetAllEventViewModel: APIServiceManager<MeetEventListModel> {
@@ -23,7 +21,7 @@ class MeetAllEventViewModel: APIServiceManager<MeetEventListModel> {
     func fetchMeetAllEventListAsyncCall() {
         let urlString   = URLConstants.meetAllEventList + "?pagination=false"
         let method      = RequestType.get
-        asyncCall(urlString: urlString, method: method, parameters: nil, isGuestUser: true, anyDefaultToken: DefaultToken.guestUser)
+        asyncCall(urlString: urlString, method: method, parameters: nil)
     }
 }
 
@@ -32,7 +30,7 @@ class MeetMyUpcomingEventViewModel: APIServiceManager<MeetEventListModel> {
     func fetchMeetMyUpcomingEventListAsyncCall() {
         let urlString   = URLConstants.meetMyUpcomingEvent + "?pagination=false"
         let method      = RequestType.get
-        asyncCall(urlString: urlString, method: method, parameters: nil, isGuestUser: true, anyDefaultToken: DefaultToken.guestUser)
+        asyncCall(urlString: urlString, method: method, parameters: nil)
     }
 }
 
@@ -41,6 +39,33 @@ class MeetMyPastEventViewModel: APIServiceManager<MeetEventListModel> {
     func fetchMeetMyPastEventListAsyncCall() {
         let urlString   = URLConstants.meetMyPastEvent + "?pagination=false"
         let method      = RequestType.get
-        asyncCall(urlString: urlString, method: method, parameters: nil, isGuestUser: true, anyDefaultToken: DefaultToken.guestUser)
+        asyncCall(urlString: urlString, method: method, parameters: nil)
+    }
+}
+
+class MeetCreateEventVM: MultipartAPIServiceManager<MeetEventDetailModel> {
+    ///function to upload image for a post for social module
+    func postCreateEventAsyncCall(params: [String:Any], imageName: String, imageData: Data) {
+        let urlString   = URLConstants.meetCreateEvent
+        asyncCall(urlString: urlString, params: params, imageName: imageName, imageData: imageData, imageKey: "banner")
+    }
+}
+
+class MeetEventDetailViewModel: APIServiceManager<MeetEventDetailModel> {
+    ///function to fetch all event list
+    func fetchMeetEventDetailAsyncCall(eventID: Int) {
+        let urlString   = URLConstants.meetAllEventList + "?event_id=\(eventID)"
+        let method      = RequestType.get
+        asyncCall(urlString: urlString, method: method, parameters: nil)
+    }
+}
+
+class MeetJoinEventViewModel: APIServiceManager<MeetEventDetailModel> {
+    ///function to fetch all event list
+    func postJoinEventAsyncCall(eventID: Int) {
+        let urlString   = URLConstants.meetJoinEvent
+        let method      = RequestType.post
+        let params      = JoinOrInviteMeetEventRequest(eventId: eventID).dictionary
+        asyncCall(urlString: urlString, method: method, parameters: params)
     }
 }

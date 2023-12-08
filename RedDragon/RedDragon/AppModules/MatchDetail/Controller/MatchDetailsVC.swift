@@ -22,6 +22,7 @@ class MatchDetailsVC: UIViewController {
     @IBOutlet weak var viewContainer: UIView!
     @IBOutlet weak var viewContainerHeight: NSLayoutConstraint!
     
+    
     private var cancellable = Set<AnyCancellable>()
     private var matchDetailViewModel: MatchDetailsViewModel?
     private var tennisDetailViewModel: TennisDetailsViewModel?
@@ -30,6 +31,8 @@ class MatchDetailsVC: UIViewController {
     var matchSlug: String?
     var leagueName: String?
     var sports: String?
+    var isFromPrediction = false
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +55,8 @@ class MatchDetailsVC: UIViewController {
     func matchTabsData() {
         matchTabsArray = [StringConstants.highlight.localized,
                           StringConstants.stat.localized,
-                          StringConstants.lineup.localized]
+                          StringConstants.lineup.localized,
+                          StringConstants.analysis.localized]
     }
     
     func nibInitialization() {
@@ -132,7 +136,12 @@ extension MatchDetailsVC {
             awayTeamNameLabel.text = data.awayTeamName
             scoreLabel.text = "\(data.homeScore) - \(data.awayScore)"
             firstHalfScoreLabel.text = "\(StringConstants.firstHalf)(\(data.home1StHalf)-\(data.away1StHalf))"
-            highlightFirstIndex_collectionView()
+            if isFromPrediction{
+                highlightAnalysis_collectionView()
+            }
+            else{
+                highlightFirstIndex_collectionView()
+            }
             self.view.layoutIfNeeded()
         }
     }
@@ -175,6 +184,9 @@ extension MatchDetailsVC: UICollectionViewDelegate, UICollectionViewDataSource {
             embedStatisticVC()
         case 2:
             embedLineupVC()
+        case 3:
+            embedAnalysisVC()
+            
         default:
             break
         }
@@ -206,6 +218,13 @@ extension MatchDetailsVC {
         collectionView(matchTabsCollectionView, didSelectItemAt: indexPath)
     }
     
+    func highlightAnalysis_collectionView() {
+        //code to show collectionView cell default first index selected
+        let indexPath = IndexPath(item: 3, section: 0)
+        matchTabsCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
+        collectionView(matchTabsCollectionView, didSelectItemAt: indexPath)
+    }
+    
     func embedHighlightVC() {
         ViewEmbedder.embed(withIdentifier: "HighlightViewController", storyboard: UIStoryboard(name: StoryboardName.matchDetail, bundle: nil), parent: self, container: viewContainer) { [self] vc in
             let vc = vc as! HighlightViewController
@@ -228,6 +247,15 @@ extension MatchDetailsVC {
             vc.configureHomeLineupView(homeLineup: self?.matchDetailViewModel?.responseData?.data.homeLineup)
             vc.configureAwayLineupView(awayLineup: self?.matchDetailViewModel?.responseData?.data.awayLineup)
             vc.configureSubstitutePlayer(homeSubstituteData: self?.matchDetailViewModel?.responseData?.data.homeLineup, awaySubstituteData: self?.matchDetailViewModel?.responseData?.data.awayLineup)
+        }
+    }
+    
+    func embedAnalysisVC() {
+        ViewEmbedder.embed(withIdentifier: "AnalysisViewController", storyboard: UIStoryboard(name: StoryboardName.matchDetail, bundle: nil), parent: self, container: viewContainer) { [weak self] vc in
+            let vc = vc as! AnalysisViewController
+            vc.matchSlug =  self?.matchSlug ?? ""
+            vc.data = self?.matchDetailViewModel?.responseData?.data
+            vc.configureView()
         }
     }
     

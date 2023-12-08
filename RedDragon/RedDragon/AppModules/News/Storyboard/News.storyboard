@@ -18,6 +18,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GT4-IW-lEG">
+                                <rect key="frame" x="0.0" y="219" width="393" height="589"/>
+                            </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hht-3c-m89" userLabel="topView">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="119"/>
                                 <subviews>
@@ -64,12 +67,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="83P-3e-0Ng">
                                 <rect key="frame" x="0.0" y="119" width="393" height="40"/>
                                 <subviews>
-
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="white" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1qd-Cs-Mdf">
                                         <rect key="frame" x="15" y="0.0" width="363" height="40"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="DNP-vC-qYZ">
-
                                             <size key="itemSize" width="128" height="128"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -126,9 +127,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GT4-IW-lEG">
-                                <rect key="frame" x="0.0" y="219" width="393" height="589"/>
-                            </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -150,9 +148,7 @@
                         </constraints>
                     </view>
                     <connections>
-
                         <outlet property="containerView" destination="GT4-IW-lEG" id="RcW-Gf-GBU"/>
-
                         <outlet property="headerCollectionView" destination="X4t-Ph-JzF" id="1aa-TV-2Av"/>
                         <outlet property="searchTextField" destination="SML-7a-V5f" id="D3C-wi-1I0"/>
                         <outlet property="sportsCollectionView" destination="1qd-Cs-Mdf" id="WcK-iT-0vP"/>
@@ -162,7 +158,6 @@
             </objects>
             <point key="canvasLocation" x="140" y="-23"/>
         </scene>
-
         <!--NewsVC-->
         <scene sceneID="6wi-93-Sj3">
             <objects>
@@ -177,7 +172,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ac2-K2-IcT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="879" y="-23"/>
-
         </scene>
     </scenes>
     <resources>
@@ -186,7 +180,6 @@
         <namedColor name="base">
             <color red="0.71764705882352942" green="0.094117647058823528" blue="0.054901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-
         <namedColor name="blue1">
             <color red="0.77647058823529413" green="0.90588235294117647" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

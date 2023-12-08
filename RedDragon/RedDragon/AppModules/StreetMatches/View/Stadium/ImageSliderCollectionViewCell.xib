@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ImageSliderCollectionViewCell" customModule="RedDragon" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="411" height="160"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="411" height="160"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lt9-7h-Z6V">
+                        <rect key="frame" x="0.0" y="0.0" width="411" height="160"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="86i-6i-S9b">
+                                <rect key="frame" x="0.0" y="0.0" width="411" height="160"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="86i-6i-S9b" firstAttribute="leading" secondItem="lt9-7h-Z6V" secondAttribute="leading" id="2wa-qc-7Od"/>
+                            <constraint firstAttribute="bottom" secondItem="86i-6i-S9b" secondAttribute="bottom" id="Flf-Kz-FQY"/>
+                            <constraint firstItem="86i-6i-S9b" firstAttribute="top" secondItem="lt9-7h-Z6V" secondAttribute="top" id="OOM-AL-Sdh"/>
+                            <constraint firstAttribute="trailing" secondItem="86i-6i-S9b" secondAttribute="trailing" id="hcu-bA-ehf"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="lt9-7h-Z6V" secondAttribute="bottom" id="0uL-Oh-ZgJ"/>
+                <constraint firstItem="lt9-7h-Z6V" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="BRr-Ab-azM"/>
+                <constraint firstAttribute="trailing" secondItem="lt9-7h-Z6V" secondAttribute="trailing" id="rPI-YM-s2c"/>
+                <constraint firstItem="lt9-7h-Z6V" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="rzq-3w-X1l"/>
+            </constraints>
+            <size key="customSize" width="411" height="160"/>
+            <connections>
+                <outlet property="imageView" destination="86i-6i-S9b" id="daD-MK-FmC"/>
+            </connections>
+            <point key="canvasLocation" x="135.1145038167939" y="6.3380281690140849"/>
+        </collectionViewCell>
+    </objects>
+</document>

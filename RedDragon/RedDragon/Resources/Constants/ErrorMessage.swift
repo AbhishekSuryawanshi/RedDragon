@@ -24,6 +24,7 @@ struct ErrorMessage {
     static var phoneEmptyAlert             = "Please enter your phone number"
     static var passwordEmptyAlert          = "Please enter a password"
     static var amountEmptyAlert            = "Please enter amount first"
+    static var onlyLiveMatches             = "Bet can not be placed"
     static var oddsEmptyAlert              = "Please choose odds first"
     static var confirmPasswordEmptyAlert   = "Please confirm your password"
     static var termsAlert                  = "Confirm your acceptance of the terms and conditions"
@@ -49,10 +50,28 @@ struct ErrorMessage {
     static var betsEmptyAlert              = "No Bets found"
     
     static let addPlayer                   = "Looks like you haven't bought any players yet, please buy a player to play the game"
+    static let noPlayers                   = "Currently, this user has no players"
     static let playerListUnavailable       = "Players list unavailable"
     static let userIDNotFound              = "Unable to get user ID"
     static let lowBudget                   = "Low Budget"
     static let insufficientBudget          = "Sorry, you don't have sufficient budget to buy this player"
     static let addPlayerToPlay             = "Please add a minimum of 11 players to your team to play the game"
     static let playerAlreadyUsed           = "Your team already has this player"
+    static let playerBuyed                 = "Player bought successfully!!"
+    static let playerRemoved               = "Player removed!!"
+    
+    static let betPlacedSuccess            = "Bet Placed Successfully"
+    static let betPlacedAlready            = "Bet Already Placed"
+    
+    static let eventTitleEmptyAlert        = "Please enter event title"
+    static let eventDescEmptyAlert         = "Please enter event description"
+    static let eventImageEmptyAlert        = "Please enter event image"
+    static let eventStartDateEmptyAlert    = "Please enter event start date"
+    static let eventStartTimeEmptyAlert    = "Please enter event start time"
+    static let eventLocationEmptyAlert     = "Please enter event location"
+    static let eventPriceEmptyAlert        = "Please enter event location"
+}
+
+struct SuccessMessage {
+    static let successfullyLikedUser       = "User liked successfully"
 }

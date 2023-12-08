@@ -10,7 +10,10 @@ import UIKit
 class MyEventsVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var searchBar: UISearchBar!
     var upcomingEventsArray = [MeetEvent]()
+    var upcomingEventsArray1 = [MeetEvent]()
+    var pastEventsArray1 = [MeetEvent]()
     var pastEventsArray = [MeetEvent]()
    
     override func viewDidLoad() {
@@ -31,6 +34,8 @@ class MyEventsVC: UIViewController {
     
     func configureEvents(upcomingEvents: [MeetEvent], pastEvents: [MeetEvent]) {
         self.upcomingEventsArray = upcomingEvents
+        self.upcomingEventsArray1 = upcomingEvents
+        self.pastEventsArray1 = pastEvents
         self.pastEventsArray = pastEvents
     }
     
@@ -55,9 +60,9 @@ extension MyEventsVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        navigateToViewController(MeetUserDetailVC.self, storyboardName: StoryboardName.meet, animationType: .autoReverse(presenting: .zoom)) {
+        navigateToXIBViewController(EventDetailVC.self, nibName: "EventDetailVC") {
             vc in
-            //vc.selectedUserId = self.users[indexPath.row].id ?? 0
+            vc.selectedEventId = self.upcomingEventsArray[indexPath.row].eventId ?? 0
         }
     }
 }
@@ -74,6 +79,13 @@ extension MyEventsVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 74.0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigateToXIBViewController(EventDetailVC.self, nibName: "EventDetailVC") {
+            vc in
+            vc.selectedEventId = self.pastEventsArray[indexPath.row].eventId ?? 0
+        }
     }
 }
 
@@ -107,6 +119,31 @@ extension MyEventsVC {
             cell.noOfPeopleJoinedLbl.text = "\(event.peopleJoinedCount ?? 0) People joined"
             let date = event.date?.formatDate(inputFormat: dateFormat.yyyyMMdd, outputFormat: dateFormat.ddMMM) ?? ""
             cell.dateTimeLbl.text = "\(date), \(event.time ?? "")"
+        }
+    }
+}
+
+extension MyEventsVC: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchText.isEmpty {
+            self.upcomingEventsArray = self.upcomingEventsArray1
+            self.pastEventsArray = self.pastEventsArray1
+            self.tableView.reloadData()
+            self.collectionView.reloadData()
+            searchBar.perform(#selector(self.resignFirstResponder), with: nil, afterDelay: 0.1)
+            return
+            
+        }else if searchText.count >= 1 {
+            self.upcomingEventsArray = upcomingEventsArray1.filter{($0.name?.lowercased().contains(searchText.lowercased()) ?? false)
+                || ($0.creator?.name?.lowercased().contains(searchText.lowercased()) ?? false)}
+            
+            self.pastEventsArray = pastEventsArray1.filter{($0.name?.lowercased().contains(searchText.lowercased()) ?? false)
+                || ($0.creator?.name?.lowercased().contains(searchText.lowercased()) ?? false)}
+
+            self.tableView.reloadData()
+            self.collectionView.reloadData()
         }
     }
 }

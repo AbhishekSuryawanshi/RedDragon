@@ -25,6 +25,7 @@ class MeetHomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         performInitialSetup()
+       
     }
     
     // MARK: - Methods
@@ -50,7 +51,7 @@ class MeetHomeVC: UIViewController {
     @IBAction func likeDislikeButtonTapped(_ sender: UIButton) {
         if sender.tag == 1 {  //Dislike User
             cardStack.swipe(.left, animated: true)
-            
+    
         }else { // Like User
             cardStack.swipe(.right, animated: true)
         }

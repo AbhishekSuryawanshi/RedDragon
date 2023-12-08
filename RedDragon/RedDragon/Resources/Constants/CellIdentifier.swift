@@ -34,6 +34,7 @@ struct CellIdentifier {
     static let mediaCollectionView              = "MediaCollectionViewCell"
     static let recentMatchTableCell             = "RecentMatchTableViewCell"
     static let substituteTableCell              = "SubstituteTableViewCell"
+    static let analysisTableViewCell            = "AnalysisTableViewCell"
     
     //Player Details
     static let matchesTableViewCell             = "MatchesTableViewCell"
@@ -46,6 +47,7 @@ struct CellIdentifier {
     static let homeTitleCollectionVc            = "HomeTitleCollectionVc"
     static let menuItemTableVC                  = "MenuItemTableVC"
     static let betMatchTableVC                  = "BetMatchTableVC"
+    static let betLeagueTableVC                  = "BetLeagueTableVC"
     static let betWinTableVC                    = "BetWinTableVC"
     static let betLoseTableVC                   = "BetLoseTableVC"
     static let pointsItemTableVC                = "PointsItemTableVC"
@@ -55,6 +57,7 @@ struct CellIdentifier {
     static let statisticCell                    = "StatCollectionViewCell"
     static let myTeamCell                       = "MyTeamCollectionViewCell"
     static let leaderboardCell                  = "LeaderboardTableViewCell"
+    static let yourMatches                      = "YourMatchesTableCell"
     
     //Prediction
     static let predictUpcomingTableViewCell     = "PredictUpcomingTableViewCell"
@@ -64,6 +67,8 @@ struct CellIdentifier {
     static let exploreEventsTableViewCell       = "ExploreEventsTableViewCell"
     static let matchesCollectionViewCell        = "MatchesCollectionViewCell"
     static let myEventsCollectionViewCell       = "MyEventsCollectionViewCell"
+    static let senderTableViewCell              = "SenderTableViewCell"
+    static let receiverTableViewCell              = "ReceiverTableViewCell"
     
     //StreetMatches
 
@@ -72,7 +77,12 @@ struct CellIdentifier {
     static let feedsTableViewCell              = "FeedsTableViewCell"
     static let streetHomeHeaderTableViewCell   = "StreetHomeHeaderTableViewCell"
     static let selectionCollectionViewCell     = "SelectionCollectionViewCell"
-  
+    static let timingsTableViewCell            = "TimingsTableViewCell"
+    static let amenityCollectionViewCell       = "AmenityCollectionViewCell"
+    static let sportsCollectionViewCell        = "SportsCollectionViewCell"
+    static let imageSliderCollectionViewCell   = "ImageSliderCollectionViewCell"
+    static let hoursTableViewCell              = "HoursTableViewCell"
+    static let stadiumImageCollectionViewCell  = "StadiumImageCollectionViewCell"
     
     //News
     static let newsCollectionViewCell           = "NewsCollectionViewCell"
