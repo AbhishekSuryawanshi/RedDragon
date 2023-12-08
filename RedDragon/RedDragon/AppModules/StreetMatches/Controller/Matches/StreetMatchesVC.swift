@@ -124,6 +124,12 @@ extension StreetMatchesVC:UITableViewDelegate,UITableViewDataSource{
         cell.configureCell(obj: matchList?[indexPath.row])
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigateToViewController(StreetMatchesDetailsVC.self,storyboardName: StoryboardName.streetMatches) { vc in
+            vc.matchID = self.matchList?[indexPath.row].id
+        }
+    }
 }
 
 extension StreetMatchesVC:UISearchBarDelegate{
