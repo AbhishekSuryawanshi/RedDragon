@@ -388,6 +388,12 @@
 		AD90AF1D2B23002D00515C60 /* StreetMatchesDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD90AF1C2B23002D00515C60 /* StreetMatchesDetailsVC.swift */; };
 		AD90AF202B23005500515C60 /* StreetTeamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD90AF1F2B23005500515C60 /* StreetTeamsViewController.swift */; };
 		AD90AF222B23029800515C60 /* StreetMatchDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD90AF212B23029800515C60 /* StreetMatchDetails.swift */; };
+		AD90AF242B2306E000515C60 /* StreetTeamDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD90AF232B2306E000515C60 /* StreetTeamDetailsVC.swift */; };
+		AD90AF262B2307B300515C60 /* StreetTeamDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD90AF252B2307B300515C60 /* StreetTeamDetails.swift */; };
+		AD90AF282B2308D300515C60 /* StreetTeamDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD90AF272B2308D300515C60 /* StreetTeamDetailsViewModel.swift */; };
+		AD90AF2B2B230AEB00515C60 /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD90AF292B230AEB00515C60 /* InfoTableViewCell.swift */; };
+		AD90AF2C2B230AEB00515C60 /* InfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD90AF2A2B230AEB00515C60 /* InfoTableViewCell.xib */; };
+		AD90AF2F2B234A7500515C60 /* iOSDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD90AF2E2B234A7500515C60 /* iOSDropDown.swift */; };
 		AD93101A2B186713005E4DAF /* Local Timings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9310192B186713005E4DAF /* Local Timings.swift */; };
 		AD93101D2B187786005E4DAF /* ImageSliderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD93101B2B187786005E4DAF /* ImageSliderCollectionViewCell.swift */; };
 		AD93101E2B187786005E4DAF /* ImageSliderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD93101C2B187786005E4DAF /* ImageSliderCollectionViewCell.xib */; };
@@ -818,6 +824,12 @@
 		AD90AF1C2B23002D00515C60 /* StreetMatchesDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreetMatchesDetailsVC.swift; sourceTree = "<group>"; };
 		AD90AF1F2B23005500515C60 /* StreetTeamsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreetTeamsViewController.swift; sourceTree = "<group>"; };
 		AD90AF212B23029800515C60 /* StreetMatchDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreetMatchDetails.swift; sourceTree = "<group>"; };
+		AD90AF232B2306E000515C60 /* StreetTeamDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetTeamDetailsVC.swift; sourceTree = "<group>"; };
+		AD90AF252B2307B300515C60 /* StreetTeamDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetTeamDetails.swift; sourceTree = "<group>"; };
+		AD90AF272B2308D300515C60 /* StreetTeamDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetTeamDetailsViewModel.swift; sourceTree = "<group>"; };
+		AD90AF292B230AEB00515C60 /* InfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
+		AD90AF2A2B230AEB00515C60 /* InfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoTableViewCell.xib; sourceTree = "<group>"; };
+		AD90AF2E2B234A7500515C60 /* iOSDropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOSDropDown.swift; sourceTree = "<group>"; };
 		AD9310192B186713005E4DAF /* Local Timings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Local Timings.swift"; sourceTree = "<group>"; };
 		AD93101B2B187786005E4DAF /* ImageSliderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSliderCollectionViewCell.swift; sourceTree = "<group>"; };
 		AD93101C2B187786005E4DAF /* ImageSliderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageSliderCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -2103,6 +2115,8 @@
 		AD90AF0B2B22FFCE00515C60 /* Teams */ = {
 			isa = PBXGroup;
 			children = (
+				AD90AF292B230AEB00515C60 /* InfoTableViewCell.swift */,
+				AD90AF2A2B230AEB00515C60 /* InfoTableViewCell.xib */,
 				AD90AF0C2B22FFCE00515C60 /* TeamCollectionViewCell.swift */,
 				AD90AF0D2B22FFCE00515C60 /* TeamCollectionViewCell.xib */,
 				AD90AF0E2B22FFCE00515C60 /* TeamCollectionTableViewCell.xib */,
@@ -2117,8 +2131,17 @@
 			isa = PBXGroup;
 			children = (
 				AD90AF1F2B23005500515C60 /* StreetTeamsViewController.swift */,
+				AD90AF232B2306E000515C60 /* StreetTeamDetailsVC.swift */,
 			);
 			path = Teams;
+			sourceTree = "<group>";
+		};
+		AD90AF2D2B234A5000515C60 /* Dropdown */ = {
+			isa = PBXGroup;
+			children = (
+				AD90AF2E2B234A7500515C60 /* iOSDropDown.swift */,
+			);
+			path = Dropdown;
 			sourceTree = "<group>";
 		};
 		ADD339802B0F423500B91101 /* StreetMatches */ = {
@@ -2136,6 +2159,7 @@
 		ADD339812B0F426100B91101 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				AD90AF2D2B234A5000515C60 /* Dropdown */,
 				AD31C4F92B1770BC00DC879D /* Dashboard */,
 				AD31C4FB2B1770EA00DC879D /* Matches */,
 				AD31C4FA2B1770D600DC879D /* Feeds */,
@@ -2156,6 +2180,7 @@
 				AD3B555A2B1602DB007B14F7 /* StreetMatchesViewModel.swift */,
 				AD2676E72B1EF57A00B96921 /* CreateStadiumViewModel.swift */,
 				AD2676EB2B1EFEB200B96921 /* StreetImageUploadViewModel.swift */,
+				AD90AF272B2308D300515C60 /* StreetTeamDetailsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2168,6 +2193,7 @@
 				AD2676E92B1EF93500B96921 /* StreetGeneralResponse.swift */,
 				AD2676ED2B1EFF0F00B96921 /* StreetUploadResponse.swift */,
 				AD90AF212B23029800515C60 /* StreetMatchDetails.swift */,
+				AD90AF252B2307B300515C60 /* StreetTeamDetails.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2446,6 +2472,7 @@
 				419658192B0CDF5C00730D9F /* PlacePredictionView.xib in Resources */,
 				473E1D132AEB910C00A806DF /* IconNameCollectionViewCell.xib in Resources */,
 				41B5C9FD2B10EA21000A7A59 /* PredictUpcomingHeaderView.xib in Resources */,
+				AD90AF2C2B230AEB00515C60 /* InfoTableViewCell.xib in Resources */,
 				AD90AF132B22FFCE00515C60 /* TeamCollectionViewCell.xib in Resources */,
 				41EB79D02AF37BA000D068F7 /* TeamsView.xib in Resources */,
 				47C3B71D2B04D4D700E12A4D /* countryCodes.json in Resources */,
@@ -2613,6 +2640,7 @@
 				6A947A9F2B1F325C00A00788 /* ChatDetailTV.swift in Sources */,
 				49B211482B0B470E00E1C58E /* FootballPlayers.swift in Sources */,
 				494D7B7C2AE9317F00488E27 /* LeagueDetailModel.swift in Sources */,
+				AD90AF2F2B234A7500515C60 /* iOSDropDown.swift in Sources */,
 				6A947AA62B1F33DB00A00788 /* ChannelManager.swift in Sources */,
 				494B37E52AEA3BD700FB9BCD /* PMAlertController.swift in Sources */,
 				49B0BA232AE698B200A9D235 /* UIString+Extension.swift in Sources */,
@@ -2649,6 +2677,7 @@
 				AD31C4F62B176D0800DC879D /* TimingsTableViewCell.swift in Sources */,
 				ADCE38582B1F351B00727F0F /* TimeViewController.swift in Sources */,
 				4784E3F12AECDCC000C96085 /* SocialViewModel.swift in Sources */,
+				AD90AF282B2308D300515C60 /* StreetTeamDetailsViewModel.swift in Sources */,
 				E9C657212B0B67A800833D37 /* PlaceBetVc.swift in Sources */,
 				E9C657232B0B73CC00833D37 /* PointsVc.swift in Sources */,
 				6A947A972B1F2A0C00A00788 /* ChatListTableViewCell.swift in Sources */,
@@ -2720,6 +2749,7 @@
 				6AB18E372B187B7B00287A9C /* EventDetailVC.swift in Sources */,
 				6A5F2BA12B0CE10300AB6A98 /* MeetUserTableViewCell.swift in Sources */,
 				4716B1192AEF8D6B003582A9 /* MatchTableViewCell.swift in Sources */,
+				AD90AF2B2B230AEB00515C60 /* InfoTableViewCell.swift in Sources */,
 				6A947A942B1F2A0C00A00788 /* ReceiverTableViewCell.swift in Sources */,
 				6A4A7B432B11C23F00231EA2 /* MeetEventViewModel.swift in Sources */,
 				49581AF52B14A2CB00048189 /* CardGameMyTeamVC.swift in Sources */,
@@ -2752,6 +2782,7 @@
 				41EB79E52AF3C51D00D068F7 /* LastMatchesView.swift in Sources */,
 				ADD3398B2B0F5DAB00B91101 /* StadiumTableViewCell.swift in Sources */,
 				6A5F2B992B0CC34700AB6A98 /* ExploreEventsVC.swift in Sources */,
+				AD90AF262B2307B300515C60 /* StreetTeamDetails.swift in Sources */,
 				E9380B9B2B15EEC0007AEB3D /* BetLeagueTableVC.swift in Sources */,
 				AD2676E82B1EF57A00B96921 /* CreateStadiumViewModel.swift in Sources */,
 				49C22E612AFCF3D500B0340A /* HighlightTableViewCell.swift in Sources */,
@@ -2798,6 +2829,7 @@
 				E93C6C032B0C7F8A0042657B /* PointsViewModel.swift in Sources */,
 				47FC33E42AEA50BE00FABED4 /* SocialVC.swift in Sources */,
 				6A947A8B2B1F0DDF00A00788 /* ChatListModel.swift in Sources */,
+				AD90AF242B2306E000515C60 /* StreetTeamDetailsVC.swift in Sources */,
 				47FC33E12AEA4DAC00FABED4 /* HeaderTopCollectionViewCell.swift in Sources */,
 				41EB79CF2AF37BA000D068F7 /* TeamsView.swift in Sources */,
 				47E3E50D2B064F1500B43994 /* LoginViewModel.swift in Sources */,

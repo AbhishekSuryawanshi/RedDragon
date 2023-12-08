@@ -194,14 +194,13 @@ extension StreetTeamsViewController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func gotoTeamDetails(team:StreetTeam?){
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "TeamDetailsViewController") as! TeamDetailsViewController
-//        vc.teamID = team?.id
-//        self.navigationController?.pushViewController(vc, animated: true)
+        navigateToViewController(StreetTeamDetailsVC.self,storyboardName: StoryboardName.streetMatches) { vc in
+            vc.teamID = team?.id
+        }
+
     }
     
 }
-
-
 
 
 

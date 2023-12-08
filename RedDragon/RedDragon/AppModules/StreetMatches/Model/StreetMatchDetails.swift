@@ -81,7 +81,7 @@ struct StreetMatchPlayer: Codable {
     let locationLong, locationLat: Double
     let address: String
     let description, descriptionCN: String?
-    let creatorUserID, teamID, playerID: Int
+    let creatorUserID, teamID, playerID: Int?
     let positionName, positionNameCN: String
     let imgURL: String
 
