@@ -10,6 +10,7 @@ import UIKit
 class StreetHomeHeaderTableViewCell: UITableViewCell {
 
     @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var btnMore: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
