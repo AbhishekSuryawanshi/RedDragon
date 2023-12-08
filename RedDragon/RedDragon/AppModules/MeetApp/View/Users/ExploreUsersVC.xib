@@ -23,6 +23,7 @@
                 <outlet property="gifContainerView" destination="DEa-0K-FvN" id="CQU-jv-iMa"/>
                 <outlet property="matchGifImageView" destination="Fqs-GT-uOa" id="ATZ-wP-IQC"/>
                 <outlet property="matchUserNameLabel" destination="3Ba-9c-NtP" id="QIa-vF-uK2"/>
+                <outlet property="searchBar" destination="rPI-81-272" id="LBJ-lm-kq4"/>
                 <outlet property="tableView" destination="vks-oc-guY" id="nRM-Gp-RGL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -32,8 +33,15 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="rPI-81-272">
+                    <rect key="frame" x="0.0" y="59" width="393" height="56"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="QOA-0R-Ypx"/>
+                    </connections>
+                </searchBar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vks-oc-guY">
-                    <rect key="frame" x="12" y="79" width="369" height="773"/>
+                    <rect key="frame" x="12" y="129" width="369" height="723"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="LeF-ap-XCW"/>
@@ -136,13 +144,16 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="rPI-81-272" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="1Zg-MZ-CI8"/>
+                <constraint firstItem="vks-oc-guY" firstAttribute="top" secondItem="rPI-81-272" secondAttribute="bottom" constant="14" id="5qO-Di-FVB"/>
                 <constraint firstAttribute="bottom" secondItem="DEa-0K-FvN" secondAttribute="bottom" id="GwI-nR-RBw"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="vks-oc-guY" secondAttribute="trailing" constant="12" id="QDv-JR-7Gd"/>
                 <constraint firstItem="DEa-0K-FvN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="b3U-hy-j4d"/>
                 <constraint firstItem="vks-oc-guY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="lJQ-ds-EaX"/>
-                <constraint firstItem="vks-oc-guY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="mBV-ZP-qcs"/>
                 <constraint firstItem="DEa-0K-FvN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="sgq-ZO-9Zg"/>
+                <constraint firstItem="rPI-81-272" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="uI7-pe-PUV"/>
                 <constraint firstAttribute="bottom" secondItem="vks-oc-guY" secondAttribute="bottom" id="vBZ-U9-4Pu"/>
+                <constraint firstItem="rPI-81-272" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="wDW-1t-npg"/>
                 <constraint firstItem="DEa-0K-FvN" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="xZy-xO-Vhv"/>
             </constraints>
             <point key="canvasLocation" x="130.53435114503816" y="-12.67605633802817"/>
@@ -159,5 +170,3 @@
         </systemColor>
     </resources>
 </document>
-
-

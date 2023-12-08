@@ -34,7 +34,7 @@ struct MeetLikedUserModel: Codable {
 }
 
 struct MeetLikedUser: Codable {
-    let messages: String?
+    let messages: [String]?
     let data: MeetUser?
 }
 

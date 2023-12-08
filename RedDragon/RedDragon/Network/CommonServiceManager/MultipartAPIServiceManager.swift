@@ -64,7 +64,7 @@ class MultipartAPIServiceManager<ResponseModel: Decodable>: ObservableObject {
                 request.setValue("Bearer " + userToken, forHTTPHeaderField: "Authorization")
             }
         }
-        print("[Request] :==>\(URLConstants.postImage)\n[Token] :==>\(UserDefaults.standard.token ?? "")")
+        print("[Request] :==>\(request)\n[Token] :==>\(UserDefaults.standard.token ?? "")")
         return request
     }
     

@@ -119,7 +119,7 @@ extension ChatDetailTV: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         tableView.separatorStyle = .none
      //   let userID = Constants.userDefault.string(forKey: UserDefaultKeys.UserId)!
-        let userID = "6"
+        let userID = "\(UserDefaults.standard.user?.appDataIDs.vinderUserId ?? 0)"
         
         if sortedMessages[indexPath.row].author == userID {
             return senderCell(indexPath: indexPath)

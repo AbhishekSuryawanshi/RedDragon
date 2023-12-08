@@ -66,12 +66,12 @@ class CreateEventVC: UIViewController {
     }
     
     func geocodeAddress(address: String) {
-        geocoder.geocodeAddressString(address) {
+        geocoder.geocodeAddressString(address) { [self]
             placemarks, error in
             let placemark = placemarks?.first
-            self.latitude = (placemark?.location?.coordinate.latitude)!
-            self.longitude = (placemark?.location?.coordinate.longitude)!
-            // print("Lat: \(lat), Lon: \(lon)")
+            self.latitude = (placemark?.location?.coordinate.latitude) ?? 0.0
+            self.longitude = (placemark?.location?.coordinate.longitude) ?? 0.0
+            print("Lat: \(latitude), Lon: \(self.longitude)")
         }
     }
     
@@ -82,7 +82,7 @@ class CreateEventVC: UIViewController {
         } else if eventDescTextView.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
             self.view.makeToast(ErrorMessage.eventDescEmptyAlert)
             return false
-        } else if selectedImage?.0 == "" {
+        } else if selectedImage?.0 == nil {
             self.view.makeToast(ErrorMessage.eventImageEmptyAlert)
             return false
         } else if startEventDateTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
@@ -136,18 +136,18 @@ class CreateEventVC: UIViewController {
     }
     
     @IBAction func createEventBtnAction(_ sender: Any) {
-        var priceString = priceTextField.text ?? "0"
-        if priceString == ""{
-            priceString = "0"
-        }
-        price = Float(priceString)!
-        eventRequest =
-        MeetEvent(name: eventTitleTextField.text!, description: eventDescTextView.text!, interestId: sportsInterestArray[self.selectedCellRow].id!, latitude: latitude, longitude: longitude, date: startEventDateTextField.text!, time: startEventTimeTextField.text!, address: locationTextField.text!, isPaid: isPaid, price: price)
-        
-        let dict = eventRequest.dictionary
-
+    
         if validate() {
             geocodeAddress(address: locationTextField.text!)
+            var priceString = priceTextField.text ?? "0"
+            if priceString == ""{
+                priceString = "0"
+            }
+            price = Float(priceString)!
+            eventRequest =
+            MeetEvent(name: eventTitleTextField.text!, description: eventDescTextView.text!, interestId: sportsInterestArray[self.selectedCellRow].id!, latitude: latitude, longitude: longitude, date: startEventDateTextField.text!, time: startEventTimeTextField.text!, address: locationTextField.text!, isPaid: isPaid, price: price)
+            print(eventRequest as Any)
+            let dict = eventRequest.dictionary
             meetCreateEventVM = MeetCreateEventVM()
             meetCreateEventVM?.postCreateEventAsyncCall(params: dict, imageName: selectedImage!.0, imageData: selectedImage!.1)
             fetchCreateEventViewModelResponse()
