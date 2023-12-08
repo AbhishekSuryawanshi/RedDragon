@@ -55,6 +55,7 @@ class CardGameMyTeamVC: UIViewController {
     }
     
     @IBAction func playAgainstComputer(_ sender: Any) {
+        presentToViewController(GameViewController.self, storyboardName: StoryboardName.cardGameMatch, animationType: .zoomOut)
     }
     
     @IBAction func playAgainstFriends(_ sender: Any) {

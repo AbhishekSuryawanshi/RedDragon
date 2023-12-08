@@ -223,6 +223,8 @@
 		4988F7342B2068BE00905CDD /* ResponseMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988F7332B2068BE00905CDD /* ResponseMessage.swift */; };
 		4988F7372B2084A700905CDD /* BudgetCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988F7362B2084A700905CDD /* BudgetCalculation.swift */; };
 		4988F7392B2084FC00905CDD /* UpdateInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988F7382B2084FC00905CDD /* UpdateInfoViewModel.swift */; };
+		499F4A6B2B2303470079C522 /* CardGameMatchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499F4A6A2B2303470079C522 /* CardGameMatchScreen.storyboard */; };
+		499F4A6E2B2303BD0079C522 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499F4A6D2B2303BD0079C522 /* GameViewController.swift */; };
 		49A822BB2B04FC27007752C2 /* RecentMatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A822B92B04FC27007752C2 /* RecentMatchTableViewCell.swift */; };
 		49A822BC2B04FC27007752C2 /* RecentMatchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49A822BA2B04FC27007752C2 /* RecentMatchTableViewCell.xib */; };
 		49A9D9DC2B1F000000C4A1A1 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A9D9DB2B1F000000C4A1A1 /* UserProfileViewController.swift */; };
@@ -640,6 +642,8 @@
 		4988F7332B2068BE00905CDD /* ResponseMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseMessage.swift; sourceTree = "<group>"; };
 		4988F7362B2084A700905CDD /* BudgetCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetCalculation.swift; sourceTree = "<group>"; };
 		4988F7382B2084FC00905CDD /* UpdateInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateInfoViewModel.swift; sourceTree = "<group>"; };
+		499F4A6A2B2303470079C522 /* CardGameMatchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CardGameMatchScreen.storyboard; sourceTree = "<group>"; };
+		499F4A6D2B2303BD0079C522 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		49A822B92B04FC27007752C2 /* RecentMatchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMatchTableViewCell.swift; sourceTree = "<group>"; };
 		49A822BA2B04FC27007752C2 /* RecentMatchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentMatchTableViewCell.xib; sourceTree = "<group>"; };
 		49A9D9DB2B1F000000C4A1A1 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
@@ -1506,6 +1510,14 @@
 			path = BudgetCalculation;
 			sourceTree = "<group>";
 		};
+		499F4A6C2B2303A50079C522 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				499F4A6D2B2303BD0079C522 /* GameViewController.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
 		49B0B9DB2AE68F0700A9D235 = {
 			isa = PBXGroup;
 			children = (
@@ -1684,6 +1696,7 @@
 				49E223C42B15CBB600A7202C /* LeaderboardViewController.swift */,
 				49A9D9DB2B1F000000C4A1A1 /* UserProfileViewController.swift */,
 				4988F7312B20685900905CDD /* BuyAndSell */,
+				499F4A6C2B2303A50079C522 /* Game */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1737,6 +1750,7 @@
 			children = (
 				49DCA7C12B0C90DD005902AF /* CardGame.storyboard */,
 				4988F72A2B20591000905CDD /* CardGamePopup.storyboard */,
+				499F4A6A2B2303470079C522 /* CardGameMatchScreen.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -2492,6 +2506,7 @@
 				49F65E442AF6222D000F9E96 /* MatchTabsCollectionViewCell.xib in Resources */,
 				419658242B0CF18000730D9F /* PredictResultTopView.xib in Resources */,
 				ADD339912B0F6DB700B91101 /* FeedsTableViewCell.xib in Resources */,
+				499F4A6B2B2303470079C522 /* CardGameMatchScreen.storyboard in Resources */,
 				49581AFD2B14CC1800048189 /* MyTeamCollectionViewCell.xib in Resources */,
 				41846BDA2B0C7E050020F503 /* TopView.xib in Resources */,
 				4716B11A2AEF8D6B003582A9 /* MatchTableViewCell.xib in Resources */,
@@ -2648,6 +2663,7 @@
 				473E1D122AEB910C00A806DF /* IconNameCollectionViewCell.swift in Sources */,
 				47AE9C9D2B03AEB400C271FB /* LoginVC.swift in Sources */,
 				6A2140242B0B730C00F52E69 /* SwipeCardContentView.swift in Sources */,
+				499F4A6E2B2303BD0079C522 /* GameViewController.swift in Sources */,
 				4703F8DA2B08D6F000276F3E /* ForgotPasswordVC.swift in Sources */,
 				4784E3EF2AECDBFF00C96085 /* LeagueMatchModel.swift in Sources */,
 				AD3B55572B15F2CE007B14F7 /* FeedsListViewModel.swift in Sources */,
