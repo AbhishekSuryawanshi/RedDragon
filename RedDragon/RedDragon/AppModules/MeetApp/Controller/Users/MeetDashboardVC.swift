@@ -78,7 +78,6 @@ extension MeetDashboardVC: UICollectionViewDataSource, UICollectionViewDelegate,
         let selected = selectedSegment == meetHeaderSegment.allCases[indexPath.row]
         return CGSize(width: meetHeaderSegment.allCases[indexPath.row].rawValue.localized.size(withAttributes: [NSAttributedString.Key.font : selected ? fontBold(17) : fontRegular(17)]).width + 26, height: 50)
     }
-    
 }
 
 // MARK: - Functions to add Child controllers in Parent View

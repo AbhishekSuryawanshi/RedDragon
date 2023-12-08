@@ -121,4 +121,6 @@ struct URLConstants {
     static let videosThumbnail     = "https://34433tiyu.com/"
     static let chatTokenURL        = "https://grullo-chihuahua-4284.twil.io/chat-token"
     
+    // MARK: - GlobalMatches
+    static let footballMatchList   = "http://199.241.1.88:4049/api/football/matchlist/today"
 }
