@@ -12,7 +12,7 @@ import Combine
 import SDWebImage
 import DDSpiderChart
 
-class CardGamePlayerDetailVC: UIViewController {
+class CardGamePlayerDetailVC: UIViewController, ControllerDelegate {
     
     @IBOutlet weak var userPointsLabel: UILabel!
     @IBOutlet weak var playerImageView: UIImageView!
@@ -80,6 +80,7 @@ class CardGamePlayerDetailVC: UIViewController {
         if ((UserDefaults.standard.token ?? "") != "") {
             let marketValue = Int(value)
             presentToViewController(BuyPlayerViewController.self, storyboardName: StoryboardName.cardGamePopup, animationType: .fade) { [self] vc in
+                vc.delegate = self //delegate to confirm
                 vc.image = defaultImage
                 vc.name = playerName
                 vc.position = position
@@ -90,6 +91,11 @@ class CardGamePlayerDetailVC: UIViewController {
         } else {
             customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.loginRequires.localized, image: ImageConstants.alertImage)
         }
+    }
+    
+    /// Implement the delegate method to navigate back after player bought from BuyPlayerViewController
+    func controllerDismissed() {
+        navigationController?.popViewController(animated: true)
     }
 }
 

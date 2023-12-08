@@ -58,6 +58,7 @@ struct ErrorMessage {
     static let addPlayerToPlay             = "Please add a minimum of 11 players to your team to play the game"
     static let playerAlreadyUsed           = "Your team already has this player"
     static let playerBuyed                 = "Player bought successfully!!"
+    static let playerRemoved               = "Player removed!!"
     
     static let betPlacedSuccess            = "Bet Placed Successfully"
     static let betPlacedAlready            = "Bet Already Placed"
