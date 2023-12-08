@@ -59,3 +59,13 @@ class MeetEventDetailViewModel: APIServiceManager<MeetEventDetailModel> {
         asyncCall(urlString: urlString, method: method, parameters: nil, isGuestUser: true, anyDefaultToken: DefaultToken.guestUser)
     }
 }
+
+class MeetJoinEventViewModel: APIServiceManager<MeetEventDetailModel> {
+    ///function to fetch all event list
+    func postJoinEventAsyncCall(eventID: Int) {
+        let urlString   = URLConstants.meetJoinEvent
+        let method      = RequestType.post
+        let params      = JoinOrInviteMeetEventRequest(eventId: eventID).dictionary
+        asyncCall(urlString: urlString, method: method, parameters: params, isGuestUser: true, anyDefaultToken: DefaultToken.guestUser)
+    }
+}

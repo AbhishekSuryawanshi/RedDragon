@@ -50,12 +50,14 @@ struct ErrorMessage {
     static var betsEmptyAlert              = "No Bets found"
     
     static let addPlayer                   = "Looks like you haven't bought any players yet, please buy a player to play the game"
+    static let noPlayers                   = "Currently, this user has no players"
     static let playerListUnavailable       = "Players list unavailable"
     static let userIDNotFound              = "Unable to get user ID"
     static let lowBudget                   = "Low Budget"
     static let insufficientBudget          = "Sorry, you don't have sufficient budget to buy this player"
     static let addPlayerToPlay             = "Please add a minimum of 11 players to your team to play the game"
     static let playerAlreadyUsed           = "Your team already has this player"
+    static let playerBuyed                 = "Player bought successfully!!"
     
     static let betPlacedSuccess            = "Bet Placed Successfully"
     static let betPlacedAlready            = "Bet Already Placed"
@@ -67,4 +69,8 @@ struct ErrorMessage {
     static let eventStartTimeEmptyAlert    = "Please enter event start time"
     static let eventLocationEmptyAlert     = "Please enter event location"
     static let eventPriceEmptyAlert        = "Please enter event location"
+}
+
+struct SuccessMessage {
+    static let successfullyLikedUser       = "User liked successfully"
 }
