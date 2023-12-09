@@ -92,15 +92,18 @@ struct URLConstants {
     
     // MARK: - StreetMatches
     static let streetMatchesBaseURL = "https://trkick.com/stm/api/"
-    static let streetHome = streetMatchesBaseURL + "home/data"
-    static let stadiumList = streetMatchesBaseURL + "stadium/list"
-    static let eventsList = streetMatchesBaseURL + "event/list"
-    static let streetMatchesList = streetMatchesBaseURL + "match/list"
-    static let stadiums = streetMatchesBaseURL + "stadium"
-    static let streetUploadImage = streetMatchesBaseURL + "resource/img/upload"
-    static let streetMatches = streetMatchesBaseURL + "match"
-    static let streetTeamList = streetMatchesBaseURL + "team/list"
-    static let streetTeamDetails = streetMatchesBaseURL + "team"
+
+    static let streetHome           = streetMatchesBaseURL + "home/data"
+    static let stadiumList          = streetMatchesBaseURL + "stadium/list"
+    static let eventsList           = streetMatchesBaseURL + "event/list"
+    static let streetMatchesList    = streetMatchesBaseURL + "match/list"
+    static let stadiums             = streetMatchesBaseURL + "stadium"
+    static let streetUploadImage    = streetMatchesBaseURL + "resource/img/upload"
+    static let streetMatches        = streetMatchesBaseURL + "match"
+    static let streetTeamList       = streetMatchesBaseURL + "team/list"
+    static let streetTeamDetails    = streetMatchesBaseURL + "team"
+    static let streetPlayersList    = streetMatchesBaseURL + "player/list"
+    
 
     // MARK: - Prediction
     static let getMatchesList       = "api/match/list?"

@@ -84,6 +84,7 @@ struct StreetMatchPlayer: Codable {
     let creatorUserID, teamID, playerID: Int?
     let positionName, positionNameCN: String
     let imgURL: String
+    var selected = false
 
     enum CodingKeys: String, CodingKey {
         case id

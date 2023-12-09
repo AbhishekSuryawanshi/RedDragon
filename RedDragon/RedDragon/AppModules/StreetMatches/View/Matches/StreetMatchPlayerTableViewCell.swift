@@ -13,6 +13,12 @@ class StreetMatchPlayerTableViewCell: UITableViewCell {
     @IBOutlet weak var imgPlayer: UIImageView!
     @IBOutlet weak var lblAge: UILabel!
     @IBOutlet weak var lblPosition: UILabel!
+    @IBOutlet weak var btnInfo: UIButton!
+    @IBOutlet weak var imgSelection: UIImageView!
+    @IBOutlet weak var btnDelete: UIButton!
+    
+    var callSelection:(()->Void)?
+    var callDelete:(()->Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,8 +27,6 @@ class StreetMatchPlayerTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     func configureCell(obj:StreetMatchPlayer?){
@@ -40,4 +44,23 @@ class StreetMatchPlayerTableViewCell: UITableViewCell {
         return Calendar.current.dateComponents([.year], from: dt1, to: Date()).year ?? 0
     }
     
+    func handleSelection(selected:Bool){
+        if selected{
+            imgSelection.isHidden = false
+        }
+        else{
+            imgSelection.isHidden = true
+        }
+    }
+    
+    
+    @IBAction func actionDetails(_ sender: Any) {
+        callSelection?()
+    }
+    
+    
+    @IBAction func actionDelete(_ sender: Any) {
+        callDelete?()
+    }
+   
 }
