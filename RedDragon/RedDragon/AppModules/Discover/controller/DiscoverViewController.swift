@@ -32,6 +32,10 @@ class DiscoverViewController: UIViewController {
         self.goToMeet()
     }
     
+    @IBAction func btnGoToMatches(_ sender: Any) {
+        self.goToMatches()
+    }
+    
     
     @IBAction func toStreetMatches(_ sender: Any) {
         goToStreetMatches()
@@ -65,6 +69,10 @@ class DiscoverViewController: UIViewController {
     
     func goToStreetMatches(){
         navigateToViewController(StreetMatchesDashboardVC.self, storyboardName: StoryboardName.streetMatches, animationType: .autoReverse(presenting: .zoom))
+    }
+    
+    func goToMatches(){
+        navigateToViewController(MatchesDashboardVC.self, storyboardName: StoryboardName.matches, animationType: .autoReverse(presenting: .zoom))
     }
 }
 

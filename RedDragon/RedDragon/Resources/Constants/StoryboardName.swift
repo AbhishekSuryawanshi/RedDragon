@@ -23,5 +23,6 @@ struct StoryboardName {
     static let streetMatches  = "StreetMatches"
     static let news           = "News"
     static let gossip         = "Gossip"
+    static let matches        = "Matches"
 }
 
