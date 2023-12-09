@@ -34,3 +34,41 @@ class FootballFinishedMatchesViewModel: APIServiceManager<GlobalEventsModel> {
         asyncCall(urlString: urlString, method: method, parameters: nil)
     }
 }
+
+class BasketballLeaguesViewModel: APIServiceManager<GlobalEventsModel> {
+    
+    ///function to fetch football live matches
+    func fetchBasketballLeagueMatches() {
+        let urlString   = URLConstants.basketballMatchList
+        let method      = RequestType.get
+        asyncCall(urlString: urlString, method: method, parameters: nil)
+    }
+}
+
+class BasketballLiveMatchesViewModel: APIServiceManager<GlobalEventsModel> {
+    
+    ///function to fetch football live matches
+    func fetchBasketballLiveMatches() {
+        let urlString   = URLConstants.basketballMatchList + "?matchStatus=live"
+        let method      = RequestType.get
+        asyncCall(urlString: urlString, method: method, parameters: nil)
+    }
+}
+
+class BasketballUpcomingMatchesViewModel: APIServiceManager<GlobalEventsModel> {
+    ///function to fetch football upcoming matches
+    func fetchBasketballUpcomingMatches() {
+        let urlString   = URLConstants.basketballMatchList + "?matchStatus=upcoming"
+        let method      = RequestType.get
+        asyncCall(urlString: urlString, method: method, parameters: nil)
+    }
+}
+
+class BasketballFinishedMatchesViewModel: APIServiceManager<GlobalEventsModel> {
+    ///function to fetch football finished matches
+    func fetchBasketballFinishedMatches() {
+        let urlString   = URLConstants.basketballMatchList + "?matchStatus=finished"
+        let method      = RequestType.get
+        asyncCall(urlString: urlString, method: method, parameters: nil)
+    }
+}

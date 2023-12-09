@@ -19,6 +19,7 @@ struct GlobalMatchList: Codable {
     var awayInfo: GlobalMatches?
     var leagueInfo: GlobalMatches?
     var coverage: Coverage?
+    var position: Position?
     var round: Round?
     var environment: Environment?
     var odds: Odds?
@@ -49,6 +50,7 @@ struct GlobalMatches: Codable {
     var overtimeScore: Int?
     var penaltyScore: Int?
     var yellowCards: Int?
+    var shortName: String?
     
     enum CodingKeys: String, CodingKey {
         case name = "en_name"
@@ -62,12 +64,18 @@ struct GlobalMatches: Codable {
         case overtimeScore = "overtime_score"
         case penaltyScore = "penalty_score"
         case yellowCards = "yellow_cards"
+        case shortName = "short_name"
     }
 }
 
 struct Coverage: Codable {
     var mlive: Int?
     var lineup: Int?
+}
+
+struct Position: Codable {
+    var home: String?
+    var away: String?
 }
 
 struct Round: Codable {

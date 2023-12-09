@@ -17,7 +17,6 @@ class GlobalMatchesTableViewCell: UITableViewCell {
     @IBOutlet weak var awayNameLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var cornerLabel: UILabel!
-    @IBOutlet weak var roundLabel: UILabel!
     @IBOutlet weak var halftimeLabel: UILabel!
     
     override func awakeFromNib() {

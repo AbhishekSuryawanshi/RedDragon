@@ -92,7 +92,6 @@ struct URLConstants {
     
     // MARK: - StreetMatches
     static let streetMatchesBaseURL = "https://trkick.com/stm/api/"
-
     static let streetHome = streetMatchesBaseURL + "home/data"
     static let stadiumList = streetMatchesBaseURL + "stadium/list"
     static let eventsList = streetMatchesBaseURL + "event/list"
@@ -104,7 +103,6 @@ struct URLConstants {
     static let streetTeamDetails = streetMatchesBaseURL + "team"
 
     // MARK: - Prediction
-
     static let getMatchesList       = "api/match/list?"
     static let postMatchPrediction  = "api/predict"
     static let matchDetail          = "api/match"
@@ -112,15 +110,17 @@ struct URLConstants {
     
     
     // MARK: - News
-    static let newsGossips         = "https://datasport.one/api/v1/news/data.php"
-    static let eSportsBaseURL      = "http://199.241.1.88:7001/"
-    static let eSportsList         = eSportsBaseURL + "api/esports-news-list"
-    static let eSportsDetail       = eSportsBaseURL + "specific-esports-news/"
-    static let videosBaseURL       = "https://zeyuapi.com/v1/video/"
-    static let videosList          = videosBaseURL + "recommend"
-    static let videosThumbnail     = "https://34433tiyu.com/"
-    static let chatTokenURL        = "https://grullo-chihuahua-4284.twil.io/chat-token"
+    static let newsGossips          = "https://datasport.one/api/v1/news/data.php"
+    static let eSportsBaseURL       = "http://199.241.1.88:7001/"
+    static let eSportsList          = eSportsBaseURL + "api/esports-news-list"
+    static let eSportsDetail        = eSportsBaseURL + "specific-esports-news/"
+    static let videosBaseURL        = "https://zeyuapi.com/v1/video/"
+    static let videosList           = videosBaseURL + "recommend"
+    static let videosThumbnail      = "https://34433tiyu.com/"
+    static let chatTokenURL         = "https://grullo-chihuahua-4284.twil.io/chat-token"
     
     // MARK: - GlobalMatches
-    static let footballMatchList   = "http://199.241.1.88:4049/api/football/matchlist/today"
+    static let globalMatchBaseURL   = "http://199.241.1.88:4049/api/"
+    static let footballMatchList    = globalMatchBaseURL + "football/matchlist/today"
+    static let basketballMatchList  = globalMatchBaseURL + "basketball/matchlist/today"
 }
