@@ -24,6 +24,7 @@ class CardGameMyTeamVC: UIViewController {
     var budgetClass = BudgetCalculation()
     var updateInfoVM = UpdateInfoViewModel()
     var playerSoldOut: Bool? = nil
+    var againstComputer: Bool?
     var userBudget_afterPlayerSold: Double? = 0
 
     override func viewDidLoad() {
@@ -55,7 +56,23 @@ class CardGameMyTeamVC: UIViewController {
     }
     
     @IBAction func playAgainstComputer(_ sender: Any) {
-        presentToViewController(GameViewController.self, storyboardName: StoryboardName.cardGameMatch, animationType: .zoomOut)
+        UserDefaults.standard.set(false, forKey: "gameEnd")
+        againstComputer = true
+        fetchPlayersID(teamListVM?.responseData)
+    }
+    
+    func fetchPlayersID(_ team: MyTeam?) {
+        if let team = team {
+            let playerIDs = team.map { $0.playerID }
+            if playerIDs.count < 11 {
+                customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.addPlayerToPlay.localized, image: ImageConstants.alertImage)
+            } else {
+                presentToViewController(GameViewController.self, storyboardName: StoryboardName.cardGameMatch) { [self] vc in
+                    vc.playersIDs = playerIDs
+                    vc.againstComputer = againstComputer
+                }
+            }
+        }
     }
     
     @IBAction func playAgainstFriends(_ sender: Any) {
@@ -174,7 +191,6 @@ extension CardGameMyTeamVC: UICollectionViewDelegate, UICollectionViewDataSource
 }
 
 extension CardGameMyTeamVC {
-    
     ///calculate user budget after selling player
     func calculateBudget(_ playerValue: Double) -> Double {
         let userBudget = UserDefaults.standard.budget!

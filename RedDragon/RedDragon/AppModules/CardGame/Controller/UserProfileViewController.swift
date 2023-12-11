@@ -136,14 +136,14 @@ extension UserProfileViewController {
             if playerIDs.count < 11 {
                 customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.addPlayerToPlay.localized, image: ImageConstants.alertImage)
             } else {
-//                navigateToViewController(GameViewController.self, storyboardName: Storyboard.play) { [self] vc in
-//                    vc.playersIDs = playerIDs
-//                    vc.opponent_playersIDs = opponentPlayrsID
-//                    vc.againstComputer = againstComputer
-//                    vc.opponentUserName = leaderboardDetailsVM?.responseData?.name
-//                    vc.opponentUserID = leaderboardDetailsVM?.responseData?.id
-//                    vc.opponentUserProfileImage = leaderboardDetailsVM?.responseData?.imgURL
-//                }
+                presentToViewController(GameViewController.self, storyboardName: StoryboardName.cardGameMatch) { [self] vc in
+                    vc.playersIDs = playerIDs
+                    vc.opponent_playersIDs = opponentPlayrsID
+                    vc.againstComputer = againstComputer
+                    vc.opponentUserName = leaderboardDetailsVM?.responseData?.name
+                    vc.opponentUserID = leaderboardDetailsVM?.responseData?.id
+                    vc.opponentUserProfileImage = leaderboardDetailsVM?.responseData?.imgURL
+                }
             }
         }
     }

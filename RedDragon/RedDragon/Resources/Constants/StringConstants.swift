@@ -94,5 +94,17 @@ struct StringConstants {
     static let currentBudget        = "Your current budget is"
     static let cancel               = "Cancel"
     static let buy                  = "Buy"
+    static let you                  = "You"
+    static let yourTurn             = "Your Turn"
+    static let opponent             = "Opponent"
+    static let rating               = "Rating"
+    static let technical            = "Technical"
+    static let defending            = "Defending"
+    static let tactical             = "Tactical"
+    static let creativity           = "Creativity"
+    static let youThere             = "You there?"
+    static let itsYourTurn          = "It's your turn. \n Please select the card to resume the game."
+    static let computer             = "Computer"
+    static let round                = "Round"
 }
 
