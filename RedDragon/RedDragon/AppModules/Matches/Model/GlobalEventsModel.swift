@@ -19,7 +19,7 @@ struct GlobalMatchList: Codable {
     var awayInfo: GlobalMatches?
     var leagueInfo: GlobalMatches?
     var coverage: Coverage?
-    var position: Position?
+    var matchPosition: MatchPosition?
     var round: Round?
     var environment: Environment?
     var odds: Odds?
@@ -29,6 +29,7 @@ struct GlobalMatchList: Codable {
         case homeInfo = "home_Info"
         case awayInfo = "away_Info"
         case leagueInfo = "league_Info"
+        case matchPosition = "position"
         case coverage, round, environment, odds
     }
 }
@@ -73,7 +74,7 @@ struct Coverage: Codable {
     var lineup: Int?
 }
 
-struct Position: Codable {
+struct MatchPosition: Codable {
     var home: String?
     var away: String?
 }
