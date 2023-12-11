@@ -58,6 +58,7 @@ struct CellIdentifier {
     static let myTeamCell                       = "MyTeamCollectionViewCell"
     static let leaderboardCell                  = "LeaderboardTableViewCell"
     static let yourMatches                      = "YourMatchesTableCell"
+    static let userPlayerCell                   = "UserPlayersCollectionCell"
     
     //Prediction
     static let predictUpcomingTableViewCell     = "PredictUpcomingTableViewCell"
