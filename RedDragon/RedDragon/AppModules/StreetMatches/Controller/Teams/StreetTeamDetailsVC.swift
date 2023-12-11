@@ -113,7 +113,6 @@ class StreetTeamDetailsVC: UIViewController {
             infoStack.isHidden = true
             tableViewList.isHidden = false
             tableViewList.reloadData()
-            
         }
         
     }

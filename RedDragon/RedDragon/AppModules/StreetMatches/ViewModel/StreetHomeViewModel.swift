@@ -15,5 +15,4 @@ class StreetHomeViewModel: APIServiceManager<StreetMatchHome> {
         let method      = RequestType.get
         asyncCall(urlString: urlString, method: method, parameters: nil)
     }
-    
 }

@@ -45,22 +45,18 @@ class StreetTeamsViewController: UIViewController {
     
     
     @IBAction func actionCreateTeam(_ sender: Any) {
-       
+        navigateToViewController(CreateStreetTeamVC.self,storyboardName: StoryboardName.streetMatches)
     }
    
     func initialSetup(){
-        
         nibInitialization()
         configureViewModel()
-      
     }
     
     func nibInitialization() {
         defineTableViewNibCell(tableView: tableView, cellName: CellIdentifier.teamCollectionTableViewCell)
         defineTableViewNibCell(tableView: tableView, cellName: CellIdentifier.newTeamTableViewCell)
         defineTableViewNibCell(tableView: tableView, cellName: CellIdentifier.streetHomeHeaderTableViewCell)
-        
-        
     }
     
     func showLoader(_ value: Bool) {

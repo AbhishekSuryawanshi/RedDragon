@@ -1,9 +1,4 @@
-//
-//  InfoTableViewCell.swift
-//  Area Sports
-//
-//  Created by Remya on 5/12/23.
-//
+
 
 import UIKit
 

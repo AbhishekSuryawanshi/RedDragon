@@ -18,6 +18,6 @@ struct HTTPHeader {
     
     static func createAuthorizationHeader(token: String) -> [String: String] {
         return ["Authorization": "Bearer " + token]
-        //return ["Authorization": "Bearer " + "87|MCa9ot00xIU5JgG2KUsAd38X2NyGleoyjbdCLrP6"]
+        //return ["Authorization": "Bearer " + "90|jgitYHX5xNhBbOS1cJ3vFs05X2hffoMU9kM58cO0"]
     }
 }
