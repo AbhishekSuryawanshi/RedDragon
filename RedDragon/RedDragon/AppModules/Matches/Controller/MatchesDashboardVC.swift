@@ -35,6 +35,7 @@ class MatchesDashboardVC: UIViewController {
     private var basketballFinishedMatchesVM: BasketballFinishedMatchesViewModel?
     private var basketballUpcomingMatchesVM: BasketballUpcomingMatchesViewModel?
     private var basketballLeaguesVM: BasketballLeaguesViewModel?
+    var isFootball: Bool? = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,10 +86,12 @@ class MatchesDashboardVC: UIViewController {
     @IBAction func segmentControlValueChanged(_ sender: UISegmentedControl) {
         DispatchQueue.main.async { [self] in
             if self.segmentControl.selectedSegmentIndex == 0 {
+                isFootball = true
                 footballLiveMatchesVM?.fetchFootballLiveMatches()
                 footballFinishedMatchesVM?.fetchFootballFinishedMatches()
                 footballUpcomingMatchesVM?.fetchFootballUpcomingMatches()
-            }else{
+            }else {
+                isFootball = false
                 basketballLeaguesVM?.fetchBasketballLeagueMatches()
                 basketballLiveMatchesVM?.fetchBasketballLiveMatches()
                 basketballFinishedMatchesVM?.fetchBasketballFinishedMatches()
@@ -344,9 +347,18 @@ extension MatchesDashboardVC {
         cell.leagueNameLabel.text = "\(matches.leagueInfo?.name ?? "") | Round \(matches.round?.round ?? 0)"
         cell.homeNameLabel.text = matches.homeInfo?.name ?? ""
         cell.awayNameLabel.text = matches.awayInfo?.name ?? ""
-        cell.cornerLabel.text = "Corners: \(matches.homeInfo?.cornerScore ?? 0)-\(matches.awayInfo?.cornerScore ?? 0)"
-        cell.scoreLabel.text = "Score: \(matches.homeInfo?.homeScore ?? 0)-\(matches.awayInfo?.awayScore ?? 0)"
-        cell.halftimeLabel.text = "Halftime: \(matches.homeInfo?.halfTimeScore ?? 0)-\(matches.awayInfo?.halfTimeScore ?? 0)"
+        
+        if isFootball ?? true {
+            cell.cornerLabel.text = "Corners: \(matches.homeInfo?.cornerScore ?? 0)-\(matches.awayInfo?.cornerScore ?? 0)"
+            cell.scoreLabel.text = "Score: \(matches.homeInfo?.homeScore ?? 0)-\(matches.awayInfo?.awayScore ?? 0)"
+            cell.halftimeLabel.isHidden = false
+            cell.halftimeLabel.text = "Halftime: \(matches.homeInfo?.halfTimeScore ?? 0)-\(matches.awayInfo?.halfTimeScore ?? 0)"
+        }else {
+            cell.cornerLabel.text = "Position: \(matches.matchPosition?.home ?? "")-\(matches.matchPosition?.away ?? "")"
+            cell.scoreLabel.text = "Overtime Score: \(matches.homeInfo?.overtimeScore ?? 0)-\(matches.awayInfo?.overtimeScore ?? 0)"
+            cell.halftimeLabel.isHidden = true
+        }
+        
 //        cell.noOfPeopleJoinedLbl.text = "\(event.peopleJoinedCount ?? 0) People joined"
 //        let date = event.date?.formatDate(inputFormat: dateFormat.yyyyMMdd, outputFormat: dateFormat.ddMMM) ?? ""
 //        cell.dateTimeLbl.text = "\(date), \(event.time ?? "")"
