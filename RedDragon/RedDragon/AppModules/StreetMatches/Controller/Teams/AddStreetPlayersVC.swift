@@ -28,6 +28,8 @@ class AddStreetPlayersVC: UIViewController {
     func initialSettings(){
         btnAddPlayers.setTitle("Add Players".localized, for: .normal)
         nibInitialization()
+        configureViewModel()
+        makeNetworkRequest()
     }
     
     func nibInitialization() {
@@ -67,6 +69,10 @@ class AddStreetPlayersVC: UIViewController {
         tableViewPlayers.reloadData()
     }
     
+    func makeNetworkRequest(){
+        playerListViewModel?.fetchStreetPlayerListAsyncCall()
+    }
+    
     func toPlayerDetails(player:StreetMatchPlayer?){
 //        let vc = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
 //        vc.isOtherPlayer = true
@@ -81,8 +87,6 @@ class AddStreetPlayersVC: UIViewController {
         passPlayers?(players)
         self.navigationController?.popViewController(animated: true)
     }
-    
-
 }
 
 

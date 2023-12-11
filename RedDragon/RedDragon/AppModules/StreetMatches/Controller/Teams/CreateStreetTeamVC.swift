@@ -246,3 +246,10 @@ extension CreateStreetTeamVC: ImagePickerDelegate, UINavigationControllerDelegat
     }
 }
 
+
+extension CreateStreetTeamVC:UISearchBarDelegate{
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        actionAddPlayers()
+        searchBar.endEditing(true)
+    }
+}

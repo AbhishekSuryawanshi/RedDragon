@@ -50,30 +50,28 @@ class CreateStreetMatchVC: UIViewController {
   
     
     @IBAction func actionTapHome(_ sender: Any) {
-//        chooseTeam { team in
-//            if team?.id == self.awayTeam?.id{
-//                self.view.makeToast("Please choose a different team".localized)
-//                return
-//            }
-//            self.homeTeam = team
-//            self.imageViewHome.setImage(with: team?.logoImgUrl, placeholder: Utility.getPlaceHolder())
-//            self.lblHome.text = team?.name
-//        }
-//        
+        
+        chooseTeam { team in
+            if team?.id == self.awayTeam?.id{
+                self.view.makeToast("Please choose a different team".localized)
+                return
+            }
+            self.homeTeam = team
+            self.lblHomeTeamName.text = team?.name
+        }
+        
     }
     
     
     @IBAction func actionTapAway(_ sender: Any) {
-//        chooseTeam { team in
-//            if team?.id == self.homeTeam?.id{
-//                Utility.showErrorSnackView(message: "Please choose a different team".localized)
-//                return
-//            }
-//            self.awayTeam = team
-//            self.imageViewAway.setImage(with: team?.logoImgUrl, placeholder: Utility.getPlaceHolder())
-//            self.lblAway.text = team?.name
-//        }
-        
+        chooseTeam { team in
+            if team?.id == self.homeTeam?.id{
+                self.view.makeToast("Please choose a different team".localized)
+                return
+            }
+            self.awayTeam = team
+            self.lblAwayTeamName.text = team?.name
+        }
     }
     
     
@@ -82,9 +80,7 @@ class CreateStreetMatchVC: UIViewController {
     }
     
     @IBAction func actionCreate(_ sender: Any) {
-        
         validations()
-       
     }
     
     func initialSettings(){
@@ -109,8 +105,6 @@ class CreateStreetMatchVC: UIViewController {
         fixedAway.text = "Away Team".localized
         fixedAboutMatchCn.text = "About Match Chinese".localized
         fixedAboutMatchEn.text = "About Match English".localized
-        
-        
     }
     
     func setupViewModels(){
@@ -149,12 +143,12 @@ class CreateStreetMatchVC: UIViewController {
         }
     }
     
-//    func chooseTeam(completion:((Team?)->Void)?){
-//        let vc = UIStoryboard(name: "Teams", bundle: nil).instantiateViewController(withIdentifier: "MyTeamsViewController") as! MyTeamsViewController
-//        vc.isForSelection = true
-//        vc.passTeam = completion
-//        self.navigationController?.pushViewController(vc, animated: true)
-//    }
+    func chooseTeam(completion:((StreetTeam?)->Void)?){
+        navigateToViewController(MyStreetTeamsVC.self,storyboardName: StoryboardName.streetMatches) { vc in
+            vc.isForSelection = true
+            vc.passTeam = completion
+        }
+    }
     
    
     
