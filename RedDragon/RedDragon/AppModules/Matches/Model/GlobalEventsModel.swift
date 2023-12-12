@@ -14,23 +14,29 @@ struct GlobalEventsModel: Codable {
 }
 
 struct GlobalMatchList: Codable {
+    var id: String?
     var matchTime: String?
     var homeInfo: GlobalMatches?
     var awayInfo: GlobalMatches?
     var leagueInfo: GlobalMatches?
     var coverage: Coverage?
+    var homePosition: String?
+    var awayPosition: String?
     var matchPosition: MatchPosition?
     var round: Round?
     var environment: Environment?
     var odds: Odds?
     
     enum CodingKeys: String, CodingKey {
+        case id
         case matchTime = "match_timing"
         case homeInfo = "home_Info"
         case awayInfo = "away_Info"
         case leagueInfo = "league_Info"
         case matchPosition = "position"
         case coverage, round, environment, odds
+        case homePosition = "home_position"
+        case awayPosition = "away_position"
     }
 }
 
@@ -116,91 +122,163 @@ struct Score: Codable {
     var handicap: Double?
 }
 
+struct H2HMatchListModel: Codable {
+    var history: History?
+}
+
+struct History: Codable {
+    var homeMatchInfo: [MatchInfo]?
+    var awayMatchInfo: [MatchInfo]?
+   
+    enum CodingKeys: String, CodingKey {
+        case homeMatchInfo = "home_match_info"
+        case awayMatchInfo = "away_match_info"
+    }
+}
+
+struct MatchInfo: Codable {
+    var homeName: String?
+    var awayName: String?
+    var homeScore: Int?
+    var awayScore: Int?
+    var homeHalfScore: Int?
+    var awayHalfScore: Int?
+    var homeOvertimeScore: Int?
+    var awayOvertimeScore: Int?
+    var homeRanking: String?
+    var awayRanking: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case homeName = "home_en_name"
+        case awayName = "away_en_name"
+        case homeScore = "home_team_score"
+        case awayScore = "away_team_score"
+        case homeHalfScore = "home_team_half_time_score"
+        case awayHalfScore = "away_team_half_time_score"
+        case homeOvertimeScore = "home_team_overTime_score"
+        case awayOvertimeScore = "away_team_overTime_score"
+        case homeRanking = "home_league_ranking"
+        case awayRanking = "away_league_ranking"
+    }
+}
 
 //{
-//    "id": "6ypq3nh3zk0gmd7",
-//    "season_id": "56ypq3nh9ovmd7o",
-//    "competition_id": "kn54qllh28pqvy9",
-//    "home_team_id": "4jwq2gh4no6m0ve",
-//    "away_team_id": "3glrw7hydx0qdyj",
-//    "status_id": 1,
-//    "match_time": 1699950600,
-//    "venue_id": "e4wyrn4h48oq86p",
-//    "referee_id": "",
-//    "neutral": 0,
-//    "note": "",
-//    "home_position": "11",
-//    "away_position": "3",
-//    "coverage": {
-//        "mlive": 1,
-//        "lineup": 0
-//    },
-//    "round": {
-//        "stage_id": "ednm9whv895ryox",
-//        "round_num": 4,
-//        "group_num": 0
-//    },
-//    "environment": {
-//        "weather": 5,
-//        "pressure": "761mmHg",
-//        "temperature": "22°C",
-//        "wind": "2.0m/s",
-//        "humidity": "47%"
-//    },
-//    "updated_at": 1699931422,
-//    "match_timing": "2023-11-14 08:30:00",
-//    "update_timing": "2023-11-14 03:10:22",
-//    "home_Info": {
-//        "en_name": "Shillong Lajong FC",
-//        "cn_name": "西隆拉莊",
-//        "en_short_name": "Shillong Lajong FC",
-//        "logo": "https://img.thesports.com/football/team/714a6a87f097c2b3a1a9a46d34677fe6.png",
-//        "home_score": 0,
-//        "half_time_score": 0,
-//        "red_cards": 0,
-//        "corner_score": 0,
-//        "overtime_score": 0,
-//        "penalty_score": 0
-//    },
-//    "away_Info": {
-//        "en_name": "Sreenidi Deccan",
-//        "cn_name": "斯里尼迪德乾",
-//        "en_short_name": "",
-//        "logo": "https://img.thesports.com/football/team/ac0943dbb5e9a5b3efa8fe762e23330e.png",
-//        "away_score": 0,
-//        "half_time_score": 0,
-//        "red_card": 0,
-//        "yellow_cards": 0,
-//        "corner_score": 0,
-//        "overtime_score": 0,
-//        "penalty_score": 0
-//    },
-//    "league_Info": {
-//        "en_name": "Indian League Division 1",
-//        "cn_name": "印度甲級聯賽",
-//        "short_name": "IND Division 1",
-//        "primary_color": "#0a4e7c",
-//        "secondary_color": "#ea7628",
-//        "logo": "https://img.thesports.com/football/competition/fd3a8019ad4593e751abe7c1fbaab83a.png"
-//    },
-//    "odds": {
-//        "init": {
-//            "asia": {
-//                "home": 0.87,
-//                "handicap": -0.75,
-//                "away": 0.89
+//    "history": {
+//        "home_match_info": [
+//            {
+//                "match_time": 1701245700,
+//                "home_en_name": "Medan Utama FC",
+//                "home_cn_name": "梅丹烏塔馬",
+//                "home_league_ranking": "",
+//                "home_team_score": 3,
+//                "home_team_half_time_score": 2,
+//                "home_team_red_cards": 0,
+//                "home_team_yellow_cards": 2,
+//                "home_team_cornor": 4,
+//                "home_team_overtime_score": 0,
+//                "home_team_panalty_score": 0,
+//                "away_en_name": "Tunas Ngaglik",
+//                "away_cn_name": "斯加利克",
+//                "away_league_ranking": "",
+//                "away_team_score": 3,
+//                "away_team_half_time_score": 0,
+//                "away_team_red_cards": 0,
+//                "away_team_yellow_cards": 3,
+//                "away_team_cornor": 3,
+//                "away_team_overtime_score": 0,
+//                "away_team_panalty_score": 0
 //            },
-//            "euro": {
-//                "home": 4.57,
-//                "handicap": 3.75,
-//                "away": 1.69
+//            {
+//                "match_time": 1700467800,
+//                "home_en_name": "Tunas Ngaglik",
+//                "home_cn_name": "斯加利克",
+//                "home_league_ranking": "",
+//                "home_team_score": 1,
+//                "home_team_half_time_score": 0,
+//                "home_team_red_cards": 0,
+//                "home_team_yellow_cards": 4,
+//                "home_team_cornor": 1,
+//                "home_team_overtime_score": 0,
+//                "home_team_panalty_score": 0,
+//                "away_en_name": "Bantul United",
+//                "away_cn_name": "班圖爾聯",
+//                "away_league_ranking": "",
+//                "away_team_score": 4,
+//                "away_team_half_time_score": 2,
+//                "away_team_red_cards": 0,
+//                "away_team_yellow_cards": 2,
+//                "away_team_cornor": 8,
+//                "away_team_overtime_score": 0,
+//                "away_team_panalty_score": 0
 //            },
-//            "bigSmall": {
-//                "home": 0.81,
-//                "handicap": 2.5,
-//                "away": 0.94
+//            {
+//                "match_time": 1700036400,
+//                "home_en_name": "Uad FC Jogja",
+//                "home_cn_name": null,
+//                "home_league_ranking": "",
+//                "home_team_score": 2,
+//                "home_team_half_time_score": 2,
+//                "home_team_red_cards": 0,
+//                "home_team_yellow_cards": 3,
+//                "home_team_cornor": 6,
+//                "home_team_overtime_score": 0,
+//                "home_team_panalty_score": 0,
+//                "away_en_name": "Tunas Ngaglik",
+//                "away_cn_name": "斯加利克",
+//                "away_league_ranking": "",
+//                "away_team_score": 1,
+//                "away_team_half_time_score": 1,
+//                "away_team_red_cards": 0,
+//                "away_team_yellow_cards": 3,
+//                "away_team_cornor": 4,
+//                "away_team_overtime_score": 0,
+//                "away_team_panalty_score": 0
+//            },
+//            {
+//                "match_time": 1638604800,
+//                "home_en_name": "Tunas Ngaglik",
+//                "home_cn_name": "斯加利克",
+//                "home_league_ranking": "",
+//                "home_team_score": 3,
+//                "home_team_half_time_score": 2,
+//                "home_team_red_cards": 0,
+//                "home_team_yellow_cards": 4,
+//                "home_team_cornor": 3,
+//                "home_team_overtime_score": 0,
+//                "home_team_panalty_score": 0,
+//                "away_en_name": "Bina Taruna",
+//                "away_cn_name": "比纳塔鲁纳",
+//                "away_league_ranking": "",
+//                "away_team_score": 2,
+//                "away_team_half_time_score": 0,
+//                "away_team_red_cards": 0,
+//                "away_team_yellow_cards": 4,
+//                "away_team_cornor": 5,
+//                "away_team_overtime_score": 0,
+//                "away_team_panalty_score": 0
 //            }
-//        }
-//    }
-//},
-//}
+//        ],
+//        "away_match_info": [
+//            {
+//                "match_time": 1702023300,
+//                "home_en_name": "PS Hizbul Wathan",
+//                "home_cn_name": "瓦坦真主",
+//                "home_league_ranking": "",
+//                "home_team_score": 2,
+//                "home_team_half_time_score": 1,
+//                "home_team_red_cards": 0,
+//                "home_team_yellow_cards": 5,
+//                "home_team_cornor": 1,
+//                "home_team_overtime_score": 0,
+//                "home_team_panalty_score": 0,
+//                "away_en_name": "Bantul United",
+//                "away_cn_name": "班圖爾聯合",
+//                "away_league_ranking": "",
+//                "away_team_score": 1,
+//                "away_team_half_time_score": 0,
+//                "away_team_red_cards": 0,
+//                "away_team_yellow_cards": 3,
+//                "away_team_cornor": 5,
+//                "away_team_overtime_score": 0,
+//                "away_team_panalty_score": 0
+//            },

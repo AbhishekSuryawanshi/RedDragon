@@ -120,7 +120,9 @@ struct URLConstants {
     static let chatTokenURL         = "https://grullo-chihuahua-4284.twil.io/chat-token"
     
     // MARK: - GlobalMatches
-    static let globalMatchBaseURL   = "http://199.241.1.88:4049/api/"
-    static let footballMatchList    = globalMatchBaseURL + "football/matchlist/today"
-    static let basketballMatchList  = globalMatchBaseURL + "basketball/matchlist/today"
+    static let globalMatchBaseURL     = "http://199.241.1.88:4049/api/"
+    static let footballMatchList      = globalMatchBaseURL + "football/matchlist/today"
+    static let basketballMatchList    = globalMatchBaseURL + "basketball/matchlist/today"
+    static let footballH2HMatchList   = globalMatchBaseURL + "football/match-analysis/statics/"
+    static let basketballH2HMatchList = globalMatchBaseURL + "basketball/match-analysis/statics/"
 }

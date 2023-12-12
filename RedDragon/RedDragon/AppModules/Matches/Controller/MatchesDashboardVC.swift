@@ -20,6 +20,7 @@ class MatchesDashboardVC: UIViewController {
     @IBOutlet weak var leagueCollectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
+    @IBOutlet weak var topSpaceHeightForTable: NSLayoutConstraint!
     
     var cancellable = Set<AnyCancellable>()
     var selectedSegment: sportCategorySegment = .hottest
@@ -28,14 +29,19 @@ class MatchesDashboardVC: UIViewController {
     var liveMatchArray: [GlobalMatchList] = []
     var finishedMatchArray: [GlobalMatchList] = []
     var upcomingMatchArray: [GlobalMatchList] = []
+    var leagueMatchArray: [GlobalMatchList] = []
     private var footballLiveMatchesVM: FootballLiveMatchesViewModel?
     private var footballFinishedMatchesVM: FootballFinishedMatchesViewModel?
     private var footballUpcomingMatchesVM: FootballUpcomingMatchesViewModel?
+    private var footballLeagueMatchesVM = FootballLeagueMatchesViewModel()
     private var basketballLiveMatchesVM: BasketballLiveMatchesViewModel?
     private var basketballFinishedMatchesVM: BasketballFinishedMatchesViewModel?
     private var basketballUpcomingMatchesVM: BasketballUpcomingMatchesViewModel?
     private var basketballLeaguesVM: BasketballLeaguesViewModel?
+    private var basketballLeagueMatchesVM = BasketballLeagueMatchesViewModel()
+    
     var isFootball: Bool? = true
+    var isLeagueMatches: Bool? = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +55,7 @@ class MatchesDashboardVC: UIViewController {
         makeNetworkCall()
         segmentControl.selectedSegmentIndex = 0
         segmentControlValueChanged(segmentControl)
+        topSpaceHeightForTable.constant = 49.0
     }
     
     func nibInitialization() {
@@ -103,7 +110,25 @@ class MatchesDashboardVC: UIViewController {
 
 // MARK: - Network Related Response
 extension MatchesDashboardVC {
-    ///fetch view model for user list
+    
+    // Football Related Response
+    func fetchFBLeagueMatchesViewModelResponse() {
+        footballLeagueMatchesVM.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        footballLeagueMatchesVM.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        footballLeagueMatchesVM.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                self?.execute_onFBLeagueMatchesResponse(response!)
+            })
+            .store(in: &cancellable)
+    }
+    
+    ///fetch view model for live, finished, upcoming match list
     func fetchFBViewModelResponse() {
         footballLiveMatchesVM?.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
@@ -141,6 +166,7 @@ extension MatchesDashboardVC {
         leagueArray = response.hotLeagues ?? []
         leagueCollectionView.reloadData()
         highlightFirstIndex_collectionView()
+        isLeagueMatches = false
         tableView.reloadData()
     }
     
@@ -152,6 +178,28 @@ extension MatchesDashboardVC {
     func execute_onFBUpcomingMatchesResponse(_ response: GlobalEventsModel) {
         upcomingMatchArray = response.matchList ?? []
         tableView.reloadData()
+    }
+    
+    func execute_onFBLeagueMatchesResponse(_ response: GlobalEventsModel) {
+        leagueMatchArray = response.matchList ?? []
+        tableView.reloadData()
+    }
+    
+    // Basketball Related Response
+    func fetchBBLeagueMatchesViewModelResponse() {
+        basketballLeagueMatchesVM.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        basketballLeagueMatchesVM.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        basketballLeagueMatchesVM.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                self?.execute_onBBLeagueMatchesResponse(response!)
+            })
+            .store(in: &cancellable)
     }
     
     func fetchBBViewModelResponse() {
@@ -166,7 +214,7 @@ extension MatchesDashboardVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.execute_onBBLeagueMatchesResponse(response!)
+                self?.execute_onBBLeagueResponse(response!)
             })
             .store(in: &cancellable)
         
@@ -196,6 +244,11 @@ extension MatchesDashboardVC {
     }
     
     func execute_onBBLeagueMatchesResponse(_ response: GlobalEventsModel) {
+        leagueMatchArray = response.matchList ?? []
+        tableView.reloadData()
+    }
+
+    func execute_onBBLeagueResponse(_ response: GlobalEventsModel) {
         leagueArray = response.hotLeagues ?? []
         leagueCollectionView.reloadData()
         highlightFirstIndex_collectionView()
@@ -249,16 +302,47 @@ extension MatchesDashboardVC: UICollectionViewDataSource, UICollectionViewDelega
         if collectionView == headerCollectionView {
             switch indexPath.item {
             case 0:
+                topSpaceHeightForTable.constant = 49.0
                 segmentControl.isHidden = false
+                segmentControl.selectedSegmentIndex = 0
+                segmentControlValueChanged(segmentControl)
             case 1:
+                isFootball = true
+                topSpaceHeightForTable.constant = 8.0
                 segmentControl.isHidden = true
+                segmentControl.selectedSegmentIndex = 0   // Football
+                segmentControlValueChanged(segmentControl)
             case 2:
+                isFootball = false
                 segmentControl.isHidden = true
+                topSpaceHeightForTable.constant = 8.0
+                segmentControl.selectedSegmentIndex = 1  // Basketball
+                segmentControlValueChanged(segmentControl)
             default:
                 segmentControl.isHidden = true
             }
             collectionView.reloadData()
         }else {
+            if segmentControl.selectedSegmentIndex == 0 { // Football league cell clicked
+                if indexPath.item == 0 { // For "All" case
+                    isLeagueMatches = false
+                    tableView.reloadData()
+                }else {
+                    isLeagueMatches = true
+                    footballLeagueMatchesVM.fetchFootballLeagueMatches(leagueId: leagueArray[indexPath.item-1].id ?? "")
+                    fetchFBLeagueMatchesViewModelResponse()
+                }
+            }else { // Basketball league cell clicked
+                
+                if indexPath.item == 0 { // For "All" case
+                    isLeagueMatches = false
+                    tableView.reloadData()
+                }else {
+                    isLeagueMatches = true
+                    basketballLeagueMatchesVM.fetchBasketballLeagueMatches(leagueId: leagueArray[indexPath.item-1].id ?? "")
+                    fetchBBLeagueMatchesViewModelResponse()
+                }
+            }
           print("League coll")
         }
     }
@@ -283,7 +367,11 @@ extension MatchesDashboardVC: UICollectionViewDataSource, UICollectionViewDelega
 
 extension MatchesDashboardVC: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionTitle.count
+        if isLeagueMatches ?? false {
+            return 1
+        }else {
+            return sectionTitle.count
+        }
     }
     
 //    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -291,7 +379,11 @@ extension MatchesDashboardVC: UITableViewDataSource, UITableViewDelegate {
 //    }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionTitle[section]
+        if isLeagueMatches ?? false {
+            return nil
+        }else {
+            return sectionTitle[section]
+        }
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -305,13 +397,17 @@ extension MatchesDashboardVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return liveMatchArray.count
-        case 1:
-            return upcomingMatchArray.count
-        default:
-            return finishedMatchArray.count
+        if isLeagueMatches ?? false {
+            return leagueMatchArray.count
+        }else {
+            switch section {
+            case 0:
+                return liveMatchArray.count
+            case 1:
+                return upcomingMatchArray.count
+            default:
+                return finishedMatchArray.count
+            }
         }
     }
     
@@ -322,19 +418,42 @@ extension MatchesDashboardVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         UITableView.automaticDimension
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presentToViewController(GlobalMatchDetailVC.self, storyboardName: StoryboardName.matches, animationType: .autoReverse(presenting: .zoom)) { [self] vc in
+            if isLeagueMatches ?? false {
+                configureDidSelectTableCell(vc: vc, array: leagueMatchArray[indexPath.row])
+                vc.isFootball = isFootball
+            }else {
+                switch indexPath.section {
+                case 0:
+                    configureDidSelectTableCell(vc: vc, array: liveMatchArray[indexPath.row])
+                case 1:
+                    configureDidSelectTableCell(vc: vc, array: upcomingMatchArray[indexPath.row])
+                default:
+                    configureDidSelectTableCell(vc: vc, array: finishedMatchArray[indexPath.row])
+                }
+                vc.isFootball = isFootball
+            }
+        }
+    }
 }
 
 extension MatchesDashboardVC {
     private func tableCell(indexPath:IndexPath) -> GlobalMatchesTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.globalMatchesTableViewCell, for: indexPath) as! GlobalMatchesTableViewCell
         
-        switch indexPath.section {
-        case 0:
-            congifureCell(cell: cell, matches: liveMatchArray[indexPath.row])
-        case 1:
-            congifureCell(cell: cell, matches: upcomingMatchArray[indexPath.row])
-        default:
-            congifureCell(cell: cell, matches: finishedMatchArray[indexPath.row])
+        if isLeagueMatches ?? false {
+            congifureCell(cell: cell, matches: leagueMatchArray[indexPath.row])
+        }else {
+            switch indexPath.section {
+            case 0:
+                congifureCell(cell: cell, matches: liveMatchArray[indexPath.row])
+            case 1:
+                congifureCell(cell: cell, matches: upcomingMatchArray[indexPath.row])
+            default:
+                congifureCell(cell: cell, matches: finishedMatchArray[indexPath.row])
+            }
         }
         return cell
     }
@@ -343,24 +462,29 @@ extension MatchesDashboardVC {
         cell.leagueImageView.setImage(imageStr: matches.leagueInfo?.logo ?? "", placeholder: UIImage(named: "placeholderLeague"))
         cell.homeImageView.setImage(imageStr: matches.homeInfo?.logo ?? "", placeholder: UIImage(named: "placeholderLeague"))
         cell.awayImageView.setImage(imageStr: matches.awayInfo?.logo ?? "", placeholder: UIImage(named: "placeholderLeague"))
-        
-        cell.leagueNameLabel.text = "\(matches.leagueInfo?.name ?? "") | Round \(matches.round?.round ?? 0)"
         cell.homeNameLabel.text = matches.homeInfo?.name ?? ""
         cell.awayNameLabel.text = matches.awayInfo?.name ?? ""
         
         if isFootball ?? true {
+            cell.leagueNameLabel.text = "\(matches.leagueInfo?.name ?? "") | Round \(matches.round?.round ?? 0)"
             cell.cornerLabel.text = "Corners: \(matches.homeInfo?.cornerScore ?? 0)-\(matches.awayInfo?.cornerScore ?? 0)"
             cell.scoreLabel.text = "Score: \(matches.homeInfo?.homeScore ?? 0)-\(matches.awayInfo?.awayScore ?? 0)"
             cell.halftimeLabel.isHidden = false
             cell.halftimeLabel.text = "Halftime: \(matches.homeInfo?.halfTimeScore ?? 0)-\(matches.awayInfo?.halfTimeScore ?? 0)"
         }else {
+            cell.leagueNameLabel.text = matches.leagueInfo?.name ?? ""
             cell.cornerLabel.text = "Position: \(matches.matchPosition?.home ?? "")-\(matches.matchPosition?.away ?? "")"
             cell.scoreLabel.text = "Overtime Score: \(matches.homeInfo?.overtimeScore ?? 0)-\(matches.awayInfo?.overtimeScore ?? 0)"
             cell.halftimeLabel.isHidden = true
         }
-        
-//        cell.noOfPeopleJoinedLbl.text = "\(event.peopleJoinedCount ?? 0) People joined"
-//        let date = event.date?.formatDate(inputFormat: dateFormat.yyyyMMdd, outputFormat: dateFormat.ddMMM) ?? ""
-//        cell.dateTimeLbl.text = "\(date), \(event.time ?? "")"
+    }
+    
+    func configureDidSelectTableCell(vc: GlobalMatchDetailVC, array: GlobalMatchList) {
+        vc.match = array
+        vc.matchId = array.id ?? ""
+        vc.leagueName = array.leagueInfo?.name ?? ""
+        vc.leagueLogo = array.leagueInfo?.logo ?? ""
     }
 }
+
+
