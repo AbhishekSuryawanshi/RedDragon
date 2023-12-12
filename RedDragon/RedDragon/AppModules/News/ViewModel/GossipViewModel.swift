@@ -57,12 +57,13 @@ class ESportsDetailVM: APIServiceManager<ESportsDetail> {
     }
 }
 
-class GossipVideoListVM: APIServiceManager<GossipVideoResponse> {
+class GossipVideoListVM: APIServiceManager<GossipVideoListResponse> {
     init () {}
     static let shared = GossipVideoListVM()
+    var videoList: [GossipVideo] = []
     
     ///function to fetch videos for gossips in news module
-    func fetchESportsListAsyncCall() {
+    func fetchVideosAsyncCall() {
         let urlString   = URLConstants.videosList
         let method      = RequestType.get
         asyncCall(urlString: urlString, method: method, parameters: nil)
@@ -74,7 +75,7 @@ class GossipVideoVM: APIServiceManager<GossipVideoResponse> {
     static let shared = GossipVideoVM()
     
     ///function to fetch videos for gossips in news module
-    func fetchESportsListAsyncCall(id: Int) {
+    func fetchVideoDetailAsyncCall(id: Int) {
         let urlString   = URLConstants.videosBaseURL + "\(id)"
         let method      = RequestType.get
         asyncCall(urlString: urlString, method: method, parameters: nil)

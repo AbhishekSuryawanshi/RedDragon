@@ -117,7 +117,7 @@ struct URLConstants {
     static let eSportsBaseURL       = "http://199.241.1.88:7001/"
     static let eSportsList          = eSportsBaseURL + "api/esports-news-list"
     static let eSportsDetail        = eSportsBaseURL + "specific-esports-news/"
-    static let videosBaseURL        = "https://zeyuapi.com/v1/video/"
+    static let videosBaseURL        = "https://zeyuapi.com/v1/video/" //custom headers adding in APIServiceManager.swift
     static let videosList           = videosBaseURL + "recommend"
     static let videosThumbnail      = "https://34433tiyu.com/"
     static let chatTokenURL         = "https://grullo-chihuahua-4284.twil.io/chat-token"

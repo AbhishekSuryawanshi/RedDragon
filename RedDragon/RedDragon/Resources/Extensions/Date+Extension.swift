@@ -15,6 +15,10 @@ extension Date {
     var dayAfter: Date {
         return Calendar.current.date(byAdding: .day, value: 1, to: Date())!
     }
+    static var currentTimeStamp: Int64 {
+           return Int64(Date().timeIntervalSince1970 * 1000)
+       }
+    
     /// Here we are converting date in Date format to given output format date string
     /// Showing localized date
     func formatDate(outputFormat: dateFormat)-> String {

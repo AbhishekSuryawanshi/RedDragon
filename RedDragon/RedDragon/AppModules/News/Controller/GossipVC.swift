@@ -15,12 +15,13 @@ class GossipVC: UIViewController {
     @IBOutlet weak var topMarqueeLabel: MarqueeLabel!
     @IBOutlet weak var publisherCollectionView: UICollectionView!
     @IBOutlet weak var leagueCollectionView: UICollectionView!
+    @IBOutlet weak var trendingView: UIView!
     @IBOutlet weak var trendingCollectionView: UICollectionView!
     @IBOutlet weak var newsTableView: UITableView!
-    @IBOutlet weak var trendingView: UIView!
-    @IBOutlet weak var videosView: UIView!
-    @IBOutlet weak var viewAllButton: UIButton!
     @IBOutlet weak var newsTableHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var viewAllButton: UIButton!
+    @IBOutlet weak var videosView: UIView!
+    @IBOutlet weak var videosCollectionView: UICollectionView!
     
     var cancellable = Set<AnyCancellable>()
     var isPagination = false
@@ -28,7 +29,9 @@ class GossipVC: UIViewController {
     var leagueArray: [SocialLeague] = []
     var gossipsArray: [Gossip] = []
     var trendingArray: [Gossip] = []
+    var videoArray: [GossipVideo] = []
     
+    var sportType: SportsType = .football
     var newsSource = "thehindu"
     var pageNum = 1
     
@@ -36,7 +39,10 @@ class GossipVC: UIViewController {
         super.viewDidLoad()
         initialSettings()
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        /// "thehindu" default value
+        getNewsList()
+    }
     func initialSettings() {
         nibInitialization()
         
@@ -53,8 +59,7 @@ class GossipVC: UIViewController {
         fetchGossipViewModel()
         
         SocialPublicLeagueVM.shared.fetchLeagueListAsyncCall()
-        /// "thehindu" default value
-        getNewsList()
+       
     }
     
     func nibInitialization() {
@@ -76,14 +81,18 @@ class GossipVC: UIViewController {
 // MARK: - API Services
 extension GossipVC {
     func getNewsList() {
-        let param: [String: Any] = [
-            "page": pageNum,
-            "source": newsSource,
-            "category": "football"
-        ]
-        GossipListVM.shared.fetchNewsListAsyncCall(params: param)
+        if sportType == .eSports {
+            ESportsListVM.shared.fetchESportsListAsyncCall()
+        } else {
+            let param: [String: Any] = [
+                "page": pageNum,
+                "source": newsSource,
+                "category": sportType.sourceNewsKey
+            ]
+            GossipListVM.shared.fetchNewsListAsyncCall(params: param)
+        }
     }
-    
+        
     func fetchSocialViewModel() {
         ///fetch public league list / euro 5 league
         SocialPublicLeagueVM.shared.showError = { [weak self] error in
@@ -109,6 +118,32 @@ extension GossipVC {
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
                 self?.execute_onGossipsResponseData(response)
+            })
+            .store(in: &cancellable)
+        
+        ///fetch esports news list
+        ESportsListVM.shared.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        ESportsListVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                GossipVideoListVM.shared.fetchVideosAsyncCall()
+            })
+            .store(in: &cancellable)
+        
+        ///fetch videos list
+        GossipVideoListVM.shared.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        GossipVideoListVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                GossipVideoListVM.shared.videoList = response?.data ?? []
+                self?.videoArray = GossipVideoListVM.shared.videoList
+                self?.videosCollectionView.reloadData()
             })
             .store(in: &cancellable)
     }
@@ -160,6 +195,9 @@ extension GossipVC: UICollectionViewDataSource {
         }  else if collectionView == trendingCollectionView {
             trendingView.isHidden = trendingArray.count == 0
             return trendingArray.count
+        }  else if collectionView == videosCollectionView {
+            videosView.isHidden = videoArray.count == 0
+            return videoArray.count
         } else {
             return 0
         }
@@ -177,6 +215,10 @@ extension GossipVC: UICollectionViewDataSource {
             cell.configure(title: UserDefaults.standard.language == "en" ? model.enName : model.cnName, iconName: model.logoURL, imageWidth: (0.7 * 60), placeHolderImage: .placeholderLeague)
             return cell
         } else if collectionView == trendingCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.newsCollectionViewCell, for: indexPath) as! NewsCollectionViewCell
+            cell.configureGossipCell(model: trendingArray[indexPath.row])
+            return cell
+        } else if collectionView == videosCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.newsCollectionViewCell, for: indexPath) as! NewsCollectionViewCell
             cell.configureGossipCell(model: trendingArray[indexPath.row])
             return cell
@@ -201,7 +243,7 @@ extension GossipVC: UICollectionViewDelegateFlowLayout {
         if collectionView == publisherCollectionView || collectionView == leagueCollectionView {
             return CGSize(width: 75, height: 112)
         } else if collectionView == trendingCollectionView {
-            return CGSize(width: screenWidth * 0.7, height: 250)
+            return CGSize(width: screenWidth * 0.7, height: 240)
         } else {
             return CGSize(width: 0, height: 0)
         }
