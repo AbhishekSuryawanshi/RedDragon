@@ -10,6 +10,7 @@ import Foundation
 // MARK: - StreetPlayerPosition
 struct StreetPlayerPosition: Codable {
     let code, name, nameCN: String
+    var count = 0
 
     enum CodingKeys: String, CodingKey {
         case code, name

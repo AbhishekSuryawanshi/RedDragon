@@ -68,7 +68,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="nBu-Oq-S6K">
                                                 <rect key="frame" x="0.0" y="38.000000000000028" width="253" height="90"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t2M-XR-Eue">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t2M-XR-Eue" userLabel="PlayersEventView">
                                                         <rect key="frame" x="0.0" y="0.0" width="253" height="30"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ie0-ov-H8n">
@@ -98,13 +98,17 @@
                                                             </stackView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <gestureRecognizers/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="HnI-pK-uxp"/>
                                                             <constraint firstItem="Ie0-ov-H8n" firstAttribute="centerY" secondItem="t2M-XR-Eue" secondAttribute="centerY" id="Sh1-Fg-pZA"/>
                                                             <constraint firstItem="Ie0-ov-H8n" firstAttribute="leading" secondItem="t2M-XR-Eue" secondAttribute="leading" id="Thm-kM-UM9"/>
                                                         </constraints>
+                                                        <connections>
+                                                            <outletCollection property="gestureRecognizers" destination="odP-8J-F9Z" appends="YES" id="KiX-Xr-Sfi"/>
+                                                        </connections>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hmt-HH-1UQ">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hmt-HH-1UQ" userLabel="TeamsEventView">
                                                         <rect key="frame" x="0.0" y="30" width="253" height="30"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hxF-Xz-EZD">
@@ -134,13 +138,17 @@
                                                             </stackView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <gestureRecognizers/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="lHm-pw-t6J"/>
                                                             <constraint firstItem="hxF-Xz-EZD" firstAttribute="centerY" secondItem="hmt-HH-1UQ" secondAttribute="centerY" id="mcC-wa-oJv"/>
                                                             <constraint firstItem="hxF-Xz-EZD" firstAttribute="leading" secondItem="hmt-HH-1UQ" secondAttribute="leading" id="xHf-pc-jat"/>
                                                         </constraints>
+                                                        <connections>
+                                                            <outletCollection property="gestureRecognizers" destination="Bn5-90-Pmt" appends="YES" id="VYF-d2-ySF"/>
+                                                        </connections>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JVI-uc-FFh">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JVI-uc-FFh" userLabel="MatchEventView">
                                                         <rect key="frame" x="0.0" y="60" width="253" height="30"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="IhI-lR-j3z">
@@ -170,11 +178,15 @@
                                                             </stackView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <gestureRecognizers/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="Wbq-jI-st1"/>
                                                             <constraint firstItem="IhI-lR-j3z" firstAttribute="centerY" secondItem="JVI-uc-FFh" secondAttribute="centerY" id="xf7-Xl-eEf"/>
                                                             <constraint firstItem="IhI-lR-j3z" firstAttribute="leading" secondItem="JVI-uc-FFh" secondAttribute="leading" id="xfq-rw-8V0"/>
                                                         </constraints>
+                                                        <connections>
+                                                            <outletCollection property="gestureRecognizers" destination="CZW-f9-LQY" appends="YES" id="fP2-J0-48C"/>
+                                                        </connections>
                                                     </view>
                                                 </subviews>
                                             </stackView>
@@ -365,6 +377,21 @@
                 <tapGestureRecognizer id="H0n-fU-erO" userLabel="tapMatch">
                     <connections>
                         <action selector="actionTapCreateMatch:" destination="tSc-Rh-5k7" id="KiH-IH-iaH"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="odP-8J-F9Z" userLabel="tapPlayers">
+                    <connections>
+                        <action selector="actionTapPlayers:" destination="tSc-Rh-5k7" id="OEK-8c-Fyg"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="Bn5-90-Pmt" userLabel="tapTeams">
+                    <connections>
+                        <action selector="actionTapTeams:" destination="tSc-Rh-5k7" id="nMo-e3-79O"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="CZW-f9-LQY" userLabel="tapMatches">
+                    <connections>
+                        <action selector="actionTapMatches:" destination="tSc-Rh-5k7" id="pDc-x7-K8y"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -1139,7 +1166,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nJS-84-5Ml">
-                                <rect key="frame" x="0.0" y="89" width="393" height="728.99999999999977"/>
+                                <rect key="frame" x="0.0" y="89" width="393" height="729"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nm4-vi-SN4">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="1670.6666666666667"/>
@@ -3808,7 +3835,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mTZ-HN-ZFi">
-                                        <rect key="frame" x="154" y="63.666666666666664" width="85" height="17.666666666666664"/>
+                                        <rect key="frame" x="153.33333333333334" y="63.666666666666664" width="86.666666666666657" height="17.666666666666664"/>
                                         <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -3998,7 +4025,7 @@
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Your Team" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccz-Pk-o90">
                                                                                 <rect key="frame" x="8" y="4" width="121" height="42"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                <color key="textColor" name="gray2"/>
+                                                                                <color key="textColor" name="black1"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                         </subviews>
@@ -4325,6 +4352,7 @@
                         <outlet property="informationStack" destination="Ek5-Ua-cDO" id="gGe-h6-RGM"/>
                         <outlet property="lblLocation" destination="09w-RO-mpo" id="Zar-1a-iDF"/>
                         <outlet property="lblTeam" destination="ccz-Pk-o90" id="gFj-tk-8oE"/>
+                        <outlet property="lblTitle" destination="mTZ-HN-ZFi" id="MEP-ac-Ex4"/>
                         <outlet property="positionsStack" destination="hgR-qC-52z" id="NWh-73-VZx"/>
                         <outlet property="tableHeight" destination="nRK-hV-2yI" id="cYB-B2-uWc"/>
                         <outlet property="tableViewPositions" destination="U4Q-AJ-Ts2" id="JW8-dx-vyV"/>

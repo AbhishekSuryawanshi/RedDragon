@@ -39,12 +39,14 @@ class StreetCreateEventsVC: UIViewController {
     @IBOutlet weak var fixedDescriptionCn: UILabel!
     @IBOutlet weak var fixedTime: UILabel!
     @IBOutlet weak var fixedDate: UILabel!
+    @IBOutlet weak var lblTitle: UILabel!
     
     //Variables
     var tableViewPlayersObserver: NSKeyValueObservation?
     var lat = ""
     var long = ""
     var address = ""
+    var titleStr = ""
     var selectedImage:UIImage?
     var selectedTeam:StreetTeam?
     var positionsViewModel:PlayerPositionsViewModel?
@@ -98,7 +100,7 @@ class StreetCreateEventsVC: UIViewController {
     }
     
     func setupLocalisation(){
-        btnCreatePost.setTitle("Create Post".localized, for: .normal)
+        btnCreatePost.setTitle("Create Event".localized, for: .normal)
         textView.placeholder = "Description English".localized
         textViewChineseDescription.placeholder = "Description Chinese".localized
         lblLocation.text = "Choose Location".localized
@@ -111,7 +113,8 @@ class StreetCreateEventsVC: UIViewController {
         txtDate.placeholder = "Date".localized
         fixedTime.text = "Time".localized
         txtTime.placeholder = "Time".localized
-        fixedChooseImage.text = "Choose your image files here".localized
+        lblTitle.text = "\("Create Event".localized) - \(titleStr)"
+        
     }
     
     func makeNetworkCall(){
@@ -153,7 +156,7 @@ class StreetCreateEventsVC: UIViewController {
              .receive(on: DispatchQueue.main)
              .dropFirst()
              .sink(receiveValue: { [weak self] response in
-                 self?.playerListSuccess(list: response)
+                 self?.playerListSuccess(list: response!)
              })
              .store(in: &cancellable)
         
@@ -211,6 +214,7 @@ class StreetCreateEventsVC: UIViewController {
         }
     }
     
+    
    
     
     func chooseLocation(){
@@ -250,7 +254,7 @@ class StreetCreateEventsVC: UIViewController {
         }
         
         if feedType == .searchPlayer{
-            if playerPositions?.count == (viewModel.playerPositions?.filter{$0.count == 0}.count){
+            if playerPositions?.count == (playerPositions?.filter{$0.count == 0}.count){
                 self.view.makeToast("Please select needed player positions".localized)
                 return
                 
@@ -291,7 +295,7 @@ class StreetCreateEventsVC: UIViewController {
                      "img_url":uploadResponse?.path ?? "",
                      "positions":positionsDict]
         if feedType != .searchTeam{
-            param["team_id"] = selectedTeam!.id!
+            param["team_id"] = selectedTeam!.id
         }
         
         if feedType == .challengeTeam{
@@ -338,6 +342,7 @@ extension StreetCreateEventsVC: ImagePickerDelegate, UINavigationControllerDeleg
     func finishedPickingImage(image: UIImage, imageName: String) {
         //self.imgProfile.image = image
         self.selectedImage = image
+        self.imageViewMedia.image = image
         if let imageData = image.jpegData(compressionQuality: 0.8) {
             StreetImageUploadViewModel.shared.uploadStreetImageAsyncCall(imageName: "img", imageData: imageData)
         }
