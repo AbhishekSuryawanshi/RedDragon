@@ -282,15 +282,18 @@
                                                         <rect key="frame" x="0.0" y="847" width="363" height="200"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Videos" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6o-eC-cHd">
-                                                                <rect key="frame" x="0.0" y="6" width="45.333333333333336" height="17.666666666666668"/>
+                                                                <rect key="frame" x="0.0" y="6" width="45.333333333333336" height="185"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
                                                                 <color key="textColor" name="base"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NFr-wr-FNj">
-                                                                <rect key="frame" x="0.0" y="25.666666666666629" width="363" height="174.33333333333334"/>
+                                                                <rect key="frame" x="0.0" y="200" width="363" height="0.0"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="JPL-wF-Bzg">
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" id="Etl-QD-Lge"/>
+                                                                </constraints>
+                                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="JPL-wF-Bzg">
                                                                     <size key="itemSize" width="128" height="128"/>
                                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -305,12 +308,11 @@
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstItem="NFr-wr-FNj" firstAttribute="top" secondItem="Q6o-eC-cHd" secondAttribute="bottom" constant="2" id="2mc-C2-ddA"/>
+                                                            <constraint firstItem="NFr-wr-FNj" firstAttribute="top" secondItem="Q6o-eC-cHd" secondAttribute="bottom" constant="9" id="2mc-C2-ddA"/>
                                                             <constraint firstItem="Q6o-eC-cHd" firstAttribute="leading" secondItem="rSc-cc-geS" secondAttribute="leading" id="a3J-Id-hOd"/>
                                                             <constraint firstAttribute="bottom" secondItem="NFr-wr-FNj" secondAttribute="bottom" id="esH-Tg-dTY"/>
                                                             <constraint firstAttribute="trailing" secondItem="NFr-wr-FNj" secondAttribute="trailing" id="fhe-Py-oEM"/>
                                                             <constraint firstItem="NFr-wr-FNj" firstAttribute="leading" secondItem="rSc-cc-geS" secondAttribute="leading" id="h5a-Hz-ksZ"/>
-                                                            <constraint firstAttribute="height" constant="200" id="rLL-Q6-UCs"/>
                                                             <constraint firstItem="Q6o-eC-cHd" firstAttribute="top" secondItem="rSc-cc-geS" secondAttribute="top" constant="6" id="u0x-FS-PiF"/>
                                                         </constraints>
                                                     </view>
@@ -351,9 +353,11 @@
                         <outlet property="newsTableHeightConstraint" destination="5nK-B6-voJ" id="Quf-uh-wz8"/>
                         <outlet property="newsTableView" destination="ZfM-UF-cdX" id="OsI-jE-1OJ"/>
                         <outlet property="publisherCollectionView" destination="qSW-OC-bLu" id="5og-af-eDi"/>
+                        <outlet property="publishersView" destination="Mig-cA-T8S" id="rMp-Ps-U1a"/>
                         <outlet property="topMarqueeLabel" destination="2Mm-Wd-eqy" id="Inc-nY-fEF"/>
                         <outlet property="trendingCollectionView" destination="xDU-Sf-0fe" id="SHR-OE-1hl"/>
                         <outlet property="trendingView" destination="tFc-Af-bIx" id="5gt-i2-hJU"/>
+                        <outlet property="videoCollectionHeightConstraint" destination="Etl-QD-Lge" id="4IP-l0-zCL"/>
                         <outlet property="videosCollectionView" destination="NFr-wr-FNj" id="cEo-dC-3EH"/>
                         <outlet property="videosView" destination="rSc-cc-geS" id="2Ig-q9-LI2"/>
                         <outlet property="viewAllButton" destination="XFm-qF-BA8" id="RIc-ld-4Uw"/>

@@ -13,6 +13,7 @@ class GossipVC: UIViewController {
     
     @IBOutlet weak var breakngNewsImage: UIImageView!
     @IBOutlet weak var topMarqueeLabel: MarqueeLabel!
+    @IBOutlet weak var publishersView: UIView!
     @IBOutlet weak var publisherCollectionView: UICollectionView!
     @IBOutlet weak var leagueCollectionView: UICollectionView!
     @IBOutlet weak var trendingView: UIView!
@@ -22,6 +23,7 @@ class GossipVC: UIViewController {
     @IBOutlet weak var viewAllButton: UIButton!
     @IBOutlet weak var videosView: UIView!
     @IBOutlet weak var videosCollectionView: UICollectionView!
+    @IBOutlet weak var videoCollectionHeightConstraint: NSLayoutConstraint!
     
     var cancellable = Set<AnyCancellable>()
     var isPagination = false
@@ -47,11 +49,11 @@ class GossipVC: UIViewController {
         nibInitialization()
         
         /// breakng news view
-        topMarqueeLabel.text = "......comng soon....."
+        /// label text set in api response function
         topMarqueeLabel.type = .continuous
-        topMarqueeLabel.speed = .duration(5)
+        topMarqueeLabel.speed = .rate(50)
         topMarqueeLabel.animationCurve = .linear
-        topMarqueeLabel.fadeLength = 10.0
+       // topMarqueeLabel.fadeLength = 10.0
         
         breakngNewsImage.zoomAnimation()
         
@@ -59,7 +61,7 @@ class GossipVC: UIViewController {
         fetchGossipViewModel()
         
         SocialPublicLeagueVM.shared.fetchLeagueListAsyncCall()
-       
+        GossipVideoListVM.shared.fetchVideosAsyncCall()
     }
     
     func nibInitialization() {
@@ -67,6 +69,7 @@ class GossipVC: UIViewController {
         leagueCollectionView.register(CellIdentifier.iconNameCollectionViewCell)
         trendingCollectionView.register(CellIdentifier.newsCollectionViewCell)
         newsTableView.register(CellIdentifier.newsTableViewCell)
+        videosCollectionView.register(CellIdentifier.newsCollectionViewCell)
     }
     
     // MARK: - Button Actions
@@ -81,6 +84,10 @@ class GossipVC: UIViewController {
 // MARK: - API Services
 extension GossipVC {
     func getNewsList() {
+        ///If sportType == .eSports, ESports model array else Gossip model array
+        ///ESports model to gossip model conversion doing in the api response function
+        publishersView.isHidden = sportType == .eSports
+        
         if sportType == .eSports {
             ESportsListVM.shared.fetchESportsListAsyncCall()
         } else {
@@ -92,7 +99,7 @@ extension GossipVC {
             GossipListVM.shared.fetchNewsListAsyncCall(params: param)
         }
     }
-        
+    
     func fetchSocialViewModel() {
         ///fetch public league list / euro 5 league
         SocialPublicLeagueVM.shared.showError = { [weak self] error in
@@ -104,7 +111,7 @@ extension GossipVC {
             .sink(receiveValue: { [weak self] response in
                 self?.leagueArray = response ?? []
                 self?.leagueCollectionView.reloadData()
-             })
+            })
             .store(in: &cancellable)
     }
     
@@ -120,6 +127,9 @@ extension GossipVC {
                 self?.execute_onGossipsResponseData(response)
             })
             .store(in: &cancellable)
+        GossipListVM.shared.displayLoader = { [weak self] value in
+            value ? self?.startLoader() : stopLoader()
+        }
         
         ///fetch esports news list
         ESportsListVM.shared.showError = { [weak self] error in
@@ -129,10 +139,12 @@ extension GossipVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                GossipVideoListVM.shared.fetchVideosAsyncCall()
+                self?.execute_onESportsResponseData(response?.newsList ?? [])
             })
             .store(in: &cancellable)
-        
+        ESportsListVM.shared.displayLoader = { [weak self] value in
+            value ? self?.startLoader() : stopLoader()
+        }
         ///fetch videos list
         GossipVideoListVM.shared.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
@@ -147,26 +159,61 @@ extension GossipVC {
             })
             .store(in: &cancellable)
     }
-    
+
     func execute_onGossipsResponseData(_ response: GossipListResponse?) {
+        ///api has pagination
         publishersArray = response?.source ?? []
         
         if self.pageNum == 1 {
             gossipsArray.removeAll()
+            trendingArray.removeAll()
             GossipListVM.shared.gossipsArray.removeAll()
         }
         
         if (response?.data?.data ?? []).count > 0 {
             self.gossipsArray.append(contentsOf: response?.data?.data ?? [])
-            GossipListVM.shared.gossipsArray = self.gossipsArray
-            self.isPagination = false
+            loadData(showEsportdata: false)
+        } else {
+            loadData(showEsportdata: false)
         }
+    }
+    
+    func execute_onESportsResponseData(_ response: [ESports]) {
+        ///api has no pagination
+        gossipsArray.removeAll()
+        trendingArray.removeAll()
+        GossipListVM.shared.gossipsArray.removeAll()
+        
+        
+        /// make Gossip model from ESports model
+        /// update id, title, mediasource
+        
+        for eSportModel in response {
+            var gossipModel = Gossip()
+            gossipModel.id = eSportModel.id
+            gossipModel.title = eSportModel.articalTitle
+            gossipModel.mediaSource = [URLConstants.eSportsBaseURL + eSportModel.articalThumbnailImage]
+            gossipsArray.append(gossipModel)
+        }
+        loadData(showEsportdata: true)
+    }
+    
+    func loadData(showEsportdata: Bool) {
+        topMarqueeLabel.text = gossipsArray.reversed().map({$0.title ?? ""}).joined(separator: "   *   ")
+        GossipListVM.shared.gossipsArray = gossipsArray
         /// Show 5 news of gossip array in trending topic section
         trendingArray = Array(gossipsArray.prefix(5))
         /// shuffle gossip array to avoid repeat content on "trending topic" and "news category"
         GossipListVM.shared.gossipsArray = GossipListVM.shared.gossipsArray.shuffled()
         /// Show 3 news of gossip array, and show all news if "see All" button tapped
-        gossipsArray = Array(GossipListVM.shared.gossipsArray.prefix(3))
+        if showEsportdata {
+            gossipsArray = Array(GossipListVM.shared.gossipsArray.prefix(3))
+        } else {
+            if !self.isPagination {
+                gossipsArray = Array(GossipListVM.shared.gossipsArray.prefix(3))
+            }
+            self.isPagination = false
+        }
         viewAllButton.isHidden = gossipsArray.count == 0
         publisherCollectionView.reloadData()
         trendingCollectionView.reloadData()
@@ -196,6 +243,7 @@ extension GossipVC: UICollectionViewDataSource {
             trendingView.isHidden = trendingArray.count == 0
             return trendingArray.count
         }  else if collectionView == videosCollectionView {
+            videoCollectionHeightConstraint.constant = CGFloat(((videoArray.count / 2) + 1) * 160)
             videosView.isHidden = videoArray.count == 0
             return videoArray.count
         } else {
@@ -216,11 +264,11 @@ extension GossipVC: UICollectionViewDataSource {
             return cell
         } else if collectionView == trendingCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.newsCollectionViewCell, for: indexPath) as! NewsCollectionViewCell
-            cell.configureGossipCell(model: trendingArray[indexPath.row])
+            cell.configureGossipImageCell(model: trendingArray[indexPath.row])
             return cell
         } else if collectionView == videosCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.newsCollectionViewCell, for: indexPath) as! NewsCollectionViewCell
-            cell.configureGossipCell(model: trendingArray[indexPath.row])
+            cell.configureGossipVideoCell(model: videoArray[indexPath.row])
             return cell
         } else {
             return UICollectionViewCell()
@@ -244,6 +292,8 @@ extension GossipVC: UICollectionViewDelegateFlowLayout {
             return CGSize(width: 75, height: 112)
         } else if collectionView == trendingCollectionView {
             return CGSize(width: screenWidth * 0.7, height: 240)
+        }  else if collectionView == videosCollectionView {
+            return CGSize(width: (screenWidth / 2) - 20, height: 160)
         } else {
             return CGSize(width: 0, height: 0)
         }
@@ -253,8 +303,15 @@ extension GossipVC: UICollectionViewDelegateFlowLayout {
 // MARK: - TableView Delegates
 extension GossipVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        /// news category section's table height calculation
+        /// If count = 0, height = 70 to show "No data" label
+        /// maximum height of table sould be 20 * cell height, if more than 20 items are there, do pagination
+        if gossipsArray.count < 20 {
+            newsTableHeightConstraint.constant = (gossipsArray.count * 70) < 70 ? 300 : CGFloat(gossipsArray.count * 120)
+        } else {
+            newsTableHeightConstraint.constant = CGFloat(20 * 120)
+        }
         
-        newsTableHeightConstraint.constant = CGFloat(gossipsArray.count * 120)
         if gossipsArray.count == 0 {
             tableView.setEmptyMessage(ErrorMessage.dataNotFound)
         } else {
@@ -269,9 +326,24 @@ extension GossipVC: UITableViewDataSource {
         return cell
     }
 }
-  
+
 extension GossipVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
+    }
+}
+
+// MARK: - ScrollView Delegates
+extension GossipVC {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if scrollView == self.newsTableView && sportType != .eSports {
+            if(scrollView.contentOffset.y>0 && scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.bounds.size.height)) {
+                if(isPagination == false){
+                    isPagination = true
+                    pageNum = pageNum + 1
+                    self.getNewsList()
+                }
+            }
+        }
     }
 }

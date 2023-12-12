@@ -29,6 +29,7 @@ struct GossipListData: Codable {
 }
 
 struct Gossip: Codable {
+    var id: Int? = 0 //used for ESports to Gossip model conversion in GossipVC
     var title: String? = ""
     var slug: String? = ""
     var content: String? = ""
