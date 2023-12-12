@@ -20,4 +20,13 @@ struct HTTPHeader {
         return ["Authorization": "Bearer " + token]
         //return ["Authorization": "Bearer " + "87|MCa9ot00xIU5JgG2KUsAd38X2NyGleoyjbdCLrP6"]
     }
+    
+    static var zeyuapiHeaders: [String: String] {
+        return [
+            "time": String(Date.currentTimeStamp),
+            "random": "ksdklfkdnsfnjksdfksdfj",
+            "sign":"ME1DWnBqYWcyWEJuRWFoU0djM1VGemhpa0JsSklBWHg=",
+            "client":"pc"
+        ]
+    }
 }

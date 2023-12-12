@@ -53,6 +53,12 @@ class APIServiceManager<ResponseModel: Decodable>: ObservableObject {
                     allHeaders = allHeaders.merging(authorizationToken, uniquingKeysWith: { $1 })
                 }
             }
+            
+            /// This custom header is used only for https://zeyuapi.com/v1/video/ to show the videos in news module
+            if urlString.contains(URLConstants.videosBaseURL) {
+                allHeaders = allHeaders.merging(HTTPHeader.zeyuapiHeaders, uniquingKeysWith: { $1 })
+            }
+            
             print("[Request] :==> \(method.rawValue)  \(urlString)\n[Token] :==>\(UserDefaults.standard.token ?? "")\n[Parameter] :==>\(parameters ?? [:])")
             for (key, value) in allHeaders {
                 request.setValue(value, forHTTPHeaderField: key)

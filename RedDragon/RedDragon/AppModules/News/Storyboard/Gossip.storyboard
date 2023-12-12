@@ -153,7 +153,7 @@
                                                             <constraint firstItem="Wxw-eW-2x8" firstAttribute="top" secondItem="v0n-gy-ke2" secondAttribute="top" constant="5" id="w1e-Nm-PMp"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tFc-Af-bIx">
+                                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tFc-Af-bIx">
                                                         <rect key="frame" x="0.0" y="350" width="363" height="300"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gG1-WA-qgc">
@@ -164,13 +164,13 @@
                                                                 </constraints>
                                                             </view>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trending Topics" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eyh-2n-Z1a">
-                                                                <rect key="frame" x="0.0" y="6" width="105.33333333333333" height="17.666666666666668"/>
+                                                                <rect key="frame" x="0.0" y="10.000000000000002" width="105.33333333333333" height="17.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
                                                                 <color key="textColor" name="base"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xDU-Sf-0fe">
-                                                                <rect key="frame" x="0.0" y="33.6666666666667" width="363" height="246.33333333333337"/>
+                                                                <rect key="frame" x="0.0" y="37.6666666666667" width="363" height="242.33333333333337"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="WRI-AW-sWR">
                                                                     <size key="itemSize" width="128" height="128"/>
@@ -204,7 +204,7 @@
                                                         <constraints>
                                                             <constraint firstItem="gG1-WA-qgc" firstAttribute="leading" secondItem="tFc-Af-bIx" secondAttribute="leading" id="2bq-DV-s1C"/>
                                                             <constraint firstItem="xDU-Sf-0fe" firstAttribute="leading" secondItem="tFc-Af-bIx" secondAttribute="leading" id="3BU-vo-1qo"/>
-                                                            <constraint firstItem="Eyh-2n-Z1a" firstAttribute="top" secondItem="tFc-Af-bIx" secondAttribute="top" constant="6" id="IDY-dk-tg6"/>
+                                                            <constraint firstItem="Eyh-2n-Z1a" firstAttribute="top" secondItem="tFc-Af-bIx" secondAttribute="top" constant="10" id="IDY-dk-tg6"/>
                                                             <constraint firstAttribute="bottom" secondItem="kQy-49-iIx" secondAttribute="bottom" constant="10" id="LWD-eP-Ize"/>
                                                             <constraint firstAttribute="trailing" secondItem="gG1-WA-qgc" secondAttribute="trailing" id="MRn-tu-R5p"/>
                                                             <constraint firstAttribute="trailing" secondItem="kQy-49-iIx" secondAttribute="trailing" constant="50" id="PTQ-Jp-d1O"/>
@@ -297,6 +297,10 @@
                                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                 </collectionViewFlowLayout>
                                                                 <cells/>
+                                                                <connections>
+                                                                    <outlet property="dataSource" destination="Ib1-Iz-Ba2" id="DQF-PW-0qu"/>
+                                                                    <outlet property="delegate" destination="Ib1-Iz-Ba2" id="j1j-Dx-UXG"/>
+                                                                </connections>
                                                             </collectionView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -350,6 +354,7 @@
                         <outlet property="topMarqueeLabel" destination="2Mm-Wd-eqy" id="Inc-nY-fEF"/>
                         <outlet property="trendingCollectionView" destination="xDU-Sf-0fe" id="SHR-OE-1hl"/>
                         <outlet property="trendingView" destination="tFc-Af-bIx" id="5gt-i2-hJU"/>
+                        <outlet property="videosCollectionView" destination="NFr-wr-FNj" id="cEo-dC-3EH"/>
                         <outlet property="videosView" destination="rSc-cc-geS" id="2Ig-q9-LI2"/>
                         <outlet property="viewAllButton" destination="XFm-qF-BA8" id="RIc-ld-4Uw"/>
                     </connections>

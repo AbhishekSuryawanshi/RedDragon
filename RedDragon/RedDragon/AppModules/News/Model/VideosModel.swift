@@ -7,11 +7,16 @@
 
 import Foundation
 
+struct GossipVideoListResponse: Codable {
+    let code: Int?
+    let msg: String?
+    var data: [GossipVideo]? = []
+}
+
 struct GossipVideoResponse: Codable {
     let code: Int?
     let msg: String?
-    let time: Int?
-    var data: [GossipVideo]? = []
+    var data = GossipVideo()
 }
 
 struct GossipVideo: Codable {
@@ -19,7 +24,8 @@ struct GossipVideo: Codable {
     var title: String = ""
     var video: String = ""
     var createTime: Int = 0
-    var cover, duration: String
+    var cover: String = ""
+    var duration: String = ""
     var browse: Int = 0
     var praiseStatus: Int = 0
     var praise: Int = 0
@@ -34,6 +40,8 @@ struct GossipVideo: Codable {
         case praise, playAuth
         case playURL = "playUrl"
     }
+    
+    public init () {}
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
