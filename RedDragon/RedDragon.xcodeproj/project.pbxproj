@@ -178,6 +178,8 @@
 		47FE163B2B15C073009043D2 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FE16392B15C073009043D2 /* CommentTableViewCell.swift */; };
 		47FE163C2B15C073009043D2 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47FE163A2B15C073009043D2 /* CommentTableViewCell.xib */; };
 		47FE163E2B15ECBF009043D2 /* GossipModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FE163D2B15ECBF009043D2 /* GossipModel.swift */; };
+		49181D7F2B283966007D6614 /* SPConfetti in Frameworks */ = {isa = PBXBuildFile; productRef = 49181D7E2B283966007D6614 /* SPConfetti */; };
+		49181D812B283B19007D6614 /* UpdateMatchStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49181D802B283B19007D6614 /* UpdateMatchStatus.swift */; };
 		49310AF72B0BA02F00AFCBCA /* Shuffle in Frameworks */ = {isa = PBXBuildFile; productRef = 49310AF62B0BA02F00AFCBCA /* Shuffle */; };
 		493138032B147133000E167B /* StatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493138012B147133000E167B /* StatCollectionViewCell.swift */; };
 		493138042B147133000E167B /* StatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493138022B147133000E167B /* StatCollectionViewCell.xib */; };
@@ -602,6 +604,7 @@
 		47FE16392B15C073009043D2 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		47FE163A2B15C073009043D2 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
 		47FE163D2B15ECBF009043D2 /* GossipModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GossipModel.swift; sourceTree = "<group>"; };
+		49181D802B283B19007D6614 /* UpdateMatchStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMatchStatus.swift; sourceTree = "<group>"; };
 		493138012B147133000E167B /* StatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatCollectionViewCell.swift; sourceTree = "<group>"; };
 		493138022B147133000E167B /* StatCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatCollectionViewCell.xib; sourceTree = "<group>"; };
 		4936FBFD2B15F8430037F620 /* LeaderboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewCell.swift; sourceTree = "<group>"; };
@@ -862,6 +865,7 @@
 				4728736B2AEA7E360011F00F /* SDWebImageMapKit in Frameworks */,
 				47051F142B146C95004D190A /* MarqueeLabel in Frameworks */,
 				47C8C9572AF0D3A900448D96 /* TOCropViewController in Frameworks */,
+				49181D7F2B283966007D6614 /* SPConfetti in Frameworks */,
 				49B2114F2B0B488B00E1C58E /* RealmSwift in Frameworks */,
 				41846BC32B0B395B0020F503 /* YouTubePlayerKit in Frameworks */,
 				472873702AEA7E3F0011F00F /* NVActivityIndicatorViewExtended in Frameworks */,
@@ -1498,6 +1502,7 @@
 			children = (
 				4988F72F2B20685100905CDD /* BuyPlayerViewModel.swift */,
 				4988F7382B2084FC00905CDD /* UpdateInfoViewModel.swift */,
+				49181D802B283B19007D6614 /* UpdateMatchStatus.swift */,
 			);
 			path = BuyAndSell;
 			sourceTree = "<group>";
@@ -2357,6 +2362,7 @@
 				47051F132B146C95004D190A /* MarqueeLabel */,
 				47BBF5042B19B3A500CDE3D9 /* CHIPageControl */,
 				6A947A812B1EFDA600A00788 /* TwilioChatClient */,
+				49181D7E2B283966007D6614 /* SPConfetti */,
 			);
 			productName = RedDragon;
 			productReference = 49B0B9E42AE68F0700A9D235 /* RedDragon.app */;
@@ -2405,6 +2411,7 @@
 				47051F122B146C95004D190A /* XCRemoteSwiftPackageReference "MarqueeLabel" */,
 				47BBF5032B19B3A500CDE3D9 /* XCRemoteSwiftPackageReference "CHIPageControl" */,
 				6A947A802B1EFDA600A00788 /* XCRemoteSwiftPackageReference "twilio-chat-ios" */,
+				49181D7D2B283966007D6614 /* XCRemoteSwiftPackageReference "SPConfetti" */,
 			);
 			productRefGroup = 49B0B9E52AE68F0700A9D235 /* Products */;
 			projectDirPath = "";
@@ -2655,6 +2662,7 @@
 				49B04A562AFA6DCE00B440AA /* StatisticsViewController.swift in Sources */,
 				6A5F2B9D2B0CC37D00AB6A98 /* MyEventsVC.swift in Sources */,
 				49A9D9E02B1F2C6C00C4A1A1 /* LeaderboardDetail.swift in Sources */,
+				49181D812B283B19007D6614 /* UpdateMatchStatus.swift in Sources */,
 				474164952AFFA27B0015F7D5 /* NotificationExtension.swift in Sources */,
 				474D994E2AE7F9D6009499D0 /* Constants.swift in Sources */,
 				47E7C84D2AEFBFA800D054A8 /* PostCreateVC.swift in Sources */,
@@ -3186,6 +3194,14 @@
 				minimumVersion = 7.10.0;
 			};
 		};
+		49181D7D2B283966007D6614 /* XCRemoteSwiftPackageReference "SPConfetti" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ivanvorobei/SPConfetti";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.1;
+			};
+		};
 		49310AF52B0BA02F00AFCBCA /* XCRemoteSwiftPackageReference "Shuffle" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mac-gallagher/Shuffle.git";
@@ -3298,6 +3314,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 47C8C95E2AF1191700448D96 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		49181D7E2B283966007D6614 /* SPConfetti */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 49181D7D2B283966007D6614 /* XCRemoteSwiftPackageReference "SPConfetti" */;
+			productName = SPConfetti;
 		};
 		49310AF62B0BA02F00AFCBCA /* Shuffle */ = {
 			isa = XCSwiftPackageProductDependency;

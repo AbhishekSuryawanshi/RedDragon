@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import Toast
 import Combine
 import RealmSwift
 import SDWebImage
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, WinControllerDelegate, LossControllerDelegate {
     
     @IBOutlet weak var roundCountLabel: UILabel!
     @IBOutlet weak var opponentTurnView: UIView!
@@ -106,7 +107,7 @@ class GameViewController: UIViewController {
         checkLocalisation()
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
-  
+    
     @IBAction func backButton(_ sender: Any) {
         dismiss(animated: true)
     }
@@ -426,6 +427,7 @@ extension GameViewController {
         }
         else if userPlayerValue ?? 0 == opponentPlayerValue ?? 0 {
             //print("match is draw")
+            customAlertView(title: ErrorMessage.matchDraw.localized, description: ErrorMessage.sameScore.localized, image: ImageConstants.alertImage)
         }
     }
 }
@@ -482,7 +484,6 @@ extension GameViewController {
         useCardButtonView.alpha = 0.4
         useCardButton.isHidden = true
     }
-    
 }
 
 extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -541,7 +542,6 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
             label.text = "\(targetAbility.value ?? 0)"
         }
     }
-    
 }
 
 
@@ -591,37 +591,56 @@ extension GameViewController {
             isUserTurn.toggle()
             self.shufflePlayerToPlay()
             UserDefaults.standard.set(false, forKey: "gameEnd")
-        } else {
-            
+        }
+        else {
             let gameEnd = UserDefaults.standard.bool(forKey: "gameEnd")
-            
             if gameEnd { return }
             
             countdownTimer?.invalidate()
             userPlayersCollectionView.reloadData()
             userPlayersCollectionView.allowsMultipleSelection = false
             statisticsView.isUserInteractionEnabled = false
-            
             UserDefaults.standard.set(true, forKey: "gameEnd")
             
-//            if userScore > opponentScore {
-//                navigateToViewController(WinViewController.self, storyboardName: StoryboardName.cardGamePopup) { [self] vc in
-//                    vc.score = userScore
-//                    vc.againstComputer = againstComputer ?? false
-//                    if againstComputer == false {
-//                        vc.opponentUserID = opponentUserID //pass opponent user id here
-//                    }
-//                }
-//            } else {
-//                navigateToViewController(LossViewController.self, storyboardName: StoryboardName.cardGamePopup) { [self] vc in
-//                    vc.score = userScore
-//                    vc.againstComputer = againstComputer ?? false
-//                    if againstComputer == false {
-//                        vc.opponentUserID = opponentUserID //pass opponent user id here
-//                    }
-//                }
-//            }
+            if userScore > opponentScore {
+                presentToViewController(WinViewController.self, storyboardName: StoryboardName.cardGameMatch) { [self] vc in
+                    vc.delegate = self
+                    vc.score = userScore
+                    vc.againstComputer = againstComputer ?? false
+                    if againstComputer == false {
+                        vc.opponentUserID = opponentUserID //pass opponent user id here
+                    }
+                }
+            } else {
+                presentToViewController(LossViewController.self, storyboardName: StoryboardName.cardGameMatch) { [self] vc in
+                    vc.delegate = self
+                    vc.score = userScore
+                    vc.againstComputer = againstComputer ?? false
+                    if againstComputer == false {
+                        vc.opponentUserID = opponentUserID //pass opponent user id here
+                    }
+                }
+            }
+        }
+    }
+}
+
+/// __Implement the delegate method to dismissnthis VC after game over from win or loss view
+extension GameViewController {
+    func controllerDismissedFrom_winView() {
+        DispatchQueue.main.async {
+            //self.dismiss(animated: true)
+            self.view.makeToast(ErrorMessage.wellPlayed.localized, duration: 1.0, position: .center) { didTap in
+                self.dismiss(animated: true)
+            }
         }
     }
     
+    func controllerDismissedFrom_lossView() {
+        DispatchQueue.main.async {
+            self.view.makeToast(ErrorMessage.wellPlayed.localized, duration: 1.0, position: .center) { didTap in
+                self.dismiss(animated: true)
+            }
+        }
+    }
 }
