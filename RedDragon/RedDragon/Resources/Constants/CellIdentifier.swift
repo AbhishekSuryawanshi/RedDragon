@@ -98,4 +98,6 @@ struct CellIdentifier {
     
     //Matches
     static let globalMatchesTableViewCell       = "GlobalMatchesTableViewCell"
+    static let globalMatchInfoTableViewCell     = "GlobalMatchInfoTableViewCell"
+    static let globalMatchOddsTableViewCell     = "GlobalMatchOddsTableViewCell"
 }

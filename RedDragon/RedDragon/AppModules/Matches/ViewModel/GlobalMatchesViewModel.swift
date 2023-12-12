@@ -35,6 +35,15 @@ class FootballFinishedMatchesViewModel: APIServiceManager<GlobalEventsModel> {
     }
 }
 
+class FootballLeagueMatchesViewModel: APIServiceManager<GlobalEventsModel> {
+    ///function to fetch football finished matches
+    func fetchFootballLeagueMatches(leagueId: String) {
+        let urlString   = URLConstants.footballMatchList + "?hotLeagueId=\(leagueId)"
+        let method      = RequestType.get
+        asyncCall(urlString: urlString, method: method, parameters: nil)
+    }
+}
+
 class BasketballLeaguesViewModel: APIServiceManager<GlobalEventsModel> {
     
     ///function to fetch football live matches
@@ -72,3 +81,31 @@ class BasketballFinishedMatchesViewModel: APIServiceManager<GlobalEventsModel> {
         asyncCall(urlString: urlString, method: method, parameters: nil)
     }
 }
+
+class BasketballLeagueMatchesViewModel: APIServiceManager<GlobalEventsModel> {
+    ///function to fetch football finished matches
+    func fetchBasketballLeagueMatches(leagueId: String) {
+        let urlString   = URLConstants.basketballMatchList + "?hotLeagueId=\(leagueId)"
+        let method      = RequestType.get
+        asyncCall(urlString: urlString, method: method, parameters: nil)
+    }
+}
+
+class FootballH2HMatchesViewModel: APIServiceManager<H2HMatchListModel> {
+    ///function to fetch football finished matches
+    func fetchFootballH2HMatches(matchId: String) {
+        let urlString   = URLConstants.footballH2HMatchList + "\(matchId)"
+        let method      = RequestType.get
+        asyncCall(urlString: urlString, method: method, parameters: nil)
+    }
+}
+
+class BasketballH2HMatchesViewModel: APIServiceManager<H2HMatchListModel> {
+    ///function to fetch football finished matches
+    func fetchBasketballH2HMatches(matchId: String) {
+        let urlString   = URLConstants.basketballH2HMatchList + "\(matchId)"
+        let method      = RequestType.get
+        asyncCall(urlString: urlString, method: method, parameters: nil)
+    }
+}
+
