@@ -72,6 +72,7 @@ struct AffAppData: Codable {
 
 struct SportCard: Codable {
     let budget: String
+    let score: String
 }
 
 struct LocalAppUserID: Codable {

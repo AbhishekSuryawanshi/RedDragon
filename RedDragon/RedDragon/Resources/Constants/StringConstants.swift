@@ -106,5 +106,6 @@ struct StringConstants {
     static let itsYourTurn          = "It's your turn. \n Please select the card to resume the game."
     static let computer             = "Computer"
     static let round                = "Round"
+    static let pointsEarned         = "Points earned"
 }
 

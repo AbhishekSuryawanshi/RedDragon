@@ -133,6 +133,8 @@ extension VerificationVC {
                     ///User verified
                     UserDefaults.standard.user = user
                     UserDefaults.standard.token = user.token
+                    UserDefaults.standard.budget = Int(user.affAppData?.sportCard?.budget ?? "200000000")
+                    UserDefaults.standard.score = Int(user.affAppData?.sportCard?.score ?? "0")
                     //go back to tabbar
                     NotificationCenter.default.post(name: NSNotification.dismissLoginVC, object: nil)
                 } else {

@@ -59,6 +59,9 @@ struct ErrorMessage {
     static let playerAlreadyUsed           = "Your team already has this player"
     static let playerBuyed                 = "Player bought successfully!!"
     static let playerRemoved               = "Player removed!!"
+    static let matchDraw                   = "Match Draw!!"
+    static let sameScore                   = "Both users scored same score"
+    static let wellPlayed                  = "Well Played!!"
     
     static let betPlacedSuccess            = "Bet Placed Successfully"
     static let betPlacedAlready            = "Bet Already Placed"
