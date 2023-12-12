@@ -9,7 +9,7 @@ import Foundation
 
 class StadiumListViewModel: APIServiceManager<[Stadium]> {
     
-    //function to fetch home data
+    //function to fetch Stadium list
     func fetchStadiumListAsyncCall() {
         let urlString   = URLConstants.stadiumList
         let method      = RequestType.get

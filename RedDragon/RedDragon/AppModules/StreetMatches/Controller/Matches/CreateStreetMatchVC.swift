@@ -150,8 +150,6 @@ class CreateStreetMatchVC: UIViewController {
         }
     }
     
-   
-    
     func validations(){
         if homeTeam == nil{
             self.view.makeToast("Please choose home team".localized)

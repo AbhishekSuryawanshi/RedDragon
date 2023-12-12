@@ -10,7 +10,7 @@ import Foundation
 
 class CreateMatchViewModel: APIServiceManager<StreetGeneralResponse> {
     
-    //function to fetch home data
+    //function to create match
     func createMatchAsyncCall(parameters:[String:Any]) {
         let urlString   = URLConstants.streetMatches
         let method      = RequestType.post
