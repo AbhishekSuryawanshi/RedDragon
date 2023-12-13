@@ -15,8 +15,6 @@ struct URLConstants {
     static let terms               = "https://pitchstories.wordpress.com/terms-of-use/"
     static let baseURL             = "http://157.245.159.136:5072/api/"
     static let predictionBaseURL   = "http://45.76.178.21:5069/"
-    static let cardGameBaseURL     = "http://157.245.159.136:5072/api/sportcard"
-    //"https://amberic.top/sport-api-card"
 
     
     // MARK: -  Login
@@ -35,12 +33,12 @@ struct URLConstants {
     
     // MARK: - CardGame
     static let cardGame_allPlayersList = databaseBaseURL + "player_filter.php"
-    static let cardGame_buyPlayer   = cardGameBaseURL + "/api/user/players"
-    static let removePlayer         = cardGameBaseURL + "/api/user/player"
-    static let cardGame_leaderboard = cardGameBaseURL + "/api/user/list"
-    static let leaderboardDetail    = cardGameBaseURL + "/api/user/"
-    static let yourMatches          = cardGameBaseURL + "/api/matches"
-    static let updateUserInfo       = cardGameBaseURL + "/api/user/info"
+    static let cardGame_buyPlayer  = baseURL + "sportcard/user/players"
+    static let removePlayer        = baseURL + "sportcard/user/player"
+    static let cardGame_leaderboard = baseURL + "sportcard/user/list"
+    static let leaderboardDetail   = baseURL + "sportcard/user/"
+    static let yourMatches         = baseURL + "sportcard/matches"
+    static let updateUserInfo      = baseURL + "sportcard/user/info"
     
     // MARK: -  Social
     static let socialBaseURL       = baseURL + "euro5league/"
