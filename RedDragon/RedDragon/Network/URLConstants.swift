@@ -15,7 +15,9 @@ struct URLConstants {
     static let terms               = "https://pitchstories.wordpress.com/terms-of-use/"
     static let baseURL             = "http://157.245.159.136:5072/api/"
     static let predictionBaseURL   = "http://45.76.178.21:5069/"
-    static let cardGameBaseURL     = "https://amberic.top/sport-api-card"
+    static let cardGameBaseURL     = "http://157.245.159.136:5072/api/sportcard"
+    //"https://amberic.top/sport-api-card"
+
     
     // MARK: -  Login
     static let login               = baseURL + "login"
