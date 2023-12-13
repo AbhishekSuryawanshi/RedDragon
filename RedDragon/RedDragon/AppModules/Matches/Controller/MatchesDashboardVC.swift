@@ -365,6 +365,7 @@ extension MatchesDashboardVC: UICollectionViewDataSource, UICollectionViewDelega
     }
 }
 
+// MARK: - TableView Data source and Delegates
 extension MatchesDashboardVC: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         if isLeagueMatches ?? false {
@@ -373,11 +374,7 @@ extension MatchesDashboardVC: UITableViewDataSource, UITableViewDelegate {
             return sectionTitle.count
         }
     }
-    
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 30
-//    }
-    
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if isLeagueMatches ?? false {
             return nil
@@ -439,6 +436,7 @@ extension MatchesDashboardVC: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+// MARK: - TableView Data handling
 extension MatchesDashboardVC {
     private func tableCell(indexPath:IndexPath) -> GlobalMatchesTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.globalMatchesTableViewCell, for: indexPath) as! GlobalMatchesTableViewCell

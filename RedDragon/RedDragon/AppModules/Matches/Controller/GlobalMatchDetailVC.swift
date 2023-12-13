@@ -61,7 +61,9 @@ class GlobalMatchDetailVC: UIViewController {
     func performInitialSetup() {
         nibInitialization()
         highlightFirstIndex_collectionView()
-        
+        fetchFBH2HViewModelResponse()
+        fetchBBH2HViewModelResponse()
+       
         let homeDict = match.homeInfo?.dictionary ?? [:]
         if isFootball ?? true {
             for i in homeInfoKeyArr {
@@ -139,6 +141,7 @@ class GlobalMatchDetailVC: UIViewController {
         headerCollectionView.register(CellIdentifier.headerTopCollectionViewCell)
         tableView.register(CellIdentifier.globalMatchInfoTableViewCell)
         tableView.register(CellIdentifier.globalMatchOddsTableViewCell)
+        tableView.register(CellIdentifier.globalMatchHeadToHeadTableViewCell)
     }
     
     func highlightFirstIndex_collectionView() {
@@ -168,13 +171,14 @@ extension GlobalMatchDetailVC: UICollectionViewDataSource, UICollectionViewDeleg
         if selectedIndex == 3 {
             if isFootball ?? true {
                 footballH2HMatchesViewModel.fetchFootballH2HMatches(matchId: matchId)
-                fetchFBH2HViewModelResponse()
+             //   fetchFBH2HViewModelResponse()
             }else {
                 basketballH2HMatchesViewModel.fetchBasketballH2HMatches(matchId: matchId)
-                fetchBBH2HViewModelResponse()
+             //   fetchBBH2HViewModelResponse()
             }
         }
         collectionView.reloadData()
+        tableView.separatorStyle = .singleLine
         tableView.reloadData()
     }
     
@@ -184,6 +188,7 @@ extension GlobalMatchDetailVC: UICollectionViewDataSource, UICollectionViewDeleg
     }
 }
 
+// MARK: - TableView Data source and Delegates
 extension GlobalMatchDetailVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch selectedIndex {
@@ -201,7 +206,7 @@ extension GlobalMatchDetailVC: UITableViewDataSource, UITableViewDelegate {
             return oddsHeaderTitleArr.count
             
         default:
-            return 0
+            return matchForH2HArr.count
         }
     }
     
@@ -214,7 +219,7 @@ extension GlobalMatchDetailVC: UITableViewDataSource, UITableViewDelegate {
         case 2:
             return tableOddsCell(indexPath: indexPath)
         default:
-            return tableCell(indexPath: indexPath)
+            return tableH2HCell(indexPath: indexPath)
         }
     }
     
@@ -227,11 +232,12 @@ extension GlobalMatchDetailVC: UITableViewDataSource, UITableViewDelegate {
         case 2:
             return 100.0
         default:
-            return 0.0
+            return 88.0
         }
     }
 }
 
+// MARK: - TableView Data handling
 extension GlobalMatchDetailVC {
     private func tableCell(indexPath:IndexPath) -> GlobalMatchInfoTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.globalMatchInfoTableViewCell, for: indexPath) as! GlobalMatchInfoTableViewCell
@@ -279,8 +285,21 @@ extension GlobalMatchDetailVC {
         cell.awayLabel.text = "\(score?.away ?? 0.0)"
         cell.handicapLabel.text = "\(score?.handicap ?? 0.0)"
     }
+    
+    private func tableH2HCell(indexPath:IndexPath) -> GlobalMatchHeadToHeadTableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.globalMatchHeadToHeadTableViewCell, for: indexPath) as! GlobalMatchHeadToHeadTableViewCell
+        cell.leagueNameLabel.text = leagueName
+        cell.leagueImageView.setImage(imageStr: leagueLogo, placeholder: UIImage(named: "placeholderLeague"))
+        cell.homeNameLabel.text = matchForH2HArr[indexPath.row].homeName
+        cell.awayNameLabel.text = matchForH2HArr[indexPath.row].awayName
+        cell.overtimeLabel.text = "Overtime: \(matchForH2HArr[indexPath.row].homeOvertimeScore ?? 0)-\(matchForH2HArr[indexPath.row].awayOvertimeScore ?? 0)"
+        cell.halftimeLabel.text = "Ranking: \(matchForH2HArr[indexPath.row].homeRanking ?? "" )-\(matchForH2HArr[indexPath.row].awayRanking ?? "")"
+    
+        return cell
+    }
 }
 
+// MARK: - Network Related Response
 extension GlobalMatchDetailVC {
     func fetchFBH2HViewModelResponse() {
         footballH2HMatchesViewModel.showError = { [weak self] error in
@@ -318,9 +337,13 @@ extension GlobalMatchDetailVC {
     
     func execute_onFBH2HMatchResponse(_ response: H2HMatchListModel) {
         matchForH2HArr = (response.history?.homeMatchInfo ?? []) + (response.history?.awayMatchInfo ?? [])
+        tableView.separatorStyle = .none
+        tableView.reloadData()
     }
     
     func execute_onBBH2HMatchResponse(_ response: H2HMatchListModel) {
         matchForH2HArr = (response.history?.homeMatchInfo ?? []) + (response.history?.awayMatchInfo ?? [])
+        tableView.separatorStyle = .none
+        tableView.reloadData()
     }
 }
