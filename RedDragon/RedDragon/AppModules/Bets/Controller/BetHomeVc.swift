@@ -38,7 +38,7 @@ class BetHomeVc: UIViewController {
         fetchBets()
         
         // notification
-        NotificationCenter.default.addObserver(self, selector: #selector(selectedSport), name: NSNotification.selectedSport, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(selectedSport), name: .selectedSport, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {

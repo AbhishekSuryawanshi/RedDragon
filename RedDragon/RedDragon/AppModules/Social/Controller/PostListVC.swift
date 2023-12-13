@@ -41,7 +41,7 @@ class PostListVC: UIViewController {
     
     func initialSettings() {
         nibInitialization()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.searchEnable(notification:)), name: NSNotification.socialSearchEnable, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.searchEnable(notification:)), name: .socialSearch, object: nil)
     }
     
     func loadFunctionality() {
@@ -306,7 +306,7 @@ extension PostListVC {
             ///Remove duplicates
             let filteredArray = Array(Set(hashTagAttay))
             let dataDict:[String: Any] = ["data": filteredArray]
-            NotificationCenter.default.post(name: NSNotification.refreshHashTags, object: nil, userInfo: dataDict)
+            NotificationCenter.default.post(name: .refreshHashTags, object: nil, userInfo: dataDict)
             
             ///set placeholder for tableview
             //        if postArray.count == 0 {

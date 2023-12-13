@@ -7,9 +7,11 @@
 
 import Foundation
 
-extension NSNotification {
-    static let socialSearchEnable  = Notification.Name("socialSearchEnable")
+extension Notification.Name {
+    static let socialSearch        = Notification.Name("socialSearch")
+    static let newsSearch          = Notification.Name("newsSearch")
     static let refreshHashTags     = Notification.Name("refreshHashTags")
     static let dismissLoginVC      = Notification.Name("dismissLoginVC")
-    static let selectedSport      = Notification.Name("selectedSport")
+    static let selectedSport       = Notification.Name("selectedSport")
+    static let moveToNewsDetail    = Notification.Name("NewsDetail")
 }

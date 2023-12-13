@@ -134,7 +134,7 @@ extension VerificationVC {
                     UserDefaults.standard.user = user
                     UserDefaults.standard.token = user.token
                     //go back to tabbar
-                    NotificationCenter.default.post(name: NSNotification.dismissLoginVC, object: nil)
+                    NotificationCenter.default.post(name: .dismissLoginVC, object: nil)
                 } else {
                     self.view.makeToast(ErrorMessage.incorrectOTP)
                 }

@@ -115,7 +115,7 @@ extension ResetPasswordVC {
         if let dataResponse = response?.response {
             self.view.makeToast(dataResponse.messages?.first)
             Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (timer) in
-                NotificationCenter.default.post(name: NSNotification.dismissLoginVC, object: nil)
+                NotificationCenter.default.post(name: .dismissLoginVC, object: nil)
             }
         } else {
             if let errorResponse = response?.error {
