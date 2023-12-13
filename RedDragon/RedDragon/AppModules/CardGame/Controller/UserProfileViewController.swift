@@ -57,10 +57,10 @@ class UserProfileViewController: UIViewController {
     
     @IBAction func inviteToPlayButton(_ sender: Any) {
         if ((UserDefaults.standard.token ?? "") != "") {
-            if leaderboardDetailsVM?.responseData?.players.count == 0 {
+            if leaderboardDetailsVM?.responseData?.response.data.players.count == 0 {
                 self.view.makeToast(ErrorMessage.noPlayers.localized, duration: 2.0, position: .center)
             } else {
-                let players = leaderboardDetailsVM?.responseData?.players
+                let players = leaderboardDetailsVM?.responseData?.response.data.players
                 if players?.count ?? 0 >= 11 {
                     againstComputer = false
                     UserDefaults.standard.set(false, forKey: "gameEnd")
@@ -75,7 +75,7 @@ class UserProfileViewController: UIViewController {
     
     ///fetch opponent players ID
     func fetchOpponentPlayersID(_ team: LeaderboardDetail?) {
-        let data = team?.players
+        let data = team?.response.data.players
         for i in 0..<(data?.count ?? 0) {
             let playerIDs = data?[i].playerID ?? 0
             opponentPlayrsID.append(playerIDs)
@@ -101,7 +101,7 @@ extension UserProfileViewController {
             .sink(receiveValue: { [weak self] detail in
                 self?.loadData()
                 self?.collectionView.reloadData()
-                if detail?.players.count != 0 {
+                if detail?.response.data.players.count != 0 {
                     self?.teamCollectionViewHeight.constant = 120
                 }
             })
@@ -120,7 +120,7 @@ extension UserProfileViewController {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] team in
-                self?.fetchPlayersID(team)
+                self?.fetchPlayersID(team?.response)
             })
             .store(in: &cancellable)
         
@@ -128,8 +128,8 @@ extension UserProfileViewController {
     }
     
     ///fetch my team players ID
-    func fetchPlayersID(_ team: MyTeam?) {
-        if let team = team {
+    func fetchPlayersID(_ team: MyTeamResponse?) {
+        if let team = team?.data {
             let playerIDs = team.map { $0.playerID }
             if playerIDs.count < 11 {
                 customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.addPlayerToPlay.localized, image: ImageConstants.alertImage)
@@ -139,9 +139,9 @@ extension UserProfileViewController {
                     vc.playersIDs = playerIDs
                     vc.opponent_playersIDs = opponentPlayrsID
                     vc.againstComputer = againstComputer
-                    vc.opponentUserName = leaderboardDetailsVM?.responseData?.name
-                    vc.opponentUserID = leaderboardDetailsVM?.responseData?.id
-                    vc.opponentUserProfileImage = leaderboardDetailsVM?.responseData?.imgURL
+                    vc.opponentUserName = leaderboardDetailsVM?.responseData?.response.data.name
+                    vc.opponentUserID = leaderboardDetailsVM?.responseData?.response.data.id
+                    vc.opponentUserProfileImage = leaderboardDetailsVM?.responseData?.response.data.imgURL
                 }
             }
         }
@@ -215,20 +215,20 @@ extension UserProfileViewController {
     }
     
     private func setUserDetail() {
-        nameLabel.text = leaderboardDetailsVM?.responseData?.name
-        scoreLabel.text = "\(StringConstants.score.localized) \(leaderboardDetailsVM?.responseData?.score ?? 0)"
-        budgetLabel.text = formatNumber(Double(leaderboardDetailsVM?.responseData?.budget ?? 0))
+        nameLabel.text = leaderboardDetailsVM?.responseData?.response.data.name
+        scoreLabel.text = "\(StringConstants.score.localized) \(leaderboardDetailsVM?.responseData?.response.data.score ?? 0)"
+        budgetLabel.text = formatNumber(Double(leaderboardDetailsVM?.responseData?.response.data.budget ?? 0))
     }
     
     private func setImage() {
         userImageView.sd_imageIndicator = SDWebImageActivityIndicator.white
-        userImageView.sd_setImage(with: URL(string: leaderboardDetailsVM?.responseData?.imgURL ?? ""), placeholderImage: #imageLiteral(resourceName: "cardGame_defaultUser"))
+        userImageView.sd_setImage(with: URL(string: leaderboardDetailsVM?.responseData?.response.data.imgURL ?? ""), placeholderImage: #imageLiteral(resourceName: "cardGame_defaultUser"))
     }
     
     private func setMatchStatus() {
-        winCountLabel.text = "\(leaderboardDetailsVM?.responseData?.matchStats.wins ?? 0)"
-        lossCountLabel.text = "\(leaderboardDetailsVM?.responseData?.matchStats.loses ?? 0)"
-        totalPlayedCountLabel.text = "\(leaderboardDetailsVM?.responseData?.matchStats.total ?? 0)"
+        winCountLabel.text = "\(leaderboardDetailsVM?.responseData?.response.data.matchStats.wins ?? 0)"
+        lossCountLabel.text = "\(leaderboardDetailsVM?.responseData?.response.data.matchStats.loses ?? 0)"
+        totalPlayedCountLabel.text = "\(leaderboardDetailsVM?.responseData?.response.data.matchStats.total ?? 0)"
     }
     
     private func checkLocalisation() {
@@ -243,14 +243,14 @@ extension UserProfileViewController {
 extension UserProfileViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if leaderboardDetailsVM?.responseData?.players.count == 0 {
+        if leaderboardDetailsVM?.responseData?.response.data.players.count == 0 {
             self.view.makeToast(ErrorMessage.playerListUnavailable.localized, duration: 2.0, position: .center)
         }
-        return leaderboardDetailsVM?.responseData?.players.count ?? 0
+        return leaderboardDetailsVM?.responseData?.response.data.players.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let players = leaderboardDetailsVM?.responseData?.players else { return UICollectionViewCell() }
+        guard let players = leaderboardDetailsVM?.responseData?.response.data.players else { return UICollectionViewCell() }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.myTeamCell, for: indexPath) as! MyTeamCollectionViewCell
         cell.confiure(data: players[indexPath.item])
         let marketValue = Double(players[indexPath.item].marketValue) ?? 0
@@ -278,11 +278,11 @@ extension UserProfileViewController: UICollectionViewDataSource, UICollectionVie
 extension UserProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return yourMatchesVM?.responseData?.count ?? 0
+        return yourMatchesVM?.responseData?.response.data.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let data = yourMatchesVM?.responseData else { return UITableViewCell() }
+        guard let data = yourMatchesVM?.responseData?.response.data else { return UITableViewCell() }
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.yourMatches, for: indexPath) as! YourMatchesTableCell
         cell.configure(data: data[indexPath.row])
         return cell

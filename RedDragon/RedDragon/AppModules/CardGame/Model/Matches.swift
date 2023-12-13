@@ -8,6 +8,17 @@
 import Foundation
 
 struct YourMatch: Decodable {
+    let response: YourMatchResponse
+}
+
+// MARK: - Response
+struct YourMatchResponse: Decodable {
+    let code: Int
+    let messages: [String]
+    let data: [YourMatchData]
+}
+
+struct YourMatchData: Decodable {
     let id, userID: Int
     let opponentUserID: Int?
     let result: String
@@ -44,4 +55,4 @@ struct MatchUser: Decodable {
     }
 }
 
-typealias YourMatches = [YourMatch]
+//typealias YourMatches = [YourMatch]

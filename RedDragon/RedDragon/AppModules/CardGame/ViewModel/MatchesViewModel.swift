@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MatchesViewModel: APIServiceManager<YourMatches> {
+class MatchesViewModel: APIServiceManager<YourMatch> {
     
     func yourMatchesAsyncCall(isGuest: Bool = false) {
         let urlString = URLConstants.yourMatches //+ "?onlyOwn=true"

@@ -7,6 +7,18 @@
 
 import Foundation
 
+struct MyTeam: Decodable {
+    let response: MyTeamResponse
+}
+
+// MARK: - Response
+struct MyTeamResponse: Decodable {
+    let code: Int
+    let messages: [String]
+    let data: [MyTeamElement]
+}
+
+
 struct MyTeamElement: Codable {
     let playerID, userID: Int
     let name, position, marketValue, createdAt: String
@@ -22,4 +34,4 @@ struct MyTeamElement: Codable {
     }
 }
 
-typealias MyTeam = [MyTeamElement]
+//typealias MyTeam = [MyTeamElement]

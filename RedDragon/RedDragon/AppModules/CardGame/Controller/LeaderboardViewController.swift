@@ -99,7 +99,7 @@ extension LeaderboardViewController {
     }
     
     private func firstThreeUsersData(data: Leaderboard?) {
-        guard let leader = data else {
+        guard let leader = data?.response.data else {
             customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.dataNotFound.localized, image: ImageConstants.alertImage)
             return
         }
@@ -132,11 +132,11 @@ extension LeaderboardViewController {
 extension LeaderboardViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return leaderboardVM?.responseData?.count ?? 0
+        return leaderboardVM?.responseData?.response.data.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let data = leaderboardVM?.responseData else {
+        guard let data = leaderboardVM?.responseData?.response.data else {
             return UITableViewCell()
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.leaderboardCell, for: indexPath) as! LeaderboardTableViewCell
@@ -147,14 +147,14 @@ extension LeaderboardViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let data = leaderboardVM?.responseData else {
+        guard let data = leaderboardVM?.responseData?.response.data else {
             return
         }
         if data[indexPath.row].name == "Guest User" {
             customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.dataNotFound.localized, image: ImageConstants.alertImage)
         } else {
             navigateToViewController(UserProfileViewController.self, storyboardName: StoryboardName.cardGame) { [self] vc in
-                vc.userID = leaderboardVM?.responseData?[indexPath.row].id ?? 0
+                vc.userID = leaderboardVM?.responseData?.response.data[indexPath.row].id ?? 0
             }
         }
     }
