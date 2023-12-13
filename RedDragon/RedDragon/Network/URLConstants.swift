@@ -24,6 +24,7 @@ struct URLConstants {
     static let resendOTP           = baseURL + "resendotp"
     static let forgetPassword      = baseURL + "forgetPass"
     static let resetpassword       = baseURL + "resetpassword"
+    static let logout              = baseURL + "logout"
     
     // MARK: -  Database
     static let databaseBaseURL     = "https://datasport.one/api/v1/sportscore/data/"
