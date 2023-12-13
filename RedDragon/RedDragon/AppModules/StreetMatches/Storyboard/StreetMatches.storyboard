@@ -722,13 +722,13 @@
                                                                                         <rect key="frame" x="10" y="10" width="153.33333333333334" height="40"/>
                                                                                         <subviews>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Phone Number" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="toc-Ps-1rG">
-                                                                                                <rect key="frame" x="0.0" y="0.0" width="153.33333333333334" height="12"/>
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="153.33333333333334" height="25.666666666666668"/>
                                                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="10"/>
                                                                                                 <color key="textColor" name="black1"/>
                                                                                                 <nil key="highlightedColor"/>
                                                                                             </label>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Owner Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DrJ-Rg-OPC">
-                                                                                                <rect key="frame" x="0.0" y="12" width="153.33333333333334" height="28"/>
+                                                                                                <rect key="frame" x="0.0" y="25.666666666666739" width="153.33333333333334" height="14.333333333333332"/>
                                                                                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="12"/>
                                                                                                 <color key="textColor" name="black2"/>
                                                                                                 <nil key="highlightedColor"/>
@@ -4984,16 +4984,45 @@
             </objects>
             <point key="canvasLocation" x="1615" y="-1375"/>
         </scene>
-        <!--Event Requests View Controller-->
+        <!--Street Event Requests View Controller-->
         <scene sceneID="G9s-DH-j13">
             <objects>
-                <viewController storyboardIdentifier="EventRequestsViewController" id="meT-fa-xFL" customClass="EventRequestsViewController" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StreetEventRequestsViewController" id="meT-fa-xFL" customClass="StreetEventRequestsViewController" customModule="RedDragon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BGR-Fe-wcW">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pN2-kA-2Mx">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="89"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0jA-N2-sCk">
+                                        <rect key="frame" x="20" y="56" width="36" height="33"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="cardGame_back"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="cardGame_back">
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="backClicked:" destination="meT-fa-xFL" eventType="touchUpInside" id="qvq-zZ-YAu"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Requests" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddX-K3-XZD">
+                                        <rect key="frame" x="144" y="63.666666666666664" width="105.33333333333331" height="17.666666666666664"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="base"/>
+                                <constraints>
+                                    <constraint firstItem="ddX-K3-XZD" firstAttribute="centerX" secondItem="pN2-kA-2Mx" secondAttribute="centerX" id="5jQ-Nx-Hq6"/>
+                                    <constraint firstItem="ddX-K3-XZD" firstAttribute="centerY" secondItem="0jA-N2-sCk" secondAttribute="centerY" id="HnR-Ng-Q0f"/>
+                                    <constraint firstItem="0jA-N2-sCk" firstAttribute="leading" secondItem="pN2-kA-2Mx" secondAttribute="leading" constant="20" id="MZ0-zq-NpR"/>
+                                    <constraint firstAttribute="bottom" secondItem="0jA-N2-sCk" secondAttribute="bottom" id="yxc-TV-Bq5"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="e7S-CR-8Pp">
-                                <rect key="frame" x="15" y="74" width="363" height="729"/>
+                                <rect key="frame" x="15" y="104" width="363" height="699"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="meT-fa-xFL" id="0GU-c6-o9n"/>
@@ -5001,10 +5030,10 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b0H-LP-EA5">
-                                <rect key="frame" x="15" y="74" width="363" height="729"/>
+                                <rect key="frame" x="15" y="104" width="363" height="699"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hms-uX-yRD">
-                                        <rect key="frame" x="107.00000000000001" y="250.33333333333331" width="149.33333333333337" height="128.33333333333331"/>
+                                        <rect key="frame" x="107.00000000000001" y="235.33333333333331" width="149.33333333333337" height="128.33333333333331"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noData" translatesAutoresizingMaskIntoConstraints="NO" id="yaG-tM-4Kc">
                                                 <rect key="frame" x="24.666666666666657" y="0.0" width="100" height="100"/>
@@ -5033,18 +5062,23 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="JBv-s7-iT2" firstAttribute="bottom" secondItem="e7S-CR-8Pp" secondAttribute="bottom" constant="15" id="0WH-ny-P9q"/>
-                            <constraint firstItem="e7S-CR-8Pp" firstAttribute="top" secondItem="JBv-s7-iT2" secondAttribute="top" constant="15" id="7Ku-4z-tAU"/>
+                            <constraint firstItem="pN2-kA-2Mx" firstAttribute="leading" secondItem="JBv-s7-iT2" secondAttribute="leading" id="75P-Va-44p"/>
                             <constraint firstItem="JBv-s7-iT2" firstAttribute="trailing" secondItem="e7S-CR-8Pp" secondAttribute="trailing" constant="15" id="C8H-hJ-ESQ"/>
                             <constraint firstItem="JBv-s7-iT2" firstAttribute="trailing" secondItem="b0H-LP-EA5" secondAttribute="trailing" constant="15" id="N8K-7n-lJY"/>
                             <constraint firstItem="e7S-CR-8Pp" firstAttribute="leading" secondItem="JBv-s7-iT2" secondAttribute="leading" constant="15" id="QUM-2R-bU3"/>
                             <constraint firstItem="b0H-LP-EA5" firstAttribute="leading" secondItem="JBv-s7-iT2" secondAttribute="leading" constant="15" id="b0J-td-U2u"/>
-                            <constraint firstItem="b0H-LP-EA5" firstAttribute="top" secondItem="JBv-s7-iT2" secondAttribute="top" constant="15" id="eSP-zS-3Fj"/>
+                            <constraint firstItem="e7S-CR-8Pp" firstAttribute="top" secondItem="pN2-kA-2Mx" secondAttribute="bottom" constant="15" id="fvI-X8-V2v"/>
+                            <constraint firstItem="b0H-LP-EA5" firstAttribute="top" secondItem="pN2-kA-2Mx" secondAttribute="bottom" constant="15" id="nFT-J6-AsK"/>
                             <constraint firstItem="JBv-s7-iT2" firstAttribute="bottom" secondItem="b0H-LP-EA5" secondAttribute="bottom" constant="15" id="uU5-Im-O6o"/>
+                            <constraint firstItem="JBv-s7-iT2" firstAttribute="top" secondItem="pN2-kA-2Mx" secondAttribute="bottom" constant="-30" id="vPd-v2-4Gn"/>
+                            <constraint firstItem="pN2-kA-2Mx" firstAttribute="top" secondItem="BGR-Fe-wcW" secondAttribute="top" id="wcF-HH-9xh"/>
+                            <constraint firstItem="pN2-kA-2Mx" firstAttribute="trailing" secondItem="JBv-s7-iT2" secondAttribute="trailing" id="y4f-Sr-hVC"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="emptyView" destination="b0H-LP-EA5" id="BJO-eI-jbA"/>
                         <outlet property="lblNoData" destination="XgU-w4-JEs" id="RM8-JF-ris"/>
+                        <outlet property="lblTitle" destination="ddX-K3-XZD" id="Uei-Gr-ebs"/>
                         <outlet property="tableView" destination="e7S-CR-8Pp" id="LvE-kD-mxb"/>
                     </connections>
                 </viewController>
