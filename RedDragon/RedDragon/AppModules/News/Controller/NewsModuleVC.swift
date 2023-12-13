@@ -40,6 +40,7 @@ class NewsModuleVC: UIViewController {
                                , parent: self, container: containerView) { vc in
                 let vc = vc as! GossipVC
                 vc.sportType = self.sportType
+                
             }
         } else {
             sportsTypeArray = [.football, .cricket]
@@ -53,6 +54,11 @@ class NewsModuleVC: UIViewController {
     func nibInitialization() {
         headerCollectionView.register(CellIdentifier.headerTopCollectionViewCell)
         sportsCollectionView.register(CellIdentifier.headerTopCollectionViewCell)
+    }
+    
+    func searchData(text: String) {
+        let dataDict:[String: Any] = ["text": text]
+        NotificationCenter.default.post(name: .newsSearch, object: nil, userInfo: dataDict)
     }
 }
 
@@ -109,21 +115,21 @@ extension NewsModuleVC: UITextFieldDelegate {
         if let text = textField.text,
            let textRange = Range(range, in: text) {
             let searchText = text.replacingCharacters(in: textRange,with: string)
-            print("searchText  \(searchText)")
+            searchData(text: searchText)
         }
         return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        //searchData(text: searchTextField.text!)
+        searchData(text: searchTextField.text!)
         return true
     }
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         textField.text = ""
         textField.resignFirstResponder()
-        //searchData(text: searchTextField.text!)
+        searchData(text: searchTextField.text!)
         return true
     }
 }

@@ -15,6 +15,7 @@ class GossipVC: UIViewController {
     @IBOutlet weak var topMarqueeLabel: MarqueeLabel!
     @IBOutlet weak var publishersView: UIView!
     @IBOutlet weak var publisherCollectionView: UICollectionView!
+    @IBOutlet weak var leaguesView: UIView!
     @IBOutlet weak var leagueCollectionView: UICollectionView!
     @IBOutlet weak var trendingView: UIView!
     @IBOutlet weak var trendingCollectionView: UICollectionView!
@@ -45,6 +46,11 @@ class GossipVC: UIViewController {
         /// "thehindu" default value
         getNewsList()
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func initialSettings() {
         nibInitialization()
         
@@ -53,7 +59,7 @@ class GossipVC: UIViewController {
         topMarqueeLabel.type = .continuous
         topMarqueeLabel.speed = .rate(50)
         topMarqueeLabel.animationCurve = .linear
-       // topMarqueeLabel.fadeLength = 10.0
+        // topMarqueeLabel.fadeLength = 10.0
         
         breakngNewsImage.zoomAnimation()
         
@@ -62,6 +68,8 @@ class GossipVC: UIViewController {
         
         SocialPublicLeagueVM.shared.fetchLeagueListAsyncCall()
         GossipVideoListVM.shared.fetchVideosAsyncCall()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.searchEnable(notification:)), name: .newsSearch, object: nil)
     }
     
     func nibInitialization() {
@@ -70,6 +78,54 @@ class GossipVC: UIViewController {
         trendingCollectionView.register(CellIdentifier.newsCollectionViewCell)
         newsTableView.register(CellIdentifier.newsTableViewCell)
         videosCollectionView.register(CellIdentifier.newsCollectionViewCell)
+    }
+    
+    @objc func searchEnable(notification: Notification) {
+        if let dict = notification.userInfo as NSDictionary? {
+            let text = dict["text"] as? String ?? ""
+            
+            if text.count > 0 {
+                leagueArray = SocialPublicLeagueVM.shared.leagueArray
+                leagueArray = leagueArray.filter({(item: SocialLeague) -> Bool in
+                    if item.enName.lowercased().range(of: text.lowercased()) != nil {
+                        return true
+                    }
+                    if item.cnName.lowercased().range(of: text.lowercased()) != nil {
+                        return true
+                    }
+                    return false
+                })
+                leaguesView.isHidden = leagueArray.count == 0
+                gossipsArray = GossipListVM.shared.gossipsArray
+                gossipsArray = gossipsArray.filter({(item: Gossip) -> Bool in
+                    if item.title?.lowercased().range(of: text.lowercased()) != nil {
+                        return true
+                    }
+                    return false
+                })
+                videoArray = GossipVideoListVM.shared.videoList
+                videoArray = videoArray.filter({(item: GossipVideo) -> Bool in
+                    if item.title.lowercased().range(of: text.lowercased()) != nil {
+                        return true
+                    }
+                    return false
+                })
+                trendingArray.removeAll()
+                leaguesView.isHidden = leagueArray.count == 0
+                viewAllButton.isHidden = true
+                trendingCollectionView.reloadData()
+                newsTableView.reloadData()
+            } else {
+                
+                leagueArray = SocialPublicLeagueVM.shared.leagueArray
+                videoArray = GossipVideoListVM.shared.videoList
+                loadGossipData(showEsportdata: sportType == .eSports)
+            }
+            publishersView.isHidden = !(sportType != .eSports && text.count == 0)
+            leagueCollectionView.reloadData()
+            videosCollectionView.reloadData()
+            newsTableView.setContentOffset(.zero, animated: true)
+        }
     }
     
     // MARK: - Button Actions
@@ -109,7 +165,8 @@ extension GossipVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.leagueArray = response ?? []
+                SocialPublicLeagueVM.shared.leagueArray = response ?? []
+                self?.leagueArray = SocialPublicLeagueVM.shared.leagueArray
                 self?.leagueCollectionView.reloadData()
             })
             .store(in: &cancellable)
@@ -159,7 +216,7 @@ extension GossipVC {
             })
             .store(in: &cancellable)
     }
-
+    
     func execute_onGossipsResponseData(_ response: GossipListResponse?) {
         ///api has pagination
         publishersArray = response?.source ?? []
@@ -171,19 +228,16 @@ extension GossipVC {
         }
         
         if (response?.data?.data ?? []).count > 0 {
-            self.gossipsArray.append(contentsOf: response?.data?.data ?? [])
-            loadData(showEsportdata: false)
+            GossipListVM.shared.gossipsArray.append(contentsOf: response?.data?.data ?? [])
+            loadGossipData(showEsportdata: false)
         } else {
-            loadData(showEsportdata: false)
+            loadGossipData(showEsportdata: false)
         }
     }
     
     func execute_onESportsResponseData(_ response: [ESports]) {
         ///api has no pagination
-        gossipsArray.removeAll()
-        trendingArray.removeAll()
         GossipListVM.shared.gossipsArray.removeAll()
-        
         
         /// make Gossip model from ESports model
         /// update id, title, mediasource
@@ -193,14 +247,14 @@ extension GossipVC {
             gossipModel.id = eSportModel.id
             gossipModel.title = eSportModel.articalTitle
             gossipModel.mediaSource = [URLConstants.eSportsBaseURL + eSportModel.articalThumbnailImage]
-            gossipsArray.append(gossipModel)
+            GossipListVM.shared.gossipsArray.append(gossipModel)
         }
-        loadData(showEsportdata: true)
+        loadGossipData(showEsportdata: true)
     }
     
-    func loadData(showEsportdata: Bool) {
+    func loadGossipData(showEsportdata: Bool) {
+        gossipsArray = GossipListVM.shared.gossipsArray
         topMarqueeLabel.text = gossipsArray.reversed().map({$0.title ?? ""}).joined(separator: "   *   ")
-        GossipListVM.shared.gossipsArray = gossipsArray
         /// Show 5 news of gossip array in trending topic section
         trendingArray = Array(gossipsArray.prefix(5))
         /// shuffle gossip array to avoid repeat content on "trending topic" and "news category"
@@ -220,7 +274,6 @@ extension GossipVC {
         newsTableView.reloadData()
     }
 }
-
 
 // MARK: - CollectionView Delegates
 extension GossipVC: UICollectionViewDataSource {

@@ -28,8 +28,8 @@ class NewsCollectionViewCell: UICollectionViewCell {
     func configureGossipImageCell(model: Gossip) {
         newsImageView.setImage(imageStr: model.mediaSource.last ?? "", placeholder: .empty)
         titleLabel.text = model.title
-        //        newsImageView.roundCornersWithBorderLayer(cornerRadii: 10, corners: [.topLeft, .topRight], bound: newsImageView.bounds)
-        //        newsImageView.layoutIfNeeded()
+        // newsImageView.roundCornersWithBorderLayer(cornerRadii: 10, corners: [.topLeft, .topRight], bound: newsImageView.bounds)
+        // newsImageView.layoutIfNeeded()
         newsImageView.isHidden = false
         videoView.isHidden = true
     }

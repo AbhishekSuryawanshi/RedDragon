@@ -61,7 +61,7 @@ class LoginVC: UIViewController {
         bottomFormatedText.addLink(textToFind: " Register", linkURL: "register")
         bottomTextView.attributedText = bottomFormatedText
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.dismissLoginVC), name: NSNotification.dismissLoginVC, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dismissLoginVC), name: .dismissLoginVC, object: nil)
     }
     
     func showLoader(_ value: Bool) {

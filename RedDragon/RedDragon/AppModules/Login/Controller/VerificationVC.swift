@@ -136,7 +136,7 @@ extension VerificationVC {
                     UserDefaults.standard.budget = Int(user.affAppData?.sportCard?.budget ?? "200000000")
                     UserDefaults.standard.score = Int(user.affAppData?.sportCard?.score ?? "0")
                     //go back to tabbar
-                    NotificationCenter.default.post(name: NSNotification.dismissLoginVC, object: nil)
+                    NotificationCenter.default.post(name: .dismissLoginVC, object: nil)
                 } else {
                     self.view.makeToast(ErrorMessage.incorrectOTP)
                 }

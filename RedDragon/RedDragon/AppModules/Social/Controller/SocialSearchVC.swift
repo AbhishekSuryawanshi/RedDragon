@@ -178,7 +178,7 @@ extension SocialSearchVC: PostListVCDelegate {
         containerHeightConstraint.constant = height
         if searchEnable {
             searchEnable = false
-            NotificationCenter.default.post(name: NSNotification.socialSearchEnable, object: nil, userInfo: searchDataDict)
+            NotificationCenter.default.post(name: .socialSearch, object: nil, userInfo: searchDataDict)
         }
         stopLoader()
     }

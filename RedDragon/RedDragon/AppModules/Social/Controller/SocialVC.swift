@@ -54,7 +54,7 @@ class SocialVC: UIViewController {
     }
     
     func initialSettings() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshHashTagView(notification:)), name: NSNotification.refreshHashTags, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshHashTagView(notification:)), name: .refreshHashTags, object: nil)
         nibInitialization()
         fetchSocialViewModel()
         let tagLayout: BaseLayout = TagsCVLayout()
@@ -118,7 +118,7 @@ class SocialVC: UIViewController {
         if text.count > 0 {
             let dataDict:[String: Any] = ["status": true,
                                           "text": searchTextField.text!]
-            NotificationCenter.default.post(name: NSNotification.socialSearchEnable, object: nil, userInfo: dataDict)
+            NotificationCenter.default.post(name: .socialSearch, object: nil, userInfo: dataDict)
             
             leagueArray = SocialLeagueVM.shared.leagueArray
             leagueArray = leagueArray.filter({(item: SocialLeague) -> Bool in
@@ -130,6 +130,7 @@ class SocialVC: UIViewController {
                 }
                 return false
             })
+            
             leagueView.isHidden = leagueArray.count == 0 ? true : false
             leagueCollectionView.reloadData()
             
@@ -175,7 +176,7 @@ class SocialVC: UIViewController {
         }
         searchTextField.text = ""
         let dataDict:[String: Any] = ["status": false]
-        NotificationCenter.default.post(name: NSNotification.socialSearchEnable, object: nil, userInfo: dataDict)
+        NotificationCenter.default.post(name: .socialSearch, object: nil, userInfo: dataDict)
         
         leagueView.isHidden = false
         teamView.isHidden = false
