@@ -29,7 +29,7 @@ struct StreetEvent: Codable {
     let isClosed: Int
     let createdAt, updatedAt: String
     let teamName, teamNameCN, teamAddress: String?
-    let eventImgURL: String
+    let eventImgURL: String?
     let teamLogoURL: String?
     let creatorName: String
     let creatorImgURL: String?
