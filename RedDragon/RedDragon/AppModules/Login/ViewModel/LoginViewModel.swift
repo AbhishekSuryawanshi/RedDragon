@@ -66,3 +66,14 @@ class ResetPasswordVM: APIServiceManager<LoginResponse> {
         asyncCall(urlString: URLConstants.resetpassword, method: .post, parameters: parameters)
     }
 }
+
+
+class LogoutVM: APIServiceManager<LoginResponse> {
+    init () {}
+    static let shared = LogoutVM()
+    
+    ///function for logout
+    func logoutAsyncCall() {
+        asyncCall(urlString: URLConstants.logout, method: .get, parameters: nil)
+    }
+}

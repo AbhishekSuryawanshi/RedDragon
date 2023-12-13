@@ -7,16 +7,24 @@
 
 import UIKit
 import Hero
+import Combine
 
 class DiscoverViewController: UIViewController {
     
+    var cancellable = Set<AnyCancellable>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchLoginViewModel()
         gotoCardGameButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    func showLoader(_ value: Bool) {
+        value ? startLoader() : stopLoader()
     }
     
     // MARK: - Navigation
@@ -43,9 +51,7 @@ class DiscoverViewController: UIViewController {
     
     @IBAction func logoutButtonTapped(_ sender: UIButton) {
         self.customAlertView_2Actions(title: "Logout".localized, description: StringConstants.logoutAlert.localized) {
-            UserDefaults.standard.user = nil
-            UserDefaults.standard.token = nil
-            UserDefaults.standard.points = nil
+            LogoutVM.shared.logoutAsyncCall()
         }
     }
     
@@ -92,5 +98,37 @@ extension DiscoverViewController {
     @objc func buttonTapped() {
         self.tabBarController?.tabBar.isHidden = true
         navigateToViewController(AllPlayersViewController.self, storyboardName: StoryboardName.cardGame, identifier: "AllPlayersViewController")
+    }
+}
+
+// MARK: - API Services
+extension DiscoverViewController {
+    func fetchLoginViewModel() {
+        
+        LogoutVM.shared.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        LogoutVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        LogoutVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                self?.execute_onResponseData(response)
+            })
+            .store(in: &cancellable)
+    }
+    
+    func execute_onResponseData(_ response: LoginResponse?) {
+        if let dataResponse = response?.response {
+            UserDefaults.standard.user = nil
+            UserDefaults.standard.token = nil
+            UserDefaults.standard.points = nil
+        } else {
+            if let errorResponse = response?.error {
+                self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+            }
+        }
     }
 }
