@@ -7,6 +7,17 @@
 
 import Foundation
 
+struct Leaderboard: Decodable {
+    let response: LeaderboardResponse
+}
+
+// MARK: - Response
+struct LeaderboardResponse: Decodable {
+    let code: Int
+    let messages: [String]
+    let data: [LeaderboardElement]
+}
+
 struct LeaderboardElement: Decodable {
     let id: Int
     let name, email: String
@@ -23,4 +34,4 @@ struct LeaderboardElement: Decodable {
     }
 }
 
-typealias Leaderboard = [LeaderboardElement]
+//typealias Leaderboard = [LeaderboardElement]

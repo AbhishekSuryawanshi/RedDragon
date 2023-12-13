@@ -136,9 +136,9 @@ extension AllPlayersViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        animateTabelCell(tableView, willDisplay: cell, forRowAt: indexPath)
-    }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        animateTabelCell(tableView, willDisplay: cell, forRowAt: indexPath)
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as? AllPlayersTableViewCell

@@ -30,7 +30,7 @@ class YourMatchesTableCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func configure(data: YourMatch) {
+    func configure(data: YourMatchData) {
         firstPlayerNameLabel.text = data.user.name
         firstPlayerProfileImage.sd_imageIndicator = SDWebImageActivityIndicator.white
         firstPlayerProfileImage.sd_setImage(with: URL(string: data.user.imgURL), placeholderImage: #imageLiteral(resourceName: "cardGame_defaultUser"))
