@@ -56,11 +56,7 @@ class UserProfileViewController: UIViewController {
     }
     
     @IBAction func inviteToPlayButton(_ sender: Any) {
-        let guest = UserDefaults.standard.bool(forKey: UserDefaultString.guestUser)
-        if guest {
-            customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.loginRequires.localized, image: ImageConstants.alertImage)
-        }
-        else {
+        if ((UserDefaults.standard.token ?? "") != "") {
             if leaderboardDetailsVM?.responseData?.players.count == 0 {
                 self.view.makeToast(ErrorMessage.noPlayers.localized, duration: 2.0, position: .center)
             } else {
@@ -72,6 +68,8 @@ class UserProfileViewController: UIViewController {
                     fetchOpponentPlayersID(leaderboardDetailsVM?.responseData)
                 }
             }
+        } else {
+            customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.loginRequires.localized, image: ImageConstants.alertImage)
         }
     }
     

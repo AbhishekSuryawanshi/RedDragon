@@ -32,6 +32,12 @@ class CardGameMyTeamVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        guard let _ = UserDefaults.standard.token else {
+            view.makeToast(ErrorMessage.loginRequires.localized, duration: 1.0, position: .center) { didTap in
+                self.navigationController?.popViewController(animated: true)
+            }
+            return
+        }
         loadFunctionality()
     }
     
