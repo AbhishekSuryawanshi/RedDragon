@@ -171,8 +171,10 @@ extension CardGamePlayerDetailVC {
         playerImageView.heroID = defaultImage
         playerNameLabel.heroID = playerName
         
-        let userBudget = UserDefaults.standard.budget
-        userPointsLabel.text = "\(formatNumber(Double(userBudget!)))"
+        if ((UserDefaults.standard.token ?? "") != "") {
+            let userBudget = UserDefaults.standard.budget
+            userPointsLabel.text = "\(formatNumber(Double(userBudget!)))"
+        }
         
         playerImageView.sd_imageIndicator = SDWebImageActivityIndicator.white
         playerImageView.sd_setImage(with: URL(string: defaultImage))

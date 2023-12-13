@@ -29,7 +29,7 @@ class BuyPlayerViewModel : APIServiceManager<ResponseMessage> {
             "players": [player]
         ]
         
-        asyncCall(urlString: url, method: method, parameters: parameters, isGuestUser: true, anyDefaultToken: DefaultToken.guestUserCardGame)
+        asyncCall(urlString: url, method: method, parameters: parameters)
     }
     
 }

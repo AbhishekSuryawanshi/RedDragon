@@ -59,6 +59,16 @@ extension UserDefaults {
         }
     }
     
+    var score: Int? {
+        get {
+            return value(forKey: UserDefaultString.cardGame_score) as? Int
+        }
+        set {
+            set(newValue, forKey: UserDefaultString.cardGame_score)
+            synchronize()
+        }
+    }
+    
     
     func clearSpecifiedItems() {
         removeObject(forKey: UserDefaultString.token)

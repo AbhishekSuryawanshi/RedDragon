@@ -58,6 +58,7 @@ struct CellIdentifier {
     static let myTeamCell                       = "MyTeamCollectionViewCell"
     static let leaderboardCell                  = "LeaderboardTableViewCell"
     static let yourMatches                      = "YourMatchesTableCell"
+    static let userPlayerCell                   = "UserPlayersCollectionCell"
     
     //Prediction
     static let predictUpcomingTableViewCell     = "PredictUpcomingTableViewCell"
@@ -83,9 +84,21 @@ struct CellIdentifier {
     static let imageSliderCollectionViewCell   = "ImageSliderCollectionViewCell"
     static let hoursTableViewCell              = "HoursTableViewCell"
     static let stadiumImageCollectionViewCell  = "StadiumImageCollectionViewCell"
+    static let streetMatchPlayerTableViewCell  = "StreetMatchPlayerTableViewCell"
+    static let teamCollectionTableViewCell     = "TeamCollectionTableViewCell"
+    static let newTeamTableViewCell            = "NewTeamTableViewCell"
+    static let teamCollectionViewCell          = "TeamCollectionViewCell"
+    static let infoTableViewCell               = "InfoTableViewCell"
+    static let playerPositionsTableViewCell    = "PlayerPositionsTableViewCell"
     
     //News
     static let newsCollectionViewCell           = "NewsCollectionViewCell"
     static let newsTableViewCell                = "NewsTableViewCell"
     static let newsVideoCollectionViewCell      = "NewsVideoCollectionViewCell"
+    
+    //Matches
+    static let globalMatchesTableViewCell         = "GlobalMatchesTableViewCell"
+    static let globalMatchInfoTableViewCell       = "GlobalMatchInfoTableViewCell"
+    static let globalMatchOddsTableViewCell       = "GlobalMatchOddsTableViewCell"
+    static let globalMatchHeadToHeadTableViewCell = "GlobalMatchHeadToHeadTableViewCell"
 }

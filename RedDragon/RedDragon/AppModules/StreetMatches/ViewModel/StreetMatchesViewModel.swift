@@ -8,7 +8,7 @@
 import Foundation
 
 class StreetMatchesViewModel: APIServiceManager<[StreetMatch]> {
-    //function to fetch home data
+    //function to fetch matches data
     func fetchMatchesListAsyncCall(offset:String) {
         var urlString   = URLConstants.streetMatchesList
         let method      = RequestType.get

@@ -24,6 +24,7 @@ class CardGameMyTeamVC: UIViewController {
     var budgetClass = BudgetCalculation()
     var updateInfoVM = UpdateInfoViewModel()
     var playerSoldOut: Bool? = nil
+    var againstComputer: Bool?
     var userBudget_afterPlayerSold: Double? = 0
 
     override func viewDidLoad() {
@@ -31,6 +32,12 @@ class CardGameMyTeamVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        guard let _ = UserDefaults.standard.token else {
+            view.makeToast(ErrorMessage.loginRequires.localized, duration: 1.0, position: .center) { didTap in
+                self.navigationController?.popViewController(animated: true)
+            }
+            return
+        }
         loadFunctionality()
     }
     
@@ -55,6 +62,24 @@ class CardGameMyTeamVC: UIViewController {
     }
     
     @IBAction func playAgainstComputer(_ sender: Any) {
+        UserDefaults.standard.set(false, forKey: "gameEnd")
+        againstComputer = true
+        fetchPlayersID(teamListVM?.responseData?.response)
+    }
+    
+    func fetchPlayersID(_ team: MyTeamResponse?) {
+        if let team = team?.data {
+            let playerIDs = team.map { $0.playerID }
+            if playerIDs.count < 11 {
+                customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.addPlayerToPlay.localized, image: ImageConstants.alertImage)
+            } else {
+                /// __Present Game screen 
+                presentToViewController(GameViewController.self, storyboardName: StoryboardName.cardGameMatch) { [self] vc in
+                    vc.playersIDs = playerIDs
+                    vc.againstComputer = againstComputer
+                }
+            }
+        }
     }
     
     @IBAction func playAgainstFriends(_ sender: Any) {
@@ -126,14 +151,14 @@ extension CardGameMyTeamVC {
 extension CardGameMyTeamVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if teamListVM?.responseData?.count == 0 {
+        if teamListVM?.responseData?.response.data.count == 0 {
             customAlertView(title: ErrorMessage.dataNotFound.localized, description: ErrorMessage.addPlayer.localized, image: ImageConstants.alertImage)
         }
-        return teamListVM?.responseData?.count ?? 0
+        return teamListVM?.responseData?.response.data.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let list = teamListVM?.responseData else {
+        guard let list = teamListVM?.responseData?.response.data else {
             return UICollectionViewCell()
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.myTeamCell, for: indexPath) as! MyTeamCollectionViewCell
@@ -163,9 +188,9 @@ extension CardGameMyTeamVC: UICollectionViewDelegate, UICollectionViewDataSource
     
     ///sell player API call
     @objc func sellPlayerFunction(sender: UIButton) {
-        teamListVM?.sellPlayerAsyncCall(playerID: teamListVM?.responseData?[sender.tag].playerID ?? 0)
+        teamListVM?.sellPlayerAsyncCall(playerID: teamListVM?.responseData?.response.data[sender.tag].playerID ?? 0)
         playerSoldOut = true
-        userBudget_afterPlayerSold = calculateBudget(Double(teamListVM?.responseData?[sender.tag].marketValue ?? "") ?? 0)
+        userBudget_afterPlayerSold = calculateBudget(Double(teamListVM?.responseData?.response.data[sender.tag].marketValue ?? "") ?? 0)
         DispatchQueue.main.async { [self] in
             budgetLabel.text = "\(formatNumber(Double(userBudget_afterPlayerSold!)))"
         }
@@ -173,7 +198,6 @@ extension CardGameMyTeamVC: UICollectionViewDelegate, UICollectionViewDataSource
 }
 
 extension CardGameMyTeamVC {
-    
     ///calculate user budget after selling player
     func calculateBudget(_ playerValue: Double) -> Double {
         let userBudget = UserDefaults.standard.budget!

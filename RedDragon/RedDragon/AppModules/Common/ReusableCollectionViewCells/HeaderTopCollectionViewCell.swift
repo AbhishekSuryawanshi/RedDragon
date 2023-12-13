@@ -32,4 +32,18 @@ class HeaderTopCollectionViewCell: UICollectionViewCell {
         titleLabel.font = font
         titleLabel.textColor = textColor
     }
+    
+    func configureCell(title: String, selected: Bool, textColor: UIColor = .black, selectionColor: UIColor = .base,fontSize: CGFloat = 17) {
+        if selected{
+            titleLabel.textColor = selectionColor
+        }
+        else{
+            titleLabel.textColor = textColor
+        }
+        var formatedText = NSMutableAttributedString()
+        formatedText = selected ? formatedText.bold(title, size: fontSize) : formatedText.regular(title, size: fontSize)
+        formatedText.addUnderLine(textToFind: title, remove: !selected)
+        titleLabel.attributedText = formatedText
+        
+    }
 }

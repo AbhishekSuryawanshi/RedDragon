@@ -20,7 +20,7 @@ class MeetUserViewModel: APIServiceManager<MeetUserListModel> {
 
 class MeetUserDetailViewModel: APIServiceManager<MeetUserDetailModel> {
     
-    ///function to fetch user list
+    ///function to fetch user detail
     func fetchMeetUserDetailAsyncCall(userID: Int) {
         let urlString   = URLConstants.meetUserList + "?id=\(userID)"
         let method      = RequestType.get
@@ -40,7 +40,7 @@ class MeetLikedUserViewModel: APIServiceManager<MeetLikedUserModel> {
 
 class MeetMyMatchUserViewModel: APIServiceManager<MeetUserListModel> {
     
-    ///function to post like user
+    ///function to fetch my match user
     func fetchMyMatchUserAsyncCall() {
         let urlString   = URLConstants.meetMyMatchUser
         let method      = RequestType.get

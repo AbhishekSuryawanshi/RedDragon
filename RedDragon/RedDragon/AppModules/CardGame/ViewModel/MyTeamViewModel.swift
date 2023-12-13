@@ -12,7 +12,7 @@ class MyTeamViewModel: APIServiceManager<MyTeam> {
     func fetchmyTeamAsyncCall() {
         let url = URLConstants.cardGame_buyPlayer
         let method = RequestType.get
-        asyncCall(urlString: url, method: method, parameters: nil, isGuestUser: true, anyDefaultToken: DefaultToken.guestUserCardGame)
+        asyncCall(urlString: url, method: method, parameters: nil)
     }
 }
 
@@ -24,6 +24,6 @@ extension MyTeamViewModel {
         let url = URLConstants.removePlayer
         let method = RequestType.delete
         let parameter: [String: Any] = ["playerId": playerID]
-        asyncCall(urlString: url, method: method, parameters: parameter, isGuestUser: true, anyDefaultToken: DefaultToken.guestUserCardGame)
+        asyncCall(urlString: url, method: method, parameters: parameter)
     }
 }

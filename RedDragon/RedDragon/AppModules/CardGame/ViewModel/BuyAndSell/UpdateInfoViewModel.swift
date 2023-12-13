@@ -14,7 +14,7 @@ class UpdateInfoViewModel: APIServiceManager<ResponseMessage> {
         let urlString = URLConstants.updateUserInfo
         let method = RequestType.put
         let parameters: [String: Any] = ["budget": budget]
-        asyncCall(urlString: urlString, method: method, parameters: parameters, isGuestUser: true, anyDefaultToken: DefaultToken.guestUserCardGame)
+        asyncCall(urlString: urlString, method: method, parameters: parameters)
     }
     
     //score
@@ -22,7 +22,7 @@ class UpdateInfoViewModel: APIServiceManager<ResponseMessage> {
         let urlString = URLConstants.updateUserInfo
         let method = RequestType.put
         let parameters: [String: Any] = ["score": score]
-        asyncCall(urlString: urlString, method: method, parameters: parameters, isGuestUser: true, anyDefaultToken: DefaultToken.guestUserCardGame)
+        asyncCall(urlString: urlString, method: method, parameters: parameters)
     }
     
 }

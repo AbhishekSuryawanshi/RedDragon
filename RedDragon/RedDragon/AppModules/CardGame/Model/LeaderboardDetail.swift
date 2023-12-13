@@ -8,6 +8,17 @@
 import Foundation
 
 struct LeaderboardDetail: Decodable {
+    let response: LeaderboardDetailResponse
+}
+
+// MARK: - Response
+struct LeaderboardDetailResponse: Decodable {
+    let code: Int
+    let messages: [String]
+    let data: DetailElement
+}
+
+struct DetailElement: Decodable {
     let id: Int
     let name, email: String
     let mobile, birthdate: String?

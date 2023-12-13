@@ -15,6 +15,7 @@ struct StoryboardName {
     static let matchDetail    = "MatchDetail"
     static let cardGame       = "CardGame"
     static let cardGamePopup  = "CardGamePopup"
+    static let cardGameMatch  = "CardGameMatchScreen"
     static let playerDetail   = "PlayerDetail"
     static let bets           = "BetStoryboard"
     static let meet           = "Meet"
@@ -22,5 +23,6 @@ struct StoryboardName {
     static let streetMatches  = "StreetMatches"
     static let news           = "News"
     static let gossip         = "Gossip"
+    static let matches        = "Matches"
 }
 

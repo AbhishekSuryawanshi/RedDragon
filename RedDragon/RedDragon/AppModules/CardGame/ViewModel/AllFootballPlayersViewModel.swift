@@ -49,7 +49,7 @@ class AllFootballPlayersViewModel: ObservableObject {
             allPlayers = retrieveAllPlayersFromRealm()
         } else {
             /// More than a week has passed, perform API call and store data in Realm
-            allPlayersAsyncCall(language: "en", page: 1, sort: "desc", value: 20000000, limit: 1000, lowerBound: 1)
+            allPlayersAsyncCall(language: "en", page: 1, sort: "desc", value: 100000000, limit: 1000, lowerBound: 1)
             UserDefaults.standard.set(currentDate, forKey: UserDefaultString.lastAPICallDateKey)
         }
     }

@@ -61,7 +61,7 @@ extension SideMenuVc : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         UserDefaults.standard.sport = viewModel.sports[indexPath.row].title.lowercased()
-        NotificationCenter.default.post(name: NSNotification.selectedSport, object: nil)
+        NotificationCenter.default.post(name: .selectedSport, object: nil)
         self.dismiss(animated: true)
     }
     

@@ -103,13 +103,6 @@ class CreateStadiumVC:UIViewController{
     
     @IBAction func tapChooseImage(_ sender: Any) {
         showNewImageActionSheet(sourceView: self.view)
-//        ImagePickerManager().pickImage(self) { image in
-//            self.viewModel.uploadImage(image: image)
-//            self.images.append(image)
-//            self.collectionViewImages.reloadData()
-//            self.collectionViewImages.isHidden = false
-//        }
-        
     }
     
     func initialSettings(){

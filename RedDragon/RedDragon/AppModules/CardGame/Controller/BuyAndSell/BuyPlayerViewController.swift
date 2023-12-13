@@ -86,7 +86,7 @@ extension BuyPlayerViewController {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] team in
-                guard let data = team else {
+                guard let data = team?.response else {
                     return
                 }
                 self?.storePlayerID(data: data)
@@ -108,7 +108,7 @@ extension BuyPlayerViewController {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] isBuyed in
-                if isBuyed?.message == "success" {
+                if isBuyed?.response.data.message == "success" {
                     self?.loadFunctionalityOn_buy_success()
                 }
             })
@@ -162,9 +162,10 @@ extension BuyPlayerViewController {
         cancelButton.setTitle(StringConstants.cancel.localized, for: .normal)
     }
     
-    private func storePlayerID(data: MyTeam) {
-        for i in 0..<data.count {
-            myTeam.append(data[i].playerID)
+    private func storePlayerID(data: MyTeamResponse) {
+        let playerData = data.data
+        for i in 0..<playerData.count {
+            myTeam.append(playerData[i].playerID)
         }
     }
     
