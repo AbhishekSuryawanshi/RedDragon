@@ -53,7 +53,8 @@ struct Creator: Codable {
     let locationLong, locationLat: Double
     let address, createdAt, updatedAt: String
     let imgURL: String?
-    let players: [StreetMatchPlayer]
+    let players: StreetMatchPlayer?
+    let player: StreetMatchPlayer
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -69,6 +70,7 @@ struct Creator: Codable {
         case updatedAt = "updated_at"
         case imgURL = "img_url"
         case players
+        case player
     }
 }
 

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class StreetEventDetailsViewController: UIViewController {
 
@@ -41,6 +42,7 @@ class StreetEventDetailsViewController: UIViewController {
     var feedType:FeedsType?
     var tableViewPlayersObserver: NSKeyValueObservation?
     var sendEventRequestsViewModel:SendEventRequestsViewModel?
+    private var cancellable = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,14 +96,46 @@ class StreetEventDetailsViewController: UIViewController {
     
     func initialSettings(){
         setupLocalisation()
-        tableViewPositions.register(UINib(nibName: "ListPlayerPositionTableViewCell", bundle: nil), forCellReuseIdentifier: "listPlayerPositionTableViewCell")
+        nibInitialization()
         tableViewPlayersObserver = tableViewPositions.observe(\.contentSize, options: .new) { (_, change) in
                     guard let height = change.newValue?.height else { return }
                     self.tableViewHeight.constant = height
                 }
-        
+        configureViewModel()
         fillDetails()
     }
+    
+    func nibInitialization() {
+        defineTableViewNibCell(tableView: tableViewPositions, cellName: CellIdentifier.listPlayerPositionTableViewCell)
+    }
+    
+    func showLoader(_ value: Bool) {
+         value ? startLoader() : stopLoader()
+    }
+    
+    func configureViewModel() {
+        sendEventRequestsViewModel = SendEventRequestsViewModel()
+        sendEventRequestsViewModel?.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        sendEventRequestsViewModel?.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        sendEventRequestsViewModel?.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                self?.eventRequestSuccess()
+            })
+            .store(in: &cancellable)
+    }
+    
+    func eventRequestSuccess(){
+        self.customAlertView(title: ErrorMessage.success.localized, description: "Event Request Sent", image: ImageConstants.successImage) {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
     
     func setupLocalisation(){
         btnDetails.setTitle("View Details".localized, for: .normal)
@@ -226,20 +260,16 @@ class StreetEventDetailsViewController: UIViewController {
         else{
             message = matchMessage
         }
-//        chooseTeam { team in
-//            Popup.openAlertPopup(title: "Confirmation".localized, message: message) {
-//                let param = ["event_id":self.details!.id!,
-//                             "team_id":team!.id!]
-//                self.viewModel.sendRequest(param: param)
-//            } dismissed: {
-//                
-//            }
-//
-//        }
-        
+        chooseTeam { team in
+            self.customAlertView_2Actions(title: "Alert".localized, description: message) {
+                let param = ["event_id":self.details!.id,
+                             "team_id":team!.id]
+                self.sendEventRequestsViewModel?.sendEventRequestAsyncCall(param: param)
+            }
+            
+        }
     }
    
-    
 }
 
 extension StreetEventDetailsViewController{
@@ -252,20 +282,20 @@ extension StreetEventDetailsViewController{
 }
 
 
-//extension StreetEventDetailsViewController:UITableViewDelegate,UITableViewDataSource{
-//    
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return details?.positions?.count ?? 0
-//    }
-//    
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "listPlayerPositionTableViewCell", for: indexPath) as! ListPlayerPositionTableViewCell
-//        cell.configureCell(obj: details?.positions?[indexPath.row])
-//        return cell
-//    }
-//    
-//    
-//}
+extension StreetEventDetailsViewController:UITableViewDelegate,UITableViewDataSource{
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return details?.positions?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.listPlayerPositionTableViewCell, for: indexPath) as! ListPlayerPositionTableViewCell
+        cell.configureCell(obj: details?.positions?[indexPath.row])
+        return cell
+    }
+}
+
+
 //
 //extension StreetEventDetailsViewController:FeedsDetailsViewModelDelegate{
 //    func didFinishSendRequest() {
