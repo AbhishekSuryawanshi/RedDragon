@@ -19,7 +19,7 @@ class UpdateMatchStatus: APIServiceManager<ResponseMessage> {
         else {
             parameters = ["result": result, "budget": budget, "score": score, "opponent_user_id": opponentUserID]
         }
-        asyncCall(urlString: urlString, method: method, parameters: parameters, isGuestUser: true, anyDefaultToken: DefaultToken.guestUserCardGame)
+        asyncCall(urlString: urlString, method: method, parameters: parameters)
     }
     
 }

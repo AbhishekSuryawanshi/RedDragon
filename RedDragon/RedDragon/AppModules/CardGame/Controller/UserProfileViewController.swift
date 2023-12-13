@@ -199,8 +199,13 @@ extension UserProfileViewController {
     }
     
     private func makeNetworkCall() {
-        leaderboardDetailsVM?.leaderboardDetailAsyncCall(userID: userID)
-        yourMatchesVM?.yourMatchesAsyncCall()
+        if ((UserDefaults.standard.token ?? "") != "") {
+            leaderboardDetailsVM?.leaderboardDetailAsyncCall(userID: userID)
+            yourMatchesVM?.yourMatchesAsyncCall()
+        } else {
+            leaderboardDetailsVM?.leaderboardDetailAsyncCall(userID: userID, isGuest: true)
+            yourMatchesVM?.yourMatchesAsyncCall(isGuest: true)
+        }
     }
     
     private func loadData() {

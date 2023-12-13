@@ -91,7 +91,11 @@ extension LeaderboardViewController {
     }
     
     private func makeNetworkCall() {
-        leaderboardVM?.fetchLeaderboardListAsyncCall()
+        if ((UserDefaults.standard.token ?? "") != "") {
+            leaderboardVM?.fetchLeaderboardListAsyncCall()
+        } else {
+            leaderboardVM?.fetchLeaderboardListAsyncCall(isGuest: true)
+        }
     }
     
     private func firstThreeUsersData(data: Leaderboard?) {

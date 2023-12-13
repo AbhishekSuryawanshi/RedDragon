@@ -9,10 +9,14 @@ import Foundation
 
 class MatchesViewModel: APIServiceManager<YourMatches> {
     
-    func yourMatchesAsyncCall() {
+    func yourMatchesAsyncCall(isGuest: Bool = false) {
         let urlString = URLConstants.yourMatches //+ "?onlyOwn=true"
         let method = RequestType.get
-        asyncCall(urlString: urlString, method: method, parameters: nil, isGuestUser: true, anyDefaultToken: DefaultToken.guestUserCardGame)
+        if isGuest {
+            asyncCall(urlString: urlString, method: method, parameters: nil, isGuestUser: true, anyDefaultToken: DefaultToken.guestUserCardGame)
+        } else {
+            asyncCall(urlString: urlString, method: method, parameters: nil)
+        }
     }
     
 }

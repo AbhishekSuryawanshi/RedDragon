@@ -9,10 +9,14 @@ import Foundation
 
 class LeaderboardViewModel: APIServiceManager<Leaderboard> {
     
-    func fetchLeaderboardListAsyncCall() {
+    func fetchLeaderboardListAsyncCall(isGuest: Bool = false) {
         let url = URLConstants.cardGame_leaderboard
         let method = RequestType.get
-        asyncCall(urlString: url, method: method, parameters: nil, isGuestUser: true, anyDefaultToken: DefaultToken.guestUserCardGame)
+        if isGuest {
+            asyncCall(urlString: url, method: method, parameters: nil, isGuestUser: true, anyDefaultToken: DefaultToken.guestUserCardGame)
+        } else {
+            asyncCall(urlString: url, method: method, parameters: nil)
+        }
     }
     
 }
