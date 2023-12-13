@@ -8,7 +8,13 @@
 import UIKit
 
 class GlobalMatchHeadToHeadTableViewCell: UITableViewCell {
-
+    @IBOutlet weak var leagueImageView: UIImageView!
+    @IBOutlet weak var leagueNameLabel: UILabel!
+    @IBOutlet weak var homeNameLabel: UILabel!
+    @IBOutlet weak var awayNameLabel: UILabel!
+    @IBOutlet weak var overtimeLabel: UILabel!
+    @IBOutlet weak var halftimeLabel: UILabel!
+  
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -95,7 +95,8 @@ struct CellIdentifier {
     static let newsVideoCollectionViewCell      = "NewsVideoCollectionViewCell"
     
     //Matches
-    static let globalMatchesTableViewCell       = "GlobalMatchesTableViewCell"
-    static let globalMatchInfoTableViewCell     = "GlobalMatchInfoTableViewCell"
-    static let globalMatchOddsTableViewCell     = "GlobalMatchOddsTableViewCell"
+    static let globalMatchesTableViewCell         = "GlobalMatchesTableViewCell"
+    static let globalMatchInfoTableViewCell       = "GlobalMatchInfoTableViewCell"
+    static let globalMatchOddsTableViewCell       = "GlobalMatchOddsTableViewCell"
+    static let globalMatchHeadToHeadTableViewCell = "GlobalMatchHeadToHeadTableViewCell"
 }
