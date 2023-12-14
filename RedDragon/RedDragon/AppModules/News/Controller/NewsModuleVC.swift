@@ -46,8 +46,9 @@ class NewsModuleVC: UIViewController {
                 
             }
         } else {
-            sportsTypeArray = [.football, .cricket]
-            ViewEmbedder.embedXIBController(childVC: NewsVC(), parentVC: self, container: containerView)
+            searchTextField.placeholder = "Search"
+            sportsTypeArray = [.football, .tennis, .eSports, .basketball]
+            ViewEmbedder.embedXIBController(childVC: NewsVC(viewModel: NewsViewModel(sportType: sportType)), parentVC: self, container: containerView)
         }
         sportsCollectionView.reloadData()
     }

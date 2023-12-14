@@ -24,7 +24,7 @@ final class NewsVC: UIViewController {
     }
     
     init(
-        viewModel: NewsViewModel = NewsViewModel(),
+        viewModel: NewsViewModel,
         videoViewModel: NewsVideoViewModel = NewsVideoViewModel()
     ) {
         self.viewModel = viewModel
@@ -63,7 +63,7 @@ private extension NewsVC {
     
     func fetchNewsList() {
         startLoader()
-        viewModel.fetchNewsDataAsyncCall(page: pageNo)
+        viewModel.fetchNewsDataAsyncCall(page: pageNo, keyword: "/\(viewModel.sportType.rawValue)")
         viewModel.$responseData
             .receive(on: DispatchQueue.main)
             .dropFirst()
@@ -201,7 +201,7 @@ extension NewsVC: UIScrollViewDelegate {
                 if let lastPage = viewModel.model.lastPage, let currentPage = viewModel.model.currentPage, currentPage < lastPage {
                     startLoader()
                     self.pageNo = currentPage + 1
-                    viewModel.fetchNewsDataAsyncCall(page: self.pageNo)
+                    viewModel.fetchNewsDataAsyncCall(page: self.pageNo, keyword: "/\(viewModel.sportType.rawValue)")
                 }
             }
         }
