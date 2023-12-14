@@ -27,6 +27,9 @@ class GossipDetailVC: UIViewController {
     }
     
     @IBAction func commentButtonTapped(_ sender: UIButton) {
-        
+        navigateToViewController(NewsCommentsVC.self, storyboardName: StoryboardName.gossip, animationType: .autoReverse(presenting: .zoom)) { vc in
+            vc.sectionId = self.commentSectionID
+            vc.newsTitle = "Title"
+        }
     }
 }

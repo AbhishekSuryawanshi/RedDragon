@@ -36,9 +36,9 @@ class DeleteCommentVM: APIServiceManager<BasicAPIResponse> {
     static let shared = DeleteCommentVM()
     
     ///function to delete comment
-    func deleteCommentAsyncCall(parameters: [String: Any]) {
-        let urlString   = URLConstants.deleteComment
+    func deleteCommentAsyncCall(id: Int) {
+        let urlString   = URLConstants.deleteComment + "\(id)"
         let method      = RequestType.delete
-        asyncCall(urlString: urlString, method: method, parameters: parameters)
+        asyncCall(urlString: urlString, method: method, parameters: nil)
     }
 }

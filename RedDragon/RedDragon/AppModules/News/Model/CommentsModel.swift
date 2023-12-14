@@ -20,7 +20,7 @@ struct CommentData: Codable {
 
 struct Comment: Codable {
     var id: Int = 0
-    var sectionId: Int = 0
+    var sectionId: String = ""
     var updatedTime: String = ""
     var createdTime: String = ""
     var user = User()
@@ -36,7 +36,7 @@ struct Comment: Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try (container.decodeIfPresent(Int.self, forKey: .id) ?? 0)
-        sectionId = try (container.decodeIfPresent(Int.self, forKey: .sectionId) ?? 0)
+        sectionId = try (container.decodeIfPresent(String.self, forKey: .sectionId) ?? "")
         updatedTime = try (container.decodeIfPresent(String.self, forKey: .updatedTime) ?? "")
         createdTime = try (container.decodeIfPresent(String.self, forKey: .createdTime) ?? "")
         user = try (container.decodeIfPresent(User.self, forKey: .user) ?? User())

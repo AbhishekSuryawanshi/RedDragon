@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 class NewsCommentsVC: UIViewController {
-
+    
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var listTableView: UITableView!
     @IBOutlet weak var commentTextView: GrowingTextView!
@@ -21,13 +21,22 @@ class NewsCommentsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-initialSettings()
+        initialSettings()
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        refreshPage()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        listTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 50, right: 0)
+    }
+    
     func initialSettings() {
         nibInitialization()
         fetchCommentsViewModel()
         commentTextView.textContainerInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        CommentListVM.shared.getCommentsAsyncCall(sectionId: sectionId)
     }
     
     func nibInitialization() {
@@ -56,7 +65,7 @@ initialSettings()
     
     @objc func deleteCommentBTNTapped(sender: UIButton) {
         self.customAlertView_2Actions(title: "".localized, description: StringConstants.deleteAlert.localized) {
-            SocialDeleteCommentVM.shared.deleteComment(id: SocialLikeCommentListVM.shared.commentsArray[sender.tag].id)
+            DeleteCommentVM.shared.deleteCommentAsyncCall(id: self.commentsArray[sender.tag].id)
         }
     }
     
@@ -77,13 +86,17 @@ extension NewsCommentsVC {
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
                 if let dataResponse = response?.response {
-                    self?.commentsArray = dataResponse.data ?? []
+                    self?.commentsArray = dataResponse.data?.reversed() ?? []
                 } else {
                     if let errorResponse = response?.error {
                         self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
                     }
                 }
                 self?.listTableView.reloadData()
+                if self?.commentsArray.count ?? 0 > 0 {
+                    let indexPosition = IndexPath(row: (self?.commentsArray.count ?? 1) - 1, section: 0)
+                    self?.listTableView.scrollToRow(at: indexPosition, at: UITableView.ScrollPosition.bottom, animated: false)
+                }
             })
             .store(in: &cancellable)
         
@@ -140,7 +153,7 @@ extension NewsCommentsVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.commentTableViewCell, for: indexPath) as! CommentTableViewCell
-        cell.configureComments(model: commentsArray[indexPath.row], _index: indexPath.row - 1)
+        cell.configureComments(model: commentsArray[indexPath.row], _index: indexPath.row)
         cell.deleteButton.addTarget(self, action: #selector(deleteCommentBTNTapped(sender:)), for: .touchUpInside)
         return cell
     }
@@ -149,7 +162,7 @@ extension NewsCommentsVC: UITableViewDataSource {
 extension NewsCommentsVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let model = SocialLikeCommentListVM.shared.commentsArray[indexPath.row]
+        let model = commentsArray[indexPath.row]
         let height = model.comment.heightOfString2(width: screenWidth - 90, font: fontRegular(13))
         if (UserDefaults.standard.user?.id ?? 0) == model.user.id {
             return height + 75
