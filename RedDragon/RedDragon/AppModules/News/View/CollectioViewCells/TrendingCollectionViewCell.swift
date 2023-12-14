@@ -12,9 +12,7 @@ final class TrendingCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var trendingTableView: UITableView!
     
     var model: TrendingCollectionSection? {
-        didSet {
-            guard let model = self.model else { return }
-            
+        didSet {            
             trendingTableView.reloadData()
         }
     }

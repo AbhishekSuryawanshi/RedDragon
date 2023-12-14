@@ -21,7 +21,7 @@ final class TrendingNewsChildTableViewCell: UITableViewCell {
             let model = viewModel.model
             titleLabel.text = model.title?.attributedHtmlString?.string ?? "NA"
             timeStampLabel.text = model.createTime?.formatDate2(inputFormat: .ddMMyyyyWithTimeZone)
-            newsImageView.kf.setImage(with: URL(string: model.path ?? ""))
+            newsImageView.kf.setImage(with: URL(string: model.path ?? ""), placeholder: UIImage(named: "empty"))
         }
     }
     

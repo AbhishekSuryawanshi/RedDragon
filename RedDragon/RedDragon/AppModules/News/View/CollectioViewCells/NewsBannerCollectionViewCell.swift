@@ -23,7 +23,7 @@ final class NewsBannerCollectionViewCell: UICollectionViewCell {
             titleLabel.text = model.title?.attributedHtmlString?.string
             dateLabel.text = model.createTime?.formatDate(inputFormat: .ddMMyyyyWithTimeZone, outputFormat: .ddMMyyyy)
             timeLabel.text = model.createTime?.formatDate(inputFormat: .ddMMyyyyWithTimeZone, outputFormat: .hmma)
-            bannerImageView.kf.setImage(with: URL(string: model.path ?? ""))
+            bannerImageView.kf.setImage(with: URL(string: model.path ?? ""), placeholder: UIImage(named: "empty"))
         }
     }
 
