@@ -13,7 +13,7 @@ class StreetEventRequestsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var lblNoData: UILabel!
-    
+    @IBOutlet weak var lblTitle: UILabel!
     //Variables
     var feedType:FeedsType?
     var eventID:Int?

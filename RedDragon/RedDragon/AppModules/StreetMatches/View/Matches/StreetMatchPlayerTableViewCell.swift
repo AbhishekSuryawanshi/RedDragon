@@ -33,11 +33,11 @@ class StreetMatchPlayerTableViewCell: UITableViewCell {
         lblPlayer.text = (obj?.firstName ?? "") + " " + (obj?.lastName ?? "")
         imgPlayer.setImage(imageStr: obj?.imgURL ?? "", placeholder: .placeholderUser)
         lblPosition.text = obj?.positionName
-        let age = getDateDiffrence(dateStr: obj?.birthdate ?? "")
+        let age = StreetMatchPlayerTableViewCell.getDateDiffrence(dateStr: obj?.birthdate ?? "")
         lblAge.text = "\(age) \("Years".localized)"
     }
     
-    func getDateDiffrence(dateStr:String) -> Int{
+    class func getDateDiffrence(dateStr:String) -> Int{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat.yyyyMMdd.rawValue
         let dt1 = dateFormatter.date(from: dateStr) ?? Date()

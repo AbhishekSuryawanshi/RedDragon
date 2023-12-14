@@ -3,7 +3,7 @@
 import UIKit
 
 class FeedsPlayerTableViewCell: UITableViewCell {
-    @IBOutlet weak var lblLocation: UILabel!
+    @IBOutlet weak var lblAge: UILabel!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var imageViewPlayer: UIImageView!
     @IBOutlet weak var lblPosition: UILabel!
@@ -23,7 +23,8 @@ class FeedsPlayerTableViewCell: UITableViewCell {
     
     func configureCell(obj:Creator?){
         lblName.text = (obj?.firstName ?? "") + " " + (obj?.lastName ?? "")
-        lblLocation.text = obj?.address
+        let age = StreetMatchPlayerTableViewCell.getDateDiffrence(dateStr: obj?.birthdate ?? "")
+        lblAge.text = "\(age) \("Years".localized)"
         lblPosition.text = obj?.player.positionName
 //        if Utility.getCurrentLang() == "zh-Hans"{
 //            lblPosition.text = obj?.player?.position_name_cn
