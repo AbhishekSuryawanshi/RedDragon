@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="TrendingCollectionViewCell" customModule="RedDragon" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="288" height="257"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="288" height="257"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="df0-no-h3E">
+                        <rect key="frame" x="0.0" y="0.0" width="288" height="257"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vpc-vU-31V">
+                                <rect key="frame" x="0.0" y="0.0" width="288" height="257"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Vpc-vU-31V" firstAttribute="top" secondItem="df0-no-h3E" secondAttribute="top" id="Kws-gX-D4v"/>
+                            <constraint firstItem="Vpc-vU-31V" firstAttribute="leading" secondItem="df0-no-h3E" secondAttribute="leading" id="TPi-Th-062"/>
+                            <constraint firstAttribute="bottom" secondItem="Vpc-vU-31V" secondAttribute="bottom" id="bFC-Vu-gs5"/>
+                            <constraint firstAttribute="trailing" secondItem="Vpc-vU-31V" secondAttribute="trailing" id="wQ2-hJ-8Hg"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="df0-no-h3E" secondAttribute="trailing" id="7IK-cj-Dgh"/>
+                <constraint firstItem="df0-no-h3E" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="aef-Di-orh"/>
+                <constraint firstAttribute="bottom" secondItem="df0-no-h3E" secondAttribute="bottom" id="eR6-76-XVC"/>
+                <constraint firstItem="df0-no-h3E" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="gUG-Qb-Yjw"/>
+            </constraints>
+            <size key="customSize" width="221" height="158"/>
+            <connections>
+                <outlet property="trendingTableView" destination="Vpc-vU-31V" id="gGn-A3-XQh"/>
+            </connections>
+            <point key="canvasLocation" x="269.46564885496184" y="58.450704225352112"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
