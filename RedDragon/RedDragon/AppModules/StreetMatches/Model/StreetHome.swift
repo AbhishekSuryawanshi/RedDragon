@@ -9,10 +9,10 @@ import Foundation
 
 // MARK: - StreetMatchHome
 struct StreetMatchHome: Codable {
-    let matches: [StreetMatch]
-    let events: [StreetEvent]
-    let teams: [StreetTeam]
-    let stadiums: [Stadium]
+    let matches: [StreetMatch]?
+    let events: [StreetEvent]?
+    let teams: [StreetTeam]?
+    let stadiums: [Stadium]?
 }
 
 // MARK: - Event

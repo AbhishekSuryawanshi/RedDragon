@@ -92,7 +92,7 @@ struct URLConstants {
     static let meetJoinEvent       = baseURL + "vinder/user/events/join"
     
     // MARK: - StreetMatches
-    static let streetMatchesBaseURL = "https://trkick.com/stm/api/"
+    static let streetMatchesBaseURL = "https://gsports.cloud/api/"
 
     static let streetHome           = streetMatchesBaseURL + "home/data"
     static let stadiumList          = streetMatchesBaseURL + "stadium/list"
@@ -107,6 +107,8 @@ struct URLConstants {
     static let streetEvents         = streetMatchesBaseURL + "event"
     static let playerPositions      = streetMatchesBaseURL + "player/positions"
     static let eventRequests        = streetMatchesBaseURL + "event/request"
+    static let streetPlayerProfile  = streetMatchesBaseURL + "auth/user"
+    static let streetPlayers        = streetMatchesBaseURL + "player"
     
 
     // MARK: - Prediction

@@ -382,6 +382,10 @@
 		AD16664E2B1763E1001C0770 /* SportsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD16664A2B1763E1001C0770 /* SportsCollectionViewCell.xib */; };
 		AD16664F2B1763E1001C0770 /* AmenityCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD16664B2B1763E1001C0770 /* AmenityCollectionViewCell.xib */; };
 		AD1666502B1763E1001C0770 /* SportsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD16664C2B1763E1001C0770 /* SportsCollectionViewCell.swift */; };
+		AD25B70C2B2ADA410022DA1E /* StreetPlayerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD25B70B2B2ADA410022DA1E /* StreetPlayerProfileViewController.swift */; };
+		AD25B70E2B2ADC320022DA1E /* StreetProfileUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD25B70D2B2ADC320022DA1E /* StreetProfileUser.swift */; };
+		AD25B7102B2AE1050022DA1E /* StreetPlayerProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD25B70F2B2AE1050022DA1E /* StreetPlayerProfileViewModel.swift */; };
+		AD25B7122B2AE2E10022DA1E /* StreetMyPlayerProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD25B7112B2AE2E10022DA1E /* StreetMyPlayerProfileViewModel.swift */; };
 		AD2676E82B1EF57A00B96921 /* CreateStadiumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2676E72B1EF57A00B96921 /* CreateStadiumViewModel.swift */; };
 		AD2676EA2B1EF93500B96921 /* StreetGeneralResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2676E92B1EF93500B96921 /* StreetGeneralResponse.swift */; };
 		AD2676EC2B1EFEB200B96921 /* StreetImageUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2676EB2B1EFEB200B96921 /* StreetImageUploadViewModel.swift */; };
@@ -864,6 +868,10 @@
 		AD16664A2B1763E1001C0770 /* SportsCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SportsCollectionViewCell.xib; sourceTree = "<group>"; };
 		AD16664B2B1763E1001C0770 /* AmenityCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AmenityCollectionViewCell.xib; sourceTree = "<group>"; };
 		AD16664C2B1763E1001C0770 /* SportsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SportsCollectionViewCell.swift; sourceTree = "<group>"; };
+		AD25B70B2B2ADA410022DA1E /* StreetPlayerProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetPlayerProfileViewController.swift; sourceTree = "<group>"; };
+		AD25B70D2B2ADC320022DA1E /* StreetProfileUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetProfileUser.swift; sourceTree = "<group>"; };
+		AD25B70F2B2AE1050022DA1E /* StreetPlayerProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetPlayerProfileViewModel.swift; sourceTree = "<group>"; };
+		AD25B7112B2AE2E10022DA1E /* StreetMyPlayerProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetMyPlayerProfileViewModel.swift; sourceTree = "<group>"; };
 		AD2676E72B1EF57A00B96921 /* CreateStadiumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStadiumViewModel.swift; sourceTree = "<group>"; };
 		AD2676E92B1EF93500B96921 /* StreetGeneralResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetGeneralResponse.swift; sourceTree = "<group>"; };
 		AD2676EB2B1EFEB200B96921 /* StreetImageUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetImageUploadViewModel.swift; sourceTree = "<group>"; };
@@ -2254,6 +2262,14 @@
 			path = Players;
 			sourceTree = "<group>";
 		};
+		AD25B70A2B2AD9F00022DA1E /* PlayerProfile */ = {
+			isa = PBXGroup;
+			children = (
+				AD25B70B2B2ADA410022DA1E /* StreetPlayerProfileViewController.swift */,
+			);
+			path = PlayerProfile;
+			sourceTree = "<group>";
+		};
 		AD31C4F82B1770A500DC879D /* Stadium */ = {
 			isa = PBXGroup;
 			children = (
@@ -2349,6 +2365,7 @@
 		ADD339812B0F426100B91101 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				AD25B70A2B2AD9F00022DA1E /* PlayerProfile */,
 				AD31C4F92B1770BC00DC879D /* Dashboard */,
 				AD31C4FB2B1770EA00DC879D /* Matches */,
 				AD31C4FA2B1770D600DC879D /* Feeds */,
@@ -2378,6 +2395,8 @@
 				AD7338B32B28847D003EE9B6 /* SendEventRequestsViewModel.swift */,
 				ADC075F82B299C7A009FE6C4 /* StreetEventRequestViewModel.swift */,
 				ADC076042B29C2BD009FE6C4 /* StreetEventRequestAcceptViewModel.swift */,
+				AD25B70F2B2AE1050022DA1E /* StreetPlayerProfileViewModel.swift */,
+				AD25B7112B2AE2E10022DA1E /* StreetMyPlayerProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2393,6 +2412,7 @@
 				AD90AF252B2307B300515C60 /* StreetTeamDetails.swift */,
 				AD1042BF2B27226A00451DB9 /* StreetPlayerPosition.swift */,
 				ADC075FA2B29BAF6009FE6C4 /* StreetEventRequest.swift */,
+				AD25B70D2B2ADC320022DA1E /* StreetProfileUser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2948,10 +2968,12 @@
 				49B0BA492AE6A42800A9D235 /* CellIdentifier.swift in Sources */,
 				49E223C52B15CBB600A7202C /* LeaderboardViewController.swift in Sources */,
 				49B0BA212AE6982400A9D235 /* ErrorMessage.swift in Sources */,
+				AD25B70C2B2ADA410022DA1E /* StreetPlayerProfileViewController.swift in Sources */,
 				6A2140262B0B75F800F52E69 /* MeetUserModel.swift in Sources */,
 				49B0BA1F2AE697A500A9D235 /* CustomErrors.swift in Sources */,
 				E9129B9A2B05FC960073A407 /* BetLoseTableVC.swift in Sources */,
 				E9129B962B05F5560073A407 /* BetWinTableVC.swift in Sources */,
+				AD25B70E2B2ADC320022DA1E /* StreetProfileUser.swift in Sources */,
 				41EB79CD2AF37BA000D068F7 /* PlayerDetailViewController.swift in Sources */,
 				6AD21DCF2B15F37E0043D7C2 /* CreateEventVC.swift in Sources */,
 				6A2140232B0B730C00F52E69 /* TinderCardModel.swift in Sources */,
@@ -3072,6 +3094,7 @@
 				47E2FACF2AFE6BAE00DBEFE6 /* SocialSearchVC.swift in Sources */,
 				E9C657262B0B783E00833D37 /* PointsItemTableVC.swift in Sources */,
 				41EB79DD2AF398DF00D068F7 /* SpiderChartView.swift in Sources */,
+				AD25B7122B2AE2E10022DA1E /* StreetMyPlayerProfileViewModel.swift in Sources */,
 				E93C6C032B0C7F8A0042657B /* PointsViewModel.swift in Sources */,
 				47FC33E42AEA50BE00FABED4 /* SocialVC.swift in Sources */,
 				6A947A8B2B1F0DDF00A00788 /* ChatListModel.swift in Sources */,
@@ -3108,6 +3131,7 @@
 				ADC075F72B29982E009FE6C4 /* StreetEventRequestsViewController.swift in Sources */,
 				AD5331AB2B10904200C97FE4 /* StreetHome.swift in Sources */,
 				6A947AA82B1F33DB00A00788 /* TokenRequestHandler.swift in Sources */,
+				AD25B7102B2AE1050022DA1E /* StreetPlayerProfileViewModel.swift in Sources */,
 				E9DDB6352B04B474004C8ACF /* BetsHomeViewModel.swift in Sources */,
 				AD7338B42B28847D003EE9B6 /* SendEventRequestsViewModel.swift in Sources */,
 				49F72D2F2B0CCE3D004E60DF /* AllPlayersTableViewCell.swift in Sources */,
