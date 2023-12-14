@@ -100,7 +100,7 @@ class StreetMatchHomeVC: UIViewController {
     }
     
     func makeNetworkCall(){
-        streethomeVM?.fetchStreetHomeAsyncCall()
+        streethomeVM?.fetchStreetHomeAsyncCall(id: nil)
     }
 }
 
@@ -119,19 +119,19 @@ extension StreetMatchHomeVC:UITableViewDelegate,UITableViewDataSource{
         }
         else{
             if section == 0{
-                if  (homeData?.stadiums.count ?? 0) >= 2{
+                if  (homeData?.stadiums?.count ?? 0) >= 2{
                     return 2
                 }
                 else{
-                    return homeData?.stadiums.count ?? 0
+                    return homeData?.stadiums?.count ?? 0
                 }
             }
             else if section == 1{
-                if (homeData?.events.count ?? 0) >= 3{
+                if (homeData?.events?.count ?? 0) >= 3{
                     return 3
                 }
                 else{
-                    return homeData?.events.count ?? 0
+                    return homeData?.events?.count ?? 0
                 }
             }
             else {
@@ -151,12 +151,12 @@ extension StreetMatchHomeVC:UITableViewDelegate,UITableViewDataSource{
         else{
             if indexPath.section == 0{
                 let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.stadiumTableViewCell, for: indexPath) as! StadiumTableViewCell
-                cell.configureCell(obj: homeData?.stadiums[indexPath.row])
+                cell.configureCell(obj: homeData?.stadiums?[indexPath.row])
                 return cell
             }
             else if indexPath.section == 1{
                 let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.feedsTableViewCell, for: indexPath) as! FeedsTableViewCell
-                cell.configureCell(obj: homeData?.events[indexPath.row])
+                cell.configureCell(obj: homeData?.events?[indexPath.row])
                 return cell
             }
             else{
@@ -181,7 +181,7 @@ extension StreetMatchHomeVC:UITableViewDelegate,UITableViewDataSource{
     
     func openDetails(index:Int){
         navigateToViewController(StadiumDetailsVC.self,storyboardName: StoryboardName.streetMatches) { vc in
-            vc.stadium = self.homeData?.stadiums[index]
+            vc.stadium = self.homeData?.stadiums?[index]
         }
     }
     
@@ -204,7 +204,7 @@ extension StreetMatchHomeVC:UISearchBarDelegate{
             tableView.reloadData()
         }
         else{
-            matches = homeData?.matches.filter{($0.address.lowercased().contains(text.lowercased()) ) || ($0.homeTeam.name.lowercased().contains(text.lowercased()) ) || ($0.awayTeam.name.lowercased().contains(text.lowercased()) )}
+            matches = homeData?.matches?.filter{($0.address.lowercased().contains(text.lowercased()) ) || ($0.homeTeam.name.lowercased().contains(text.lowercased()) ) || ($0.awayTeam.name.lowercased().contains(text.lowercased()) )}
             isSearchMode = true
             tableView.reloadData()
         }
