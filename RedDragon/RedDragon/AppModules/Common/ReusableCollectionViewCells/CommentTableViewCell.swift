@@ -36,4 +36,16 @@ class CommentTableViewCell: UITableViewCell {
         ///Show delete button for comment owner
         deleteButtonHeightConstaint.constant = (UserDefaults.standard.user?.appDataIDs.euro5LeagueUserId ?? 0) == model.user.id ? 25 : 0
     }
+    
+    ///comments in news module
+    func configureComments(model: Comment, _index: Int) {
+        userImageView.setImage(imageStr: model.user.profileImg, placeholder: .placeholderUser)
+        nameLabel.text = model.user.name
+        commentLabel.text = model.comment
+        deleteButton.setTitle("Delete".localized, for: .normal)
+        deleteButton.tag = _index
+        ///Pass user id to find comment owner or not
+        ///Show delete button for comment owner
+        deleteButtonHeightConstaint.constant = (UserDefaults.standard.user?.id ?? 0) == model.user.id ? 25 : 0
+    }
 }

@@ -384,6 +384,12 @@ extension GossipVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigateToViewController(GossipDetailVC.self, storyboardName: StoryboardName.news, animationType: .autoReverse(presenting: .zoom)) { vc in
+            vc.commentSectionID = self.sportType == .eSports ? "eSportsId_\(self.gossipsArray[indexPath.row].id ?? 0)" : "gossipNewsId_\(self.gossipsArray[indexPath.row].id ?? 0)"
+        }
+    }
 }
 
 // MARK: - ScrollView Delegates
