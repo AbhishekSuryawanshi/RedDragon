@@ -24,5 +24,7 @@ struct StoryboardName {
     static let news           = "News"
     static let gossip         = "Gossip"
     static let matches        = "Matches"
+    static let home           = "Home"
+    
 }
 

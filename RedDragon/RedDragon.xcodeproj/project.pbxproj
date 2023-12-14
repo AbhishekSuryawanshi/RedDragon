@@ -365,6 +365,11 @@
 		6A947AA82B1F33DB00A00788 /* TokenRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A947AA42B1F33DB00A00788 /* TokenRequestHandler.swift */; };
 		6AB18E372B187B7B00287A9C /* EventDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB18E352B187B7B00287A9C /* EventDetailVC.swift */; };
 		6AB18E382B187B7B00287A9C /* EventDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AB18E362B187B7B00287A9C /* EventDetailVC.xib */; };
+		6AC52DD82B29C19300723A52 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AC52DD72B29C19300723A52 /* Home.storyboard */; };
+		6AC52DDB2B29CE7E00723A52 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC52DDA2B29CE7E00723A52 /* HomeVC.swift */; };
+		6AC52DE02B29D02C00723A52 /* InfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC52DDE2B29D02C00723A52 /* InfoVC.swift */; };
+		6AC52DE52B29D05300723A52 /* ExpertsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC52DE32B29D05300723A52 /* ExpertsVC.swift */; };
+		6AC52DE92B29D06500723A52 /* ForYouVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC52DE72B29D06500723A52 /* ForYouVC.swift */; };
 		6AD21DCB2B15B3100043D7C2 /* MyEventsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD21DC92B15B3100043D7C2 /* MyEventsCollectionViewCell.swift */; };
 		6AD21DCC2B15B3100043D7C2 /* MyEventsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AD21DCA2B15B3100043D7C2 /* MyEventsCollectionViewCell.xib */; };
 		6AD21DCF2B15F37E0043D7C2 /* CreateEventVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD21DCD2B15F37E0043D7C2 /* CreateEventVC.swift */; };
@@ -847,6 +852,11 @@
 		6A947AA42B1F33DB00A00788 /* TokenRequestHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenRequestHandler.swift; sourceTree = "<group>"; };
 		6AB18E352B187B7B00287A9C /* EventDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailVC.swift; sourceTree = "<group>"; };
 		6AB18E362B187B7B00287A9C /* EventDetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventDetailVC.xib; sourceTree = "<group>"; };
+		6AC52DD72B29C19300723A52 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		6AC52DDA2B29CE7E00723A52 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		6AC52DDE2B29D02C00723A52 /* InfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoVC.swift; sourceTree = "<group>"; };
+		6AC52DE32B29D05300723A52 /* ExpertsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertsVC.swift; sourceTree = "<group>"; };
+		6AC52DE72B29D06500723A52 /* ForYouVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouVC.swift; sourceTree = "<group>"; };
 		6AD21DC92B15B3100043D7C2 /* MyEventsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEventsCollectionViewCell.swift; sourceTree = "<group>"; };
 		6AD21DCA2B15B3100043D7C2 /* MyEventsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyEventsCollectionViewCell.xib; sourceTree = "<group>"; };
 		6AD21DCD2B15F37E0043D7C2 /* CreateEventVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventVC.swift; sourceTree = "<group>"; };
@@ -1804,6 +1814,7 @@
 				ADD339802B0F423500B91101 /* StreetMatches */,
 				47CB0E082B11D6A10070744B /* News */,
 				6A1A057E2B22F48D009ED5C4 /* Matches */,
+				6AC52DD52B29BF2400723A52 /* Experts */,
 			);
 			path = AppModules;
 			sourceTree = "<group>";
@@ -2241,6 +2252,50 @@
 				6A947AA42B1F33DB00A00788 /* TokenRequestHandler.swift */,
 			);
 			path = "Twilio Chat";
+			sourceTree = "<group>";
+		};
+		6AC52DD52B29BF2400723A52 /* Experts */ = {
+			isa = PBXGroup;
+			children = (
+				6AC52DDD2B29CFCA00723A52 /* ViewModel */,
+				6AC52DDC2B29CFAC00723A52 /* View */,
+				6AC52DD92B29CE5900723A52 /* Controller */,
+				6AC52DD62B29C0F400723A52 /* Storyboard */,
+			);
+			path = Experts;
+			sourceTree = "<group>";
+		};
+		6AC52DD62B29C0F400723A52 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				6AC52DD72B29C19300723A52 /* Home.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		6AC52DD92B29CE5900723A52 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6AC52DDA2B29CE7E00723A52 /* HomeVC.swift */,
+				6AC52DDE2B29D02C00723A52 /* InfoVC.swift */,
+				6AC52DE32B29D05300723A52 /* ExpertsVC.swift */,
+				6AC52DE72B29D06500723A52 /* ForYouVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6AC52DDC2B29CFAC00723A52 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6AC52DDD2B29CFCA00723A52 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		AD1042C32B273DB000451DB9 /* Players */ = {
@@ -2741,6 +2796,7 @@
 				494B37E62AEA3BD700FB9BCD /* PMAlertController.xib in Resources */,
 				E9DDB6282B049BA2004C8ACF /* BetStoryboard.storyboard in Resources */,
 				474D99442AE7F30D009499D0 /* Roboto-BlackItalic.ttf in Resources */,
+				6AC52DD82B29C19300723A52 /* Home.storyboard in Resources */,
 				AD16664F2B1763E1001C0770 /* AmenityCollectionViewCell.xib in Resources */,
 				4196581D2B0CE29C00730D9F /* PlacePredictionDescriptionView.xib in Resources */,
 				E9129B972B05F5560073A407 /* BetWinTableVC.xib in Resources */,
@@ -2835,6 +2891,7 @@
 				47E7C8432AEFBD6400D054A8 /* PostModel.swift in Sources */,
 				419658172B0CDF4700730D9F /* PlacePredictionView.swift in Sources */,
 				4936FBFF2B15F8430037F620 /* LeaderboardTableViewCell.swift in Sources */,
+				6AC52DE52B29D05300723A52 /* ExpertsVC.swift in Sources */,
 				494B37E72AEA3BD700FB9BCD /* PMAlertAction.swift in Sources */,
 				49BC7EB72AFE0C900006EEB5 /* PlayerDetailMatchesViewController.swift in Sources */,
 				4196581B2B0CE27E00730D9F /* PlacePredictionDescriptionView.swift in Sources */,
@@ -2890,6 +2947,7 @@
 				41BB287F2B0609AA0080E63F /* PlayerLeaguesCollectionViewCell.swift in Sources */,
 				49F3EED12AE7AFC20095CAC6 /* ToggleTabbarNames.swift in Sources */,
 				AD3B55592B16020F007B14F7 /* StreetMatchesVC.swift in Sources */,
+				6AC52DE92B29D06500723A52 /* ForYouVC.swift in Sources */,
 				6A2140282B0B7C1100F52E69 /* MeetUserViewModel.swift in Sources */,
 				6A0BF7602B27241200DE89A4 /* GlobalMatchDetailVC.swift in Sources */,
 				47ACEB812B0CB811001AD0EB /* SocialPostImageViewModel.swift in Sources */,
@@ -2905,6 +2963,7 @@
 				4784E3F12AECDCC000C96085 /* SocialViewModel.swift in Sources */,
 				AD90AF282B2308D300515C60 /* StreetTeamDetailsViewModel.swift in Sources */,
 				E9C657212B0B67A800833D37 /* PlaceBetVc.swift in Sources */,
+				6AC52DE02B29D02C00723A52 /* InfoVC.swift in Sources */,
 				E9C657232B0B73CC00833D37 /* PointsVc.swift in Sources */,
 				6A947A972B1F2A0C00A00788 /* ChatListTableViewCell.swift in Sources */,
 				41E2AB4E2B0CBBD1005425CF /* PredictionDetailTopView.swift in Sources */,
@@ -2936,6 +2995,7 @@
 				474D99472AE7F353009499D0 /* Fonts+Extra.swift in Sources */,
 				49B04A562AFA6DCE00B440AA /* StatisticsViewController.swift in Sources */,
 				6A5F2B9D2B0CC37D00AB6A98 /* MyEventsVC.swift in Sources */,
+				6AC52DDB2B29CE7E00723A52 /* HomeVC.swift in Sources */,
 				49A9D9E02B1F2C6C00C4A1A1 /* LeaderboardDetail.swift in Sources */,
 				49181D812B283B19007D6614 /* UpdateMatchStatus.swift in Sources */,
 				474164952AFFA27B0015F7D5 /* NotificationExtension.swift in Sources */,
