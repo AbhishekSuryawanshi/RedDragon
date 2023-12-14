@@ -95,6 +95,11 @@ final class NewsViewModel: APIServiceManager<NewsModel> {
     var model: NewsModel!
     var videoModel: NewsVideoModel!
     var section: [NewsSection] = []
+    var sportType: SportsType
+    
+    init(sportType: SportsType) {
+        self.sportType = sportType
+    }
     
     func fetchNewsDataAsyncCall(page: Int = 1, keyword: String = "/La Liga,World Cup,Transfer") {
         let lang = Utility.getCurrentLang() == "zh" ? "cn" : Utility.getCurrentLang()
@@ -102,13 +107,6 @@ final class NewsViewModel: APIServiceManager<NewsModel> {
         let method = RequestType.get
         asyncCall(urlString: urlString, method: method, parameters: nil)
     }
-    
-//    func fetchVideoListAsyncCall(page: Int = 1) {
-//        let lang = Utility.getCurrentLang() == "zh" ? "cn" : Utility.getCurrentLang()
-//        let urlString = URLConstants.newsBaseURL + URLConstants.videoList + lang + "/\(page)"
-//        let method = RequestType.get
-//        asyncCall(urlString: urlString, method: method, parameters: nil)
-//    }
     
     func onNewsSuccess(response: NewsModel?) {
         guard let model = response else { return }

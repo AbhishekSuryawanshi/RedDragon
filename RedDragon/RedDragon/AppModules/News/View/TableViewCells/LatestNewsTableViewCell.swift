@@ -21,7 +21,7 @@ final class LatestNewsTableViewCell: UITableViewCell {
             
             titleLabel.text = model.title?.attributedHtmlString?.string
             timeLabel.text = model.createTime?.formatDate2(inputFormat: .ddMMyyyyWithTimeZone)
-            newsImageView.kf.setImage(with: URL(string: model.path ?? ""))
+            newsImageView.kf.setImage(with: URL(string: model.path ?? ""), placeholder: UIImage(named: "placeholder_1"))
         }
     }
 

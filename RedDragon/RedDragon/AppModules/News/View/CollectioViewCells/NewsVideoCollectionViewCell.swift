@@ -21,7 +21,7 @@ final class NewsVideoCollectionViewCell: UICollectionViewCell {
             
             let model = viewModel.model
             titleLabel.text = model.title
-            newsImageView.kf.setImage(with: URL(string: model.thumbnailPath ?? ""))
+            newsImageView.kf.setImage(with: URL(string: model.thumbnailPath ?? ""), placeholder: UIImage(named: "placeholder_1"))
         }
     }
 
