@@ -129,6 +129,11 @@ struct URLConstants {
     static let newsDetail        = "/api/post/"
     static let videoList         = "/api/video-list/"
     
+    // Comments
+    static let commentList          = baseURL + "user/comment/list"
+    static let addComment           = baseURL + "user/comment/add"
+    static let deleteComment        = baseURL + "user/comment/delete/"
+    
     // MARK: - GlobalMatches
     static let globalMatchBaseURL     = "http://199.241.1.88:4049/api/"
     static let footballMatchList      = globalMatchBaseURL + "football/matchlist/today"
