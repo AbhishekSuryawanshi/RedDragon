@@ -133,6 +133,10 @@
 		47AE9C9F2B03AECF00C271FB /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47AE9C9E2B03AECF00C271FB /* Login.storyboard */; };
 		47AECA8A2B01E7D800166292 /* TagsCVLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AECA892B01E7D800166292 /* TagsCVLayout.swift */; };
 		47AFBC212B298151009968B1 /* GossipDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFBC202B298151009968B1 /* GossipDetailVC.swift */; };
+		47AFBC232B29BBCD009968B1 /* ExpandableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFBC222B29BBCD009968B1 /* ExpandableLabel.swift */; };
+		47AFBC252B29D607009968B1 /* NewsCommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFBC242B29D607009968B1 /* NewsCommentsVC.swift */; };
+		47AFBC272B29DA97009968B1 /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFBC262B29DA97009968B1 /* CommentsViewModel.swift */; };
+		47AFBC292B29DEF9009968B1 /* CommentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFBC282B29DEF9009968B1 /* CommentsModel.swift */; };
 		47B3E9972AF22BDC008BB827 /* SocialPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B3E9962AF22BDC008BB827 /* SocialPostViewModel.swift */; };
 		47B3E99A2AF25F70008BB827 /* SocialPollTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B3E9982AF25F70008BB827 /* SocialPollTableViewCell.swift */; };
 		47B3E99B2AF25F70008BB827 /* SocialPollTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47B3E9992AF25F70008BB827 /* SocialPollTableViewCell.xib */; };
@@ -662,6 +666,10 @@
 		47AE9C9E2B03AECF00C271FB /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		47AECA892B01E7D800166292 /* TagsCVLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsCVLayout.swift; sourceTree = "<group>"; };
 		47AFBC202B298151009968B1 /* GossipDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GossipDetailVC.swift; sourceTree = "<group>"; };
+		47AFBC222B29BBCD009968B1 /* ExpandableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableLabel.swift; sourceTree = "<group>"; };
+		47AFBC242B29D607009968B1 /* NewsCommentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCommentsVC.swift; sourceTree = "<group>"; };
+		47AFBC262B29DA97009968B1 /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
+		47AFBC282B29DEF9009968B1 /* CommentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsModel.swift; sourceTree = "<group>"; };
 		47B3E9962AF22BDC008BB827 /* SocialPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialPostViewModel.swift; sourceTree = "<group>"; };
 		47B3E9982AF25F70008BB827 /* SocialPollTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialPollTableViewCell.swift; sourceTree = "<group>"; };
 		47B3E9992AF25F70008BB827 /* SocialPollTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialPollTableViewCell.xib; sourceTree = "<group>"; };
@@ -1298,6 +1306,7 @@
 				AD90AF2E2B234A7500515C60 /* iOSDropDown.swift */,
 				47C8C9612AF119A800448D96 /* ImageScrollView.swift */,
 				47E3E50A2B05F61C00B43994 /* OTPFieldView.swift */,
+				47AFBC222B29BBCD009968B1 /* ExpandableLabel.swift */,
 			);
 			path = SubClass;
 			sourceTree = "<group>";
@@ -1437,6 +1446,7 @@
 				47CB0E192B11DA9B0070744B /* NewsModuleVC.swift */,
 				47AFBC202B298151009968B1 /* GossipDetailVC.swift */,
 				47051F102B14687E004D190A /* GossipVC.swift */,
+				47AFBC242B29D607009968B1 /* NewsCommentsVC.swift */,
 				47051F172B14A0BB004D190A /* NewsVC.swift */,
 				B8D3380E2B2AD1E5004ABC66 /* NewsDetailViewController.swift */,
 			);
@@ -1457,6 +1467,7 @@
 				B8D338422B2AD556004ABC66 /* TrendingChildCellViewModel.swift */,
 				B8D338462B2AD556004ABC66 /* TrendingCollectionCellViewModel.swift */,
 				B8D338432B2AD556004ABC66 /* TrendingNewsCellViewModel.swift */,
+                47AFBC262B29DA97009968B1 /* CommentsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1476,6 +1487,7 @@
 				47CB0E102B11D8510070744B /* NewsModel.swift */,
 				47FE163D2B15ECBF009043D2 /* GossipModel.swift */,
 				47C18F7A2B1A0B8700DC1B11 /* ESportsModel.swift */,
+				47AFBC282B29DEF9009968B1 /* CommentsModel.swift */,
 				47C18F7C2B1A103800DC1B11 /* VideosModel.swift */,
 				B8D338142B2AD3AB004ABC66 /* NewsVideoModel.swift */,
 			);
@@ -1532,9 +1544,9 @@
 			isa = PBXGroup;
 			children = (
 				47FC33E32AEA50BE00FABED4 /* SocialVC.swift */,
-				47E2FACE2AFE6BAE00DBEFE6 /* SocialSearchVC.swift */,
 				47E7C84A2AEFBF8D00D054A8 /* PostListVC.swift */,
 				47E7C8482AEFBF6D00D054A8 /* PostDetailVC.swift */,
+				47E2FACE2AFE6BAE00DBEFE6 /* SocialSearchVC.swift */,
 				47E7C84C2AEFBFA800D054A8 /* PostCreateVC.swift */,
 				47E7C8502AEFD2F400D054A8 /* PostMatchesVC.swift */,
 				47C8C95C2AF116D700448D96 /* ImageZoomVC.swift */,
@@ -3099,10 +3111,12 @@
 				B8D3384C2B2AD556004ABC66 /* TrendingNewsCellViewModel.swift in Sources */,
 				41E2AB4E2B0CBBD1005425CF /* PredictionDetailTopView.swift in Sources */,
 				ADC075F92B299C7A009FE6C4 /* StreetEventRequestViewModel.swift in Sources */,
+				47AFBC292B29DEF9009968B1 /* CommentsModel.swift in Sources */,
 				4196582A2B0CFA0C00730D9F /* PredictionResultViewController.swift in Sources */,
 				47163AE72B108EDA00235FC6 /* UTableCollectionView+Extension.swift in Sources */,
 				47163AE32B108DD200235FC6 /* UIView+Extension.swift in Sources */,
 				47C8C95D2AF116D700448D96 /* ImageZoomVC.swift in Sources */,
+				47AFBC272B29DA97009968B1 /* CommentsViewModel.swift in Sources */,
 				49B04A602AFA6FD300B440AA /* ExpertViewController.swift in Sources */,
 				47C18F7B2B1A0B8700DC1B11 /* ESportsModel.swift in Sources */,
 				49A822BB2B04FC27007752C2 /* RecentMatchTableViewCell.swift in Sources */,
@@ -3136,6 +3150,7 @@
 				474D994E2AE7F9D6009499D0 /* Constants.swift in Sources */,
 				47E7C84D2AEFBFA800D054A8 /* PostCreateVC.swift in Sources */,
 				47ECAA172B1708E9000B4A3D /* MultipartAPIServiceManager.swift in Sources */,
+				47AFBC252B29D607009968B1 /* NewsCommentsVC.swift in Sources */,
 				ADC588702B2480CE004F2A49 /* CreateStreetMatchVC.swift in Sources */,
 				49A9D9E42B1F3E4C00C4A1A1 /* Matches.swift in Sources */,
 				47ACEB7F2B0C9737001AD0EB /* ResponseModel.swift in Sources */,
@@ -3320,6 +3335,7 @@
 				47B3E9972AF22BDC008BB827 /* SocialPostViewModel.swift in Sources */,
 				41B5C9FB2B10EA0A000A7A59 /* PredictUpcomingHeaderView.swift in Sources */,
 				493D212A2AFE125600045672 /* PlayerDetailsMediaCollectionViewCell.swift in Sources */,
+				47AFBC232B29BBCD009968B1 /* ExpandableLabel.swift in Sources */,
 				493D21352AFE127F00045672 /* MatchesHeaderView.swift in Sources */,
 				41EB79E92AF4E20600D068F7 /* MediaView.swift in Sources */,
 				AD31C4FD2B17711500DC879D /* StadiumDetailsVC.swift in Sources */,

@@ -8,6 +8,7 @@
 import UIKit
 import Combine
 import MarqueeLabel
+import AVKit
 
 class GossipVC: UIViewController {
     
@@ -128,6 +129,17 @@ class GossipVC: UIViewController {
         }
     }
     
+    func playVideo(url: String) {
+        guard let videoURL = URL(string: url) else { return }
+        
+        let player = AVPlayer(url: videoURL)
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        present(playerViewController, animated: true, completion: {
+            playerViewController.player!.play()
+        })
+    }
+    
     // MARK: - Button Actions
     
     @IBAction func viewAllButtonTapped(_ sender: UIButton) {
@@ -215,6 +227,21 @@ extension GossipVC {
                 self?.videosCollectionView.reloadData()
             })
             .store(in: &cancellable)
+        
+        /// fetch video play url
+        GossipVideoVM.shared.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        GossipVideoVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                self?.playVideo(url: response?.data.playURL.first ?? "")
+            })
+            .store(in: &cancellable)
+        GossipVideoVM.shared.displayLoader = { [weak self] value in
+            value ? self?.startLoader() : stopLoader()
+        }
     }
     
     func execute_onGossipsResponseData(_ response: GossipListResponse?) {
@@ -256,9 +283,9 @@ extension GossipVC {
         gossipsArray = GossipListVM.shared.gossipsArray
         topMarqueeLabel.text = gossipsArray.reversed().map({$0.title ?? ""}).joined(separator: "   *   ")
         /// Show 5 news of gossip array in trending topic section
-        trendingArray = Array(gossipsArray.prefix(5))
         /// shuffle gossip array to avoid repeat content on "trending topic" and "news category"
-        GossipListVM.shared.gossipsArray = GossipListVM.shared.gossipsArray.shuffled()
+        let suffledArray = gossipsArray.shuffled()
+        trendingArray = Array(suffledArray.prefix(5))
         /// Show 3 news of gossip array, and show all news if "see All" button tapped
         if showEsportdata {
             gossipsArray = Array(GossipListVM.shared.gossipsArray.prefix(3))
@@ -335,6 +362,16 @@ extension GossipVC: UICollectionViewDelegate {
             pageNum = 1
             newsSource = publishersArray[indexPath.row]
             getNewsList()
+        } else if collectionView == leagueCollectionView {
+            
+        } else if collectionView == trendingCollectionView {
+            navigateToViewController(GossipDetailVC.self, storyboardName: StoryboardName.gossip, animationType: .autoReverse(presenting: .zoom)) { vc in
+                vc.commentSectionID = self.sportType == .eSports ? "eSportsID:-\(self.gossipsArray[indexPath.row].id ?? 0)" : "gossipNewsID:-\(self.gossipsArray[indexPath.row].slug ?? "")"
+            }
+        } else if collectionView == videosCollectionView {
+            GossipVideoVM.shared.fetchVideoDetailAsyncCall(id: videoArray[indexPath.row].id)
+        } else {
+            
         }
     }
 }
@@ -383,6 +420,12 @@ extension GossipVC: UITableViewDataSource {
 extension GossipVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigateToViewController(GossipDetailVC.self, storyboardName: StoryboardName.gossip, animationType: .autoReverse(presenting: .zoom)) { vc in
+            vc.commentSectionID = self.sportType == .eSports ? "eSportsID:-\(self.gossipsArray[indexPath.row].id ?? 0)" : "gossipNewsID:-\(self.gossipsArray[indexPath.row].slug ?? "")"
+        }
     }
 }
 
