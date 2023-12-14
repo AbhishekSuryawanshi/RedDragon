@@ -15,8 +15,8 @@ struct URLConstants {
     static let terms               = "https://pitchstories.wordpress.com/terms-of-use/"
     static let baseURL             = "http://157.245.159.136:5072/api/"
     static let predictionBaseURL   = "http://45.76.178.21:5069/"
+    static let newsBaseURL         = "https://www.77577.live"
 
-    
     // MARK: -  Login
     static let login               = baseURL + "login"
     static let register            = baseURL + "register"
@@ -125,6 +125,9 @@ struct URLConstants {
     static let videosList           = videosBaseURL + "recommend"
     static let videosThumbnail      = "https://34433tiyu.com/"
     static let chatTokenURL         = "https://grullo-chihuahua-4284.twil.io/chat-token"
+    static let newsList          = "/api/post-keyword/"
+    static let newsDetail        = "/api/post/"
+    static let videoList         = "/api/video-list/"
     
     // MARK: - GlobalMatches
     static let globalMatchBaseURL     = "http://199.241.1.88:4049/api/"
