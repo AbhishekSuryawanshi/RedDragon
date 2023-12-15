@@ -42,7 +42,7 @@ struct Gossip: Codable {
         case mediaSource = "media_source"
     }
     
-    public init () {}
+    init () {}
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

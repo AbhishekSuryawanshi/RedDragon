@@ -43,7 +43,6 @@ class NewsModuleVC: UIViewController {
                                , parent: self, container: containerView) { vc in
                 let vc = vc as! GossipVC
                 vc.sportType = self.sportType
-                
             }
         } else {
             sportsTypeArray = [.football, .cricket]

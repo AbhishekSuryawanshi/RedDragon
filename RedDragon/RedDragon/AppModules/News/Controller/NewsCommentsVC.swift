@@ -36,7 +36,6 @@ class NewsCommentsVC: UIViewController {
         nibInitialization()
         fetchCommentsViewModel()
         commentTextView.textContainerInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
-        CommentListVM.shared.getCommentsAsyncCall(sectionId: sectionId)
     }
     
     func nibInitialization() {
@@ -50,6 +49,12 @@ class NewsCommentsVC: UIViewController {
     func refreshPage() {
         headerLabel.text = "Comments" + " - \(newsTitle)"
         commentTextView.placeholder = "Add a comment".localized
+        listTableView.reloadData()
+        //listTableView.setContentOffset(CGPointMake(0, listTableView.contentSize.height - listTableView.frame.size.height), animated: true)
+        if commentsArray.count > 0 {
+            let indexPosition = IndexPath(row: commentsArray.count - 1, section: 0)
+            self.listTableView.scrollToRow(at: indexPosition, at: UITableView.ScrollPosition.bottom, animated: false)
+        }
     }
     
     // MARK: - Button Actions
@@ -148,6 +153,11 @@ extension NewsCommentsVC {
 // MARK: - TableView Delegates
 extension NewsCommentsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if commentsArray.count == 0 {
+            tableView.setEmptyMessage(ErrorMessage.commentListEmptyAlert)
+        } else {
+            tableView.restore()
+        }
         return commentsArray.count
     }
     
