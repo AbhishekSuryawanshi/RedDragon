@@ -56,6 +56,12 @@ class NewsCommentsVC: UIViewController {
     func refreshPage() {
         headerLabel.text = "Comments" + " - \(newsTitle)"
         commentTextView.placeholder = "Add a comment".localized
+        listTableView.reloadData()
+        //listTableView.setContentOffset(CGPointMake(0, listTableView.contentSize.height - listTableView.frame.size.height), animated: true)
+        if commentsArray.count > 0 {
+            let indexPosition = IndexPath(row: commentsArray.count - 1, section: 0)
+            self.listTableView.scrollToRow(at: indexPosition, at: UITableView.ScrollPosition.bottom, animated: false)
+        }
     }
     
     // MARK: - Button Actions
