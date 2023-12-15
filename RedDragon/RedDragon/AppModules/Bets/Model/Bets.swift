@@ -11,7 +11,7 @@ import Foundation
 struct MatchListModel: Codable {
     let response: MatchResponse?
     let error :  ErrorResponse?
-
+    
     private enum CodingKeys: String, CodingKey {
         case response = "response"
         case error = "error"
@@ -19,23 +19,19 @@ struct MatchListModel: Codable {
 }
 
 struct MatchResponse: Codable {
-
     let code: Int?
     let messages: [String]?
     let data: [MatchesList]?
-
+    
     private enum CodingKeys: String, CodingKey {
         case code = "code"
         case messages = "messages"
         case data = "data"
     }
-
 }
-
 
 // MARK: - MatchesList
 struct MatchesList: Codable {
-    
     let league: String?
     let leagueSlug: String?
     let section: String?
@@ -43,7 +39,7 @@ struct MatchesList: Codable {
     let startDate: String?
     let endDate: String?
     let matches: [Matches]?
-
+    
     private enum CodingKeys: String, CodingKey {
         case league = "league"
         case leagueSlug = "league_slug"
@@ -56,7 +52,6 @@ struct MatchesList: Codable {
 }
 
 struct Matches: Codable {
-
     let slug: String?
     let time: String?
     let matchState: String?
@@ -77,7 +72,7 @@ struct Matches: Codable {
     let odds3Value: String?
     let lineup: Bool?
     let betDetail: BetDetail?
-
+    
     private enum CodingKeys: String, CodingKey {
         case slug = "slug"
         case time = "time"
@@ -103,7 +98,6 @@ struct Matches: Codable {
 }
 
 struct BetDetail: Codable {
-
     let totalBetAll: String?
     let totalBetWin: String?
     let totalBetLose: String?
@@ -113,7 +107,7 @@ struct BetDetail: Codable {
     let amountBetLose: String?
     let amountBetPending: String?
     let betPlaced: Bool?
-    
+    let winRate: Int?
     
     private enum CodingKeys: String, CodingKey {
         case totalBetAll = "total_bet_all"
@@ -125,53 +119,45 @@ struct BetDetail: Codable {
         case amountBetLose = "amount_bet_lose"
         case amountBetPending = "amount_bet_pending"
         case betPlaced = "bet_placed"
+        case winRate = "win_rate"
     }
-
 }
 
-
 struct BetListModel : Codable {
-    
     let response: BetResponse?
     let error :  ErrorResponse?
-
+    
     private enum CodingKeys: String, CodingKey {
         case response = "response"
         case error = "error"
     }
-    
 }
 
 struct BetResponse: Codable {
-
     let code: Int?
     let messages: [String]?
     let data: BetList?
-
+    
     private enum CodingKeys: String, CodingKey {
         case code = "code"
         case messages = "messages"
         case data = "data"
     }
-
 }
 
 struct BetList : Codable {
-    
     let status: Int?
     let message: String?
     let bets: [BetItem]?
     let totalRecord: String?
-
+    
     private enum CodingKeys: String, CodingKey {
         case status = "status"
         case message = "message"
         case bets = "data"
         case totalRecord = "total_record"
     }
-    
 }
-
 
 struct BetItem : Codable {
     let betId: String?
@@ -199,7 +185,7 @@ struct BetItem : Codable {
     let betAmount: String?
     let betStatus: String?
     let betDatetime: String?
-
+    
     private enum CodingKeys: String, CodingKey {
         case betId = "bet_id"
         case sport = "sport"
@@ -229,12 +215,10 @@ struct BetItem : Codable {
     }
 }
 
-
 struct BetSuccessModel : Codable{
-    
     let response: BetSuccessResponse?
     let error :  ErrorResponse?
-
+    
     private enum CodingKeys: String, CodingKey {
         case response = "response"
         case error = "error"
@@ -242,28 +226,23 @@ struct BetSuccessModel : Codable{
 }
 
 struct BetSuccessResponse: Codable {
-
     let code: Int?
     let messages: [String]?
     let data: BetSuccess?
-
+    
     private enum CodingKeys: String, CodingKey {
         case code = "code"
         case messages = "messages"
         case data = "data"
     }
-
 }
 
 struct BetSuccess : Codable{
-    
     let status: Int?
     let message: String?
     
     private enum CodingKeys: String, CodingKey {
         case status = "status"
         case message = "message"
-    
-}
-    
+    }
 }
