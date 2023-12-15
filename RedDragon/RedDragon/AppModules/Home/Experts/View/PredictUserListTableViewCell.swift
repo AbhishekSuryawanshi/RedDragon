@@ -8,7 +8,18 @@
 import UIKit
 
 class PredictUserListTableViewCell: UITableViewCell {
-
+    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var aboutLabel: UILabel!
+    @IBOutlet weak var winRateLabel: UILabel!
+    @IBOutlet weak var allCountLabel: UILabel!
+    @IBOutlet weak var successCountLabel: UILabel!
+    @IBOutlet weak var unsuccessCountLabel: UILabel!
+    @IBOutlet weak var coinLabel: UILabel!
+    @IBOutlet weak var followButton: UIButton!
+    @IBOutlet weak var followingButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
