@@ -377,6 +377,9 @@
 		6AC52DE02B29D02C00723A52 /* InfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC52DDE2B29D02C00723A52 /* InfoVC.swift */; };
 		6AC52DE52B29D05300723A52 /* ExpertsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC52DE32B29D05300723A52 /* ExpertsVC.swift */; };
 		6AC52DE92B29D06500723A52 /* ForYouVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC52DE72B29D06500723A52 /* ForYouVC.swift */; };
+		6ACB47072B2C2B1A00333ADF /* PredictUserListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6ACB47052B2C2B1900333ADF /* PredictUserListTableViewCell.xib */; };
+		6ACB47082B2C2B1A00333ADF /* PredictUserListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB47062B2C2B1A00333ADF /* PredictUserListTableViewCell.swift */; };
+		6ACB470B2B2C2BE600333ADF /* ExpertBetUserListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB470A2B2C2BE600333ADF /* ExpertBetUserListModel.swift */; };
 		6AD21DCB2B15B3100043D7C2 /* MyEventsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD21DC92B15B3100043D7C2 /* MyEventsCollectionViewCell.swift */; };
 		6AD21DCC2B15B3100043D7C2 /* MyEventsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AD21DCA2B15B3100043D7C2 /* MyEventsCollectionViewCell.xib */; };
 		6AD21DCF2B15F37E0043D7C2 /* CreateEventVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD21DCD2B15F37E0043D7C2 /* CreateEventVC.swift */; };
@@ -921,6 +924,9 @@
 		6AC52DDE2B29D02C00723A52 /* InfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoVC.swift; sourceTree = "<group>"; };
 		6AC52DE32B29D05300723A52 /* ExpertsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertsVC.swift; sourceTree = "<group>"; };
 		6AC52DE72B29D06500723A52 /* ForYouVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouVC.swift; sourceTree = "<group>"; };
+		6ACB47052B2C2B1900333ADF /* PredictUserListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PredictUserListTableViewCell.xib; sourceTree = "<group>"; };
+		6ACB47062B2C2B1A00333ADF /* PredictUserListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictUserListTableViewCell.swift; sourceTree = "<group>"; };
+		6ACB470A2B2C2BE600333ADF /* ExpertBetUserListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpertBetUserListModel.swift; sourceTree = "<group>"; };
 		6AD21DC92B15B3100043D7C2 /* MyEventsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEventsCollectionViewCell.swift; sourceTree = "<group>"; };
 		6AD21DCA2B15B3100043D7C2 /* MyEventsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyEventsCollectionViewCell.xib; sourceTree = "<group>"; };
 		6AD21DCD2B15F37E0043D7C2 /* CreateEventVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventVC.swift; sourceTree = "<group>"; };
@@ -2521,6 +2527,7 @@
 		6AC52DD52B29BF2400723A52 /* Experts */ = {
 			isa = PBXGroup;
 			children = (
+				6ACB47092B2C2B7F00333ADF /* Model */,
 				6AC52DDD2B29CFCA00723A52 /* ViewModel */,
 				6AC52DDC2B29CFAC00723A52 /* View */,
 				6AC52DD92B29CE5900723A52 /* Controller */,
@@ -2548,6 +2555,8 @@
 		6AC52DDC2B29CFAC00723A52 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6ACB47062B2C2B1A00333ADF /* PredictUserListTableViewCell.swift */,
+				6ACB47052B2C2B1900333ADF /* PredictUserListTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2565,6 +2574,12 @@
 				AD020AED2B305051009DBD4E /* StreetExts.swift */,
 			);
 			path = ModuleExts;
+		6ACB47092B2C2B7F00333ADF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6ACB470A2B2C2BE600333ADF /* ExpertBetUserListModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		AD1042C32B273DB000451DB9 /* Players */ = {
@@ -3021,6 +3036,7 @@
 			files = (
 				6A5F2B832B0C922E00AB6A98 /* match.gif in Resources */,
 				41EB79DF2AF3994400D068F7 /* SpiderChartView.xib in Resources */,
+				6ACB47072B2C2B1A00333ADF /* PredictUserListTableViewCell.xib in Resources */,
 				419658192B0CDF5C00730D9F /* PlacePredictionView.xib in Resources */,
 				473E1D132AEB910C00A806DF /* IconNameCollectionViewCell.xib in Resources */,
 				41B5C9FD2B10EA21000A7A59 /* PredictUpcomingHeaderView.xib in Resources */,
@@ -3303,6 +3319,7 @@
 				49B2114A2B0B471A00E1C58E /* RealmPlayerData.swift in Sources */,
 				B8D338362B2AD4BA004ABC66 /* TrendingNewsChildTableViewCell.swift in Sources */,
 				49DB68F52B0E319300921791 /* CardGamePlayerDetailVC.swift in Sources */,
+				6ACB470B2B2C2BE600333ADF /* ExpertBetUserListModel.swift in Sources */,
 				494B37E92AEA3EC500FB9BCD /* ImageConstants.swift in Sources */,
 				AD2676EE2B1EFF0F00B96921 /* StreetUploadResponse.swift in Sources */,
 				49581AFC2B14CC1800048189 /* MyTeamCollectionViewCell.swift in Sources */,
@@ -3500,6 +3517,7 @@
 				AD90AF172B22FFCE00515C60 /* TeamCollectionTableViewCell.swift in Sources */,
 				49B211512B0B4AEF00E1C58E /* AllFootballPlayersViewModel.swift in Sources */,
 				AD633A072B1A0EA9005DEBD1 /* MapVC.swift in Sources */,
+				6ACB47082B2C2B1A00333ADF /* PredictUserListTableViewCell.swift in Sources */,
 				47CB0E1A2B11DA9B0070744B /* NewsModuleVC.swift in Sources */,
 				AD3B555B2B1602DB007B14F7 /* StreetMatchesViewModel.swift in Sources */,
 				B8D338482B2AD556004ABC66 /* NewsVideoCollectionCellViewModel.swift in Sources */,
