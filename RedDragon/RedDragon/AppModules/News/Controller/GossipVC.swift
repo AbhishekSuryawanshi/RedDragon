@@ -140,6 +140,15 @@ class GossipVC: UIViewController {
         })
     }
     
+    func gotoDetailPage(index: Int) {
+        navigateToViewController(GossipDetailVC.self, storyboardName: StoryboardName.gossip, animationType: .autoReverse(presenting: .zoom)) { vc in
+            vc.commentSectionID = self.sportType == .eSports ? "eSportsID:-\(self.gossipsArray[index].id ?? 0)" : "gossipNewsID:-\(self.gossipsArray[index].slug ?? "")"
+            vc.gossipModel = self.gossipsArray[index]
+            vc.sportType = self.sportType
+            vc.newsSource = self.newsSource
+        }
+    }
+    
     // MARK: - Button Actions
     
     @IBAction func viewAllButtonTapped(_ sender: UIButton) {
@@ -270,11 +279,7 @@ extension GossipVC {
         /// update id, title, mediasource
         
         for eSportModel in response {
-            var gossipModel = Gossip()
-            gossipModel.id = eSportModel.id
-            gossipModel.title = eSportModel.articalTitle
-            gossipModel.mediaSource = [URLConstants.eSportsBaseURL + eSportModel.articalThumbnailImage]
-            GossipListVM.shared.gossipsArray.append(gossipModel)
+            GossipListVM.shared.gossipsArray.append(GossipVM.shared.eSportToGossipModel(eSportModel: eSportModel))
         }
         loadGossipData(showEsportdata: true)
     }
@@ -365,9 +370,7 @@ extension GossipVC: UICollectionViewDelegate {
         } else if collectionView == leagueCollectionView {
             
         } else if collectionView == trendingCollectionView {
-            navigateToViewController(GossipDetailVC.self, storyboardName: StoryboardName.gossip, animationType: .autoReverse(presenting: .zoom)) { vc in
-                vc.commentSectionID = self.sportType == .eSports ? "eSportsID:-\(self.gossipsArray[indexPath.row].id ?? 0)" : "gossipNewsID:-\(self.gossipsArray[indexPath.row].slug ?? "")"
-            }
+            gotoDetailPage(index: indexPath.row)
         } else if collectionView == videosCollectionView {
             GossipVideoVM.shared.fetchVideoDetailAsyncCall(id: videoArray[indexPath.row].id)
         } else {
@@ -423,9 +426,7 @@ extension GossipVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigateToViewController(GossipDetailVC.self, storyboardName: StoryboardName.gossip, animationType: .autoReverse(presenting: .zoom)) { vc in
-            vc.commentSectionID = self.sportType == .eSports ? "eSportsID:-\(self.gossipsArray[indexPath.row].id ?? 0)" : "gossipNewsID:-\(self.gossipsArray[indexPath.row].slug ?? "")"
-        }
+        gotoDetailPage(index: indexPath.row)
     }
 }
 
