@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="148" id="KGk-i7-Jjw" customClass="PredictUserListTableViewCell" customModule="RedDragon" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="370" height="148"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="370" height="148"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="54Y-wk-XmM">
+                        <rect key="frame" x="0.0" y="0.0" width="370" height="148"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DNa-ou-wiT">
+                                <rect key="frame" x="8" y="8" width="54" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="54" id="UrF-nE-mYe"/>
+                                    <constraint firstAttribute="height" constant="54" id="apf-YN-IC9"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cFJ-V6-EQF">
+                                <rect key="frame" x="67" y="8" width="33" height="17"/>
+                                <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="14"/>
+                                <color key="textColor" name="base"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Win Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ppq-WJ-KW5">
+                                <rect key="frame" x="313.33333333333331" y="8" width="46.666666666666686" height="14"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                                <color key="textColor" name="blue4"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="67%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAE-0O-ptW">
+                                <rect key="frame" x="326.33333333333331" y="25" width="33.666666666666686" height="22.666666666666671"/>
+                                <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="19"/>
+                                <color key="textColor" name="green2"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wzd-W9-Xdl">
+                                <rect key="frame" x="67" y="25" width="203" height="15"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="13"/>
+                                <color key="textColor" name="black1"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gqv-3z-HpU">
+                                <rect key="frame" x="275" y="52.666666666666657" width="85" height="26"/>
+                                <color key="backgroundColor" name="blue4"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="85" id="DUD-xc-f0S"/>
+                                    <constraint firstAttribute="height" constant="26" id="yZ4-6D-91Z"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Follow">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="14"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Ked-fS-rEf">
+                                <rect key="frame" x="8" y="86.666666666666671" width="352" height="23"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Qv-9S-qoU">
+                                        <rect key="frame" x="0.0" y="0.0" width="84.333333333333329" height="23"/>
+                                        <color key="backgroundColor" name="blue1"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="23" id="T8h-Po-mug"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="All count">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" name="blue4"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fcD-tW-aUn">
+                                        <rect key="frame" x="89.333333333333343" y="0.0" width="84.333333333333343" height="23"/>
+                                        <color key="backgroundColor" name="blue1"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="23" id="uZ3-bT-3Il"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="All count">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" name="blue4"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mcp-c7-b1A">
+                                        <rect key="frame" x="178.66666666666666" y="0.0" width="83.999999999999972" height="23"/>
+                                        <color key="backgroundColor" name="blue1"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="23" id="u7V-Wp-ljZ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="All count">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" name="blue4"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0oX-TH-R6T">
+                                        <rect key="frame" x="267.66666666666669" y="0.0" width="84.333333333333314" height="23"/>
+                                        <color key="backgroundColor" name="blue1"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="23" id="ReZ-EK-kU1"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="All count">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" name="blue4"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XmC-Aw-ach">
+                                <rect key="frame" x="8" y="117.66666666666669" width="352" height="25"/>
+                                <color key="backgroundColor" name="yellow1"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="CMc-cN-ASg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ked-fS-rEf" firstAttribute="trailing" secondItem="gqv-3z-HpU" secondAttribute="trailing" id="6no-Uq-MqU"/>
+                            <constraint firstItem="MAE-0O-ptW" firstAttribute="top" secondItem="ppq-WJ-KW5" secondAttribute="bottom" constant="3" id="JkV-lq-NA8"/>
+                            <constraint firstItem="gqv-3z-HpU" firstAttribute="trailing" secondItem="ppq-WJ-KW5" secondAttribute="trailing" id="Kev-26-xZ9"/>
+                            <constraint firstItem="cFJ-V6-EQF" firstAttribute="top" secondItem="DNa-ou-wiT" secondAttribute="top" id="Kif-PI-v0P"/>
+                            <constraint firstItem="MAE-0O-ptW" firstAttribute="trailing" secondItem="ppq-WJ-KW5" secondAttribute="trailing" id="PjW-jJ-g2a"/>
+                            <constraint firstItem="Ked-fS-rEf" firstAttribute="leading" secondItem="DNa-ou-wiT" secondAttribute="leading" id="Pvn-bC-EX0"/>
+                            <constraint firstItem="Ked-fS-rEf" firstAttribute="top" secondItem="gqv-3z-HpU" secondAttribute="bottom" constant="8" id="QDy-5I-mQf"/>
+                            <constraint firstItem="XmC-Aw-ach" firstAttribute="trailing" secondItem="Ked-fS-rEf" secondAttribute="trailing" id="VBs-WB-Iup"/>
+                            <constraint firstItem="ppq-WJ-KW5" firstAttribute="top" secondItem="cFJ-V6-EQF" secondAttribute="top" id="Vhu-74-xLv"/>
+                            <constraint firstItem="gqv-3z-HpU" firstAttribute="leading" secondItem="Wzd-W9-Xdl" secondAttribute="trailing" constant="5" id="ayN-2Y-Ua7"/>
+                            <constraint firstItem="XmC-Aw-ach" firstAttribute="top" secondItem="Ked-fS-rEf" secondAttribute="bottom" constant="8" id="r8N-jI-RB6"/>
+                            <constraint firstItem="Wzd-W9-Xdl" firstAttribute="leading" secondItem="cFJ-V6-EQF" secondAttribute="leading" id="sAF-uW-Djf"/>
+                            <constraint firstItem="XmC-Aw-ach" firstAttribute="leading" secondItem="Ked-fS-rEf" secondAttribute="leading" id="sw9-ik-OOl"/>
+                            <constraint firstItem="gqv-3z-HpU" firstAttribute="top" secondItem="MAE-0O-ptW" secondAttribute="bottom" constant="5" id="vIS-fI-sNY"/>
+                            <constraint firstItem="DNa-ou-wiT" firstAttribute="top" secondItem="54Y-wk-XmM" secondAttribute="top" constant="8" id="wjr-RU-cdO"/>
+                            <constraint firstItem="cFJ-V6-EQF" firstAttribute="leading" secondItem="DNa-ou-wiT" secondAttribute="trailing" constant="5" id="xC6-vU-NCb"/>
+                            <constraint firstItem="DNa-ou-wiT" firstAttribute="leading" secondItem="54Y-wk-XmM" secondAttribute="leading" constant="8" id="y8E-rz-euM"/>
+                            <constraint firstItem="Wzd-W9-Xdl" firstAttribute="top" secondItem="MAE-0O-ptW" secondAttribute="top" id="yc4-2l-Rtl"/>
+                            <constraint firstAttribute="trailing" secondItem="ppq-WJ-KW5" secondAttribute="trailing" constant="10" id="zy9-VH-ptr"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="54Y-wk-XmM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="1YR-3J-jZT"/>
+                    <constraint firstAttribute="bottom" secondItem="54Y-wk-XmM" secondAttribute="bottom" id="9RA-Q2-Lwg"/>
+                    <constraint firstItem="54Y-wk-XmM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Mvb-jH-mLa"/>
+                    <constraint firstAttribute="trailing" secondItem="54Y-wk-XmM" secondAttribute="trailing" id="UZS-NL-V9n"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <point key="canvasLocation" x="177.09923664122135" y="56.338028169014088"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="base">
+            <color red="0.71764705882352942" green="0.094117647058823528" blue="0.054901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="black1">
+            <color red="0.12549019607843137" green="0.10196078431372549" blue="0.098039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="blue1">
+            <color red="0.77647058823529413" green="0.90588235294117647" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="blue4">
+            <color red="0.0" green="0.396078431372549" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="green2">
+            <color red="0.18823529411764706" green="0.5490196078431373" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="yellow1">
+            <color red="0.89411764705882357" green="0.792156862745098" blue="0.4823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
