@@ -38,6 +38,8 @@ struct ESports: Codable {
         case articalDescription = "artical_description"
     }
     
+    init () {}
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try (container.decodeIfPresent(Int.self, forKey: .id) ?? 0)
