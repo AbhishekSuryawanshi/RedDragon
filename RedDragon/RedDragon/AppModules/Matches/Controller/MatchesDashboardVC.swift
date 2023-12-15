@@ -417,7 +417,7 @@ extension MatchesDashboardVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presentToViewController(GlobalMatchDetailVC.self, storyboardName: StoryboardName.matches, animationType: .autoReverse(presenting: .zoom)) { [self] vc in
+        presentOverViewController(GlobalMatchDetailVC.self, storyboardName: StoryboardName.matches) { [self] vc in
             if isLeagueMatches ?? false {
                 configureDidSelectTableCell(vc: vc, array: leagueMatchArray[indexPath.row])
                 vc.isFootball = isFootball
