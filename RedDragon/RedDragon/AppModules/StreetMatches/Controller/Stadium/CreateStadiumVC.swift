@@ -189,10 +189,10 @@ class CreateStadiumVC:UIViewController{
     }
     
     func validateFields()->Bool{
-//        if !Utility.isUserLoggedIn(){
-//            self.view.makeToast("Please login first to continue".localized)
-//            return false
-//        }
+        if !isUserLoggedIn(){
+            self.view.makeToast("Please login and update player profile to continue".localized)
+            return false
+        }
         if images.count == 0{
             self.view.makeToast("Please choose at least one stadium image".localized)
             return false

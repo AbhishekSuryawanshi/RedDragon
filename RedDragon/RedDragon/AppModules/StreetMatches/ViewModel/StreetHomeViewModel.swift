@@ -7,7 +7,7 @@
 
 import Foundation
 
-class StreetHomeViewModel: APIServiceManager<StreetMatchHome> {
+class StreetHomeViewModel: APIServiceManager<StreetMatchHomeResponse> {
     
     //function to fetch home data
     func fetchStreetHomeAsyncCall(id:Int?) {

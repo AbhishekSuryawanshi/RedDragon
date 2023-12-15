@@ -35,10 +35,10 @@ class StreetTeamsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         setupLocalisations()
-//        if Utility.isUserLoggedIn(){
-//            viewModel.getTeams(isMyteams: 1)
-//        }
-        myTeamViewModel?.fetchMyStreetTeamsAsyncCall(isMyteams: 1)
+        if isUserLoggedIn(){
+            myTeamViewModel?.fetchMyStreetTeamsAsyncCall(isMyteams: 1)
+        }
+       
         teamViewModel?.fetchStreetTeamsAsyncCall(isMyteams: 0)
         
     }

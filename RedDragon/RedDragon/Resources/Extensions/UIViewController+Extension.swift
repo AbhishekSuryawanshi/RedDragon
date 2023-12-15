@@ -134,4 +134,14 @@ extension UIViewController {
         }
     }
     
+    func isUserLoggedIn()->Bool{
+        if UserDefaults.standard.user?.streetPlayerUpdated == 0{
+            return false
+        }
+        else{
+            return true
+        }
+    }
+    
+    
 }

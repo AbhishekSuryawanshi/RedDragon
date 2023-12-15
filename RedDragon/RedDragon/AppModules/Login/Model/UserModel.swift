@@ -31,6 +31,7 @@ struct User: Codable {
     var token: String = ""
     var appDataIDs = LocalAppUserID()
     var affAppData: AffAppData?
+    var streetPlayerUpdated:Int = 0
     
     enum CodingKeys: String, CodingKey {
         case id, email, username, appDataIDs, affAppData
@@ -41,6 +42,7 @@ struct User: Codable {
         case otpVerified = "otp_verified"
         case profileImg = "profile_img"
         case token = "access_token"
+        case streetPlayerUpdated = "street_player_updated"
     }
     
     public init () {}
@@ -59,6 +61,7 @@ struct User: Codable {
         token = try container.decodeIfPresent(String.self, forKey: .token) ?? ""
         appDataIDs = try container.decodeIfPresent(LocalAppUserID.self, forKey: .appDataIDs) ?? LocalAppUserID()
         affAppData = try container.decodeIfPresent(AffAppData.self, forKey: .affAppData)
+        streetPlayerUpdated = try container.decodeIfPresent(Int.self, forKey: .streetPlayerUpdated) ?? 0
     }
 }
 

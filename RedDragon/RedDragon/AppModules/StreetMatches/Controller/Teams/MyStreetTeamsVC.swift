@@ -37,7 +37,9 @@ class MyStreetTeamsVC: UIViewController {
         setupLocalisation()
         registerCells()
         configureViewModel()
-        makeNetworkCall()
+        if !isFromProfile{
+            makeNetworkCall()
+        }
     }
     
     func setupLocalisation(){

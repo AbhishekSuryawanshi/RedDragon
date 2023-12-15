@@ -7,6 +7,19 @@
 
 import Foundation
 
+
+struct StreetMatchHomeResponse: Codable {
+    let response: StreetMatchHomeData?
+    let error: StreetMatchHomeData?
+}
+
+struct StreetMatchHomeData: Codable {
+    let code: Int?
+    let messages: [String]?
+    let data: StreetMatchHome?
+}
+
+
 // MARK: - StreetMatchHome
 struct StreetMatchHome: Codable {
     let matches: [StreetMatch]?

@@ -7,7 +7,13 @@
 
 import Foundation
 
-
 struct StreetGeneralResponse: Codable {
-    let message:String
+    let response: StreetGeneralData?
+    let error: StreetGeneralData?
 }
+
+struct StreetGeneralData: Codable {
+    let code: Int?
+    let messages: [String]?
+}
+    

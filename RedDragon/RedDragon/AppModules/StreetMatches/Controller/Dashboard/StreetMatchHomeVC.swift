@@ -87,8 +87,8 @@ class StreetMatchHomeVC: UIViewController {
         streethomeVM?.$responseData
             .receive(on: DispatchQueue.main)
             .dropFirst()
-            .sink(receiveValue: { [weak self] homeData in
-                self?.execute_onResponseData(homeData: homeData!)
+            .sink(receiveValue: { [weak self] response in
+                self?.execute_onResponseData(homeData: response!.response!.data!)
             })
             .store(in: &cancellable)
     }

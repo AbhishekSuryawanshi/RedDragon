@@ -74,7 +74,7 @@ class StreetEventRequestsViewController: UIViewController {
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
                 
-                self?.acceptRequestSuccess(message: response?.message ?? "")
+                self?.acceptRequestSuccess(message: response?.response?.messages?.first ?? "")
             })
             .store(in: &cancellable)
     }
@@ -95,7 +95,6 @@ class StreetEventRequestsViewController: UIViewController {
         self.customAlertView(title: ErrorMessage.success.localized, description: message, image: ImageConstants.successImage) {
             self.navigationController?.popViewController(animated: true)
         }
-        
         
     }
     
