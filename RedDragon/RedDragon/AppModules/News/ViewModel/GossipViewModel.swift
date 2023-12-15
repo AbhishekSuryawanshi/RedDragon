@@ -31,6 +31,14 @@ class GossipVM: APIServiceManager<GossipResponse> {
         let method      = RequestType.post
         asyncCall(urlString: urlString, method: method, parameters: params)
     }
+    
+    func eSportToGossipModel(eSportModel: ESports) -> Gossip {
+        var gossipModel = Gossip()
+        gossipModel.id = eSportModel.id
+        gossipModel.title = eSportModel.articalTitle
+        gossipModel.mediaSource = [URLConstants.eSportsBaseURL + eSportModel.articalThumbnailImage]
+        return gossipModel
+    }
 }
 
 class ESportsListVM: APIServiceManager<ESportsList> {
