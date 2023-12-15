@@ -14,16 +14,19 @@ enum homeHeaderSegment: String, CaseIterable {
 }
 
 class HomeVC: UIViewController {
+    
     @IBOutlet weak var headerCollectionView: UICollectionView!
     @IBOutlet weak var viewContainer: UIView!
+    
     var selectedSegment: homeHeaderSegment = .info
     var MessagingClientClass = MessagingManager.self
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         performInitialSetup()
     }
+    
     // MARK: - Methods
     func performInitialSetup() {
         nibInitialization()
@@ -87,14 +90,14 @@ extension HomeVC {
     }
     
     func embedInfoVC() {
-        ViewEmbedder.embed(withIdentifier: "InfoVC", storyboard: UIStoryboard(name: StoryboardName.home, bundle: nil), parent: self, container: viewContainer)
+        ViewEmbedder.embed(withIdentifier: "InfoVC", storyboard: UIStoryboard(name: StoryboardName.info, bundle: nil), parent: self, container: viewContainer)
     }
     
     func embedExpertsVC() {
-        ViewEmbedder.embed(withIdentifier: "ExpertsVC", storyboard: UIStoryboard(name: StoryboardName.home, bundle: nil), parent: self, container: viewContainer)
+        ViewEmbedder.embed(withIdentifier: "ExpertsVC", storyboard: UIStoryboard(name: StoryboardName.expert, bundle: nil), parent: self, container: viewContainer)
     }
     
     func embedForYouVC() {
-        ViewEmbedder.embed(withIdentifier: "ForYouVC", storyboard: UIStoryboard(name: StoryboardName.home, bundle: nil), parent: self, container: viewContainer)
+        ViewEmbedder.embed(withIdentifier: "ForYouVC", storyboard: UIStoryboard(name: StoryboardName.forYou, bundle: nil), parent: self, container: viewContainer)
     }
 }

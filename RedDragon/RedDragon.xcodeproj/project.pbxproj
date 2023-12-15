@@ -231,6 +231,9 @@
 		4988F7342B2068BE00905CDD /* ResponseMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988F7332B2068BE00905CDD /* ResponseMessage.swift */; };
 		4988F7372B2084A700905CDD /* BudgetCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988F7362B2084A700905CDD /* BudgetCalculation.swift */; };
 		4988F7392B2084FC00905CDD /* UpdateInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988F7382B2084FC00905CDD /* UpdateInfoViewModel.swift */; };
+		498F02D42B2C21DB008B1DC9 /* Expert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 498F02D32B2C21DB008B1DC9 /* Expert.storyboard */; };
+		498F02E12B2C22ED008B1DC9 /* Foryou.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 498F02E02B2C22ED008B1DC9 /* Foryou.storyboard */; };
+		498F02E32B2C2335008B1DC9 /* Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 498F02E22B2C2335008B1DC9 /* Info.storyboard */; };
 		499F4A6B2B2303470079C522 /* CardGameMatchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499F4A6A2B2303470079C522 /* CardGameMatchScreen.storyboard */; };
 		499F4A6E2B2303BD0079C522 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499F4A6D2B2303BD0079C522 /* GameViewController.swift */; };
 		49A822BB2B04FC27007752C2 /* RecentMatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A822B92B04FC27007752C2 /* RecentMatchTableViewCell.swift */; };
@@ -762,6 +765,9 @@
 		4988F7332B2068BE00905CDD /* ResponseMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseMessage.swift; sourceTree = "<group>"; };
 		4988F7362B2084A700905CDD /* BudgetCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetCalculation.swift; sourceTree = "<group>"; };
 		4988F7382B2084FC00905CDD /* UpdateInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateInfoViewModel.swift; sourceTree = "<group>"; };
+		498F02D32B2C21DB008B1DC9 /* Expert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Expert.storyboard; sourceTree = "<group>"; };
+		498F02E02B2C22ED008B1DC9 /* Foryou.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Foryou.storyboard; sourceTree = "<group>"; };
+		498F02E22B2C2335008B1DC9 /* Info.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Info.storyboard; sourceTree = "<group>"; };
 		499F4A6A2B2303470079C522 /* CardGameMatchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CardGameMatchScreen.storyboard; sourceTree = "<group>"; };
 		499F4A6D2B2303BD0079C522 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		49A822B92B04FC27007752C2 /* RecentMatchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMatchTableViewCell.swift; sourceTree = "<group>"; };
@@ -1475,7 +1481,7 @@
 				B8D338422B2AD556004ABC66 /* TrendingChildCellViewModel.swift */,
 				B8D338462B2AD556004ABC66 /* TrendingCollectionCellViewModel.swift */,
 				B8D338432B2AD556004ABC66 /* TrendingNewsCellViewModel.swift */,
-                47AFBC262B29DA97009968B1 /* CommentsViewModel.swift */,
+				47AFBC262B29DA97009968B1 /* CommentsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1784,6 +1790,116 @@
 			path = BudgetCalculation;
 			sourceTree = "<group>";
 		};
+		498F02D02B2C2156008B1DC9 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				6AC52DD72B29C19300723A52 /* Home.storyboard */,
+				6AC52DDA2B29CE7E00723A52 /* HomeVC.swift */,
+				498F02D12B2C218A008B1DC9 /* Info */,
+				6AC52DD52B29BF2400723A52 /* Experts */,
+				498F02D22B2C2198008B1DC9 /* ForYou */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		498F02D12B2C218A008B1DC9 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				498F02D92B2C227E008B1DC9 /* Storyboard */,
+				498F02D82B2C2275008B1DC9 /* Model */,
+				498F02D72B2C226E008B1DC9 /* View */,
+				498F02D62B2C222D008B1DC9 /* ViewModel */,
+				498F02D52B2C2223008B1DC9 /* Controller */,
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
+		498F02D22B2C2198008B1DC9 /* ForYou */ = {
+			isa = PBXGroup;
+			children = (
+				498F02DF2B2C22D6008B1DC9 /* Storyboard */,
+				498F02DE2B2C22D0008B1DC9 /* Model */,
+				498F02DD2B2C22C6008B1DC9 /* View */,
+				498F02DC2B2C22BF008B1DC9 /* ViewModel */,
+				498F02DB2B2C22B0008B1DC9 /* Controller */,
+			);
+			path = ForYou;
+			sourceTree = "<group>";
+		};
+		498F02D52B2C2223008B1DC9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6AC52DDE2B29D02C00723A52 /* InfoVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		498F02D62B2C222D008B1DC9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		498F02D72B2C226E008B1DC9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		498F02D82B2C2275008B1DC9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		498F02D92B2C227E008B1DC9 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				498F02E22B2C2335008B1DC9 /* Info.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		498F02DB2B2C22B0008B1DC9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6AC52DE72B29D06500723A52 /* ForYouVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		498F02DC2B2C22BF008B1DC9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		498F02DD2B2C22C6008B1DC9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		498F02DE2B2C22D0008B1DC9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		498F02DF2B2C22D6008B1DC9 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				498F02E02B2C22ED008B1DC9 /* Foryou.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
 		499F4A6C2B2303A50079C522 /* Game */ = {
 			isa = PBXGroup;
 			children = (
@@ -1927,8 +2043,9 @@
 		49B0BA052AE691EC00A9D235 /* AppModules */ = {
 			isa = PBXGroup;
 			children = (
-				41846BCD2B0C7CEB0020F503 /* Prediction */,
 				47AE9C922B03A9C500C271FB /* Login */,
+				498F02D02B2C2156008B1DC9 /* Home */,
+				41846BCD2B0C7CEB0020F503 /* Prediction */,
 				E9DDB61F2B049BA2004C8ACF /* Bets */,
 				41EB79BE2AF37BA000D068F7 /* PlayerDetail */,
 				47FC33DD2AEA4D4200FABED4 /* Common */,
@@ -1942,7 +2059,6 @@
 				ADD339802B0F423500B91101 /* StreetMatches */,
 				47CB0E082B11D6A10070744B /* News */,
 				6A1A057E2B22F48D009ED5C4 /* Matches */,
-				6AC52DD52B29BF2400723A52 /* Experts */,
 			);
 			path = AppModules;
 			sourceTree = "<group>";
@@ -2396,7 +2512,7 @@
 		6AC52DD62B29C0F400723A52 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
-				6AC52DD72B29C19300723A52 /* Home.storyboard */,
+				498F02D32B2C21DB008B1DC9 /* Expert.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -2404,10 +2520,7 @@
 		6AC52DD92B29CE5900723A52 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				6AC52DDA2B29CE7E00723A52 /* HomeVC.swift */,
-				6AC52DDE2B29D02C00723A52 /* InfoVC.swift */,
 				6AC52DE32B29D05300723A52 /* ExpertsVC.swift */,
-				6AC52DE72B29D06500723A52 /* ForYouVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2877,9 +2990,11 @@
 				AD90AF132B22FFCE00515C60 /* TeamCollectionViewCell.xib in Resources */,
 				41EB79D02AF37BA000D068F7 /* TeamsView.xib in Resources */,
 				47C3B71D2B04D4D700E12A4D /* countryCodes.json in Resources */,
+				498F02E32B2C2335008B1DC9 /* Info.storyboard in Resources */,
 				474D99452AE7F30D009499D0 /* Roboto-MediumItalic.ttf in Resources */,
 				ADD339862B0F42FA00B91101 /* StreetMatches.storyboard in Resources */,
 				6AB18E382B187B7B00287A9C /* EventDetailVC.xib in Resources */,
+				498F02E12B2C22ED008B1DC9 /* Foryou.storyboard in Resources */,
 				47FC33E22AEA4DAC00FABED4 /* HeaderTopCollectionViewCell.xib in Resources */,
 				47C8C9522AF0CAB700448D96 /* SingleImageCollectionViewCell.xib in Resources */,
 				41BB28842B064C8F0080E63F /* PlayerStatsTableViewHeader.xib in Resources */,
@@ -2944,6 +3059,7 @@
 				419658282B0CF88200730D9F /* PredictResultDescriptionView.xib in Resources */,
 				494B37E62AEA3BD700FB9BCD /* PMAlertController.xib in Resources */,
 				B8D3381D2B2AD448004ABC66 /* NewsVideoCollectionViewCell.xib in Resources */,
+				498F02D42B2C21DB008B1DC9 /* Expert.storyboard in Resources */,
 				E9DDB6282B049BA2004C8ACF /* BetStoryboard.storyboard in Resources */,
 				474D99442AE7F30D009499D0 /* Roboto-BlackItalic.ttf in Resources */,
 				6AC52DD82B29C19300723A52 /* Home.storyboard in Resources */,
