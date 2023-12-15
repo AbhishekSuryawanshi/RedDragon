@@ -113,5 +113,8 @@ struct CellIdentifier {
     //Wallet
     static let subscriptionTableViewCell         = "SubscriptionTableViewCell"
 
+    //Experts
+    static let predictUserListTableViewCell         = "PredictUserListTableViewCell"
+
 }
 

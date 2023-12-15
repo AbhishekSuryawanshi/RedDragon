@@ -149,4 +149,8 @@ struct URLConstants {
     static let basketballMatchList    = globalMatchBaseURL + "basketball/matchlist/today"
     static let footballH2HMatchList   = globalMatchBaseURL + "football/match-analysis/statics/"
     static let basketballH2HMatchList = globalMatchBaseURL + "basketball/match-analysis/statics/"
+    
+    // MARK: - Experts
+    static let expertsBaseURL         = "http://157.245.159.136:5072/api"
+    static let expertUserList         = expertsBaseURL + "/user/list"
 }
