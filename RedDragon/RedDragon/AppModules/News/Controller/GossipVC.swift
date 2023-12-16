@@ -368,7 +368,23 @@ extension GossipVC: UICollectionViewDelegate {
             newsSource = publishersArray[indexPath.row]
             getNewsList()
         } else if collectionView == leagueCollectionView {
-            
+            var gossipArray = GossipListVM.shared.gossipsArray
+            gossipArray = gossipArray.filter({(item: Gossip) -> Bool in
+                if item.title?.lowercased().range(of: leagueArray[indexPath.row].enName.lowercased()) != nil {
+                    return true
+                }
+                if item.title?.lowercased().range(of: leagueArray[indexPath.row].cnName.lowercased()) != nil {
+                    return true
+                }
+                return false
+            })
+            navigateToViewController(GossipSearchVC.self, storyboardName: StoryboardName.gossip, animationType: .autoReverse(presenting: .zoom)) { vc in
+                vc.leagueModel = self.leagueArray[indexPath.row]
+                vc.gossipsArray = gossipArray
+                vc.sportType = self.sportType
+                vc.newsSource = self.newsSource
+                
+            }
         } else if collectionView == trendingCollectionView {
             gotoDetailPage(index: indexPath.row)
         } else if collectionView == videosCollectionView {

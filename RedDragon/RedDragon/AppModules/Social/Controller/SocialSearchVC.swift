@@ -64,9 +64,9 @@ class SocialSearchVC: UIViewController {
         matchTitleLabel.text = ""
         if showMatches {
             if teamModel.id == "" {
-                logoImageView.setImage(imageStr: leagueModel.logoURL, placeholder: .placeholderTeam)
+                logoImageView.setImage(imageStr: leagueModel.logoURL, placeholder: .placeholderLeague)
             } else {
-                logoImageView.setImage(imageStr: teamModel.logoURL, placeholder: .placeholderLeague)
+                logoImageView.setImage(imageStr: teamModel.logoURL, placeholder: .placeholderTeam)
             }
             titleLabel.text = teamModel.id == "" ? (UserDefaults.standard.language == "en" ? leagueModel.enName : leagueModel.cnName) : (UserDefaults.standard.language == "en" ? teamModel.enName : teamModel.cnName)
             matchTitleLabel.text = "Top Matches in " + (teamModel.id == "" ? "Leage" : "Team")
