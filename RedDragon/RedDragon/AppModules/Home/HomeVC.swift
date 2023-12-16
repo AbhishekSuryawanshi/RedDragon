@@ -27,6 +27,10 @@ class HomeVC: UIViewController {
         performInitialSetup()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     // MARK: - Methods
     func performInitialSetup() {
         nibInitialization()
@@ -90,7 +94,10 @@ extension HomeVC {
     }
     
     func embedInfoVC() {
-        ViewEmbedder.embed(withIdentifier: "InfoVC", storyboard: UIStoryboard(name: StoryboardName.info, bundle: nil), parent: self, container: viewContainer)
+        ViewEmbedder.embed(withIdentifier: "InfoVC", storyboard: UIStoryboard(name: StoryboardName.info, bundle: nil), parent: self, container: viewContainer) { vc in
+            let vc = vc as! InfoVC
+            vc.configureUI()
+        }
     }
     
     func embedExpertsVC() {
