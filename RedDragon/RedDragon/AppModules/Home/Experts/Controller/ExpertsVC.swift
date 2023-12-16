@@ -17,9 +17,13 @@ class ExpertsVC: UIViewController {
     @IBOutlet weak var dropDown : DropDown!
     @IBOutlet weak var tableView: UITableView!
     
-    private var expertUserVM = ExpertPredictUserViewModel()
+    private var expertPredictUserVM = ExpertPredictUserViewModel()
+    private var expertBetUserVM = ExpertBetUserViewModel()
     var cancellable = Set<AnyCancellable>()
     var userArray = [ExpertUser]()
+    var predictUserArray = [ExpertUser]()
+    var betUserArray = [ExpertUser]()
+    var selectedDropDownIndex = Int()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +32,19 @@ class ExpertsVC: UIViewController {
     
     // MARK: - Methods
     func performInitialSetup() {
+        dropDown.optionArray = ["Prediction", "Bet"]
+
+        dropDown.didSelect { [self] selectedText, index, id in
+            self.selectedDropDownIndex = index
+            
+            if selectedDropDownIndex == 0 {
+                userArray = predictUserArray
+                tableView.reloadData()
+            }else {
+                userArray = betUserArray
+                tableView.reloadData()
+            }
+        }
         nibInitialization()
         makeNetworkCall()
     }
@@ -37,8 +54,10 @@ class ExpertsVC: UIViewController {
     }
 
     func makeNetworkCall() {
-        expertUserVM.fetchExpertUserListAsyncCall(page: 1, slug: Slug.predict.rawValue)
-        fetchUserListViewModelResponse()
+        expertPredictUserVM.fetchExpertUserListAsyncCall(page: 1, slug: Slug.predict.rawValue)
+        expertBetUserVM.fetchExpertUserListAsyncCall(page: 1, slug: Slug.bet.rawValue)
+        fetchPredictUserListViewModelResponse()
+        fetchBetUserListViewModelResponse()
     }
     
     func showLoader(_ value: Bool) {
@@ -66,13 +85,14 @@ extension ExpertsVC {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.predictUserListTableViewCell, for: indexPath) as! PredictUserListTableViewCell
         cell.nameLabel.text = userArray[indexPath.row].appdata?.predict?.name?.capitalized
         cell.aboutLabel.text = userArray[indexPath.row].about
-        cell.winRateLabel.text = "\(userArray[indexPath.row].appdata?.predict?.predictStats?.successRate ?? 0.0)%"
-        cell.allCountLabel.text = "\(userArray[indexPath.row].appdata?.predict?.predictStats?.allCount ?? 0)"
-        cell.successCountLabel.text = "\(userArray[indexPath.row].appdata?.predict?.predictStats?.successCount ?? 0)"
-        cell.unsuccessCountLabel.text = "\(userArray[indexPath.row].appdata?.predict?.predictStats?.unsuccessCount ?? 0)"
-        cell.coinLabel.text = "\(userArray[indexPath.row].appdata?.predict?.predictStats?.coins ?? 0)"
+        let roundedValue = (userArray[indexPath.row].appdata?.predict?.predictStats?.successRate ?? 0.0).rounded(toPlaces: 2)
+        cell.winRateLabel.text = "\(roundedValue)%"
+        cell.allCountLabel.text = "All count: \(userArray[indexPath.row].appdata?.predict?.predictStats?.allCount ?? 0)"
+        cell.successCountLabel.text = "Success count: \(userArray[indexPath.row].appdata?.predict?.predictStats?.successCount ?? 0)"
+        cell.unsuccessCountLabel.text = "Unsuccess count: \(userArray[indexPath.row].appdata?.predict?.predictStats?.unsuccessCount ?? 0)"
+        cell.coinLabel.text = "Coin: \(userArray[indexPath.row].appdata?.predict?.predictStats?.coins ?? 0)"
         cell.userImageView.setImage(imageStr: userArray[indexPath.row].profileImg ?? "", placeholder: .placeholderUser)
-        cell.dateLabel.text = userArray[indexPath.row].appdata?.predict?.date.formatDate(inputFormat: dateFormat.ddMMyyyyWithTimeZone, outputFormat: dateFormat.ddMMMyyyyhmma) ?? ""
+        cell.dateLabel.text = "  \(userArray[indexPath.row].appdata?.predict?.date.formatDate(inputFormat: dateFormat.ddMMyyyyWithTimeZone, outputFormat: dateFormat.ddMMMyyyyhmma) ?? "")"
        
         if userArray[indexPath.row].following ?? true {
             cell.followButton.isHidden = true
@@ -83,24 +103,47 @@ extension ExpertsVC {
         return cell
     }
     
-    func fetchUserListViewModelResponse() {
-        expertUserVM.showError = { [weak self] error in
+    func fetchPredictUserListViewModelResponse() {
+        expertPredictUserVM.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
-        expertUserVM.displayLoader = { [weak self] value in
+        expertPredictUserVM.displayLoader = { [weak self] value in
             self?.showLoader(value)
         }
-        expertUserVM.$responseData
+        expertPredictUserVM.$responseData
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.execute_onUserListResponse(response!)
+                self?.execute_onPredictUserListResponse(response!)
             })
             .store(in: &cancellable)
     }
     
-    func execute_onUserListResponse(_ list: ExpertUserListModel) {
-        userArray = list.response?.data ?? []
+    func execute_onPredictUserListResponse(_ list: ExpertUserListModel) {
+        predictUserArray = list.response?.data ?? []
+        userArray = predictUserArray
         tableView.reloadData()
+    }
+    
+    func fetchBetUserListViewModelResponse() {
+        expertBetUserVM.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        expertBetUserVM.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        expertBetUserVM.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                self?.execute_onBetUserListResponse(response!)
+            })
+            .store(in: &cancellable)
+    }
+    
+    func execute_onBetUserListResponse(_ list: ExpertUserListModel) {
+        betUserArray = list.response?.data ?? []
+    //    userArray = betUserArray
+    //    tableView.reloadData()
     }
 }
