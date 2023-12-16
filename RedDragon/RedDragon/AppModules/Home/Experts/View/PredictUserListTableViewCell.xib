@@ -28,6 +28,11 @@
                                     <constraint firstAttribute="width" constant="54" id="UrF-nE-mYe"/>
                                     <constraint firstAttribute="height" constant="54" id="apf-YN-IC9"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="27"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cFJ-V6-EQF">
                                 <rect key="frame" x="67" y="8" width="33" height="17"/>
@@ -73,7 +78,7 @@
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="14"/>
+                                                <real key="value" value="12"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
@@ -91,18 +96,21 @@
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="14"/>
+                                                <real key="value" value="12"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Ked-fS-rEf">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Ked-fS-rEf">
                                 <rect key="frame" x="8" y="86.666666666666671" width="352" height="23"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdn-wn-SOZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="84.333333333333329" height="23"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="23"/>
                                         <color key="backgroundColor" name="blue1"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="Lrl-ZL-be1"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
                                         <color key="textColor" name="black1"/>
                                         <nil key="highlightedColor"/>
@@ -113,8 +121,11 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="30a-oB-csH">
-                                        <rect key="frame" x="89.333333333333343" y="0.0" width="84.333333333333343" height="23"/>
+                                        <rect key="frame" x="85" y="0.0" width="94" height="23"/>
                                         <color key="backgroundColor" name="blue1"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="94" id="exM-2O-7Y7"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
                                         <color key="textColor" name="black1"/>
                                         <nil key="highlightedColor"/>
@@ -125,7 +136,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSg-Al-72F">
-                                        <rect key="frame" x="178.66666666666666" y="0.0" width="83.999999999999972" height="23"/>
+                                        <rect key="frame" x="184" y="0.0" width="98" height="23"/>
                                         <color key="backgroundColor" name="blue1"/>
                                         <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
                                         <color key="textColor" name="black1"/>
@@ -137,8 +148,11 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zny-4O-9NO">
-                                        <rect key="frame" x="267.66666666666669" y="0.0" width="84.333333333333314" height="23"/>
+                                        <rect key="frame" x="287" y="0.0" width="65" height="23"/>
                                         <color key="backgroundColor" name="blue1"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="65" id="uGQ-gN-BO3"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
                                         <color key="textColor" name="black1"/>
                                         <nil key="highlightedColor"/>

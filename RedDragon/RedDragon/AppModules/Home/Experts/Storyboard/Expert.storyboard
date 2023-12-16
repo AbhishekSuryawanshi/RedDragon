@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,10 +21,10 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="v0K-4c-3cJ">
                                 <rect key="frame" x="10" y="69" width="373" height="36"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Prediction Experts" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9pc-UE-5ab" customClass="DropDown" customModule="RedDragon" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="150" height="36"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Prediction Experts" borderStyle="bezel" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="9pc-UE-5ab" customClass="DropDown" customModule="RedDragon" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="142" height="36"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="150" id="0hn-lc-SMT"/>
+                                            <constraint firstAttribute="width" constant="142" id="0hn-lc-SMT"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -32,9 +33,12 @@
                                                 <real key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="delegate" destination="7k2-H9-dwo" id="YBf-0i-QMo"/>
+                                        </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Basketball" borderStyle="bezel" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Omg-I1-Lkb" customClass="DropDown" customModule="RedDragon" customModuleProvider="target">
-                                        <rect key="frame" x="160" y="0.0" width="100" height="36"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Basketball" borderStyle="bezel" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="Omg-I1-Lkb" customClass="DropDown" customModule="RedDragon" customModuleProvider="target">
+                                        <rect key="frame" x="152" y="0.0" width="100" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="u72-kZ-WCy"/>
                                         </constraints>
@@ -46,8 +50,8 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Top Overall" borderStyle="bezel" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FBV-vA-DpU" customClass="DropDown" customModule="RedDragon" customModuleProvider="target">
-                                        <rect key="frame" x="270" y="0.0" width="103" height="36"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Top Overall" borderStyle="bezel" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="FBV-vA-DpU" customClass="DropDown" customModule="RedDragon" customModuleProvider="target">
+                                        <rect key="frame" x="262" y="0.0" width="111" height="36"/>
                                         <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <userDefinedRuntimeAttributes>
@@ -64,6 +68,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="PvI-6j-qeQ">
                                 <rect key="frame" x="10" y="125" width="373" height="693"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="separatorColor" name="gray2"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="dataSource" destination="7k2-H9-dwo" id="6gD-CK-ZFB"/>
@@ -84,7 +89,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="dropDown" destination="FBV-vA-DpU" id="vWe-sW-sSL"/>
+                        <outlet property="dropDown" destination="9pc-UE-5ab" id="ate-Zz-k1h"/>
                         <outlet property="tableView" destination="PvI-6j-qeQ" id="AUb-Us-UJF"/>
                     </connections>
                 </viewController>
@@ -105,6 +110,9 @@
         </designable>
     </designables>
     <resources>
+        <namedColor name="gray2">
+            <color red="0.80784313725490198" green="0.76470588235294112" blue="0.75294117647058822" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

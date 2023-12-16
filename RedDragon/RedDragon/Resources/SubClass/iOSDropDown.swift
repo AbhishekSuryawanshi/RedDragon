@@ -216,9 +216,9 @@ open class DropDown : UITextField{
     }
 
     @objc public func touchAction() {
-
         isSelected ?  hideList() : showList()
     }
+    
     func reSizeTable() {
         if listHeight > rowHeight * CGFloat( dataArray.count) {
             self.tableheightX = rowHeight * CGFloat(dataArray.count)
