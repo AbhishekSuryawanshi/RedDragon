@@ -32,6 +32,13 @@ class NewsCommentsVC: UIViewController {
         listTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 50, right: 0)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if commentsArray.count > 0 {
+            let indexPosition = IndexPath(row: commentsArray.count - 1, section: 0)
+            self.listTableView.scrollToRow(at: indexPosition, at: UITableView.ScrollPosition.bottom, animated: true)
+        }
+    }
+    
     func initialSettings() {
         nibInitialization()
         fetchCommentsViewModel()
@@ -49,12 +56,6 @@ class NewsCommentsVC: UIViewController {
     func refreshPage() {
         headerLabel.text = "Comments" + " - \(newsTitle)"
         commentTextView.placeholder = "Add a comment".localized
-        listTableView.reloadData()
-        //listTableView.setContentOffset(CGPointMake(0, listTableView.contentSize.height - listTableView.frame.size.height), animated: true)
-        if commentsArray.count > 0 {
-            let indexPosition = IndexPath(row: commentsArray.count - 1, section: 0)
-            self.listTableView.scrollToRow(at: indexPosition, at: UITableView.ScrollPosition.bottom, animated: false)
-        }
     }
     
     // MARK: - Button Actions
@@ -73,7 +74,6 @@ class NewsCommentsVC: UIViewController {
             DeleteCommentVM.shared.deleteCommentAsyncCall(id: self.commentsArray[sender.tag].id)
         }
     }
-    
 }
 
 // MARK: - API Services
@@ -100,7 +100,7 @@ extension NewsCommentsVC {
                 self?.listTableView.reloadData()
                 if self?.commentsArray.count ?? 0 > 0 {
                     let indexPosition = IndexPath(row: (self?.commentsArray.count ?? 1) - 1, section: 0)
-                    self?.listTableView.scrollToRow(at: indexPosition, at: UITableView.ScrollPosition.bottom, animated: false)
+                    self?.listTableView.scrollToRow(at: indexPosition, at: UITableView.ScrollPosition.bottom, animated: true)
                 }
             })
             .store(in: &cancellable)

@@ -37,6 +37,7 @@ class GossipVM: APIServiceManager<GossipResponse> {
         gossipModel.id = eSportModel.id
         gossipModel.title = eSportModel.articalTitle
         gossipModel.mediaSource = [URLConstants.eSportsBaseURL + eSportModel.articalThumbnailImage]
+        gossipModel.eSportDate = eSportModel.articalPublishedDate
         return gossipModel
     }
 }
