@@ -13,9 +13,12 @@ class GossipDetailVC: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var gossipImageView: UIImageView!
     @IBOutlet weak var contentLabel: ExpandableLabel!
+    @IBOutlet weak var commentView: UIView!
     @IBOutlet weak var noCommentView: UIView!
     @IBOutlet weak var commentTableView: UITableView!
     @IBOutlet weak var commentHeightConstarint: NSLayoutConstraint!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
     
     var cancellable = Set<AnyCancellable>()
     var commentSectionID = ""
@@ -30,11 +33,20 @@ class GossipDetailVC: UIViewController {
         initialSettings()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
+            commentView.isHidden = false
+            CommentListVM.shared.getCommentsAsyncCall(sectionId: commentSectionID)
+        } else {
+            commentView.isHidden = true
+        }
+    }
+    
     func initialSettings() {
         nibInitialization()
         fetchCommentsViewModel()
         fetchGossipViewModel()
-        CommentListVM.shared.getCommentsAsyncCall(sectionId: commentSectionID)
+        
         if sportType == .eSports {
             ESportsDetailVM.shared.fetchESportsDetailAsyncCall(id: gossipModel.id ?? 0)
         } else {
@@ -64,8 +76,22 @@ class GossipDetailVC: UIViewController {
             let headingRemovedString = lines.joined(separator: "\n")
             contentLabel.text = headingRemovedString
         }
+        if sportType == .eSports {
+            dateLabel.text = gossipModel.eSportDate.formatDate(inputFormat: .mmmdyyyyhma, outputFormat: .ddMMyyyy)
+            timeLabel.text = gossipModel.eSportDate.formatDate(inputFormat: .mmmdyyyyhma, outputFormat: .hmma)
+        } else {
+            dateLabel.text = getGossipDate().formatDate(inputFormat: .mmmmdyyyyhma, outputFormat: .ddMMyyyy)
+            timeLabel.text = getGossipDate().formatDate(inputFormat: .mmmmdyyyyhma, outputFormat: .hmma)
+        }
+        
         titleLabel.text = gossipModel.title
         gossipImageView.setImage(imageStr: gossipModel.mediaSource.last ?? "")
+    }
+    
+    func getGossipDate() -> String {
+        let splitArray = gossipModel.content?.components(separatedBy: "class=\"publish-time\"> ")
+        let dateStringArray = splitArray?.last?.components(separatedBy: " | Updated")
+        return dateStringArray?.first ?? ""
     }
     
     // MARK: - Button Action
@@ -132,6 +158,7 @@ extension GossipDetailVC {
             .sink(receiveValue: { [weak self] response in
                 let eSportsModel = response?.specificeSportNews.first ?? ESports()
                 self?.gossipModel.content = eSportsModel.articalDescription
+                self?.gossipModel.eSportDate = eSportsModel.articalPublishedDate
                 self?.setView()
             })
             .store(in: &cancellable)
