@@ -123,14 +123,14 @@ struct URLConstants {
     static let newsGossips          = "https://datasport.one/api/v1/news/data.php"
     static let eSportsBaseURL       = "http://199.241.1.88:7001/"
     static let eSportsList          = eSportsBaseURL + "api/esports-news-list"
-    static let eSportsDetail        = eSportsBaseURL + "specific-esports-news/"
+    static let eSportsDetail        = eSportsBaseURL + "api/specific-esports-news/"
     static let videosBaseURL        = "https://zeyuapi.com/v1/video/" //custom headers adding in APIServiceManager.swift
     static let videosList           = videosBaseURL + "recommend"
     static let videosThumbnail      = "https://34433tiyu.com/"
     static let chatTokenURL         = "https://grullo-chihuahua-4284.twil.io/chat-token"
-    static let newsList          = "/api/post-keyword/"
-    static let newsDetail        = "/api/post/"
-    static let videoList         = "/api/video-list/"
+    static let newsList             = "/api/post-keyword/"
+    static let newsDetail           = "/api/post/"
+    static let videoList            = "/api/video-list/"
     
     // Comments
     static let commentList          = baseURL + "user/comment/list"
