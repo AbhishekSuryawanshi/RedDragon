@@ -52,12 +52,18 @@ class InfoVC: UIViewController {
     @IBOutlet weak var whatsHappeningSeeAllButton: UIButton!
     @IBOutlet weak var whatsHappeningTableView: UITableView!
     
+    @IBOutlet weak var homePredictionLabel: UILabel!
+    @IBOutlet weak var predictionSeeAllButton: UIButton!
+    @IBOutlet weak var predictionTabelView: UITableView!
+    @IBOutlet weak var predictionViewHeightConstraints: NSLayoutConstraint!
+    
     private var cancellable = Set<AnyCancellable>()
     private var bannerVM: BannerViewModel?
     private var liveMatchArray: [GlobalMatchList] = []
     private var gossipVM: GossipListVM?
     private var footballLiveMatchesVM: FootballLiveMatchesViewModel?
     private var gossipsArray: [Gossip] = []
+    private var predictionVM: HomePagePredictionVM?
     private var banners_count = 0
     private var timer = Timer()
     
@@ -68,8 +74,11 @@ class InfoVC: UIViewController {
     }
     
     private func loadFunctionality() {
+        let nib = UINib(nibName: CellIdentifier.bannerCell, bundle: nil)
+        bannerCollectionView.register(nib, forCellWithReuseIdentifier: CellIdentifier.bannerCell)
         topMatchesTableView.register(CellIdentifier.globalMatchesTableViewCell)
         whatsHappeningTableView.register(CellIdentifier.newsTableViewCell)
+        predictionTabelView.register(CellIdentifier.predictionTableCell)
     }
 
     @IBAction func appModulesButton(_ sender: UIButton) {
@@ -91,6 +100,7 @@ class InfoVC: UIViewController {
         fetchBannerViewModel()
         fetchLiveMatchViewModel()
         fetchGossipViewModel()
+        fetchPredictionViewModel()
     }
     
 }
@@ -168,6 +178,30 @@ extension InfoVC {
         gossipVM?.fetchNewsListAsyncCall(params: param)
     }
     
+    private func fetchPredictionViewModel() {
+        predictionVM = HomePagePredictionVM()
+        predictionVM?.showError = { [weak self] error in
+            self?.predictionViewHeightConstraints.constant = 0
+            self?.view.makeToast(ErrorMessage.predictionsNotFound.localized, duration: 2.0, position: .center)
+        }
+        predictionVM?.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                self?.predictionViewHeightConstraints.constant = 250
+                self?.predictionTabelView.reloadData()
+                print(response?.response.data as Any)
+            })
+            .store(in: &cancellable)
+        
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let formattedDate = dateFormatter.string(from: currentDate)
+        /// API call to fetch prediction data
+        predictionVM?.fetchHomePagePredictionMatchesAsyncCall(lang: "en", date: formattedDate)
+    }
+    
 }
 
 /// __Supportive functions
@@ -233,10 +267,19 @@ extension InfoVC: UITableViewDelegate, UITableViewDataSource {
                 return liveMatchArray.count
             }
         }
-        if gossipsArray.count >= 3 {
-            return 3
-        } else {
-            return gossipsArray.count
+        else if tableView == whatsHappeningTableView {
+            if gossipsArray.count >= 3 {
+                return 3
+            } else {
+                return gossipsArray.count
+            }
+        } 
+        else {
+            if predictionVM?.responseData?.response.data.count ?? 0 >= 3 {
+                return 3
+            } else {
+                return predictionVM?.responseData?.response.data.count ?? 00
+            }
         }
     }
     
@@ -246,17 +289,32 @@ extension InfoVC: UITableViewDelegate, UITableViewDataSource {
             congifureCell(cell: cell, matches: liveMatchArray[indexPath.row])
             return cell
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.newsTableViewCell, for: indexPath) as! NewsTableViewCell
-        cell.titleLabel.textColor = UIColor(red: 0/255, green: 76/255, blue: 107/255, alpha: 1)
-        cell.configureGossipCell(model: gossipsArray[indexPath.row])
-        return cell
+        else if tableView == whatsHappeningTableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.newsTableViewCell, for: indexPath) as! NewsTableViewCell
+            cell.titleLabel.textColor = UIColor(red: 0/255, green: 76/255, blue: 107/255, alpha: 1)
+            cell.configureGossipCell(model: gossipsArray[indexPath.row])
+            return cell
+        }
+        else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.predictionTableCell, for: indexPath) as! HomePagePredictionTableViewCell
+            guard let data = predictionVM?.responseData?.response.data[indexPath.row].matches else {
+                return UITableViewCell()
+            }
+            cell.configureCell(data: data[0])
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if tableView == whatsHappeningView {
-            return 100
+        if tableView == topMatchesTableView {
+            return 90
         }
-        return 90
+        else if tableView == whatsHappeningTableView {
+            return 90
+        }
+        else {
+            return 75
+        }
     }
     
     func congifureCell(cell: GlobalMatchesTableViewCell, matches: GlobalMatchList) {
