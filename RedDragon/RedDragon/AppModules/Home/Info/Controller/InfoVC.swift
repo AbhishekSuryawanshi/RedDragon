@@ -42,6 +42,7 @@ class InfoVC: UIViewController {
     @IBOutlet weak var fourthPointsLabel: UILabel!
     @IBOutlet weak var fourthPriceLabel: UILabel!
     
+    @IBOutlet weak var tagsCollectionView: UICollectionView!
     @IBOutlet weak var bannerCollectionView: UICollectionView!
     @IBOutlet weak var topMatchesLabel: UILabel!
     @IBOutlet weak var topMatchesSeeMoreButton: UIButton!
@@ -59,6 +60,7 @@ class InfoVC: UIViewController {
     
     private var cancellable = Set<AnyCancellable>()
     private var bannerVM: BannerViewModel?
+    private var tagsVM: TagsViewModel?
     private var liveMatchArray: [GlobalMatchList] = []
     private var gossipVM: GossipListVM?
     private var footballLiveMatchesVM: FootballLiveMatchesViewModel?
@@ -76,6 +78,8 @@ class InfoVC: UIViewController {
     private func loadFunctionality() {
         let nib = UINib(nibName: CellIdentifier.bannerCell, bundle: nil)
         bannerCollectionView.register(nib, forCellWithReuseIdentifier: CellIdentifier.bannerCell)
+        let tag_nib = UINib(nibName: CellIdentifier.leagueNamesCollectionCell, bundle: nil)
+        tagsCollectionView.register(tag_nib, forCellWithReuseIdentifier: CellIdentifier.leagueNamesCollectionCell)
         topMatchesTableView.register(CellIdentifier.globalMatchesTableViewCell)
         whatsHappeningTableView.register(CellIdentifier.newsTableViewCell)
         predictionTabelView.register(CellIdentifier.predictionTableCell)
@@ -98,6 +102,7 @@ class InfoVC: UIViewController {
     
     func configureUI() {
         fetchBannerViewModel()
+        fetchTagsViewModel()
         fetchLiveMatchViewModel()
         fetchGossipViewModel()
         fetchPredictionViewModel()
@@ -128,6 +133,20 @@ extension InfoVC {
             .store(in: &cancellable)
         /// API call for banners
         bannerVM?.fetchBannerDataAsyncCall()
+    }
+    
+    private func fetchTagsViewModel() {
+        tagsVM = TagsViewModel()
+        tagsVM?.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] data in
+                self?.tagsCollectionView.reloadData()
+                self?.highlightFirstIndex_collectionView()
+            })
+            .store(in: &cancellable)
+        /// API call to fetch all tags
+        tagsVM?.fetchTagsAsyncCall()
     }
     
     private func fetchLiveMatchViewModel() {
@@ -210,6 +229,13 @@ extension InfoVC {
     private func showLoader(_ value: Bool) {
         value ? startLoader() : stopLoader()
     }
+    
+    func highlightFirstIndex_collectionView() {
+        //code to show collectionView cell default first index selected
+        let indexPath = IndexPath(item: 0, section: 0)
+        tagsCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
+        //collectionView(leaguesCollectionView, didSelectItemAt: indexPath)
+    }
 }
 
 extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -230,29 +256,47 @@ extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return bannerVM?.responseData?.data.top.count ?? 0
+        if collectionView == bannerCollectionView {
+            return bannerVM?.responseData?.data.top.count ?? 0
+        }
+        return tagsVM?.responseData?.response.data.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let banner = bannerVM?.responseData?.data.top else {
-            return UICollectionViewCell()
+        if collectionView == bannerCollectionView {
+            guard let banner = bannerVM?.responseData?.data.top else {
+                return UICollectionViewCell()
+            }
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.bannerCell, for: indexPath) as! BannerCollectionViewCell
+            cell.bannerImage.sd_imageIndicator = SDWebImageActivityIndicator.white
+            cell.bannerImage.sd_setImage(with: URL(string: URLConstants.bannerBaseURL + banner[indexPath.item].coverPath))
+            return cell
         }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.bannerCell, for: indexPath) as! BannerCollectionViewCell
-        cell.bannerImage.sd_imageIndicator = SDWebImageActivityIndicator.white
-        cell.bannerImage.sd_setImage(with: URL(string: URLConstants.bannerBaseURL + banner[indexPath.item].coverPath))
-        return cell
+        else {
+            guard let tags = tagsVM?.responseData?.response.data else {
+                return UICollectionViewCell()
+            }
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.leagueNamesCollectionCell, for: indexPath) as! LeagueCollectionViewCell
+            cell.leagueName.text = tags[indexPath.item].tag
+            return cell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let bannerMesssage = bannerVM?.responseData?.data.top[indexPath.item].message ?? ""
-        if bannerMesssage.contains("http") || bannerMesssage.contains("www"){
-            guard let url = URL(string: bannerMesssage) else { return }
-            UIApplication.shared.open(url)
+        if collectionView == bannerCollectionView {
+            let bannerMesssage = bannerVM?.responseData?.data.top[indexPath.item].message ?? ""
+            if bannerMesssage.contains("http") || bannerMesssage.contains("www"){
+                guard let url = URL(string: bannerMesssage) else { return }
+                UIApplication.shared.open(url)
+            }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width/1 - 0, height: collectionView.bounds.height)
+        if collectionView == bannerCollectionView {
+            return CGSize(width: collectionView.bounds.width/1 - 0, height: collectionView.bounds.height)
+        }
+        return CGSize(width: collectionView.bounds.width/4 - 0, height: collectionView.bounds.height)
     }
     
 }

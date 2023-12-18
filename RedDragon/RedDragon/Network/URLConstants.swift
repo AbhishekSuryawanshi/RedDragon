@@ -29,6 +29,7 @@ struct URLConstants {
     // MARK: - Home
     static let banners             = "https://api996.com/api/v1/banner/com.app.b8"
     static let bannerBaseURL       = "https://api996.com/"
+    static let tagsURL             = baseURL + "user/tag/list"
     
     // MARK: -  Database
     static let databaseBaseURL     = "https://datasport.one/api/v1/sportscore/data/"
