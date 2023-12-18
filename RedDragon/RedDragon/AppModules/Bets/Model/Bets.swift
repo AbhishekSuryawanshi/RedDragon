@@ -98,14 +98,14 @@ struct Matches: Codable {
 }
 
 struct BetDetail: Codable {
-    let totalBetAll: String?
-    let totalBetWin: String?
-    let totalBetLose: String?
-    let totalBetPending: String?
-    let amountBetAll: String?
-    let amountBetWin: String?
-    let amountBetLose: String?
-    let amountBetPending: String?
+    let totalBetAll: Int?
+    let totalBetWin: Int?
+    let totalBetLose: Int?
+    let totalBetPending: Int?
+    let amountBetAll: Int?
+    let amountBetWin: Int?
+    let amountBetLose: Int?
+    let amountBetPending: Int?
     let betPlaced: Bool?
     let winRate: Int?
     

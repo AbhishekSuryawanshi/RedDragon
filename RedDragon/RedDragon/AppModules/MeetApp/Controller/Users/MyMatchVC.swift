@@ -65,12 +65,6 @@ extension MyMatchVC {
         cell.userImgView.sd_setImage(with: URL(string: dict.profileImg ?? ""), placeholderImage: UIImage(named: "placeholderUser"))
         let location = dict.location ?? ""
         cell.userLocationLbl.text = location
-
-//        if location.isEmpty {
-//            cell.locationIcon.isHidden = true
-//        }else {
-//            cell.locationIcon.isHidden = false
-//        }
         return cell
     }
 }
