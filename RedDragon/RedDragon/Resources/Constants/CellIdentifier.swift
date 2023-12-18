@@ -108,8 +108,10 @@ struct CellIdentifier {
     
     //Home
     static let bannerCell                        = "BannerCollectionViewCell"
+    static let predictionTableCell               = "HomePagePredictionTableViewCell"
     
     //Wallet
     static let subscriptionTableViewCell         = "SubscriptionTableViewCell"
+
 }
 
