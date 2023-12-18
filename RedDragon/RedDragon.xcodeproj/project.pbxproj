@@ -102,6 +102,9 @@
 		472873762AEA7E4F0011F00F /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 472873752AEA7E4F0011F00F /* IQKeyboardManagerSwift */; };
 		472873792AEA7E920011F00F /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 472873782AEA7E920011F00F /* Toast */; };
 		473BFC652B2DB61100C75069 /* GossipSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BFC642B2DB61100C75069 /* GossipSearchVC.swift */; };
+		473BFC682B3029BC00C75069 /* WalletVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BFC672B3029BC00C75069 /* WalletVC.swift */; };
+		473BFC6D2B30309900C75069 /* Wallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 473BFC6C2B30309900C75069 /* Wallet.storyboard */; };
+		473BFC712B304C1C00C75069 /* SubscriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BFC702B304C1C00C75069 /* SubscriptionTableViewCell.swift */; };
 		473E1D122AEB910C00A806DF /* IconNameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473E1D102AEB910C00A806DF /* IconNameCollectionViewCell.swift */; };
 		473E1D132AEB910C00A806DF /* IconNameCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 473E1D112AEB910C00A806DF /* IconNameCollectionViewCell.xib */; };
 		474164952AFFA27B0015F7D5 /* NotificationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474164942AFFA27B0015F7D5 /* NotificationExtension.swift */; };
@@ -661,6 +664,9 @@
 		472873532AEA7A780011F00F /* HeaderBottom_1CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderBottom_1CollectionViewCell.swift; sourceTree = "<group>"; };
 		472873542AEA7A780011F00F /* HeaderBottom_1CollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderBottom_1CollectionViewCell.xib; sourceTree = "<group>"; };
 		473BFC642B2DB61100C75069 /* GossipSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GossipSearchVC.swift; sourceTree = "<group>"; };
+		473BFC672B3029BC00C75069 /* WalletVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletVC.swift; sourceTree = "<group>"; };
+		473BFC6C2B30309900C75069 /* Wallet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Wallet.storyboard; sourceTree = "<group>"; };
+		473BFC702B304C1C00C75069 /* SubscriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionTableViewCell.swift; sourceTree = "<group>"; };
 		473E1D102AEB910C00A806DF /* IconNameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconNameCollectionViewCell.swift; sourceTree = "<group>"; };
 		473E1D112AEB910C00A806DF /* IconNameCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IconNameCollectionViewCell.xib; sourceTree = "<group>"; };
 		474164942AFFA27B0015F7D5 /* NotificationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtension.swift; sourceTree = "<group>"; };
@@ -1361,6 +1367,48 @@
 				47AFBC222B29BBCD009968B1 /* ExpandableLabel.swift */,
 			);
 			path = SubClass;
+			sourceTree = "<group>";
+		};
+		473BFC662B30297F00C75069 /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				473BFC692B302F9E00C75069 /* Storyboard */,
+				473BFC6B2B302FCC00C75069 /* View */,
+				473BFC6A2B302FB000C75069 /* Controller */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		473BFC692B302F9E00C75069 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				473BFC6C2B30309900C75069 /* Wallet.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		473BFC6A2B302FB000C75069 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				473BFC672B3029BC00C75069 /* WalletVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		473BFC6B2B302FCC00C75069 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				473BFC6F2B303AEA00C75069 /* TableViewCells */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		473BFC6F2B303AEA00C75069 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				473BFC702B304C1C00C75069 /* SubscriptionTableViewCell.swift */,
+			);
+			path = TableViewCells;
 			sourceTree = "<group>";
 		};
 		474D992D2AE7F2F6009499D0 /* Fonts */ = {
@@ -2111,6 +2159,7 @@
 				ADD339802B0F423500B91101 /* StreetMatches */,
 				47CB0E082B11D6A10070744B /* News */,
 				6A1A057E2B22F48D009ED5C4 /* Matches */,
+				473BFC662B30297F00C75069 /* Wallet */,
 			);
 			path = AppModules;
 			sourceTree = "<group>";
@@ -3199,6 +3248,7 @@
 				419658242B0CF18000730D9F /* PredictResultTopView.xib in Resources */,
 				ADD339912B0F6DB700B91101 /* FeedsTableViewCell.xib in Resources */,
 				499F4A6B2B2303470079C522 /* CardGameMatchScreen.storyboard in Resources */,
+				473BFC6D2B30309900C75069 /* Wallet.storyboard in Resources */,
 				49581AFD2B14CC1800048189 /* MyTeamCollectionViewCell.xib in Resources */,
 				6A1DEC092B287F73006EC885 /* GlobalMatchHeadToHeadTableViewCell.xib in Resources */,
 				41846BDA2B0C7E050020F503 /* TopView.xib in Resources */,
@@ -3262,6 +3312,7 @@
 				ADC075FE2B29C13F009FE6C4 /* FeedsPlayerTableViewCell.swift in Sources */,
 				6A5F2B8C2B0CB7C100AB6A98 /* MeetEventVC.swift in Sources */,
 				ADCE38532B1F302400727F0F /* HoursTableViewCell.swift in Sources */,
+				473BFC712B304C1C00C75069 /* SubscriptionTableViewCell.swift in Sources */,
 				E973A7102B146FD70061A36D /* TenninsMatchDetail.swift in Sources */,
 				4703F8D82B089E4300276F3E /* UserModel.swift in Sources */,
 				47E7C8532AEFE4A400D054A8 /* GrowingTextView.swift in Sources */,
@@ -3512,6 +3563,7 @@
 				49EA0AF02B0258E90003D469 /* PlayerDetailModel.swift in Sources */,
 				4703F8DC2B08D70A00276F3E /* ResetPasswordVC.swift in Sources */,
 				4137D57B2B15BFA9007CF84E /* PredictionMakeModel.swift in Sources */,
+				473BFC682B3029BC00C75069 /* WalletVC.swift in Sources */,
 				B8D338372B2AD4BA004ABC66 /* NewsBannerTableViewCell.swift in Sources */,
 				47C3B7202B04D5DA00E12A4D /* CountryListTableViewCell.swift in Sources */,
 				6A08D65E2B0F808700E1AE7C /* MeetEventModel.swift in Sources */,

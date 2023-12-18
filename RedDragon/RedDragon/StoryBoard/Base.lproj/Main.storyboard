@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -43,23 +43,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1856" y="662"/>
-        </scene>
-        <!--Wallet-->
-        <scene sceneID="dq0-5S-ZPS">
-            <objects>
-                <viewController modalPresentationStyle="overCurrentContext" id="bGf-RP-GfK" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="VWe-AT-3Or">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="Jqd-Xd-h4H"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Wallet" image="Wallet" id="Csg-Tg-U7Z"/>
-                    <navigationItem key="navigationItem" id="6VP-JV-VtX"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VgM-U0-b9i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2746" y="2146"/>
         </scene>
         <!--Discover-->
         <scene sceneID="G69-DG-Dws">
@@ -104,7 +87,7 @@
                         <segue destination="AKJ-4T-eWB" kind="relationship" relationship="viewControllers" id="WaX-J9-O8w"/>
                         <segue destination="fy7-qc-dHG" kind="relationship" relationship="viewControllers" id="V14-fE-wEr"/>
                         <segue destination="HVP-tE-ciH" kind="relationship" relationship="viewControllers" id="2lS-EN-QDK"/>
-                        <segue destination="bGf-RP-GfK" kind="relationship" relationship="viewControllers" id="nJe-01-HpY"/>
+                        <segue destination="K8W-S6-O8A" kind="relationship" relationship="viewControllers" id="nJe-01-HpY"/>
                         <segue destination="Y5S-L7-egR" kind="relationship" relationship="viewControllers" id="lwD-Ue-5Ey"/>
                     </connections>
                 </tabBarController>
@@ -121,6 +104,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vkw-NX-jhb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="966" y="2761"/>
+        </scene>
+        <!--Wallet-->
+        <scene sceneID="wbQ-HA-Fnq">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Wallet" id="gDo-BW-2Ks" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="WWv-Hc-ciL"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fkp-fJ-kOV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2743" y="2582"/>
         </scene>
         <!--Database-->
         <scene sceneID="ur3-5v-ovd">
@@ -177,6 +170,14 @@
             </objects>
             <point key="canvasLocation" x="1856" y="2132"/>
         </scene>
+        <!--Storyboard Reference-->
+        <scene sceneID="vTS-49-oMN">
+            <objects>
+                <viewControllerPlaceholder id="n2f-Ta-N0t" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PwK-mA-yVj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2483" y="1573"/>
+        </scene>
         <!--Discover-->
         <scene sceneID="OK3-pm-zi9">
             <objects>
@@ -196,7 +197,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Gi-Hz-exJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3779" y="2146"/>
+            <point key="canvasLocation" x="3625" y="2146"/>
         </scene>
         <!--Home-->
         <scene sceneID="xkf-Kd-J0z">
@@ -216,6 +217,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pV2-7T-K7u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="57" y="2132"/>
+        </scene>
+        <!--Wallet-->
+        <scene sceneID="adF-Wm-LWV">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="K8W-S6-O8A" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Wallet" image="Wallet" id="Csg-Tg-U7Z"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="721-JY-3sx">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="gDo-BW-2Ks" kind="relationship" relationship="rootViewController" id="Blm-ys-P2Y"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6KY-9h-5Jf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2745.801526717557" y="2145.7746478873241"/>
         </scene>
     </scenes>
     <resources>
