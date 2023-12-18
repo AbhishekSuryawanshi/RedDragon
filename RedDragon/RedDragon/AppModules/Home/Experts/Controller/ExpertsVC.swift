@@ -76,30 +76,54 @@ extension ExpertsVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 148.0
+        return 188.0
     }
 }
 
 extension ExpertsVC {
     private func tableCell(indexPath:IndexPath) -> PredictUserListTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.predictUserListTableViewCell, for: indexPath) as! PredictUserListTableViewCell
-        cell.nameLabel.text = userArray[indexPath.row].appdata?.predict?.name?.capitalized
-        cell.aboutLabel.text = userArray[indexPath.row].about
-        let roundedValue = (userArray[indexPath.row].appdata?.predict?.predictStats?.successRate ?? 0.0).rounded(toPlaces: 2)
-        cell.winRateLabel.text = "\(roundedValue)%"
-        cell.allCountLabel.text = "All count: \(userArray[indexPath.row].appdata?.predict?.predictStats?.allCount ?? 0)"
-        cell.successCountLabel.text = "Success count: \(userArray[indexPath.row].appdata?.predict?.predictStats?.successCount ?? 0)"
-        cell.unsuccessCountLabel.text = "Unsuccess count: \(userArray[indexPath.row].appdata?.predict?.predictStats?.unsuccessCount ?? 0)"
-        cell.coinLabel.text = "Coin: \(userArray[indexPath.row].appdata?.predict?.predictStats?.coins ?? 0)"
-        cell.userImageView.setImage(imageStr: userArray[indexPath.row].profileImg ?? "", placeholder: .placeholderUser)
-        cell.dateLabel.text = "  \(userArray[indexPath.row].appdata?.predict?.date.formatDate(inputFormat: dateFormat.ddMMyyyyWithTimeZone, outputFormat: dateFormat.ddMMMyyyyhmma) ?? "")"
-       
-        if userArray[indexPath.row].following ?? true {
-            cell.followButton.isHidden = true
-        }else {
-            cell.followingButton.isHidden = true
-        }
         
+        cell.aboutLabel.text = userArray[indexPath.row].about
+        cell.userImageView.setImage(imageStr: userArray[indexPath.row].profileImg ?? "", placeholder: .placeholderUser)
+        cell.walletButton.setTitle("\(userArray[indexPath.row].wallet ?? 0)", for: .normal)
+        cell.configureTagCollectionData(data: userArray[indexPath.row].tags ?? [])
+        
+        if selectedDropDownIndex == 0 { // Predict
+            cell.betPointsStackView.isHidden = true
+            cell.dateLabel.isHidden = false
+            cell.followStackView.isHidden = false
+        //    cell.heightConstraint.constant = 35.67
+            cell.nameLabel.text = userArray[indexPath.row].appdata?.predict?.name?.capitalized
+        //    let roundedValue = (userArray[indexPath.row].appdata?.predict?.predictStats?.successRate ?? 0.0).rounded(toPlaces: 2)
+            cell.winRateLabel.text = "\(userArray[indexPath.row].appdata?.predict?.predictStats?.successRate ?? 0)%"
+            cell.allCountLabel.text = "Total: \(userArray[indexPath.row].appdata?.predict?.predictStats?.allCount ?? 0)"
+            cell.successCountLabel.text = "Success: \(userArray[indexPath.row].appdata?.predict?.predictStats?.successCount ?? 0)"
+            cell.unsuccessCountLabel.text = "Failed: \(userArray[indexPath.row].appdata?.predict?.predictStats?.unsuccessCount ?? 0)"
+            cell.coinLabel.text = "Coin: \(userArray[indexPath.row].appdata?.predict?.predictStats?.coins ?? 0)"
+            cell.dateLabel.text = "  \(userArray[indexPath.row].appdata?.predict?.date.formatDate(inputFormat: dateFormat.ddMMyyyyWithTimeZone, outputFormat: dateFormat.ddMMMyyyyhmma) ?? "")"
+            
+            if userArray[indexPath.row].following ?? true {
+                cell.followButton.isHidden = true
+            }else {
+                cell.followingButton.isHidden = true
+            }
+        }else { // Bet
+            cell.betPointsStackView.isHidden = false
+            cell.dateLabel.isHidden = true
+            cell.followStackView.isHidden = true
+       //     cell.heightConstraint.constant = 0
+            cell.nameLabel.text = userArray[indexPath.row].appdata?.bet?.name?.capitalized
+            cell.winRateLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.winRate ?? 0)%"
+            cell.allCountLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.totalBetAll ?? 0) Total bets"
+            cell.successCountLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.totalBetWin ?? 0) Won bets"
+            cell.unsuccessCountLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.totalBetLose ?? 0) Lost bets"
+            cell.coinLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.totalBetPending ?? 0) Pending bets"
+            cell.totalPointsLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.totalBetAll ?? 0) Total pts"
+            cell.wonPointsLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.amountBetWin ?? 0) Won pts"
+            cell.lostPointsLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.amountBetLose ?? 0) Lost pts"
+            cell.pendingPointsLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.amountBetPending ?? 0) Pending pts"
+        }
         return cell
     }
     

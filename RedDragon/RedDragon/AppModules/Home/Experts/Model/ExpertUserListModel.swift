@@ -21,9 +21,11 @@ struct ExpertUser: Codable {
     let about: String?
     let profileImg: String?
     let following: Bool?
+    let tags: [String]?
+    let wallet: Int?
     
     enum CodingKeys: String, CodingKey {
-        case appdata
+        case appdata, tags, wallet
         case about, following
         case profileImg = "profile_img"
     }
@@ -56,7 +58,7 @@ struct PredictStats: Codable {
     let successCount: Int?
     let unsuccessCount: Int?
     let coins: Int?
-    let successRate: Double?
+    let successRate: Int?
     
     enum CodingKeys: String, CodingKey {
         case allCount = "allCnt"
