@@ -134,4 +134,13 @@ extension UIViewController {
         }
     }
     
+    func isUserLoggedIn()->Bool{
+        if UserDefaults.standard.user == nil{
+            return false
+        }
+        else{
+            return true
+        }
+    }
+    
 }

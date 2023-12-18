@@ -55,8 +55,10 @@ class StreetMatchesVC: UIViewController {
         matchListVM?.$responseData
             .receive(on: DispatchQueue.main)
             .dropFirst()
-            .sink(receiveValue: { [weak self] matchList in
-                self?.execute_onResponseData(matchList: matchList!)
+            .sink(receiveValue: { [weak self] response in
+                if let matchList = response?.response?.data{
+                    self?.execute_onResponseData(matchList: matchList)
+                }
             })
             .store(in: &cancellable)
     }
@@ -147,7 +149,7 @@ extension StreetMatchesVC:UISearchBarDelegate{
         }
         else{
             matchList?.removeAll()
-            matchList = originalMatchesList?.filter{($0.homeTeam.name.lowercased().contains(searchText.lowercased()) ) || ($0.awayTeam.name.lowercased().contains(searchText.lowercased()) )}
+            matchList = originalMatchesList?.filter{($0.homeTeam?.name?.lowercased().contains(searchText.lowercased()) ?? false ) || ($0.awayTeam?.name?.lowercased().contains(searchText.lowercased()) ?? false )}
             tableView.reloadData()
         }
     }

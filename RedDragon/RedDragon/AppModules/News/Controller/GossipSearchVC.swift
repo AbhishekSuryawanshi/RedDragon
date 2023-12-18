@@ -50,13 +50,8 @@ extension GossipSearchVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.newsTableViewCell, for: indexPath) as! NewsTableViewCell
         cell.configureGossipCell(model: gossipsArray[indexPath.row])
-
-        
-        
-        
-        
-        
-
+        return cell
+   
     }
 }
 

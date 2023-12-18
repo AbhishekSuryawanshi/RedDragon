@@ -7,12 +7,23 @@
 
 import Foundation
 
+struct StreetEventRequestResponse: Codable {
+    let response: StreetEventRequestData?
+    let error: StreetEventRequestData?
+}
+
+struct StreetEventRequestData: Codable {
+    let code: Int?
+    let messages: [String]?
+    let data: [StreetEventRequest]?
+}
+
 // MARK: - StreetEventRequest
 struct StreetEventRequest: Codable {
-    let id, creatorUserID, eventID: Int
+    let id, creatorUserID, eventID: Int?
     let teamID: Int?
-    let isAccepted: Int
-    let createdAt, updatedAt: String
+    let isAccepted: Int?
+    let createdAt, updatedAt: String?
     let creator: Creator?
     let team: StreetTeam?
 
