@@ -51,15 +51,17 @@ class AddStreetPlayersVC: UIViewController {
         playerListViewModel?.$responseData
             .receive(on: DispatchQueue.main)
             .dropFirst()
-            .sink(receiveValue: { [weak self] playerList in
-                self?.execute_onResponseData(playerList: playerList!)
+            .sink(receiveValue: { [weak self] response in
+                if let playerList = response?.response?.data{
+                    self?.execute_onResponseData(playerList: playerList)
+                }
             })
             .store(in: &cancellable)
     }
     
     func execute_onResponseData(playerList:[StreetMatchPlayer]){
         players = playerList
-        let ids:[Int] = self.chosenPlayers?.map{$0.id } ?? []
+        let ids:[Int] = self.chosenPlayers?.map{$0.id ?? 0} ?? []
         for i in 0 ... (players?.count ?? 0)-1{
             if ids.contains(players?[i].id ?? 0){
                 players?[i].selected = true

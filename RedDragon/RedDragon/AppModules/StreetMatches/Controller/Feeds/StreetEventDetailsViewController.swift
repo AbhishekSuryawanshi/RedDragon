@@ -66,16 +66,21 @@ class StreetEventDetailsViewController: UIViewController {
     
    
     @IBAction func actionRespond(_ sender: UIButton) {
-//        if !Utility.isUserLoggedIn(){
-//            Utility.showErrorSnackView(message: "Please login first to continue".localized)
-//            return
-//        }
-//        if AppPreferences.getUserData()?.id == details?.creatorUserId{
-//            viewAllRequests()
-//        }
-//        else{
-//            prepareEventRequest()
-//        }
+        if !isUserLoggedIn(){
+            self.view.makeToast("Please login to continue".localized)
+            return
+        }
+        
+        if !isUserStreetProfileUpdated(){
+            self.view.makeToast("Please update player profile to continue".localized)
+            return
+        }
+       if UserDefaults.standard.user?.id == details?.creatorUserID{
+            viewAllRequests()
+        }
+        else{
+            prepareEventRequest()
+        }
         
     }
     
@@ -200,7 +205,7 @@ class StreetEventDetailsViewController: UIViewController {
             btnAction.setTitle("Accept Challenge".localized, for: .normal)
             txtDate.text = details?.scheduleTime
             lblTop.text = "Challenge".localized
-           // if AppPreferences.getUserData()?.id != details?.creatorUserId{
+            if UserDefaults.standard.user?.id != details?.creatorUserID{
                 let dt_formatter = DateFormatter()
                 dt_formatter.dateFormat = dateFormat.yyyyMMddHHmm.rawValue
                 let matchDate = dt_formatter.date(from: details?.scheduleTime ?? "")
@@ -209,17 +214,17 @@ class StreetEventDetailsViewController: UIViewController {
                     matchDateStack.isHidden = true
                     btnAction.isHidden = true
                 }
-           // }
+            }
         default:
             lblType.text = ""
         }
         
-//        if AppPreferences.getUserData()?.id == details?.creatorUserId{
-//            btnAction.setTitle("View Requests".localized, for: .normal)
-//            if self.feedType == .challengeTeam{
-//                btnAction.isHidden = true
-//            }
-//        }
+        if UserDefaults.standard.user?.id == details?.creatorUserID{
+            btnAction.setTitle("View Requests".localized, for: .normal)
+            if self.feedType == .challengeTeam{
+                btnAction.isHidden = true
+            }
+        }
         
         if details?.isClosed == 1{
             btnAction.isHidden = true

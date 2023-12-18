@@ -7,14 +7,25 @@
 
 import Foundation
 
+struct StreetProfileUserResponse: Codable {
+    let response: StreetProfileUserData?
+    let error: StreetProfileUserData?
+}
+
+struct StreetProfileUserData: Codable {
+    let code: Int?
+    let messages: [String]?
+    let data: StreetProfileUser?
+}
+
 // MARK: - StreetProfileUser
 struct StreetProfileUser: Codable {
-    let id: Int
-    let firstName, lastName, email, phoneNumber: String
-    let birthdate, type: String
-    let locationLong, locationLat: Double
-    let address, createdAt, updatedAt: String
-    let player: StreetPlayer
+    let id: Int?
+    let firstName, lastName, email, phoneNumber: String?
+    let birthdate, type: String?
+    let locationLong, locationLat: Double?
+    let address, createdAt, updatedAt: String?
+    let player: StreetPlayer?
 
     enum CodingKeys: String, CodingKey {
         case id

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PlayerPositionsViewModel: APIServiceManager<[StreetPlayerPosition]> {
+class PlayerPositionsViewModel: APIServiceManager<StreetPlayerPositionResponse> {
     
     //function to fetch player data
     func getPlayerPositionsAsyncCall() {
