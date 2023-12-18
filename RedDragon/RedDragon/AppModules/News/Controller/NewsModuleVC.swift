@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 enum NewsHeaders: String, CaseIterable {
     case gossip = "Gossip"
@@ -22,6 +23,7 @@ class NewsModuleVC: UIViewController {
     var sportsTypeArray: [SportsType] = []
     var sportType: SportsType = .football
     var contentType: NewsHeaders = .gossip
+    private var cancellable = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +33,7 @@ class NewsModuleVC: UIViewController {
     func initialSettings() {
         nibInitialization()
         setView()
+        NotificationCenter.default.addObserver(self, selector: #selector(pushViewController), name: .moveToNewsDetail, object: nil)
     }
     
     func setView() {
@@ -40,13 +43,11 @@ class NewsModuleVC: UIViewController {
                                , parent: self, container: containerView) { vc in
                 let vc = vc as! GossipVC
                 vc.sportType = self.sportType
-                
             }
         } else {
-            sportsTypeArray = [.football, .cricket]
-            ViewEmbedder.embed(withIdentifier: "NewsVC", storyboard: UIStoryboard(name: StoryboardName.news, bundle: nil)
-                               , parent: self, container: containerView) { vc in
-            }
+            searchTextField.placeholder = "Search"
+            sportsTypeArray = [.football, .tennis, .eSports, .basketball]
+            ViewEmbedder.embedXIBController(childVC: NewsVC(viewModel: NewsViewModel(sportType: sportType)), parentVC: self, container: containerView)
         }
         sportsCollectionView.reloadData()
     }
@@ -54,6 +55,21 @@ class NewsModuleVC: UIViewController {
     func nibInitialization() {
         headerCollectionView.register(CellIdentifier.headerTopCollectionViewCell)
         sportsCollectionView.register(CellIdentifier.headerTopCollectionViewCell)
+    }
+    
+    @objc func pushViewController(notification: Notification) {
+        guard let model = notification.userInfo?["NewsDetails"] as? NewsDetail else { return }
+        let viewModel = NewsDetailViewModel(model: model)
+        viewModel.fetchDetailsAsyncCall(newsId: model.id ?? 0)
+        viewModel.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                viewModel.onSuccess(response: response)
+                self?.navigationController?.pushViewController(NewsDetailViewController(viewModel: viewModel), animated: true)
+            })
+            .store(in: &cancellable)
+        
     }
     
     func searchData(text: String) {

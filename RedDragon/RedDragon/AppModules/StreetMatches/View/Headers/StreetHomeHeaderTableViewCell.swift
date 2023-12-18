@@ -11,6 +11,8 @@ class StreetHomeHeaderTableViewCell: UITableViewCell {
 
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var btnMore: UIButton!
+    
+    var callSelection:(()->Void)?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,7 +26,7 @@ class StreetHomeHeaderTableViewCell: UITableViewCell {
     
     
     @IBAction func actionMore(_ sender: Any) {
-        
+        callSelection?()
     }
     
 }

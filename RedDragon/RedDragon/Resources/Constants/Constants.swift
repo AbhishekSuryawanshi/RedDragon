@@ -28,10 +28,12 @@ enum dateFormat: String {
     case hhmmaddMMMyyyy       = "hh:mm a | d MMMM yyyy"
     case hhmmaddMMMyyyy2      = "hh:mm a - dd/MM/yyyy" // 11.00 PM - 03/11/2023
     case hmma                 = "hh:mm a"
-    case edmmmHHmm            = "E, d"
-  //  case edmmmHHmm            = "E, d MMM HH:mm"
-    case mmmdhm            = "MMM d, h:mm a"
-    case hhmmssa           = "h:mm:ss aa"
+    case ed                   = "E, d"
+    case edmmmHHmm            = "E, d MMM HH:mm"
+    case mmmdhm               = "MMM d, h:mm a"
+    case mmmdyyyyhma          = "MMM dd, yyyy hh:mm a" // Oct 30, 2023 10:26 pm
+    case mmmmdyyyyhma         = "MMMM dd, yyyy hh:mm a" // December 15, 2023 11:30 am
+    case hhmmssa              = "h:mm:ss aa"
 }
 
 //func formatDate(date: Date?, with outputFormat: dateFormat)-> String

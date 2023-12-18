@@ -15,8 +15,8 @@ struct URLConstants {
     static let terms               = "https://pitchstories.wordpress.com/terms-of-use/"
     static let baseURL             = "http://157.245.159.136:5072/api/"
     static let predictionBaseURL   = "http://45.76.178.21:5069/"
+    static let newsBaseURL         = "https://www.77577.live"
 
-    
     // MARK: -  Login
     static let login               = baseURL + "login"
     static let register            = baseURL + "register"
@@ -25,6 +25,10 @@ struct URLConstants {
     static let forgetPassword      = baseURL + "forgetPass"
     static let resetpassword       = baseURL + "resetpassword"
     static let logout              = baseURL + "logout"
+    
+    // MARK: - Home
+    static let banners             = "https://api996.com/api/v1/banner/com.app.b8"
+    static let bannerBaseURL       = "https://api996.com/"
     
     // MARK: -  Database
     static let databaseBaseURL     = "https://datasport.one/api/v1/sportscore/data/"
@@ -92,7 +96,7 @@ struct URLConstants {
     static let meetJoinEvent       = baseURL + "vinder/user/events/join"
     
     // MARK: - StreetMatches
-    static let streetMatchesBaseURL = "https://trkick.com/stm/api/"
+    static let streetMatchesBaseURL = "https://gsports.cloud/api/"
 
     static let streetHome           = streetMatchesBaseURL + "home/data"
     static let stadiumList          = streetMatchesBaseURL + "stadium/list"
@@ -106,6 +110,9 @@ struct URLConstants {
     static let streetPlayersList    = streetMatchesBaseURL + "player/list"
     static let streetEvents         = streetMatchesBaseURL + "event"
     static let playerPositions      = streetMatchesBaseURL + "player/positions"
+    static let eventRequests        = streetMatchesBaseURL + "event/request"
+    static let streetPlayerProfile  = streetMatchesBaseURL + "auth/user"
+    static let streetPlayers        = streetMatchesBaseURL + "player"
     
 
     // MARK: - Prediction
@@ -119,11 +126,19 @@ struct URLConstants {
     static let newsGossips          = "https://datasport.one/api/v1/news/data.php"
     static let eSportsBaseURL       = "http://199.241.1.88:7001/"
     static let eSportsList          = eSportsBaseURL + "api/esports-news-list"
-    static let eSportsDetail        = eSportsBaseURL + "specific-esports-news/"
+    static let eSportsDetail        = eSportsBaseURL + "api/specific-esports-news/"
     static let videosBaseURL        = "https://zeyuapi.com/v1/video/" //custom headers adding in APIServiceManager.swift
     static let videosList           = videosBaseURL + "recommend"
     static let videosThumbnail      = "https://34433tiyu.com/"
     static let chatTokenURL         = "https://grullo-chihuahua-4284.twil.io/chat-token"
+    static let newsList             = "/api/post-keyword/"
+    static let newsDetail           = "/api/post/"
+    static let videoList            = "/api/video-list/"
+    
+    // Comments
+    static let commentList          = baseURL + "user/comment/list"
+    static let addComment           = baseURL + "user/comment/add"
+    static let deleteComment        = baseURL + "user/comment/delete/"
     
     // MARK: - GlobalMatches
     static let globalMatchBaseURL     = "http://199.241.1.88:4049/api/"

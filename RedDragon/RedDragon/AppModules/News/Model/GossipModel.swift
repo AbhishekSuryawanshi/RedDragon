@@ -30,6 +30,7 @@ struct GossipListData: Codable {
 
 struct Gossip: Codable {
     var id: Int? = 0 //used for ESports to Gossip model conversion in GossipVC
+    var eSportDate = ""  //used for ESports to Gossip model conversion in GossipVC
     var title: String? = ""
     var slug: String? = ""
     var content: String? = ""
@@ -42,7 +43,7 @@ struct Gossip: Codable {
         case mediaSource = "media_source"
     }
     
-    public init () {}
+    init () {}
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

@@ -73,6 +73,10 @@ struct ErrorMessage {
     static let eventStartTimeEmptyAlert    = "Please enter event start time"
     static let eventLocationEmptyAlert     = "Please enter event location"
     static let eventPriceEmptyAlert        = "Please enter event location"
+    
+    static let bannerNotFound              = "Banner data not found"
+    static let liveMatchNotFound           = "Live matches are not available at this moment."
+    static let whatsHappeningNotFound      = "Data not found for What's Happening section"
 }
 
 struct SuccessMessage {

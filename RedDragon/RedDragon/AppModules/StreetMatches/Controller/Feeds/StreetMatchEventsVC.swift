@@ -14,7 +14,7 @@ class StreetMatchEventsVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     //Variables
-    private var feedsListVM : FeedsListViewModel?
+    private var feedsListVM : StreetEventListViewModel?
     private var cancellable = Set<AnyCancellable>()
     var feedsList:[StreetEvent]?
     var originalFeedsList:[StreetEvent]?
@@ -38,7 +38,7 @@ class StreetMatchEventsVC: UIViewController {
     }
     
     func fetchFeedsListViewModel() {
-        feedsListVM = FeedsListViewModel()
+        feedsListVM = StreetEventListViewModel()
         feedsListVM?.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
@@ -78,6 +78,18 @@ extension StreetMatchEventsVC:UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.feedsTableViewCell, for: indexPath) as! FeedsTableViewCell
         cell.configureCell(obj: feedsList?[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        goToDetails(event: feedsList?[indexPath.row])
+        
+    }
+    
+    func goToDetails(event:StreetEvent?){
+        navigateToViewController(StreetEventDetailsViewController.self,storyboardName: StoryboardName.streetMatches) { vc in
+            vc.details = event
+            
+        }
     }
     
 }

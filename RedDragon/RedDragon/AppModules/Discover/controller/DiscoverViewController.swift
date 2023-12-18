@@ -44,11 +44,14 @@ class DiscoverViewController: UIViewController {
         self.goToMatches()
     }
     
-    
     @IBAction func toStreetMatches(_ sender: Any) {
         goToStreetMatches()
     }
     
+    @IBAction func btnGoToExperts(_ sender: Any) {
+        goToExperts()
+    }
+      
     @IBAction func logoutButtonTapped(_ sender: UIButton) {
         self.customAlertView_2Actions(title: "Logout".localized, description: StringConstants.logoutAlert.localized) {
             LogoutVM.shared.logoutAsyncCall()
@@ -79,6 +82,10 @@ class DiscoverViewController: UIViewController {
     
     func goToMatches(){
         navigateToViewController(MatchesDashboardVC.self, storyboardName: StoryboardName.matches, animationType: .autoReverse(presenting: .zoom))
+    }
+    
+    func goToExperts(){
+        navigateToViewController(HomeVC.self, storyboardName: StoryboardName.home, animationType: .autoReverse(presenting: .zoom))
     }
 }
 

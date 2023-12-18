@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="252" id="KGk-i7-Jjw" customClass="TrendingNewsParentTableViewCell" customModule="RedDragon" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="252"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="252"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="1Fa-yW-fKo">
+                        <rect key="frame" x="0.0" y="8" width="320" height="228"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="MIP-Ml-Ly2">
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Bw8-vt-RkY">
+                        <rect key="frame" x="72.666666666666686" y="244" width="175" height="2"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TeA-nz-R1k">
+                                <rect key="frame" x="0.0" y="0.0" width="53" height="2"/>
+                                <color key="backgroundColor" name="Red_Dark"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="53" id="C5g-FI-GVz"/>
+                                    <constraint firstAttribute="height" constant="2" id="fPP-GQ-X1G"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2KW-tS-WGw">
+                                <rect key="frame" x="60.999999999999986" y="0.0" width="53" height="2"/>
+                                <color key="backgroundColor" name="Red_Pale"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="2" id="4jD-IC-1bx"/>
+                                    <constraint firstAttribute="width" constant="53" id="IPR-lg-rfc"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="USj-Qf-VAR">
+                                <rect key="frame" x="122" y="0.0" width="53" height="2"/>
+                                <color key="backgroundColor" name="Red_Pale"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="2" id="4iQ-2o-lW1"/>
+                                    <constraint firstAttribute="width" constant="53" id="jkb-uo-mTe"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Bw8-vt-RkY" firstAttribute="top" secondItem="1Fa-yW-fKo" secondAttribute="bottom" constant="8" id="QgT-2P-eMK"/>
+                    <constraint firstAttribute="bottom" secondItem="1Fa-yW-fKo" secondAttribute="bottom" constant="16" id="j1r-CL-wUZ"/>
+                    <constraint firstItem="Bw8-vt-RkY" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="lYX-yq-WwK"/>
+                    <constraint firstItem="1Fa-yW-fKo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="noo-Oj-tHe"/>
+                    <constraint firstAttribute="trailing" secondItem="1Fa-yW-fKo" secondAttribute="trailing" id="urw-kj-gJ7"/>
+                    <constraint firstItem="1Fa-yW-fKo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="usf-Ym-apw"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="indicatorView1" destination="TeA-nz-R1k" id="0km-5H-OmZ"/>
+                <outlet property="indicatorView2" destination="2KW-tS-WGw" id="fDy-VX-19c"/>
+                <outlet property="indicatorView3" destination="USj-Qf-VAR" id="uzi-wb-TLm"/>
+                <outlet property="newsCollectionView" destination="1Fa-yW-fKo" id="BEi-jI-Jrg"/>
+            </connections>
+            <point key="canvasLocation" x="138.93129770992365" y="103.87323943661973"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="Red_Dark">
+            <color red="0.73333333333333328" green="0.098039215686274508" blue="0.062745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Red_Pale">
+            <color red="0.89411764705882357" green="0.84313725490196079" blue="0.83529411764705885" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
