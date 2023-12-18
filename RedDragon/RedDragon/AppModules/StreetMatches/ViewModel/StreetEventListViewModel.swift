@@ -7,7 +7,7 @@
 
 import Foundation
 
-class StreetEventListViewModel: APIServiceManager<[StreetEvent]> {
+class StreetEventListViewModel: APIServiceManager<StreetEventListResponse> {
     //function to fetch feeds data
     func fetchFeedsListAsyncCall() {
         let urlString   = URLConstants.eventsList

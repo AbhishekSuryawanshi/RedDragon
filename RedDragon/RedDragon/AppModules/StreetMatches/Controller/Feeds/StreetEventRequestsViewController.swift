@@ -57,7 +57,9 @@ class StreetEventRequestsViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.handleResponse(data: response!)
+                if let list = response?.response?.data{
+                    self?.handleResponse(data: list)
+                }
             })
             .store(in: &cancellable)
         

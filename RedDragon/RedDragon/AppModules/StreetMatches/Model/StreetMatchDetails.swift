@@ -7,18 +7,30 @@
 
 import Foundation
 
+
+struct StreetMatchDetailsResponse: Codable {
+    let response: StreetMatchDetailsData?
+    let error: StreetMatchDetailsData?
+}
+
+struct StreetMatchDetailsData: Codable {
+    let code: Int?
+    let messages: [String]?
+    let data: StreetMatchDetails?
+}
+
 // MARK: - StreetMatchDetails
 struct StreetMatchDetails: Codable {
-    let id, homeTeamID, awayTeamID: Int
-    let locationLong, locationLat: Double
-    let address: String
+    let id, homeTeamID, awayTeamID: Int?
+    let locationLong, locationLat: Double?
+    let address: String?
     let description, descriptionCN: String?
-    let scheduleTime: String
+    let scheduleTime: String?
     let startTime: String?
-    let status: String
-    let creatorUserID: Int
-    let createdAt, updatedAt: String
-    let homeTeam, awayTeam: StreetMatchTeam
+    let status: String?
+    let creatorUserID: Int?
+    let createdAt, updatedAt: String?
+    let homeTeam, awayTeam: StreetMatchTeam?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -41,15 +53,15 @@ struct StreetMatchDetails: Codable {
 
 // MARK: - StreetMatchTeam
 struct StreetMatchTeam: Codable {
-    let id: Int
-    let name, nameCN: String
-    let logoImgID: Int
-    let locationLong, locationLat: Double
-    let address, description, descriptionCN: String
-    let creatorUserID: Int
-    let createdAt, updatedAt: String
-    let logoImgURL: String
-    let players: [StreetMatchPlayer]
+    let id: Int?
+    let name, nameCN: String?
+    let logoImgID: Int?
+    let locationLong, locationLat: Double?
+    let address, description, descriptionCN: String?
+    let creatorUserID: Int?
+    let createdAt, updatedAt: String?
+    let logoImgURL: String?
+    let players: [StreetMatchPlayer]?
 
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -71,19 +83,19 @@ struct StreetMatchTeam: Codable {
 
 // MARK: - StreetMatchPlayer
 struct StreetMatchPlayer: Codable {
-    let id, userID: Int
-    let createdAt, updatedAt: String
-    let dominateFoot: String
-    let weight, height: Int
-    let position: String
-    let yearActive: Int
-    let firstName, lastName, birthdate: String
-    let locationLong, locationLat: Double
-    let address: String
+    let id, userID: Int?
+    let createdAt, updatedAt: String?
+    let dominateFoot: String?
+    let weight, height: Int?
+    let position: String?
+    let yearActive: Int?
+    let firstName, lastName, birthdate: String?
+    let locationLong, locationLat: Double?
+    let address: String?
     let description, descriptionCN: String?
     let creatorUserID, teamID, playerID: Int?
-    let positionName, positionNameCN: String
-    let imgURL: String
+    let positionName, positionNameCN: String?
+    let imgURL: String?
     var selected = false
 
     enum CodingKeys: String, CodingKey {

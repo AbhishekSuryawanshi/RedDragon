@@ -7,7 +7,7 @@
 
 import Foundation
 
-class StadiumListViewModel: APIServiceManager<[Stadium]> {
+class StadiumListViewModel: APIServiceManager<StreetStradiumListingResponse> {
     
     //function to fetch Stadium list
     func fetchStadiumListAsyncCall() {

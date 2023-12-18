@@ -67,7 +67,12 @@ class StreetEventDetailsViewController: UIViewController {
    
     @IBAction func actionRespond(_ sender: UIButton) {
         if !isUserLoggedIn(){
-            self.view.makeToast("Please login and update player profile to continue".localized)
+            self.view.makeToast("Please login to continue".localized)
+            return
+        }
+        
+        if !isUserStreetProfileUpdated(){
+            self.view.makeToast("Please update player profile to continue".localized)
             return
         }
        if UserDefaults.standard.user?.id == details?.creatorUserID{

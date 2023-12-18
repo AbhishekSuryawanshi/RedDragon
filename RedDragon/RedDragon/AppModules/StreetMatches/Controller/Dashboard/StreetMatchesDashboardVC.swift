@@ -44,7 +44,12 @@ class StreetMatchesDashboardVC: UIViewController {
 // MARK: - CollectionView Delegates
 extension StreetMatchesDashboardVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return streetMatchesHeaderSegment.allCases.count
+        if isUserLoggedIn(){
+            return streetMatchesHeaderSegment.allCases.count
+        }
+        else{
+            return (streetMatchesHeaderSegment.allCases.count - 1)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -122,6 +127,16 @@ extension StreetMatchesDashboardVC {
     }
     
     func embedStreetProfileVC() {
+        
+        
+        if !isUserStreetProfileUpdated(){
+            self.view.makeToast("Please update player profile to continue".localized)
+            
+            ViewEmbedder.embed(withIdentifier: "StreetEditProfileViewController", storyboard: UIStoryboard(name: StoryboardName.streetMatches, bundle: nil), parent: self, container: viewContainer) { vc in
+               // let vc = vc as! StreetTeamsViewController
+            }
+            return
+        }
         ViewEmbedder.embed(withIdentifier: "StreetPlayerProfileViewController", storyboard: UIStoryboard(name: StoryboardName.streetMatches, bundle: nil), parent: self, container: viewContainer) { vc in
            // let vc = vc as! StreetTeamsViewController
         }

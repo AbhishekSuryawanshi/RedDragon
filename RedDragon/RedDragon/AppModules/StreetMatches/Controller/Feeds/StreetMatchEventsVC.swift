@@ -48,8 +48,10 @@ class StreetMatchEventsVC: UIViewController {
         feedsListVM?.$responseData
             .receive(on: DispatchQueue.main)
             .dropFirst()
-            .sink(receiveValue: { [weak self] feedsList in
-                self?.execute_onResponseData(eventList: feedsList!)
+            .sink(receiveValue: { [weak self] response in
+                if let feedsList = response?.response?.data{
+                    self?.execute_onResponseData(eventList: feedsList)
+                }
             })
             .store(in: &cancellable)
     }
@@ -112,7 +114,7 @@ extension StreetMatchEventsVC:UISearchBarDelegate{
         }
         else{
             feedsList?.removeAll()
-            feedsList = originalFeedsList?.filter{$0.creatorName.lowercased().contains(searchText.lowercased()) }
+            feedsList = originalFeedsList?.filter{$0.creatorName?.lowercased().contains(searchText.lowercased()) ?? false}
             tableView.reloadData()
         }
     }

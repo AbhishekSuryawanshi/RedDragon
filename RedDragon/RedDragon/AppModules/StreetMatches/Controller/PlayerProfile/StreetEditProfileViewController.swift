@@ -132,7 +132,9 @@ class StreetEditProfileViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.handleUserData(data: response!)
+                if let data = response?.response?.data{
+                    self?.handleUserData(data: data)
+                }
             })
             .store(in: &cancellable)
         //editProfileViewModel
@@ -164,7 +166,9 @@ class StreetEditProfileViewController: UIViewController {
              .receive(on: DispatchQueue.main)
              .dropFirst()
              .sink(receiveValue: { [weak self] response in
-                 self?.positionListSuccess(list: response!)
+                 if let list = response?.response?.data{
+                     self?.positionListSuccess(list: list)
+                 }
              })
              .store(in: &cancellable)
         
@@ -181,18 +185,20 @@ class StreetEditProfileViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.uploadResponse = response
+                if response?.response?.data != nil{
+                    self?.uploadResponse = response!.response!.data
+                }
             })
             .store(in: &cancellable)
     }
     
     func positionListSuccess(list:[StreetPlayerPosition]){
         self.playerPositions = list
-        if let code = user?.player.position{
+        if let code = user?.player?.position{
             selectedPosition = playerPositions?.firstIndex(where: {$0.code == code})
         }
         
-        positionDropDown.optionArray = playerPositions?.map{$0.name } ?? []
+        positionDropDown.optionArray = playerPositions?.map{$0.name ?? ""} ?? []
         
     }
     
@@ -210,20 +216,20 @@ class StreetEditProfileViewController: UIViewController {
     func fillData(){
         txtFirstName.text = user?.firstName
         txtLastName.text = user?.lastName
-        imgProfile.setImage(imageStr: user?.player.imgURL ?? "", placeholder: .placeholderUser)
-        textViewDescription.text = user?.player.description
-        textViewDescriptionCn.text = user?.player.descriptionCN
+        imgProfile.setImage(imageStr: user?.player?.imgURL ?? "", placeholder: .placeholderUser)
+        textViewDescription.text = user?.player?.description
+        textViewDescriptionCn.text = user?.player?.descriptionCN
         lblLocation.text = user?.address
         address = user?.address ?? ""
         lat = "\(user?.locationLat ?? 0)"
         long = "\(user?.locationLong ?? 0)"
-        footDropDown.text = (user?.player.dominateFoot ?? "").localized
-        foot = user?.player.dominateFoot ?? ""
-        positionDropDown.text = user?.player.positionName
-        txtDOB.text = user?.player.birthdate
-        txtWeight.text = "\(user?.player.weight ?? 0)"
-        txtHeight.text = "\(user?.player.height ?? 0)"
-        if let code = user?.player.position{
+        footDropDown.text = (user?.player?.dominateFoot ?? "").localized
+        foot = user?.player?.dominateFoot ?? ""
+        positionDropDown.text = user?.player?.positionName
+        txtDOB.text = user?.player?.birthdate
+        txtWeight.text = "\(user?.player?.weight ?? 0)"
+        txtHeight.text = "\(user?.player?.height ?? 0)"
+        if let code = user?.player?.position{
             selectedPosition = playerPositions?.firstIndex(where: {$0.code == code})
         }
     }

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-class StreetTeamDetailsViewModel: APIServiceManager<StreetTeamDetails> {
+class StreetTeamDetailsViewModel: APIServiceManager<StreetTeamDetailsResponse> {
     
     //function to fetch match details
     func fetchStreetTeamDetailsAsyncCall(id:Int) {

@@ -36,7 +36,9 @@ class StreetTeamsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         setupLocalisations()
         if isUserLoggedIn(){
-            myTeamViewModel?.fetchMyStreetTeamsAsyncCall(isMyteams: 1)
+            if isUserStreetProfileUpdated(){
+                myTeamViewModel?.fetchMyStreetTeamsAsyncCall(isMyteams: 1)
+            }
         }
        
         teamViewModel?.fetchStreetTeamsAsyncCall(isMyteams: 0)
@@ -74,8 +76,10 @@ class StreetTeamsViewController: UIViewController {
         teamViewModel?.$responseData
             .receive(on: DispatchQueue.main)
             .dropFirst()
-            .sink(receiveValue: { [weak self] teamList in
-                self?.execute_onResponseData(teamList: teamList!)
+            .sink(receiveValue: { [weak self] response in
+                if let list = response?.response?.data{
+                    self?.execute_onResponseData(teamList: list)
+                }
             })
             .store(in: &cancellable)
         
@@ -90,8 +94,10 @@ class StreetTeamsViewController: UIViewController {
         myTeamViewModel?.$responseData
              .receive(on: DispatchQueue.main)
              .dropFirst()
-             .sink(receiveValue: { [weak self] teamList in
-                 self?.execute_onMyTeamData(teamList: teamList!)
+             .sink(receiveValue: { [weak self] response in
+                 if let list = response?.response?.data{
+                     self?.execute_onMyTeamData(teamList: list)
+                 }
              })
              .store(in: &cancellable)
     }
@@ -219,7 +225,7 @@ extension StreetTeamsViewController:UISearchBarDelegate{
         else{
             isSearchMode = true
             //teams?.removeAll()
-            teams = teams_Original?.filter{$0.name.lowercased().contains(searchText.lowercased())}
+            teams = teams_Original?.filter{$0.name?.lowercased().contains(searchText.lowercased()) ?? false}
             tableView.reloadData()
         }
     }

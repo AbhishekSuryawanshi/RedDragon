@@ -7,7 +7,7 @@
 
 import Foundation
 
-class StreetPlayersListViewModel: APIServiceManager<[StreetMatchPlayer]> {
+class StreetPlayersListViewModel: APIServiceManager<StreetPlayersListResponse> {
     
     //function to fetch player list
     func fetchStreetPlayerListAsyncCall() {

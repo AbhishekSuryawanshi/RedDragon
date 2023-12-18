@@ -7,7 +7,7 @@
 
 import Foundation
 
-class StreetEditProfileViewModel: APIServiceManager<StreetProfileUser> {
+class StreetEditProfileViewModel: APIServiceManager<StreetProfileUserResponse> {
     
     //function to update player profile
     func updateProfileAsyncCall(param:[String:Any]) {

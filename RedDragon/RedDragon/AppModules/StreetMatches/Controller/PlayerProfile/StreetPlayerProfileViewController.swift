@@ -101,7 +101,9 @@ class StreetPlayerProfileViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.handleActivities(data: response!.response!.data!)
+                if response?.response?.data != nil{
+                    self?.handleActivities(data: response!.response!.data!)
+                }
             })
             .store(in: &cancellable)
         
@@ -117,7 +119,9 @@ class StreetPlayerProfileViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.handleUserData(data: response!)
+                if let data = response?.response?.data{
+                    self?.handleUserData(data: data)
+                }
             })
             .store(in: &cancellable)
         
@@ -132,7 +136,9 @@ class StreetPlayerProfileViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.handleUserData(data: response!)
+                if let data = response?.response?.data{
+                    self?.handleUserData(data: data)
+                }
             })
             .store(in: &cancellable)
     }
@@ -152,13 +158,13 @@ class StreetPlayerProfileViewController: UIViewController {
     func setupDetails(){
         userID = user?.id
         lblName.text = "\(user?.firstName ?? "") \(user?.lastName ?? "")"
-        lblLocation.text = user?.player.address
-        lblAbout.text = user?.player.description
+        lblLocation.text = user?.player?.address
+        lblAbout.text = user?.player?.description
 //        if Utility.getCurrentLang() == "zh-Hans"{
 //            lblAbout.text = user?.player.description_cn
 //        }
-        if !(user?.player.imgURL.isEmpty ?? false){
-            imgProfile.setImage(imageStr: user?.player.imgURL ?? "", placeholder: .placeholderUser)
+        if !(user?.player?.imgURL?.isEmpty ?? false){
+            imgProfile.setImage(imageStr: user?.player?.imgURL ?? "", placeholder: .placeholderUser)
         }
         tableView.reloadData()
     }
@@ -213,13 +219,13 @@ extension StreetPlayerProfileViewController:UITableViewDelegate,UITableViewDataS
             
             switch indexPath.row{
             case 0:
-                var position = user?.player.positionName ?? ""
+                var position = user?.player?.positionName ?? ""
 //                if Utility.getCurrentLang() == "zh-Hans"{
 //                    position = user?.player?.position_name_cn ?? ""
 //                }
                 cell.configureCell(key: "Main Position".localized, value: position)
             case 1:
-                var valueText = user?.player.dominateFoot ?? ""
+                var valueText = user?.player?.dominateFoot ?? ""
 //                if Utility.getCurrentLang() == "zh-Hans"{
 //                    if valueText == "LEFT"{
 //                        valueText = "LEFT".localized
@@ -230,16 +236,15 @@ extension StreetPlayerProfileViewController:UITableViewDelegate,UITableViewDataS
 //                }
                 cell.configureCell(key: "Preferred Foot".localized, value: valueText)
             case 2:
-                cell.configureCell(key: "Height".localized, value: (String(user?.player.height ?? 0)) + " cm")
+                cell.configureCell(key: "Height".localized, value: (String(user?.player?.height ?? 0)) + " cm")
             case 3:
-                cell.configureCell(key: "Weight".localized, value: (String(user?.player.weight ?? 0)) + " kg")
+                cell.configureCell(key: "Weight".localized, value: (String(user?.player?.weight ?? 0)) + " kg")
             case 4:
-                let age = StreetMatchPlayerTableViewCell.getDateDiffrence(dateStr: user?.player.birthdate ?? "")
+                let age = StreetMatchPlayerTableViewCell.getDateDiffrence(dateStr: user?.player?.birthdate ?? "")
                 cell.configureCell(key: "Age".localized, value: "\(age)")
             default:
                 break
             }
-           
             return cell
         }
     }

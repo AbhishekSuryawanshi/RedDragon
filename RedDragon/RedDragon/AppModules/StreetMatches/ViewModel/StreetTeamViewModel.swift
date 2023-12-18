@@ -8,7 +8,7 @@
 import Foundation
 
 
-class StreetTeamViewModel: APIServiceManager<[StreetTeam]> {
+class StreetTeamViewModel: APIServiceManager<StreetTeamListingResponse> {
     
     //function to fetch team data
     func fetchStreetTeamsAsyncCall(isMyteams:Int) {
@@ -25,7 +25,7 @@ class StreetTeamViewModel: APIServiceManager<[StreetTeam]> {
 }
 
 
-class StreetMyTeamViewModel: APIServiceManager<[StreetTeam]> {
+class StreetMyTeamViewModel: APIServiceManager<StreetTeamListingResponse> {
     
     //function to fetch team data
     func fetchMyStreetTeamsAsyncCall(isMyteams:Int) {

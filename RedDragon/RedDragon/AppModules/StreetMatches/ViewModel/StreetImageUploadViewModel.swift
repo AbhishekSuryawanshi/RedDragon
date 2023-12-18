@@ -8,7 +8,7 @@
 import Foundation
 
 
-class StreetImageUploadViewModel: MultipartAPIServiceManager<UploadResponse> {
+class StreetImageUploadViewModel: MultipartAPIServiceManager<StreetUploadResponseRoot> {
     static let shared = StreetImageUploadViewModel()
     
     //function to upload image

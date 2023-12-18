@@ -142,10 +142,9 @@ class CreateStadiumVC:UIViewController{
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.createStadiumViewModel.imagePaths.append(response?.path ?? "")
+                self?.createStadiumViewModel.imagePaths.append(response?.response?.data?.path ?? "")
             })
             .store(in: &cancellable)
-        
     }
     
     func stadiumSuccess(){
@@ -190,7 +189,12 @@ class CreateStadiumVC:UIViewController{
     
     func validateFields()->Bool{
         if !isUserLoggedIn(){
-            self.view.makeToast("Please login and update player profile to continue".localized)
+            self.view.makeToast("Please login to continue".localized)
+            return false
+        }
+        
+        if !isUserStreetProfileUpdated(){
+            self.view.makeToast("Please update player profile to continue".localized)
             return false
         }
         if images.count == 0{

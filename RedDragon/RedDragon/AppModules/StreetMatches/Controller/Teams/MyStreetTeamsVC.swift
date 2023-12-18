@@ -68,8 +68,10 @@ class MyStreetTeamsVC: UIViewController {
         myTeamViewModel?.$responseData
              .receive(on: DispatchQueue.main)
              .dropFirst()
-             .sink(receiveValue: { [weak self] teamList in
-                 self?.execute_onMyTeamData(teamList: teamList!)
+             .sink(receiveValue: { [weak self] response in
+                 if let list = response?.response?.data{
+                     self?.execute_onMyTeamData(teamList: list)
+                 }
              })
              .store(in: &cancellable)
     }
