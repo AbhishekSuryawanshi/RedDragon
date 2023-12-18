@@ -8,7 +8,8 @@
 import Foundation
 
 struct CellIdentifier {
-    // Common 
+    
+    // Common
     static let headerTopCollectionViewCell      = "HeaderTopCollectionViewCell"
     static let headerBottom_1CollectionViewCell = "HeaderBottom_1CollectionViewCell"
     static let iconNameCollectionViewCell       = "IconNameCollectionViewCell"
@@ -107,4 +108,8 @@ struct CellIdentifier {
     
     //Home
     static let bannerCell                        = "BannerCollectionViewCell"
+    
+    //Wallet
+    static let subscriptionTableViewCell         = "SubscriptionTableViewCell"
 }
+
