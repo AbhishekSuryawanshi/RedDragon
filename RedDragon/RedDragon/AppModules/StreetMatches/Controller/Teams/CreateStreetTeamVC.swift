@@ -121,7 +121,9 @@ class CreateStreetTeamVC: UIViewController {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.uploadResponse = response
+                if response?.response?.data != nil{
+                    self?.uploadResponse = response!.response!.data
+                }
             })
             .store(in: &cancellable)
     }
@@ -188,7 +190,7 @@ class CreateStreetTeamVC: UIViewController {
             return
         }
         
-        let playerIDs:[Int] = selectedPlayers?.map{$0.id } ?? []
+        let playerIDs:[Int] = selectedPlayers?.map{$0.id ?? 0 } ?? []
         let param:[String:Any] = ["name":txtTeamName.text!,
                                   "name_cn":txtChineseTeamName.text!,
                                   "location_lat":lat,

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class StreetMatchDetailsViewModel: APIServiceManager<StreetMatchDetails> {
+class StreetMatchDetailsViewModel: APIServiceManager<StreetMatchDetailsResponse> {
     
     //function to fetch match details
     func fetchStreetMatchDetailsAsyncCall(id:Int) {
@@ -15,5 +15,4 @@ class StreetMatchDetailsViewModel: APIServiceManager<StreetMatchDetails> {
         let method      = RequestType.get
         asyncCall(urlString: urlString, method: method, parameters: nil)
     }
-    
 }

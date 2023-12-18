@@ -92,8 +92,8 @@ class StreetTeamDetailsVC: UIViewController {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.teamDetails = response
-                self?.fillDetails()
+                    self?.teamDetails = response?.response?.data
+                    self?.fillDetails()
             })
             .store(in: &cancellable)
     }
@@ -122,7 +122,7 @@ class StreetTeamDetailsVC: UIViewController {
        
         lblTeam.text = teamDetails?.name
         lblLocation.text = teamDetails?.address
-        if teamDetails?.description.count ?? 0 == 0{
+        if teamDetails?.description?.count ?? 0 == 0{
             descriptionStack.isHidden = true
         }
         lblAbout.text = teamDetails?.description
@@ -233,13 +233,13 @@ extension StreetTeamDetailsVC:UITableViewDelegate,UITableViewDataSource{
             else if selectedHeader == 2{
                 let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.streetMatchTableViewCell, for: indexPath) as! StreetMatchTableViewCell
                 if indexPath.section == 0{
-                    cell.configureCell(obj: teamDetails?.matches?.today[indexPath.row])
+                    cell.configureCell(obj: teamDetails?.matches?.today?[indexPath.row])
                 }
                 else if indexPath.section == 1{
-                    cell.configureCell(obj: teamDetails?.matches?.scheduled[indexPath.row])
+                    cell.configureCell(obj: teamDetails?.matches?.scheduled?[indexPath.row])
                 }
                 else{
-                    cell.configureCell(obj: teamDetails?.matches?.past[indexPath.row])
+                    cell.configureCell(obj: teamDetails?.matches?.past?[indexPath.row])
                 }
                 return cell
             }
@@ -257,13 +257,13 @@ extension StreetTeamDetailsVC:UITableViewDelegate,UITableViewDataSource{
             return teamDetails?.players?.count ?? 0
         case 2:
             if section == 0{
-                return teamDetails?.matches?.today.count ?? 0
+                return teamDetails?.matches?.today?.count ?? 0
             }
             else if section == 1{
-                return teamDetails?.matches?.scheduled.count ?? 0
+                return teamDetails?.matches?.scheduled?.count ?? 0
             }
             else{
-                return teamDetails?.matches?.past.count ?? 0
+                return teamDetails?.matches?.past?.count ?? 0
             }
         default:
             return 0
@@ -285,13 +285,13 @@ extension StreetTeamDetailsVC:UITableViewDelegate,UITableViewDataSource{
             }
             else if selectedHeader == 2{
                 if indexPath.section == 0{
-                    toMatchDetails(matchID: teamDetails?.matches?.today[indexPath.row].id)
+                    toMatchDetails(matchID: teamDetails?.matches?.today?[indexPath.row].id)
                 }
                 else if indexPath.section == 1{
-                    toMatchDetails(matchID: teamDetails?.matches?.scheduled[indexPath.row].id)
+                    toMatchDetails(matchID: teamDetails?.matches?.scheduled?[indexPath.row].id)
                 }
                 else{
-                    toMatchDetails(matchID: teamDetails?.matches?.past[indexPath.row].id)
+                    toMatchDetails(matchID: teamDetails?.matches?.past?[indexPath.row].id)
                 }
                 
             }
@@ -316,13 +316,13 @@ extension StreetTeamDetailsVC:UITableViewDelegate,UITableViewDataSource{
         }
         else{
             if selectedHeader == 2{
-                if section == 0 && (teamDetails?.matches?.today.count ?? 0) == 0{
+                if section == 0 && (teamDetails?.matches?.today?.count ?? 0) == 0{
                     return CGFloat.leastNormalMagnitude
                 }
-               else if section == 1 && (teamDetails?.matches?.scheduled.count ?? 0) == 0{
+               else if section == 1 && (teamDetails?.matches?.scheduled?.count ?? 0) == 0{
                     return CGFloat.leastNormalMagnitude
                 }
-                else if section == 2 && (teamDetails?.matches?.past.count ?? 0) == 0{
+                else if section == 2 && (teamDetails?.matches?.past?.count ?? 0) == 0{
                      return CGFloat.leastNormalMagnitude
                  }
                 return 50

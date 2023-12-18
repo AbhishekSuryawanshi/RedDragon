@@ -29,6 +29,7 @@ struct User: Codable {
     var updatedAt: String = ""
     var otpVerified: Int = 0
     var token: String = ""
+    var streetPlayerUpdated:Int = 0
     var appDataIDs = LocalAppUserID()
     var affAppData: AffAppData?
     

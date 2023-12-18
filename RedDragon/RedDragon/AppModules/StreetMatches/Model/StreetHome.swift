@@ -7,6 +7,19 @@
 
 import Foundation
 
+
+struct StreetMatchHomeResponse: Codable {
+    let response: StreetMatchHomeData?
+    let error: StreetMatchHomeData?
+}
+
+struct StreetMatchHomeData: Codable {
+    let code: Int?
+    let messages: [String]?
+    let data: StreetMatchHome?
+}
+
+
 // MARK: - StreetMatchHome
 struct StreetMatchHome: Codable {
     let matches: [StreetMatch]?
@@ -18,23 +31,23 @@ struct StreetMatchHome: Codable {
 // MARK: - Event
 struct StreetEvent: Codable {
     let id: Int
-    let type: String
-    let locationLong, locationLat: Double
-    let address: String
-    let imgID: Int
-    let description, descriptionCN: String
-    let creatorUserID: Int
+    let type: String?
+    let locationLong, locationLat: Double?
+    let address: String?
+    let imgID: Int?
+    let description, descriptionCN: String?
+    let creatorUserID: Int?
     let teamID: Int?
     let scheduleTime: String?
-    let isClosed: Int
-    let createdAt, updatedAt: String
+    let isClosed: Int?
+    let createdAt, updatedAt: String?
     let teamName, teamNameCN, teamAddress: String?
     let eventImgURL: String?
     let teamLogoURL: String?
-    let creatorName: String
+    let creatorName: String?
     let creatorImgURL: String?
     let positions: [StreetPosition]?
-    let creatorUser: CreatorUser
+    let creatorUser: CreatorUser?
 
     enum CodingKeys: String, CodingKey {
         case id, type
@@ -64,13 +77,14 @@ struct StreetEvent: Codable {
 
 // MARK: - CreatorUser
 struct CreatorUser: Codable {
-    let id: Int
-    let firstName, lastName, email, phoneNumber: String
-    let birthdate, type: String
-    let locationLong, locationLat: Double
-    let address, createdAt, updatedAt: String
+    let id: Int?
+    let firstName, lastName, email, phoneNumber: String?
+    let birthdate:String?
+    let type: String?
+    let locationLong, locationLat: Double?
+    let address, createdAt, updatedAt: String?
     let imgURL: String?
-    let players: [StreetPlayer]
+    let players: [StreetPlayer]?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -91,17 +105,17 @@ struct CreatorUser: Codable {
 
 // MARK: - Player
 struct StreetPlayer: Codable {
-    let id, userID: Int
-    let createdAt, updatedAt, dominateFoot: String
-    let weight, height: Int
-    let position: String
-    let yearActive: Int
-    let firstName, lastName, birthdate: String
-    let locationLong, locationLat: Double
-    let address, description, descriptionCN: String
-    let creatorUserID: Int
-    let positionName, positionNameCN: String
-    let imgURL: String
+    let id, userID: Int?
+    let createdAt, updatedAt, dominateFoot: String?
+    let weight, height: Int?
+    let position: String?
+    let yearActive: Int?
+    let firstName, lastName, birthdate: String?
+    let locationLong, locationLat: Double?
+    let address, description, descriptionCN: String?
+    let creatorUserID: Int?
+    let positionName, positionNameCN: String?
+    let imgURL: String?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -127,7 +141,7 @@ struct StreetPlayer: Codable {
 
 // MARK: - Position
 struct StreetPosition: Codable {
-    let position, positionName, positionNameCN, count: String
+    let position, positionName, positionNameCN, count: String?
 
     enum CodingKeys: String, CodingKey {
         case position
@@ -139,16 +153,16 @@ struct StreetPosition: Codable {
 
 // MARK: - Match
 struct StreetMatch: Codable {
-    let id, homeTeamID, awayTeamID: Int
-    let locationLong, locationLat: Double
-    let address: String
+    let id, homeTeamID, awayTeamID: Int?
+    let locationLong, locationLat: Double?
+    let address: String?
     let description, descriptionCN: String?
-    let scheduleTime: String
+    let scheduleTime: String?
     let startTime: String?
-    let status: String
-    let creatorUserID: Int
-    let createdAt, updatedAt: String
-    let homeTeam, awayTeam: StreetTeam
+    let status: String?
+    let creatorUserID: Int?
+    let createdAt, updatedAt: String?
+    let homeTeam, awayTeam: StreetTeam?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -171,14 +185,14 @@ struct StreetMatch: Codable {
 
 // MARK: - Team
 struct StreetTeam: Codable {
-    let id: Int
-    let name, nameCN: String
-    let logoImgID: Int
-    let locationLong, locationLat: Double
-    let address, description, descriptionCN: String
-    let creatorUserID: Int
-    let createdAt, updatedAt: String
-    let logoImgURL: String
+    let id: Int?
+    let name, nameCN: String?
+    let logoImgID: Int?
+    let locationLong, locationLat: Double?
+    let address, description, descriptionCN: String?
+    let creatorUserID: Int?
+    let createdAt, updatedAt: String?
+    let logoImgURL: String?
 
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -197,14 +211,14 @@ struct StreetTeam: Codable {
 
 // MARK: - Stadium
 struct Stadium: Codable {
-    let id: Int
-    let name, nameCN, description, descriptionCN: String
-    let locationLong, locationLat: Double
-    let address, timings: String
-    let ownerUserID: Int
-    let availableSports, amenities, createdAt, updatedAt: String
-    let imgsUrls: [String]
-    let owner: CreatorUser
+    let id: Int?
+    let name, nameCN, description, descriptionCN: String?
+    let locationLong, locationLat: Double?
+    let address, timings: String?
+    let ownerUserID: Int?
+    let availableSports, amenities, createdAt, updatedAt: String?
+    let imgsUrls: [String]?
+    let owner: CreatorUser?
 
     enum CodingKeys: String, CodingKey {
         case id, name

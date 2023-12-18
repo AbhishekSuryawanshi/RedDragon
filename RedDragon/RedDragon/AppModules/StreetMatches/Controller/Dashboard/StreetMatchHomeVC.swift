@@ -87,8 +87,10 @@ class StreetMatchHomeVC: UIViewController {
         streethomeVM?.$responseData
             .receive(on: DispatchQueue.main)
             .dropFirst()
-            .sink(receiveValue: { [weak self] homeData in
-                self?.execute_onResponseData(homeData: homeData!)
+            .sink(receiveValue: { [weak self] response in
+                if response?.response?.data != nil{
+                    self?.execute_onResponseData(homeData: response!.response!.data!)
+                }
             })
             .store(in: &cancellable)
     }
@@ -204,7 +206,7 @@ extension StreetMatchHomeVC:UISearchBarDelegate{
             tableView.reloadData()
         }
         else{
-            matches = homeData?.matches?.filter{($0.address.lowercased().contains(text.lowercased()) ) || ($0.homeTeam.name.lowercased().contains(text.lowercased()) ) || ($0.awayTeam.name.lowercased().contains(text.lowercased()) )}
+            matches = homeData?.matches?.filter{($0.address?.lowercased().contains(text.lowercased()) ?? false) || ($0.homeTeam?.name?.lowercased().contains(text.lowercased()) ?? false) || ($0.awayTeam?.name?.lowercased().contains(text.lowercased()) ?? false)}
             isSearchMode = true
             tableView.reloadData()
         }
