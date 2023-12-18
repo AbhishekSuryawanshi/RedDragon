@@ -228,7 +228,12 @@
 		49631A1A2AFA4CA200BE84BB /* SymbolsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49631A192AFA4CA200BE84BB /* SymbolsCollectionViewCell.swift */; };
 		496A9AB32B0F200900274FC6 /* LeagueCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496A9AB12B0F200900274FC6 /* LeagueCollectionViewCell.swift */; };
 		496A9AB42B0F200900274FC6 /* LeagueCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496A9AB22B0F200900274FC6 /* LeagueCollectionViewCell.xib */; };
-		497A05012B2D846200FDB020 /* BannerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497A05002B2D846200FDB020 /* BannerCollectionViewCell.swift */; };
+		49778F012B30202A00BB2BD7 /* HomePagePredictionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49778EFF2B30202A00BB2BD7 /* HomePagePredictionTableViewCell.swift */; };
+		49778F022B30202A00BB2BD7 /* HomePagePredictionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49778F002B30202A00BB2BD7 /* HomePagePredictionTableViewCell.xib */; };
+		49778F042B30315600BB2BD7 /* HomePagePredictionVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49778F032B30315600BB2BD7 /* HomePagePredictionVM.swift */; };
+		49778F062B3032F900BB2BD7 /* HomePagePrediction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49778F052B3032F900BB2BD7 /* HomePagePrediction.swift */; };
+		49778F092B30760500BB2BD7 /* BannerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49778F072B30760500BB2BD7 /* BannerCollectionViewCell.swift */; };
+		49778F0A2B30760500BB2BD7 /* BannerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49778F082B30760500BB2BD7 /* BannerCollectionViewCell.xib */; };
 		497A05032B2D8D1F00FDB020 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497A05022B2D8D1F00FDB020 /* Banner.swift */; };
 		497A05052B2D8D6E00FDB020 /* BannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497A05042B2D8D6E00FDB020 /* BannerViewModel.swift */; };
 		497DBAAE2B2448B90012D722 /* UserPlayersCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497DBAAD2B2448B90012D722 /* UserPlayersCollectionCell.swift */; };
@@ -784,7 +789,12 @@
 		49631A192AFA4CA200BE84BB /* SymbolsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolsCollectionViewCell.swift; sourceTree = "<group>"; };
 		496A9AB12B0F200900274FC6 /* LeagueCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueCollectionViewCell.swift; sourceTree = "<group>"; };
 		496A9AB22B0F200900274FC6 /* LeagueCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeagueCollectionViewCell.xib; sourceTree = "<group>"; };
-		497A05002B2D846200FDB020 /* BannerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCollectionViewCell.swift; sourceTree = "<group>"; };
+		49778EFF2B30202A00BB2BD7 /* HomePagePredictionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePagePredictionTableViewCell.swift; sourceTree = "<group>"; };
+		49778F002B30202A00BB2BD7 /* HomePagePredictionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePagePredictionTableViewCell.xib; sourceTree = "<group>"; };
+		49778F032B30315600BB2BD7 /* HomePagePredictionVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePagePredictionVM.swift; sourceTree = "<group>"; };
+		49778F052B3032F900BB2BD7 /* HomePagePrediction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePagePrediction.swift; sourceTree = "<group>"; };
+		49778F072B30760500BB2BD7 /* BannerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCollectionViewCell.swift; sourceTree = "<group>"; };
+		49778F082B30760500BB2BD7 /* BannerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BannerCollectionViewCell.xib; sourceTree = "<group>"; };
 		497A05022B2D8D1F00FDB020 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		497A05042B2D8D6E00FDB020 /* BannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewModel.swift; sourceTree = "<group>"; };
 		497DBAAD2B2448B90012D722 /* UserPlayersCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPlayersCollectionCell.swift; sourceTree = "<group>"; };
@@ -1927,6 +1937,7 @@
 			isa = PBXGroup;
 			children = (
 				497A05042B2D8D6E00FDB020 /* BannerViewModel.swift */,
+				49778F032B30315600BB2BD7 /* HomePagePredictionVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1934,7 +1945,10 @@
 		498F02D72B2C226E008B1DC9 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				497A05002B2D846200FDB020 /* BannerCollectionViewCell.swift */,
+				49778F072B30760500BB2BD7 /* BannerCollectionViewCell.swift */,
+				49778F082B30760500BB2BD7 /* BannerCollectionViewCell.xib */,
+				49778EFF2B30202A00BB2BD7 /* HomePagePredictionTableViewCell.swift */,
+				49778F002B30202A00BB2BD7 /* HomePagePredictionTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1943,6 +1957,7 @@
 			isa = PBXGroup;
 			children = (
 				497A05022B2D8D1F00FDB020 /* Banner.swift */,
+				49778F052B3032F900BB2BD7 /* HomePagePrediction.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3200,6 +3215,7 @@
 				E9129B972B05F5560073A407 /* BetWinTableVC.xib in Resources */,
 				6A08D66B2B0F83F400E1AE7C /* ExploreEventsTableViewCell.xib in Resources */,
 				474D99522AE7FB1D009499D0 /* Colors.xcassets in Resources */,
+				49778F022B30202A00BB2BD7 /* HomePagePredictionTableViewCell.xib in Resources */,
 				4137D5832B172F09007CF84E /* AnalysisTableViewCell.xib in Resources */,
 				ADCE38502B1F0D4D00727F0F /* StadiumImageCollectionViewCell.xib in Resources */,
 				6A5F2B9E2B0CC37D00AB6A98 /* MyEventsVC.xib in Resources */,
@@ -3229,6 +3245,7 @@
 				AD1042C72B273DC900451DB9 /* PlayerPositionsTableViewCell.xib in Resources */,
 				474D993B2AE7F30D009499D0 /* Roboto-Italic.ttf in Resources */,
 				474D993D2AE7F30D009499D0 /* Roboto-Black.ttf in Resources */,
+				49778F0A2B30760500BB2BD7 /* BannerCollectionViewCell.xib in Resources */,
 				AD90AF0A2B22FFBD00515C60 /* StreetMatchPlayerTableViewCell.xib in Resources */,
 				41EB79EB2AF4E21500D068F7 /* MediaView.xib in Resources */,
 				B8D338332B2AD4BA004ABC66 /* TrendingNewsParentTableViewCell.xib in Resources */,
@@ -3282,7 +3299,6 @@
 				47A1AB2D2AECE5ED00F1BD13 /* UserDefaultsExtension.swift in Sources */,
 				AD020B012B3072B7009DBD4E /* StreetExts.swift in Sources */,
 				ADCE384F2B1F0D4D00727F0F /* StadiumImageCollectionViewCell.swift in Sources */,
-				497A05012B2D846200FDB020 /* BannerCollectionViewCell.swift in Sources */,
 				49A9D9E22B1F3E2B00C4A1A1 /* MatchesViewModel.swift in Sources */,
 				493138032B147133000E167B /* StatCollectionViewCell.swift in Sources */,
 				47163AE52B108E1700235FC6 /* UIImageView+Extension.swift in Sources */,
@@ -3308,6 +3324,7 @@
 				41E726742B0DE75400D2BFB5 /* PredictHistoryTableViewCell.swift in Sources */,
 				6A1A058B2B230A59009ED5C4 /* GlobalMatchesViewModel.swift in Sources */,
 				6A1A058E2B233E55009ED5C4 /* GlobalMatchesTableViewCell.swift in Sources */,
+				49778F062B3032F900BB2BD7 /* HomePagePrediction.swift in Sources */,
 				085385C02B079F7F00C4E953 /* SubstituteTableViewCell.swift in Sources */,
 				ADC075FE2B29C13F009FE6C4 /* FeedsPlayerTableViewCell.swift in Sources */,
 				6A5F2B8C2B0CB7C100AB6A98 /* MeetEventVC.swift in Sources */,
@@ -3428,6 +3445,7 @@
 				47ECAA172B1708E9000B4A3D /* MultipartAPIServiceManager.swift in Sources */,
 				47AFBC252B29D607009968B1 /* NewsCommentsVC.swift in Sources */,
 				ADC588702B2480CE004F2A49 /* CreateStreetMatchVC.swift in Sources */,
+				49778F042B30315600BB2BD7 /* HomePagePredictionVM.swift in Sources */,
 				49A9D9E42B1F3E4C00C4A1A1 /* Matches.swift in Sources */,
 				47ACEB7F2B0C9737001AD0EB /* ResponseModel.swift in Sources */,
 				49B0BA492AE6A42800A9D235 /* CellIdentifier.swift in Sources */,
@@ -3478,6 +3496,7 @@
 				B8D3380F2B2AD1E5004ABC66 /* NewsDetailViewController.swift in Sources */,
 				AD020AF42B307158009DBD4E /* StreetTeamListingResponse.swift in Sources */,
 				41119D922B14D97300797C84 /* PredictionMatchDetailModel.swift in Sources */,
+				49778F012B30202A00BB2BD7 /* HomePagePredictionTableViewCell.swift in Sources */,
 				47C8C9622AF119A800448D96 /* ImageScrollView.swift in Sources */,
 				49A9D9DE2B1F2C4C00C4A1A1 /* LeaderboardDetailViewModel.swift in Sources */,
 				6A0BF7632B273F1500DE89A4 /* GlobalMatchInfoTableViewCell.swift in Sources */,
@@ -3620,6 +3639,7 @@
 				AD020AFA2B3071B5009DBD4E /* StreetEditProfileViewController.swift in Sources */,
 				AD7338B42B28847D003EE9B6 /* SendEventRequestsViewModel.swift in Sources */,
 				49F72D2F2B0CCE3D004E60DF /* AllPlayersTableViewCell.swift in Sources */,
+				49778F092B30760500BB2BD7 /* BannerCollectionViewCell.swift in Sources */,
 				47A1AB312AED3CA300F1BD13 /* PostTableViewCell.swift in Sources */,
 				AD90AF1A2B23000F00515C60 /* StreetTeamViewModel.swift in Sources */,
 				6AECE5802B0E2025004D7E76 /* MatchesCollectionViewCell.swift in Sources */,
