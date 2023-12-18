@@ -14,12 +14,15 @@ protocol LoginVCDelegate:AnyObject {
 
 class LoginVC: UIViewController {
     
+    @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var topTextLabel: UILabel!
     @IBOutlet weak var countryCodeButton: UIButton!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var bottomTextView: UITextView!
+    @IBOutlet weak var forgotPassButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
     
     weak var delegate:LoginVCDelegate?
     var cancellable = Set<AnyCancellable>()
@@ -28,6 +31,10 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSettings()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        refreshPage()
     }
     
     override func viewDidLayoutSubviews() {
@@ -51,6 +58,11 @@ class LoginVC: UIViewController {
         countryCodeButton.setTitle(countryCode, for: .normal)
         countryCodeButton.setImage(UIImage(named: "AE") ?? .placeholder1, for: .normal)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dismissLoginVC), name: .dismissLoginVC, object: nil)
+    }
+    
+    func refreshPage() {
+        headerLabel.text = "Welcome to RedDragon App".localized
         let topFormatedText = NSMutableAttributedString()
         topTextLabel.attributedText = topFormatedText.regular("Please ", size: 15).medium("Login", size: 15).regular(" to continue", size: 15)
         phoneTextField.placeholder = "Phone Number".localized
@@ -60,8 +72,8 @@ class LoginVC: UIViewController {
         bottomFormatedText.addUnderLine(textToFind: "Register")
         bottomFormatedText.addLink(textToFind: " Register", linkURL: "register")
         bottomTextView.attributedText = bottomFormatedText
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.dismissLoginVC), name: .dismissLoginVC, object: nil)
+        forgotPassButton.setTitle("Forgot Password".localized, for: .normal)
+        loginButton.setTitle("Login".localized, for: .normal)
     }
     
     func showLoader(_ value: Bool) {

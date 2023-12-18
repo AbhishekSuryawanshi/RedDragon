@@ -10,6 +10,7 @@ import Combine
 
 class RegisterVC: UIViewController {
     
+    @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var topTextLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
@@ -31,6 +32,10 @@ class RegisterVC: UIViewController {
         initialSettings()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        refreshPage()
+    }
+    
     override func viewDidLayoutSubviews() {
         ///Add top corner for background view
         bgView.roundCornersWithBorderLayer(cornerRadii: 30, corners: [.topLeft, .topRight], bound: bgView.bounds)
@@ -44,9 +49,13 @@ class RegisterVC: UIViewController {
         countryCode = "+971"
         countryCodeButton.setTitle(countryCode, for: .normal)
         countryCodeButton.setImage(UIImage(named: "AE") ?? .placeholder1, for: .normal)
-        
+    }
+    
+    func refreshPage() {
+        headerLabel.text = "Welcome to RedDragon App".localized
         let formatedText = NSMutableAttributedString()
         topTextLabel.attributedText = formatedText.regular("Please ", size: 15).medium("Create an account", size: 15).regular(" to continue", size: 15)
+        
         nameTextField.placeholder = "Full Name".localized
         emailTextfield.placeholder = "Email".localized
         phoneTextField.placeholder = "Phone Number".localized
@@ -62,6 +71,7 @@ class RegisterVC: UIViewController {
         termsFormatedText.regular("Confirm your acceptance of the", size: 14).bold(" Terms and Conditions", size: 15)
         bottomFormatedText.addLink(textToFind: "Confirm your acceptance of the Terms and Conditions", linkURL: URLConstants.terms)
         termsTextView.attributedText = termsFormatedText
+        
     }
     
     func showLoader(_ value: Bool) {
