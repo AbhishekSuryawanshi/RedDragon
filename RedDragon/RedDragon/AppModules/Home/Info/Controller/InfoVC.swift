@@ -58,6 +58,33 @@ class InfoVC: UIViewController {
     @IBOutlet weak var predictionTabelView: UITableView!
     @IBOutlet weak var predictionViewHeightConstraints: NSLayoutConstraint!
     
+    @IBOutlet weak var recommendedLabel: UILabel!
+    @IBOutlet weak var recommendedSeeAllLabel: UIButton!
+    @IBOutlet weak var firstExpertImageView: UIImageView!
+    @IBOutlet weak var firstExpertNameLabel: UILabel!
+    @IBOutlet weak var firstExpertWinPercentLabel: UILabel!
+    @IBOutlet weak var firstWinRateLabel: UILabel!
+    
+    @IBOutlet weak var secondExpertImageView: UIImageView!
+    @IBOutlet weak var secondExpertNameLabel: UILabel!
+    @IBOutlet weak var secondExpertWinPercentLabel: UILabel!
+    @IBOutlet weak var secondExpertWinRateLabel: UILabel!
+    
+    @IBOutlet weak var thirdExpertImageView: UIImageView!
+    @IBOutlet weak var thirdExpertNameLabel: UILabel!
+    @IBOutlet weak var thirdtExpertWinPercentLabel: UILabel!
+    @IBOutlet weak var thirdExpertWinRateLabel: UILabel!
+    
+    @IBOutlet weak var titleLineLabel: UILabel!
+    @IBOutlet weak var onAStrakLabel: UILabel!
+    @IBOutlet weak var topAccuracyLabel: UILabel!
+    @IBOutlet weak var continuesWinningLabel: UILabel!
+    
+    @IBOutlet weak var expertTableLabel: UILabel!
+    @IBOutlet weak var expertSeeAllLabel: UIButton!
+    @IBOutlet weak var expertTableView: UITableView!
+    @IBOutlet weak var expertTableViewHeight: NSLayoutConstraint!
+    
     private var cancellable = Set<AnyCancellable>()
     private var bannerVM: BannerViewModel?
     private var tagsVM: TagsViewModel?
@@ -66,6 +93,8 @@ class InfoVC: UIViewController {
     private var footballLiveMatchesVM: FootballLiveMatchesViewModel?
     private var gossipsArray: [Gossip] = []
     private var predictionVM: HomePagePredictionVM?
+    private var expertPredictUserVM: ExpertPredictUserViewModel?
+    private var userArray = [ExpertUser]()
     private var banners_count = 0
     private var timer = Timer()
     
@@ -75,16 +104,6 @@ class InfoVC: UIViewController {
         loadFunctionality()
     }
     
-    private func loadFunctionality() {
-        let nib = UINib(nibName: CellIdentifier.bannerCell, bundle: nil)
-        bannerCollectionView.register(nib, forCellWithReuseIdentifier: CellIdentifier.bannerCell)
-        let tag_nib = UINib(nibName: CellIdentifier.leagueNamesCollectionCell, bundle: nil)
-        tagsCollectionView.register(tag_nib, forCellWithReuseIdentifier: CellIdentifier.leagueNamesCollectionCell)
-        topMatchesTableView.register(CellIdentifier.globalMatchesTableViewCell)
-        whatsHappeningTableView.register(CellIdentifier.newsTableViewCell)
-        predictionTabelView.register(CellIdentifier.predictionTableCell)
-    }
-
     @IBAction func appModulesButton(_ sender: UIButton) {
         switch sender.tag {
         case 8:
@@ -99,15 +118,110 @@ class InfoVC: UIViewController {
     
     @IBAction func seeAllButton(_ sender: UIButton) {
     }
+}
+
+/// __Supportive functions
+extension InfoVC {
+    
+    private func loadFunctionality() {
+        initializeNibFiles()
+    }
+    
+    private func initializeNibFiles() {
+        bannerCollectionView.register(CellIdentifier.bannerCell)
+        tagsCollectionView.register(CellIdentifier.leagueNamesCollectionCell)
+        topMatchesTableView.register(CellIdentifier.globalMatchesTableViewCell)
+        whatsHappeningTableView.register(CellIdentifier.newsTableViewCell)
+        predictionTabelView.register(CellIdentifier.predictionTableCell)
+        expertTableView.register(CellIdentifier.predictUserListTableViewCell)
+    }
     
     func configureUI() {
+        loadViewModels()
+    }
+    
+    private func loadViewModels() {
         fetchBannerViewModel()
         fetchTagsViewModel()
         fetchLiveMatchViewModel()
         fetchGossipViewModel()
         fetchPredictionViewModel()
+        fetchExpertViewModel()
+        expertDataAPICall()
     }
     
+    private func showLoader(_ value: Bool) {
+        value ? startLoader() : stopLoader()
+    }
+    
+    func highlightFirstIndex_collectionView() {
+        let indexPath = IndexPath(item: 0, section: 0)
+        tagsCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
+    }
+    
+    func congifureCell(cell: GlobalMatchesTableViewCell, matches: GlobalMatchList) {
+        cell.leagueImageView.setImage(imageStr: matches.leagueInfo?.logo ?? "", placeholder: UIImage(named: "placeholderLeague"))
+        cell.homeImageView.setImage(imageStr: matches.homeInfo?.logo ?? "", placeholder: UIImage(named: "placeholderLeague"))
+        cell.awayImageView.setImage(imageStr: matches.awayInfo?.logo ?? "", placeholder: UIImage(named: "placeholderLeague"))
+        cell.homeNameLabel.text = matches.homeInfo?.name ?? ""
+        cell.awayNameLabel.text = matches.awayInfo?.name ?? ""
+        
+        cell.leagueNameLabel.text = "\(matches.leagueInfo?.name ?? "") | Round \(matches.round?.round ?? 0)"
+        cell.cornerLabel.text = "Corners: \(matches.homeInfo?.cornerScore ?? 0)-\(matches.awayInfo?.cornerScore ?? 0)"
+        cell.scoreLabel.text = "Score: \(matches.homeInfo?.homeScore ?? 0)-\(matches.awayInfo?.awayScore ?? 0)"
+        cell.halftimeLabel.isHidden = false
+        cell.halftimeLabel.text = "Halftime: \(matches.homeInfo?.halfTimeScore ?? 0)-\(matches.awayInfo?.halfTimeScore ?? 0)"
+    }
+    
+    private func tableCell(indexPath:IndexPath) -> PredictUserListTableViewCell {
+        let cell = expertTableView.dequeueReusableCell(withIdentifier: CellIdentifier.predictUserListTableViewCell, for: indexPath) as! PredictUserListTableViewCell
+        
+        cell.aboutLabel.text = userArray[indexPath.row].about
+        cell.userImageView.setImage(imageStr: userArray[indexPath.row].profileImg ?? "", placeholder: .placeholderUser)
+        cell.walletButton.setTitle("\(userArray[indexPath.row].wallet ?? 0)", for: .normal)
+        cell.configureTagCollectionData(data: userArray[indexPath.row].tags ?? [])
+        
+        cell.betPointsStackView.isHidden = true
+        cell.dateLabel.isHidden = false
+        cell.followStackView.isHidden = false
+        cell.heightConstraint.constant = 35.67
+        cell.nameLabel.text = userArray[indexPath.row].appdata?.predict?.name?.capitalized
+        //    let roundedValue = (userArray[indexPath.row].appdata?.predict?.predictStats?.successRate ?? 0.0).rounded(toPlaces: 2)
+        cell.winRateLabel.text = "\(userArray[indexPath.row].appdata?.predict?.predictStats?.successRate ?? 0)%"
+        cell.allCountLabel.text = "Total: \(userArray[indexPath.row].appdata?.predict?.predictStats?.allCount ?? 0)"
+        cell.successCountLabel.text = "Success: \(userArray[indexPath.row].appdata?.predict?.predictStats?.successCount ?? 0)"
+        cell.unsuccessCountLabel.text = "Failed: \(userArray[indexPath.row].appdata?.predict?.predictStats?.unsuccessCount ?? 0)"
+        cell.coinLabel.text = "Coin: \(userArray[indexPath.row].appdata?.predict?.predictStats?.coins ?? 0)"
+        cell.dateLabel.text = "  \(userArray[indexPath.row].appdata?.predict?.date.formatDate(inputFormat: dateFormat.ddMMyyyyWithTimeZone, outputFormat: dateFormat.ddMMMyyyyhmma) ?? "")"
+        
+        if userArray[indexPath.row].following ?? true {
+            cell.followButton.isHidden = true
+        }else {
+            cell.followingButton.isHidden = true
+        }
+        return cell
+    }
+    
+    private func firstThreeExpertsData() {
+        guard var data = expertPredictUserVM?.responseData?.response?.data else {
+            return
+        }
+        // Sort the data array based on successRate in descending order
+        data.sort { (expert1, expert2) -> Bool in
+            return (expert1.appdata?.predict?.predictStats?.successRate ?? 0) > (expert2.appdata?.predict?.predictStats?.successRate ?? 0)
+        }
+        // Display the sorted data
+        for (index, expert) in data.prefix(3).enumerated() {
+            let imageView = [firstExpertImageView, secondExpertImageView, thirdExpertImageView][index]
+            let nameLabel = [firstExpertNameLabel, secondExpertNameLabel, thirdExpertNameLabel][index]
+            let winPercentLabel = [firstExpertWinPercentLabel, secondExpertWinPercentLabel, thirdtExpertWinPercentLabel][index]
+            
+            imageView?.sd_imageIndicator = SDWebImageActivityIndicator.white
+            imageView?.setImage(imageStr: expert.profileImg ?? "", placeholder: .placeholderUser)
+            nameLabel?.text = expert.appdata?.predict?.name?.capitalized
+            winPercentLabel?.text = "\(expert.appdata?.predict?.predictStats?.successRate ?? 0)%"
+        }
+    }
 }
 
 /// __Fetch View Model
@@ -221,21 +335,30 @@ extension InfoVC {
         predictionVM?.fetchHomePagePredictionMatchesAsyncCall(lang: "en", date: formattedDate)
     }
     
-}
-
-/// __Supportive functions
-extension InfoVC {
-    
-    private func showLoader(_ value: Bool) {
-        value ? startLoader() : stopLoader()
+    private func fetchExpertViewModel() {
+        expertPredictUserVM = ExpertPredictUserViewModel()
+        expertPredictUserVM?.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        expertPredictUserVM?.showError = { [weak self] error in
+            self?.view.makeToast(ErrorMessage.expertNotFound.localized, duration: 2.0, position: .center)
+        }
+        expertPredictUserVM?.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                self?.firstThreeExpertsData()
+                self?.userArray = response?.response?.data ?? []
+                self?.expertTableView.reloadData()
+            })
+            .store(in: &cancellable)
     }
     
-    func highlightFirstIndex_collectionView() {
-        //code to show collectionView cell default first index selected
-        let indexPath = IndexPath(item: 0, section: 0)
-        tagsCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
-        //collectionView(leaguesCollectionView, didSelectItemAt: indexPath)
+    private func expertDataAPICall() {
+        /// API call to fetch experts data
+        expertPredictUserVM?.fetchExpertUserListAsyncCall(page: 1, slug: "predict-match", tag: "betting-expert")
     }
+    
 }
 
 extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -256,30 +379,23 @@ extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == bannerCollectionView {
-            return bannerVM?.responseData?.data.top.count ?? 0
-        }
-        return tagsVM?.responseData?.response.data.count ?? 0
+        return collectionView == bannerCollectionView ?
+                bannerVM?.responseData?.data.top.count ?? 0 :
+                tagsVM?.responseData?.response.data.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == bannerCollectionView {
-            guard let banner = bannerVM?.responseData?.data.top else {
-                return UICollectionViewCell()
-            }
+        if collectionView == bannerCollectionView, let banner = bannerVM?.responseData?.data.top {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.bannerCell, for: indexPath) as! BannerCollectionViewCell
             cell.bannerImage.sd_imageIndicator = SDWebImageActivityIndicator.white
             cell.bannerImage.sd_setImage(with: URL(string: URLConstants.bannerBaseURL + banner[indexPath.item].coverPath))
             return cell
-        }
-        else {
-            guard let tags = tagsVM?.responseData?.response.data else {
-                return UICollectionViewCell()
-            }
+        } else if let tags = tagsVM?.responseData?.response.data {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.leagueNamesCollectionCell, for: indexPath) as! LeagueCollectionViewCell
             cell.leagueName.text = tags[indexPath.item].tag
             return cell
         }
+        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -289,89 +405,83 @@ extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
                 guard let url = URL(string: bannerMesssage) else { return }
                 UIApplication.shared.open(url)
             }
+        } else {
+            let tag = tagsVM?.responseData?.response.data[indexPath.item].slug
+            expertPredictUserVM?.fetchExpertUserListAsyncCall(page: 1, slug: "predict-match", tag: tag)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == bannerCollectionView {
-            return CGSize(width: collectionView.bounds.width/1 - 0, height: collectionView.bounds.height)
-        }
-        return CGSize(width: collectionView.bounds.width/4 - 0, height: collectionView.bounds.height)
+        let width: CGFloat
+           if collectionView == bannerCollectionView {
+               width = collectionView.bounds.width
+           } else {
+               width = collectionView.bounds.width / 4
+           }
+           return CGSize(width: width, height: collectionView.bounds.height)
     }
-    
 }
 
 extension InfoVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == topMatchesTableView {
-            if liveMatchArray.count >= 2 {
-                return 2
-            } else {
-                return liveMatchArray.count
-            }
-        }
-        else if tableView == whatsHappeningTableView {
-            if gossipsArray.count >= 3 {
-                return 3
-            } else {
-                return gossipsArray.count
-            }
-        } 
-        else {
-            if predictionVM?.responseData?.response.data.count ?? 0 >= 3 {
-                return 3
-            } else {
-                return predictionVM?.responseData?.response.data.count ?? 00
-            }
+        switch tableView {
+        case topMatchesTableView:
+            return min(liveMatchArray.count, 2)
+            
+        case whatsHappeningTableView:
+            return min(gossipsArray.count, 3)
+            
+        case predictionTabelView:
+            return min(predictionVM?.responseData?.response.data.count ?? 0, 3)
+            
+        default:
+            return expertPredictUserVM?.responseData?.response?.data?.count ?? 0
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView == topMatchesTableView {
+        switch tableView {
+        case topMatchesTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.globalMatchesTableViewCell, for: indexPath) as! GlobalMatchesTableViewCell
             congifureCell(cell: cell, matches: liveMatchArray[indexPath.row])
             return cell
-        }
-        else if tableView == whatsHappeningTableView {
+            
+        case whatsHappeningTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.newsTableViewCell, for: indexPath) as! NewsTableViewCell
             cell.titleLabel.textColor = UIColor(red: 0/255, green: 76/255, blue: 107/255, alpha: 1)
             cell.configureGossipCell(model: gossipsArray[indexPath.row])
             return cell
-        }
-        else {
+            
+        case predictionTabelView:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.predictionTableCell, for: indexPath) as! HomePagePredictionTableViewCell
             guard let data = predictionVM?.responseData?.response.data[indexPath.row].matches else {
                 return UITableViewCell()
             }
             cell.configureCell(data: data[0])
             return cell
+            
+        default:
+            return tableCell(indexPath: indexPath)
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if tableView == topMatchesTableView {
+        switch tableView {
+        case topMatchesTableView, whatsHappeningTableView:
             return 90
-        }
-        else if tableView == whatsHappeningTableView {
-            return 90
-        }
-        else {
+            
+        case predictionTabelView:
             return 75
+            
+        default:
+            return 183
         }
     }
     
-    func congifureCell(cell: GlobalMatchesTableViewCell, matches: GlobalMatchList) {
-        cell.leagueImageView.setImage(imageStr: matches.leagueInfo?.logo ?? "", placeholder: UIImage(named: "placeholderLeague"))
-        cell.homeImageView.setImage(imageStr: matches.homeInfo?.logo ?? "", placeholder: UIImage(named: "placeholderLeague"))
-        cell.awayImageView.setImage(imageStr: matches.awayInfo?.logo ?? "", placeholder: UIImage(named: "placeholderLeague"))
-        cell.homeNameLabel.text = matches.homeInfo?.name ?? ""
-        cell.awayNameLabel.text = matches.awayInfo?.name ?? ""
-        
-        cell.leagueNameLabel.text = "\(matches.leagueInfo?.name ?? "") | Round \(matches.round?.round ?? 0)"
-        cell.cornerLabel.text = "Corners: \(matches.homeInfo?.cornerScore ?? 0)-\(matches.awayInfo?.cornerScore ?? 0)"
-        cell.scoreLabel.text = "Score: \(matches.homeInfo?.homeScore ?? 0)-\(matches.awayInfo?.awayScore ?? 0)"
-        cell.halftimeLabel.isHidden = false
-        cell.halftimeLabel.text = "Halftime: \(matches.homeInfo?.halfTimeScore ?? 0)-\(matches.awayInfo?.halfTimeScore ?? 0)"
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if tableView == expertTableView {
+            expertTableViewHeight.constant = self.expertTableView.contentSize.height
+        }
     }
 }
