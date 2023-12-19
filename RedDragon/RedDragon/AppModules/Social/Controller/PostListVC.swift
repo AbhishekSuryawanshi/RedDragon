@@ -208,7 +208,7 @@ extension PostListVC {
     func fetchPostViewModel() {
         ///fetch post and poll list
         SocialPostListVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
             self?.execute_onPostListResponseData(nil)
         }
         //        SocialPostListVM.shared.displayLoader = { [weak self] value in
@@ -224,7 +224,7 @@ extension PostListVC {
         
         /// Update poll
         SocialPollVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         SocialPollVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -237,7 +237,7 @@ extension PostListVC {
                     SocialPostListVM.shared.fetchPostListAsyncCall()
                 } else {
                     if let errorResponse = response?.error {
-                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                        self?.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
                     }
                 }
             })
@@ -245,7 +245,7 @@ extension PostListVC {
         
         /// Delete poll / post
         SocialDeleteVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         SocialDeleteVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -258,7 +258,7 @@ extension PostListVC {
                     SocialPostListVM.shared.fetchPostListAsyncCall()
                 } else {
                     if let errorResponse = response?.error {
-                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                        self?.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
                     }
                 }
             })
@@ -266,7 +266,7 @@ extension PostListVC {
         
         /// Add Like
         SocialAddLikeVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         SocialAddLikeVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -279,7 +279,7 @@ extension PostListVC {
                     SocialPostListVM.shared.fetchPostListAsyncCall()
                 } else {
                     if let errorResponse = response?.error {
-                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                        self?.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
                     }
                 }
             })
@@ -316,7 +316,7 @@ extension PostListVC {
             //        }
         } else {
             if let errorResponse = response?.error {
-                self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                self.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
             }
         }
         calculateContentHeight()

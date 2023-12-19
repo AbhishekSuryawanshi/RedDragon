@@ -180,7 +180,7 @@ extension GossipVC {
     func fetchSocialViewModel() {
         ///fetch public league list / euro 5 league
         SocialPublicLeagueVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         SocialPublicLeagueVM.shared.$responseData
             .receive(on: DispatchQueue.main)
@@ -196,7 +196,7 @@ extension GossipVC {
     func fetchGossipViewModel() {
         ///fetch news list
         GossipListVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         GossipListVM.shared.$responseData
             .receive(on: DispatchQueue.main)
@@ -211,7 +211,7 @@ extension GossipVC {
         
         ///fetch esports news list
         ESportsListVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         ESportsListVM.shared.$responseData
             .receive(on: DispatchQueue.main)
@@ -225,7 +225,7 @@ extension GossipVC {
         }
         ///fetch videos list
         GossipVideoListVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         GossipVideoListVM.shared.$responseData
             .receive(on: DispatchQueue.main)
@@ -239,7 +239,7 @@ extension GossipVC {
         
         /// fetch video play url
         GossipVideoVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         GossipVideoVM.shared.$responseData
             .receive(on: DispatchQueue.main)

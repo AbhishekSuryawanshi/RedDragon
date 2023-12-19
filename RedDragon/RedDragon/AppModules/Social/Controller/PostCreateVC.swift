@@ -319,7 +319,7 @@ class PostCreateVC: UIViewController {
 extension PostCreateVC {
     func fetchImageViewModel() {
         imageVM.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         imageVM.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -334,7 +334,7 @@ extension PostCreateVC {
                     self?.setImageView()
                 } else {
                     if let errorResponse = response?.error {
-                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                        self?.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
                     }
                 }
             })
@@ -345,7 +345,7 @@ extension PostCreateVC {
         
         /// Add / Edit post
         SocialPostVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         SocialPostVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -362,7 +362,7 @@ extension PostCreateVC {
                     }
                 } else {
                     if let errorResponse = response?.error {
-                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                        self?.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
                     }
                 }
             })
@@ -370,7 +370,7 @@ extension PostCreateVC {
         
         /// Add / Edit poll
         SocialPollVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         SocialPollVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -387,7 +387,7 @@ extension PostCreateVC {
                     }
                 } else {
                     if let errorResponse = response?.error {
-                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                        self?.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
                     }
                 }
             })
@@ -395,7 +395,7 @@ extension PostCreateVC {
         
         /// Delete post
         SocialDeleteVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         SocialDeleteVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -409,7 +409,7 @@ extension PostCreateVC {
                     self?.postButtonTapped(UIButton())
                 } else {
                     if let errorResponse = response?.error {
-                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                        self?.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
                     }
                 }
             })
