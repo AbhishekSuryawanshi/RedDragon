@@ -38,6 +38,7 @@
                                 <rect key="frame" x="69" y="12" width="78.666666666666686" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="160" id="1ra-5c-Hrw"/>
+                                    <constraint firstAttribute="height" constant="17" id="GVl-ST-HLO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="14"/>
                                 <color key="textColor" name="base"/>
@@ -68,12 +69,18 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Win Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ppq-WJ-KW5">
                                 <rect key="frame" x="299.33333333333331" y="12" width="46.666666666666686" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="55X-U2-q8P"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
                                 <color key="textColor" name="blue4"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="67%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAE-0O-ptW">
                                 <rect key="frame" x="312.33333333333331" y="29" width="33.666666666666686" height="22.666666666666671"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22.670000000000002" id="9Fb-O8-zPl"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="19"/>
                                 <color key="textColor" name="green2"/>
                                 <nil key="highlightedColor"/>
@@ -270,18 +277,92 @@
                                             </label>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="23" id="fCg-gc-QYR"/>
+                                            <constraint firstAttribute="height" constant="23" id="5Mg-eK-bKX"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="D5G-TX-Mlq">
+                                        <rect key="frame" x="0.0" y="64.999999999999986" width="338" height="25"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XmC-Aw-ach">
+                                                <rect key="frame" x="0.0" y="0.0" width="338" height="25"/>
+                                                <color key="backgroundColor" name="yellow4"/>
+                                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="4"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Q2W-01-Rg7">
+                                                <rect key="frame" x="0.0" y="25" width="338" height="23"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9k-iI-o2X">
+                                                        <rect key="frame" x="0.0" y="0.0" width="80.666666666666671" height="23"/>
+                                                        <color key="backgroundColor" name="yellow4"/>
+                                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                                                        <color key="textColor" name="black1"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="2"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5G-8B-3uc">
+                                                        <rect key="frame" x="85.666666666666671" y="0.0" width="81.000000000000014" height="23"/>
+                                                        <color key="backgroundColor" name="yellow4"/>
+                                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                                                        <color key="textColor" name="black1"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="2"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgY-Ry-wcY">
+                                                        <rect key="frame" x="171.66666666666666" y="0.0" width="80.666666666666657" height="23"/>
+                                                        <color key="backgroundColor" name="yellow4"/>
+                                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                                                        <color key="textColor" name="black1"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="2"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3GW-iz-s8F">
+                                                        <rect key="frame" x="257.33333333333331" y="0.0" width="80.666666666666686" height="23"/>
+                                                        <color key="backgroundColor" name="yellow4"/>
+                                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                                                        <color key="textColor" name="black1"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="2"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="23" id="fCg-gc-QYR"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="nZH-nw-Zzi"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="nZH-nw-Zzi"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="D5G-TX-Mlq" firstAttribute="leading" secondItem="Ked-fS-rEf" secondAttribute="leading" id="5KT-5e-fOc"/>
+                            <constraint firstItem="wKy-o3-EVB" firstAttribute="leading" secondItem="DNa-ou-wiT" secondAttribute="leading" id="06e-N4-ojA"/>
+                            <constraint firstItem="wKy-o3-EVB" firstAttribute="top" secondItem="aZf-ef-a1E" secondAttribute="bottom" constant="7.0000000000000284" id="Eu7-eV-82j"/>
                             <constraint firstItem="MAE-0O-ptW" firstAttribute="top" secondItem="ppq-WJ-KW5" secondAttribute="bottom" constant="3" id="JkV-lq-NA8"/>
                             <constraint firstItem="cFJ-V6-EQF" firstAttribute="top" secondItem="DNa-ou-wiT" secondAttribute="top" id="Kif-PI-v0P"/>
                             <constraint firstItem="aZf-ef-a1E" firstAttribute="top" secondItem="MAE-0O-ptW" secondAttribute="bottom" constant="0.33000000000000002" id="Mjo-0s-mtb"/>
@@ -294,10 +375,9 @@
                             <constraint firstItem="QD9-8H-bEg" firstAttribute="leading" secondItem="DNa-ou-wiT" secondAttribute="leading" id="XX0-EL-oau"/>
                             <constraint firstItem="QD9-8H-bEg" firstAttribute="top" secondItem="Wzd-W9-Xdl" secondAttribute="bottom" constant="34" id="ZFs-jg-wVp"/>
                             <constraint firstItem="zCh-mt-MIh" firstAttribute="leading" secondItem="cFJ-V6-EQF" secondAttribute="trailing" constant="8" id="abP-KA-jjH"/>
-                            <constraint firstItem="QD9-8H-bEg" firstAttribute="top" secondItem="aZf-ef-a1E" secondAttribute="bottom" constant="5" id="bnb-ve-uTH"/>
+                            <constraint firstItem="wKy-o3-EVB" firstAttribute="trailing" secondItem="aZf-ef-a1E" secondAttribute="trailing" id="cAU-qZ-Ntp"/>
                             <constraint firstItem="Wzd-W9-Xdl" firstAttribute="top" secondItem="cFJ-V6-EQF" secondAttribute="bottom" id="dIu-5o-57Q"/>
-                            <constraint firstItem="Ked-fS-rEf" firstAttribute="trailing" secondItem="aZf-ef-a1E" secondAttribute="trailing" id="dWw-0J-Acn"/>
-                            <constraint firstItem="QD9-8H-bEg" firstAttribute="trailing" secondItem="aZf-ef-a1E" secondAttribute="trailing" id="f3x-Cw-d3S"/>
+                            <constraint firstItem="wKy-o3-EVB" firstAttribute="top" secondItem="DNa-ou-wiT" secondAttribute="bottom" constant="23.666666666666686" id="f4n-U4-wsZ"/>
                             <constraint firstItem="zCh-mt-MIh" firstAttribute="centerY" secondItem="cFJ-V6-EQF" secondAttribute="centerY" id="lDz-Yi-Ddj"/>
                             <constraint firstItem="Ked-fS-rEf" firstAttribute="top" secondItem="QD9-8H-bEg" secondAttribute="bottom" constant="3" id="lv7-qu-tU6"/>
                             <constraint firstItem="Wzd-W9-Xdl" firstAttribute="leading" secondItem="cFJ-V6-EQF" secondAttribute="leading" id="sAF-uW-Djf"/>
@@ -329,7 +409,7 @@
                 <outlet property="followButton" destination="gqv-3z-HpU" id="9wN-uR-81y"/>
                 <outlet property="followStackView" destination="aZf-ef-a1E" id="0HG-1D-Ygm"/>
                 <outlet property="followingButton" destination="aOv-5c-2vN" id="sx9-to-SN9"/>
-                <outlet property="heightConstraint" destination="ZFs-jg-wVp" id="96G-yE-u6J"/>
+                <outlet property="heightConstraint" destination="f4n-U4-wsZ" id="nPj-D6-VIt"/>
                 <outlet property="lostPointsLabel" destination="fgY-Ry-wcY" id="vUQ-YA-bFd"/>
                 <outlet property="nameLabel" destination="cFJ-V6-EQF" id="pbS-Ai-ibl"/>
                 <outlet property="pendingPointsLabel" destination="3GW-iz-s8F" id="oA1-WK-J6o"/>
