@@ -33,7 +33,7 @@ class ExpertsVC: UIViewController {
     // MARK: - Methods
     func performInitialSetup() {
         dropDown.optionArray = ["Prediction", "Bet"]
-
+        
         dropDown.didSelect { [self] selectedText, index, id in
             self.selectedDropDownIndex = index
             
@@ -52,7 +52,7 @@ class ExpertsVC: UIViewController {
     func nibInitialization() {
         tableView.register(CellIdentifier.predictUserListTableViewCell)
     }
-
+    
     func makeNetworkCall() {
         expertPredictUserVM.fetchExpertUserListAsyncCall(page: 1, slug: Slug.predict.rawValue)
         expertBetUserVM.fetchExpertUserListAsyncCall(page: 1, slug: Slug.bet.rawValue)
@@ -95,7 +95,7 @@ extension ExpertsVC {
             cell.followStackView.isHidden = false
             cell.heightConstraint.constant = 35.67
             cell.nameLabel.text = userArray[indexPath.row].appdata?.predict?.name?.capitalized
-        //    let roundedValue = (userArray[indexPath.row].appdata?.predict?.predictStats?.successRate ?? 0.0).rounded(toPlaces: 2)
+            //    let roundedValue = (userArray[indexPath.row].appdata?.predict?.predictStats?.successRate ?? 0.0).rounded(toPlaces: 2)
             cell.winRateLabel.text = "\(userArray[indexPath.row].appdata?.predict?.predictStats?.successRate ?? 0)%"
             cell.allCountLabel.text = "Total: \(userArray[indexPath.row].appdata?.predict?.predictStats?.allCount ?? 0)"
             cell.successCountLabel.text = "Success: \(userArray[indexPath.row].appdata?.predict?.predictStats?.successCount ?? 0)"
@@ -167,7 +167,7 @@ extension ExpertsVC {
     
     func execute_onBetUserListResponse(_ list: ExpertUserListModel) {
         betUserArray = list.response?.data ?? []
-    //    userArray = betUserArray
-    //    tableView.reloadData()
+        //    userArray = betUserArray
+        //    tableView.reloadData()
     }
 }
