@@ -127,7 +127,7 @@ extension LoginVC {
     func fetchLoginViewModel() {
         
         LoginVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         LoginVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -165,7 +165,7 @@ extension LoginVC {
             }
         } else {
             if let errorResponse = response?.error {
-                self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                self.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
             }
         }
     }

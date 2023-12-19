@@ -212,7 +212,7 @@ extension SocialVC {
     func fetchSocialViewModel() {
         ///fetch league list
         SocialLeagueVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         SocialLeagueVM.shared.$responseData
             .receive(on: DispatchQueue.main)
@@ -224,7 +224,7 @@ extension SocialVC {
         
         ///fetch public league list
         SocialPublicLeagueVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         SocialPublicLeagueVM.shared.$responseData
             .receive(on: DispatchQueue.main)
@@ -239,7 +239,7 @@ extension SocialVC {
         
         ///fetch team list
         SocialTeamVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         SocialTeamVM.shared.$responseData
             .receive(on: DispatchQueue.main)
@@ -251,7 +251,7 @@ extension SocialVC {
         
         ///fetch public team list
         SocialPublicTeamVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         SocialPublicTeamVM.shared.$responseData
             .receive(on: DispatchQueue.main)
@@ -271,7 +271,7 @@ extension SocialVC {
             SocialTeamVM.shared.fetchTeamListAsyncCall()
         } else {
             if let errorResponse = response?.error {
-                self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                self.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
             }
         }
         leagueCollectionView.reloadData()
@@ -285,7 +285,7 @@ extension SocialVC {
             self.teamsCollectionView.reloadData()
         } else {
             if let errorResponse = response?.error {
-                self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                self.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
             }
         }
     }

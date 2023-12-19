@@ -81,7 +81,7 @@ extension NewsCommentsVC {
     func fetchCommentsViewModel() {
         ///fetch comment list
         CommentListVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         CommentListVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -94,7 +94,7 @@ extension NewsCommentsVC {
                     self?.commentsArray = dataResponse.data?.reversed() ?? []
                 } else {
                     if let errorResponse = response?.error {
-                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                        self?.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
                     }
                 }
                 self?.listTableView.reloadData()
@@ -107,7 +107,7 @@ extension NewsCommentsVC {
         
         ///Add comment
         AddCommentVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         AddCommentVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -121,7 +121,7 @@ extension NewsCommentsVC {
                     CommentListVM.shared.getCommentsAsyncCall(sectionId: self?.sectionId ?? "")
                 } else {
                     if let errorResponse = response?.error {
-                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                        self?.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
                     }
                 }
             })
@@ -129,7 +129,7 @@ extension NewsCommentsVC {
         
         ///Delete comment
         DeleteCommentVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         DeleteCommentVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -142,7 +142,7 @@ extension NewsCommentsVC {
                     CommentListVM.shared.getCommentsAsyncCall(sectionId: self?.sectionId ?? "")
                 } else {
                     if let errorResponse = response?.error {
-                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                        self?.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
                     }
                 }
             })

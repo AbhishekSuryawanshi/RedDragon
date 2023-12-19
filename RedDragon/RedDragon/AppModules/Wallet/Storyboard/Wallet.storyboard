@@ -18,53 +18,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6pU-Bf-HAh">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="250"/>
-                                <subviews>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cLM-eg-WmA">
-                                        <rect key="frame" x="20" y="69" width="353" height="161"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your HeatPoints Balance🔥" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hmn-tI-p2M">
-                                                <rect key="frame" x="10" y="51" width="333" height="19.333333333333329"/>
-                                                <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="17"/>
-                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12,567,725" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xHr-jU-yVV">
-                                                <rect key="frame" x="5" y="90.333333333333343" width="343" height="23.333333333333329"/>
-                                                <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="20"/>
-                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" name="wheat8"/>
-                                        <constraints>
-                                            <constraint firstItem="xHr-jU-yVV" firstAttribute="leading" secondItem="cLM-eg-WmA" secondAttribute="leading" constant="5" id="70B-W7-9lU"/>
-                                            <constraint firstAttribute="trailing" secondItem="xHr-jU-yVV" secondAttribute="trailing" constant="5" id="8do-Tr-Dg8"/>
-                                            <constraint firstItem="Hmn-tI-p2M" firstAttribute="centerY" secondItem="cLM-eg-WmA" secondAttribute="centerY" constant="-20" id="Gwo-vw-gKZ"/>
-                                            <constraint firstItem="xHr-jU-yVV" firstAttribute="top" secondItem="Hmn-tI-p2M" secondAttribute="bottom" constant="20" id="Wk7-Bk-zIf"/>
-                                            <constraint firstAttribute="trailing" secondItem="Hmn-tI-p2M" secondAttribute="trailing" constant="10" id="aSP-6d-vRc"/>
-                                            <constraint firstItem="Hmn-tI-p2M" firstAttribute="leading" secondItem="cLM-eg-WmA" secondAttribute="leading" constant="10" id="fqR-Ul-Cob"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="13"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" name="base"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="cLM-eg-WmA" secondAttribute="bottom" constant="20" id="Lf6-nn-JCm"/>
-                                    <constraint firstItem="cLM-eg-WmA" firstAttribute="leading" secondItem="6pU-Bf-HAh" secondAttribute="leading" constant="20" id="XIw-Do-a7S"/>
-                                    <constraint firstAttribute="height" constant="250" id="nIz-UJ-ohU"/>
-                                </constraints>
-                            </view>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SNe-UB-4yX">
-                                <rect key="frame" x="0.0" y="250" width="393" height="568"/>
+                                <rect key="frame" x="0.0" y="200" width="393" height="618"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1E3-sh-yxu">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="490"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="610"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ZuJ-Iy-XbH">
                                                 <rect key="frame" x="15" y="10" width="363" height="200"/>
@@ -395,31 +353,35 @@
                                                 </constraints>
                                             </view>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sUg-an-GOQ">
-                                                <rect key="frame" x="15" y="350" width="363" height="120"/>
+                                                <rect key="frame" x="0.0" y="350" width="393" height="220"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="120" id="I3x-ja-qqX"/>
+                                                    <constraint firstAttribute="height" constant="220" id="va1-76-cb0"/>
                                                 </constraints>
-                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Fi2-gb-goG">
+                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Fi2-gb-goG">
                                                     <size key="itemSize" width="128" height="128"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells/>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="w45-Uk-aSM"/>
+                                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="p1N-jL-Ran"/>
+                                                </connections>
                                             </collectionView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="sUg-an-GOQ" firstAttribute="top" secondItem="vxb-g5-gyU" secondAttribute="bottom" constant="20" id="ECD-bL-3cE"/>
-                                            <constraint firstItem="sUg-an-GOQ" firstAttribute="leading" secondItem="1E3-sh-yxu" secondAttribute="leading" constant="15" id="Fcn-nZ-vEH"/>
+                                            <constraint firstItem="sUg-an-GOQ" firstAttribute="leading" secondItem="1E3-sh-yxu" secondAttribute="leading" id="Fcn-nZ-vEH"/>
                                             <constraint firstAttribute="trailing" secondItem="vxb-g5-gyU" secondAttribute="trailing" id="Rd3-4I-Yfv"/>
                                             <constraint firstAttribute="trailing" secondItem="ZuJ-Iy-XbH" secondAttribute="trailing" constant="15" id="ZdZ-Hj-HaK"/>
-                                            <constraint firstAttribute="bottom" secondItem="sUg-an-GOQ" secondAttribute="bottom" constant="20" id="cUX-8t-dVH"/>
+                                            <constraint firstAttribute="bottom" secondItem="sUg-an-GOQ" secondAttribute="bottom" constant="40" id="cUX-8t-dVH"/>
                                             <constraint firstItem="ZuJ-Iy-XbH" firstAttribute="leading" secondItem="1E3-sh-yxu" secondAttribute="leading" constant="15" id="lT2-cc-et4"/>
                                             <constraint firstItem="ZuJ-Iy-XbH" firstAttribute="top" secondItem="1E3-sh-yxu" secondAttribute="top" constant="10" id="m2g-G9-Tko"/>
                                             <constraint firstItem="vxb-g5-gyU" firstAttribute="top" secondItem="ZuJ-Iy-XbH" secondAttribute="bottom" id="mXR-32-F9R"/>
-                                            <constraint firstAttribute="trailing" secondItem="sUg-an-GOQ" secondAttribute="trailing" constant="15" id="pkp-HR-c9J"/>
+                                            <constraint firstAttribute="trailing" secondItem="sUg-an-GOQ" secondAttribute="trailing" id="pkp-HR-c9J"/>
                                             <constraint firstItem="vxb-g5-gyU" firstAttribute="leading" secondItem="1E3-sh-yxu" secondAttribute="leading" id="rAQ-gK-42S"/>
                                         </constraints>
                                     </view>
@@ -433,6 +395,48 @@
                                     <constraint firstItem="1E3-sh-yxu" firstAttribute="width" secondItem="SNe-UB-4yX" secondAttribute="width" id="yKw-2O-IB7"/>
                                 </constraints>
                             </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6pU-Bf-HAh">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="200"/>
+                                <subviews>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cLM-eg-WmA">
+                                        <rect key="frame" x="20" y="69" width="353" height="111"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your HeatPoints Balance🔥" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hmn-tI-p2M">
+                                                <rect key="frame" x="10" y="26" width="333" height="19.333333333333329"/>
+                                                <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="17"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12,567,725" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xHr-jU-yVV">
+                                                <rect key="frame" x="5" y="65.333333333333343" width="343" height="23.333333333333329"/>
+                                                <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="20"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" name="wheat8"/>
+                                        <constraints>
+                                            <constraint firstItem="xHr-jU-yVV" firstAttribute="leading" secondItem="cLM-eg-WmA" secondAttribute="leading" constant="5" id="70B-W7-9lU"/>
+                                            <constraint firstAttribute="trailing" secondItem="xHr-jU-yVV" secondAttribute="trailing" constant="5" id="8do-Tr-Dg8"/>
+                                            <constraint firstItem="Hmn-tI-p2M" firstAttribute="centerY" secondItem="cLM-eg-WmA" secondAttribute="centerY" constant="-20" id="Gwo-vw-gKZ"/>
+                                            <constraint firstItem="xHr-jU-yVV" firstAttribute="top" secondItem="Hmn-tI-p2M" secondAttribute="bottom" constant="20" id="Wk7-Bk-zIf"/>
+                                            <constraint firstAttribute="trailing" secondItem="Hmn-tI-p2M" secondAttribute="trailing" constant="10" id="aSP-6d-vRc"/>
+                                            <constraint firstItem="Hmn-tI-p2M" firstAttribute="leading" secondItem="cLM-eg-WmA" secondAttribute="leading" constant="10" id="fqR-Ul-Cob"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="13"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" name="base"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="cLM-eg-WmA" secondAttribute="bottom" constant="20" id="Lf6-nn-JCm"/>
+                                    <constraint firstItem="cLM-eg-WmA" firstAttribute="leading" secondItem="6pU-Bf-HAh" secondAttribute="leading" constant="20" id="XIw-Do-a7S"/>
+                                    <constraint firstAttribute="height" constant="200" id="nIz-UJ-ohU"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

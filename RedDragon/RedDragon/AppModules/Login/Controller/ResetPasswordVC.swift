@@ -96,7 +96,7 @@ extension ResetPasswordVC {
     func fetchLoginViewModel() {
         
         ResetPasswordVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         ResetPasswordVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -125,7 +125,7 @@ extension ResetPasswordVC {
                         self.dismiss(animated: true)
                     }
                 }
-                self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage, actions: [okAction])
+                self.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
             }
         }
     }
