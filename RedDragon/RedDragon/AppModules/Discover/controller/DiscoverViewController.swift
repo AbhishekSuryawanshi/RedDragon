@@ -77,6 +77,7 @@ class DiscoverViewController: UIViewController {
     }
     
     func goToStreetMatches(){
+        
         navigateToViewController(StreetMatchesDashboardVC.self, storyboardName: StoryboardName.streetMatches, animationType: .autoReverse(presenting: .zoom))
     }
     

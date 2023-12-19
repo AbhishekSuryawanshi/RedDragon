@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.placeholderColor = .clear
         IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "Done".localized
         IQKeyboardManager.shared.enable = true
+        setupLanguage()
         return true
     }
 
@@ -37,4 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
+
+
 
