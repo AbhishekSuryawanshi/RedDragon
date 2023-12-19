@@ -110,7 +110,7 @@ extension GossipDetailVC {
     func fetchCommentsViewModel() {
         ///fetch comment list
         CommentListVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         CommentListVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -124,7 +124,7 @@ extension GossipDetailVC {
                     self?.commentsArray = Array((dataResponse.data ?? []).prefix(2))
                 } else {
                     if let errorResponse = response?.error {
-                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                        self?.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
                     }
                 }
                 self?.commentTableView.reloadData()
@@ -135,7 +135,7 @@ extension GossipDetailVC {
     
     func fetchGossipViewModel() {
         GossipVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         GossipVM.shared.$responseData
             .receive(on: DispatchQueue.main)
@@ -150,7 +150,7 @@ extension GossipDetailVC {
         }
         
         ESportsDetailVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         ESportsDetailVM.shared.$responseData
             .receive(on: DispatchQueue.main)

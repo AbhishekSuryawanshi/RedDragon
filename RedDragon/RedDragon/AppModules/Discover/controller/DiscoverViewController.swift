@@ -134,7 +134,7 @@ extension DiscoverViewController {
             UserDefaults.standard.points = nil
         } else {
             if let errorResponse = response?.error {
-                self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                self.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
             }
         }
     }

@@ -96,7 +96,7 @@ extension VerificationVC {
     func fetchLoginViewModel() {
         //response of otp verification
         UserVerifyVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         UserVerifyVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -111,7 +111,7 @@ extension VerificationVC {
         
         //response of resend otp
         ResendOtpVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         ResendOtpVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -143,7 +143,7 @@ extension VerificationVC {
             }
         } else {
             if let errorResponse = response?.error {
-                self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                self.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
             }
         }
     }
@@ -154,7 +154,7 @@ extension VerificationVC {
             self.view.makeToast(dataResponse.messages?.first)
         } else {
             if let errorResponse = response?.error {
-                self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                self.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
             }
         }
     }
