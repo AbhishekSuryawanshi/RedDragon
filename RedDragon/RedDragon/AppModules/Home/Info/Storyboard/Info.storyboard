@@ -476,7 +476,7 @@
                                                                                     <constraint firstAttribute="height" constant="30" id="pFD-1D-KM3"/>
                                                                                 </constraints>
                                                                             </imageView>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Streen Match" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y0c-Fr-mkR">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Street Match" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y0c-Fr-mkR">
                                                                                 <rect key="frame" x="4.0000000000000036" y="34" width="60.333333333333343" height="36"/>
                                                                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
                                                                                 <color key="textColor" red="0.73333333329999995" green="0.098039215690000001" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -973,7 +973,7 @@
                                                             <outlet property="delegate" destination="F0O-ys-Elv" id="gxg-Vu-dns"/>
                                                         </connections>
                                                     </tableView>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OC7-oO-869">
+                                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OC7-oO-869">
                                                         <rect key="frame" x="0.0" y="880" width="393" height="310"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's Happening" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oA0-bY-dht">
@@ -1003,6 +1003,9 @@
                                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="12c-hJ-EHa">
                                                                 <rect key="frame" x="20" y="35" width="353" height="265"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="265" id="Kz1-Qr-cKu"/>
+                                                                </constraints>
                                                                 <connections>
                                                                     <outlet property="dataSource" destination="F0O-ys-Elv" id="NKy-3z-dfj"/>
                                                                     <outlet property="delegate" destination="F0O-ys-Elv" id="pKO-Bc-0Ux"/>
@@ -1013,7 +1016,6 @@
                                                         <constraints>
                                                             <constraint firstItem="njC-jw-pln" firstAttribute="centerY" secondItem="oA0-bY-dht" secondAttribute="centerY" id="4Dj-6b-dEi"/>
                                                             <constraint firstItem="oA0-bY-dht" firstAttribute="top" secondItem="OC7-oO-869" secondAttribute="top" constant="10" id="7tb-Mi-1RG"/>
-                                                            <constraint firstAttribute="bottom" secondItem="12c-hJ-EHa" secondAttribute="bottom" constant="10" id="PYG-NT-ZUA"/>
                                                             <constraint firstAttribute="trailing" secondItem="njC-jw-pln" secondAttribute="trailing" constant="8" id="VLA-7j-Hlb"/>
                                                             <constraint firstItem="12c-hJ-EHa" firstAttribute="leading" secondItem="OC7-oO-869" secondAttribute="leading" constant="20" id="bdH-Md-dfh"/>
                                                             <constraint firstAttribute="height" constant="310" id="gp3-TQ-Hhq"/>
@@ -1285,8 +1287,8 @@
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2T-OW-7mL">
-                                                                <rect key="frame" x="192" y="238.33333333333326" width="9.3333333333333428" height="16.333333333333343"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Win Rate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2T-OW-7mL">
+                                                                <rect key="frame" x="169.33333333333334" y="238.33333333333326" width="54.666666666666657" height="16.333333333333343"/>
                                                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -1303,8 +1305,8 @@
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wz8-xM-147">
-                                                                <rect key="frame" x="297" y="234.33333333333326" width="9.3333333333333144" height="16.333333333333343"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Win Rate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wz8-xM-147">
+                                                                <rect key="frame" x="274.33333333333331" y="234.33333333333326" width="54.666666666666686" height="16.333333333333343"/>
                                                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -1321,8 +1323,8 @@
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jcu-KW-LNf">
-                                                                <rect key="frame" x="87" y="234.33333333333326" width="9.3333333333333286" height="16.333333333333343"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Win Rate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jcu-KW-LNf">
+                                                                <rect key="frame" x="64.333333333333329" y="234.33333333333326" width="54.666666666666671" height="16.333333333333343"/>
                                                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -1539,17 +1541,26 @@
                         <outlet property="bannerCollectionView" destination="DkU-6F-9Q7" id="Dur-nu-vjc"/>
                         <outlet property="betLabel" destination="U0h-5w-Ii4" id="w5F-yB-eMU"/>
                         <outlet property="cardsLabel" destination="Ref-cU-1Sg" id="uGS-Ka-FGs"/>
+                        <outlet property="continuesWinningLabel" destination="K4o-Wd-F5k" id="I26-uq-eua"/>
                         <outlet property="databaseLabel" destination="QMj-eF-jtd" id="ymE-Fs-gwB"/>
-                        <outlet property="expertLabel" destination="Rn9-GV-9XV" id="vWM-Wr-CVJ"/>
+                        <outlet property="expertLabel" destination="Rn9-GV-9XV" id="151-hd-HEq"/>
+                        <outlet property="expertSeeAllLabel" destination="OrO-nb-3it" id="kmt-SE-T52"/>
+                        <outlet property="expertTableLabel" destination="75K-uh-V8z" id="xXX-tX-zII"/>
+                        <outlet property="expertTableView" destination="81u-rI-emL" id="ofb-jY-aer"/>
                         <outlet property="fantasyLabel" destination="GfI-5M-UuK" id="XEd-TY-0Tq"/>
+                        <outlet property="firstExpertImageView" destination="o4G-dW-03S" id="gz4-pc-UKr"/>
+                        <outlet property="firstExpertNameLabel" destination="Wgu-k4-bj9" id="dk8-yV-vrT"/>
+                        <outlet property="firstExpertWinPercentLabel" destination="Agm-Xs-Qpp" id="Gnp-DA-AKH"/>
                         <outlet property="firstPointsLabel" destination="fRo-qs-6VL" id="hfc-sF-0cj"/>
                         <outlet property="firstPriceLabel" destination="zum-yv-RPW" id="Kwe-1l-23J"/>
                         <outlet property="firstStaticDataView" destination="6zb-46-etG" id="4jZ-MN-giK"/>
+                        <outlet property="firstWinRateLabel" destination="r2T-OW-7mL" id="Xk0-wj-fpB"/>
                         <outlet property="fourthPointsLabel" destination="MIx-5f-w8u" id="ja2-nk-hfl"/>
                         <outlet property="fourthPriceLabel" destination="j2Y-Wz-GJo" id="Pcy-SP-bLg"/>
                         <outlet property="homePredictionLabel" destination="NRk-bK-3YN" id="d7t-rU-EMR"/>
                         <outlet property="matchesLabel" destination="E2Q-Pe-aRR" id="r2T-lm-lC8"/>
                         <outlet property="meetAppLabel" destination="hdI-9P-pc0" id="i03-OS-GbZ"/>
+                        <outlet property="onAStrakLabel" destination="QoY-yL-N1a" id="CaY-TJ-x7z"/>
                         <outlet property="packageLabel" destination="rwx-b9-rS8" id="Kws-yW-4JV"/>
                         <outlet property="packageSeeAllButton" destination="tSx-Ch-7OU" id="bpq-ju-pT5"/>
                         <outlet property="predictionLabel" destination="j9K-7q-mya" id="xEQ-nG-rUt"/>
@@ -1557,14 +1568,26 @@
                         <outlet property="predictionTabelView" destination="ffJ-V8-lVY" id="DWI-Bu-erw"/>
                         <outlet property="predictionViewHeightConstraints" destination="37V-VC-krw" id="IzC-ai-Jbf"/>
                         <outlet property="quizLabel" destination="GkC-Zq-mch" id="N3b-oI-5eO"/>
+                        <outlet property="recommendedLabel" destination="oIJ-qx-pX8" id="QZS-hM-yGv"/>
+                        <outlet property="recommendedSeeAllLabel" destination="013-rw-UXw" id="oVh-Db-wCe"/>
                         <outlet property="saveUptoLabel" destination="QMM-6r-XvT" id="1hk-8C-RAT"/>
+                        <outlet property="secondExpertImageView" destination="gO4-pF-wO7" id="RCw-2z-iB0"/>
+                        <outlet property="secondExpertNameLabel" destination="aaK-gU-zhX" id="4fh-HN-xvD"/>
+                        <outlet property="secondExpertWinPercentLabel" destination="5v0-1w-zRZ" id="Ajw-SL-92L"/>
+                        <outlet property="secondExpertWinRateLabel" destination="Jcu-KW-LNf" id="UGm-dU-AMB"/>
                         <outlet property="secondPonitsLabel" destination="zYw-ZA-ZOx" id="6bQ-3t-iap"/>
                         <outlet property="secondPriceLabel" destination="dsj-DO-mQl" id="fYM-Na-nsL"/>
                         <outlet property="socialLabel" destination="o5a-pi-UJL" id="ssY-oZ-bln"/>
                         <outlet property="streetMatchLabel" destination="Y0c-Fr-mkR" id="rKJ-T4-VpN"/>
                         <outlet property="tagsCollectionView" destination="MoQ-DN-ch1" id="C0z-ZG-4CN"/>
+                        <outlet property="thirdExpertImageView" destination="DkT-lF-uv7" id="8lm-OI-yOX"/>
+                        <outlet property="thirdExpertNameLabel" destination="0N4-b0-gx4" id="WbL-gO-bDF"/>
+                        <outlet property="thirdExpertWinRateLabel" destination="Wz8-xM-147" id="VUn-Yh-uXL"/>
                         <outlet property="thirdPointsLabel" destination="QLT-Lf-tx2" id="78h-Qf-0lt"/>
                         <outlet property="thirdPriceLabel" destination="Oia-u4-97S" id="EZf-Is-T6b"/>
+                        <outlet property="thirdtExpertWinPercentLabel" destination="OsV-Ee-cSH" id="VAq-Sj-9HF"/>
+                        <outlet property="titleLineLabel" destination="gxa-Em-LZU" id="pd6-OO-ch5"/>
+                        <outlet property="topAccuracyLabel" destination="bum-PU-huZ" id="Evq-I4-eEd"/>
                         <outlet property="topMatchesLabel" destination="5Dv-iW-bMc" id="rYt-UH-Cjg"/>
                         <outlet property="topMatchesSeeMoreButton" destination="WQd-3r-wfF" id="3nW-9d-QMv"/>
                         <outlet property="topMatchesTableView" destination="fck-c5-9to" id="Nuf-DT-1ly"/>
