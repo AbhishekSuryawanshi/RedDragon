@@ -12,6 +12,7 @@ import Toast
 
 class StreetEditProfileViewController: UIViewController {
 
+    @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var positionDropDown: DropDown!
     @IBOutlet weak var footDropDown: DropDown!
     @IBOutlet weak var txtLastName: UITextField!
@@ -50,6 +51,7 @@ class StreetEditProfileViewController: UIViewController {
     var uploadResponse:UploadResponse?
     var playerPositions:[StreetPlayerPosition]?
     var user:StreetProfileUser?
+    var isFromDashboard = false
     private var cancellable = Set<AnyCancellable>()
     
     override func viewDidLoad() {
@@ -76,6 +78,10 @@ class StreetEditProfileViewController: UIViewController {
     
    
     func initialSettings(){
+        if isFromDashboard{
+            btnBack.isHidden = true
+            lblTitle.isHidden = true
+        }
         setupLocalisation()
         fillData()
         showDatePicker()
@@ -108,6 +114,7 @@ class StreetEditProfileViewController: UIViewController {
         fixedAboutPlayerEn.text = "About Player English".localized
         fixedAboutPlayerCn.text = "About Player Chinese".localized
         
+        
     }
     
     func makeNetworkCall(){
@@ -132,6 +139,12 @@ class StreetEditProfileViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
+                if let errorResponse = response?.error {
+                    self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage,completion: {
+                        self?.navigationController?.popViewController(animated: true)
+                    })
+                    
+                }
                 if let data = response?.response?.data{
                     self?.handleUserData(data: data)
                 }
@@ -149,6 +162,11 @@ class StreetEditProfileViewController: UIViewController {
              .receive(on: DispatchQueue.main)
              .dropFirst()
              .sink(receiveValue: { [weak self] response in
+                 if let errorResponse = response?.error {
+                     self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                     return
+                 }
+                 
                  self?.updateProfileSuccess()
              })
              .store(in: &cancellable)
@@ -203,6 +221,9 @@ class StreetEditProfileViewController: UIViewController {
     }
     
     func updateProfileSuccess(){
+        var user = UserDefaults.standard.user
+        user?.streetPlayerUpdated = 1
+        UserDefaults.standard.user = user
         self.customAlertView(title: ErrorMessage.success.localized, description: "Profile Updated!", image: ImageConstants.successImage) {
             self.navigationController?.popViewController(animated: true)
         }
@@ -307,7 +328,7 @@ class StreetEditProfileViewController: UIViewController {
                                   "birthdate":txtDOB.text ?? "",
                                   "weight": txtWeight.text ?? "",
                                   "height": txtHeight.text ?? "",
-                                  "position":playerPositions![selectedPosition!].code,
+                                  "position":playerPositions![selectedPosition!].code ?? "",
                                   "description":textViewDescription.text ?? "",
                                   "img_url":uploadResponse?.path ?? "",
                                   "description_cn":textViewDescriptionCn.text ?? ""]

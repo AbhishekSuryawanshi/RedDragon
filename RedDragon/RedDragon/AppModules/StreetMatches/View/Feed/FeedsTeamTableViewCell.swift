@@ -34,9 +34,9 @@ class FeedsTeamTableViewCell: UITableViewCell {
     
     func configureCell(obj:StreetTeam?){
         lblTeam.text = obj?.name
-//        if Utility.getCurrentLang() == "zh-Hans"{
-//            lblTeam.text = obj?.name_cn
-//        }
+        if UserDefaults.standard.language == "zh-Hans"{
+            lblTeam.text = obj?.nameCN
+        }
         imgLogo.setImage(imageStr: obj?.logoImgURL ?? "", placeholder: .placeholderTeam)
         lblLocation.text = obj?.address
     }

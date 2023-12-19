@@ -29,6 +29,7 @@ class StreetMatchesDashboardVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
+        headerCollectionView.reloadData()
     }
     // MARK: - Methods
     func performInitialSetup() {
@@ -127,13 +128,13 @@ extension StreetMatchesDashboardVC {
     }
     
     func embedStreetProfileVC() {
-        
-        
+       
         if !isUserStreetProfileUpdated(){
             self.view.makeToast("Please update player profile to continue".localized)
             
             ViewEmbedder.embed(withIdentifier: "StreetEditProfileViewController", storyboard: UIStoryboard(name: StoryboardName.streetMatches, bundle: nil), parent: self, container: viewContainer) { vc in
-               // let vc = vc as! StreetTeamsViewController
+               let vc = vc as! StreetEditProfileViewController
+               vc.isFromDashboard = true
             }
             return
         }

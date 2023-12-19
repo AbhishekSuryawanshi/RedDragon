@@ -48,13 +48,14 @@ class ViewEmbedder {
     class func embed(withIdentifier id:String, storyboard: UIStoryboard, parent:UIViewController, container:UIView, completion:((UIViewController)->Void)? = nil){
       
         let vc = storyboard.instantiateViewController(withIdentifier: id)
+        completion?(vc)
         loadVC(
             parent: parent,
             container: container,
             child: vc,
             previous: parent.children.first
         )
-        completion?(vc)
+        
     }
     
     // Add XIB ViewController as child

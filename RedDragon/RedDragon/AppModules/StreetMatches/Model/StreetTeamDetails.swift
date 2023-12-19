@@ -62,7 +62,7 @@ struct Creator: Codable {
     let locationLong, locationLat: Double?
     let address, createdAt, updatedAt: String?
     let imgURL: String?
-    let players: StreetMatchPlayer?
+    let players: [StreetMatchPlayer]?
     let player: StreetMatchPlayer?
 
     enum CodingKeys: String, CodingKey {
