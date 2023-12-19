@@ -24,7 +24,7 @@ class HomePagePredictionVM: APIServiceManager<HomePagePredictionData> {
                 var urlComponents = URLComponents(string: url)
                 urlComponents?.queryItems = queryItems
                         
-        asyncCall(urlString: (urlComponents?.string)!, method: method, parameters: nil, isGuestUser: true, anyDefaultToken: DefaultToken.guestUserCardGame)
+        asyncCall(urlString: (urlComponents?.string)!, method: method, parameters: nil)
     }
 
 }

@@ -26,5 +26,5 @@ struct DefaultToken {
     static let guestUser    = "162|HIK9ALmSVE7rR1Ih77PsY1V2Qg2ziHwGBoVptLRja6bff384"
     static let session      = "17ba0791499db908433b80f37c5fbc89b870084b-eeb2319c2c71c4ad5636e0a27ae5a98852275a53"
     static let guestPredictionUser = "6|7lnYzWZ4YsOZ5qTnVLtJkd5fJaaPi7HOV7galESs6ef6f6d8"
-    static let guestUserCardGame = "184|xSLbtWG7O1hyTYY62ss4U8UKRUpxrzIp8jt4t3d414d277d2"
+    static let guestUserCardGame = "202|tqIi1CSQjJ1c7D6YX13mHKyuQtZRo5nmPPIS9bwK7a4fe5e8"
 }
