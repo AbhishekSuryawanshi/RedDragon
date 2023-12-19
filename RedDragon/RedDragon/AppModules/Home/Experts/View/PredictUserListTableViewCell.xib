@@ -135,15 +135,15 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="xHv-py-C9Q"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="QKc-EF-YeB">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="QKc-EF-YeB">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <connections>
-                                    <outlet property="dataSource" destination="-1" id="XcE-me-ui1"/>
-                                    <outlet property="delegate" destination="-1" id="wZi-zP-8en"/>
+                                    <outlet property="dataSource" destination="KGk-i7-Jjw" id="L88-Fy-hOT"/>
+                                    <outlet property="delegate" destination="KGk-i7-Jjw" id="dyP-dN-zql"/>
                                 </connections>
                             </collectionView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Ked-fS-rEf">
@@ -291,12 +291,12 @@
                             <constraint firstItem="ppq-WJ-KW5" firstAttribute="top" secondItem="cFJ-V6-EQF" secondAttribute="top" id="Vhu-74-xLv"/>
                             <constraint firstItem="MAE-0O-ptW" firstAttribute="leading" secondItem="Wzd-W9-Xdl" secondAttribute="trailing" constant="10" id="WT5-zB-J36"/>
                             <constraint firstItem="QD9-8H-bEg" firstAttribute="leading" secondItem="DNa-ou-wiT" secondAttribute="leading" id="XX0-EL-oau"/>
+                            <constraint firstItem="QD9-8H-bEg" firstAttribute="top" secondItem="Wzd-W9-Xdl" secondAttribute="bottom" constant="35.666666666666671" id="ZFs-jg-wVp"/>
                             <constraint firstItem="zCh-mt-MIh" firstAttribute="leading" secondItem="cFJ-V6-EQF" secondAttribute="trailing" constant="8" id="abP-KA-jjH"/>
                             <constraint firstItem="QD9-8H-bEg" firstAttribute="top" secondItem="aZf-ef-a1E" secondAttribute="bottom" constant="5" id="bnb-ve-uTH"/>
                             <constraint firstItem="Wzd-W9-Xdl" firstAttribute="top" secondItem="cFJ-V6-EQF" secondAttribute="bottom" id="dIu-5o-57Q"/>
                             <constraint firstItem="Ked-fS-rEf" firstAttribute="trailing" secondItem="aZf-ef-a1E" secondAttribute="trailing" id="dWw-0J-Acn"/>
                             <constraint firstItem="QD9-8H-bEg" firstAttribute="trailing" secondItem="aZf-ef-a1E" secondAttribute="trailing" id="f3x-Cw-d3S"/>
-                            <constraint firstItem="QD9-8H-bEg" firstAttribute="top" secondItem="Wzd-W9-Xdl" secondAttribute="bottom" constant="35.666666666666671" id="hny-rQ-he5"/>
                             <constraint firstItem="zCh-mt-MIh" firstAttribute="centerY" secondItem="cFJ-V6-EQF" secondAttribute="centerY" id="lDz-Yi-Ddj"/>
                             <constraint firstItem="Ked-fS-rEf" firstAttribute="top" secondItem="QD9-8H-bEg" secondAttribute="bottom" constant="5" id="lv7-qu-tU6"/>
                             <constraint firstAttribute="bottom" secondItem="D5G-TX-Mlq" secondAttribute="bottom" constant="7.3300000000000001" id="poo-56-ZFz"/>
@@ -329,7 +329,7 @@
                 <outlet property="followButton" destination="gqv-3z-HpU" id="9wN-uR-81y"/>
                 <outlet property="followStackView" destination="aZf-ef-a1E" id="0HG-1D-Ygm"/>
                 <outlet property="followingButton" destination="aOv-5c-2vN" id="sx9-to-SN9"/>
-                <outlet property="heightConstraint" destination="hny-rQ-he5" id="a7Q-J6-ayg"/>
+                <outlet property="heightConstraint" destination="ZFs-jg-wVp" id="96G-yE-u6J"/>
                 <outlet property="lostPointsLabel" destination="fgY-Ry-wcY" id="vUQ-YA-bFd"/>
                 <outlet property="nameLabel" destination="cFJ-V6-EQF" id="pbS-Ai-ibl"/>
                 <outlet property="pendingPointsLabel" destination="3GW-iz-s8F" id="oA1-WK-J6o"/>

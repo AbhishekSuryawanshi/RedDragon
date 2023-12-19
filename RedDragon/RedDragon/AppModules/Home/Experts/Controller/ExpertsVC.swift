@@ -76,7 +76,7 @@ extension ExpertsVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 188.0
+        return UITableView.automaticDimension
     }
 }
 
@@ -93,7 +93,7 @@ extension ExpertsVC {
             cell.betPointsStackView.isHidden = true
             cell.dateLabel.isHidden = false
             cell.followStackView.isHidden = false
-        //    cell.heightConstraint.constant = 35.67
+            cell.heightConstraint.constant = 35.67
             cell.nameLabel.text = userArray[indexPath.row].appdata?.predict?.name?.capitalized
         //    let roundedValue = (userArray[indexPath.row].appdata?.predict?.predictStats?.successRate ?? 0.0).rounded(toPlaces: 2)
             cell.winRateLabel.text = "\(userArray[indexPath.row].appdata?.predict?.predictStats?.successRate ?? 0)%"
@@ -112,7 +112,7 @@ extension ExpertsVC {
             cell.betPointsStackView.isHidden = false
             cell.dateLabel.isHidden = true
             cell.followStackView.isHidden = true
-       //     cell.heightConstraint.constant = 0
+            cell.heightConstraint.constant = 12
             cell.nameLabel.text = userArray[indexPath.row].appdata?.bet?.name?.capitalized
             cell.winRateLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.winRate ?? 0)%"
             cell.allCountLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.totalBetAll ?? 0) Total bets"
