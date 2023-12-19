@@ -74,16 +74,6 @@ class InfoVC: UIViewController {
         super.viewDidLoad()
         loadFunctionality()
     }
-    
-    private func loadFunctionality() {
-        let nib = UINib(nibName: CellIdentifier.bannerCell, bundle: nil)
-        bannerCollectionView.register(nib, forCellWithReuseIdentifier: CellIdentifier.bannerCell)
-        let tag_nib = UINib(nibName: CellIdentifier.leagueNamesCollectionCell, bundle: nil)
-        tagsCollectionView.register(tag_nib, forCellWithReuseIdentifier: CellIdentifier.leagueNamesCollectionCell)
-        topMatchesTableView.register(CellIdentifier.globalMatchesTableViewCell)
-        whatsHappeningTableView.register(CellIdentifier.newsTableViewCell)
-        predictionTabelView.register(CellIdentifier.predictionTableCell)
-    }
 
     @IBAction func appModulesButton(_ sender: UIButton) {
         switch sender.tag {
@@ -99,8 +89,28 @@ class InfoVC: UIViewController {
     
     @IBAction func seeAllButton(_ sender: UIButton) {
     }
+}
+
+/// __Supportive functions
+extension InfoVC {
+    
+    private func loadFunctionality() {
+        initializeNibFiles()
+    }
+    
+    private func initializeNibFiles() {
+        bannerCollectionView.register(CellIdentifier.bannerCell)
+        tagsCollectionView.register(CellIdentifier.leagueNamesCollectionCell)
+        topMatchesTableView.register(CellIdentifier.globalMatchesTableViewCell)
+        whatsHappeningTableView.register(CellIdentifier.newsTableViewCell)
+        predictionTabelView.register(CellIdentifier.predictionTableCell)
+    }
     
     func configureUI() {
+        loadViewModels()
+    }
+    
+    private func loadViewModels() {
         fetchBannerViewModel()
         fetchTagsViewModel()
         fetchLiveMatchViewModel()
@@ -108,6 +118,14 @@ class InfoVC: UIViewController {
         fetchPredictionViewModel()
     }
     
+    private func showLoader(_ value: Bool) {
+        value ? startLoader() : stopLoader()
+    }
+    
+    func highlightFirstIndex_collectionView() {
+        let indexPath = IndexPath(item: 0, section: 0)
+        tagsCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
+    }
 }
 
 /// __Fetch View Model
@@ -221,21 +239,6 @@ extension InfoVC {
         predictionVM?.fetchHomePagePredictionMatchesAsyncCall(lang: "en", date: formattedDate)
     }
     
-}
-
-/// __Supportive functions
-extension InfoVC {
-    
-    private func showLoader(_ value: Bool) {
-        value ? startLoader() : stopLoader()
-    }
-    
-    func highlightFirstIndex_collectionView() {
-        //code to show collectionView cell default first index selected
-        let indexPath = IndexPath(item: 0, section: 0)
-        tagsCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
-        //collectionView(leaguesCollectionView, didSelectItemAt: indexPath)
-    }
 }
 
 extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
