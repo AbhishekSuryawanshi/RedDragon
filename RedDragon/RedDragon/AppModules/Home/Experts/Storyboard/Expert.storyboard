@@ -23,7 +23,7 @@
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Prediction Experts" borderStyle="bezel" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="9pc-UE-5ab" customClass="DropDown" customModule="RedDragon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="181.66666666666666" height="36"/>
-                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="arrowSize">
@@ -36,13 +36,16 @@
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Tags" borderStyle="bezel" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="FBV-vA-DpU" customClass="DropDown" customModule="RedDragon" customModuleProvider="target">
                                         <rect key="frame" x="191.66666666666663" y="0.0" width="181.33333333333337" height="36"/>
-                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="arrowSize">
                                                 <real key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="delegate" destination="7k2-H9-dwo" id="wVg-d2-6gx"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -73,8 +76,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="dropDown" destination="9pc-UE-5ab" id="ate-Zz-k1h"/>
+                        <outlet property="predictDropDown" destination="9pc-UE-5ab" id="B3q-da-LOw"/>
                         <outlet property="tableView" destination="PvI-6j-qeQ" id="AUb-Us-UJF"/>
+                        <outlet property="tagsDropDown" destination="FBV-vA-DpU" id="t2Q-YS-pd6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w6f-NV-Mnm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -84,10 +88,10 @@
     </scenes>
     <designables>
         <designable name="9pc-UE-5ab">
-            <size key="intrinsicContentSize" width="119" height="25.666666666666668"/>
+            <size key="intrinsicContentSize" width="134" height="28"/>
         </designable>
         <designable name="FBV-vA-DpU">
-            <size key="intrinsicContentSize" width="49" height="25.666666666666668"/>
+            <size key="intrinsicContentSize" width="53" height="28"/>
         </designable>
     </designables>
     <resources>
