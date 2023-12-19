@@ -20,12 +20,6 @@ class ExpertPredictUserViewModel: APIServiceManager<ExpertUserListModel> {
         let method      = RequestType.get
         asyncCall(urlString: urlString, method: method, parameters: nil)
     }
-    
-    func fetchExpertUserListAsyncCallWithTag(tag: String, page: Int, slug: String) {
-        let urlString   = URLConstants.expertUserList + "?tag=\(tag)&page=\(page)&app_slug=\(slug)"
-        let method      = RequestType.get
-        asyncCall(urlString: urlString, method: method, parameters: nil)
-    }
 }
 
 class ExpertBetUserViewModel: APIServiceManager<ExpertUserListModel> {

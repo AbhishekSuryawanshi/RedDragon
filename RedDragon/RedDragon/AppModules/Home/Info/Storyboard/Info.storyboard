@@ -1099,12 +1099,16 @@
                                                             <action selector="seeAllButton:" destination="F0O-ys-Elv" eventType="touchUpInside" id="hnQ-LK-KOp"/>
                                                         </connections>
                                                     </button>
-                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="81u-rI-emL">
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="81u-rI-emL">
                                                         <rect key="frame" x="8" y="1979" width="377" height="250"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="250" id="hQ1-xL-q74"/>
+                                                            <constraint firstAttribute="height" priority="250" constant="250" id="hQ1-xL-q74"/>
                                                         </constraints>
+                                                        <connections>
+                                                            <outlet property="dataSource" destination="F0O-ys-Elv" id="Foc-cb-l3E"/>
+                                                            <outlet property="delegate" destination="F0O-ys-Elv" id="Ege-bQ-YFF"/>
+                                                        </connections>
                                                     </tableView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HEq-lQ-eIo">
                                                         <rect key="frame" x="0.0" y="1490" width="393" height="320"/>
@@ -1547,6 +1551,7 @@
                         <outlet property="expertSeeAllLabel" destination="OrO-nb-3it" id="kmt-SE-T52"/>
                         <outlet property="expertTableLabel" destination="75K-uh-V8z" id="xXX-tX-zII"/>
                         <outlet property="expertTableView" destination="81u-rI-emL" id="ofb-jY-aer"/>
+                        <outlet property="expertTableViewHeight" destination="hQ1-xL-q74" id="9hL-NS-XM2"/>
                         <outlet property="fantasyLabel" destination="GfI-5M-UuK" id="XEd-TY-0Tq"/>
                         <outlet property="firstExpertImageView" destination="o4G-dW-03S" id="gz4-pc-UKr"/>
                         <outlet property="firstExpertNameLabel" destination="Wgu-k4-bj9" id="dk8-yV-vrT"/>

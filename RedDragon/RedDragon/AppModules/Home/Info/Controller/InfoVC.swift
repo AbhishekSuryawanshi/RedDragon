@@ -83,6 +83,7 @@ class InfoVC: UIViewController {
     @IBOutlet weak var expertTableLabel: UILabel!
     @IBOutlet weak var expertSeeAllLabel: UIButton!
     @IBOutlet weak var expertTableView: UITableView!
+    @IBOutlet weak var expertTableViewHeight: NSLayoutConstraint!
     
     private var cancellable = Set<AnyCancellable>()
     private var bannerVM: BannerViewModel?
@@ -92,6 +93,8 @@ class InfoVC: UIViewController {
     private var footballLiveMatchesVM: FootballLiveMatchesViewModel?
     private var gossipsArray: [Gossip] = []
     private var predictionVM: HomePagePredictionVM?
+    private var expertPredictUserVM: ExpertPredictUserViewModel?
+    private var userArray = [ExpertUser]()
     private var banners_count = 0
     private var timer = Timer()
     
@@ -130,6 +133,7 @@ extension InfoVC {
         topMatchesTableView.register(CellIdentifier.globalMatchesTableViewCell)
         whatsHappeningTableView.register(CellIdentifier.newsTableViewCell)
         predictionTabelView.register(CellIdentifier.predictionTableCell)
+        expertTableView.register(CellIdentifier.predictUserListTableViewCell)
     }
     
     func configureUI() {
@@ -142,6 +146,7 @@ extension InfoVC {
         fetchLiveMatchViewModel()
         fetchGossipViewModel()
         fetchPredictionViewModel()
+        fetchExpertViewModel()
     }
     
     private func showLoader(_ value: Bool) {
@@ -165,6 +170,35 @@ extension InfoVC {
         cell.scoreLabel.text = "Score: \(matches.homeInfo?.homeScore ?? 0)-\(matches.awayInfo?.awayScore ?? 0)"
         cell.halftimeLabel.isHidden = false
         cell.halftimeLabel.text = "Halftime: \(matches.homeInfo?.halfTimeScore ?? 0)-\(matches.awayInfo?.halfTimeScore ?? 0)"
+    }
+    
+    private func tableCell(indexPath:IndexPath) -> PredictUserListTableViewCell {
+        let cell = expertTableView.dequeueReusableCell(withIdentifier: CellIdentifier.predictUserListTableViewCell, for: indexPath) as! PredictUserListTableViewCell
+        
+        cell.aboutLabel.text = userArray[indexPath.row].about
+        cell.userImageView.setImage(imageStr: userArray[indexPath.row].profileImg ?? "", placeholder: .placeholderUser)
+        cell.walletButton.setTitle("\(userArray[indexPath.row].wallet ?? 0)", for: .normal)
+        cell.configureTagCollectionData(data: userArray[indexPath.row].tags ?? [])
+        
+        cell.betPointsStackView.isHidden = true
+        cell.dateLabel.isHidden = false
+        cell.followStackView.isHidden = false
+        cell.heightConstraint.constant = 35.67
+        cell.nameLabel.text = userArray[indexPath.row].appdata?.predict?.name?.capitalized
+        //    let roundedValue = (userArray[indexPath.row].appdata?.predict?.predictStats?.successRate ?? 0.0).rounded(toPlaces: 2)
+        cell.winRateLabel.text = "\(userArray[indexPath.row].appdata?.predict?.predictStats?.successRate ?? 0)%"
+        cell.allCountLabel.text = "Total: \(userArray[indexPath.row].appdata?.predict?.predictStats?.allCount ?? 0)"
+        cell.successCountLabel.text = "Success: \(userArray[indexPath.row].appdata?.predict?.predictStats?.successCount ?? 0)"
+        cell.unsuccessCountLabel.text = "Failed: \(userArray[indexPath.row].appdata?.predict?.predictStats?.unsuccessCount ?? 0)"
+        cell.coinLabel.text = "Coin: \(userArray[indexPath.row].appdata?.predict?.predictStats?.coins ?? 0)"
+        cell.dateLabel.text = "  \(userArray[indexPath.row].appdata?.predict?.date.formatDate(inputFormat: dateFormat.ddMMyyyyWithTimeZone, outputFormat: dateFormat.ddMMMyyyyhmma) ?? "")"
+        
+        if userArray[indexPath.row].following ?? true {
+            cell.followButton.isHidden = true
+        }else {
+            cell.followingButton.isHidden = true
+        }
+        return cell
     }
 }
 
@@ -279,6 +313,23 @@ extension InfoVC {
         predictionVM?.fetchHomePagePredictionMatchesAsyncCall(lang: "en", date: formattedDate)
     }
     
+    private func fetchExpertViewModel() {
+        expertPredictUserVM = ExpertPredictUserViewModel()
+        expertPredictUserVM?.showError = { [weak self] error in
+            self?.view.makeToast(ErrorMessage.expertNotFound.localized, duration: 2.0, position: .center)
+        }
+        expertPredictUserVM?.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                self?.userArray = response?.response?.data ?? []
+                self?.expertTableView.reloadData()
+            })
+            .store(in: &cancellable)
+        /// API call to fetch experts data
+        expertPredictUserVM?.fetchExpertUserListAsyncCall(page: 1, slug: "predict-match", tag: "betting-expert")
+    }
+    
 }
 
 extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -341,7 +392,6 @@ extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
         }
         return CGSize(width: collectionView.bounds.width/4 - 0, height: collectionView.bounds.height)
     }
-    
 }
 
 extension InfoVC: UITableViewDelegate, UITableViewDataSource {
@@ -361,13 +411,14 @@ extension InfoVC: UITableViewDelegate, UITableViewDataSource {
                 return gossipsArray.count
             }
         } 
-        else {
+        else if tableView == predictionTabelView {
             if predictionVM?.responseData?.response.data.count ?? 0 >= 3 {
                 return 3
             } else {
                 return predictionVM?.responseData?.response.data.count ?? 00
             }
         }
+        return expertPredictUserVM?.responseData?.response?.data?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -382,13 +433,16 @@ extension InfoVC: UITableViewDelegate, UITableViewDataSource {
             cell.configureGossipCell(model: gossipsArray[indexPath.row])
             return cell
         }
-        else {
+        else if tableView == predictionTabelView {
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.predictionTableCell, for: indexPath) as! HomePagePredictionTableViewCell
             guard let data = predictionVM?.responseData?.response.data[indexPath.row].matches else {
                 return UITableViewCell()
             }
             cell.configureCell(data: data[0])
             return cell
+        }
+        else {
+            return tableCell(indexPath: indexPath)
         }
     }
     
@@ -399,8 +453,17 @@ extension InfoVC: UITableViewDelegate, UITableViewDataSource {
         else if tableView == whatsHappeningTableView {
             return 90
         }
-        else {
+        else if tableView == predictionTabelView {
             return 75
+        }
+        else {
+            return UITableView.automaticDimension
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if tableView == expertTableView {
+            expertTableViewHeight.constant = self.expertTableView.contentSize.height
         }
     }
 }

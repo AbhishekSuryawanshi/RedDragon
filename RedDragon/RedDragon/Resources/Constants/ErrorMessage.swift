@@ -78,6 +78,7 @@ struct ErrorMessage {
     static let liveMatchNotFound           = "Live matches are not available at this moment."
     static let whatsHappeningNotFound      = "Data not found for What's Happening section"
     static let predictionsNotFound         = "Predictions data not available"
+    static let expertNotFound              = "Experts data not availabel"
 }
 
 struct SuccessMessage {
