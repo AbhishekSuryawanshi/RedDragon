@@ -116,10 +116,10 @@ class StadiumDetailsVC: UIViewController {
         lblLocation.text = stadium?.address
         lblStadiumName.text = stadium?.name
         lblDescription.text = stadium?.description
-//        if Utility.getCurrentLang() == "zh-Hans"{
-//            lblStadiumName.text = stadium?.nameCn
-//            lblDescription.text = stadium?.descriptionCn
-//        }
+        if UserDefaults.standard.language == "zh-Hans"{
+            lblStadiumName.text = stadium?.nameCN
+            lblDescription.text = stadium?.descriptionCN
+        }
         lblOwnerName.text = (stadium?.owner?.firstName ?? "") + " " + (stadium?.owner?.lastName ?? "")
         lblOwnerPhone.text = stadium?.owner?.phoneNumber ?? ""
         lblAddress.text = stadium?.owner?.address

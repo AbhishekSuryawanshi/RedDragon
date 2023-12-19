@@ -5397,7 +5397,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pcp-eJ-ngk">
-                                                        <rect key="frame" x="0.0" y="296" width="30" height="50"/>
+                                                        <rect key="frame" x="15" y="296" width="0.0" height="50"/>
                                                         <color key="backgroundColor" name="base"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="bAg-OC-Rxx"/>
@@ -5422,8 +5422,8 @@
                                                     <constraint firstAttribute="trailing" secondItem="wLn-wq-z9Y" secondAttribute="trailing" constant="15" id="6j4-yd-gy2"/>
                                                     <constraint firstItem="wLn-wq-z9Y" firstAttribute="top" secondItem="Wzy-RZ-uR6" secondAttribute="top" constant="15" id="BqM-Mu-4ey"/>
                                                     <constraint firstItem="Pcp-eJ-ngk" firstAttribute="top" secondItem="wLn-wq-z9Y" secondAttribute="bottom" constant="50" id="GCJ-W0-a9C"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Pcp-eJ-ngk" secondAttribute="trailing" id="S83-JR-x73"/>
-                                                    <constraint firstItem="Pcp-eJ-ngk" firstAttribute="leading" secondItem="Wzy-RZ-uR6" secondAttribute="leading" id="SyZ-tn-9Xd"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Pcp-eJ-ngk" secondAttribute="trailing" constant="15" id="S83-JR-x73"/>
+                                                    <constraint firstItem="Pcp-eJ-ngk" firstAttribute="leading" secondItem="Wzy-RZ-uR6" secondAttribute="leading" constant="15" id="SyZ-tn-9Xd"/>
                                                     <constraint firstItem="wLn-wq-z9Y" firstAttribute="leading" secondItem="Wzy-RZ-uR6" secondAttribute="leading" constant="15" id="a0c-2U-Oe0"/>
                                                     <constraint firstAttribute="bottom" secondItem="Pcp-eJ-ngk" secondAttribute="bottom" constant="10" id="ab7-1P-2qk"/>
                                                 </constraints>
@@ -6151,6 +6151,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnBack" destination="fS4-wX-5Il" id="Ly9-MS-9fO"/>
                         <outlet property="btnSave" destination="a7E-Fu-pw8" id="Rff-y8-iDX"/>
                         <outlet property="fixedAboutPlayerCn" destination="rxb-nN-Yjg" id="Ukt-dd-QZM"/>
                         <outlet property="fixedAboutPlayerEn" destination="wG3-iv-9xj" id="0aQ-WZ-Znc"/>
@@ -6166,6 +6167,7 @@
                         <outlet property="imgPencil" destination="mef-Ga-7V4" id="btb-Je-8yq"/>
                         <outlet property="imgProfile" destination="bcx-4R-EZI" id="iRS-SV-BEk"/>
                         <outlet property="lblLocation" destination="ys7-AT-rdw" id="9DP-8Z-50u"/>
+                        <outlet property="lblTitle" destination="fRU-uV-dGs" id="RS4-y3-ItS"/>
                         <outlet property="positionDropDown" destination="rnL-dt-oA5" id="bsg-qp-inx"/>
                         <outlet property="textViewDescription" destination="KcU-cY-TOU" id="MYe-qd-Uv5"/>
                         <outlet property="textViewDescriptionCn" destination="o8f-ee-3iA" id="PET-Xk-qK1"/>

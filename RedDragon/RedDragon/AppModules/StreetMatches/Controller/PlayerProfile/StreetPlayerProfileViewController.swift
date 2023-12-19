@@ -41,7 +41,6 @@ class StreetPlayerProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetup()
-
     }
     
     @IBAction func actionEditProfile(_ sender: Any) {
@@ -50,9 +49,6 @@ class StreetPlayerProfileViewController: UIViewController {
     
    
     func initialSetup(){
-        userID = 48
-        playerID = 48
-        isOtherPlayer = true
         nibInitialization()
         configureViewModels()
         btnUpdate.setTitle("Edit Profile".localized, for: .normal)
@@ -119,6 +115,10 @@ class StreetPlayerProfileViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
+                if let errorResponse = response?.error {
+                    self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                    return
+                }
                 if let data = response?.response?.data{
                     self?.handleUserData(data: data)
                 }
@@ -136,6 +136,10 @@ class StreetPlayerProfileViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
+                if let errorResponse = response?.error {
+                    self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                    return
+                }
                 if let data = response?.response?.data{
                     self?.handleUserData(data: data)
                 }
@@ -160,9 +164,9 @@ class StreetPlayerProfileViewController: UIViewController {
         lblName.text = "\(user?.firstName ?? "") \(user?.lastName ?? "")"
         lblLocation.text = user?.player?.address
         lblAbout.text = user?.player?.description
-//        if Utility.getCurrentLang() == "zh-Hans"{
-//            lblAbout.text = user?.player.description_cn
-//        }
+        if UserDefaults.standard.language == "zh-Hans"{
+            lblAbout.text = user?.player?.descriptionCN
+        }
         if !(user?.player?.imgURL?.isEmpty ?? false){
             imgProfile.setImage(imageStr: user?.player?.imgURL ?? "", placeholder: .placeholderUser)
         }
@@ -220,20 +224,20 @@ extension StreetPlayerProfileViewController:UITableViewDelegate,UITableViewDataS
             switch indexPath.row{
             case 0:
                 var position = user?.player?.positionName ?? ""
-//                if Utility.getCurrentLang() == "zh-Hans"{
-//                    position = user?.player?.position_name_cn ?? ""
-//                }
+                if UserDefaults.standard.language == "zh-Hans"{
+                    position = user?.player?.positionNameCN ?? ""
+                }
                 cell.configureCell(key: "Main Position".localized, value: position)
             case 1:
                 var valueText = user?.player?.dominateFoot ?? ""
-//                if Utility.getCurrentLang() == "zh-Hans"{
-//                    if valueText == "LEFT"{
-//                        valueText = "LEFT".localized
-//                    }
-//                    else{
-//                        valueText = "RIGHT".localized
-//                    }
-//                }
+                if UserDefaults.standard.language == "zh-Hans"{
+                    if valueText == "LEFT"{
+                        valueText = "LEFT".localized
+                    }
+                    else{
+                        valueText = "RIGHT".localized
+                    }
+                }
                 cell.configureCell(key: "Preferred Foot".localized, value: valueText)
             case 2:
                 cell.configureCell(key: "Height".localized, value: (String(user?.player?.height ?? 0)) + " cm")

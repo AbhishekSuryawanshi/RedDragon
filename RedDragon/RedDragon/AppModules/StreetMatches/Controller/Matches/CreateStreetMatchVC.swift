@@ -119,6 +119,10 @@ class CreateStreetMatchVC: UIViewController {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
+                if let errorResponse = response?.error {
+                    self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                    return
+                }
                 //popup
                 self?.createMatchSuccess()
             })

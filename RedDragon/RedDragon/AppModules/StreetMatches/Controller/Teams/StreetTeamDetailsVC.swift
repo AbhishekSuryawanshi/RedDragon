@@ -128,11 +128,11 @@ class StreetTeamDetailsVC: UIViewController {
         lblAbout.text = teamDetails?.description
         infoTableView.reloadData()
         
-//        if Utility.getCurrentLang() == "zh-Hans"{
-//            lblTeam.text = viewModel.teamDetails?.name_cn
-//            lblAbout.text = viewModel.teamDetails?.description_cn
-//            
-//        }
+        if UserDefaults.standard.language == "zh-Hans"{
+            lblTeam.text = teamDetails?.nameCN
+            lblAbout.text = teamDetails?.descriptionCN
+            
+        }
     }
     
     func toPlayerDetails(player:Player?){
@@ -199,9 +199,9 @@ extension StreetTeamDetailsVC:UITableViewDelegate,UITableViewDataSource{
             switch indexPath.row{
             case 0:
                 var team = teamDetails?.name ?? ""
-//                if Utility.getCurrentLang() == "zh-Hans"{
-//                    team = viewModel.teamDetails?.name_cn ?? ""
-//                }
+                if UserDefaults.standard.language == "zh-Hans"{
+                    team = teamDetails?.nameCN ?? ""
+                }
                 cell.configureCell(key: "Team Name".localized, value: team)
             case 1:
                 cell.configureCell(key: "Address".localized, value: teamDetails?.address ?? "")

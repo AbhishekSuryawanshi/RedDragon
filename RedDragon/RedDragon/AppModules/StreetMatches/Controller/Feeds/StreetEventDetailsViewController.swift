@@ -171,11 +171,11 @@ class StreetEventDetailsViewController: UIViewController {
         imageViewTeam.setImage(imageStr: details?.teamLogoURL ?? "", placeholder: .placeholderTeam)
         lblTeamName.text = details?.teamName
         lblTeamLocation.text = details?.teamAddress
-//        if Utility.getCurrentLang() == "zh-Hans"{
-//            lblTeamName.text = details?.team_name_cn
-//            lblDescription.text = details?.description_cn
-//            
-//        }
+        if UserDefaults.standard.language == "zh-Hans"{
+            lblTeamName.text = details?.teamNameCN
+            lblDescription.text = details?.descriptionCN
+            
+        }
         switch details?.type ?? ""{
         case FeedsType.searchTeam.rawValue:
             self.feedType = .searchTeam

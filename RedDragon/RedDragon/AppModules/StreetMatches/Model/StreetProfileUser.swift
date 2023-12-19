@@ -21,6 +21,7 @@ struct StreetProfileUserData: Codable {
 // MARK: - StreetProfileUser
 struct StreetProfileUser: Codable {
     let id: Int?
+    let token:String?
     let firstName, lastName, email, phoneNumber: String?
     let birthdate, type: String?
     let locationLong, locationLat: Double?
@@ -28,7 +29,7 @@ struct StreetProfileUser: Codable {
     let player: StreetPlayer?
 
     enum CodingKeys: String, CodingKey {
-        case id
+        case id,token
         case firstName = "first_name"
         case lastName = "last_name"
         case email
