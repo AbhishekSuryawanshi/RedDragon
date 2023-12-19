@@ -103,7 +103,7 @@ class InfoVC: UIViewController {
         super.viewDidLoad()
         loadFunctionality()
     }
-
+    
     @IBAction func appModulesButton(_ sender: UIButton) {
         switch sender.tag {
         case 8:
@@ -147,6 +147,7 @@ extension InfoVC {
         fetchGossipViewModel()
         fetchPredictionViewModel()
         fetchExpertViewModel()
+        expertDataAPICall()
     }
     
     private func showLoader(_ value: Bool) {
@@ -199,6 +200,27 @@ extension InfoVC {
             cell.followingButton.isHidden = true
         }
         return cell
+    }
+    
+    private func firstThreeExpertsData() {
+        guard var data = expertPredictUserVM?.responseData?.response?.data else {
+            return
+        }
+        // Sort the data array based on successRate in descending order
+        data.sort { (expert1, expert2) -> Bool in
+            return (expert1.appdata?.predict?.predictStats?.successRate ?? 0) > (expert2.appdata?.predict?.predictStats?.successRate ?? 0)
+        }
+        // Display the sorted data
+        for (index, expert) in data.prefix(3).enumerated() {
+            let imageView = [firstExpertImageView, secondExpertImageView, thirdExpertImageView][index]
+            let nameLabel = [firstExpertNameLabel, secondExpertNameLabel, thirdExpertNameLabel][index]
+            let winPercentLabel = [firstExpertWinPercentLabel, secondExpertWinPercentLabel, thirdtExpertWinPercentLabel][index]
+            
+            imageView?.sd_imageIndicator = SDWebImageActivityIndicator.white
+            imageView?.setImage(imageStr: expert.profileImg ?? "", placeholder: .placeholderUser)
+            nameLabel?.text = expert.appdata?.predict?.name?.capitalized
+            winPercentLabel?.text = "\(expert.appdata?.predict?.predictStats?.successRate ?? 0)%"
+        }
     }
 }
 
@@ -315,6 +337,9 @@ extension InfoVC {
     
     private func fetchExpertViewModel() {
         expertPredictUserVM = ExpertPredictUserViewModel()
+        expertPredictUserVM?.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
         expertPredictUserVM?.showError = { [weak self] error in
             self?.view.makeToast(ErrorMessage.expertNotFound.localized, duration: 2.0, position: .center)
         }
@@ -322,10 +347,14 @@ extension InfoVC {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
+                self?.firstThreeExpertsData()
                 self?.userArray = response?.response?.data ?? []
                 self?.expertTableView.reloadData()
             })
             .store(in: &cancellable)
+    }
+    
+    private func expertDataAPICall() {
         /// API call to fetch experts data
         expertPredictUserVM?.fetchExpertUserListAsyncCall(page: 1, slug: "predict-match", tag: "betting-expert")
     }
@@ -350,30 +379,23 @@ extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == bannerCollectionView {
-            return bannerVM?.responseData?.data.top.count ?? 0
-        }
-        return tagsVM?.responseData?.response.data.count ?? 0
+        return collectionView == bannerCollectionView ?
+                bannerVM?.responseData?.data.top.count ?? 0 :
+                tagsVM?.responseData?.response.data.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == bannerCollectionView {
-            guard let banner = bannerVM?.responseData?.data.top else {
-                return UICollectionViewCell()
-            }
+        if collectionView == bannerCollectionView, let banner = bannerVM?.responseData?.data.top {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.bannerCell, for: indexPath) as! BannerCollectionViewCell
             cell.bannerImage.sd_imageIndicator = SDWebImageActivityIndicator.white
             cell.bannerImage.sd_setImage(with: URL(string: URLConstants.bannerBaseURL + banner[indexPath.item].coverPath))
             return cell
-        }
-        else {
-            guard let tags = tagsVM?.responseData?.response.data else {
-                return UICollectionViewCell()
-            }
+        } else if let tags = tagsVM?.responseData?.response.data {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.leagueNamesCollectionCell, for: indexPath) as! LeagueCollectionViewCell
             cell.leagueName.text = tags[indexPath.item].tag
             return cell
         }
+        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -383,81 +405,77 @@ extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
                 guard let url = URL(string: bannerMesssage) else { return }
                 UIApplication.shared.open(url)
             }
+        } else {
+            let tag = tagsVM?.responseData?.response.data[indexPath.item].slug
+            expertPredictUserVM?.fetchExpertUserListAsyncCall(page: 1, slug: "predict-match", tag: tag)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == bannerCollectionView {
-            return CGSize(width: collectionView.bounds.width/1 - 0, height: collectionView.bounds.height)
-        }
-        return CGSize(width: collectionView.bounds.width/4 - 0, height: collectionView.bounds.height)
+        let width: CGFloat
+           if collectionView == bannerCollectionView {
+               width = collectionView.bounds.width
+           } else {
+               width = collectionView.bounds.width / 4
+           }
+           return CGSize(width: width, height: collectionView.bounds.height)
     }
 }
 
 extension InfoVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == topMatchesTableView {
-            if liveMatchArray.count >= 2 {
-                return 2
-            } else {
-                return liveMatchArray.count
-            }
+        switch tableView {
+        case topMatchesTableView:
+            return min(liveMatchArray.count, 2)
+            
+        case whatsHappeningTableView:
+            return min(gossipsArray.count, 3)
+            
+        case predictionTabelView:
+            return min(predictionVM?.responseData?.response.data.count ?? 0, 3)
+            
+        default:
+            return expertPredictUserVM?.responseData?.response?.data?.count ?? 0
         }
-        else if tableView == whatsHappeningTableView {
-            if gossipsArray.count >= 3 {
-                return 3
-            } else {
-                return gossipsArray.count
-            }
-        } 
-        else if tableView == predictionTabelView {
-            if predictionVM?.responseData?.response.data.count ?? 0 >= 3 {
-                return 3
-            } else {
-                return predictionVM?.responseData?.response.data.count ?? 00
-            }
-        }
-        return expertPredictUserVM?.responseData?.response?.data?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView == topMatchesTableView {
+        switch tableView {
+        case topMatchesTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.globalMatchesTableViewCell, for: indexPath) as! GlobalMatchesTableViewCell
             congifureCell(cell: cell, matches: liveMatchArray[indexPath.row])
             return cell
-        }
-        else if tableView == whatsHappeningTableView {
+            
+        case whatsHappeningTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.newsTableViewCell, for: indexPath) as! NewsTableViewCell
             cell.titleLabel.textColor = UIColor(red: 0/255, green: 76/255, blue: 107/255, alpha: 1)
             cell.configureGossipCell(model: gossipsArray[indexPath.row])
             return cell
-        }
-        else if tableView == predictionTabelView {
+            
+        case predictionTabelView:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.predictionTableCell, for: indexPath) as! HomePagePredictionTableViewCell
             guard let data = predictionVM?.responseData?.response.data[indexPath.row].matches else {
                 return UITableViewCell()
             }
             cell.configureCell(data: data[0])
             return cell
-        }
-        else {
+            
+        default:
             return tableCell(indexPath: indexPath)
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if tableView == topMatchesTableView {
+        switch tableView {
+        case topMatchesTableView, whatsHappeningTableView:
             return 90
-        }
-        else if tableView == whatsHappeningTableView {
-            return 90
-        }
-        else if tableView == predictionTabelView {
+            
+        case predictionTabelView:
             return 75
-        }
-        else {
-            return UITableView.automaticDimension
+            
+        default:
+            return 183
         }
     }
     
