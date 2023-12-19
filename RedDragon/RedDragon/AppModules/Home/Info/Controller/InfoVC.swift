@@ -58,6 +58,32 @@ class InfoVC: UIViewController {
     @IBOutlet weak var predictionTabelView: UITableView!
     @IBOutlet weak var predictionViewHeightConstraints: NSLayoutConstraint!
     
+    @IBOutlet weak var recommendedLabel: UILabel!
+    @IBOutlet weak var recommendedSeeAllLabel: UIButton!
+    @IBOutlet weak var firstExpertImageView: UIImageView!
+    @IBOutlet weak var firstExpertNameLabel: UILabel!
+    @IBOutlet weak var firstExpertWinPercentLabel: UILabel!
+    @IBOutlet weak var firstWinRateLabel: UILabel!
+    
+    @IBOutlet weak var secondExpertImageView: UIImageView!
+    @IBOutlet weak var secondExpertNameLabel: UILabel!
+    @IBOutlet weak var secondExpertWinPercentLabel: UILabel!
+    @IBOutlet weak var secondExpertWinRateLabel: UILabel!
+    
+    @IBOutlet weak var thirdExpertImageView: UIImageView!
+    @IBOutlet weak var thirdExpertNameLabel: UILabel!
+    @IBOutlet weak var thirdtExpertWinPercentLabel: UILabel!
+    @IBOutlet weak var thirdExpertWinRateLabel: UILabel!
+    
+    @IBOutlet weak var titleLineLabel: UILabel!
+    @IBOutlet weak var onAStrakLabel: UILabel!
+    @IBOutlet weak var topAccuracyLabel: UILabel!
+    @IBOutlet weak var continuesWinningLabel: UILabel!
+    
+    @IBOutlet weak var expertTableLabel: UILabel!
+    @IBOutlet weak var expertSeeAllLabel: UIButton!
+    @IBOutlet weak var expertTableView: UITableView!
+    
     private var cancellable = Set<AnyCancellable>()
     private var bannerVM: BannerViewModel?
     private var tagsVM: TagsViewModel?
@@ -125,6 +151,20 @@ extension InfoVC {
     func highlightFirstIndex_collectionView() {
         let indexPath = IndexPath(item: 0, section: 0)
         tagsCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
+    }
+    
+    func congifureCell(cell: GlobalMatchesTableViewCell, matches: GlobalMatchList) {
+        cell.leagueImageView.setImage(imageStr: matches.leagueInfo?.logo ?? "", placeholder: UIImage(named: "placeholderLeague"))
+        cell.homeImageView.setImage(imageStr: matches.homeInfo?.logo ?? "", placeholder: UIImage(named: "placeholderLeague"))
+        cell.awayImageView.setImage(imageStr: matches.awayInfo?.logo ?? "", placeholder: UIImage(named: "placeholderLeague"))
+        cell.homeNameLabel.text = matches.homeInfo?.name ?? ""
+        cell.awayNameLabel.text = matches.awayInfo?.name ?? ""
+        
+        cell.leagueNameLabel.text = "\(matches.leagueInfo?.name ?? "") | Round \(matches.round?.round ?? 0)"
+        cell.cornerLabel.text = "Corners: \(matches.homeInfo?.cornerScore ?? 0)-\(matches.awayInfo?.cornerScore ?? 0)"
+        cell.scoreLabel.text = "Score: \(matches.homeInfo?.homeScore ?? 0)-\(matches.awayInfo?.awayScore ?? 0)"
+        cell.halftimeLabel.isHidden = false
+        cell.halftimeLabel.text = "Halftime: \(matches.homeInfo?.halfTimeScore ?? 0)-\(matches.awayInfo?.halfTimeScore ?? 0)"
     }
 }
 
@@ -362,19 +402,5 @@ extension InfoVC: UITableViewDelegate, UITableViewDataSource {
         else {
             return 75
         }
-    }
-    
-    func congifureCell(cell: GlobalMatchesTableViewCell, matches: GlobalMatchList) {
-        cell.leagueImageView.setImage(imageStr: matches.leagueInfo?.logo ?? "", placeholder: UIImage(named: "placeholderLeague"))
-        cell.homeImageView.setImage(imageStr: matches.homeInfo?.logo ?? "", placeholder: UIImage(named: "placeholderLeague"))
-        cell.awayImageView.setImage(imageStr: matches.awayInfo?.logo ?? "", placeholder: UIImage(named: "placeholderLeague"))
-        cell.homeNameLabel.text = matches.homeInfo?.name ?? ""
-        cell.awayNameLabel.text = matches.awayInfo?.name ?? ""
-        
-        cell.leagueNameLabel.text = "\(matches.leagueInfo?.name ?? "") | Round \(matches.round?.round ?? 0)"
-        cell.cornerLabel.text = "Corners: \(matches.homeInfo?.cornerScore ?? 0)-\(matches.awayInfo?.cornerScore ?? 0)"
-        cell.scoreLabel.text = "Score: \(matches.homeInfo?.homeScore ?? 0)-\(matches.awayInfo?.awayScore ?? 0)"
-        cell.halftimeLabel.isHidden = false
-        cell.halftimeLabel.text = "Halftime: \(matches.homeInfo?.halfTimeScore ?? 0)-\(matches.awayInfo?.halfTimeScore ?? 0)"
     }
 }
