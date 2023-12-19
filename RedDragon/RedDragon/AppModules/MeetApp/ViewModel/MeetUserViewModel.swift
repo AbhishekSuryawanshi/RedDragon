@@ -14,7 +14,6 @@ class MeetUserViewModel: APIServiceManager<MeetUserListModel> {
         let urlString   = URLConstants.meetUserList + "?pagination=false"
         let method      = RequestType.get
         asyncCall(urlString: urlString, method: method, parameters: nil)
-                  //isGuestUser: true, anyDefaultToken: DefaultToken.guestUser)
     }
 }
 

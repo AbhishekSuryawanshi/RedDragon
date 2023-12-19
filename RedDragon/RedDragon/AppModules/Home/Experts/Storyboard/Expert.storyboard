@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,23 +18,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="v0K-4c-3cJ">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="v0K-4c-3cJ">
                                 <rect key="frame" x="10" y="69" width="373" height="36"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Prediction Experts" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9pc-UE-5ab" customClass="DropDown" customModule="RedDragon" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="117.66666666666667" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Prediction Experts" borderStyle="bezel" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="9pc-UE-5ab" customClass="DropDown" customModule="RedDragon" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="142" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="142" id="0hn-lc-SMT"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="arrowSize">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="delegate" destination="7k2-H9-dwo" id="YBf-0i-QMo"/>
+                                        </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Basketball" borderStyle="bezel" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Omg-I1-Lkb" customClass="DropDown" customModule="RedDragon" customModuleProvider="target">
-                                        <rect key="frame" x="127.66666666666666" y="0.0" width="117.66666666666666" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Basketball" borderStyle="bezel" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="Omg-I1-Lkb" customClass="DropDown" customModule="RedDragon" customModuleProvider="target">
+                                        <rect key="frame" x="152" y="0.0" width="100" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="u72-kZ-WCy"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="arrowSize">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Top Overall" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FBV-vA-DpU" customClass="DropDown" customModule="RedDragon" customModuleProvider="target">
-                                        <rect key="frame" x="255.33333333333329" y="0.0" width="117.66666666666666" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Top Overall" borderStyle="bezel" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="FBV-vA-DpU" customClass="DropDown" customModule="RedDragon" customModuleProvider="target">
+                                        <rect key="frame" x="262" y="0.0" width="111" height="36"/>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="arrowSize">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -43,6 +68,8 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="PvI-6j-qeQ">
                                 <rect key="frame" x="10" y="125" width="373" height="693"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="separatorColor" name="gray2"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="dataSource" destination="7k2-H9-dwo" id="6gD-CK-ZFB"/>
                                     <outlet property="delegate" destination="7k2-H9-dwo" id="T1m-Wp-M2a"/>
@@ -62,7 +89,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="dropDown" destination="FBV-vA-DpU" id="vWe-sW-sSL"/>
+                        <outlet property="dropDown" destination="9pc-UE-5ab" id="ate-Zz-k1h"/>
+                        <outlet property="tableView" destination="PvI-6j-qeQ" id="AUb-Us-UJF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w6f-NV-Mnm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -72,16 +100,19 @@
     </scenes>
     <designables>
         <designable name="9pc-UE-5ab">
-            <size key="intrinsicContentSize" width="132" height="26"/>
+            <size key="intrinsicContentSize" width="119" height="25.666666666666668"/>
         </designable>
         <designable name="FBV-vA-DpU">
-            <size key="intrinsicContentSize" width="101" height="28.666666666666668"/>
+            <size key="intrinsicContentSize" width="86" height="25.666666666666668"/>
         </designable>
         <designable name="Omg-I1-Lkb">
-            <size key="intrinsicContentSize" width="95" height="28.666666666666668"/>
+            <size key="intrinsicContentSize" width="77" height="25.666666666666668"/>
         </designable>
     </designables>
     <resources>
+        <namedColor name="gray2">
+            <color red="0.80784313725490198" green="0.76470588235294112" blue="0.75294117647058822" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -457,9 +457,9 @@ extension MatchesDashboardVC {
     }
     
     func congifureCell(cell: GlobalMatchesTableViewCell, matches: GlobalMatchList) {
-        cell.leagueImageView.setImage(imageStr: matches.leagueInfo?.logo ?? "", placeholder: UIImage(named: "placeholderLeague"))
-        cell.homeImageView.setImage(imageStr: matches.homeInfo?.logo ?? "", placeholder: UIImage(named: "placeholderLeague"))
-        cell.awayImageView.setImage(imageStr: matches.awayInfo?.logo ?? "", placeholder: UIImage(named: "placeholderLeague"))
+        cell.leagueImageView.setImage(imageStr: matches.leagueInfo?.logo ?? "", placeholder: .placeholderLeague)
+        cell.homeImageView.setImage(imageStr: matches.homeInfo?.logo ?? "", placeholder: .placeholderLeague)
+        cell.awayImageView.setImage(imageStr: matches.awayInfo?.logo ?? "", placeholder: .placeholderLeague)
         cell.homeNameLabel.text = matches.homeInfo?.name ?? ""
         cell.awayNameLabel.text = matches.awayInfo?.name ?? ""
         
