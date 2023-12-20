@@ -84,6 +84,7 @@ class InfoVC: UIViewController {
     @IBOutlet weak var expertSeeAllLabel: UIButton!
     @IBOutlet weak var expertTableView: UITableView!
     @IBOutlet weak var expertTableViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var expertViewHeight: NSLayoutConstraint!
     
     private var cancellable = Set<AnyCancellable>()
     private var bannerVM: BannerViewModel?
@@ -97,6 +98,7 @@ class InfoVC: UIViewController {
     private var userArray = [ExpertUser]()
     private var banners_count = 0
     private var timer = Timer()
+    var tableViewHeight: CGFloat = 0
     
     
     override func viewDidLoad() {
@@ -350,6 +352,7 @@ extension InfoVC {
                 self?.firstThreeExpertsData()
                 self?.userArray = response?.response?.data ?? []
                 self?.expertTableView.reloadData()
+                self?.expertViewHeight.constant = 1000
             })
             .store(in: &cancellable)
     }
@@ -475,13 +478,13 @@ extension InfoVC: UITableViewDelegate, UITableViewDataSource {
             return 75
             
         default:
-            return 183
+            return UITableView.automaticDimension
         }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if tableView == expertTableView {
-            expertTableViewHeight.constant = self.expertTableView.contentSize.height
+            expertTableViewHeight.constant = CGFloat(188 * (expertPredictUserVM?.responseData?.response?.data?.count ?? 0))
         }
     }
 }
