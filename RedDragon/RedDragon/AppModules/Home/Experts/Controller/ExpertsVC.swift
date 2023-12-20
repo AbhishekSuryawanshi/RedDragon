@@ -14,16 +14,21 @@ enum Slug: String {
 }
 
 class ExpertsVC: UIViewController {
-    @IBOutlet weak var dropDown : DropDown!
+    @IBOutlet weak var predictDropDown : DropDown!
+    @IBOutlet weak var tagsDropDown : DropDown!
     @IBOutlet weak var tableView: UITableView!
     
     private var expertPredictUserVM = ExpertPredictUserViewModel()
     private var expertBetUserVM = ExpertBetUserViewModel()
+    private var tagsVM: TagsViewModel?
     var cancellable = Set<AnyCancellable>()
     var userArray = [ExpertUser]()
     var predictUserArray = [ExpertUser]()
     var betUserArray = [ExpertUser]()
-    var selectedDropDownIndex = Int()
+    var selectedPredictDropDownIndex = Int()
+    var tagsArray = [TagsData]()
+    var tagSlug = String()
+    var isTagSelected: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,18 +37,26 @@ class ExpertsVC: UIViewController {
     
     // MARK: - Methods
     func performInitialSetup() {
-        dropDown.optionArray = ["Prediction", "Bet"]
+        predictDropDown.optionArray = ["Prediction", "Bet"]
         
-        dropDown.didSelect { [self] selectedText, index, id in
-            self.selectedDropDownIndex = index
+        predictDropDown.didSelect { [self] selectedText, index, id in
+            isTagSelected = false
+            self.selectedPredictDropDownIndex = index
             
-            if selectedDropDownIndex == 0 {
+            if selectedPredictDropDownIndex == 0 {
                 userArray = predictUserArray
                 tableView.reloadData()
             }else {
                 userArray = betUserArray
                 tableView.reloadData()
             }
+        }
+        
+        tagsDropDown.didSelect { [self] selectedText, index, id in
+            isTagSelected = true
+            tagSlug = tagsArray[index].slug
+            expertPredictUserVM.fetchExpertUserListAsyncCall(page: 1, slug: Slug.predict.rawValue, tag: tagSlug)
+            fetchPredictUserListViewModelResponse()
         }
         nibInitialization()
         makeNetworkCall()
@@ -54,6 +67,7 @@ class ExpertsVC: UIViewController {
     }
     
     func makeNetworkCall() {
+        fetchTagsViewModel()
         expertPredictUserVM.fetchExpertUserListAsyncCall(page: 1, slug: Slug.predict.rawValue)
         expertBetUserVM.fetchExpertUserListAsyncCall(page: 1, slug: Slug.bet.rawValue)
         fetchPredictUserListViewModelResponse()
@@ -87,13 +101,18 @@ extension ExpertsVC {
         cell.aboutLabel.text = userArray[indexPath.row].about
         cell.userImageView.setImage(imageStr: userArray[indexPath.row].profileImg ?? "", placeholder: .placeholderUser)
         cell.walletButton.setTitle("\(userArray[indexPath.row].wallet ?? 0)", for: .normal)
-        cell.configureTagCollectionData(data: userArray[indexPath.row].tags ?? [])
+        if ((userArray[indexPath.row].tags?.isEmpty) != true) {
+            cell.tagCollectionView.isHidden = false
+            cell.configureTagCollectionData(data: userArray[indexPath.row].tags ?? [])
+        }else {
+            cell.tagCollectionView.isHidden = true
+        }
         
-        if selectedDropDownIndex == 0 { // Predict
+        if selectedPredictDropDownIndex == 0 { // Predict
             cell.betPointsStackView.isHidden = true
             cell.dateLabel.isHidden = false
             cell.followStackView.isHidden = false
-            cell.heightConstraint.constant = 35.67
+            cell.heightConstraint.constant = 23.67
             cell.nameLabel.text = userArray[indexPath.row].appdata?.predict?.name?.capitalized
             //    let roundedValue = (userArray[indexPath.row].appdata?.predict?.predictStats?.successRate ?? 0.0).rounded(toPlaces: 2)
             cell.winRateLabel.text = "\(userArray[indexPath.row].appdata?.predict?.predictStats?.successRate ?? 0)%"
@@ -112,7 +131,7 @@ extension ExpertsVC {
             cell.betPointsStackView.isHidden = false
             cell.dateLabel.isHidden = true
             cell.followStackView.isHidden = true
-            cell.heightConstraint.constant = 12
+            cell.heightConstraint.constant = 14
             cell.nameLabel.text = userArray[indexPath.row].appdata?.bet?.name?.capitalized
             cell.winRateLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.winRate ?? 0)%"
             cell.allCountLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.totalBetAll ?? 0) Total bets"
@@ -144,8 +163,17 @@ extension ExpertsVC {
     }
     
     func execute_onPredictUserListResponse(_ list: ExpertUserListModel) {
-        predictUserArray = list.response?.data ?? []
-        userArray = predictUserArray
+        
+        if isTagSelected {
+            userArray = list.response?.data ?? []
+        }else {
+            predictUserArray = list.response?.data ?? []
+            userArray = predictUserArray
+        }
+        
+        if userArray.isEmpty {
+            self.customAlertView(title: ErrorMessage.matchEmptyAlert.localized, description: "", image: "empty")
+        }
         tableView.reloadData()
     }
     
@@ -167,7 +195,21 @@ extension ExpertsVC {
     
     func execute_onBetUserListResponse(_ list: ExpertUserListModel) {
         betUserArray = list.response?.data ?? []
-        //    userArray = betUserArray
-        //    tableView.reloadData()
+    }
+    
+    private func fetchTagsViewModel() {
+        tagsVM = TagsViewModel()
+        tagsVM?.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] data in
+                self?.tagsArray = data?.response.data ?? []
+                for i in data?.response.data ?? [] {
+                    self?.tagsDropDown.optionArray.append(i.tag)
+                }
+            })
+            .store(in: &cancellable)
+        /// API call to fetch all tags
+        tagsVM?.fetchTagsAsyncCall()
     }
 }
