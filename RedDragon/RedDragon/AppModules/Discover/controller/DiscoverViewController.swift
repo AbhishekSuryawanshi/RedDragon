@@ -130,7 +130,7 @@ extension DiscoverViewController {
     
     func execute_onResponseData(_ response: LoginResponse?) {
         if let dataResponse = response?.response {
-            UserDefaults.standard.user = nil
+            UserDefaults.standard.removeObject(forKey: UserDefaultString.user)
             UserDefaults.standard.token = nil
             UserDefaults.standard.points = nil
         } else {

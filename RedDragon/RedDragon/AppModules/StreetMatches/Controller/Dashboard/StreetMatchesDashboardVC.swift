@@ -45,12 +45,7 @@ class StreetMatchesDashboardVC: UIViewController {
 // MARK: - CollectionView Delegates
 extension StreetMatchesDashboardVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if isUserLoggedIn(){
-            return streetMatchesHeaderSegment.allCases.count
-        }
-        else{
-            return (streetMatchesHeaderSegment.allCases.count - 1)
-        }
+        return streetMatchesHeaderSegment.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -86,6 +81,14 @@ extension StreetMatchesDashboardVC: UICollectionViewDataSource, UICollectionView
         return CGSize(width: streetMatchesHeaderSegment.allCases[indexPath.row].rawValue.localized.size(withAttributes: [NSAttributedString.Key.font : selected ? fontBold(17) : fontRegular(17)]).width + 26, height: 50)
     }
     
+}
+
+extension StreetMatchesDashboardVC: LoginVCDelegate {
+    func viewControllerDismissed() {
+        self.tabBarController?.tabBar.isHidden = false
+        embedStreetProfileVC()
+        
+    }
 }
 
 // MARK: - Functions to add Child controllers in Parent View
@@ -128,6 +131,18 @@ extension StreetMatchesDashboardVC {
     }
     
     func embedStreetProfileVC() {
+        if !isUserLoggedIn(){
+            self.customAlertView_2Actions(title: "Login / Sign Up".localized, description: ErrorMessage.loginRequires.localized) {
+                /// Show login page to login/register new user
+                /// hide tabbar before presenting a viewcontroller
+                /// show tabbar while dismissing a presented viewcontroller in delegate
+                self.tabBarController?.tabBar.isHidden = true
+                self.presentOverViewController(LoginVC.self, storyboardName: StoryboardName.login) { vc in
+                    vc.delegate = self
+                }
+            }
+            return
+        }
        
         if !isUserStreetProfileUpdated(){
             self.view.makeToast("Please update player profile to continue".localized)
