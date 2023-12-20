@@ -145,7 +145,7 @@ extension String {
         let formatter = DateFormatter()
         formatter.dateFormat = inputDateformat
         guard let date = formatter.date(from: self) else { return "" }
-
+        
         formatter.dateFormat = outputDateFormat
         let outputDate = formatter.string(from: date)
         return outputDate
@@ -172,13 +172,7 @@ extension String {
 // MARK: - NSMutableAttributedString
 
 extension NSMutableAttributedString {
-    @discardableResult func regularColorText(_ text: String, size: CGFloat, color: UIColor) -> NSMutableAttributedString {
-        let attrs: [NSAttributedString.Key: Any] = [.font: fontRegular(size), .foregroundColor: color]
-        let normalString = NSMutableAttributedString(string:text, attributes: attrs)
-        append(normalString)
-        return self
-    }
-    
+   
     @discardableResult func light(_ text: String, size: CGFloat) -> NSMutableAttributedString {
         let attrs: [NSAttributedString.Key: Any] = [.font: fontLight(size)]
         let normalString = NSMutableAttributedString(string:text, attributes: attrs)
@@ -193,15 +187,36 @@ extension NSMutableAttributedString {
         return self
     }
     
-    @discardableResult func medium(_ text: String, size: CGFloat) -> NSMutableAttributedString {
-        let attrs: [NSAttributedString.Key: Any] = [.font: fontMedium(size)]
+    @discardableResult func regularColorText(_ text: String, size: CGFloat, color: UIColor) -> NSMutableAttributedString {
+        let attrs: [NSAttributedString.Key: Any] = [.font: fontRegular(size), .foregroundColor: color]
         let normalString = NSMutableAttributedString(string:text, attributes: attrs)
         append(normalString)
         return self
     }
     
-    @discardableResult func mediumColorText(_ text: String, size: CGFloat, color: UIColor) -> NSMutableAttributedString {
-        let attrs: [NSAttributedString.Key: Any] = [.font: fontMedium(size), .foregroundColor: color]
+    //    @discardableResult func medium(_ text: String, size: CGFloat) -> NSMutableAttributedString {
+    //        let attrs: [NSAttributedString.Key: Any] = [.font: fontMedium(size)]
+    //        let normalString = NSMutableAttributedString(string:text, attributes: attrs)
+    //        append(normalString)
+    //        return self
+    //    }
+    //
+    //    @discardableResult func mediumColorText(_ text: String, size: CGFloat, color: UIColor) -> NSMutableAttributedString {
+    //        let attrs: [NSAttributedString.Key: Any] = [.font: fontMedium(size), .foregroundColor: color]
+    //        let normalString = NSMutableAttributedString(string:text, attributes: attrs)
+    //        append(normalString)
+    //        return self
+    //    }
+    
+    @discardableResult func semiBold(_ text: String, size: CGFloat) -> NSMutableAttributedString {
+        let attrs: [NSAttributedString.Key: Any] = [.font: fontSemiBold(size)]
+        let normalString = NSMutableAttributedString(string:text, attributes: attrs)
+        append(normalString)
+        return self
+    }
+    
+    @discardableResult func semiBoldColorText(_ text: String, size: CGFloat, color: UIColor) -> NSMutableAttributedString {
+        let attrs: [NSAttributedString.Key: Any] = [.font: fontSemiBold(size), .foregroundColor: color]
         let normalString = NSMutableAttributedString(string:text, attributes: attrs)
         append(normalString)
         return self

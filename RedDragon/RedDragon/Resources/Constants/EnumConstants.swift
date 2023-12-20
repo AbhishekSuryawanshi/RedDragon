@@ -5,13 +5,13 @@
 //  Created by Qasr01 on 27/11/2023.
 //
 
-import Foundation
+import UIKit
 
 /// Enum constant for all modules, developer can add new types
 /// use separate array for each module
 /// let sportsTypeArray: [SportsType] = [.football, .basketball, .tennis]
 
-public enum SportsType: String {
+enum SportsType: String {
     case all         = "All"
     case football    = "Football"
     case basketball  = "Basketball"
@@ -54,6 +54,82 @@ public enum SportsType: String {
             return ""
         case .eSports:
             return ""
+        }
+    }
+}
+
+enum SettingType: String, CaseIterable {
+    case account     = "Account"
+    case privacy     = "Privacy Policy"
+    case notiftn     = "Notifications"
+    case langaug     = "Languages"
+    case logout      = "Logout"
+    
+    var iconImage: UIImage {
+        switch self {
+        case .account:
+            return .manageAccounts
+        case .privacy:
+            return .privacyTip
+        case .notiftn:
+            return .notifications
+        case .logout:
+            return .report
+        default:
+            return .report
+        }
+    }
+}
+
+enum ServiceType: String, CaseIterable {
+    case predictions = "Predictions"
+    case bets        = "Bets"
+    case social      = "Social"
+    case fantasy     = "Fantasy"
+    case quizz       = "Quizz"
+    case matches     = "Matches"
+    case updates     = "Updates"
+    case database    = "Database"
+    case analysis    = "Analysis"
+    case users       = "Users"
+    case street      = "Street Match"
+    case meet        = "Meet app"
+    case wallet      = "Wallet"
+    case experts     = "Experts"
+    case cards       = "Cards"
+    
+    var iconImage: UIImage {
+        switch self {
+        case .predictions:
+            return .infoPredictions
+        case .bets:
+            return .infoBets
+        case .social:
+            return .infoSocial
+        case .fantasy:
+            return .infoFantasy
+        case .quizz:
+            return .infoQuiz
+        case .matches:
+            return .infoMatches
+        case .updates:
+            return .infoUpdates
+        case .database:
+            return .infoDatabase
+        case .analysis:
+            return .infoAnalysis
+        case .users:
+            return .infoUsers
+        case .street:
+            return .infoStreetMatch
+        case .meet:
+            return .infoMeetApp
+        case .experts:
+            return .infoExperts
+        case .cards:
+            return .infoCards
+        default://wallet
+            return .infoWallet
         }
     }
 }

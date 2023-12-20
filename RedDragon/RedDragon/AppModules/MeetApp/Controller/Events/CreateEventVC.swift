@@ -182,7 +182,7 @@ extension CreateEventVC: UICollectionViewDelegate, UICollectionViewDataSource, U
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let title = sportsInterestArray[indexPath.row].name?.capitalized ?? ""
-        return CGSize(width: title.size(withAttributes: [NSAttributedString.Key.font : fontMedium(15)]).width + 70, height: 40)
+        return CGSize(width: title.size(withAttributes: [NSAttributedString.Key.font : fontSemiBold(15)]).width + 70, height: 40)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

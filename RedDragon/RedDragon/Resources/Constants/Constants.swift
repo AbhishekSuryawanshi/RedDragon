@@ -35,15 +35,3 @@ enum dateFormat: String {
     case mmmmdyyyyhma         = "MMMM dd, yyyy hh:mm a" // December 15, 2023 11:30 am
     case hhmmssa              = "h:mm:ss aa"
 }
-
-//func formatDate(date: Date?, with outputFormat: dateFormat)-> String
-//{
-//    if date == nil
-//    {
-//        return ""
-//    }
-//    let dateFormatter = DateFormatter()
-//    dateFormatter.dateFormat = outputFormat.rawValue
-//    dateFormatter.locale = Locale(identifier: "en")
-//    return dateFormatter.string(from: date!)
-//}

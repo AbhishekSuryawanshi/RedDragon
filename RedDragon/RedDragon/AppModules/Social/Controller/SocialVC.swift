@@ -405,7 +405,7 @@ extension SocialVC: UICollectionViewDelegateFlowLayout {
             return CGSize(width: 75, height: 112)
         } else {
             let selected = selectedSegment == socialHeaderSegment.allCases[indexPath.row]
-            return CGSize(width: socialHeaderSegment.allCases[indexPath.row].rawValue.localized.size(withAttributes: [NSAttributedString.Key.font : fontMedium(15)]).width + 70, height: 40)
+            return CGSize(width: socialHeaderSegment.allCases[indexPath.row].rawValue.localized.size(withAttributes: [NSAttributedString.Key.font : fontSemiBold(14)]).width + 70, height: 40)
         }
     }
 }
