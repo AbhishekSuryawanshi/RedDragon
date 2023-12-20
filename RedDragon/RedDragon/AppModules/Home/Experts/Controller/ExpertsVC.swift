@@ -25,10 +25,12 @@ class ExpertsVC: UIViewController {
     var userArray = [ExpertUser]()
     var predictUserArray = [ExpertUser]()
     var betUserArray = [ExpertUser]()
-    var selectedPredictDropDownIndex = Int()
     var tagsArray = [TagsData]()
     var tagSlug = String()
     var isTagSelected: Bool = false
+    var isPageRefreshing:Bool = false
+    var predictScrollPage: Int = 1
+    var betScrollPage: Int = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,28 +40,32 @@ class ExpertsVC: UIViewController {
     // MARK: - Methods
     func performInitialSetup() {
         predictDropDown.optionArray = ["Prediction", "Bet"]
+        predictDropDown.selectedIndex = 0
+        expertPredictUserVM.fetchExpertUserListAsyncCall(page: predictScrollPage, slug: Slug.predict.rawValue)
+        fetchPredictUserListViewModelResponse()
         
         predictDropDown.didSelect { [self] selectedText, index, id in
+            self.isPageRefreshing = false
             isTagSelected = false
-            self.selectedPredictDropDownIndex = index
-            
-            if selectedPredictDropDownIndex == 0 {
-                userArray = predictUserArray
-                tableView.reloadData()
+           
+            if index == 0 {
+                expertPredictUserVM.fetchExpertUserListAsyncCall(page: predictScrollPage, slug: Slug.predict.rawValue)
+                fetchPredictUserListViewModelResponse()
             }else {
-                userArray = betUserArray
-                tableView.reloadData()
+                expertBetUserVM.fetchExpertUserListAsyncCall(page: betScrollPage, slug: Slug.bet.rawValue)
+                fetchBetUserListViewModelResponse()
             }
         }
         
         tagsDropDown.didSelect { [self] selectedText, index, id in
+            predictScrollPage = 1
             isTagSelected = true
             tagSlug = tagsArray[index].slug
-            expertPredictUserVM.fetchExpertUserListAsyncCall(page: 1, slug: Slug.predict.rawValue, tag: tagSlug)
+            expertPredictUserVM.fetchExpertUserListAsyncCall(page: predictScrollPage, slug: Slug.predict.rawValue, tag: tagSlug)
             fetchPredictUserListViewModelResponse()
         }
         nibInitialization()
-        makeNetworkCall()
+     //   makeNetworkCall()
     }
     
     func nibInitialization() {
@@ -68,8 +74,8 @@ class ExpertsVC: UIViewController {
     
     func makeNetworkCall() {
         fetchTagsViewModel()
-        expertPredictUserVM.fetchExpertUserListAsyncCall(page: 1, slug: Slug.predict.rawValue)
-        expertBetUserVM.fetchExpertUserListAsyncCall(page: 1, slug: Slug.bet.rawValue)
+        expertPredictUserVM.fetchExpertUserListAsyncCall(page: predictScrollPage, slug: Slug.predict.rawValue)
+        expertBetUserVM.fetchExpertUserListAsyncCall(page: betScrollPage, slug: Slug.bet.rawValue)
         fetchPredictUserListViewModelResponse()
         fetchBetUserListViewModelResponse()
     }
@@ -92,6 +98,28 @@ extension ExpertsVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if (offsetY > contentHeight - scrollView.frame.size.height) {
+            if !isPageRefreshing {
+                isPageRefreshing = true
+                
+                if predictDropDown.selectedIndex == 0 { // Predict
+                    predictScrollPage = predictScrollPage + 1
+                    expertPredictUserVM.fetchExpertUserListAsyncCall(page: predictScrollPage, slug: Slug.predict.rawValue)
+                    fetchPredictUserListViewModelResponse()
+                }else {
+                    betScrollPage = betScrollPage + 1
+                    expertBetUserVM.fetchExpertUserListAsyncCall(page: betScrollPage, slug: Slug.bet.rawValue)
+                    fetchBetUserListViewModelResponse()
+                }
+                tableView.reloadData()
+            }
+        }
+    }
 }
 
 extension ExpertsVC {
@@ -108,7 +136,7 @@ extension ExpertsVC {
             cell.tagCollectionView.isHidden = true
         }
         
-        if selectedPredictDropDownIndex == 0 { // Predict
+        if predictDropDown.selectedIndex == 0 { // Predict
             cell.betPointsStackView.isHidden = true
             cell.dateLabel.isHidden = false
             cell.followStackView.isHidden = false
@@ -163,13 +191,17 @@ extension ExpertsVC {
     }
     
     func execute_onPredictUserListResponse(_ list: ExpertUserListModel) {
-        
+        userArray.removeAll()
         if isTagSelected {
             userArray = list.response?.data ?? []
         }else {
-            predictUserArray = list.response?.data ?? []
-            userArray = predictUserArray
+            if list.response?.data?.count ?? 0 > 0 {
+                self.isPageRefreshing = false
+                predictUserArray.append(contentsOf: list.response?.data ?? [])
+            }
+         //   predictUserArray = list.response?.data ?? []
         }
+        userArray = predictUserArray
         
         if userArray.isEmpty {
             self.customAlertView(title: ErrorMessage.matchEmptyAlert.localized, description: "", image: "empty")
@@ -194,7 +226,13 @@ extension ExpertsVC {
     }
     
     func execute_onBetUserListResponse(_ list: ExpertUserListModel) {
-        betUserArray = list.response?.data ?? []
+        userArray.removeAll()
+        if list.response?.data?.count ?? 0 > 0 {
+            self.isPageRefreshing = false
+            betUserArray.append(contentsOf: list.response?.data ?? [])
+        }
+        userArray = betUserArray
+        tableView.reloadData()
     }
     
     private func fetchTagsViewModel() {
