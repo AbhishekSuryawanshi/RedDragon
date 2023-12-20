@@ -34,7 +34,6 @@ class StreetEventDetailsViewController: UIViewController {
     @IBOutlet weak var txtDate: UITextField!
     @IBOutlet weak var fixedSearchingFor: UILabel!
     @IBOutlet weak var fixedMatchDate: UILabel!
-    @IBOutlet weak var fixedPostOwner: UILabel!
     @IBOutlet weak var fixedTeamInfo: UILabel!
     
     
@@ -52,11 +51,11 @@ class StreetEventDetailsViewController: UIViewController {
     
     
     @IBAction func actionProfile(_ sender: Any) {
-//        let vc = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
-//        vc.isOtherPlayer = true
-//        vc.userID = details?.creatorUserId
-//        vc.playerID = details?.creatorUserId
-//        self.navigationController?.pushViewController(vc, animated: true)
+        navigateToViewController(StreetPlayerProfileViewController.self,storyboardName: StoryboardName.streetMatches) { vc in
+            vc.isOtherPlayer = true
+            vc.userID = self.details?.creatorUserID
+            vc.playerID = self.details?.creatorUserID
+        }
         
     }
     
@@ -75,7 +74,7 @@ class StreetEventDetailsViewController: UIViewController {
             self.view.makeToast("Please update player profile to continue".localized)
             return
         }
-       if UserDefaults.standard.user?.id == details?.creatorUserID{
+        if UserDefaults.standard.user?.appDataIDs.streetMatchUserId == details?.creatorUserID{
             viewAllRequests()
         }
         else{
@@ -91,12 +90,11 @@ class StreetEventDetailsViewController: UIViewController {
     }
     
     func viewAllRequests(){
-        
-//        let vc = UIStoryboard(name: "Feeds", bundle: nil).instantiateViewController(withIdentifier: "EventRequestsViewController") as! EventRequestsViewController
-//        vc.eventID = details?.id
-//        vc.feedType = self.feedType
-//        self.navigationController?.pushViewController(vc, animated: true)
-//        
+        navigateToViewController(StreetEventRequestsViewController.self,storyboardName: StoryboardName.streetMatches) { vc in
+            vc.eventID = self.details?.id
+            vc.feedType = self.feedType
+        }
+      
     }
     
     func initialSettings(){
@@ -130,6 +128,10 @@ class StreetEventDetailsViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
+                if let errorResponse = response?.error {
+                    self?.view.makeToast(errorResponse.messages?.first ?? "")
+                    return
+                }
                 self?.eventRequestSuccess()
             })
             .store(in: &cancellable)
@@ -143,11 +145,10 @@ class StreetEventDetailsViewController: UIViewController {
     
     
     func setupLocalisation(){
-        btnDetails.setTitle("View Details".localized, for: .normal)
+        btnDetails.setTitle("Details".localized, for: .normal)
         btnProfile.setTitle("View Profile".localized, for: .normal)
         fixedSearchingFor.text = "Searching for:".localized
         fixedMatchDate.text = "Match Date".localized
-        fixedPostOwner.text = "Post Owner".localized
         fixedTeamInfo.text = "Team Info".localized
     }
     
@@ -205,7 +206,7 @@ class StreetEventDetailsViewController: UIViewController {
             btnAction.setTitle("Accept Challenge".localized, for: .normal)
             txtDate.text = details?.scheduleTime
             lblTop.text = "Challenge".localized
-            if UserDefaults.standard.user?.id != details?.creatorUserID{
+            if UserDefaults.standard.user?.appDataIDs.streetMatchUserId != details?.creatorUserID{
                 let dt_formatter = DateFormatter()
                 dt_formatter.dateFormat = dateFormat.yyyyMMddHHmm.rawValue
                 let matchDate = dt_formatter.date(from: details?.scheduleTime ?? "")
@@ -219,7 +220,7 @@ class StreetEventDetailsViewController: UIViewController {
             lblType.text = ""
         }
         
-        if UserDefaults.standard.user?.id == details?.creatorUserID{
+        if UserDefaults.standard.user?.appDataIDs.streetMatchUserId == details?.creatorUserID{
             btnAction.setTitle("View Requests".localized, for: .normal)
             if self.feedType == .challengeTeam{
                 btnAction.isHidden = true
@@ -268,7 +269,7 @@ class StreetEventDetailsViewController: UIViewController {
         chooseTeam { team in
             self.customAlertView_2Actions(title: "Alert".localized, description: message) {
                 let param = ["event_id":self.details!.id,
-                             "team_id":team!.id]
+                             "team_id":team!.id!]
                 self.sendEventRequestsViewModel?.sendEventRequestAsyncCall(param: param)
             }
             

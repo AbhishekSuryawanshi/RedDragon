@@ -59,6 +59,7 @@ class StreetPlayerProfileViewController: UIViewController {
         var heading = "My Profile".localized
        
         if !isOtherPlayer{
+            userID = UserDefaults.standard.user?.appDataIDs.streetMatchUserId
             myPlayerProfileVM?.getMyProfileAsyncCall()
             //setupDetails()
         }
