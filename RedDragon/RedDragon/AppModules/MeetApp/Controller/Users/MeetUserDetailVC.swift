@@ -74,7 +74,7 @@ extension MeetUserDetailVC: UICollectionViewDelegate, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let title = sportsInterestArray[indexPath.row].name?.capitalized ?? ""
-        return CGSize(width: title.size(withAttributes: [NSAttributedString.Key.font : fontMedium(15)]).width + 60, height: 40)
+        return CGSize(width: title.size(withAttributes: [NSAttributedString.Key.font : fontSemiBold(15)]).width + 60, height: 40)
     }
 }
 
