@@ -20,11 +20,11 @@ class IconNameCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    func configure(title: String, titleTop: CGFloat = 4, iconName: String = "", iconImage: UIImage = .placeholderPost, bgViewWidth: CGFloat = 60, imageWidth: CGFloat = 60, borderWidth: CGFloat = 1, font: UIFont = fontRegular(13.5), placeHolderImage: UIImage = .placeholderPost) {
+    func configure(title: String, titleTop: CGFloat = 4, iconName: String = "", iconImage: UIImage = .placeholderPost, bgViewWidth: CGFloat = 60, imageWidth: CGFloat = 60, bgViewCornerRadius: CGFloat = 0, iconCornerRadius: CGFloat = 0, borderWidth: CGFloat = 1, font: UIFont = fontRegular(13.5), placeHolderImage: UIImage = .placeholderPost) {
        
         bgViewWidthConstraint.constant = bgViewWidth
         bgView.borderWidth = borderWidth
-        bgView.cornerRadius = bgViewWidth / 2
+        bgView.cornerRadius = bgViewCornerRadius
         
         titleLabel.text = title
         titleLabel.font = font
@@ -33,7 +33,7 @@ class IconNameCollectionViewCell: UICollectionViewCell {
         /// pass this (0.7 * 60) for small image in middle, refer SocialVC - teamsCollectionView
         iconImageWidthConstraint.constant = imageWidth
         
-        iconImageView.cornerRadius = iconImageWidthConstraint.constant / 2
+        iconImageView.cornerRadius = iconCornerRadius
         iconImageView.clipsToBounds = true
         
         if iconName == "" {
