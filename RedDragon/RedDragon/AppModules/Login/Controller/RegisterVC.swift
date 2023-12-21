@@ -13,6 +13,12 @@ class RegisterVC: UIViewController {
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var topTextLabel: UILabel!
+    @IBOutlet weak var nameTiltleLabel: UILabel!
+    @IBOutlet weak var emailTiltleLabel: UILabel!
+    @IBOutlet weak var phoneTiltleLabel: UILabel!
+    @IBOutlet weak var userNameTiltleLabel: UILabel!
+    @IBOutlet weak var passwordTiltleLabel: UILabel!
+    @IBOutlet weak var confirmPassTiltleLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var countryCodeButton: UIButton!
@@ -23,6 +29,7 @@ class RegisterVC: UIViewController {
     @IBOutlet weak var bottomTextView: UITextView!
     @IBOutlet weak var termsTextView: UITextView!
     @IBOutlet weak var checkButton: UIButton!
+    @IBOutlet weak var createAccountButton: UIButton!
     
     var cancellable = Set<AnyCancellable>()
     var countryCode = "0"
@@ -55,7 +62,12 @@ class RegisterVC: UIViewController {
         headerLabel.text = "Welcome to RedDragon App".localized
         let formatedText = NSMutableAttributedString()
         topTextLabel.attributedText = formatedText.regular("Please ", size: 15).semiBold("Create an account", size: 15).regular(" to continue", size: 15)
-        
+        nameTiltleLabel.text = "Full Name".localized
+        emailTiltleLabel.text = "Email".localized
+        phoneTiltleLabel.text = "Phone Number".localized
+        userNameTiltleLabel.text = "User Name".localized
+        passwordTiltleLabel.text = "Password".localized
+        confirmPassTiltleLabel.text = "Confirm Password".localized
         nameTextField.placeholder = "Full Name".localized
         emailTextfield.placeholder = "Email".localized
         phoneTextField.placeholder = "Phone Number".localized
@@ -63,15 +75,15 @@ class RegisterVC: UIViewController {
         passwordTextField.placeholder = "Password".localized
         confirmPasswordTextfield.placeholder = "Confirm Password".localized
         let bottomFormatedText = NSMutableAttributedString()
-        bottomFormatedText.regular("Already Have an Account? Tap here to", size: 15).bold(" Sign In", size: 15)
+        bottomFormatedText.regular("Already Have an Account? Tap here to".localized, size: 15).semiBold(" Sign In".localized, size: 15)
         bottomFormatedText.addUnderLine(textToFind: "Sign In")
         bottomFormatedText.addLink(textToFind: " Sign In", linkURL: "signIn")
         bottomTextView.attributedText = bottomFormatedText
         let termsFormatedText = NSMutableAttributedString()
-        termsFormatedText.regular("Confirm your acceptance of the", size: 14).bold(" Terms and Conditions", size: 15)
-        bottomFormatedText.addLink(textToFind: "Confirm your acceptance of the Terms and Conditions", linkURL: URLConstants.terms)
+        termsFormatedText.regular("Confirm your acceptance of the".localized, size: 14).semiBold(" Terms and Conditions".localized, size: 15)
+        bottomFormatedText.addLink(textToFind: "Confirm your acceptance of the Terms and Conditions".localized, linkURL: URLConstants.terms)
         termsTextView.attributedText = termsFormatedText
-        
+        createAccountButton.setTitle("Create an Account".localized, for: .normal)
     }
     
     func showLoader(_ value: Bool) {
