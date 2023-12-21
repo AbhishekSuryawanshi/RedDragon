@@ -17,6 +17,8 @@ class LoginVC: UIViewController {
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var topTextLabel: UILabel!
+    @IBOutlet weak var phoneTitleLabel: UILabel!
+    @IBOutlet weak var passwordTitleLabel: UILabel!
     @IBOutlet weak var countryCodeButton: UIButton!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -65,10 +67,12 @@ class LoginVC: UIViewController {
         headerLabel.text = "Welcome to RedDragon App".localized
         let topFormatedText = NSMutableAttributedString()
         topTextLabel.attributedText = topFormatedText.regular("Please ", size: 15).semiBold("Login", size: 15).regular(" to continue", size: 15)
+        phoneTitleLabel.text = "Phone Number".localized
+        passwordTitleLabel.text = "Password".localized
         phoneTextField.placeholder = "Phone Number".localized
         passwordTextField.placeholder = "Password".localized
         let bottomFormatedText = NSMutableAttributedString()
-        bottomFormatedText.regular("Don't Have an Account? Tap here to", size: 15).bold(" Register", size: 15)
+        bottomFormatedText.regular("Don't Have an Account? Tap here to", size: 15).semiBold(" Register", size: 15)
         bottomFormatedText.addUnderLine(textToFind: "Register")
         bottomFormatedText.addLink(textToFind: " Register", linkURL: "register")
         bottomTextView.attributedText = bottomFormatedText
