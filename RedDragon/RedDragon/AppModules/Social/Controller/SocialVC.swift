@@ -329,12 +329,12 @@ extension SocialVC: UICollectionViewDataSource {
         } else if collectionView == leagueCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.iconNameCollectionViewCell, for: indexPath) as! IconNameCollectionViewCell
             let model = leagueArray[indexPath.row]
-            cell.configure(title: UserDefaults.standard.language == "en" ? model.enName : model.cnName, iconName: model.logoURL, placeHolderImage: .placeholderLeague)
+            cell.configure(title: UserDefaults.standard.language == "en" ? model.enName : model.cnName, iconName: model.logoURL, bgViewCornerRadius: 30, iconCornerRadius: 30, placeHolderImage: .placeholderLeague)
             return cell
         } else if collectionView == teamsCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.iconNameCollectionViewCell, for: indexPath) as! IconNameCollectionViewCell
             let model = teamArray[indexPath.row]
-            cell.configure(title: UserDefaults.standard.language == "en" ? model.enName : model.cnName, iconName: model.logoURL, imageWidth: (0.7 * 60), placeHolderImage: .placeholderTeam)
+            cell.configure(title: UserDefaults.standard.language == "en" ? model.enName : model.cnName, iconName: model.logoURL, imageWidth: (0.7 * 60), bgViewCornerRadius: 30, iconCornerRadius: (0.7 * 60) / 2, placeHolderImage: .placeholderTeam)
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.headerBottom_1CollectionViewCell, for: indexPath) as! HeaderBottom_1CollectionViewCell
@@ -400,9 +400,9 @@ extension SocialVC: UICollectionViewDelegateFlowLayout {
             let selected = selectedSegment == socialHeaderSegment.allCases[indexPath.row]
             return CGSize(width: socialHeaderSegment.allCases[indexPath.row].rawValue.localized.size(withAttributes: [NSAttributedString.Key.font : selected ? fontBold(17) : fontRegular(17)]).width + 40, height: 50)
         } else if collectionView == leagueCollectionView {
-            return CGSize(width: 75, height: 112)
+            return CGSize(width: 70, height: 112)
         } else if collectionView == teamsCollectionView {
-            return CGSize(width: 75, height: 112)
+            return CGSize(width: 70, height: 112)
         } else {
             let selected = selectedSegment == socialHeaderSegment.allCases[indexPath.row]
             return CGSize(width: socialHeaderSegment.allCases[indexPath.row].rawValue.localized.size(withAttributes: [NSAttributedString.Key.font : fontSemiBold(14)]).width + 70, height: 40)

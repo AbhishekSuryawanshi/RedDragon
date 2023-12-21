@@ -340,12 +340,12 @@ extension GossipVC: UICollectionViewDataSource {
         if collectionView == publisherCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.iconNameCollectionViewCell, for: indexPath) as! IconNameCollectionViewCell
             let publisher = publishersArray[indexPath.row].getNewsSource()
-            cell.configure(title: publisher.0, iconImage: publisher.1)
+            cell.configure(title: publisher.0, iconImage: publisher.1, bgViewCornerRadius: 30, iconCornerRadius: 30)
             return cell
         } else if collectionView == leagueCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.iconNameCollectionViewCell, for: indexPath) as! IconNameCollectionViewCell
             let model = leagueArray[indexPath.row]
-            cell.configure(title: UserDefaults.standard.language == "en" ? model.enName : model.cnName, iconName: model.logoURL, imageWidth: (0.7 * 60), placeHolderImage: .placeholderLeague)
+            cell.configure(title: UserDefaults.standard.language == "en" ? model.enName : model.cnName, iconName: model.logoURL, imageWidth: (0.7 * 60), bgViewCornerRadius: 30, iconCornerRadius: 30, placeHolderImage: .placeholderLeague)
             return cell
         } else if collectionView == trendingCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.newsCollectionViewCell, for: indexPath) as! NewsCollectionViewCell

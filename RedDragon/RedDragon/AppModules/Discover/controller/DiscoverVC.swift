@@ -34,6 +34,7 @@ class DiscoverVC: UIViewController {
     }
     
     func refreshView() {
+        self.navigationController?.navigationBar.isHidden = true
         headerLabel.text = "Our Services".localized
         profileHeaderLabel.text = "Profile & Settings".localized
         otherHeaderLabel.text = "Other".localized
@@ -109,11 +110,11 @@ extension DiscoverVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.iconNameCollectionViewCell, for: indexPath) as! IconNameCollectionViewCell
         if collectionView == servicesCollectionView {
-            cell.configure(title: ServiceType.allCases[indexPath.row].rawValue.localized, titleTop: -4, iconImage: ServiceType.allCases[indexPath.row].iconImage, bgViewWidth: 55, imageWidth: (0.65 * 55))
+            cell.configure(title: ServiceType.allCases[indexPath.row].rawValue.localized, titleTop: -4, iconImage: ServiceType.allCases[indexPath.row].iconImage, bgViewWidth: 55, imageWidth: (0.55 * 55))
             cell.bgView.borderWidth = 0
             cell.titleLabel.textColor = .base
         } else {
-            cell.configure(title: SettingType.allCases[indexPath.row].rawValue.localized, iconImage: SettingType.allCases[indexPath.row].iconImage, bgViewWidth: 55, imageWidth: (0.65 * 55))
+            cell.configure(title: SettingType.allCases[indexPath.row].rawValue.localized, iconImage: SettingType.allCases[indexPath.row].iconImage, bgViewWidth: 55, imageWidth: (0.65 * 55), bgViewCornerRadius: 55/2)
             cell.bgView.borderWidth = 0
             cell.bgView.backgroundColor = collectionView == profileCollectionView ? .wheat8 : .yellow4
         }
@@ -141,7 +142,7 @@ extension DiscoverVC: UICollectionViewDelegate {
             case .updates:
                 navigateToViewController(NewsModuleVC.self, storyboardName: StoryboardName.news, identifier: "NewsModuleVC")
             case .database:
-                print("")
+                self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[2]
             case .analysis:
                 print("")
             case .users:
@@ -170,7 +171,7 @@ extension DiscoverVC: UICollectionViewDelegate {
 extension DiscoverVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == servicesCollectionView {
-            return CGSize(width: (screenWidth - 25) / 5, height: 70)
+            return CGSize(width: (screenWidth - 25) / 5, height: 85)
         } else {
             return CGSize(width: (screenWidth - 25) / 5, height: 100)
         }
