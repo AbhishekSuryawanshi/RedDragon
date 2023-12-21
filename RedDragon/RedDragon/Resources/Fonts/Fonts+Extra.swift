@@ -36,10 +36,6 @@ func fontRegular(_ size: CGFloat) -> UIFont {
     let font = UIFont(name: Fonts.fontRegular, size: size) ?? UIFont.systemFont(ofSize: size)
     return font
 }
-//func fontMedium(_ size: CGFloat) -> UIFont {
-//    let font = UIFont(name: Fonts.fontSemiBold, size: size) ?? UIFont.systemFont(ofSize: size)
-//    return font
-//}
 func fontSemiBold(_ size: CGFloat) -> UIFont {
     let font = UIFont(name: Fonts.fontSemiBold, size: size) ?? UIFont.boldSystemFont(ofSize: size)
     return font

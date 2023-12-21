@@ -41,7 +41,7 @@ class HeaderTopCollectionViewCell: UICollectionViewCell {
             titleLabel.textColor = textColor
         }
         var formatedText = NSMutableAttributedString()
-        formatedText = selected ? formatedText.bold(title, size: fontSize) : formatedText.regular(title, size: fontSize)
+        formatedText = selected ? formatedText.semiBold(title, size: fontSize) : formatedText.regular(title, size: fontSize)
         formatedText.addUnderLine(textToFind: title, remove: !selected)
         titleLabel.attributedText = formatedText
         
