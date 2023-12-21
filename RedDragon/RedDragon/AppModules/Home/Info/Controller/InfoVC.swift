@@ -13,22 +13,8 @@ import SDWebImage
 
 class InfoVC: UIViewController {
     
+    @IBOutlet weak var servicesCollectionView: UICollectionView!
     @IBOutlet weak var firstStaticDataView: UIView!
-    @IBOutlet weak var predictionLabel: UILabel!
-    @IBOutlet weak var betLabel: UILabel!
-    @IBOutlet weak var socialLabel: UILabel!
-    @IBOutlet weak var fantasyLabel: UILabel!
-    @IBOutlet weak var quizLabel: UILabel!
-    @IBOutlet weak var matchesLabel: UILabel!
-    @IBOutlet weak var updatesLabel: UILabel!
-    @IBOutlet weak var databaseLabel: UILabel!
-    @IBOutlet weak var analysisLabel: UILabel!
-    @IBOutlet weak var usersLabel: UILabel!
-    @IBOutlet weak var meetAppLabel: UILabel!
-    @IBOutlet weak var streetMatchLabel: UILabel!
-    @IBOutlet weak var walletLabel: UILabel!
-    @IBOutlet weak var expertLabel: UILabel!
-    @IBOutlet weak var cardsLabel: UILabel!
     
     @IBOutlet weak var packageLabel: UILabel!
     @IBOutlet weak var saveUptoLabel: UILabel!
@@ -106,6 +92,10 @@ class InfoVC: UIViewController {
         loadFunctionality()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
     @IBAction func appModulesButton(_ sender: UIButton) {
         switch sender.tag {
         case 8:
@@ -130,6 +120,7 @@ extension InfoVC {
     }
     
     private func initializeNibFiles() {
+        servicesCollectionView.register(CellIdentifier.iconNameCollectionViewCell)
         bannerCollectionView.register(CellIdentifier.bannerCell)
         tagsCollectionView.register(CellIdentifier.leagueNamesCollectionCell)
         topMatchesTableView.register(CellIdentifier.globalMatchesTableViewCell)
@@ -382,46 +373,95 @@ extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return collectionView == bannerCollectionView ?
-                bannerVM?.responseData?.data.top.count ?? 0 :
-                tagsVM?.responseData?.response.data.count ?? 0
+        if collectionView == servicesCollectionView {
+            return ServiceType.allCases.count
+        } else {
+            return collectionView == bannerCollectionView ?
+            bannerVM?.responseData?.data.top.count ?? 0 :
+            tagsVM?.responseData?.response.data.count ?? 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == bannerCollectionView, let banner = bannerVM?.responseData?.data.top {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.bannerCell, for: indexPath) as! BannerCollectionViewCell
-            cell.bannerImage.sd_imageIndicator = SDWebImageActivityIndicator.white
-            cell.bannerImage.sd_setImage(with: URL(string: URLConstants.bannerBaseURL + banner[indexPath.item].coverPath))
+        if collectionView == servicesCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.iconNameCollectionViewCell, for: indexPath) as! IconNameCollectionViewCell
+            cell.configure(title: ServiceType.allCases[indexPath.row].rawValue.localized, titleTop: -4, iconImage: ServiceType.allCases[indexPath.row].iconImage, bgViewWidth: 55, imageWidth: (0.55 * 55))
+            cell.bgView.borderWidth = 0
+            cell.titleLabel.textColor = .base
             return cell
-        } else if let tags = tagsVM?.responseData?.response.data {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.leagueNamesCollectionCell, for: indexPath) as! LeagueCollectionViewCell
-            cell.leagueName.text = tags[indexPath.item].tag
-            return cell
+        } else {
+            if collectionView == bannerCollectionView, let banner = bannerVM?.responseData?.data.top {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.bannerCell, for: indexPath) as! BannerCollectionViewCell
+                cell.bannerImage.sd_imageIndicator = SDWebImageActivityIndicator.white
+                cell.bannerImage.sd_setImage(with: URL(string: URLConstants.bannerBaseURL + banner[indexPath.item].coverPath))
+                return cell
+            } else if let tags = tagsVM?.responseData?.response.data {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.leagueNamesCollectionCell, for: indexPath) as! LeagueCollectionViewCell
+                cell.leagueName.text = tags[indexPath.item].tag
+                return cell
+            }
         }
         return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == bannerCollectionView {
-            let bannerMesssage = bannerVM?.responseData?.data.top[indexPath.item].message ?? ""
-            if bannerMesssage.contains("http") || bannerMesssage.contains("www"){
-                guard let url = URL(string: bannerMesssage) else { return }
-                UIApplication.shared.open(url)
+        if collectionView == servicesCollectionView {
+            switch ServiceType.allCases[indexPath.row] {
+            case .predictions:
+                navigateToViewController(HomePredictionViewController.self, storyboardName: StoryboardName.prediction, animationType: .autoReverse(presenting: .zoom))
+            case .bets:
+                navigateToViewController(BetHomeVc.self, storyboardName: StoryboardName.bets, animationType: .autoReverse(presenting: .zoom))
+            case .social:
+                self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[1]
+            case .fantasy:
+                print("")
+            case .quizz:
+                print("")
+            case .matches:
+                navigateToViewController(MatchesDashboardVC.self, storyboardName: StoryboardName.matches, animationType: .autoReverse(presenting: .zoom))
+            case .updates:
+                navigateToViewController(NewsModuleVC.self, storyboardName: StoryboardName.news, identifier: "NewsModuleVC")
+            case .database:
+                self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[2]
+            case .analysis:
+                print("")
+            case .users:
+                print("")
+            case .street:
+                navigateToViewController(StreetMatchesDashboardVC.self, storyboardName: StoryboardName.streetMatches, animationType: .autoReverse(presenting: .zoom))
+            case .meet:
+                navigateToViewController(MeetDashboardVC.self, storyboardName: StoryboardName.meet, animationType: .autoReverse(presenting: .zoom))
+            case .experts:
+                navigateToViewController(HomeVC.self, storyboardName: StoryboardName.home, animationType: .autoReverse(presenting: .zoom))
+            case .cards:
+                navigateToViewController(AllPlayersViewController.self, storyboardName: StoryboardName.cardGame, identifier: "AllPlayersViewController")
+            default: //wallet
+                self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[3]
             }
         } else {
-            let tag = tagsVM?.responseData?.response.data[indexPath.item].slug
-            expertPredictUserVM?.fetchExpertUserListAsyncCall(page: 1, slug: "predict-match", tag: tag)
+            if collectionView == bannerCollectionView {
+                let bannerMesssage = bannerVM?.responseData?.data.top[indexPath.item].message ?? ""
+                if bannerMesssage.contains("http") || bannerMesssage.contains("www"){
+                    guard let url = URL(string: bannerMesssage) else { return }
+                    UIApplication.shared.open(url)
+                }
+            } else {
+                let tag = tagsVM?.responseData?.response.data[indexPath.item].slug
+                expertPredictUserVM?.fetchExpertUserListAsyncCall(page: 1, slug: "predict-match", tag: tag)
+            }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width: CGFloat
-           if collectionView == bannerCollectionView {
-               width = collectionView.bounds.width
-           } else {
-               width = collectionView.bounds.width / 4
-           }
-           return CGSize(width: width, height: collectionView.bounds.height)
+        if collectionView == servicesCollectionView {
+            return CGSize(width: (screenWidth - 25) / 5, height: 85)
+        } else if collectionView == bannerCollectionView {
+            width = collectionView.bounds.width
+        } else {
+            width = collectionView.bounds.width / 4
+        }
+        return CGSize(width: width, height: collectionView.bounds.height)
     }
 }
 
