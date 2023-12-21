@@ -47,7 +47,7 @@ class VerificationVC: UIViewController {
         ///For forgot password, resent api will not work, It require authentication
         if pushFrom != .forgotPass {
             let bottomFormatedText = NSMutableAttributedString()
-            bottomFormatedText.regular("Didn’t receive the code? ", size: 15).bold("Resend", size: 15)
+            bottomFormatedText.regular("Didn’t receive the code? ", size: 15).semiBold("Resend", size: 15)
             bottomFormatedText.addUnderLine(textToFind: "Resend")
             bottomFormatedText.addLink(textToFind: "Resend", linkURL: "resend")
             bottomTextView.attributedText = bottomFormatedText
