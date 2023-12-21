@@ -37,6 +37,21 @@ class HomePagePredictionTableViewCell: UITableViewCell {
         dateFormatter.dateFormat = "dd-MM-yyyy"
         let formattedDate = dateFormatter.string(from: currentDate)
         dateLabel.text = formattedDate
+        calculatePercentage(homeTeam: data.predStats?.winStats.homeTeamCnt ?? 0, awayTeam: data.predStats?.winStats.homeTeamCnt ?? 0)
+    }
+    
+    func calculatePercentage(homeTeam: Int, awayTeam: Int) {
+        let totalTeamCount = homeTeam + awayTeam
+        if totalTeamCount > 0 {
+            let awayTeamPercentage = "\((awayTeam * 100) / totalTeamCount)%"
+            awayTeamPercentLabel.text = "\(awayTeamPercentage)"
+            let homeTeamPercentage = "\((homeTeam * 100) / totalTeamCount)%"
+            homeTeamPercentLabel.text = "\(homeTeamPercentage)"
+        }
+        else {
+            awayTeamPercentLabel.text = "0%"
+            homeTeamPercentLabel.text = "0%"
+        }
     }
     
 }

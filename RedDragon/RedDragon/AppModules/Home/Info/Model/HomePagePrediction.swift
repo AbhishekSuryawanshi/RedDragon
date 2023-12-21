@@ -49,7 +49,7 @@ struct HomePagePredictionMatch: Codable {
     let odds3_Indicator: String
     let odds3_Value: String
     let lineup: Bool
-    let predStats: PredStats?
+    let predStats: HomePredStats?
 
     enum CodingKeys: String, CodingKey {
         case slug, time
@@ -71,5 +71,22 @@ struct HomePagePredictionMatch: Codable {
         case odds3_Value = "odds_3_value"
         case lineup
         case predStats = "pred_stats"
+    }
+}
+
+
+struct HomePredStats: Codable {
+    let allCnt: Int
+    let winStats: HomeWinStats
+    let drawCnt: Int
+}
+
+// MARK: - WinStats
+struct HomeWinStats: Codable {
+    let homeTeamCnt, awayTeamCnt: Int
+
+    enum CodingKeys: String, CodingKey {
+        case homeTeamCnt = "home_team_cnt"
+        case awayTeamCnt = "away_team_cnt"
     }
 }
