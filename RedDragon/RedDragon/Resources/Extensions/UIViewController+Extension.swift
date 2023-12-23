@@ -135,7 +135,7 @@ extension UIViewController {
     }
     
     func isUserLoggedIn()->Bool{
-        if UserDefaults.standard.user == nil{
+        if UserDefaults.standard.token == nil{
             return false
         }
         else{

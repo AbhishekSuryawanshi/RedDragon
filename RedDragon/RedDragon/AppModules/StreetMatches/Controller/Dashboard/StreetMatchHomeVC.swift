@@ -217,6 +217,10 @@ extension StreetMatchHomeVC:UITableViewDelegate,UITableViewDataSource{
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
+    }
+    
     func openStadiumDetails(index:Int){
         navigateToViewController(StadiumDetailsVC.self,storyboardName: StoryboardName.streetMatches) { vc in
             vc.stadium = self.homeData?.stadiums?[index]

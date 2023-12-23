@@ -22,12 +22,15 @@ class StreetPlayerProfileViewController: UIViewController {
     @IBOutlet weak var scroll: UIScrollView!
     @IBOutlet weak var collectionViewTop: UICollectionView!
     @IBOutlet weak var tableViewEvents: UITableView!
+    @IBOutlet weak var topView: UIView!
+    
     
     //Variables
     var tableViewObserver: NSKeyValueObservation?
     var user:StreetProfileUser?
     var actiVities:StreetMatchHome?
     var isOtherPlayer = false
+    var isFromDashboard = false
     var playerID:Int?
     var userID:Int?
     var playerProfileVM:StreetPlayerProfileViewModel?
@@ -57,6 +60,12 @@ class StreetPlayerProfileViewController: UIViewController {
                     self.tableHeight.constant = height
                 }
         var heading = "My Profile".localized
+        if isFromDashboard{
+            topView.isHidden = true
+        }
+        else{
+            topView.isHidden = false
+        }
        
         if !isOtherPlayer{
             userID = UserDefaults.standard.user?.appDataIDs.streetMatchUserId
