@@ -17,4 +17,3 @@ class SendEventRequestsViewModel: APIServiceManager<StreetGeneralResponse> {
     }
 }
 
-
