@@ -174,17 +174,17 @@ extension PlaceBetVc {
     }
     
     func execute_onResponseData(_ response: BetSuccessModel) {
-        if let response = response.response?.data?.message {
-            if response.lowercased().contains("successfully"){
-                self.customAlertView(title: ErrorMessage.success.localized, description: response, image: ImageConstants.successImage)
+        if let response = response.response?.messages?.first {
+            
+            self.customAlertView(title: ErrorMessage.success.localized, description: response, image: ImageConstants.successImage) {
+                self.navigationController?.popViewController(animated: true)
+            }
                 btnBetTitle.setTitle(ErrorMessage.betPlacedSuccess, for: .normal)
             }else{
-                self.view.makeToast(response, duration: 3.0, position: .bottom)
+                self.view.makeToast(response.error?.messages?.first, duration: 3.0, position: .bottom)
             }
-        }else{
-            handleError(response.error)
         }
-    }
+    
     
     func showLoader(_ value: Bool) {
             value ? startLoader() : stopLoader()

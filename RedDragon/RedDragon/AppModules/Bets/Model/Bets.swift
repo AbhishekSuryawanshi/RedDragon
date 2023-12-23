@@ -98,16 +98,16 @@ struct Matches: Codable {
 }
 
 struct BetDetail: Codable {
-    let totalBetAll: Int?
-    let totalBetWin: Int?
-    let totalBetLose: Int?
-    let totalBetPending: Int?
-    let amountBetAll: Int?
-    let amountBetWin: Int?
-    let amountBetLose: Int?
-    let amountBetPending: Int?
+    let totalBetAll: String?
+    let totalBetWin: String?
+    let totalBetLose: String?
+    let totalBetPending: String?
+    let amountBetAll: String?
+    let amountBetWin: String?
+    let amountBetLose: String?
+    let amountBetPending: String?
     let betPlaced: Bool?
-    let winRate: Int?
+    let winRate: String?
     
     private enum CodingKeys: String, CodingKey {
         case totalBetAll = "total_bet_all"

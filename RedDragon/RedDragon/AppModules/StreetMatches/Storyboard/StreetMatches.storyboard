@@ -931,7 +931,7 @@
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="icA-Ow-gjP">
-                                <rect key="frame" x="20" y="150" width="353" height="668"/>
+                                <rect key="frame" x="20" y="140" width="353" height="678"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="cEN-cz-Sv2" id="hnw-qx-U5N"/>
@@ -986,7 +986,7 @@
                             <constraint firstItem="icA-Ow-gjP" firstAttribute="leading" secondItem="9ii-Na-wfd" secondAttribute="leading" id="Eie-LR-Wpg"/>
                             <constraint firstItem="icA-Ow-gjP" firstAttribute="bottom" secondItem="HGU-qO-guH" secondAttribute="bottom" id="Y3v-tt-8h6"/>
                             <constraint firstItem="9ii-Na-wfd" firstAttribute="top" secondItem="HGU-qO-guH" secondAttribute="top" constant="20" id="d4M-pI-qfE"/>
-                            <constraint firstItem="icA-Ow-gjP" firstAttribute="top" secondItem="9ii-Na-wfd" secondAttribute="bottom" constant="15" id="lhp-x1-PF9"/>
+                            <constraint firstItem="icA-Ow-gjP" firstAttribute="top" secondItem="9ii-Na-wfd" secondAttribute="bottom" constant="5" id="lhp-x1-PF9"/>
                             <constraint firstItem="HGU-qO-guH" firstAttribute="bottom" secondItem="P1G-Wq-nmR" secondAttribute="bottom" constant="100" id="nba-EO-15c"/>
                             <constraint firstItem="HGU-qO-guH" firstAttribute="trailing" secondItem="P1G-Wq-nmR" secondAttribute="trailing" constant="10" id="woZ-lc-lJv"/>
                             <constraint firstItem="9ii-Na-wfd" firstAttribute="leading" secondItem="HGU-qO-guH" secondAttribute="leading" constant="20" id="z7u-TR-6Uy"/>
@@ -5114,7 +5114,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rhE-vm-Ybh">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rhE-vm-Ybh">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="89"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q9R-M7-GVr">
@@ -5440,6 +5440,7 @@
                         <outlet property="tableHeight" destination="yL1-wD-Bkr" id="6gp-gN-KPa"/>
                         <outlet property="tableView" destination="GR2-Q8-77r" id="YWW-2D-tBy"/>
                         <outlet property="tableViewEvents" destination="Bsh-Nw-97S" id="lKq-dY-giz"/>
+                        <outlet property="topView" destination="rhE-vm-Ybh" id="dhu-2U-lXq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AWB-KV-nJ6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
