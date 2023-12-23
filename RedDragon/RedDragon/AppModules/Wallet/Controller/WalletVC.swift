@@ -46,11 +46,13 @@ class WalletVC: UIViewController {
     
     func initialSettings() {
         nibInitialization()
-        fetchBannerViewModel()
+        fetchWalletViewModel()
     }
     
     func refreshView() {
-        
+        if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
+            WalletVM.shared.subscriptionListAsyncCall()
+        }
     }
     
     func nibInitialization() {
@@ -78,7 +80,24 @@ class WalletVC: UIViewController {
 }
 // MARK: - API Services
 extension WalletVC {
-    private func fetchBannerViewModel() {
+    func fetchWalletViewModel() {
+        ///fetch subscription list
+        WalletVM.shared.showError = { [weak self] error in
+            self?.view.makeToast(error, duration: 2.0, position: .center)
+        }
+        WalletVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        WalletVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                self?.execute_onSubscriptionsResponseData(response)
+            })
+            .store(in: &cancellable)
+        
+    }
+    func fetchBannerViewModel() {
         bannerVM = BannerViewModel()
         bannerVM?.showError = { [weak self] error in
             self?.view.makeToast(ErrorMessage.bannerNotFound.localized, duration: 2.0, position: .center)
@@ -99,25 +118,37 @@ extension WalletVC {
         /// API call for banners
         bannerVM?.fetchBannerDataAsyncCall()
     }
+    
+    func execute_onSubscriptionsResponseData(_ response: SubscriptionResponse?) {
+        fetchBannerViewModel()
+        if let dataResponse = response?.response {
+            WalletVM.shared.subscriptionArray = dataResponse.data ?? []
+        } else {
+            if let errorResponse = response?.error {
+                self.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
+            }
+        }
+        subscriptionTableview.reloadData()
+    }
 }
 
 // MARK: - TableView Delegates
 extension WalletVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        subscriptionTableHeightConstraint.constant = (5 * 55) + 60
-        return 5
+        subscriptionTableHeightConstraint.constant = CGFloat(WalletVM.shared.subscriptionArray.count * 60) + (WalletVM.shared.subscriptionArray.count == 0 ? 0 : 60)
+        return WalletVM.shared.subscriptionArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.subscriptionTableViewCell, for: indexPath) as! SubscriptionTableViewCell
-        
+        cell.setCellValues(model: WalletVM.shared.subscriptionArray[indexPath.row])
         return cell
     }
 }
 
 extension WalletVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 55
+        return 60
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -140,6 +171,7 @@ extension WalletVC: UICollectionViewDataSource {
         return cell
     }
 }
+
 extension WalletVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == bannerCollectionView {
@@ -151,6 +183,7 @@ extension WalletVC: UICollectionViewDelegate {
         }
     }
 }
+
 extension WalletVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: screenWidth, height: 220)
