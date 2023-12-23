@@ -133,15 +133,15 @@ extension ExpertsVC {
             cell.followStackView.isHidden = true
             cell.heightConstraint.constant = 14
             cell.nameLabel.text = userArray[indexPath.row].appdata?.bet?.name?.capitalized
-            cell.winRateLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.winRate ?? 0)%"
-            cell.allCountLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.totalBetAll ?? 0) Total bets"
-            cell.successCountLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.totalBetWin ?? 0) Won bets"
-            cell.unsuccessCountLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.totalBetLose ?? 0) Lost bets"
-            cell.coinLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.totalBetPending ?? 0) Pending bets"
-            cell.totalPointsLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.totalBetAll ?? 0) Total pts"
-            cell.wonPointsLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.amountBetWin ?? 0) Won pts"
-            cell.lostPointsLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.amountBetLose ?? 0) Lost pts"
-            cell.pendingPointsLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.amountBetPending ?? 0) Pending pts"
+            cell.winRateLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.winRate ?? "")%"
+            cell.allCountLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.totalBetAll ?? "") Total bets"
+            cell.successCountLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.totalBetWin ?? "") Won bets"
+            cell.unsuccessCountLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.totalBetLose ?? "") Lost bets"
+            cell.coinLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.totalBetPending ?? "") Pending bets"
+            cell.totalPointsLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.totalBetAll ?? "") Total pts"
+            cell.wonPointsLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.amountBetWin ?? "") Won pts"
+            cell.lostPointsLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.amountBetLose ?? "") Lost pts"
+            cell.pendingPointsLabel.text = "\(userArray[indexPath.row].appdata?.bet?.betDetail?.amountBetPending ?? "") Pending pts"
         }
         return cell
     }
