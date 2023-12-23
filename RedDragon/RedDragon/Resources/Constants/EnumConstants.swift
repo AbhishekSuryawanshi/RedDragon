@@ -81,6 +81,18 @@ enum SettingType: String, CaseIterable {
     }
 }
 
+enum ProfileType: String, CaseIterable {
+    case name      = "Full Name"
+    case userName  = "User Name"
+    case email     = "Email"
+    case phone     = "Phone Number"
+    case password  = "Password"
+    case Gender    = "Gender"
+    case dob       = "Date of Birth"
+    case location  = "Location"
+    case language  = "Language"
+}
+
 enum ServiceType: String, CaseIterable {
     case predictions = "Predictions"
     case bets        = "Bets"

@@ -124,7 +124,11 @@
 		474D99492AE7F42B009499D0 /* IBDesignable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474D99482AE7F42B009499D0 /* IBDesignable+Extension.swift */; };
 		474D994E2AE7F9D6009499D0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474D994D2AE7F9D6009499D0 /* Constants.swift */; };
 		474D99522AE7FB1D009499D0 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 474D99512AE7FB1D009499D0 /* Colors.xcassets */; };
-		478062D82B346297009B3957 /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478062D72B346297009B3957 /* AccountVC.swift */; };
+		4767DAC92B355F16008682FD /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767DAC82B355F16008682FD /* ProfileTableViewCell.swift */; };
+		4767DACB2B355F30008682FD /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767DACA2B355F30008682FD /* ProfileVC.swift */; };
+		4767DACD2B35678B008682FD /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767DACC2B35678B008682FD /* EditProfileVC.swift */; };
+		4767DAD02B357A4A008682FD /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767DACF2B357A4A008682FD /* WalletViewModel.swift */; };
+		4767DAD52B357C1D008682FD /* SubscriptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767DAD42B357C1D008682FD /* SubscriptionModel.swift */; };
 		4784E3EF2AECDBFF00C96085 /* LeagueMatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784E3EE2AECDBFF00C96085 /* LeagueMatchModel.swift */; };
 		4784E3F12AECDCC000C96085 /* SocialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784E3F02AECDCC000C96085 /* SocialViewModel.swift */; };
 		47A1AB2D2AECE5ED00F1BD13 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A1AB2C2AECE5ED00F1BD13 /* UserDefaultsExtension.swift */; };
@@ -699,7 +703,11 @@
 		474D99482AE7F42B009499D0 /* IBDesignable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBDesignable+Extension.swift"; sourceTree = "<group>"; };
 		474D994D2AE7F9D6009499D0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		474D99512AE7FB1D009499D0 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
-		478062D72B346297009B3957 /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
+		4767DAC82B355F16008682FD /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		4767DACA2B355F30008682FD /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		4767DACC2B35678B008682FD /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
+		4767DACF2B357A4A008682FD /* WalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewModel.swift; sourceTree = "<group>"; };
+		4767DAD42B357C1D008682FD /* SubscriptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionModel.swift; sourceTree = "<group>"; };
 		4784E3EE2AECDBFF00C96085 /* LeagueMatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueMatchModel.swift; sourceTree = "<group>"; };
 		4784E3F02AECDCC000C96085 /* SocialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewModel.swift; sourceTree = "<group>"; };
 		47A1AB2C2AECE5ED00F1BD13 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
@@ -1399,7 +1407,9 @@
 			isa = PBXGroup;
 			children = (
 				473BFC692B302F9E00C75069 /* Storyboard */,
+				4767DAD12B357B22008682FD /* Model */,
 				473BFC6B2B302FCC00C75069 /* View */,
+				4767DACE2B357A01008682FD /* ViewModel */,
 				473BFC6A2B302FB000C75069 /* Controller */,
 			);
 			path = Wallet;
@@ -1471,6 +1481,30 @@
 				49B0B9FC2AE690A900A9D235 /* Helper */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		4767DAC52B355EA5008682FD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4767DAC82B355F16008682FD /* ProfileTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4767DACE2B357A01008682FD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4767DACF2B357A4A008682FD /* WalletViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		4767DAD12B357B22008682FD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4767DAD42B357C1D008682FD /* SubscriptionModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		47A1AB2E2AED3C7700F1BD13 /* TableViewCells */ = {
@@ -3023,6 +3057,7 @@
 		E9DDB62B2B049BAF004C8ACF /* Discover */ = {
 			isa = PBXGroup;
 			children = (
+				4767DAC52B355EA5008682FD /* View */,
 				E9DDB62C2B049BAF004C8ACF /* Storyboard */,
 				E9DDB62E2B049BAF004C8ACF /* controller */,
 			);
@@ -3041,8 +3076,9 @@
 			isa = PBXGroup;
 			children = (
 				E9DDB62F2B049BAF004C8ACF /* DiscoverViewController.swift */,
-				478062D72B346297009B3957 /* AccountVC.swift */,
 				47CFC5E52B31872500B850BD /* DiscoverVC.swift */,
+				4767DACA2B355F30008682FD /* ProfileVC.swift */,
+				4767DACC2B35678B008682FD /* EditProfileVC.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -3379,6 +3415,7 @@
 				47163AE92B108F0B00235FC6 /* Date+Extension.swift in Sources */,
 				AD1042C62B273DC900451DB9 /* PlayerPositionsTableViewCell.swift in Sources */,
 				B8D338352B2AD4BA004ABC66 /* LatestNewsTableViewCell.swift in Sources */,
+				4767DACB2B355F30008682FD /* ProfileVC.swift in Sources */,
 				ADC5886C2B244854004F2A49 /* AddStreetPlayersVC.swift in Sources */,
 				B8D338492B2AD556004ABC66 /* NewsCollectionCellViewModel.swift in Sources */,
 				49631A1A2AFA4CA200BE84BB /* SymbolsCollectionViewCell.swift in Sources */,
@@ -3510,7 +3547,6 @@
 				E9DDB6292B049BA2004C8ACF /* SideMenuVc.swift in Sources */,
 				E9DDB6422B04E387004C8ACF /* BetMatchTableVC.swift in Sources */,
 				49B0BA412AE6A29A00A9D235 /* Validations.swift in Sources */,
-				478062D82B346297009B3957 /* AccountVC.swift in Sources */,
 				49B04A5C2AFA6F3900B440AA /* OddsViewController.swift in Sources */,
 				4710646C2B0DE3C700E9C0AC /* LoaderHelper.swift in Sources */,
 				6AB18E372B187B7B00287A9C /* EventDetailVC.swift in Sources */,
@@ -3526,6 +3562,7 @@
 				49778F012B30202A00BB2BD7 /* HomePagePredictionTableViewCell.swift in Sources */,
 				47C8C9622AF119A800448D96 /* ImageScrollView.swift in Sources */,
 				49A9D9DE2B1F2C4C00C4A1A1 /* LeaderboardDetailViewModel.swift in Sources */,
+				4767DAC92B355F16008682FD /* ProfileTableViewCell.swift in Sources */,
 				6A0BF7632B273F1500DE89A4 /* GlobalMatchInfoTableViewCell.swift in Sources */,
 				E9DDB62A2B049BA2004C8ACF /* BetHomeVc.swift in Sources */,
 				49B0BA1D2AE6976500A9D235 /* URLConstants.swift in Sources */,
@@ -3555,6 +3592,7 @@
 				47E7C8492AEFBF6D00D054A8 /* PostDetailVC.swift in Sources */,
 				49E223C92B15D4B800A7202C /* LeaderboardViewModel.swift in Sources */,
 				49B837372B04A28000CD9E26 /* StatisticsTableViewCell.swift in Sources */,
+				4767DAD02B357A4A008682FD /* WalletViewModel.swift in Sources */,
 				AD020AFC2B3071E6009DBD4E /* StreetMyMatchesViewController.swift in Sources */,
 				49B0B9EA2AE68F0700A9D235 /* SceneDelegate.swift in Sources */,
 				47AFBC212B298151009968B1 /* GossipDetailVC.swift in Sources */,
@@ -3578,6 +3616,7 @@
 				41E726772B0DF53900D2BFB5 /* PredictionHistoryViewController.swift in Sources */,
 				6A947A962B1F2A0C00A00788 /* SenderTableViewCell.swift in Sources */,
 				47051F1E2B14C101004D190A /* NewsTableViewCell.swift in Sources */,
+				4767DACD2B35678B008682FD /* EditProfileVC.swift in Sources */,
 				6A947A9E2B1F325C00A00788 /* ChatListTV.swift in Sources */,
 				6A5F2B882B0CA19100AB6A98 /* MeetDashboardVC.swift in Sources */,
 				AD90AF092B22FFBD00515C60 /* StreetMatchPlayerTableViewCell.swift in Sources */,
@@ -3647,6 +3686,7 @@
 				41846BD82B0C7DF20020F503 /* TopView.swift in Sources */,
 				47C8C9512AF0CAB700448D96 /* SingleImageCollectionViewCell.swift in Sources */,
 				6ACB470D2B2C2F8D00333ADF /* ExpertPredictUserViewModel.swift in Sources */,
+				4767DAD52B357C1D008682FD /* SubscriptionModel.swift in Sources */,
 				AD39A3002B316872008B6D00 /* AppDelegate+Extension.swift in Sources */,
 				6A93C99E2B1729C6009087DC /* MeetUserProfileViewModel.swift in Sources */,
 				49B0BA522AE6AA1A00A9D235 /* UserDefaultString.swift in Sources */,
