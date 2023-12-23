@@ -316,7 +316,6 @@ extension InfoVC {
             .sink(receiveValue: { [weak self] response in
                 self?.predictionViewHeightConstraints.constant = 250
                 self?.predictionTabelView.reloadData()
-                print(response?.response.data as Any)
             })
             .store(in: &cancellable)
         

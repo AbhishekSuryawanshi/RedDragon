@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -141,7 +140,7 @@
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="QD9-8H-bEg">
                                         <rect key="frame" x="0.0" y="0.0" width="338" height="30"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="xHv-py-C9Q"/>
                                         </constraints>
@@ -291,7 +290,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="wKy-o3-EVB" firstAttribute="leading" secondItem="DNa-ou-wiT" secondAttribute="leading" id="06e-N4-ojA"/>
                             <constraint firstItem="wKy-o3-EVB" firstAttribute="top" secondItem="aZf-ef-a1E" secondAttribute="bottom" constant="7.0000000000000284" id="Eu7-eV-82j"/>
@@ -318,6 +317,7 @@
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="54Y-wk-XmM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="1YR-3J-jZT"/>
                     <constraint firstAttribute="bottom" secondItem="54Y-wk-XmM" secondAttribute="bottom" id="9RA-Q2-Lwg"/>
@@ -326,6 +326,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="aboutLabel" destination="Wzd-W9-Xdl" id="imz-kJ-Omc"/>
                 <outlet property="allCountLabel" destination="sdn-wn-SOZ" id="HPl-9J-Jhu"/>
@@ -374,8 +375,5 @@
         <namedColor name="yellow4">
             <color red="1" green="0.8784313725490196" blue="0.54117647058823526" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

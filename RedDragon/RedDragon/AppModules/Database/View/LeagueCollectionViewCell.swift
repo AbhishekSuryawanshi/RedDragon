@@ -15,10 +15,10 @@ class LeagueCollectionViewCell: UICollectionViewCell {
         didSet {
             if isSelected {
                 leagueName.textColor = UIColor.black
-                leagueName.font = UIFont.boldSystemFont(ofSize: 13)
+                leagueName.font = fontBold(13)
             } else {
                 leagueName.textColor = UIColor.darkGray
-                leagueName.font = UIFont.systemFont(ofSize: 14)
+                leagueName.font = fontRegular(14)
             }
         }
     }
