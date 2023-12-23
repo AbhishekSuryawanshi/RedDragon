@@ -105,6 +105,9 @@ extension HomeVC {
     }
     
     func embedForYouVC() {
-        ViewEmbedder.embed(withIdentifier: "ForYouVC", storyboard: UIStoryboard(name: StoryboardName.forYou, bundle: nil), parent: self, container: viewContainer)
+        ViewEmbedder.embed(withIdentifier: "ForYouVC", storyboard: UIStoryboard(name: StoryboardName.forYou, bundle: nil), parent: self, container: viewContainer) { vc in
+            let vc = vc as! ForYouVC
+            vc.configureUI()
+        }
     }
 }
