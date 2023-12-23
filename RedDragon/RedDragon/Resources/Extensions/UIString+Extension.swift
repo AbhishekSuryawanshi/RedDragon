@@ -71,23 +71,24 @@ extension String {
     
     ///here we are checking app localization and based on language, we are returning localization key for Chinese/English
     var localized: String {
-        if let _ = UserDefaults.standard.language {} else {
-            // we set a default, just in case
-            UserDefaults.standard.language = "en"
-        }
+//        if let _ = UserDefaults.standard.language {} else {
+//            // we set a default, just in case
+//            UserDefaults.standard.language = "en"
+//        }
+//        
+//        var lang = UserDefaults.standard.language ?? "en"
+//        if lang.contains("en") {
+//            lang = "en"
+//        }
+//        else if lang.contains("zh") {
+//            lang = "zh-Hans"
+//        }
+//        //lang = (lang == "en-US") ? "en" : lang
+//        let path = Bundle.main.path(forResource: lang, ofType: "lproj")
+//        let bundle = Bundle(path: path!)
         
-        var lang = UserDefaults.standard.language ?? "en"
-        if lang.contains("en") {
-            lang = "en"
-        }
-        else if lang.contains("zh") {
-            lang = "zh-Hans"
-        }
-        //lang = (lang == "en-US") ? "en" : lang
-        let path = Bundle.main.path(forResource: lang, ofType: "lproj")
-        let bundle = Bundle(path: path!)
-        
-        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
+//        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
+        return Translation.shared.getTranslation(for: self)
     }
     
     ///here, we are considering only English and Chinese localization to match keyword from the API data, since we have only en and zh langugae "key:value" data in the API response

@@ -547,6 +547,12 @@
 		B8D338512B2AD676004ABC66 /* UIColllectionViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D338502B2AD676004ABC66 /* UIColllectionViewCell+Extension.swift */; };
 		B8D338532B2AD695004ABC66 /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D338522B2AD695004ABC66 /* UITableViewCell+Extension.swift */; };
 		B8D338552B2AD8D8004ABC66 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D338542B2AD8D8004ABC66 /* Utility.swift */; };
+		B8F027662B36FE5B00620015 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B8F027652B36FE5B00620015 /* Alamofire */; };
+		B8F027682B36FE8600620015 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F027672B36FE8600620015 /* NetworkRequest.swift */; };
+		B8F0276A2B36FEB800620015 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F027692B36FEB800620015 /* NetworkManager.swift */; };
+		B8F0276F2B37032900620015 /* TranslationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F0276E2B37032900620015 /* TranslationRequest.swift */; };
+		B8F027712B37044800620015 /* TranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F027702B37044800620015 /* TranslationService.swift */; };
+		B8F027732B3704DC00620015 /* RemoteTranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F027722B3704DC00620015 /* RemoteTranslationService.swift */; };
 		E9129B962B05F5560073A407 /* BetWinTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9129B942B05F5560073A407 /* BetWinTableVC.swift */; };
 		E9129B972B05F5560073A407 /* BetWinTableVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9129B952B05F5560073A407 /* BetWinTableVC.xib */; };
 		E9129B9A2B05FC960073A407 /* BetLoseTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9129B982B05FC960073A407 /* BetLoseTableVC.swift */; };
@@ -1117,6 +1123,11 @@
 		B8D338502B2AD676004ABC66 /* UIColllectionViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColllectionViewCell+Extension.swift"; sourceTree = "<group>"; };
 		B8D338522B2AD695004ABC66 /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
 		B8D338542B2AD8D8004ABC66 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		B8F027672B36FE8600620015 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		B8F027692B36FEB800620015 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		B8F0276E2B37032900620015 /* TranslationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationRequest.swift; sourceTree = "<group>"; };
+		B8F027702B37044800620015 /* TranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationService.swift; sourceTree = "<group>"; };
+		B8F027722B3704DC00620015 /* RemoteTranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteTranslationService.swift; sourceTree = "<group>"; };
 		E9129B942B05F5560073A407 /* BetWinTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetWinTableVC.swift; sourceTree = "<group>"; };
 		E9129B952B05F5560073A407 /* BetWinTableVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BetWinTableVC.xib; sourceTree = "<group>"; };
 		E9129B982B05FC960073A407 /* BetLoseTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetLoseTableVC.swift; sourceTree = "<group>"; };
@@ -1158,6 +1169,7 @@
 				47051F142B146C95004D190A /* MarqueeLabel in Frameworks */,
 				47C8C9572AF0D3A900448D96 /* TOCropViewController in Frameworks */,
 				49181D7F2B283966007D6614 /* SPConfetti in Frameworks */,
+				B8F027662B36FE5B00620015 /* Alamofire in Frameworks */,
 				49B2114F2B0B488B00E1C58E /* RealmSwift in Frameworks */,
 				41846BC32B0B395B0020F503 /* YouTubePlayerKit in Frameworks */,
 				472873702AEA7E3F0011F00F /* NVActivityIndicatorViewExtended in Frameworks */,
@@ -2094,8 +2106,7 @@
 				49F3EED02AE7AFC20095CAC6 /* ToggleTabbarNames.swift */,
 				47C8C9582AF0D3FB00448D96 /* ImagePickerHelper.swift */,
 				E9DDB6322B04B05B004C8ACF /* Sport.swift */,
-				B80B69782B35658B00CEEC9B /* Translation.swift */,
-				B80B697A2B35D41200CEEC9B /* TranslationModel.swift */,
+				B8F027632B36FB0500620015 /* Translation */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -2167,6 +2178,7 @@
 		49B0BA022AE690EC00A9D235 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				B8F027742B3708CB00620015 /* AlamofireNetworkManager  */,
 				49B0BA1E2AE697A500A9D235 /* CustomErrors.swift */,
 				49B0BA032AE6919800A9D235 /* Reachability.swift */,
 				49B0BA192AE696BF00A9D235 /* RequestType.swift */,
@@ -2952,6 +2964,27 @@
 			path = Headers;
 			sourceTree = "<group>";
 		};
+		B8F027632B36FB0500620015 /* Translation */ = {
+			isa = PBXGroup;
+			children = (
+				B80B69782B35658B00CEEC9B /* Translation.swift */,
+				B80B697A2B35D41200CEEC9B /* TranslationModel.swift */,
+				B8F0276E2B37032900620015 /* TranslationRequest.swift */,
+				B8F027702B37044800620015 /* TranslationService.swift */,
+				B8F027722B3704DC00620015 /* RemoteTranslationService.swift */,
+			);
+			path = Translation;
+			sourceTree = "<group>";
+		};
+		B8F027742B3708CB00620015 /* AlamofireNetworkManager  */ = {
+			isa = PBXGroup;
+			children = (
+				B8F027672B36FE8600620015 /* NetworkRequest.swift */,
+				B8F027692B36FEB800620015 /* NetworkManager.swift */,
+			);
+			path = "AlamofireNetworkManager ";
+			sourceTree = "<group>";
+		};
 		E9DDB61F2B049BA2004C8ACF /* Bets */ = {
 			isa = PBXGroup;
 			children = (
@@ -3089,6 +3122,7 @@
 				47BBF5042B19B3A500CDE3D9 /* CHIPageControl */,
 				6A947A812B1EFDA600A00788 /* TwilioChatClient */,
 				49181D7E2B283966007D6614 /* SPConfetti */,
+				B8F027652B36FE5B00620015 /* Alamofire */,
 			);
 			productName = RedDragon;
 			productReference = 49B0B9E42AE68F0700A9D235 /* RedDragon.app */;
@@ -3138,6 +3172,7 @@
 				47BBF5032B19B3A500CDE3D9 /* XCRemoteSwiftPackageReference "CHIPageControl" */,
 				6A947A802B1EFDA600A00788 /* XCRemoteSwiftPackageReference "twilio-chat-ios" */,
 				49181D7D2B283966007D6614 /* XCRemoteSwiftPackageReference "SPConfetti" */,
+				B8F027642B36FE5B00620015 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 49B0B9E52AE68F0700A9D235 /* Products */;
 			projectDirPath = "";
@@ -3406,6 +3441,7 @@
 				AD3B55592B16020F007B14F7 /* StreetMatchesVC.swift in Sources */,
 				6AC52DE92B29D06500723A52 /* ForYouVC.swift in Sources */,
 				6A2140282B0B7C1100F52E69 /* MeetUserViewModel.swift in Sources */,
+				B8F027682B36FE8600620015 /* NetworkRequest.swift in Sources */,
 				B8D3384D2B2AD556004ABC66 /* NewsVideoViewModel.swift in Sources */,
 				B8D338512B2AD676004ABC66 /* UIColllectionViewCell+Extension.swift in Sources */,
 				6A0BF7602B27241200DE89A4 /* GlobalMatchDetailVC.swift in Sources */,
@@ -3450,6 +3486,7 @@
 				6ACB470B2B2C2BE600333ADF /* ExpertUserListModel.swift in Sources */,
 				494B37E92AEA3EC500FB9BCD /* ImageConstants.swift in Sources */,
 				AD2676EE2B1EFF0F00B96921 /* StreetUploadResponse.swift in Sources */,
+				B8F027712B37044800620015 /* TranslationService.swift in Sources */,
 				49581AFC2B14CC1800048189 /* MyTeamCollectionViewCell.swift in Sources */,
 				49B0B9E82AE68F0700A9D235 /* AppDelegate.swift in Sources */,
 				47FE16342B15B539009043D2 /* GossipViewModel.swift in Sources */,
@@ -3457,6 +3494,7 @@
 				49F3EECF2AE7AC580095CAC6 /* Navigation.swift in Sources */,
 				4137D5852B174B6D007CF84E /* AnalysisModel.swift in Sources */,
 				B8D338552B2AD8D8004ABC66 /* Utility.swift in Sources */,
+				B8F0276F2B37032900620015 /* TranslationRequest.swift in Sources */,
 				49E223C72B15D47200A7202C /* Leaderboard.swift in Sources */,
 				AD93101D2B187786005E4DAF /* ImageSliderCollectionViewCell.swift in Sources */,
 				6A1DEC042B286535006EC885 /* GlobalMatchOddsTableViewCell.swift in Sources */,
@@ -3588,6 +3626,7 @@
 				47CB0E182B11D9870070744B /* NewsViewModel.swift in Sources */,
 				49B0BA042AE6919800A9D235 /* Reachability.swift in Sources */,
 				ADC076032B29C14F009FE6C4 /* FeedsTeamTableViewCell.swift in Sources */,
+				B8F027732B3704DC00620015 /* RemoteTranslationService.swift in Sources */,
 				AD2676EC2B1EFEB200B96921 /* StreetImageUploadViewModel.swift in Sources */,
 				ADD575422B10DB7C004FFDF4 /* StreetHomeHeaderTableViewCell.swift in Sources */,
 				49B04A582AFA6E1200B440AA /* LineupViewController.swift in Sources */,
@@ -3597,6 +3636,7 @@
 				E9B1A0032B0DEB8D00B96664 /* PlaceBetViewModel.swift in Sources */,
 				47E3E50B2B05F61C00B43994 /* OTPFieldView.swift in Sources */,
 				41EB79E12AF3B70100D068F7 /* PlayerDetailView.swift in Sources */,
+				B8F0276A2B36FEB800620015 /* NetworkManager.swift in Sources */,
 				6A5F2B8A2B0CB7AD00AB6A98 /* MeetExploreVC.swift in Sources */,
 				493D21362AFE127F00045672 /* MatchesTableViewCell.swift in Sources */,
 				6AD21DCB2B15B3100043D7C2 /* MyEventsCollectionViewCell.swift in Sources */,
@@ -4106,6 +4146,14 @@
 				kind = branch;
 			};
 		};
+		B8F027642B36FE5B00620015 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.1;
+			};
+		};
 		E9DDB61C2B049AF1004C8ACF /* XCRemoteSwiftPackageReference "SideMenu" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jonkykong/SideMenu.git";
@@ -4216,6 +4264,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6A947A802B1EFDA600A00788 /* XCRemoteSwiftPackageReference "twilio-chat-ios" */;
 			productName = TwilioChatClient;
+		};
+		B8F027652B36FE5B00620015 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B8F027642B36FE5B00620015 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 		E9DDB61D2B049AF1004C8ACF /* SideMenu */ = {
 			isa = XCSwiftPackageProductDependency;
