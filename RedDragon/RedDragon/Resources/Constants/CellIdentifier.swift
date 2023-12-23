@@ -107,8 +107,10 @@ struct CellIdentifier {
     static let globalMatchHeadToHeadTableViewCell = "GlobalMatchHeadToHeadTableViewCell"
     
     //Home
-    static let bannerCell                      = "BannerCollectionViewCell"
-    static let predictionTableCell             = "HomePagePredictionTableViewCell"
+
+    static let bannerCell                        = "BannerCollectionViewCell"
+    static let predictionTableCell               = "HomePagePredictionTableViewCell"
+    static let forYouLiveMatchTabelCell          = "ForYouLiveMatchTableViewCell"
     
     //Wallet
     static let subscriptionTableViewCell       = "SubscriptionTableViewCell"
