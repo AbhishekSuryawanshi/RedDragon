@@ -156,9 +156,8 @@ struct URLConstants {
     static let expertUserList         = expertsBaseURL + "/user/list"
     
     // MARK: - Wallet
-        static let subscriptionList       = baseURL + "user/wallet/history"
+    static let subscriptionList       = baseURL + "user/wallet/history"
 
     // MARK: - Translation
     static let translation            = "/get_translations.php"
-
 }
