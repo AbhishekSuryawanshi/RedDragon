@@ -154,7 +154,8 @@ extension StreetMatchesDashboardVC {
             return
         }
         ViewEmbedder.embed(withIdentifier: "StreetPlayerProfileViewController", storyboard: UIStoryboard(name: StoryboardName.streetMatches, bundle: nil), parent: self, container: viewContainer) { vc in
-           // let vc = vc as! StreetTeamsViewController
+            let vc = vc as! StreetPlayerProfileViewController
+            vc.isFromDashboard = true
         }
     }
 }
