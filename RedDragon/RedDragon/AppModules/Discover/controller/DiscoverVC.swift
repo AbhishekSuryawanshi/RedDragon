@@ -149,7 +149,7 @@ extension DiscoverVC: UICollectionViewDelegate {
                 print("")
             case .street:
                 navigateToViewController(StreetMatchesDashboardVC.self, storyboardName: StoryboardName.streetMatches, animationType: .autoReverse(presenting: .zoom))
-             case .meet:
+            case .meet:
                 navigateToViewController(MeetDashboardVC.self, storyboardName: StoryboardName.meet, animationType: .autoReverse(presenting: .zoom))
             case .experts:
                 navigateToViewController(HomeVC.self, storyboardName: StoryboardName.home, animationType: .autoReverse(presenting: .zoom))
@@ -159,10 +159,19 @@ extension DiscoverVC: UICollectionViewDelegate {
                 self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[3]
             }
         } else {
-            if SettingType.allCases[indexPath.row] == .logout {
+            switch SettingType.allCases[indexPath.row] {
+            case .account:
+                navigateToViewController(ProfileVC.self, storyboardName: StoryboardName.discover, animationType: .autoReverse(presenting: .zoom))
+            case .privacy:
+                print("")
+            case .notiftn:
+                print("")
+            case .logout:
                 self.customAlertView_2Actions(title: "Logout".localized, description: StringConstants.logoutAlert.localized) {
                     LogoutVM.shared.logoutAsyncCall()
                 }
+            default:
+                print("")
             }
         }
     }
