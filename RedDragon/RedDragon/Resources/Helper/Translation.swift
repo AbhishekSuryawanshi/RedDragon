@@ -11,14 +11,16 @@ import CoreData
 final class Translation {
     static let shared = Translation()
     
-    private init() {}
+    private init() {
+        
+    }
     
-    func getTranslation(for key: String) -> String {
+    func getTranslation(for string: String) -> String {
         // Logic to fetch translation from Core Data
         // If not found, call API and store in Core Data
         // Return translated string or original string
         
-        return ""
+        return string
     }
     
     private func fetchTranslationFromAPI() {
