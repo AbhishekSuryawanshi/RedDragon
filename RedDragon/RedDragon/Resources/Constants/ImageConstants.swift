@@ -13,6 +13,4 @@ struct ImageConstants {
     static let successImage          = "success"
     static let placeHolderLeague     = "placeholderLeague"
     static let placeHolderTeam       = "placeholderTeam"
-    static let winArrow              = "win_arrow"
-    static let loseArrow             = "lose_arrow"
 }

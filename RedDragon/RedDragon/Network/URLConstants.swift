@@ -153,4 +153,7 @@ struct URLConstants {
     // MARK: - Experts
     static let expertsBaseURL         = "http://157.245.159.136:5072/api"
     static let expertUserList         = expertsBaseURL + "/user/list"
+    
+    // MARK: - Wallet
+    static let subscriptionList       = baseURL + "user/wallet/history"
 }
