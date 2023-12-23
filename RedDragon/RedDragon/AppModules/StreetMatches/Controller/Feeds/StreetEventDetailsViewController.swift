@@ -138,7 +138,7 @@ class StreetEventDetailsViewController: UIViewController {
     }
     
     func eventRequestSuccess(){
-        self.customAlertView(title: ErrorMessage.success.localized, description: "Event Request Sent", image: ImageConstants.successImage) {
+        self.customAlertView(title: ErrorMessage.success.localized, description: "Event Request Sent".localized, image: ImageConstants.successImage) {
             self.navigationController?.popViewController(animated: true)
         }
     }
