@@ -517,8 +517,14 @@
 		ADD339962B0F7C7800B91101 /* StreetMatchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADD339942B0F7C7800B91101 /* StreetMatchTableViewCell.xib */; };
 		ADD575422B10DB7C004FFDF4 /* StreetHomeHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD575402B10DB7C004FFDF4 /* StreetHomeHeaderTableViewCell.swift */; };
 		ADD575432B10DB7C004FFDF4 /* StreetHomeHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADD575412B10DB7C004FFDF4 /* StreetHomeHeaderTableViewCell.xib */; };
-		B80B69792B35658B00CEEC9B /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B69782B35658B00CEEC9B /* Translation.swift */; };
-		B80B697B2B35D41200CEEC9B /* TranslationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B697A2B35D41200CEEC9B /* TranslationModel.swift */; };
+		B8B410362B3973220040A255 /* TranslationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B410312B3973220040A255 /* TranslationRequest.swift */; };
+		B8B410372B3973220040A255 /* RemoteTranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B410322B3973220040A255 /* RemoteTranslationService.swift */; };
+		B8B410382B3973220040A255 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B410332B3973220040A255 /* Translation.swift */; };
+		B8B410392B3973220040A255 /* TranslationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B410342B3973220040A255 /* TranslationModel.swift */; };
+		B8B4103A2B3973220040A255 /* TranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B410352B3973220040A255 /* TranslationService.swift */; };
+		B8B4103D2B39751B0040A255 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B8B4103C2B39751B0040A255 /* Alamofire */; };
+		B8B410412B3975AA0040A255 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B4103F2B3975AA0040A255 /* NetworkManager.swift */; };
+		B8B410422B3975AA0040A255 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B410402B3975AA0040A255 /* NetworkRequest.swift */; };
 		B8D3380F2B2AD1E5004ABC66 /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D3380E2B2AD1E5004ABC66 /* NewsDetailViewController.swift */; };
 		B8D338122B2AD332004ABC66 /* NewsDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8D338102B2AD332004ABC66 /* NewsDetailViewController.xib */; };
 		B8D338132B2AD332004ABC66 /* NewsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8D338112B2AD332004ABC66 /* NewsVC.xib */; };
@@ -1095,8 +1101,13 @@
 		ADD339942B0F7C7800B91101 /* StreetMatchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StreetMatchTableViewCell.xib; sourceTree = "<group>"; };
 		ADD575402B10DB7C004FFDF4 /* StreetHomeHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetHomeHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		ADD575412B10DB7C004FFDF4 /* StreetHomeHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StreetHomeHeaderTableViewCell.xib; sourceTree = "<group>"; };
-		B80B69782B35658B00CEEC9B /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
-		B80B697A2B35D41200CEEC9B /* TranslationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationModel.swift; sourceTree = "<group>"; };
+		B8B410312B3973220040A255 /* TranslationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationRequest.swift; sourceTree = "<group>"; };
+		B8B410322B3973220040A255 /* RemoteTranslationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteTranslationService.swift; sourceTree = "<group>"; };
+		B8B410332B3973220040A255 /* Translation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
+		B8B410342B3973220040A255 /* TranslationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationModel.swift; sourceTree = "<group>"; };
+		B8B410352B3973220040A255 /* TranslationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationService.swift; sourceTree = "<group>"; };
+		B8B4103F2B3975AA0040A255 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		B8B410402B3975AA0040A255 /* NetworkRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		B8D3380E2B2AD1E5004ABC66 /* NewsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
 		B8D338102B2AD332004ABC66 /* NewsDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsDetailViewController.xib; sourceTree = "<group>"; };
 		B8D338112B2AD332004ABC66 /* NewsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsVC.xib; sourceTree = "<group>"; };
@@ -1174,6 +1185,7 @@
 				47051F142B146C95004D190A /* MarqueeLabel in Frameworks */,
 				47C8C9572AF0D3A900448D96 /* TOCropViewController in Frameworks */,
 				49181D7F2B283966007D6614 /* SPConfetti in Frameworks */,
+				B8B4103D2B39751B0040A255 /* Alamofire in Frameworks */,
 				49B2114F2B0B488B00E1C58E /* RealmSwift in Frameworks */,
 				41846BC32B0B395B0020F503 /* YouTubePlayerKit in Frameworks */,
 				472873702AEA7E3F0011F00F /* NVActivityIndicatorViewExtended in Frameworks */,
@@ -2146,8 +2158,7 @@
 				49F3EED02AE7AFC20095CAC6 /* ToggleTabbarNames.swift */,
 				47C8C9582AF0D3FB00448D96 /* ImagePickerHelper.swift */,
 				E9DDB6322B04B05B004C8ACF /* Sport.swift */,
-				B80B69782B35658B00CEEC9B /* Translation.swift */,
-				B80B697A2B35D41200CEEC9B /* TranslationModel.swift */,
+				B8B410302B3972EF0040A255 /* Translation */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -2219,6 +2230,7 @@
 		49B0BA022AE690EC00A9D235 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				B8B4103E2B3975740040A255 /* AlamofireNetworkManager */,
 				49B0BA1E2AE697A500A9D235 /* CustomErrors.swift */,
 				49B0BA032AE6919800A9D235 /* Reachability.swift */,
 				49B0BA192AE696BF00A9D235 /* RequestType.swift */,
@@ -3004,6 +3016,27 @@
 			path = Headers;
 			sourceTree = "<group>";
 		};
+		B8B410302B3972EF0040A255 /* Translation */ = {
+			isa = PBXGroup;
+			children = (
+				B8B410322B3973220040A255 /* RemoteTranslationService.swift */,
+				B8B410332B3973220040A255 /* Translation.swift */,
+				B8B410342B3973220040A255 /* TranslationModel.swift */,
+				B8B410312B3973220040A255 /* TranslationRequest.swift */,
+				B8B410352B3973220040A255 /* TranslationService.swift */,
+			);
+			path = Translation;
+			sourceTree = "<group>";
+		};
+		B8B4103E2B3975740040A255 /* AlamofireNetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				B8B4103F2B3975AA0040A255 /* NetworkManager.swift */,
+				B8B410402B3975AA0040A255 /* NetworkRequest.swift */,
+			);
+			path = AlamofireNetworkManager;
+			sourceTree = "<group>";
+		};
 		E9DDB61F2B049BA2004C8ACF /* Bets */ = {
 			isa = PBXGroup;
 			children = (
@@ -3145,6 +3178,7 @@
 				47BBF5042B19B3A500CDE3D9 /* CHIPageControl */,
 				6A947A812B1EFDA600A00788 /* TwilioChatClient */,
 				49181D7E2B283966007D6614 /* SPConfetti */,
+				B8B4103C2B39751B0040A255 /* Alamofire */,
 			);
 			productName = RedDragon;
 			productReference = 49B0B9E42AE68F0700A9D235 /* RedDragon.app */;
@@ -3194,6 +3228,7 @@
 				47BBF5032B19B3A500CDE3D9 /* XCRemoteSwiftPackageReference "CHIPageControl" */,
 				6A947A802B1EFDA600A00788 /* XCRemoteSwiftPackageReference "twilio-chat-ios" */,
 				49181D7D2B283966007D6614 /* XCRemoteSwiftPackageReference "SPConfetti" */,
+				B8B4103B2B39751B0040A255 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 49B0B9E52AE68F0700A9D235 /* Products */;
 			projectDirPath = "";
@@ -3438,6 +3473,7 @@
 				419658262B0CF86C00730D9F /* PredictResultDescriptionView.swift in Sources */,
 				47163AE92B108F0B00235FC6 /* Date+Extension.swift in Sources */,
 				AD1042C62B273DC900451DB9 /* PlayerPositionsTableViewCell.swift in Sources */,
+				B8B410382B3973220040A255 /* Translation.swift in Sources */,
 				B8D338352B2AD4BA004ABC66 /* LatestNewsTableViewCell.swift in Sources */,
 				4767DACB2B355F30008682FD /* ProfileVC.swift in Sources */,
 				ADC5886C2B244854004F2A49 /* AddStreetPlayersVC.swift in Sources */,
@@ -3580,6 +3616,7 @@
 				AD90AF2B2B230AEB00515C60 /* InfoTableViewCell.swift in Sources */,
 				6A947A942B1F2A0C00A00788 /* ReceiverTableViewCell.swift in Sources */,
 				6A4A7B432B11C23F00231EA2 /* MeetEventViewModel.swift in Sources */,
+				B8B410422B3975AA0040A255 /* NetworkRequest.swift in Sources */,
 				49581AF52B14A2CB00048189 /* CardGameMyTeamVC.swift in Sources */,
 				B8D3380F2B2AD1E5004ABC66 /* NewsDetailViewController.swift in Sources */,
 				AD020AF42B307158009DBD4E /* StreetTeamListingResponse.swift in Sources */,
@@ -3609,9 +3646,11 @@
 				49A9D9E72B1F48DE00C4A1A1 /* YourMatchesTableCell.swift in Sources */,
 				494318522AE7A417007F7292 /* SplashScreenVC.swift in Sources */,
 				47C8C95B2AF0D9B600448D96 /* EmbedVCHelper.swift in Sources */,
+				B8B410412B3975AA0040A255 /* NetworkManager.swift in Sources */,
 				AD39A2FE2B316777008B6D00 /* DeviceLanguage.swift in Sources */,
 				AD7338B22B287F9A003EE9B6 /* StreetEventDetailsViewController.swift in Sources */,
 				41BB28822B064C740080E63F /* PlayerStatsTableViewHeader.swift in Sources */,
+				B8B410362B3973220040A255 /* TranslationRequest.swift in Sources */,
 				47163AED2B1090AF00235FC6 /* Encodable+Extension.swift in Sources */,
 				49B0BA502AE6A83800A9D235 /* APIServiceManager.swift in Sources */,
 				47E7C8492AEFBF6D00D054A8 /* PostDetailVC.swift in Sources */,
@@ -3694,12 +3733,12 @@
 				47FC33E12AEA4DAC00FABED4 /* HeaderTopCollectionViewCell.swift in Sources */,
 				ADC075FB2B29BAF6009FE6C4 /* StreetEventRequest.swift in Sources */,
 				41EB79CF2AF37BA000D068F7 /* TeamsView.swift in Sources */,
-				B80B69792B35658B00CEEC9B /* Translation.swift in Sources */,
 				47E3E50D2B064F1500B43994 /* LoginViewModel.swift in Sources */,
 				41EB79D12AF37BA000D068F7 /* PlayerStatsView.swift in Sources */,
 				49581AF72B14BE5E00048189 /* MyTeam.swift in Sources */,
 				49B0BA452AE6A37F00A9D235 /* StringConstants.swift in Sources */,
 				AD90AF152B22FFCE00515C60 /* NewTeamTableViewCell.swift in Sources */,
+				B8B4103A2B3973220040A255 /* TranslationService.swift in Sources */,
 				49B04A5E2AFA6F7A00B440AA /* AnalysisViewController.swift in Sources */,
 				47C8C9592AF0D3FB00448D96 /* ImagePickerHelper.swift in Sources */,
 				49B0BA1A2AE696BF00A9D235 /* RequestType.swift in Sources */,
@@ -3718,6 +3757,7 @@
 				6A93C99E2B1729C6009087DC /* MeetUserProfileViewModel.swift in Sources */,
 				49B0BA522AE6AA1A00A9D235 /* UserDefaultString.swift in Sources */,
 				AD90AF172B22FFCE00515C60 /* TeamCollectionTableViewCell.swift in Sources */,
+				B8B410372B3973220040A255 /* RemoteTranslationService.swift in Sources */,
 				49B211512B0B4AEF00E1C58E /* AllFootballPlayersViewModel.swift in Sources */,
 				AD633A072B1A0EA9005DEBD1 /* MapVC.swift in Sources */,
 				6ACB47082B2C2B1A00333ADF /* PredictUserListTableViewCell.swift in Sources */,
@@ -3737,6 +3777,7 @@
 				AD020AFA2B3071B5009DBD4E /* StreetEditProfileViewController.swift in Sources */,
 				AD7338B42B28847D003EE9B6 /* SendEventRequestsViewModel.swift in Sources */,
 				49F72D2F2B0CCE3D004E60DF /* AllPlayersTableViewCell.swift in Sources */,
+				B8B410392B3973220040A255 /* TranslationModel.swift in Sources */,
 				49778F092B30760500BB2BD7 /* BannerCollectionViewCell.swift in Sources */,
 				47A1AB312AED3CA300F1BD13 /* PostTableViewCell.swift in Sources */,
 				AD90AF1A2B23000F00515C60 /* StreetTeamViewModel.swift in Sources */,
@@ -3763,7 +3804,6 @@
 				49BC7EB32AFE0C1C0006EEB5 /* MatchDetailsVC.swift in Sources */,
 				49B0BA472AE6A3E800A9D235 /* StoryboardName.swift in Sources */,
 				4943184C2AE7A222007F7292 /* LoaderAnimation.swift in Sources */,
-				B80B697B2B35D41200CEEC9B /* TranslationModel.swift in Sources */,
 				47163AEF2B1090C700235FC6 /* Array+Extension.swift in Sources */,
 				47C18F7D2B1A103800DC1B11 /* VideosModel.swift in Sources */,
 				494318502AE7A2A1007F7292 /* ZoomAnimation.swift in Sources */,
@@ -4170,6 +4210,14 @@
 				kind = branch;
 			};
 		};
+		B8B4103B2B39751B0040A255 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.1;
+			};
+		};
 		E9DDB61C2B049AF1004C8ACF /* XCRemoteSwiftPackageReference "SideMenu" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jonkykong/SideMenu.git";
@@ -4280,6 +4328,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6A947A802B1EFDA600A00788 /* XCRemoteSwiftPackageReference "twilio-chat-ios" */;
 			productName = TwilioChatClient;
+		};
+		B8B4103C2B39751B0040A255 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B8B4103B2B39751B0040A255 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 		E9DDB61D2B049AF1004C8ACF /* SideMenu */ = {
 			isa = XCSwiftPackageProductDependency;
