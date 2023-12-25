@@ -12,6 +12,12 @@ import AVKit
 
 class GossipVC: UIViewController {
     
+    @IBOutlet weak var breakingNewsTitleLabel: UILabel!
+    @IBOutlet weak var topPublishersTitleLabel: UILabel!
+    @IBOutlet weak var leaguesTitleLabel: UILabel!
+    @IBOutlet weak var tredingTitleLabel: UILabel!
+    @IBOutlet weak var newsCategoryTitleLabel: UILabel!
+    @IBOutlet weak var videosTitleLabel: UILabel!
     @IBOutlet weak var breakngNewsImage: UIImageView!
     @IBOutlet weak var topMarqueeLabel: MarqueeLabel!
     @IBOutlet weak var publishersView: UIView!
@@ -44,7 +50,7 @@ class GossipVC: UIViewController {
         initialSettings()
     }
     override func viewDidAppear(_ animated: Bool) {
-        /// "thehindu" default value
+        refreshPage()
         getNewsList()
     }
     
@@ -79,6 +85,16 @@ class GossipVC: UIViewController {
         trendingCollectionView.register(CellIdentifier.newsCollectionViewCell)
         newsTableView.register(CellIdentifier.newsTableViewCell)
         videosCollectionView.register(CellIdentifier.newsCollectionViewCell)
+    }
+    
+    func refreshPage() {
+        breakingNewsTitleLabel.text = "Breaking News".localized
+       topPublishersTitleLabel.text = "Top Publishers".localized
+        leaguesTitleLabel.text = "Top Leagues".localized
+        tredingTitleLabel.text = "Trending Topics".localized
+        newsCategoryTitleLabel.text = "News Category".localized
+        videosTitleLabel.text = "Videos".localized
+        viewAllButton.setTitle("View All".localized, for: .normal)
     }
     
     @objc func searchEnable(notification: Notification) {

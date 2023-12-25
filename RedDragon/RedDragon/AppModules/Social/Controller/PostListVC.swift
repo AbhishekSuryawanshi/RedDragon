@@ -96,7 +96,7 @@ class PostListVC: UIViewController {
     }
     
     func deletePost(_index: Int) {
-        self.customAlertView_2Actions(title: "".localized, description: StringConstants.deleteAlert.localized) {
+        self.customAlertView_2Actions(title: "", description: StringConstants.deleteAlert.localized) {
             SocialDeleteVM.shared.deletePollOrPost(type: self.postArray[_index].type == "POLL" ? .poll : .post, id: self.postArray[_index].id)
         }
     }
@@ -120,7 +120,7 @@ class PostListVC: UIViewController {
     
     func shareAction(model: SocialPost, image: UIImage) {
         stopLoader()
-        let vc = UIActivityViewController(activityItems: [image, "\n\n\("Dive into this story via the RedDragon app".localized) \n\(model.descriptn) \n\("Stay connected to the latest in football, basketball, tennis, and other sports with us. Install it from the App Store to find more news.".localized) \n\n \(URLConstants.appstore)"], applicationActivities: [])
+        let vc = UIActivityViewController(activityItems: [image, "\n\n\("Dive into this story via the Rampage Sports app".localized) \n\(model.descriptn) \n\("Stay connected to the latest in football, basketball, tennis, and other sports with us. Install it from the App Store to find more news.".localized) \n\n \(URLConstants.appstore)"], applicationActivities: [])
         if let popoverController = vc.popoverPresentationController {
             popoverController.sourceView = self.listTableView
             popoverController.sourceRect = self.listTableView.bounds

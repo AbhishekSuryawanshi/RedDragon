@@ -64,7 +64,7 @@ class LoginVC: UIViewController {
     }
     
     func refreshPage() {
-        headerLabel.text = "Welcome to RedDragon App".localized
+        headerLabel.text = "Welcome to Rampage Sports App".localized
         let topFormatedText = NSMutableAttributedString()
         topTextLabel.attributedText = topFormatedText.regular("Please ", size: 15).semiBold("Login", size: 15).regular(" to continue", size: 15)
         phoneTitleLabel.text = "Phone Number".localized

@@ -10,14 +10,22 @@ import Combine
 
 class ForgotPasswordVC: UIViewController {
     
+    @IBOutlet weak var headerLabel: UILabel!
+    @IBOutlet weak var topLabel: UILabel!
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var emailTextfield: UITextField!
+    @IBOutlet weak var emailTitleLabel: UILabel!
+    @IBOutlet weak var continueButton: UIButton!
     
     var cancellable = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialSettings()
+        fetchLoginViewModel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        refreshPage()
     }
     
     override func viewDidLayoutSubviews() {
@@ -26,9 +34,12 @@ class ForgotPasswordVC: UIViewController {
         bgView.applyShadow(radius: 10, opacity: 1)
     }
     
-    func initialSettings() {
+    func refreshPage() {
+        headerLabel.text = "Forgot Password".localized
+        topLabel.text = "Enter the email address associated with your account.".localized
         emailTextfield.placeholder = "Email".localized
-        fetchLoginViewModel()
+        emailTitleLabel.text = "Email".localized
+        continueButton.setTitle("Continue".localized, for: .normal)
     }
     
     func showLoader(_ value: Bool) {

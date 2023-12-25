@@ -59,7 +59,7 @@ class RegisterVC: UIViewController {
     }
     
     func refreshPage() {
-        headerLabel.text = "Welcome to RedDragon App".localized
+        headerLabel.text = "Welcome to Rampage Sports App".localized
         let formatedText = NSMutableAttributedString()
         topTextLabel.attributedText = formatedText.regular("Please ", size: 15).semiBold("Create an account", size: 15).regular(" to continue", size: 15)
         nameTiltleLabel.text = "Full Name".localized

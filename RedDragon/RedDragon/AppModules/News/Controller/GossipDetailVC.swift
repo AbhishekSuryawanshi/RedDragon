@@ -10,6 +10,7 @@ import Combine
 
 class GossipDetailVC: UIViewController {
     
+    @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var gossipImageView: UIImageView!
     @IBOutlet weak var contentLabel: ExpandableLabel!
@@ -19,6 +20,9 @@ class GossipDetailVC: UIViewController {
     @IBOutlet weak var commentHeightConstarint: NSLayoutConstraint!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var commentsTitleLabel: UILabel!
+    @IBOutlet weak var viewAllTitleLabel: UILabel!
+    @IBOutlet weak var commentTextField: UITextField!
     
     var cancellable = Set<AnyCancellable>()
     var commentSectionID = ""
@@ -34,6 +38,7 @@ class GossipDetailVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        refreshPage()
         if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
             commentView.isHidden = false
             CommentListVM.shared.getCommentsAsyncCall(sectionId: commentSectionID)
@@ -57,6 +62,13 @@ class GossipDetailVC: UIViewController {
             ]
             GossipVM.shared.fetchNewsDetailAsyncCall(params: param)
         }
+    }
+    
+    func refreshPage() {
+        headerLabel.text = "Article".localized
+        commentsTitleLabel.text = "Comments".localized
+        viewAllTitleLabel.text = "View All".localized
+        commentTextField.placeholder = "Add a comment".localized
     }
     
     func nibInitialization() {
