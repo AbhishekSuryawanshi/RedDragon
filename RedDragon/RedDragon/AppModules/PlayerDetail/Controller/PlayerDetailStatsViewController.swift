@@ -25,6 +25,10 @@ class PlayerDetailStatsViewController: UIViewController {
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        configureView()
+    }
+    
     func configureView() {
         playerDetailStats = playerDetailViewModel?.responseData?.data?.statistics?[0]
         loadFunctionality()

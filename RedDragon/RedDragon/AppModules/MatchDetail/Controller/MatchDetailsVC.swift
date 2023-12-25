@@ -71,6 +71,7 @@ class MatchDetailsVC: UIViewController {
         /// __parateters__
         ///slug: "2023-02-21-liverpool-real-madrid" //matchSlug ?? ""
         ///sports: sports ?? ""
+       // matchSlug = "2023-10-31-cleveland-cavaliers-new-york-knicks"
         if sports == Sports.football.title.lowercased() {
             matchDetailViewModel?.fetchMatchDetailAsyncCall(lang: fetchCurrentLanguageCode == "en" ? "en" : "zh",
                                                             slug: matchSlug ?? "",
@@ -255,7 +256,7 @@ extension MatchDetailsVC {
             let vc = vc as! AnalysisViewController
             vc.matchSlug =  self?.matchSlug ?? ""
             vc.data = self?.matchDetailViewModel?.responseData?.data
-            vc.configureView()
+           // vc.configureView()
         }
     }
     

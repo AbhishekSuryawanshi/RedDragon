@@ -26,10 +26,19 @@ class LineupViewController: UIViewController {
     
     private var homePlayer_substituteArray: [[String]]?
     private var awayPlayer_substituteArray: [[String]]?
+    var stackHomeViews: [UIStackView] = []
+    var stackAwayViews: [UIStackView] = []
+    let positionIdentifiers = ["G", "D", "M", "F"]
+    var homeLineUp: Lineup?
+    var awayLineUp: Lineup?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         nibInitialization()
+        stackHomeViews = [gHomeStackView, dHomeStackView, mHomeStackView, fHomeStackView].compactMap { $0 }
+        stackAwayViews = [gAwayStackView, dAwayStackView, mAwayStackView, fAwayStackView].compactMap { $0 }
+        configureLineupView(lineup: homeLineUp, positionIdentifiers: positionIdentifiers, stackViews: stackHomeViews)
+        configureLineupView(lineup: awayLineUp, positionIdentifiers: positionIdentifiers, stackViews: stackAwayViews)
     }
     
     func nibInitialization() {
@@ -46,13 +55,14 @@ extension LineupViewController {
             return
         }
         
-        let positionIdentifiers = ["G", "D", "M", "F"]
-        let stackViews: [UIStackView] = [gHomeStackView, dHomeStackView, mHomeStackView, fHomeStackView].compactMap { $0 }
+        
+        //stackViews = [gHomeStackView, dHomeStackView, mHomeStackView, fHomeStackView].compactMap { $0 }
         
         if lineup.isEmpty {
             customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.dataNotFound.localized, image: ImageConstants.alertImage)
         } else {
-            configureLineupView(lineup: homeLineup, positionIdentifiers: positionIdentifiers, stackViews: stackViews)
+            homeLineUp = homeLineup
+          //  configureLineupView(lineup: homeLineup, positionIdentifiers: positionIdentifiers, stackViews: stackViews)
         }
     }
 
@@ -67,7 +77,8 @@ extension LineupViewController {
         if lineup.isEmpty {
             customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.dataNotFound.localized, image: ImageConstants.alertImage)
         } else {
-            configureLineupView(lineup: awayLineup, positionIdentifiers: positionIdentifiers, stackViews: stackViews)
+            awayLineUp = awayLineup
+         //   configureLineupView(lineup: awayLineup, positionIdentifiers: positionIdentifiers, stackViews: stackViews)
         }
     }
 
@@ -79,12 +90,13 @@ extension LineupViewController {
             
             let filteredData = lineupData.filter { $0[4].contains(positionIdentifier) }
             let imageNames = filteredData.map { $0[2] }
+            let slugs = filteredData.map{$0[1]}
             
-            createViews(viewCount: filteredData.count, imageNames: imageNames, stackView: stackView)
+            createViews(viewCount: filteredData.count, imageNames: imageNames, stackView: stackView, slugs: slugs)
         }
     }
 
-    func createViews(viewCount: Int, imageNames: [String], stackView: UIStackView) {
+    func createViews(viewCount: Int, imageNames: [String], stackView: UIStackView, slugs:[String]) {
         // Remove any existing views from the stack view
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         stackView.alignment = .fill
@@ -117,6 +129,13 @@ extension LineupViewController {
             
             imageView.layer.cornerRadius = 15
             imageView.clipsToBounds = true
+            newView.setOnClickListener {
+                self.navigateToViewController(PlayerDetailViewController.self, storyboardName: StoryboardName.playerDetail) { [self] vc in
+                    vc.playerSlug = slugs[i]
+                    
+                }
+               // self.presentToStoryboard("PlayerDetail", identifier: "PlayerDetailViewController")
+            }
             
             // Add the new view to the stack view
             stackView.addArrangedSubview(newView)
