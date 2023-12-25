@@ -42,6 +42,7 @@ class ExpertUserDetailVC: UIViewController {
     
     func nibInitialization() {
         tableView.register(CellIdentifier.userDetailPredictMatchesTableViewCell)
+        collectionView.register(CellIdentifier.userTagsCollectionViewCell)
     }
     
     func showLoader(_ value: Bool) {
@@ -50,7 +51,7 @@ class ExpertUserDetailVC: UIViewController {
     
     func setUpUIData() {
         userImageView.setImage(imageStr: userData?.profileImg ?? "", placeholder: .placeholderUser)
-        nameLabel.text = userData?.name
+        nameLabel.text = userData?.appdata?.predict?.name?.capitalized ?? ""
         aboutLabel.text = userData?.about
         winRateLabel.text = "\(userData?.appdata?.predict?.predictStats?.successRate ?? 0)%"
         allCountLabel.text = "Total: \(userData?.appdata?.predict?.predictStats?.allCount ?? 0)"

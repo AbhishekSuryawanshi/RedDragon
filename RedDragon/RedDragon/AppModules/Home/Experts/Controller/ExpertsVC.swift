@@ -70,7 +70,7 @@ class ExpertsVC: UIViewController {
             fetchPredictUserListViewModelResponse()
         }
         nibInitialization()
-     //   makeNetworkCall()
+        //   makeNetworkCall()
     }
     
     func nibInitialization() {
@@ -112,7 +112,7 @@ extension ExpertsVC: UITableViewDataSource, UITableViewDelegate {
         if (offsetY > contentHeight - scrollView.frame.size.height) {
             if !isPageRefreshing {
                 isPageRefreshing = true
-             
+                
                 if !isTagSelected {
                     if predictDropDown.selectedIndex == 0 { // Predict
                         predictScrollPage = predictScrollPage + 1
@@ -129,12 +129,18 @@ extension ExpertsVC: UITableViewDataSource, UITableViewDelegate {
             }
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigateToViewController(ExpertUserDetailVC.self, storyboardName: StoryboardName.expert) { vc in
+            vc.userId = self.userArray[indexPath.row].id ?? 0
+        }
+    }
 }
 
 extension ExpertsVC {
     private func tableCell(indexPath:IndexPath) -> PredictUserListTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.predictUserListTableViewCell, for: indexPath) as! PredictUserListTableViewCell
-        
+        print(userArray[indexPath.row].appdata?.predict?.prediction ?? [])
         cell.aboutLabel.text = userArray[indexPath.row].about
         cell.userImageView.setImage(imageStr: userArray[indexPath.row].profileImg ?? "", placeholder: .placeholderUser)
         cell.walletButton.setTitle("\(userArray[indexPath.row].wallet ?? 0)", for: .normal)
@@ -208,7 +214,7 @@ extension ExpertsVC {
                 self.isPageRefreshing = false
                 predictUserArray.append(contentsOf: list.response?.data ?? [])
             }
-         //   predictUserArray = list.response?.data ?? []
+            //   predictUserArray = list.response?.data ?? []
             userArray = predictUserArray
         }
         
