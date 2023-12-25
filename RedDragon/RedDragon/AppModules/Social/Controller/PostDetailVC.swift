@@ -56,7 +56,7 @@ class PostDetailVC: UIViewController {
     func shareAction(model: SocialPost, image: UIImage) {
         stopLoader()
         DispatchQueue.main.async {
-            let vc = UIActivityViewController(activityItems: [image, "\n\n\("Dive into this story via the RedDragon app".localized) \n\(model.descriptn) \n\("Stay connected to the latest in football, basketball, tennis, and other sports with us. Install it from the App Store to find more news.".localized) \n\n \(URLConstants.appstore)"], applicationActivities: [])
+            let vc = UIActivityViewController(activityItems: [image, "\n\n\("Dive into this story via the Rampage Sports app".localized) \n\(model.descriptn) \n\("Stay connected to the latest in football, basketball, tennis, and other sports with us. Install it from the App Store to find more news.".localized) \n\n \(URLConstants.appstore)"], applicationActivities: [])
             if let popoverController = vc.popoverPresentationController {
                 popoverController.sourceView = self.listTableView
                 popoverController.sourceRect = self.listTableView.bounds
