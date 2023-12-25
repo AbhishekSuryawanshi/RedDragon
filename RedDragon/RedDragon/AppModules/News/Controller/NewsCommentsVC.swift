@@ -54,7 +54,7 @@ class NewsCommentsVC: UIViewController {
     }
     
     func refreshPage() {
-        headerLabel.text = "Comments" + " - \(newsTitle)"
+        headerLabel.text = "Comments".localized + " - \(newsTitle)"
         commentTextView.placeholder = "Add a comment".localized
     }
     

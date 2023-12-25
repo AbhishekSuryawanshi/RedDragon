@@ -64,6 +64,9 @@ enum SettingType: String, CaseIterable {
     case notiftn     = "Notifications"
     case langaug     = "Languages"
     case logout      = "Logout"
+    case about       = "About Us"
+    case support     = "Support"
+    case help        = "Help Center"
     
     var iconImage: UIImage {
         switch self {

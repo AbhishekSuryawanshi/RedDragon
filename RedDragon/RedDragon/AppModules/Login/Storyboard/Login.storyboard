@@ -40,7 +40,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HFg-L7-iah">
                                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="300"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to RedDragon App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pF-Wu-UCf">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pF-Wu-UCf">
                                                                         <rect key="frame" x="0.0" y="10" width="343" height="21"/>
                                                                         <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="18"/>
                                                                         <color key="textColor" name="base"/>
@@ -399,7 +399,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hw5-qC-mFm">
                                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="120"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to RedDragon App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wg3-73-DBo">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wg3-73-DBo">
                                                                         <rect key="frame" x="0.0" y="10" width="343" height="21"/>
                                                                         <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="18"/>
                                                                         <color key="textColor" name="base"/>
@@ -1055,7 +1055,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXe-kG-pzs">
-                                                                <rect key="frame" x="171.66666666666666" y="243" width="0.0" height="0.0"/>
+                                                                <rect key="frame" x="20" y="243" width="303" height="0.0"/>
                                                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -1066,12 +1066,13 @@
                                                             <constraint firstAttribute="trailing" secondItem="R1Q-HR-R0x" secondAttribute="trailing" id="3R7-mi-rkv"/>
                                                             <constraint firstItem="R1Q-HR-R0x" firstAttribute="leading" secondItem="dx0-DP-Cg1" secondAttribute="leading" id="A3m-nQ-aPM"/>
                                                             <constraint firstItem="t0Z-dO-1zk" firstAttribute="top" secondItem="R1Q-HR-R0x" secondAttribute="bottom" constant="5" id="EVx-Xf-OMb"/>
+                                                            <constraint firstAttribute="trailing" secondItem="FXe-kG-pzs" secondAttribute="trailing" constant="20" id="GzC-Mb-d1g"/>
                                                             <constraint firstItem="LKK-we-hIP" firstAttribute="centerX" secondItem="dx0-DP-Cg1" secondAttribute="centerX" id="Jup-VE-8zu"/>
                                                             <constraint firstItem="LKK-we-hIP" firstAttribute="top" secondItem="R1Q-HR-R0x" secondAttribute="bottom" constant="18" id="Lgj-1g-aVS"/>
                                                             <constraint firstItem="t0Z-dO-1zk" firstAttribute="centerX" secondItem="R1Q-HR-R0x" secondAttribute="centerX" id="YfL-VT-8kJ"/>
+                                                            <constraint firstItem="FXe-kG-pzs" firstAttribute="leading" secondItem="dx0-DP-Cg1" secondAttribute="leading" constant="20" id="ZV0-h9-R9w"/>
                                                             <constraint firstItem="FXe-kG-pzs" firstAttribute="top" secondItem="LKK-we-hIP" secondAttribute="bottom" constant="15" id="cN2-CF-2mf"/>
                                                             <constraint firstAttribute="height" constant="300" id="nUj-IA-PxZ"/>
-                                                            <constraint firstItem="FXe-kG-pzs" firstAttribute="centerX" secondItem="dx0-DP-Cg1" secondAttribute="centerX" id="qDN-DO-xQa"/>
                                                             <constraint firstItem="R1Q-HR-R0x" firstAttribute="top" secondItem="dx0-DP-Cg1" secondAttribute="top" constant="10" id="tIM-MR-qrR"/>
                                                         </constraints>
                                                     </view>
@@ -1192,7 +1193,9 @@
                     <connections>
                         <outlet property="bgView" destination="Ycs-dc-aQR" id="3iW-CE-MEw"/>
                         <outlet property="bottomTextView" destination="G02-nZ-GCI" id="hUi-Rx-2D4"/>
+                        <outlet property="headerLabel" destination="R1Q-HR-R0x" id="Zqe-8y-g8V"/>
                         <outlet property="otpTextFieldView" destination="N8M-OE-4SJ" id="AvX-oG-zYG"/>
+                        <outlet property="submitButton" destination="IBd-0I-BFi" id="4hB-6k-vnq"/>
                         <outlet property="topTextLabel" destination="FXe-kG-pzs" id="Vgt-qo-8LQ"/>
                     </connections>
                 </viewController>
@@ -1432,7 +1435,11 @@
                     </view>
                     <connections>
                         <outlet property="bgView" destination="yBF-gQ-fSb" id="h0M-M8-gTG"/>
+                        <outlet property="continueButton" destination="W9a-fJ-8wZ" id="NFp-NF-fio"/>
                         <outlet property="emailTextfield" destination="PKW-8M-b1i" id="DXn-Vg-ogZ"/>
+                        <outlet property="emailTitleLabel" destination="ndg-Ky-krW" id="pea-SB-nfa"/>
+                        <outlet property="headerLabel" destination="VCF-6K-WMn" id="aai-1a-mIz"/>
+                        <outlet property="topLabel" destination="Cbz-NL-DtG" id="uQi-ex-jJj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qae-UM-6Ut" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1820,9 +1827,12 @@
                     <connections>
                         <outlet property="bgView" destination="F56-aA-Uf2" id="l6Z-ue-GCU"/>
                         <outlet property="confirmPasswordTextfield" destination="UEN-WM-532" id="a44-HS-AA8"/>
+                        <outlet property="continueButton" destination="M3t-by-jjf" id="CzQ-NM-Kbd"/>
                         <outlet property="countryCodeButton" destination="Wx6-Cz-xe9" id="c5u-bC-A2o"/>
+                        <outlet property="headerLabel" destination="CFF-oT-Hjt" id="DPb-lx-0QP"/>
                         <outlet property="passwordTextField" destination="8yI-rf-VCX" id="fsB-jp-Euq"/>
                         <outlet property="phoneTextField" destination="o2d-Pn-rdB" id="VkU-uh-a04"/>
+                        <outlet property="topLabel" destination="Qjc-08-x76" id="ECM-pt-GdO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8ex-ei-bt7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

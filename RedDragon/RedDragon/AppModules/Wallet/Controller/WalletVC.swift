@@ -53,6 +53,10 @@ class WalletVC: UIViewController {
         if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
             WalletVM.shared.subscriptionListAsyncCall()
         }
+        heatPointTitleLabel.text = "Your HeatPoints Balance".localized + "🔥"
+        recentTrasactionLabel.text = "Recent Transactions".localized
+        transactionSeeAllButton.setTitle("View All".localized, for: .normal)
+        packageLabel.text = "Packages".localized
     }
     
     func nibInitialization() {
