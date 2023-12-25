@@ -16,6 +16,7 @@ struct URLConstants {
     static let baseURL             = "http://157.245.159.136:5072/api/"
     static let predictionBaseURL   = "http://45.76.178.21:5069/"
     static let newsBaseURL         = "https://www.77577.live"
+    static let translationBaseURL  = "http://45.76.178.21:5072"
 
     // MARK: -  Login
     static let login               = baseURL + "login"
@@ -156,4 +157,8 @@ struct URLConstants {
     
     // MARK: - Wallet
     static let subscriptionList       = baseURL + "user/wallet/history"
+    
+    // MARK: - Translation
+    static let translation            = "/get_translations.php"
+
 }
