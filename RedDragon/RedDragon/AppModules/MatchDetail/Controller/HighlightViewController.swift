@@ -40,16 +40,18 @@ class HighlightViewController: UIViewController {
     }
     
     func configureView(progressData: [Progress]?) {
+        
         guard let progressData = progressData else {
             return
         }
         if progressData.isEmpty {
             customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.dataNotFound.localized, image: ImageConstants.alertImage)
-            tableViewHeight.constant = 0
+            //  tableViewHeight.constant = 0
         } else {
             highlightProgress = progressData
-            symbolCollectionView.reloadData()
+            //  symbolCollectionView.reloadData()
         }
+        
     }
 }
 
