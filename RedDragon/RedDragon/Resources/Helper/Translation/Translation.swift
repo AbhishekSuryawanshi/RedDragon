@@ -9,8 +9,8 @@ import UIKit
 
 final class Translation: APIServiceManager<TranslationModel> {
     static let shared = Translation()
-    let service: TranslationService
-    let request: TranslationRequest
+    private let service: TranslationService
+    private let request: TranslationRequest
     var model: TranslationModel!
     
     init(
