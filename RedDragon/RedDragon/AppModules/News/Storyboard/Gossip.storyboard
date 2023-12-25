@@ -345,18 +345,24 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="breakingNewsTitleLabel" destination="Spn-0Z-aPp" id="Iec-xA-YnP"/>
                         <outlet property="breakngNewsImage" destination="Psu-Gn-gk7" id="TTN-fB-D5L"/>
                         <outlet property="leagueCollectionView" destination="zvy-Dv-MvN" id="p9o-yZ-t1D"/>
+                        <outlet property="leaguesTitleLabel" destination="Wxw-eW-2x8" id="2oo-iw-eQ0"/>
                         <outlet property="leaguesView" destination="v0n-gy-ke2" id="Iyp-gD-5D5"/>
+                        <outlet property="newsCategoryTitleLabel" destination="LBg-az-jbg" id="rx0-JC-Z7E"/>
                         <outlet property="newsTableHeightConstraint" destination="5nK-B6-voJ" id="Quf-uh-wz8"/>
                         <outlet property="newsTableView" destination="ZfM-UF-cdX" id="OsI-jE-1OJ"/>
                         <outlet property="publisherCollectionView" destination="qSW-OC-bLu" id="5og-af-eDi"/>
                         <outlet property="publishersView" destination="Mig-cA-T8S" id="rMp-Ps-U1a"/>
                         <outlet property="topMarqueeLabel" destination="2Mm-Wd-eqy" id="Inc-nY-fEF"/>
+                        <outlet property="topPublishersTitleLabel" destination="eyq-wk-7WR" id="zOF-A9-b7P"/>
+                        <outlet property="tredingTitleLabel" destination="Eyh-2n-Z1a" id="bFP-hn-fs9"/>
                         <outlet property="trendingCollectionView" destination="xDU-Sf-0fe" id="SHR-OE-1hl"/>
                         <outlet property="trendingView" destination="tFc-Af-bIx" id="5gt-i2-hJU"/>
                         <outlet property="videoCollectionHeightConstraint" destination="Etl-QD-Lge" id="4IP-l0-zCL"/>
                         <outlet property="videosCollectionView" destination="NFr-wr-FNj" id="cEo-dC-3EH"/>
+                        <outlet property="videosTitleLabel" destination="Q6o-eC-cHd" id="EVN-Pi-G8T"/>
                         <outlet property="videosView" destination="rSc-cc-geS" id="2Ig-q9-LI2"/>
                         <outlet property="viewAllButton" destination="XFm-qF-BA8" id="RIc-ld-4Uw"/>
                     </connections>
@@ -807,13 +813,17 @@
                     <connections>
                         <outlet property="commentHeightConstarint" destination="LRY-aF-sKG" id="5sI-QM-P1d"/>
                         <outlet property="commentTableView" destination="PbQ-gh-UDn" id="pFR-nq-gG1"/>
+                        <outlet property="commentTextField" destination="gmH-y8-M9j" id="t9q-VT-W5a"/>
                         <outlet property="commentView" destination="Sa0-9U-w4j" id="LR5-02-5Fz"/>
+                        <outlet property="commentsTitleLabel" destination="Hcq-S4-dOa" id="Jpi-gG-k1R"/>
                         <outlet property="contentLabel" destination="IqG-ZJ-EUz" id="Arx-Kk-J4F"/>
                         <outlet property="dateLabel" destination="I6M-1T-m2o" id="jYg-cQ-lLi"/>
                         <outlet property="gossipImageView" destination="CCI-gl-Pgh" id="vtw-j7-2lB"/>
+                        <outlet property="headerLabel" destination="k5c-sv-Pao" id="OFP-uz-vky"/>
                         <outlet property="noCommentView" destination="Rzo-c9-TV0" id="wZD-EU-I7J"/>
                         <outlet property="timeLabel" destination="ZKu-9V-q7W" id="7jM-gu-3i6"/>
                         <outlet property="titleLabel" destination="4xC-43-3k4" id="qVE-6a-etS"/>
+                        <outlet property="viewAllTitleLabel" destination="f3s-yy-wLv" id="kPz-IN-IVy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="74d-g4-6tk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -951,8 +961,10 @@
         </scene>
     </scenes>
     <designables>
-        <designable name="2Mm-Wd-eqy"/>
         <designable name="IqG-ZJ-EUz"/>
+        <designable name="T9F-re-Ujp">
+            <size key="intrinsicContentSize" width="-1" height="30"/>
+        </designable>
     </designables>
     <resources>
         <image name="Shadow3" width="375" height="8"/>

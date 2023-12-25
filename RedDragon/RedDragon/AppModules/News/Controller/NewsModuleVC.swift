@@ -30,6 +30,10 @@ class NewsModuleVC: UIViewController {
         initialSettings()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        searchTextField.placeholder = "Search".localized
+    }
+    
     func initialSettings() {
         nibInitialization()
         setView()
