@@ -24,6 +24,7 @@ extension ProfileVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.profileTableViewCell, for: indexPath) as! ProfileTableViewCell
+        cell.titleLabel.text = ProfileType.allCases[indexPath.row].rawValue.localized
         
         return cell
     }

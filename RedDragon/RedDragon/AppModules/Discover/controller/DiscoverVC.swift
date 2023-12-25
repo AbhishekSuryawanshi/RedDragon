@@ -18,6 +18,8 @@ class DiscoverVC: UIViewController {
     @IBOutlet weak var otherCollectionView: UICollectionView!
     
     var cancellable = Set<AnyCancellable>()
+    var profileArray: [SettingType] = [.account, .notiftn]
+    var otherArray: [SettingType] = [.about, .privacy, .support, .help]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,7 +105,7 @@ extension DiscoverVC: UICollectionViewDataSource {
         if collectionView == servicesCollectionView {
             return ServiceType.allCases.count
         } else {
-            return SettingType.allCases.count
+            return collectionView == profileCollectionView ? profileArray.count : otherArray.count
         }
     }
     
@@ -114,7 +116,8 @@ extension DiscoverVC: UICollectionViewDataSource {
             cell.bgView.borderWidth = 0
             cell.titleLabel.textColor = .base
         } else {
-            cell.configure(title: SettingType.allCases[indexPath.row].rawValue.localized, iconImage: SettingType.allCases[indexPath.row].iconImage, bgViewWidth: 55, imageWidth: (0.65 * 55), bgViewCornerRadius: 55/2)
+            let type = collectionView == profileCollectionView ? profileArray[indexPath.row] : otherArray[indexPath.row]
+            cell.configure(title: type.rawValue.localized, iconImage: type.iconImage, bgViewWidth: 55, imageWidth: (0.65 * 55), bgViewCornerRadius: 55/2)
             cell.bgView.borderWidth = 0
             cell.bgView.backgroundColor = collectionView == profileCollectionView ? .wheat8 : .yellow4
         }
@@ -159,7 +162,8 @@ extension DiscoverVC: UICollectionViewDelegate {
                 self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[3]
             }
         } else {
-            switch SettingType.allCases[indexPath.row] {
+            let type = collectionView == profileCollectionView ? profileArray[indexPath.row] : otherArray[indexPath.row]
+            switch type {
             case .account:
                 navigateToViewController(ProfileVC.self, storyboardName: StoryboardName.discover, animationType: .autoReverse(presenting: .zoom))
             case .privacy:
@@ -182,7 +186,7 @@ extension DiscoverVC: UICollectionViewDelegateFlowLayout {
         if collectionView == servicesCollectionView {
             return CGSize(width: (screenWidth - 25) / 5, height: 85)
         } else {
-            return CGSize(width: (screenWidth - 25) / 5, height: 100)
+            return CGSize(width: (screenWidth - 25) / 4, height: 100)
         }
     }
 }
