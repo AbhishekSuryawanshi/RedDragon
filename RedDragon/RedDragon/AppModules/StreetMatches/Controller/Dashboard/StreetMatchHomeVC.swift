@@ -62,6 +62,18 @@ class StreetMatchHomeVC: UIViewController {
     
     
     @IBAction func actionCreate(_ sender: Any) {
+        if !isUserLoggedIn(){
+            self.customAlertView_2Actions(title: "Login / Sign Up".localized, description: ErrorMessage.loginRequires.localized) {
+                /// Show login page to login/register new user
+                /// hide tabbar before presenting a viewcontroller
+                /// show tabbar while dismissing a presented viewcontroller in delegate
+                self.tabBarController?.tabBar.isHidden = true
+                self.presentOverViewController(LoginVC.self, storyboardName: StoryboardName.login) { vc in
+                    vc.delegate = self
+                }
+            }
+            return
+        }
         presentOverViewController(ChooseOptionsVC.self,storyboardName: StoryboardName.streetMatches)
     }
     
@@ -87,8 +99,10 @@ class StreetMatchHomeVC: UIViewController {
         streethomeVM?.$responseData
             .receive(on: DispatchQueue.main)
             .dropFirst()
-            .sink(receiveValue: { [weak self] homeData in
-                self?.execute_onResponseData(homeData: homeData!)
+            .sink(receiveValue: { [weak self] response in
+                if response?.response?.data != nil{
+                    self?.execute_onResponseData(homeData: response!.response!.data!)
+                }
             })
             .store(in: &cancellable)
     }
@@ -101,6 +115,13 @@ class StreetMatchHomeVC: UIViewController {
     
     func makeNetworkCall(){
         streethomeVM?.fetchStreetHomeAsyncCall(id: nil)
+    }
+}
+
+extension StreetMatchHomeVC: LoginVCDelegate {
+    func viewControllerDismissed() {
+        self.tabBarController?.tabBar.isHidden = false
+        presentOverViewController(ChooseOptionsVC.self,storyboardName: StoryboardName.streetMatches)
     }
 }
 
@@ -169,20 +190,75 @@ extension StreetMatchHomeVC:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0{
-            openDetails(index: indexPath.row)
+            openStadiumDetails(index: indexPath.row)
+        }
+        else if indexPath.section == 1{
+            openEventDetails(index: indexPath.row)
+        }
+        else{
+            openMatchDetails(index: indexPath.row)
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.streetHomeHeaderTableViewCell) as! StreetHomeHeaderTableViewCell
         cell.lblTitle.text = headers[section]
+        cell.callSelection = {
+            if section == 0{
+                self.goToStadiums()
+            }
+            else if section == 1{
+                self.goToEvents()
+            }
+            else{
+                self.goToMatches()
+            }
+        }
         return cell
     }
     
-    func openDetails(index:Int){
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
+    }
+    
+    func openStadiumDetails(index:Int){
         navigateToViewController(StadiumDetailsVC.self,storyboardName: StoryboardName.streetMatches) { vc in
             vc.stadium = self.homeData?.stadiums?[index]
         }
+    }
+    func openMatchDetails(index:Int){
+        navigateToViewController(StreetMatchesDetailsVC.self,storyboardName: StoryboardName.streetMatches) { vc in
+            vc.matchID = self.homeData?.matches?[index].id
+        }
+    }
+    func openEventDetails(index:Int){
+        navigateToViewController(StreetEventDetailsViewController.self,storyboardName: StoryboardName.streetMatches) { vc in
+            vc.details = self.homeData?.events?[index]
+        }
+    }
+    
+    func goToStadiums(){
+        print(self.parent)
+        if let vc = self.parent as? StreetMatchesDashboardVC{
+            vc.headerCollectionView.selectItem(at: IndexPath(row: 1, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+            vc.headerCollectionView.delegate?.collectionView?(vc.headerCollectionView, didSelectItemAt: IndexPath(row: 1, section: 0))
+        }
+    }
+    
+    func goToMatches(){
+        if let vc = self.parent as? StreetMatchesDashboardVC{
+            vc.headerCollectionView.selectItem(at: IndexPath(row: 3, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+            vc.headerCollectionView.delegate?.collectionView?(vc.headerCollectionView, didSelectItemAt: IndexPath(row: 3, section: 0))
+        }
+        
+    }
+    
+    func goToEvents(){
+        if let vc = self.parent as? StreetMatchesDashboardVC{
+            vc.headerCollectionView.selectItem(at: IndexPath(row: 2, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+            vc.headerCollectionView.delegate?.collectionView?(vc.headerCollectionView, didSelectItemAt: IndexPath(row: 2, section: 0))
+        }
+        
     }
     
 }
@@ -204,7 +280,7 @@ extension StreetMatchHomeVC:UISearchBarDelegate{
             tableView.reloadData()
         }
         else{
-            matches = homeData?.matches?.filter{($0.address.lowercased().contains(text.lowercased()) ) || ($0.homeTeam.name.lowercased().contains(text.lowercased()) ) || ($0.awayTeam.name.lowercased().contains(text.lowercased()) )}
+            matches = homeData?.matches?.filter{($0.address?.lowercased().contains(text.lowercased()) ?? false) || ($0.homeTeam?.name?.lowercased().contains(text.lowercased()) ?? false) || ($0.awayTeam?.name?.lowercased().contains(text.lowercased()) ?? false)}
             isSearchMode = true
             tableView.reloadData()
         }

@@ -37,7 +37,7 @@ import UIKit
     public var displayType: DisplayType = .roundedCorner
     public var fieldsCount: Int = 6
     public var otpInputType: KeyboardType = .numeric
-    public var fieldFont: UIFont = fontMedium(18)
+    public var fieldFont: UIFont = fontSemiBold(18)
     public var secureEntry: Bool = false
     public var hideEnteredText: Bool = false
     public var requireCursor: Bool = true

@@ -73,7 +73,9 @@ class StreetMatchesDetailsVC: UIViewController {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.matchDetails = response
+                if response?.response?.data != nil{
+                    self?.matchDetails = response!.response!.data
+                }
                 self?.fillDetails()
             })
             .store(in: &cancellable)
@@ -88,10 +90,10 @@ class StreetMatchesDetailsVC: UIViewController {
 
     func fillDetails(){
         lblLocation.text = matchDetails?.address
-        lblHome.text = matchDetails?.homeTeam.name
-        imgHome.setImage(imageStr: matchDetails?.homeTeam.logoImgURL ?? "")
-        imgAway.setImage(imageStr: matchDetails?.awayTeam.logoImgURL ?? "")
-        lblAway.text = matchDetails?.awayTeam.name
+        lblHome.text = matchDetails?.homeTeam?.name
+        imgHome.setImage(imageStr: matchDetails?.homeTeam?.logoImgURL ?? "")
+        imgAway.setImage(imageStr: matchDetails?.awayTeam?.logoImgURL ?? "")
+        lblAway.text = matchDetails?.awayTeam?.name
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat.yyyyMMddHHmmss.rawValue
         if let dt1 = dateFormatter.date(from: matchDetails?.scheduleTime ?? "") {
@@ -107,10 +109,10 @@ class StreetMatchesDetailsVC: UIViewController {
 extension StreetMatchesDetailsVC:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == tableViewHomeLineup{
-            return matchDetails?.homeTeam.players.count ?? 0
+            return matchDetails?.homeTeam?.players?.count ?? 0
         }
         else{
-            return matchDetails?.awayTeam.players.count ?? 0
+            return matchDetails?.awayTeam?.players?.count ?? 0
         }
     }
     
@@ -118,10 +120,10 @@ extension StreetMatchesDetailsVC:UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.streetMatchPlayerTableViewCell) as! StreetMatchPlayerTableViewCell
         var obj:StreetMatchPlayer?
         if tableView == tableViewHomeLineup{
-            obj = matchDetails?.homeTeam.players[indexPath.row]
+            obj = matchDetails?.homeTeam?.players?[indexPath.row]
         }
         else{
-            obj = matchDetails?.awayTeam.players[indexPath.row]
+            obj = matchDetails?.awayTeam?.players?[indexPath.row]
         }
         cell.configureCell(obj: obj)
         return cell

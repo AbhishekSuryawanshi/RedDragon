@@ -107,7 +107,7 @@ struct BetDetail: Codable {
     let amountBetLose: String?
     let amountBetPending: String?
     let betPlaced: Bool?
-    let winRate: Int?
+    let winRate: String?
     
     private enum CodingKeys: String, CodingKey {
         case totalBetAll = "total_bet_all"

@@ -208,8 +208,8 @@ extension ExpandableLabel {
         collapsedNumberOfLines = numberOfLines
         //  expandedAttributedLink = nil
         //   self.font = appFontRegular(14)
-        collapsedAttributedLink = NSMutableAttributedString().mediumColorText("Show More".localized, size: 14, color: .blue2)
-        expandedAttributedLink = NSMutableAttributedString().mediumColorText("Show Less".localized, size: 14, color: .blue2)
+        collapsedAttributedLink = NSMutableAttributedString().semiBoldColorText("Show More".localized, size: 14, color: .blue2)
+        expandedAttributedLink = NSMutableAttributedString().semiBoldColorText("Show Less".localized, size: 14, color: .blue2)
         ellipsis = NSMutableAttributedString(string: "...")
     }
     

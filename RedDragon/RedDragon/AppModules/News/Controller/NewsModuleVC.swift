@@ -30,6 +30,10 @@ class NewsModuleVC: UIViewController {
         initialSettings()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        searchTextField.placeholder = "Search".localized
+    }
+    
     func initialSettings() {
         nibInitialization()
         setView()
@@ -120,7 +124,7 @@ extension NewsModuleVC: UICollectionViewDelegateFlowLayout {
             return CGSize(width: (screenWidth - 70) / 2, height: 60)
         } else {
             let selected = sportsTypeArray[indexPath.row] == sportType
-            return CGSize(width: sportsTypeArray[indexPath.row].rawValue.localized.size(withAttributes: [NSAttributedString.Key.font : fontMedium(15)]).width + 30, height: 40)
+            return CGSize(width: sportsTypeArray[indexPath.row].rawValue.localized.size(withAttributes: [NSAttributedString.Key.font : fontSemiBold(15)]).width + 30, height: 40)
         }
     }
 }

@@ -16,6 +16,7 @@ struct URLConstants {
     static let baseURL             = "http://157.245.159.136:5072/api/"
     static let predictionBaseURL   = "http://45.76.178.21:5069/"
     static let newsBaseURL         = "https://www.77577.live"
+    static let translationBaseURL  = "http://45.76.178.21:5072"
 
     // MARK: -  Login
     static let login               = baseURL + "login"
@@ -29,6 +30,7 @@ struct URLConstants {
     // MARK: - Home
     static let banners             = "https://api996.com/api/v1/banner/com.app.b8"
     static let bannerBaseURL       = "https://api996.com/"
+    static let tagsURL             = baseURL + "user/tag/list"
     
     // MARK: -  Database
     static let databaseBaseURL     = "https://datasport.one/api/v1/sportscore/data/"
@@ -96,23 +98,24 @@ struct URLConstants {
     static let meetJoinEvent       = baseURL + "vinder/user/events/join"
     
     // MARK: - StreetMatches
-    static let streetMatchesBaseURL = "https://gsports.cloud/api/"
+    static let streetMatchesBaseURL = baseURL//"https://gsports.cloud/api/"
 
-    static let streetHome           = streetMatchesBaseURL + "home/data"
-    static let stadiumList          = streetMatchesBaseURL + "stadium/list"
-    static let eventsList           = streetMatchesBaseURL + "event/list"
-    static let streetMatchesList    = streetMatchesBaseURL + "match/list"
-    static let stadiums             = streetMatchesBaseURL + "stadium"
-    static let streetUploadImage    = streetMatchesBaseURL + "resource/img/upload"
-    static let streetMatches        = streetMatchesBaseURL + "match"
-    static let streetTeamList       = streetMatchesBaseURL + "team/list"
-    static let streetTeamDetails    = streetMatchesBaseURL + "team"
-    static let streetPlayersList    = streetMatchesBaseURL + "player/list"
-    static let streetEvents         = streetMatchesBaseURL + "event"
-    static let playerPositions      = streetMatchesBaseURL + "player/positions"
-    static let eventRequests        = streetMatchesBaseURL + "event/request"
-    static let streetPlayerProfile  = streetMatchesBaseURL + "auth/user"
-    static let streetPlayers        = streetMatchesBaseURL + "player"
+    static let streetHome           = streetMatchesBaseURL + "streetmatch/home/data"
+    static let stadiumList          = streetMatchesBaseURL + "streetmatch/stadium/list"
+    static let eventsList           = streetMatchesBaseURL + "streetmatch/event/list"
+    static let streetMatchesList    = streetMatchesBaseURL + "streetmatch/match/list"
+    static let stadiums             = streetMatchesBaseURL + "streetmatch/stadium"
+    static let streetUploadImage    = streetMatchesBaseURL + "streetmatch/resource/img/upload"
+    static let streetMatches        = streetMatchesBaseURL + "streetmatch/match"
+    static let streetTeamList       = streetMatchesBaseURL + "streetmatch/team/list"
+    static let streetTeamDetails    = streetMatchesBaseURL + "streetmatch/team"
+    static let streetPlayersList    = streetMatchesBaseURL + "streetmatch/player/list"
+    static let streetEvents         = streetMatchesBaseURL + "streetmatch/event"
+    static let playerPositions      = streetMatchesBaseURL + "streetmatch/player/positions"
+    static let eventRequests        = streetMatchesBaseURL + "streetmatch/event/request"
+    static let streetPlayerProfile  = streetMatchesBaseURL + "streetmatch/auth/user"
+    static let streetPlayers        = streetMatchesBaseURL + "streetmatch/player"
+    static let streetUpdateProfile  = streetMatchesBaseURL + "streetmatch/user/info"
     
 
     // MARK: - Prediction
@@ -120,6 +123,7 @@ struct URLConstants {
     static let postMatchPrediction  = "api/predict"
     static let matchDetail          = "api/match"
     static let predictionList       = "api/predict/list/withMatch?"
+    static let predictionGetMatchList = baseURL + "prediction/match/list?"
     
     
     // MARK: - News
@@ -146,4 +150,14 @@ struct URLConstants {
     static let basketballMatchList    = globalMatchBaseURL + "basketball/matchlist/today"
     static let footballH2HMatchList   = globalMatchBaseURL + "football/match-analysis/statics/"
     static let basketballH2HMatchList = globalMatchBaseURL + "basketball/match-analysis/statics/"
+    
+    // MARK: - Experts
+    static let expertsBaseURL         = "http://157.245.159.136:5072/api"
+    static let expertUserList         = expertsBaseURL + "/user/list"
+    
+    // MARK: - Wallet
+    static let subscriptionList       = baseURL + "user/wallet/history"
+
+    // MARK: - Translation
+    static let translation            = "/get_translations.php"
 }

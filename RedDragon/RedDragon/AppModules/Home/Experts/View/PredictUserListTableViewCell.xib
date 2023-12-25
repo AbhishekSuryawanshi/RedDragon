@@ -1,213 +1,323 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="148" id="KGk-i7-Jjw" customClass="PredictUserListTableViewCell" customModule="RedDragon" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="370" height="148"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="188" id="KGk-i7-Jjw" customClass="PredictUserListTableViewCell" customModule="RedDragon" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="356" height="188"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="370" height="148"/>
+                <rect key="frame" x="0.0" y="0.0" width="356" height="188"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="54Y-wk-XmM">
-                        <rect key="frame" x="0.0" y="0.0" width="370" height="148"/>
+                        <rect key="frame" x="0.0" y="0.0" width="356" height="188"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DNa-ou-wiT">
-                                <rect key="frame" x="8" y="8" width="54" height="54"/>
+                                <rect key="frame" x="8" y="12" width="54" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="54" id="UrF-nE-mYe"/>
                                     <constraint firstAttribute="height" constant="54" id="apf-YN-IC9"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="27"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cFJ-V6-EQF">
-                                <rect key="frame" x="67" y="8" width="33" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expert name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cFJ-V6-EQF">
+                                <rect key="frame" x="67" y="12" width="78.666666666666686" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="160" id="1ra-5c-Hrw"/>
+                                    <constraint firstAttribute="height" constant="17" id="GVl-ST-HLO"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="14"/>
                                 <color key="textColor" name="base"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zCh-mt-MIh">
+                                <rect key="frame" x="153.66666666666666" y="10.666666666666664" width="44" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="CAL-yq-95E"/>
+                                    <constraint firstAttribute="width" constant="44" id="QQg-J2-0Qw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="13"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="147" image="heat">
+                                    <color key="titleColor" name="black1"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="1" green="0.58431372550000005" blue="0.38505244760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Win Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ppq-WJ-KW5">
-                                <rect key="frame" x="313.33333333333331" y="8" width="46.666666666666686" height="14"/>
+                                <rect key="frame" x="299.33333333333331" y="12" width="46.666666666666686" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="55X-U2-q8P"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
                                 <color key="textColor" name="blue4"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="67%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAE-0O-ptW">
-                                <rect key="frame" x="326.33333333333331" y="25" width="33.666666666666686" height="22.666666666666671"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="67%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAE-0O-ptW">
+                                <rect key="frame" x="312.33333333333331" y="29" width="33.666666666666686" height="22.666666666666671"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22.670000000000002" id="9Fb-O8-zPl"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="19"/>
                                 <color key="textColor" name="green2"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wzd-W9-Xdl">
-                                <rect key="frame" x="67" y="25" width="203" height="15"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wzd-W9-Xdl">
+                                <rect key="frame" x="67.000000000000014" y="29" width="235.33333333333337" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="23" id="pMo-mv-U99"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="13"/>
                                 <color key="textColor" name="black1"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gqv-3z-HpU">
-                                <rect key="frame" x="275" y="52.666666666666657" width="85" height="26"/>
-                                <color key="backgroundColor" name="blue4"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="85" id="DUD-xc-f0S"/>
-                                    <constraint firstAttribute="height" constant="26" id="yZ4-6D-91Z"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Follow">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="14"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Ked-fS-rEf">
-                                <rect key="frame" x="8" y="86.666666666666671" width="352" height="23"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="aZf-ef-a1E">
+                                <rect key="frame" x="171" y="56.666666666666657" width="175" height="26"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Qv-9S-qoU">
-                                        <rect key="frame" x="0.0" y="0.0" width="84.333333333333329" height="23"/>
-                                        <color key="backgroundColor" name="blue1"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gqv-3z-HpU">
+                                        <rect key="frame" x="0.0" y="0.0" width="85" height="26"/>
+                                        <color key="backgroundColor" name="blue4"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="23" id="T8h-Po-mug"/>
+                                            <constraint firstAttribute="width" constant="85" id="DUD-xc-f0S"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="All count">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Follow">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="2"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" name="blue4"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
+                                                <real key="value" value="12"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fcD-tW-aUn">
-                                        <rect key="frame" x="89.333333333333343" y="0.0" width="84.333333333333343" height="23"/>
-                                        <color key="backgroundColor" name="blue1"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aOv-5c-2vN">
+                                        <rect key="frame" x="90" y="0.0" width="85" height="26"/>
+                                        <color key="backgroundColor" name="yellow1"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="23" id="uZ3-bT-3Il"/>
+                                            <constraint firstAttribute="width" constant="85" id="hih-Ze-HlG"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="All count">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Following">
+                                            <color key="titleColor" name="black1"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="2"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" name="blue4"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mcp-c7-b1A">
-                                        <rect key="frame" x="178.66666666666666" y="0.0" width="83.999999999999972" height="23"/>
-                                        <color key="backgroundColor" name="blue1"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="23" id="u7V-Wp-ljZ"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="All count">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="2"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" name="blue4"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0oX-TH-R6T">
-                                        <rect key="frame" x="267.66666666666669" y="0.0" width="84.333333333333314" height="23"/>
-                                        <color key="backgroundColor" name="blue1"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="23" id="ReZ-EK-kU1"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="All count">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="2"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" name="blue4"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
+                                                <real key="value" value="12"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                 </subviews>
-                            </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XmC-Aw-ach">
-                                <rect key="frame" x="8" y="117.66666666666669" width="352" height="25"/>
-                                <color key="backgroundColor" name="yellow1"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="CMc-cN-ASg"/>
+                                    <constraint firstAttribute="height" constant="26" id="VQ3-Kh-vfJ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </label>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="wKy-o3-EVB">
+                                <rect key="frame" x="8" y="89.666666666666686" width="338" height="90"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="QD9-8H-bEg">
+                                        <rect key="frame" x="0.0" y="0.0" width="338" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="xHv-py-C9Q"/>
+                                        </constraints>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="QKc-EF-YeB">
+                                            <size key="itemSize" width="128" height="128"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <connections>
+                                            <outlet property="dataSource" destination="KGk-i7-Jjw" id="L88-Fy-hOT"/>
+                                            <outlet property="delegate" destination="KGk-i7-Jjw" id="dyP-dN-zql"/>
+                                        </connections>
+                                    </collectionView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Ked-fS-rEf">
+                                        <rect key="frame" x="0.0" y="36" width="338" height="23"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdn-wn-SOZ">
+                                                <rect key="frame" x="0.0" y="0.0" width="80.666666666666671" height="23"/>
+                                                <color key="backgroundColor" name="blue1"/>
+                                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                                                <color key="textColor" name="black1"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="30a-oB-csH">
+                                                <rect key="frame" x="85.666666666666671" y="0.0" width="81.000000000000014" height="23"/>
+                                                <color key="backgroundColor" name="blue1"/>
+                                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                                                <color key="textColor" name="black1"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSg-Al-72F">
+                                                <rect key="frame" x="171.66666666666666" y="0.0" width="80.666666666666657" height="23"/>
+                                                <color key="backgroundColor" name="blue1"/>
+                                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                                                <color key="textColor" name="black1"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zny-4O-9NO">
+                                                <rect key="frame" x="257.33333333333331" y="0.0" width="80.666666666666686" height="23"/>
+                                                <color key="backgroundColor" name="blue1"/>
+                                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                                                <color key="textColor" name="black1"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="23" id="5Mg-eK-bKX"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="D5G-TX-Mlq">
+                                        <rect key="frame" x="0.0" y="64.999999999999986" width="338" height="25"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XmC-Aw-ach">
+                                                <rect key="frame" x="0.0" y="0.0" width="338" height="25"/>
+                                                <color key="backgroundColor" name="yellow4"/>
+                                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="4"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Q2W-01-Rg7">
+                                                <rect key="frame" x="0.0" y="25" width="338" height="23"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9k-iI-o2X">
+                                                        <rect key="frame" x="0.0" y="0.0" width="80.666666666666671" height="23"/>
+                                                        <color key="backgroundColor" name="yellow4"/>
+                                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                                                        <color key="textColor" name="black1"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="2"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5G-8B-3uc">
+                                                        <rect key="frame" x="85.666666666666671" y="0.0" width="81.000000000000014" height="23"/>
+                                                        <color key="backgroundColor" name="yellow4"/>
+                                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                                                        <color key="textColor" name="black1"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="2"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgY-Ry-wcY">
+                                                        <rect key="frame" x="171.66666666666666" y="0.0" width="80.666666666666657" height="23"/>
+                                                        <color key="backgroundColor" name="yellow4"/>
+                                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                                                        <color key="textColor" name="black1"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="2"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3GW-iz-s8F">
+                                                        <rect key="frame" x="257.33333333333331" y="0.0" width="80.666666666666686" height="23"/>
+                                                        <color key="backgroundColor" name="yellow4"/>
+                                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                                                        <color key="textColor" name="black1"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="2"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="23" id="fCg-gc-QYR"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="nZH-nw-Zzi"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Ked-fS-rEf" firstAttribute="trailing" secondItem="gqv-3z-HpU" secondAttribute="trailing" id="6no-Uq-MqU"/>
+                            <constraint firstItem="wKy-o3-EVB" firstAttribute="leading" secondItem="DNa-ou-wiT" secondAttribute="leading" id="06e-N4-ojA"/>
+                            <constraint firstItem="wKy-o3-EVB" firstAttribute="top" secondItem="aZf-ef-a1E" secondAttribute="bottom" constant="7.0000000000000284" id="Eu7-eV-82j"/>
                             <constraint firstItem="MAE-0O-ptW" firstAttribute="top" secondItem="ppq-WJ-KW5" secondAttribute="bottom" constant="3" id="JkV-lq-NA8"/>
-                            <constraint firstItem="gqv-3z-HpU" firstAttribute="trailing" secondItem="ppq-WJ-KW5" secondAttribute="trailing" id="Kev-26-xZ9"/>
                             <constraint firstItem="cFJ-V6-EQF" firstAttribute="top" secondItem="DNa-ou-wiT" secondAttribute="top" id="Kif-PI-v0P"/>
+                            <constraint firstItem="ppq-WJ-KW5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zCh-mt-MIh" secondAttribute="trailing" constant="37.329999999999998" id="O4b-Tt-0tg"/>
                             <constraint firstItem="MAE-0O-ptW" firstAttribute="trailing" secondItem="ppq-WJ-KW5" secondAttribute="trailing" id="PjW-jJ-g2a"/>
-                            <constraint firstItem="Ked-fS-rEf" firstAttribute="leading" secondItem="DNa-ou-wiT" secondAttribute="leading" id="Pvn-bC-EX0"/>
-                            <constraint firstItem="Ked-fS-rEf" firstAttribute="top" secondItem="gqv-3z-HpU" secondAttribute="bottom" constant="8" id="QDy-5I-mQf"/>
-                            <constraint firstItem="XmC-Aw-ach" firstAttribute="trailing" secondItem="Ked-fS-rEf" secondAttribute="trailing" id="VBs-WB-Iup"/>
                             <constraint firstItem="ppq-WJ-KW5" firstAttribute="top" secondItem="cFJ-V6-EQF" secondAttribute="top" id="Vhu-74-xLv"/>
-                            <constraint firstItem="gqv-3z-HpU" firstAttribute="leading" secondItem="Wzd-W9-Xdl" secondAttribute="trailing" constant="5" id="ayN-2Y-Ua7"/>
-                            <constraint firstItem="XmC-Aw-ach" firstAttribute="top" secondItem="Ked-fS-rEf" secondAttribute="bottom" constant="8" id="r8N-jI-RB6"/>
+                            <constraint firstItem="MAE-0O-ptW" firstAttribute="leading" secondItem="Wzd-W9-Xdl" secondAttribute="trailing" constant="10" id="WT5-zB-J36"/>
+                            <constraint firstItem="zCh-mt-MIh" firstAttribute="leading" secondItem="cFJ-V6-EQF" secondAttribute="trailing" constant="8" id="abP-KA-jjH"/>
+                            <constraint firstItem="wKy-o3-EVB" firstAttribute="trailing" secondItem="aZf-ef-a1E" secondAttribute="trailing" id="cAU-qZ-Ntp"/>
+                            <constraint firstItem="Wzd-W9-Xdl" firstAttribute="top" secondItem="cFJ-V6-EQF" secondAttribute="bottom" id="dIu-5o-57Q"/>
+                            <constraint firstItem="wKy-o3-EVB" firstAttribute="top" secondItem="DNa-ou-wiT" secondAttribute="bottom" constant="23.666666666666686" id="f4n-U4-wsZ"/>
+                            <constraint firstItem="zCh-mt-MIh" firstAttribute="centerY" secondItem="cFJ-V6-EQF" secondAttribute="centerY" id="lDz-Yi-Ddj"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="wKy-o3-EVB" secondAttribute="bottom" constant="8.3300000000000001" id="nbP-Fe-HnF"/>
                             <constraint firstItem="Wzd-W9-Xdl" firstAttribute="leading" secondItem="cFJ-V6-EQF" secondAttribute="leading" id="sAF-uW-Djf"/>
-                            <constraint firstItem="XmC-Aw-ach" firstAttribute="leading" secondItem="Ked-fS-rEf" secondAttribute="leading" id="sw9-ik-OOl"/>
-                            <constraint firstItem="gqv-3z-HpU" firstAttribute="top" secondItem="MAE-0O-ptW" secondAttribute="bottom" constant="5" id="vIS-fI-sNY"/>
-                            <constraint firstItem="DNa-ou-wiT" firstAttribute="top" secondItem="54Y-wk-XmM" secondAttribute="top" constant="8" id="wjr-RU-cdO"/>
+                            <constraint firstItem="DNa-ou-wiT" firstAttribute="top" secondItem="54Y-wk-XmM" secondAttribute="top" constant="12" id="wjr-RU-cdO"/>
+                            <constraint firstItem="aZf-ef-a1E" firstAttribute="trailing" secondItem="ppq-WJ-KW5" secondAttribute="trailing" id="xBK-jr-OWo"/>
                             <constraint firstItem="cFJ-V6-EQF" firstAttribute="leading" secondItem="DNa-ou-wiT" secondAttribute="trailing" constant="5" id="xC6-vU-NCb"/>
                             <constraint firstItem="DNa-ou-wiT" firstAttribute="leading" secondItem="54Y-wk-XmM" secondAttribute="leading" constant="8" id="y8E-rz-euM"/>
                             <constraint firstItem="Wzd-W9-Xdl" firstAttribute="top" secondItem="MAE-0O-ptW" secondAttribute="top" id="yc4-2l-Rtl"/>
+                            <constraint firstItem="aZf-ef-a1E" firstAttribute="top" secondItem="Wzd-W9-Xdl" secondAttribute="bottom" constant="4.6666666666666572" id="zLg-NC-qzp"/>
                             <constraint firstAttribute="trailing" secondItem="ppq-WJ-KW5" secondAttribute="trailing" constant="10" id="zy9-VH-ptr"/>
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="54Y-wk-XmM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="1YR-3J-jZT"/>
                     <constraint firstAttribute="bottom" secondItem="54Y-wk-XmM" secondAttribute="bottom" id="9RA-Q2-Lwg"/>
@@ -216,10 +326,34 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <point key="canvasLocation" x="177.09923664122135" y="56.338028169014088"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="aboutLabel" destination="Wzd-W9-Xdl" id="imz-kJ-Omc"/>
+                <outlet property="allCountLabel" destination="sdn-wn-SOZ" id="HPl-9J-Jhu"/>
+                <outlet property="betPointsStackView" destination="Q2W-01-Rg7" id="p8o-cK-uKe"/>
+                <outlet property="coinLabel" destination="Zny-4O-9NO" id="gJU-gd-2WR"/>
+                <outlet property="dateLabel" destination="XmC-Aw-ach" id="FXK-zW-Y1k"/>
+                <outlet property="followButton" destination="gqv-3z-HpU" id="9wN-uR-81y"/>
+                <outlet property="followStackView" destination="aZf-ef-a1E" id="0HG-1D-Ygm"/>
+                <outlet property="followingButton" destination="aOv-5c-2vN" id="sx9-to-SN9"/>
+                <outlet property="heightConstraint" destination="f4n-U4-wsZ" id="nPj-D6-VIt"/>
+                <outlet property="lostPointsLabel" destination="fgY-Ry-wcY" id="vUQ-YA-bFd"/>
+                <outlet property="nameLabel" destination="cFJ-V6-EQF" id="pbS-Ai-ibl"/>
+                <outlet property="pendingPointsLabel" destination="3GW-iz-s8F" id="oA1-WK-J6o"/>
+                <outlet property="successCountLabel" destination="30a-oB-csH" id="AMp-KR-c1k"/>
+                <outlet property="tagCollectionView" destination="QD9-8H-bEg" id="033-FR-43a"/>
+                <outlet property="totalPointsLabel" destination="g9k-iI-o2X" id="v8X-XL-8ZU"/>
+                <outlet property="unsuccessCountLabel" destination="xSg-Al-72F" id="4Zt-CZ-0yB"/>
+                <outlet property="userImageView" destination="DNa-ou-wiT" id="cDR-wQ-llf"/>
+                <outlet property="walletButton" destination="zCh-mt-MIh" id="fRg-VM-iZI"/>
+                <outlet property="winRateLabel" destination="MAE-0O-ptW" id="myQ-CX-yBs"/>
+                <outlet property="wonPointsLabel" destination="X5G-8B-3uc" id="nRZ-8j-4yA"/>
+            </connections>
+            <point key="canvasLocation" x="161.83206106870227" y="69.014084507042256"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="heat" width="16" height="16"/>
         <namedColor name="base">
             <color red="0.71764705882352942" green="0.094117647058823528" blue="0.054901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -238,8 +372,8 @@
         <namedColor name="yellow1">
             <color red="0.89411764705882357" green="0.792156862745098" blue="0.4823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="yellow4">
+            <color red="1" green="0.8784313725490196" blue="0.54117647058823526" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

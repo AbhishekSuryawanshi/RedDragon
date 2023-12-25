@@ -46,8 +46,10 @@ class StreetMatchStadiumVC: UIViewController {
         stadiumListVM?.$responseData
             .receive(on: DispatchQueue.main)
             .dropFirst()
-            .sink(receiveValue: { [weak self] stadiumList in
-                self?.execute_onResponseData(stadiumList: stadiumList!)
+            .sink(receiveValue: { [weak self] response in
+                if let list = response?.response?.data{
+                    self?.execute_onResponseData(stadiumList: list)
+                }
             })
             .store(in: &cancellable)
     }
@@ -78,7 +80,6 @@ extension StreetMatchStadiumVC:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         openDetails(index: indexPath.row)
-        
     }
     
     func openDetails(index:Int){
@@ -106,7 +107,7 @@ extension StreetMatchStadiumVC:UISearchBarDelegate{
         }
         else{
             stadiumList?.removeAll()
-            stadiumList = originalStadiumList?.filter{$0.name.lowercased().contains(searchText.lowercased()) }
+            stadiumList = originalStadiumList?.filter{$0.name?.lowercased().contains(searchText.lowercased()) ?? false }
             tableView.reloadData()
         }
     }

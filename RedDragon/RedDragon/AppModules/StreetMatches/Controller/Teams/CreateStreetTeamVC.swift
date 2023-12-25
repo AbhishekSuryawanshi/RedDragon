@@ -105,6 +105,10 @@ class CreateStreetTeamVC: UIViewController {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
+                if let errorResponse = response?.error {
+                    self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                    return
+                }
                 //popup
                 self?.createTeamSuccess()
             })
@@ -121,7 +125,9 @@ class CreateStreetTeamVC: UIViewController {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.uploadResponse = response
+                if response?.response?.data != nil{
+                    self?.uploadResponse = response!.response!.data
+                }
             })
             .store(in: &cancellable)
     }
@@ -188,7 +194,7 @@ class CreateStreetTeamVC: UIViewController {
             return
         }
         
-        let playerIDs:[Int] = selectedPlayers?.map{$0.id } ?? []
+        let playerIDs:[Int] = selectedPlayers?.map{$0.id ?? 0 } ?? []
         let param:[String:Any] = ["name":txtTeamName.text!,
                                   "name_cn":txtChineseTeamName.text!,
                                   "location_lat":lat,

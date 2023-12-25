@@ -77,6 +77,7 @@ class DiscoverViewController: UIViewController {
     }
     
     func goToStreetMatches(){
+        
         navigateToViewController(StreetMatchesDashboardVC.self, storyboardName: StoryboardName.streetMatches, animationType: .autoReverse(presenting: .zoom))
     }
     
@@ -129,12 +130,12 @@ extension DiscoverViewController {
     
     func execute_onResponseData(_ response: LoginResponse?) {
         if let dataResponse = response?.response {
-            UserDefaults.standard.user = nil
+            UserDefaults.standard.removeObject(forKey: UserDefaultString.user)
             UserDefaults.standard.token = nil
             UserDefaults.standard.points = nil
         } else {
             if let errorResponse = response?.error {
-                self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                self.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
             }
         }
     }

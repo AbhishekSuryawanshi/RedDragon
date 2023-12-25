@@ -28,4 +28,6 @@ struct StoryboardName {
     static let info             = "Info"
     static let expert           = "Expert"
     static let forYou           = "Foryou"
+    static let wallet           = "Wallet"
+    static let discover         = "Discover"
 }

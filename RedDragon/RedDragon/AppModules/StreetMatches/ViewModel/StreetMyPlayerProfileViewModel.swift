@@ -7,7 +7,7 @@
 
 import Foundation
 
-class StreetMyPlayerProfileViewModel: APIServiceManager<StreetProfileUser> {
+class StreetMyPlayerProfileViewModel: APIServiceManager<StreetProfileUserResponse> {
     
     //function to fetch my player profile
     func getMyProfileAsyncCall() {

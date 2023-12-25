@@ -56,7 +56,7 @@ class PostDetailVC: UIViewController {
     func shareAction(model: SocialPost, image: UIImage) {
         stopLoader()
         DispatchQueue.main.async {
-            let vc = UIActivityViewController(activityItems: [image, "\n\n\("Dive into this story via the RedDragon app".localized) \n\(model.descriptn) \n\("Stay connected to the latest in football, basketball, tennis, and other sports with us. Install it from the App Store to find more news.".localized) \n\n \(URLConstants.appstore)"], applicationActivities: [])
+            let vc = UIActivityViewController(activityItems: [image, "\n\n\("Dive into this story via the Rampage Sports app".localized) \n\(model.descriptn) \n\("Stay connected to the latest in football, basketball, tennis, and other sports with us. Install it from the App Store to find more news.".localized) \n\n \(URLConstants.appstore)"], applicationActivities: [])
             if let popoverController = vc.popoverPresentationController {
                 popoverController.sourceView = self.listTableView
                 popoverController.sourceRect = self.listTableView.bounds
@@ -111,7 +111,7 @@ extension PostDetailVC {
     func fetchSocialPostViewModel() {
         ///fetch comment list
         SocialLikeCommentListVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         SocialLikeCommentListVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -125,7 +125,7 @@ extension PostDetailVC {
                     self?.postModel.commentCount = SocialLikeCommentListVM.shared.commentsArray.count
                 } else {
                     if let errorResponse = response?.error {
-                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                        self?.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
                     }
                 }
                 self?.listTableView.reloadData()
@@ -134,7 +134,7 @@ extension PostDetailVC {
         
         ///Add comment
         SocialAddCommentVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         SocialAddCommentVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -148,7 +148,7 @@ extension PostDetailVC {
                     SocialLikeCommentListVM.shared.fetchCommentListAsyncCall(postId: self?.postModel.id ?? 0)
                 } else {
                     if let errorResponse = response?.error {
-                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                        self?.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
                     }
                 }
             })
@@ -156,7 +156,7 @@ extension PostDetailVC {
         
         ///Delete comment
         SocialDeleteCommentVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         SocialDeleteCommentVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -169,7 +169,7 @@ extension PostDetailVC {
                     SocialLikeCommentListVM.shared.fetchCommentListAsyncCall(postId: self?.postModel.id ?? 0)
                 } else {
                     if let errorResponse = response?.error {
-                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                        self?.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
                     }
                 }
             })
@@ -177,7 +177,7 @@ extension PostDetailVC {
         
         /// Add Like
         SocialAddLikeVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         SocialAddLikeVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -195,7 +195,7 @@ extension PostDetailVC {
                     }
                 } else {
                     if let errorResponse = response?.error {
-                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                        self?.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
                     }
                 }
             })

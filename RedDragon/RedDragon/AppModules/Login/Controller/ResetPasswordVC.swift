@@ -15,6 +15,9 @@ class ResetPasswordVC: UIViewController {
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextfield: UITextField!
+    @IBOutlet weak var headerLabel: UILabel!
+    @IBOutlet weak var topLabel: UILabel!
+    @IBOutlet weak var continueButton: UIButton!
     
     var cancellable = Set<AnyCancellable>()
     var countryCode = "0"
@@ -25,6 +28,10 @@ class ResetPasswordVC: UIViewController {
         initialSettings()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        refreshPage()
+    }
+    
     override func viewDidLayoutSubviews() {
         ///Add top corner for background view
         bgView.roundCornersWithBorderLayer(cornerRadii: 30, corners: [.topLeft, .topRight], bound: bgView.bounds)
@@ -32,15 +39,21 @@ class ResetPasswordVC: UIViewController {
     }
     
     func initialSettings() {
-        phoneTextField.placeholder = "Phone Number".localized
-        passwordTextField.placeholder = "Password".localized
-        confirmPasswordTextfield.placeholder = "Confirm Password".localized
         fetchLoginViewModel()
         
         ///set deafult value for country code
         countryCode = "+971"
         countryCodeButton.setTitle(countryCode, for: .normal)
         countryCodeButton.setImage(UIImage(named: "AE") ?? .placeholder1, for: .normal)
+    }
+    
+    func refreshPage() {
+        headerLabel.text = "Reset Password".localized
+        topLabel.text = "Enter the details below to reset Password".localized
+        phoneTextField.placeholder = "Phone Number".localized
+        passwordTextField.placeholder = "Password".localized
+        confirmPasswordTextfield.placeholder = "Confirm Password".localized
+        continueButton.setTitle("Continue".localized, for: .normal)
     }
     
     func showLoader(_ value: Bool) {
@@ -96,7 +109,7 @@ extension ResetPasswordVC {
     func fetchLoginViewModel() {
         
         ResetPasswordVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         ResetPasswordVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -125,7 +138,7 @@ extension ResetPasswordVC {
                         self.dismiss(animated: true)
                     }
                 }
-                self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage, actions: [okAction])
+                self.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
             }
         }
     }

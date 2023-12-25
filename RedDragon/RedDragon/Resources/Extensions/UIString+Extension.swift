@@ -71,23 +71,24 @@ extension String {
     
     ///here we are checking app localization and based on language, we are returning localization key for Chinese/English
     var localized: String {
-        if let _ = UserDefaults.standard.language {} else {
-            // we set a default, just in case
-            UserDefaults.standard.language = "en"
-        }
+//        if let _ = UserDefaults.standard.language {} else {
+//            // we set a default, just in case
+//            UserDefaults.standard.language = "en"
+//        }
+//        
+//        var lang = UserDefaults.standard.language ?? "en"
+//        if lang.contains("en") {
+//            lang = "en"
+//        }
+//        else if lang.contains("zh") {
+//            lang = "zh-Hans"
+//        }
+//        //lang = (lang == "en-US") ? "en" : lang
+//        let path = Bundle.main.path(forResource: lang, ofType: "lproj")
+//        let bundle = Bundle(path: path!)
         
-        var lang = UserDefaults.standard.language ?? "en"
-        if lang.contains("en") {
-            lang = "en"
-        }
-        else if lang.contains("zh") {
-            lang = "zh-Hans"
-        }
-        //lang = (lang == "en-US") ? "en" : lang
-        let path = Bundle.main.path(forResource: lang, ofType: "lproj")
-        let bundle = Bundle(path: path!)
-        
-        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
+//        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
+        return Translation.shared.getTranslation(for: self)
     }
     
     ///here, we are considering only English and Chinese localization to match keyword from the API data, since we have only en and zh langugae "key:value" data in the API response
@@ -145,7 +146,7 @@ extension String {
         let formatter = DateFormatter()
         formatter.dateFormat = inputDateformat
         guard let date = formatter.date(from: self) else { return "" }
-
+        
         formatter.dateFormat = outputDateFormat
         let outputDate = formatter.string(from: date)
         return outputDate
@@ -172,13 +173,7 @@ extension String {
 // MARK: - NSMutableAttributedString
 
 extension NSMutableAttributedString {
-    @discardableResult func regularColorText(_ text: String, size: CGFloat, color: UIColor) -> NSMutableAttributedString {
-        let attrs: [NSAttributedString.Key: Any] = [.font: fontRegular(size), .foregroundColor: color]
-        let normalString = NSMutableAttributedString(string:text, attributes: attrs)
-        append(normalString)
-        return self
-    }
-    
+   
     @discardableResult func light(_ text: String, size: CGFloat) -> NSMutableAttributedString {
         let attrs: [NSAttributedString.Key: Any] = [.font: fontLight(size)]
         let normalString = NSMutableAttributedString(string:text, attributes: attrs)
@@ -193,15 +188,36 @@ extension NSMutableAttributedString {
         return self
     }
     
-    @discardableResult func medium(_ text: String, size: CGFloat) -> NSMutableAttributedString {
-        let attrs: [NSAttributedString.Key: Any] = [.font: fontMedium(size)]
+    @discardableResult func regularColorText(_ text: String, size: CGFloat, color: UIColor) -> NSMutableAttributedString {
+        let attrs: [NSAttributedString.Key: Any] = [.font: fontRegular(size), .foregroundColor: color]
         let normalString = NSMutableAttributedString(string:text, attributes: attrs)
         append(normalString)
         return self
     }
     
-    @discardableResult func mediumColorText(_ text: String, size: CGFloat, color: UIColor) -> NSMutableAttributedString {
-        let attrs: [NSAttributedString.Key: Any] = [.font: fontMedium(size), .foregroundColor: color]
+    //    @discardableResult func medium(_ text: String, size: CGFloat) -> NSMutableAttributedString {
+    //        let attrs: [NSAttributedString.Key: Any] = [.font: fontMedium(size)]
+    //        let normalString = NSMutableAttributedString(string:text, attributes: attrs)
+    //        append(normalString)
+    //        return self
+    //    }
+    //
+    //    @discardableResult func mediumColorText(_ text: String, size: CGFloat, color: UIColor) -> NSMutableAttributedString {
+    //        let attrs: [NSAttributedString.Key: Any] = [.font: fontMedium(size), .foregroundColor: color]
+    //        let normalString = NSMutableAttributedString(string:text, attributes: attrs)
+    //        append(normalString)
+    //        return self
+    //    }
+    
+    @discardableResult func semiBold(_ text: String, size: CGFloat) -> NSMutableAttributedString {
+        let attrs: [NSAttributedString.Key: Any] = [.font: fontSemiBold(size)]
+        let normalString = NSMutableAttributedString(string:text, attributes: attrs)
+        append(normalString)
+        return self
+    }
+    
+    @discardableResult func semiBoldColorText(_ text: String, size: CGFloat, color: UIColor) -> NSMutableAttributedString {
+        let attrs: [NSAttributedString.Key: Any] = [.font: fontSemiBold(size), .foregroundColor: color]
         let normalString = NSMutableAttributedString(string:text, attributes: attrs)
         append(normalString)
         return self

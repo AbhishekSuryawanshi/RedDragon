@@ -10,6 +10,7 @@ import Combine
 
 class GossipDetailVC: UIViewController {
     
+    @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var gossipImageView: UIImageView!
     @IBOutlet weak var contentLabel: ExpandableLabel!
@@ -19,6 +20,9 @@ class GossipDetailVC: UIViewController {
     @IBOutlet weak var commentHeightConstarint: NSLayoutConstraint!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var commentsTitleLabel: UILabel!
+    @IBOutlet weak var viewAllTitleLabel: UILabel!
+    @IBOutlet weak var commentTextField: UITextField!
     
     var cancellable = Set<AnyCancellable>()
     var commentSectionID = ""
@@ -34,6 +38,7 @@ class GossipDetailVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        refreshPage()
         if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
             commentView.isHidden = false
             CommentListVM.shared.getCommentsAsyncCall(sectionId: commentSectionID)
@@ -57,6 +62,13 @@ class GossipDetailVC: UIViewController {
             ]
             GossipVM.shared.fetchNewsDetailAsyncCall(params: param)
         }
+    }
+    
+    func refreshPage() {
+        headerLabel.text = "Article".localized
+        commentsTitleLabel.text = "Comments".localized
+        viewAllTitleLabel.text = "View All".localized
+        commentTextField.placeholder = "Add a comment".localized
     }
     
     func nibInitialization() {
@@ -110,7 +122,7 @@ extension GossipDetailVC {
     func fetchCommentsViewModel() {
         ///fetch comment list
         CommentListVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         CommentListVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -124,7 +136,7 @@ extension GossipDetailVC {
                     self?.commentsArray = Array((dataResponse.data ?? []).prefix(2))
                 } else {
                     if let errorResponse = response?.error {
-                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                        self?.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
                     }
                 }
                 self?.commentTableView.reloadData()
@@ -135,7 +147,7 @@ extension GossipDetailVC {
     
     func fetchGossipViewModel() {
         GossipVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         GossipVM.shared.$responseData
             .receive(on: DispatchQueue.main)
@@ -150,7 +162,7 @@ extension GossipDetailVC {
         }
         
         ESportsDetailVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         ESportsDetailVM.shared.$responseData
             .receive(on: DispatchQueue.main)

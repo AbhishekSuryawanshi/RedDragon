@@ -7,7 +7,7 @@
 
 import Foundation
 
-class StreetEventRequestViewModel: APIServiceManager<[StreetEventRequest]> {
+class StreetEventRequestViewModel: APIServiceManager<StreetEventRequestResponse> {
     
     //function to send event request
     func getEventRequestsAsyncCall(eventID:Int) {

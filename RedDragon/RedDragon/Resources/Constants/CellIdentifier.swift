@@ -8,7 +8,8 @@
 import Foundation
 
 struct CellIdentifier {
-    // Common 
+    
+    // Common
     static let headerTopCollectionViewCell      = "HeaderTopCollectionViewCell"
     static let headerBottom_1CollectionViewCell = "HeaderBottom_1CollectionViewCell"
     static let iconNameCollectionViewCell       = "IconNameCollectionViewCell"
@@ -37,39 +38,39 @@ struct CellIdentifier {
     static let analysisTableViewCell            = "AnalysisTableViewCell"
     
     //Player Details
-    static let matchesTableViewCell             = "MatchesTableViewCell"
-    static let playerStatsCollectionViewCell    = "PlayerStatsCollectionViewCell"
-    static let playerLeagueCollectionViewCell   = "PlayerLeaguesCollectionViewCell"
-    static let playerStatsTableViewCell         = "PlayerStatsTableViewCell"
-    static let playerMediaCollectionViewCell    = "PlayerDetailsMediaCollectionViewCell"
+    static let matchesTableViewCell            = "MatchesTableViewCell"
+    static let playerStatsCollectionViewCell   = "PlayerStatsCollectionViewCell"
+    static let playerLeagueCollectionViewCell  = "PlayerLeaguesCollectionViewCell"
+    static let playerStatsTableViewCell        = "PlayerStatsTableViewCell"
+    static let playerMediaCollectionViewCell   = "PlayerDetailsMediaCollectionViewCell"
     
     // Bets
-    static let homeTitleCollectionVc            = "HomeTitleCollectionVc"
-    static let menuItemTableVC                  = "MenuItemTableVC"
-    static let betMatchTableVC                  = "BetMatchTableVC"
-    static let betLeagueTableVC                  = "BetLeagueTableVC"
-    static let betWinTableVC                    = "BetWinTableVC"
-    static let betLoseTableVC                   = "BetLoseTableVC"
-    static let pointsItemTableVC                = "PointsItemTableVC"
+    static let homeTitleCollectionVc           = "HomeTitleCollectionVc"
+    static let menuItemTableVC                 = "MenuItemTableVC"
+    static let betMatchTableVC                 = "BetMatchTableVC"
+    static let betLeagueTableVC                = "BetLeagueTableVC"
+    static let betWinTableVC                   = "BetWinTableVC"
+    static let betLoseTableVC                  = "BetLoseTableVC"
+    static let pointsItemTableVC               = "PointsItemTableVC"
 
     //CardGame
-    static let allPlayersTableCell              = "AllPlayersTableViewCell"
-    static let statisticCell                    = "StatCollectionViewCell"
-    static let myTeamCell                       = "MyTeamCollectionViewCell"
-    static let leaderboardCell                  = "LeaderboardTableViewCell"
-    static let yourMatches                      = "YourMatchesTableCell"
-    static let userPlayerCell                   = "UserPlayersCollectionCell"
+    static let allPlayersTableCell             = "AllPlayersTableViewCell"
+    static let statisticCell                   = "StatCollectionViewCell"
+    static let myTeamCell                      = "MyTeamCollectionViewCell"
+    static let leaderboardCell                 = "LeaderboardTableViewCell"
+    static let yourMatches                     = "YourMatchesTableCell"
+    static let userPlayerCell                  = "UserPlayersCollectionCell"
     
     //Prediction
-    static let predictUpcomingTableViewCell     = "PredictUpcomingTableViewCell"
+    static let predictUpcomingTableViewCell    = "PredictUpcomingTableViewCell"
 
     //Meet
-    static let meetUserTableViewCell            = "MeetUserTableViewCell"
-    static let exploreEventsTableViewCell       = "ExploreEventsTableViewCell"
-    static let matchesCollectionViewCell        = "MatchesCollectionViewCell"
-    static let myEventsCollectionViewCell       = "MyEventsCollectionViewCell"
-    static let senderTableViewCell              = "SenderTableViewCell"
-    static let receiverTableViewCell              = "ReceiverTableViewCell"
+    static let meetUserTableViewCell           = "MeetUserTableViewCell"
+    static let exploreEventsTableViewCell      = "ExploreEventsTableViewCell"
+    static let matchesCollectionViewCell       = "MatchesCollectionViewCell"
+    static let myEventsCollectionViewCell      = "MyEventsCollectionViewCell"
+    static let senderTableViewCell             = "SenderTableViewCell"
+    static let receiverTableViewCell           = "ReceiverTableViewCell"
     
     //StreetMatches
 
@@ -95,9 +96,9 @@ struct CellIdentifier {
     static let feedsTeamTableViewCell          = "FeedsTeamTableViewCell"
     
     //News
-    static let newsCollectionViewCell           = "NewsCollectionViewCell"
-    static let newsTableViewCell                = "NewsTableViewCell"
-    static let newsVideoCollectionViewCell      = "NewsVideoCollectionViewCell"
+    static let newsCollectionViewCell          = "NewsCollectionViewCell"
+    static let newsTableViewCell               = "NewsTableViewCell"
+    static let newsVideoCollectionViewCell     = "NewsVideoCollectionViewCell"
     
     //Matches
     static let globalMatchesTableViewCell         = "GlobalMatchesTableViewCell"
@@ -106,5 +107,19 @@ struct CellIdentifier {
     static let globalMatchHeadToHeadTableViewCell = "GlobalMatchHeadToHeadTableViewCell"
     
     //Home
+
     static let bannerCell                        = "BannerCollectionViewCell"
+    static let predictionTableCell               = "HomePagePredictionTableViewCell"
+    static let forYouLiveMatchTabelCell          = "ForYouLiveMatchTableViewCell"
+    
+    //Wallet
+    static let subscriptionTableViewCell       = "SubscriptionTableViewCell"
+
+    //Experts
+    static let predictUserListTableViewCell    = "PredictUserListTableViewCell"
+    static let userTagsCollectionViewCell      = "UserTagsCollectionViewCell"
+
+    //Discover | Profile
+    static let profileTableViewCell            = "ProfileTableViewCell"
 }
+

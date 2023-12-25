@@ -19,7 +19,7 @@ class HeaderTopCollectionViewCell: UICollectionViewCell {
    /// To use single underline label cell
     func configureUnderLineCell(title: String, selected: Bool, textColor: UIColor = .white, fontSize: CGFloat = 17) {
         var formatedText = NSMutableAttributedString()
-        formatedText = selected ? formatedText.bold(title, size: fontSize) : formatedText.regular(title, size: fontSize)
+        formatedText = selected ? formatedText.semiBold(title, size: fontSize) : formatedText.regular(title, size: fontSize)
         ///pass true to "remove" key to remove underline
         formatedText.addUnderLine(textToFind: title, remove: !selected)
         titleLabel.attributedText = formatedText
@@ -41,7 +41,7 @@ class HeaderTopCollectionViewCell: UICollectionViewCell {
             titleLabel.textColor = textColor
         }
         var formatedText = NSMutableAttributedString()
-        formatedText = selected ? formatedText.bold(title, size: fontSize) : formatedText.regular(title, size: fontSize)
+        formatedText = selected ? formatedText.semiBold(title, size: fontSize) : formatedText.regular(title, size: fontSize)
         formatedText.addUnderLine(textToFind: title, remove: !selected)
         titleLabel.attributedText = formatedText
         

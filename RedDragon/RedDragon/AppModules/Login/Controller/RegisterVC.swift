@@ -10,8 +10,15 @@ import Combine
 
 class RegisterVC: UIViewController {
     
+    @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var topTextLabel: UILabel!
+    @IBOutlet weak var nameTiltleLabel: UILabel!
+    @IBOutlet weak var emailTiltleLabel: UILabel!
+    @IBOutlet weak var phoneTiltleLabel: UILabel!
+    @IBOutlet weak var userNameTiltleLabel: UILabel!
+    @IBOutlet weak var passwordTiltleLabel: UILabel!
+    @IBOutlet weak var confirmPassTiltleLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var countryCodeButton: UIButton!
@@ -22,6 +29,7 @@ class RegisterVC: UIViewController {
     @IBOutlet weak var bottomTextView: UITextView!
     @IBOutlet weak var termsTextView: UITextView!
     @IBOutlet weak var checkButton: UIButton!
+    @IBOutlet weak var createAccountButton: UIButton!
     
     var cancellable = Set<AnyCancellable>()
     var countryCode = "0"
@@ -29,6 +37,10 @@ class RegisterVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSettings()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        refreshPage()
     }
     
     override func viewDidLayoutSubviews() {
@@ -44,9 +56,18 @@ class RegisterVC: UIViewController {
         countryCode = "+971"
         countryCodeButton.setTitle(countryCode, for: .normal)
         countryCodeButton.setImage(UIImage(named: "AE") ?? .placeholder1, for: .normal)
-        
+    }
+    
+    func refreshPage() {
+        headerLabel.text = "Welcome to Rampage Sports App".localized
         let formatedText = NSMutableAttributedString()
-        topTextLabel.attributedText = formatedText.regular("Please ", size: 15).medium("Create an account", size: 15).regular(" to continue", size: 15)
+        topTextLabel.attributedText = formatedText.regular("Please ", size: 15).semiBold("Create an account", size: 15).regular(" to continue", size: 15)
+        nameTiltleLabel.text = "Full Name".localized
+        emailTiltleLabel.text = "Email".localized
+        phoneTiltleLabel.text = "Phone Number".localized
+        userNameTiltleLabel.text = "User Name".localized
+        passwordTiltleLabel.text = "Password".localized
+        confirmPassTiltleLabel.text = "Confirm Password".localized
         nameTextField.placeholder = "Full Name".localized
         emailTextfield.placeholder = "Email".localized
         phoneTextField.placeholder = "Phone Number".localized
@@ -54,14 +75,15 @@ class RegisterVC: UIViewController {
         passwordTextField.placeholder = "Password".localized
         confirmPasswordTextfield.placeholder = "Confirm Password".localized
         let bottomFormatedText = NSMutableAttributedString()
-        bottomFormatedText.regular("Already Have an Account? Tap here to", size: 15).bold(" Sign In", size: 15)
+        bottomFormatedText.regular("Already Have an Account? Tap here to".localized, size: 15).semiBold(" Sign In".localized, size: 15)
         bottomFormatedText.addUnderLine(textToFind: "Sign In")
         bottomFormatedText.addLink(textToFind: " Sign In", linkURL: "signIn")
         bottomTextView.attributedText = bottomFormatedText
         let termsFormatedText = NSMutableAttributedString()
-        termsFormatedText.regular("Confirm your acceptance of the", size: 14).bold(" Terms and Conditions", size: 15)
-        bottomFormatedText.addLink(textToFind: "Confirm your acceptance of the Terms and Conditions", linkURL: URLConstants.terms)
+        termsFormatedText.regular("Confirm your acceptance of the".localized, size: 14).semiBold(" Terms and Conditions".localized, size: 15)
+        bottomFormatedText.addLink(textToFind: "Confirm your acceptance of the Terms and Conditions".localized, linkURL: URLConstants.terms)
         termsTextView.attributedText = termsFormatedText
+        createAccountButton.setTitle("Create an Account".localized, for: .normal)
     }
     
     func showLoader(_ value: Bool) {
@@ -143,7 +165,7 @@ extension RegisterVC {
     func fetchLoginViewModel() {
         
         RegisterVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         RegisterVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -174,7 +196,7 @@ extension RegisterVC {
             }
         } else {
             if let errorResponse = response?.error {
-                self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                self.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
             }
         }
     }

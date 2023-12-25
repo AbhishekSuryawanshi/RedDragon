@@ -29,6 +29,7 @@ class StreetMatchesDashboardVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
+        headerCollectionView.reloadData()
     }
     // MARK: - Methods
     func performInitialSetup() {
@@ -82,6 +83,14 @@ extension StreetMatchesDashboardVC: UICollectionViewDataSource, UICollectionView
     
 }
 
+extension StreetMatchesDashboardVC: LoginVCDelegate {
+    func viewControllerDismissed() {
+        self.tabBarController?.tabBar.isHidden = false
+        embedStreetProfileVC()
+        
+    }
+}
+
 // MARK: - Functions to add Child controllers in Parent View
 extension StreetMatchesDashboardVC {
     
@@ -122,8 +131,31 @@ extension StreetMatchesDashboardVC {
     }
     
     func embedStreetProfileVC() {
+        if !isUserLoggedIn(){
+            self.customAlertView_2Actions(title: "Login / Sign Up".localized, description: ErrorMessage.loginRequires.localized) {
+                /// Show login page to login/register new user
+                /// hide tabbar before presenting a viewcontroller
+                /// show tabbar while dismissing a presented viewcontroller in delegate
+                self.tabBarController?.tabBar.isHidden = true
+                self.presentOverViewController(LoginVC.self, storyboardName: StoryboardName.login) { vc in
+                    vc.delegate = self
+                }
+            }
+            return
+        }
+       
+        if !isUserStreetProfileUpdated(){
+            self.view.makeToast("Please update player profile to continue".localized)
+            
+            ViewEmbedder.embed(withIdentifier: "StreetEditProfileViewController", storyboard: UIStoryboard(name: StoryboardName.streetMatches, bundle: nil), parent: self, container: viewContainer) { vc in
+               let vc = vc as! StreetEditProfileViewController
+               vc.isFromDashboard = true
+            }
+            return
+        }
         ViewEmbedder.embed(withIdentifier: "StreetPlayerProfileViewController", storyboard: UIStoryboard(name: StoryboardName.streetMatches, bundle: nil), parent: self, container: viewContainer) { vc in
-           // let vc = vc as! StreetTeamsViewController
+            let vc = vc as! StreetPlayerProfileViewController
+            vc.isFromDashboard = true
         }
     }
 }

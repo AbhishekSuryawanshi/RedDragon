@@ -20,6 +20,8 @@ class VerificationVC: UIViewController {
     @IBOutlet weak var topTextLabel: UILabel!
     @IBOutlet weak var otpTextFieldView: OTPFieldView!
     @IBOutlet weak var bottomTextView: UITextView!
+    @IBOutlet weak var headerLabel: UILabel!
+    @IBOutlet weak var submitButton: UIButton!
     
     var cancellable = Set<AnyCancellable>()
     var otpEntered = false
@@ -33,6 +35,9 @@ class VerificationVC: UIViewController {
         super.viewDidLoad()
         initialSettings()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        refreshPage()
+    }
     
     override func viewDidLayoutSubviews() {
         ///Add top corner for background view
@@ -42,16 +47,7 @@ class VerificationVC: UIViewController {
     
     func initialSettings() {
         fetchLoginViewModel()
-        
-        topTextLabel.text = "A verification code has been sent \nto your mobile number"
-        ///For forgot password, resent api will not work, It require authentication
-        if pushFrom != .forgotPass {
-            let bottomFormatedText = NSMutableAttributedString()
-            bottomFormatedText.regular("Didn’t receive the code? ", size: 15).bold("Resend", size: 15)
-            bottomFormatedText.addUnderLine(textToFind: "Resend")
-            bottomFormatedText.addLink(textToFind: "Resend", linkURL: "resend")
-            bottomTextView.attributedText = bottomFormatedText
-        }
+       
         otpTextFieldView.fieldSize = (screenWidth - 100) / 6
         otpTextFieldView.delegate = self
         otpTextFieldView.initializeUI()
@@ -60,6 +56,20 @@ class VerificationVC: UIViewController {
         if pushFrom == .login {
             ResendOtpVM.shared.resendOtpAsyncCall()
         }
+    }
+    
+    func refreshPage() {
+        headerLabel.text = "Verify".localized
+        topTextLabel.text = "A verification code has been sent to your mobile number".localized
+        ///For forgot password, resent api will not work, It require authentication
+        if pushFrom != .forgotPass {
+            let bottomFormatedText = NSMutableAttributedString()
+            bottomFormatedText.regular("Didn’t receive the code? ".localized, size: 15).semiBold("Resend".localized, size: 15)
+            bottomFormatedText.addUnderLine(textToFind: "Resend".localized)
+            bottomFormatedText.addLink(textToFind: "Resend", linkURL: "resend")
+            bottomTextView.attributedText = bottomFormatedText
+        }
+        submitButton.setTitle("Submit".localized, for: .normal)
     }
     
     func showLoader(_ value: Bool) {
@@ -96,7 +106,7 @@ extension VerificationVC {
     func fetchLoginViewModel() {
         //response of otp verification
         UserVerifyVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         UserVerifyVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -111,7 +121,7 @@ extension VerificationVC {
         
         //response of resend otp
         ResendOtpVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         ResendOtpVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -143,7 +153,7 @@ extension VerificationVC {
             }
         } else {
             if let errorResponse = response?.error {
-                self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                self.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
             }
         }
     }
@@ -154,7 +164,7 @@ extension VerificationVC {
             self.view.makeToast(dataResponse.messages?.first)
         } else {
             if let errorResponse = response?.error {
-                self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                self.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
             }
         }
     }

@@ -28,6 +28,12 @@ class MyStreetTeamsVC: UIViewController {
         initialSettings()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if !isFromProfile{
+            makeNetworkCall()
+        }
+    }
+    
     
     @IBAction func actionCreateTeam(_ sender: Any) {
         navigateToViewController(CreateStreetTeamVC.self,storyboardName: StoryboardName.streetMatches)
@@ -37,7 +43,7 @@ class MyStreetTeamsVC: UIViewController {
         setupLocalisation()
         registerCells()
         configureViewModel()
-        makeNetworkCall()
+        
     }
     
     func setupLocalisation(){
@@ -66,8 +72,14 @@ class MyStreetTeamsVC: UIViewController {
         myTeamViewModel?.$responseData
              .receive(on: DispatchQueue.main)
              .dropFirst()
-             .sink(receiveValue: { [weak self] teamList in
-                 self?.execute_onMyTeamData(teamList: teamList!)
+             .sink(receiveValue: { [weak self] response in
+                 if let errorResponse = response?.error {
+                     self?.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
+                     return
+                 }
+                 if let list = response?.response?.data{
+                     self?.execute_onMyTeamData(teamList: list)
+                 }
              })
              .store(in: &cancellable)
     }
@@ -75,8 +87,15 @@ class MyStreetTeamsVC: UIViewController {
    
     
     func execute_onMyTeamData(teamList:[StreetTeam]){
-        teams = teamList
-        tableView.reloadData()
+        if teamList.count == 0{
+            emptyView.isHidden = false
+            
+        }
+        else{
+            teams = teamList
+            tableView.reloadData()
+            emptyView.isHidden = true
+        }
     }
     
     func makeNetworkCall(){

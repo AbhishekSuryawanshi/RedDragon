@@ -139,6 +139,10 @@ class StreetCreateEventsVC: UIViewController {
              .receive(on: DispatchQueue.main)
              .dropFirst()
              .sink(receiveValue: { [weak self] response in
+                 if let errorResponse = response?.error {
+                     self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                     return
+                 }
                  self?.createEventSuccess()
              })
              .store(in: &cancellable)
@@ -156,7 +160,9 @@ class StreetCreateEventsVC: UIViewController {
              .receive(on: DispatchQueue.main)
              .dropFirst()
              .sink(receiveValue: { [weak self] response in
-                 self?.playerListSuccess(list: response!)
+                 if let list = response?.response?.data{
+                     self?.playerListSuccess(list: list)
+                 }
              })
              .store(in: &cancellable)
         
@@ -173,7 +179,9 @@ class StreetCreateEventsVC: UIViewController {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
-                self?.uploadResponse = response
+                if response?.response?.data != nil{
+                    self?.uploadResponse = response!.response!.data
+                }
             })
             .store(in: &cancellable)
     }

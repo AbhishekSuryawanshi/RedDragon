@@ -8,22 +8,25 @@
 import Foundation
 
 // MARK: - Bet and Prediction Users List
-struct BetUserListModel: Codable {
-    let response: BetUserList?
+struct ExpertUserListModel: Codable {
+    let response: ExpertUserList?
 }
 
-struct BetUserList: Codable {
-    let data: [BetUser]?
+struct ExpertUserList: Codable {
+    let data: [ExpertUser]?
 }
 
-struct BetUser: Codable {
+struct ExpertUser: Codable {
     let appdata: AppData?
     let about: String?
     let profileImg: String?
-  
+    let following: Bool?
+    let tags: [String]?
+    let wallet: Int?
+    
     enum CodingKeys: String, CodingKey {
-        case appdata
-        case about
+        case appdata, tags, wallet
+        case about, following
         case profileImg = "profile_img"
     }
 }
@@ -40,10 +43,12 @@ struct AppData: Codable {
 
 struct Predict: Codable {
     let name: String?
+    let date: String
     let predictStats: PredictStats?
     
     enum CodingKeys: String, CodingKey {
         case name
+        case date = "created_at"
         case predictStats = "pred_stats"
     }
 }

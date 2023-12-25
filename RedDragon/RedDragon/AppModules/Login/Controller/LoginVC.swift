@@ -14,12 +14,17 @@ protocol LoginVCDelegate:AnyObject {
 
 class LoginVC: UIViewController {
     
+    @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var topTextLabel: UILabel!
+    @IBOutlet weak var phoneTitleLabel: UILabel!
+    @IBOutlet weak var passwordTitleLabel: UILabel!
     @IBOutlet weak var countryCodeButton: UIButton!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var bottomTextView: UITextView!
+    @IBOutlet weak var forgotPassButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
     
     weak var delegate:LoginVCDelegate?
     var cancellable = Set<AnyCancellable>()
@@ -28,6 +33,10 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSettings()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        refreshPage()
     }
     
     override func viewDidLayoutSubviews() {
@@ -51,17 +60,24 @@ class LoginVC: UIViewController {
         countryCodeButton.setTitle(countryCode, for: .normal)
         countryCodeButton.setImage(UIImage(named: "AE") ?? .placeholder1, for: .normal)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dismissLoginVC), name: .dismissLoginVC, object: nil)
+    }
+    
+    func refreshPage() {
+        headerLabel.text = "Welcome to Rampage Sports App".localized
         let topFormatedText = NSMutableAttributedString()
-        topTextLabel.attributedText = topFormatedText.regular("Please ", size: 15).medium("Login", size: 15).regular(" to continue", size: 15)
+        topTextLabel.attributedText = topFormatedText.regular("Please ", size: 15).semiBold("Login", size: 15).regular(" to continue", size: 15)
+        phoneTitleLabel.text = "Phone Number".localized
+        passwordTitleLabel.text = "Password".localized
         phoneTextField.placeholder = "Phone Number".localized
         passwordTextField.placeholder = "Password".localized
         let bottomFormatedText = NSMutableAttributedString()
-        bottomFormatedText.regular("Don't Have an Account? Tap here to", size: 15).bold(" Register", size: 15)
+        bottomFormatedText.regular("Don't Have an Account? Tap here to", size: 15).semiBold(" Register", size: 15)
         bottomFormatedText.addUnderLine(textToFind: "Register")
         bottomFormatedText.addLink(textToFind: " Register", linkURL: "register")
         bottomTextView.attributedText = bottomFormatedText
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.dismissLoginVC), name: .dismissLoginVC, object: nil)
+        forgotPassButton.setTitle("Forgot Password".localized, for: .normal)
+        loginButton.setTitle("Login".localized, for: .normal)
     }
     
     func showLoader(_ value: Bool) {
@@ -115,7 +131,7 @@ extension LoginVC {
     func fetchLoginViewModel() {
         
         LoginVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         LoginVM.shared.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -153,7 +169,7 @@ extension LoginVC {
             }
         } else {
             if let errorResponse = response?.error {
-                self.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                self.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
             }
         }
     }

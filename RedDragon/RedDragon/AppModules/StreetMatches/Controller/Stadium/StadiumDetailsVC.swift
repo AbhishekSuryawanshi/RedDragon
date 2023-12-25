@@ -116,15 +116,15 @@ class StadiumDetailsVC: UIViewController {
         lblLocation.text = stadium?.address
         lblStadiumName.text = stadium?.name
         lblDescription.text = stadium?.description
-//        if Utility.getCurrentLang() == "zh-Hans"{
-//            lblStadiumName.text = stadium?.nameCn
-//            lblDescription.text = stadium?.descriptionCn
-//        }
-        lblOwnerName.text = (stadium?.owner.firstName ?? "") + " " + (stadium?.owner.lastName ?? "")
-        lblOwnerPhone.text = stadium?.owner.phoneNumber ?? ""
-        lblAddress.text = stadium?.owner.address
-        let sportsArr:[String] = stadium?.availableSports.components(separatedBy: ",") ?? []
-        let amenities:[String] = stadium?.amenities.components(separatedBy: ",") ?? []
+        if UserDefaults.standard.language == "zh-Hans"{
+            lblStadiumName.text = stadium?.nameCN
+            lblDescription.text = stadium?.descriptionCN
+        }
+        lblOwnerName.text = (stadium?.owner?.firstName ?? "") + " " + (stadium?.owner?.lastName ?? "")
+        lblOwnerPhone.text = stadium?.owner?.phoneNumber ?? ""
+        lblAddress.text = stadium?.owner?.address
+        let sportsArr:[String] = stadium?.availableSports?.components(separatedBy: ",") ?? []
+        let amenities:[String] = stadium?.amenities?.components(separatedBy: ",") ?? []
         for m in sportsArr {
             if m == SportTypes.Football.key{
                 sports.append(.Football)
@@ -162,7 +162,7 @@ class StadiumDetailsVC: UIViewController {
         }
         collectionViewSports.reloadData()
         collectionViewAmenities.reloadData()
-        pageControl.numberOfPages = stadium?.imgsUrls.count ?? 0
+        pageControl.numberOfPages = stadium?.imgsUrls?.count ?? 0
         collectionViewImages.reloadData()
         tableViewTimings.reloadData()
         
@@ -185,7 +185,7 @@ extension StadiumDetailsVC:UICollectionViewDelegate,UICollectionViewDataSource,U
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == collectionViewImages{
-            return stadium?.imgsUrls.count ?? 0
+            return stadium?.imgsUrls?.count ?? 0
         }
         else if collectionView == collectionViewSports{
             return sports.count
@@ -198,10 +198,10 @@ extension StadiumDetailsVC:UICollectionViewDelegate,UICollectionViewDataSource,U
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == collectionViewImages{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.imageSliderCollectionViewCell, for: indexPath) as! ImageSliderCollectionViewCell
-            cell.imageView.setImage(imageStr:stadium?.imgsUrls[indexPath.row] ?? "" ,placeholder: .placeholder1)
+            cell.imageView.setImage(imageStr:stadium?.imgsUrls?[indexPath.row] ?? "" ,placeholder: .placeholder1)
             cell.callLeft = {
                 let toIndex = indexPath.row+1
-                if toIndex < (self.stadium?.imgsUrls.count ?? 0){
+                if toIndex < (self.stadium?.imgsUrls?.count ?? 0){
                     collectionView.scrollToItem(at: IndexPath(row: toIndex, section: 0), at: .right, animated: false)
                 }
                 

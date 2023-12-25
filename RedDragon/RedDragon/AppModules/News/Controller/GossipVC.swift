@@ -12,6 +12,12 @@ import AVKit
 
 class GossipVC: UIViewController {
     
+    @IBOutlet weak var breakingNewsTitleLabel: UILabel!
+    @IBOutlet weak var topPublishersTitleLabel: UILabel!
+    @IBOutlet weak var leaguesTitleLabel: UILabel!
+    @IBOutlet weak var tredingTitleLabel: UILabel!
+    @IBOutlet weak var newsCategoryTitleLabel: UILabel!
+    @IBOutlet weak var videosTitleLabel: UILabel!
     @IBOutlet weak var breakngNewsImage: UIImageView!
     @IBOutlet weak var topMarqueeLabel: MarqueeLabel!
     @IBOutlet weak var publishersView: UIView!
@@ -44,7 +50,7 @@ class GossipVC: UIViewController {
         initialSettings()
     }
     override func viewDidAppear(_ animated: Bool) {
-        /// "thehindu" default value
+        refreshPage()
         getNewsList()
     }
     
@@ -79,6 +85,16 @@ class GossipVC: UIViewController {
         trendingCollectionView.register(CellIdentifier.newsCollectionViewCell)
         newsTableView.register(CellIdentifier.newsTableViewCell)
         videosCollectionView.register(CellIdentifier.newsCollectionViewCell)
+    }
+    
+    func refreshPage() {
+        breakingNewsTitleLabel.text = "Breaking News".localized
+       topPublishersTitleLabel.text = "Top Publishers".localized
+        leaguesTitleLabel.text = "Top Leagues".localized
+        tredingTitleLabel.text = "Trending Topics".localized
+        newsCategoryTitleLabel.text = "News Category".localized
+        videosTitleLabel.text = "Videos".localized
+        viewAllButton.setTitle("View All".localized, for: .normal)
     }
     
     @objc func searchEnable(notification: Notification) {
@@ -180,7 +196,7 @@ extension GossipVC {
     func fetchSocialViewModel() {
         ///fetch public league list / euro 5 league
         SocialPublicLeagueVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         SocialPublicLeagueVM.shared.$responseData
             .receive(on: DispatchQueue.main)
@@ -196,7 +212,7 @@ extension GossipVC {
     func fetchGossipViewModel() {
         ///fetch news list
         GossipListVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         GossipListVM.shared.$responseData
             .receive(on: DispatchQueue.main)
@@ -211,7 +227,7 @@ extension GossipVC {
         
         ///fetch esports news list
         ESportsListVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         ESportsListVM.shared.$responseData
             .receive(on: DispatchQueue.main)
@@ -225,7 +241,7 @@ extension GossipVC {
         }
         ///fetch videos list
         GossipVideoListVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         GossipVideoListVM.shared.$responseData
             .receive(on: DispatchQueue.main)
@@ -239,7 +255,7 @@ extension GossipVC {
         
         /// fetch video play url
         GossipVideoVM.shared.showError = { [weak self] error in
-            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.view.makeToast(error, duration: 2.0, position: .center)
         }
         GossipVideoVM.shared.$responseData
             .receive(on: DispatchQueue.main)
@@ -340,12 +356,12 @@ extension GossipVC: UICollectionViewDataSource {
         if collectionView == publisherCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.iconNameCollectionViewCell, for: indexPath) as! IconNameCollectionViewCell
             let publisher = publishersArray[indexPath.row].getNewsSource()
-            cell.configure(title: publisher.0, iconImage: publisher.1)
+            cell.configure(title: publisher.0, iconImage: publisher.1, bgViewCornerRadius: 30, iconCornerRadius: 30)
             return cell
         } else if collectionView == leagueCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.iconNameCollectionViewCell, for: indexPath) as! IconNameCollectionViewCell
             let model = leagueArray[indexPath.row]
-            cell.configure(title: UserDefaults.standard.language == "en" ? model.enName : model.cnName, iconName: model.logoURL, imageWidth: (0.7 * 60), placeHolderImage: .placeholderLeague)
+            cell.configure(title: UserDefaults.standard.language == "en" ? model.enName : model.cnName, iconName: model.logoURL, imageWidth: (0.7 * 60), bgViewCornerRadius: 30, iconCornerRadius: 30, placeHolderImage: .placeholderLeague)
             return cell
         } else if collectionView == trendingCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.newsCollectionViewCell, for: indexPath) as! NewsCollectionViewCell

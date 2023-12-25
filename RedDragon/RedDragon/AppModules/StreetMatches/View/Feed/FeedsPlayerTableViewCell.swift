@@ -25,10 +25,10 @@ class FeedsPlayerTableViewCell: UITableViewCell {
         lblName.text = (obj?.firstName ?? "") + " " + (obj?.lastName ?? "")
         let age = StreetMatchPlayerTableViewCell.getDateDiffrence(dateStr: obj?.birthdate ?? "")
         lblAge.text = "\(age) \("Years".localized)"
-        lblPosition.text = obj?.player.positionName
-//        if Utility.getCurrentLang() == "zh-Hans"{
-//            lblPosition.text = obj?.player?.position_name_cn
-//        }
+        lblPosition.text = obj?.player?.positionName
+        if UserDefaults.standard.language == "zh-Hans"{
+            lblPosition.text = obj?.player?.positionNameCN
+        }
         imageViewPlayer.setImage(imageStr: obj?.imgURL ?? "", placeholder: .placeholderUser)
     }
     

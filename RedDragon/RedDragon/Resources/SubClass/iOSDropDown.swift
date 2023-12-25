@@ -14,7 +14,6 @@ open class DropDown : UITextField{
     var shadow : UIView!
     public  var selectedIndex: Int?
 
-
     //MARK: IBInspectable
     @IBInspectable public var rowHeight: CGFloat = 30
     @IBInspectable public var rowBackgroundColor: UIColor = .white
@@ -216,9 +215,9 @@ open class DropDown : UITextField{
     }
 
     @objc public func touchAction() {
-
         isSelected ?  hideList() : showList()
     }
+    
     func reSizeTable() {
         if listHeight > rowHeight * CGFloat( dataArray.count) {
             self.tableheightX = rowHeight * CGFloat(dataArray.count)
@@ -274,6 +273,7 @@ extension DropDown : UITextFieldDelegate {
         return false
     }
     public func  textFieldDidBeginEditing(_ textField: UITextField) {
+     //    textField.resignFirstResponder()
         textField.text = ""
         //self.selectedIndex = nil
         self.dataArray = self.optionArray
