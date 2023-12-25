@@ -88,7 +88,8 @@ extension String {
 //        let bundle = Bundle(path: path!)
 //        
 //        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
-        return Translation.shared.getTranslation(for: self)
+       // return Translation.shared.getTranslation(for: self)
+        return self
     }
     
     ///here, we are considering only English and Chinese localization to match keyword from the API data, since we have only en and zh langugae "key:value" data in the API response

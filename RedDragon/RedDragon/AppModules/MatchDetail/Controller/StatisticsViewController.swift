@@ -28,6 +28,9 @@ class StatisticsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+        collectionview.reloadData()
+        recentMatchesTableView.reloadData()
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0
             recentMatchesTableView.sectionHeaderTopPadding = 0
@@ -51,7 +54,7 @@ class StatisticsViewController: UIViewController {
             tableViewHeight.constant = 0
         } else {
             statisticsArray = statisticData
-            tableView.reloadData()
+           
         }
     }
     
@@ -64,7 +67,7 @@ class StatisticsViewController: UIViewController {
             highlightViewHeight.constant = 0
         } else {
             mediaArray = mediaData
-            collectionview.reloadData()
+           
         }
     }
     
@@ -76,7 +79,7 @@ class StatisticsViewController: UIViewController {
             customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.dataNotFound.localized, image: ImageConstants.alertImage)
         } else {
             eventsArray = recentMatches
-            recentMatchesTableView.reloadData()
+           
         }
     }
 }

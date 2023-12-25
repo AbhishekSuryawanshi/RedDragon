@@ -6,10 +6,27 @@
 //
 
 import UIKit
+class ClickListener: UITapGestureRecognizer {
+    var onClick : (() -> Void)? = nil
+}
 
 extension UIView {
     /// To curve the sides of view
     /// add suitable corners in "corners" as [.topLeft, .topRight, .bottomLeft, .bottomRight, .allCorners]
+    ///
+    func setOnClickListener(action :@escaping () -> Void){
+        let tapRecogniser = ClickListener(target: self, action: #selector(onViewClicked(sender:)))
+        tapRecogniser.onClick = action
+        self.addGestureRecognizer(tapRecogniser)
+    }
+    @objc func onViewClicked(sender: ClickListener) {
+        if let onClick = sender.onClick {
+            onClick()
+        }
+    }
+    func callOnClick(){
+        
+    }
 
     func roundCornersWithBorderLayer(cornerRadii: CGFloat, corners: UIRectCorner, bound:CGRect, borderColor: UIColor = .clear, borderWidth: CGFloat = 0) {
         let maskPath = UIBezierPath(roundedRect: bound, byRoundingCorners: corners, cornerRadii: CGSize(width: cornerRadii, height: cornerRadii))
@@ -125,4 +142,15 @@ extension UIView {
                     bottom: superview?.bottomAnchor,
                     right: superview?.rightAnchor)
     }
+    
+    func fixInView(_ container: UIView!) -> Void{
+        self.translatesAutoresizingMaskIntoConstraints = false;
+        self.frame = container.frame;
+        container.addSubview(self);
+        NSLayoutConstraint(item: self, attribute: .leading, relatedBy: .equal, toItem: container, attribute: .leading, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: self, attribute: .trailing, relatedBy: .equal, toItem: container, attribute: .trailing, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: container, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: container, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
+    }
+    
 }

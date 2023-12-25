@@ -20,6 +20,10 @@ class PlayerDetailMatchesViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        configureView()
+    }
+    
     func configureView() {
         loadFunctionality()
         self.matchesTableView.reloadData()

@@ -22,7 +22,7 @@ class PlayerDetailMediaViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        configureView()
     }
     
     @objc func playVideo(sender: UIButton){

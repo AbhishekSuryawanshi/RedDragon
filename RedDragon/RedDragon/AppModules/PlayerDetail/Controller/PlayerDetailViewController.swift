@@ -22,6 +22,8 @@ class PlayerDetailViewController: UIViewController {
     private var playerDetailViewModel: PlayerDetailViewModel?
     private var cancellable = Set<AnyCancellable>()
     
+    var playerSlug = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -63,7 +65,7 @@ class PlayerDetailViewController: UIViewController {
     }
     
     func makeNetworkCall() {
-        playerDetailViewModel?.fetchPlayerDetailAsyncCall(lang: "en", slug: "nick-pope")
+        playerDetailViewModel?.fetchPlayerDetailAsyncCall(lang: "en", slug: playerSlug)
     }
     
 }
@@ -136,7 +138,7 @@ extension PlayerDetailViewController {
             let vc = vc as! PlayerDetailProfileViewController
             vc.playerDetailViewModel = playerDetails
         
-            vc.configureView()
+         //   vc.configureView()
             //viewContainerHeight.constant = vc.view.frame.size.height
         }
     }
@@ -144,7 +146,7 @@ extension PlayerDetailViewController {
         ViewEmbedder.embed(withIdentifier: "PlayerDetailMatchesViewController", storyboard: UIStoryboard(name: StoryboardName.playerDetail, bundle: nil), parent: self, container: viewContainer) { [self] vc in
             let vc = vc as! PlayerDetailMatchesViewController
             vc.playerDetailViewModel = playerDetails
-            vc.configureView()
+          //  vc.configureView()
             //viewContainerHeight.constant = vc.view.frame.size.height
         }
     }
@@ -152,7 +154,7 @@ extension PlayerDetailViewController {
         ViewEmbedder.embed(withIdentifier: "PlayerDetailStatsViewController", storyboard: UIStoryboard(name: StoryboardName.playerDetail, bundle: nil), parent: self, container: viewContainer) { [self] vc in
             let vc = vc as! PlayerDetailStatsViewController
             vc.playerDetailViewModel = playerDetails
-            vc.configureView()
+           // vc.configureView()
             
         }
     }
@@ -160,7 +162,7 @@ extension PlayerDetailViewController {
         ViewEmbedder.embed(withIdentifier: "PlayerDetailMediaViewController", storyboard: UIStoryboard(name: StoryboardName.playerDetail, bundle: nil), parent: self, container: viewContainer) { [self] vc in
             let vc = vc as! PlayerDetailMediaViewController
             vc.playerDetailViewModel = playerDetails
-            vc.configureView()
+          //  vc.configureView()
             
         }
     }

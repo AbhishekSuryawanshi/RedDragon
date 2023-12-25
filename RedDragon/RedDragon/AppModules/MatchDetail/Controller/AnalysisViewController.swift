@@ -26,7 +26,7 @@ class AnalysisViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        configureView()
     }
     
     func configureView(){
