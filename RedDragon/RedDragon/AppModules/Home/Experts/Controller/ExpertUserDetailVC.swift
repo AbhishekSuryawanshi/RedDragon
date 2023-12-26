@@ -68,9 +68,11 @@ class ExpertUserDetailVC: UIViewController {
         successCountLabel.text = "Success: \(userData?.appdata?.predict?.predictStats?.successCount ?? 0)"
         unsuccessCountLabel.text = "Failed: \(userData?.appdata?.predict?.predictStats?.unsuccessCount ?? 0)"
         coinLabel.text = "Coin: \(userData?.appdata?.predict?.predictStats?.coins ?? 0)"
-        if userData?.following ?? true {
+        if userData?.following ?? false {
             followButton.isHidden = true
+            followingButton.isHidden = false
         }else {
+            followButton.isHidden = false
             followingButton.isHidden = true
         }
         

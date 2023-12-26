@@ -31,6 +31,8 @@ class ExpertsVC: UIViewController {
     var isPageRefreshing:Bool = false
     var predictScrollPage: Int = 1
     var betScrollPage: Int = 1
+    var followUserVM = FollowUserViewModel()
+    var unfollowUserVM = UnfollowUserViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -164,11 +166,17 @@ extension ExpertsVC {
             cell.unsuccessCountLabel.text = "Failed: \(userArray[indexPath.row].appdata?.predict?.predictStats?.unsuccessCount ?? 0)"
             cell.coinLabel.text = "Coin: \(userArray[indexPath.row].appdata?.predict?.predictStats?.coins ?? 0)"
             cell.dateLabel.text = "  \(userArray[indexPath.row].appdata?.predict?.date.formatDate(inputFormat: dateFormat.ddMMyyyyWithTimeZone, outputFormat: dateFormat.ddMMMyyyyhmma) ?? "")"
+            cell.followButton.tag = indexPath.row
+            cell.followingButton.tag = indexPath.row
+            cell.followButton.addTarget(self, action: #selector(postFollowUser(sender:)), for: .touchUpInside)
+            cell.followingButton.addTarget(self, action: #selector(postUnfollowUser(sender:)), for: .touchUpInside)
             
-            if userArray[indexPath.row].following ?? true {
+            if userArray[indexPath.row].following ?? false {
                 cell.followButton.isHidden = true
+                cell.followingButton.isHidden = false
             }else {
                 cell.followingButton.isHidden = true
+                cell.followButton.isHidden = false
             }
         }else { // Bet
             cell.betPointsStackView.isHidden = false
@@ -264,5 +272,53 @@ extension ExpertsVC {
             .store(in: &cancellable)
         /// API call to fetch all tags
         tagsVM?.fetchTagsAsyncCall()
+    }
+    
+    @objc func postFollowUser(sender: UIButton) {
+        followUserVM.postFollowUser(userId: userArray[sender.tag].id ?? 0)
+        followUserViewModelResponse(index: sender.tag)
+    }
+    
+    @objc func postUnfollowUser(sender: UIButton) {
+        unfollowUserVM.postUnfollowUser(userId: userArray[sender.tag].id ?? 0)
+        unfollowUserViewModelResponse(index: sender.tag)
+    }
+    
+    func followUserViewModelResponse(index: Int) {
+        followUserVM.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        followUserVM.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        followUserVM.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] result in
+                if result?.response?.code == 200 {
+                    self?.userArray[index].following = true
+                    self?.tableView.reloadData()
+                }
+            })
+            .store(in: &cancellable)
+    }
+    
+    func unfollowUserViewModelResponse(index: Int) {
+        unfollowUserVM.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        unfollowUserVM.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        unfollowUserVM.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] result in
+                if result?.response?.code == 200 {
+                    self?.userArray[index].following = false
+                    self?.tableView.reloadData()
+                }
+            })
+            .store(in: &cancellable)
     }
 }

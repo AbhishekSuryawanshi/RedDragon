@@ -31,7 +31,7 @@ struct ExpertUser: Codable {
     let appdata: AppData?
     let about: String?
     let profileImg: String?
-    let following: Bool?
+    var following: Bool?
     let tags: [String]?
     let wallet: Int?
     
@@ -108,4 +108,14 @@ struct ExpertPredictionMatch: Codable {
 
 struct PredictMatch: Codable {
     let detail: PredictionMatchDetail?
+}
+
+// MARK: - Follow Users
+struct FollowOrUnfollowUserModel: Codable {
+    let response: FollowOrUnfollowUser?
+}
+
+struct FollowOrUnfollowUser: Codable {
+    let code: Int?
+    let messages: [String]?
 }

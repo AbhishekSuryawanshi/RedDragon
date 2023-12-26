@@ -41,3 +41,23 @@ class ExpertPredictionUserDetailViewModel: APIServiceManager<ExpertUserDetailMod
         asyncCall(urlString: urlString, method: method, parameters: nil)
     }
 }
+
+class FollowUserViewModel: APIServiceManager<FollowOrUnfollowUserModel> {
+    
+    ///function to post follow user
+    func postFollowUser(userId: Int) {
+        let urlString   = URLConstants.followUser + "\(userId)"
+        let method      = RequestType.post
+        asyncCall(urlString: urlString, method: method, parameters: nil)
+    }
+}
+
+class UnfollowUserViewModel: APIServiceManager<FollowOrUnfollowUserModel> {
+    
+    ///function to post unfollow user
+    func postUnfollowUser(userId: Int) {
+        let urlString   = URLConstants.unfollowUser + "\(userId)"
+        let method      = RequestType.post
+        asyncCall(urlString: urlString, method: method, parameters: nil)
+    }
+}
