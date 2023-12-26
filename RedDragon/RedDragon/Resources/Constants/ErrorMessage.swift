@@ -41,6 +41,7 @@ struct ErrorMessage {
     static var textEmptyAlert              = "What do you want to talk about?"
     static var pollOptionEmptyAlert        = "Please add two poll choices"
     
+    static var postEmptyAlert              = "No Posts & Analysis yet!"
     static var chatEmptyAlert              = "No Chats yet!"
     static var likeListEmptyAlert          = "No Likes yet!"
     static var commentListEmptyAlert       = "No Comments yet!"

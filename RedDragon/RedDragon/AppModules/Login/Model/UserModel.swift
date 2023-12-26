@@ -28,19 +28,30 @@ struct User: Codable {
     var createdAt: String = ""
     var updatedAt: String = ""
     var otpVerified: Int = 0
+    var gender: String = ""
+    var dob: String = ""
+    var language: String = "en"
+    var locationName: String = ""
     var token: String = ""
     var streetPlayerUpdated:Int = 0
+    var wallet:Int = 0
+    var tags: [String] = []
+    var historicTags: [String] = []
     var appDataIDs = LocalAppUserID()
     var affAppData: AffAppData?
     
     enum CodingKeys: String, CodingKey {
-        case id, email, username, appDataIDs, affAppData
+        case id, email, username, gender, dob, wallet
+        case appDataIDs, affAppData
+        case tags, historicTags
         case name = "full_name"
         case phoneNumber = "phone_number"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case otpVerified = "otp_verified"
         case profileImg = "profile_img"
+        case language = "preffered_language"
+        case locationName = "location_name"
         case token = "access_token"
         case streetPlayerUpdated = "street_player_updated"
     }
@@ -58,7 +69,14 @@ struct User: Codable {
         updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt) ?? ""
         otpVerified = try container.decodeIfPresent(Int.self, forKey: .otpVerified) ?? 0
         profileImg = try container.decodeIfPresent(String.self, forKey: .profileImg) ?? ""
+        gender = try container.decodeIfPresent(String.self, forKey: .gender) ?? ""
+        dob = try container.decodeIfPresent(String.self, forKey: .dob) ?? ""
+        language = try container.decodeIfPresent(String.self, forKey: .language) ?? "en"
+        locationName = try container.decodeIfPresent(String.self, forKey: .locationName) ?? ""
         token = try container.decodeIfPresent(String.self, forKey: .token) ?? ""
+        wallet = try container.decodeIfPresent(Int.self, forKey: .wallet) ?? 0
+        tags = try container.decodeIfPresent([String].self, forKey: .tags) ?? []
+        historicTags = try container.decodeIfPresent([String].self, forKey: .historicTags) ?? []
         appDataIDs = try container.decodeIfPresent(LocalAppUserID.self, forKey: .appDataIDs) ?? LocalAppUserID()
         affAppData = try container.decodeIfPresent(AffAppData.self, forKey: .affAppData)
         streetPlayerUpdated = try container.decodeIfPresent(Int.self, forKey: .streetPlayerUpdated) ?? 0

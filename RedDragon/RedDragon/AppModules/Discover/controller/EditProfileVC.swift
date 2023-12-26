@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class EditProfileVC: UIViewController {
 
@@ -18,6 +19,7 @@ class EditProfileVC: UIViewController {
     @IBOutlet var pickerView: UIPickerView!
     @IBOutlet weak var saveButton: UIButton!
     
+    var cancellable = Set<AnyCancellable>()
     var settingType: SettingType?
     var selectedLanguage: LanguageType = .en
     
@@ -31,7 +33,7 @@ class EditProfileVC: UIViewController {
     }
 
     func initialSettings() {
-        selectedLanguage = UserDefaults.standard.language == "zh" ? .zh : .en
+        selectedLanguage = UserDefaults.standard.language == "en" ? .en : .zh
         phoneView.isHidden = settingType != .phone
         phoneTextField.placeholder = settingType?.rawValue.localized
         basicTextField.placeholder = settingType?.rawValue.localized
@@ -39,13 +41,49 @@ class EditProfileVC: UIViewController {
         saveButton.setTitle("Save".localized, for: .normal)
     }
     
+    func showLoader(_ value: Bool) {
+        value ? startLoader() : stopLoader()
+    }
+    
     // MARK: - Button Actions
     @IBAction func saveButtonTapped(_ sender: Any) {
         if settingType == .language {
-            UserDefaults.standard.language = selectedLanguage == .zh ? "zh" : "en"
+            UserDefaults.standard.language = selectedLanguage == .en ? "en" : "zh"
             initialSettings()
         }
         self.navigationController?.popViewController(animated: true)
+    }
+}
+
+// MARK: - API Services
+extension EditProfileVC {
+    func fetchProfileViewModel() {
+        
+        EditProfileVM.shared.showError = { [weak self] error in
+            self?.view.makeToast(error, duration: 2.0, position: .center)
+        }
+        EditProfileVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        EditProfileVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                self?.execute_onResponseData(response)
+            })
+            .store(in: &cancellable)
+    }
+    
+    func execute_onResponseData(_ response: LoginResponse?) {
+        if let dataResponse = response?.response {
+            if let user = dataResponse.data {
+                
+            }
+        } else {
+            if let errorResponse = response?.error {
+                self.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
+            }
+        }
     }
 }
 

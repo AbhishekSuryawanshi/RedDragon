@@ -23,6 +23,7 @@ class GossipDetailVC: UIViewController {
     @IBOutlet weak var commentsTitleLabel: UILabel!
     @IBOutlet weak var viewAllTitleLabel: UILabel!
     @IBOutlet weak var commentTextField: UITextField!
+    @IBOutlet weak var dateStackHeightConstarint: NSLayoutConstraint!
     
     var cancellable = Set<AnyCancellable>()
     var commentSectionID = ""
@@ -68,7 +69,7 @@ class GossipDetailVC: UIViewController {
         headerLabel.text = "Article".localized
         commentsTitleLabel.text = "Comments".localized
         viewAllTitleLabel.text = "View All".localized
-        commentTextField.placeholder = "Add a comment".localized
+        commentTextField.placeholder = "  " + "Add a comment".localized
     }
     
     func nibInitialization() {
@@ -95,7 +96,7 @@ class GossipDetailVC: UIViewController {
             dateLabel.text = getGossipDate().formatDate(inputFormat: .mmmmdyyyyhma, outputFormat: .ddMMyyyy)
             timeLabel.text = getGossipDate().formatDate(inputFormat: .mmmmdyyyyhma, outputFormat: .hmma)
         }
-        
+        dateStackHeightConstarint.constant = (dateLabel.text == "" && timeLabel.text == "") ? 0 : 20
         titleLabel.text = gossipModel.title
         gossipImageView.setImage(imageStr: gossipModel.mediaSource.last ?? "")
     }
