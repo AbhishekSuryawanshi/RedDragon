@@ -138,7 +138,7 @@ class GlobalMatchDetailVC: UIViewController {
     }
     
     func nibInitialization() {
-        headerCollectionView.register(CellIdentifier.headerTopCollectionViewCell)
+        headerCollectionView.register(HeaderTopCollectionViewCell.nibName)
         tableView.register(CellIdentifier.globalMatchInfoTableViewCell)
         tableView.register(CellIdentifier.globalMatchOddsTableViewCell)
         tableView.register(CellIdentifier.globalMatchHeadToHeadTableViewCell)
@@ -159,7 +159,7 @@ extension GlobalMatchDetailVC: UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.headerTopCollectionViewCell, for: indexPath) as! HeaderTopCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HeaderTopCollectionViewCell.reuseIdentifier, for: indexPath) as! HeaderTopCollectionViewCell
         cell.configureUnderLineCell(title: headerTitleArray[indexPath.item], selected: selectedIndex == indexPath.item, textColor: .base)
         
         return cell
