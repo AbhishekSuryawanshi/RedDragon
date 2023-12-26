@@ -9,9 +9,9 @@ import UIKit
 
 final class Translation: APIServiceManager<TranslationModel> {
     static let shared = Translation()
-    let service: TranslationService
-    let request: TranslationRequest
-    var model: TranslationModel!
+    private let service: TranslationService
+    private let request: TranslationRequest
+    private var model: TranslationModel!
     
     init(
         request: TranslationRequest = TranslationRequest(),
@@ -54,19 +54,9 @@ extension Translation {
 
             case .failure(let error):
                 print("Translation data fetching failed.Reason:", error.description)
-                break
+                completion()
             }
         }
     }
-    
-//    private func saveTranslationsToCoreData(translations: [TranslationModel]) {
-//        // Implement Core Data save logic
-//    }
-//    
-//    private func fetchTranslationsFromCoreData() -> [TranslationModel] {
-//        // Implement Core Data fetch logic
-//        
-//        return []
-//    }
 
 }
