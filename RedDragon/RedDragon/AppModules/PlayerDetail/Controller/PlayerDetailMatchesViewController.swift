@@ -10,9 +10,12 @@ import SDWebImage
 
 class PlayerDetailMatchesViewController: UIViewController {
 
+    @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var backBtnHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var matchesTableView: UITableView!
     
     var playerDetailViewModel: PlayerDetailViewModel?
+    var isFromSeeAll = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +24,14 @@ class PlayerDetailMatchesViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if !isFromSeeAll{
+            backBtnHeightConstraint.constant = 0
+            tableViewTopConstraint.constant = 0
+        }
+        else{
+            backBtnHeightConstraint.constant = 30
+            tableViewTopConstraint.constant = 100
+        }
         configureView()
     }
     
@@ -39,6 +50,9 @@ class PlayerDetailMatchesViewController: UIViewController {
        
     }
     
+    @IBAction func backBtnAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
 extension PlayerDetailMatchesViewController: UITableViewDelegate, UITableViewDataSource{

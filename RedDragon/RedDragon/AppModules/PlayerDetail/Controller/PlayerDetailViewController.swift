@@ -68,6 +68,9 @@ class PlayerDetailViewController: UIViewController {
         playerDetailViewModel?.fetchPlayerDetailAsyncCall(lang: "en", slug: playerSlug)
     }
     
+    @IBAction func backBtnAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
 extension PlayerDetailViewController {

@@ -41,6 +41,9 @@ class PlayerDetailStatsViewController: UIViewController {
     func nibInitialization() {
         leaguesCollectionView.register(CellIdentifier.playerLeagueCollectionViewCell)
         mainTableView.register(CellIdentifier.playerStatsTableViewCell)
+        let selectedIndexPath = IndexPath(item: 0, section: 0)
+        leaguesCollectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .left)
+
     }
     
 }

@@ -11,10 +11,13 @@ import YouTubePlayerKit
 
 class PlayerDetailMediaViewController: UIViewController {
 
+    @IBOutlet weak var mediaViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var backBtnHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var mediaTopView: PlayerDetailsTopView!
     @IBOutlet weak var mediaCollectionView: UICollectionView!
     
     var playerDetailViewModel: PlayerDetailViewModel?
+    var isFromSeeAll = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +25,16 @@ class PlayerDetailMediaViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if !isFromSeeAll{
+            backBtnHeightConstraint.constant = 0
+            mediaViewTopConstraint.constant = 0
+            
+        }
+        else{
+            backBtnHeightConstraint.constant = 30
+            mediaViewTopConstraint.constant = 120
+           
+        }
         configureView()
     }
     
@@ -69,12 +82,18 @@ class PlayerDetailMediaViewController: UIViewController {
        
     }
     func configureTopView(){
-        mediaTopView.dateLbl.text = playerDetailViewModel?.responseData?.data?.medias?[0].date
-        mediaTopView.mediaImg.sd_imageIndicator = SDWebImageActivityIndicator.white
-        mediaTopView.mediaImg.sd_setImage(with: URL(string: playerDetailViewModel?.responseData?.data?.medias?[0].preview ?? ""))
-        mediaTopView.mediaDetailTxtView.text = playerDetailViewModel?.responseData?.data?.medias?[0].subtitle
-        mediaTopView.mediaTitleLbl.text = playerDetailViewModel?.responseData?.data?.medias?[0].title
-        mediaTopView.playBtn.addTarget(self, action: #selector(playVideo), for: .touchUpInside)
+        if playerDetailViewModel?.responseData?.data?.medias?.count ?? 0 > 0{
+            mediaTopView.dateLbl.text = playerDetailViewModel?.responseData?.data?.medias?[0].date
+            mediaTopView.mediaImg.sd_imageIndicator = SDWebImageActivityIndicator.white
+            mediaTopView.mediaImg.sd_setImage(with: URL(string: playerDetailViewModel?.responseData?.data?.medias?[0].preview ?? ""))
+            mediaTopView.mediaDetailTxtView.text = playerDetailViewModel?.responseData?.data?.medias?[0].subtitle
+            mediaTopView.mediaTitleLbl.text = playerDetailViewModel?.responseData?.data?.medias?[0].title
+            mediaTopView.playBtn.addTarget(self, action: #selector(playVideo), for: .touchUpInside)
+        }
+    }
+    
+    @IBAction func backBtnAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

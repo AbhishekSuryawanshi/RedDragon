@@ -10,6 +10,7 @@ import Foundation
 // MARK: - PredictionListModel
 struct PredictionListModel: Codable {
     var data: [PredictionsData]?
+    var error: ErrorResponse?
 }
 
 struct PredictionsData: Codable {
