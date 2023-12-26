@@ -129,7 +129,6 @@
 		4767DACD2B35678B008682FD /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767DACC2B35678B008682FD /* EditProfileVC.swift */; };
 		4767DAD02B357A4A008682FD /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767DACF2B357A4A008682FD /* WalletViewModel.swift */; };
 		4767DAD52B357C1D008682FD /* SubscriptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767DAD42B357C1D008682FD /* SubscriptionModel.swift */; };
-		4767DAD82B36AEB0008682FD /* ServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767DAD72B36AEB0008682FD /* ServiceViewModel.swift */; };
 		4784E3EF2AECDBFF00C96085 /* LeagueMatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784E3EE2AECDBFF00C96085 /* LeagueMatchModel.swift */; };
 		4784E3F12AECDCC000C96085 /* SocialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784E3F02AECDCC000C96085 /* SocialViewModel.swift */; };
 		47A1AB2D2AECE5ED00F1BD13 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A1AB2C2AECE5ED00F1BD13 /* UserDefaultsExtension.swift */; };
@@ -137,6 +136,7 @@
 		47A1AB322AED3CA300F1BD13 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47A1AB302AED3CA300F1BD13 /* PostTableViewCell.xib */; };
 		47AC3E952B3AAAF8004A5BBF /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC3E932B3AAAF8004A5BBF /* CommentTableViewCell.swift */; };
 		47AC3E962B3AAAF8004A5BBF /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47AC3E942B3AAAF8004A5BBF /* CommentTableViewCell.xib */; };
+		47AC3E982B3AEFF9004A5BBF /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC3E972B3AEFF9004A5BBF /* ProfileViewModel.swift */; };
 		47ACEB7F2B0C9737001AD0EB /* ResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47ACEB7E2B0C9737001AD0EB /* ResponseModel.swift */; };
 		47ACEB812B0CB811001AD0EB /* SocialPostImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47ACEB802B0CB811001AD0EB /* SocialPostImageViewModel.swift */; };
 		47AE9C992B03AE8800C271FB /* VerificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AE9C982B03AE8800C271FB /* VerificationVC.swift */; };
@@ -725,7 +725,6 @@
 		4767DACC2B35678B008682FD /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 		4767DACF2B357A4A008682FD /* WalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewModel.swift; sourceTree = "<group>"; };
 		4767DAD42B357C1D008682FD /* SubscriptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionModel.swift; sourceTree = "<group>"; };
-		4767DAD72B36AEB0008682FD /* ServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewModel.swift; sourceTree = "<group>"; };
 		4784E3EE2AECDBFF00C96085 /* LeagueMatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueMatchModel.swift; sourceTree = "<group>"; };
 		4784E3F02AECDCC000C96085 /* SocialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewModel.swift; sourceTree = "<group>"; };
 		47A1AB2C2AECE5ED00F1BD13 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
@@ -733,6 +732,7 @@
 		47A1AB302AED3CA300F1BD13 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
 		47AC3E932B3AAAF8004A5BBF /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		47AC3E942B3AAAF8004A5BBF /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
+		47AC3E972B3AEFF9004A5BBF /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		47ACEB7E2B0C9737001AD0EB /* ResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseModel.swift; sourceTree = "<group>"; };
 		47ACEB802B0CB811001AD0EB /* SocialPostImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialPostImageViewModel.swift; sourceTree = "<group>"; };
 		47AE9C982B03AE8800C271FB /* VerificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationVC.swift; sourceTree = "<group>"; };
@@ -1544,7 +1544,7 @@
 		4767DAD62B36AE7A008682FD /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				4767DAD72B36AEB0008682FD /* ServiceViewModel.swift */,
+				47AC3E972B3AEFF9004A5BBF /* ProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -3781,7 +3781,6 @@
 				B8D3384E2B2AD556004ABC66 /* NewsDetailCellViewModel.swift in Sources */,
 				493D21182AFE102E00045672 /* PlayerDetailMediaViewController.swift in Sources */,
 				47E7C84B2AEFBF8D00D054A8 /* PostListVC.swift in Sources */,
-				4767DAD82B36AEB0008682FD /* ServiceViewModel.swift in Sources */,
 				4988F7342B2068BE00905CDD /* ResponseMessage.swift in Sources */,
 				47163AEB2B108F2900235FC6 /* Int+Extension.swift in Sources */,
 				41846BD82B0C7DF20020F503 /* TopView.swift in Sources */,
@@ -3792,6 +3791,7 @@
 				6A93C99E2B1729C6009087DC /* MeetUserProfileViewModel.swift in Sources */,
 				49B0BA522AE6AA1A00A9D235 /* UserDefaultString.swift in Sources */,
 				AD90AF172B22FFCE00515C60 /* TeamCollectionTableViewCell.swift in Sources */,
+				47AC3E982B3AEFF9004A5BBF /* ProfileViewModel.swift in Sources */,
 				B8B410372B3973220040A255 /* RemoteTranslationService.swift in Sources */,
 				49B211512B0B4AEF00E1C58E /* AllFootballPlayersViewModel.swift in Sources */,
 				AD633A072B1A0EA9005DEBD1 /* MapVC.swift in Sources */,

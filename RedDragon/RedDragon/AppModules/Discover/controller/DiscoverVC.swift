@@ -18,7 +18,7 @@ class DiscoverVC: UIViewController {
     @IBOutlet weak var otherCollectionView: UICollectionView!
     
     var cancellable = Set<AnyCancellable>()
-    var profileArray: [SettingType] = [.account, .notiftn, .language, .logout]
+    var profileArray: [SettingType] = [.account, .notiftn, .language]
     var otherArray: [SettingType] = [.about, .privacy, .support, .help]
     
     override func viewDidLoad() {
@@ -37,9 +37,21 @@ class DiscoverVC: UIViewController {
     
     func refreshView() {
         self.navigationController?.navigationBar.isHidden = true
+        
         headerLabel.text = "Our Services".localized
         profileHeaderLabel.text = "Profile & Settings".localized
         otherHeaderLabel.text = "Other".localized
+        filterProfileArray()
+    }
+    
+    func filterProfileArray() {
+        /// Filter items for logged in user
+        if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) && !profileArray.contains(.logout){
+            profileArray.append(.logout)
+        } else {
+            profileArray = profileArray.filter({$0 != .logout})
+        }
+        profileCollectionView.reloadData()
     }
     
     func nibInitialization() {
@@ -91,6 +103,7 @@ extension DiscoverVC {
             UserDefaults.standard.user = nil
             UserDefaults.standard.token = nil
             UserDefaults.standard.points = nil
+            self.filterProfileArray()
         } else {
             if let errorResponse = response?.error {
                 self.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
@@ -117,7 +130,7 @@ extension DiscoverVC: UICollectionViewDataSource {
             cell.titleLabel.textColor = .base
         } else {
             let type = collectionView == profileCollectionView ? profileArray[indexPath.row] : otherArray[indexPath.row]
-            cell.configure(title: type.rawValue, iconImage: type.iconImage, bgViewWidth: 55, imageWidth: (0.65 * 55), bgViewCornerRadius: 55/2)
+            cell.configure(title: type.rawValue.localized, iconImage: type.iconImage, bgViewWidth: 55, imageWidth: (0.65 * 55), bgViewCornerRadius: 55/2)
             cell.bgView.borderWidth = 0
             cell.bgView.backgroundColor = collectionView == profileCollectionView ? .wheat8 : .yellow4
         }
@@ -165,7 +178,21 @@ extension DiscoverVC: UICollectionViewDelegate {
             let type = collectionView == profileCollectionView ? profileArray[indexPath.row] : otherArray[indexPath.row]
             switch type {
             case .account:
-                navigateToViewController(ProfileVC.self, storyboardName: StoryboardName.discover, animationType: .autoReverse(presenting: .zoom))
+                
+                if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
+                    navigateToViewController(ProfileVC.self, storyboardName: StoryboardName.discover, animationType: .autoReverse(presenting: .zoom))
+                } else {
+                    self.customAlertView_2Actions(title: "Login / Sign Up".localized, description: ErrorMessage.loginRequires.localized) {
+                        /// Show login page to login/register new user
+                        /// hide tabbar before presenting a viewcontroller
+                        /// show tabbar while dismissing a presented viewcontroller in delegate
+                        self.tabBarController?.tabBar.isHidden = true
+                        self.presentOverViewController(LoginVC.self, storyboardName: StoryboardName.login) { vc in
+                            vc.delegate = self
+                        }
+                    }
+                }
+                
             case .language:
                 navigateToViewController(EditProfileVC.self, storyboardName: StoryboardName.discover, animationType: .autoReverse(presenting: .zoom)) { vc in
                     vc.settingType = type
@@ -192,5 +219,13 @@ extension DiscoverVC: UICollectionViewDelegateFlowLayout {
         } else {
             return CGSize(width: (screenWidth - 25) / 4, height: 100)
         }
+    }
+}
+
+/// LoginVCDelegate to show hided tabbar
+extension DiscoverVC: LoginVCDelegate {
+    func viewControllerDismissed() {
+        self.tabBarController?.tabBar.isHidden = false
+        filterProfileArray()
     }
 }

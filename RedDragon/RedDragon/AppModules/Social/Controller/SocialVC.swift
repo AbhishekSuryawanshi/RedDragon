@@ -327,7 +327,7 @@ extension SocialVC: UICollectionViewDataSource {
             return cell
         } else if collectionView == headerCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.headerTopCollectionViewCell, for: indexPath) as! HeaderTopCollectionViewCell
-            cell.configureUnderLineCell(title: socialHeaderSegment.allCases[indexPath.row].rawValue, selected: selectedSegment == socialHeaderSegment.allCases[indexPath.row])
+            cell.configureUnderLineCell(title: socialHeaderSegment.allCases[indexPath.row].rawValue.localized, selected: selectedSegment == socialHeaderSegment.allCases[indexPath.row])
             return cell
         } else if collectionView == leagueCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.iconNameCollectionViewCell, for: indexPath) as! IconNameCollectionViewCell
@@ -341,7 +341,7 @@ extension SocialVC: UICollectionViewDataSource {
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.headerBottom_1CollectionViewCell, for: indexPath) as! HeaderBottom_1CollectionViewCell
-            cell.configure(title: socialHeaderSegment.allCases[indexPath.row].rawValue, selected: selectedSegment == socialHeaderSegment.allCases[indexPath.row])
+            cell.configure(title: socialHeaderSegment.allCases[indexPath.row].rawValue.localized, selected: selectedSegment == socialHeaderSegment.allCases[indexPath.row])
             return cell
         }
     }
@@ -403,9 +403,9 @@ extension SocialVC: UICollectionViewDelegateFlowLayout {
             let selected = selectedSegment == socialHeaderSegment.allCases[indexPath.row]
             return CGSize(width: socialHeaderSegment.allCases[indexPath.row].rawValue.localized.size(withAttributes: [NSAttributedString.Key.font : selected ? fontBold(17) : fontRegular(17)]).width + 40, height: 50)
         } else if collectionView == leagueCollectionView {
-            return CGSize(width: 70, height: 112)
+            return CGSize(width: 80, height: 112)
         } else if collectionView == teamsCollectionView {
-            return CGSize(width: 70, height: 112)
+            return CGSize(width: 80, height: 112)
         } else {
             let selected = selectedSegment == socialHeaderSegment.allCases[indexPath.row]
             return CGSize(width: socialHeaderSegment.allCases[indexPath.row].rawValue.localized.size(withAttributes: [NSAttributedString.Key.font : fontSemiBold(14)]).width + 70, height: 40)

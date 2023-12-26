@@ -47,6 +47,7 @@ class WalletVC: UIViewController {
     func initialSettings() {
         nibInitialization()
         fetchWalletViewModel()
+        heatPointLabel.text = String(UserDefaults.standard.user?.wallet ?? 0)
     }
     
     func refreshView() {
@@ -101,6 +102,7 @@ extension WalletVC {
             .store(in: &cancellable)
         
     }
+    
     func fetchBannerViewModel() {
         bannerVM = BannerViewModel()
         bannerVM?.showError = { [weak self] error in
