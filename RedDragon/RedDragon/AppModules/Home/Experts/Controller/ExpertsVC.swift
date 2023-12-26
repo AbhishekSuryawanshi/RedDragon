@@ -219,7 +219,7 @@ extension ExpertsVC {
         }
         
         if userArray.isEmpty {
-            self.customAlertView(title: ErrorMessage.matchEmptyAlert.localized, description: "", image: "empty")
+            self.customAlertView(title: ErrorMessage.userEmptyAlert.localized, description: "", image: "empty")
         }
         tableView.reloadData()
     }

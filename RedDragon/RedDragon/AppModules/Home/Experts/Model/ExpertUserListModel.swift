@@ -97,7 +97,7 @@ struct Bet: Codable {
 }
 
 struct ExpertPredictionMatch: Codable {
-    let isSuccess: Bool? = nil
+    let isSuccess: Int? = nil
     let match: PredictMatch?
     
     enum CodingKeys: String, CodingKey {

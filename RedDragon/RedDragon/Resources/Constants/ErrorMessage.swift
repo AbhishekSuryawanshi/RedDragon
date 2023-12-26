@@ -47,6 +47,7 @@ struct ErrorMessage {
     static var leaguesEmptyAlert           = "No Leagues found"
     static var teamEmptyAlert              = "No Teams found"
     static var matchEmptyAlert             = "No Matches found"
+    static var userEmptyAlert              = "No Users found"
     static var betsEmptyAlert              = "No Bets found"
     
     static let addPlayer                   = "Looks like you haven't bought any players yet, please buy a player to play the game"
