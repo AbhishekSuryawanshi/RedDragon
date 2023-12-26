@@ -116,8 +116,9 @@ struct CellIdentifier {
     static let subscriptionTableViewCell       = "SubscriptionTableViewCell"
 
     //Experts
-    static let predictUserListTableViewCell    = "PredictUserListTableViewCell"
-    static let userTagsCollectionViewCell      = "UserTagsCollectionViewCell"
+    static let predictUserListTableViewCell           = "PredictUserListTableViewCell"
+    static let userTagsCollectionViewCell             = "UserTagsCollectionViewCell"
+    static let userDetailPredictMatchesTableViewCell  = "UserDetailPredictMatchesTableViewCell"
 
     //Discover | Profile
     static let profileTableViewCell            = "ProfileTableViewCell"
