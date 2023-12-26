@@ -28,10 +28,14 @@ final class Translation: APIServiceManager<TranslationModel> {
     }
     
     func getTranslation(for string: String) -> String {
-        if let _ = model {
-            return self.filterArrayFor(string: string)
+        if UserDefaults.standard.language == "zh" {
+            if let _ = model {
+                return self.filterArrayFor(string: string)
+            }
+            
+            return string
         }
-        
+                
         return string
     }
     

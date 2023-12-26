@@ -14,14 +14,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        //setting device current language
+        self.setupLanguage()
+        
+        //Keyboard
         Translation.shared.setupTranslationModule {
-            //Keybord
             IQKeyboardManager.shared.placeholderColor = .clear
             IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "Done".localized
             IQKeyboardManager.shared.enable = true
-             
-            //setting device current language
-            self.setupLanguage()
         }
         return true
     }
