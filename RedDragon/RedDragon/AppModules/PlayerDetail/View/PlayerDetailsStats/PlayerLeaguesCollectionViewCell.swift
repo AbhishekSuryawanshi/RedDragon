@@ -14,5 +14,10 @@ class PlayerLeaguesCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    override var isSelected: Bool {
+            didSet {
+                contentView.backgroundColor = isSelected ? UIColor.init(hex: "FFE08A") : .clear
+            }
+        }
 
 }

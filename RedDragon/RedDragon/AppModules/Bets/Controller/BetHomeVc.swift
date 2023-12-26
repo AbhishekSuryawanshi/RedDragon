@@ -258,20 +258,20 @@ extension BetHomeVc {
                 .store(in: &cancellable)
         }
         
-        func execute_onResponseData(_ matches: MatchListModel) {
-          
-            if let matchList = matches.response?.data{
+    func execute_onResponseData(_ matches: MatchListModel) {
+        
+        if let matchList = matches.response?.data{
             if selectedType == .All{
                 matchesList = matches.response?.data
             }else{
                 liveMatchesList = matches.response?.data
             }
-           tableView.reloadData()
-            }else{
-                handleError(matches.error)
-            }
-       
+            tableView.reloadData()
+        }else{
+            handleError(matches.error)
         }
+        
+    }
     
     func loopWithCompletion(_ bets: BetListModel, closure: @escaping () -> ()) {
         if let betsList = bets.response?.data?.bets {

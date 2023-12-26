@@ -10,6 +10,7 @@ import Foundation
 // MARK: - PredictionMatchesModel
 struct PredictionMatchesModel: Codable {
     var data: [PredictionData]?
+    var error: ErrorResponse?
 }
 
 // MARK: - Datum
@@ -84,6 +85,7 @@ struct WinStats: Codable {
         case awayTeamCnt = "away_team_cnt"
     }
 }
+
 
 
 

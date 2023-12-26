@@ -111,7 +111,11 @@ class PlayerDetailProfileViewController: UIViewController {
     }
     
     @objc func seeAllMatches(){
-        navigateToViewController(PlayerDetailMatchesViewController.self, storyboardName: StoryboardName.playerDetail, animationType: .autoReverse(presenting: .zoom))
+        navigateToViewController(PlayerDetailMatchesViewController.self, storyboardName: StoryboardName.playerDetail, animationType: .autoReverse(presenting: .zoom)){ [self] vc in
+            vc.isFromSeeAll = true
+            vc.playerDetailViewModel = playerDetailViewModel
+            
+        }
     }
     
     func configureLastMatchesView(){
@@ -128,21 +132,27 @@ class PlayerDetailProfileViewController: UIViewController {
                 playerLastMatches.team2ScoreLbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].awayScore
                 playerLastMatches.dateLbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].date
                 j = j+1
-                playerLastMatches.league2ImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
-                playerLastMatches.league2ImgView.sd_setImage(with: URL(string: playerDetailViewModel?.responseData?.data?.events?[0].leagueLogo ?? ""))
-                playerLastMatches.leagueName2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].leagueName
-                playerLastMatches.round2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].round
-                playerLastMatches.team1Lbl2.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].homeName
-                playerLastMatches.team2Lbl2.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].awayName
-                playerLastMatches.team1Score2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].homeScore
-                playerLastMatches.team2Score2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].awayScore
-                playerLastMatches.date2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].date
+                if playerDetailViewModel?.responseData?.data?.events?[0].matches?.count ?? 0 > j{
+                    playerLastMatches.league2ImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
+                    playerLastMatches.league2ImgView.sd_setImage(with: URL(string: playerDetailViewModel?.responseData?.data?.events?[0].leagueLogo ?? ""))
+                    playerLastMatches.leagueName2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].leagueName
+                    playerLastMatches.round2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].round
+                    playerLastMatches.team1Lbl2.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].homeName
+                    playerLastMatches.team2Lbl2.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].awayName
+                    playerLastMatches.team1Score2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].homeScore
+                    playerLastMatches.team2Score2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].awayScore
+                    playerLastMatches.date2Lbl.text = playerDetailViewModel?.responseData?.data?.events?[0].matches?[j].date
                 }
             }
+        }
     }
     
     @objc func seeAllMedia(){
-        navigateToViewController(PlayerDetailMediaViewController.self, storyboardName: StoryboardName.playerDetail, animationType: .autoReverse(presenting: .zoom))
+        navigateToViewController(PlayerDetailMediaViewController.self, storyboardName: StoryboardName.playerDetail, animationType: .autoReverse(presenting: .zoom)){ [self] vc in
+            vc.isFromSeeAll = true
+            vc.playerDetailViewModel = playerDetailViewModel
+            
+        }
     }
     
     func configureMediaView(){
