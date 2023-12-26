@@ -327,6 +327,11 @@ extension PostListVC {
 // MARK: - TableView Delegate
 extension PostListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if postArray.count == 0 {
+            tableView.setEmptyMessage(ErrorMessage.postEmptyAlert)
+        } else {
+            tableView.restore()
+        }
         return postArray.count
     }
     

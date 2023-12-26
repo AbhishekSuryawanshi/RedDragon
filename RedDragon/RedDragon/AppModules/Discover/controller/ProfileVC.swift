@@ -9,13 +9,50 @@ import UIKit
 
 class ProfileVC: UIViewController {
 
+    @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var tagsCollectionView: UICollectionView!
+    @IBOutlet weak var historicalTagCollectionView: UICollectionView!
+    
+    let user = UserDefaults.standard.user
     var profileArray: [SettingType] = [.name, .userName, .email, .phone, .password, .gender, .dob, .location]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        initialSettings()
+    }
+    
+    func initialSettings() {
+        photoImageView.setImage(imageStr: user?.profileImg ?? "", placeholder: .placeholderUser)
+        nameLabel.text = user?.name ?? ""
     }
 
+    func getProfileValue(type: SettingType) -> String {
+        switch type {
+        case .name:
+            return user?.name ?? ""
+        case .userName:
+            return user?.username ?? ""
+        case .email:
+            return user?.email ?? ""
+        case .phone:
+            return user?.phoneNumber ?? ""
+        case .gender:
+            return user?.gender ?? ""
+        case .dob:
+            return user?.dob ?? ""
+        case .location:
+            return user?.locationName ?? ""
+        default:
+            return ""
+        }
+    }
+    
+    // MARK: - Button Actions
+    
+    @IBAction func imageButtonTapped(_ sender: UIButton) {
+        
+    }
 }
 
 // MARK: - TableView Delegates
@@ -27,11 +64,30 @@ extension ProfileVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.profileTableViewCell, for: indexPath) as! ProfileTableViewCell
         cell.titleLabel.text = profileArray[indexPath.row].rawValue.localized
-        
+        cell.valueLabel.text = getProfileValue(type: profileArray[indexPath.row])
         return cell
     }
 }
 
 extension ProfileVC: UITableViewDelegate {
     
+}
+
+// MARK: - CollectionView Delegates
+extension ProfileVC: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return collectionView == tagsCollectionView ? user?.tags.count ?? 0 : user?.historicTags.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.headerTopCollectionViewCell, for: indexPath) as! HeaderTopCollectionViewCell
+        cell.configureTagCell(title: "")
+       
+        if collectionView == tagsCollectionView {
+            
+        } else {
+            
+        }
+        return cell
+    }
 }

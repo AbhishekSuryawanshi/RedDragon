@@ -27,6 +27,10 @@ struct URLConstants {
     static let resetpassword       = baseURL + "resetpassword"
     static let logout              = baseURL + "logout"
     
+    // MARK: - Discover | Profile
+      static let profile             = baseURL + "profile"
+      static let updateProfile       = baseURL + "/user/profile/update"
+
     // MARK: - Home
     static let banners             = "https://api996.com/api/v1/banner/com.app.b8"
     static let bannerBaseURL       = "https://api996.com/"

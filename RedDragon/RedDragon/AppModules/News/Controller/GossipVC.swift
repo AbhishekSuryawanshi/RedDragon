@@ -156,10 +156,10 @@ class GossipVC: UIViewController {
         })
     }
     
-    func gotoDetailPage(index: Int) {
+    func gotoDetailPage(model: Gossip) {
         navigateToViewController(GossipDetailVC.self, storyboardName: StoryboardName.gossip, animationType: .autoReverse(presenting: .zoom)) { vc in
-            vc.commentSectionID = self.sportType == .eSports ? "eSportsID:-\(self.gossipsArray[index].id ?? 0)" : "gossipNewsID:-\(self.gossipsArray[index].slug ?? "")"
-            vc.gossipModel = self.gossipsArray[index]
+            vc.commentSectionID = self.sportType == .eSports ? "eSportsID:-\(model.id ?? 0)" : "gossipNewsID:-\(model.slug ?? "")"
+            vc.gossipModel = model
             vc.sportType = self.sportType
             vc.newsSource = self.newsSource
         }
@@ -402,7 +402,7 @@ extension GossipVC: UICollectionViewDelegate {
                 
             }
         } else if collectionView == trendingCollectionView {
-            gotoDetailPage(index: indexPath.row)
+            gotoDetailPage(model: trendingArray[indexPath.row])
         } else if collectionView == videosCollectionView {
             GossipVideoVM.shared.fetchVideoDetailAsyncCall(id: videoArray[indexPath.row].id)
         } else {
@@ -458,7 +458,7 @@ extension GossipVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        gotoDetailPage(index: indexPath.row)
+        gotoDetailPage(model: gossipsArray[indexPath.row])
     }
 }
 
