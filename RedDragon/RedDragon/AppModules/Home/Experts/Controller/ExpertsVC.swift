@@ -39,6 +39,7 @@ class ExpertsVC: UIViewController {
     
     // MARK: - Methods
     func performInitialSetup() {
+        fetchTagsViewModel()
         predictDropDown.optionArray = ["Prediction", "Bet"]
         predictDropDown.selectedIndex = 0
         expertPredictUserVM.fetchExpertUserListAsyncCall(page: predictScrollPage, slug: Slug.predict.rawValue)
@@ -47,7 +48,11 @@ class ExpertsVC: UIViewController {
         predictDropDown.didSelect { [self] selectedText, index, id in
             self.isPageRefreshing = false
             isTagSelected = false
-           
+            userArray.removeAll()
+            predictUserArray.removeAll()
+            betUserArray.removeAll()
+            tableView.reloadData()
+            
             if index == 0 {
                 expertPredictUserVM.fetchExpertUserListAsyncCall(page: predictScrollPage, slug: Slug.predict.rawValue)
                 fetchPredictUserListViewModelResponse()
@@ -88,7 +93,8 @@ class ExpertsVC: UIViewController {
 // MARK: - TableView Data source and Delegates
 extension ExpertsVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        userArray.count
+        print("User array count,,,,,\(userArray.count)")
+        return userArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -106,17 +112,20 @@ extension ExpertsVC: UITableViewDataSource, UITableViewDelegate {
         if (offsetY > contentHeight - scrollView.frame.size.height) {
             if !isPageRefreshing {
                 isPageRefreshing = true
-                
-                if predictDropDown.selectedIndex == 0 { // Predict
-                    predictScrollPage = predictScrollPage + 1
-                    expertPredictUserVM.fetchExpertUserListAsyncCall(page: predictScrollPage, slug: Slug.predict.rawValue)
-                    fetchPredictUserListViewModelResponse()
-                }else {
-                    betScrollPage = betScrollPage + 1
-                    expertBetUserVM.fetchExpertUserListAsyncCall(page: betScrollPage, slug: Slug.bet.rawValue)
-                    fetchBetUserListViewModelResponse()
+             
+                if !isTagSelected {
+                    if predictDropDown.selectedIndex == 0 { // Predict
+                        predictScrollPage = predictScrollPage + 1
+                        expertPredictUserVM.fetchExpertUserListAsyncCall(page: predictScrollPage, slug: Slug.predict.rawValue)
+                        fetchPredictUserListViewModelResponse()
+                    }else {
+                        betScrollPage = betScrollPage + 1
+                        expertBetUserVM.fetchExpertUserListAsyncCall(page: betScrollPage, slug: Slug.bet.rawValue)
+                        fetchBetUserListViewModelResponse()
+                    }
+                    tableView.reloadData()
                 }
-                tableView.reloadData()
+                
             }
         }
     }
@@ -200,8 +209,8 @@ extension ExpertsVC {
                 predictUserArray.append(contentsOf: list.response?.data ?? [])
             }
          //   predictUserArray = list.response?.data ?? []
+            userArray = predictUserArray
         }
-        userArray = predictUserArray
         
         if userArray.isEmpty {
             self.customAlertView(title: ErrorMessage.matchEmptyAlert.localized, description: "", image: "empty")

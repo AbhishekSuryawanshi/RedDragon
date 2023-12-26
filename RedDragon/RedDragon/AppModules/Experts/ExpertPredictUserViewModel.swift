@@ -31,3 +31,13 @@ class ExpertBetUserViewModel: APIServiceManager<ExpertUserListModel> {
         asyncCall(urlString: urlString, method: method, parameters: nil)
     }
 }
+
+class ExpertPredictionUserDetailViewModel: APIServiceManager<ExpertUserDetailModel> {
+    
+    ///function to fetch user detail
+    func fetchExpertUserDetailAsyncCall(slug: String, userId: Int) {
+        let urlString   = URLConstants.expertUserList + "?affiliated_app_slug=\(slug)&userId=\(userId)"
+        let method      = RequestType.get
+        asyncCall(urlString: urlString, method: method, parameters: nil)
+    }
+}
