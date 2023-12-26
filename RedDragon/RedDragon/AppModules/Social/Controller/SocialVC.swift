@@ -82,7 +82,7 @@ class SocialVC: UIViewController {
             let vc = vc as! PostListVC
             vc.delegate = self
         }
-        
+       
         if refreshLeagueList {
             refreshLeagueList = false
             if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
@@ -90,6 +90,9 @@ class SocialVC: UIViewController {
             } else {
                 SocialPublicLeagueVM.shared.fetchLeagueListAsyncCall()
             }
+        } else {
+            leagueCollectionView.reloadData()
+            teamsCollectionView.reloadData()
         }
     }
     

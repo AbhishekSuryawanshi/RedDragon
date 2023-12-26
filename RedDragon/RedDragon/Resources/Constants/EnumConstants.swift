@@ -58,42 +58,49 @@ enum SportsType: String {
     }
 }
 
+enum LanguageType: String, CaseIterable {
+    case en = "English"
+    case zh = "Chinese" //cn
+}
+
 enum SettingType: String, CaseIterable {
     case account     = "Account"
     case privacy     = "Privacy Policy"
     case notiftn     = "Notifications"
-    case langaug     = "Languages"
+    case language    = "Languages"
     case logout      = "Logout"
     case about       = "About Us"
     case support     = "Support"
     case help        = "Help Center"
+    case name        = "Full Name"
+    case userName    = "User Name"
+    case email       = "Email"
+    case phone       = "Phone Number"
+    case password    = "Password"
+    case gender      = "Gender"
+    case dob         = "Date of Birth"
+    case location    = "Location"
     
     var iconImage: UIImage {
         switch self {
         case .account:
             return .manageAccounts
-        case .privacy:
-            return .privacyTip
         case .notiftn:
             return .notifications
+        case .language:
+            return .language
         case .logout:
-            return .report
+            return .logout
+        case .about:
+            return .aboutUs
+        case .privacy:
+            return .shieldStar
+        case .support:
+            return .support
         default:
-            return .report
+            return .helpOutline
         }
     }
-}
-
-enum ProfileType: String, CaseIterable {
-    case name      = "Full Name"
-    case userName  = "User Name"
-    case email     = "Email"
-    case phone     = "Phone Number"
-    case password  = "Password"
-    case Gender    = "Gender"
-    case dob       = "Date of Birth"
-    case location  = "Location"
-    case language  = "Language"
 }
 
 enum ServiceType: String, CaseIterable {
