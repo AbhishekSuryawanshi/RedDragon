@@ -18,7 +18,7 @@ class DiscoverVC: UIViewController {
     @IBOutlet weak var otherCollectionView: UICollectionView!
     
     var cancellable = Set<AnyCancellable>()
-    var profileArray: [SettingType] = [.account, .notiftn]
+    var profileArray: [SettingType] = [.account, .notiftn, .language, .logout]
     var otherArray: [SettingType] = [.about, .privacy, .support, .help]
     
     override func viewDidLoad() {
@@ -117,7 +117,7 @@ extension DiscoverVC: UICollectionViewDataSource {
             cell.titleLabel.textColor = .base
         } else {
             let type = collectionView == profileCollectionView ? profileArray[indexPath.row] : otherArray[indexPath.row]
-            cell.configure(title: type.rawValue.localized, iconImage: type.iconImage, bgViewWidth: 55, imageWidth: (0.65 * 55), bgViewCornerRadius: 55/2)
+            cell.configure(title: type.rawValue, iconImage: type.iconImage, bgViewWidth: 55, imageWidth: (0.65 * 55), bgViewCornerRadius: 55/2)
             cell.bgView.borderWidth = 0
             cell.bgView.backgroundColor = collectionView == profileCollectionView ? .wheat8 : .yellow4
         }
@@ -166,6 +166,10 @@ extension DiscoverVC: UICollectionViewDelegate {
             switch type {
             case .account:
                 navigateToViewController(ProfileVC.self, storyboardName: StoryboardName.discover, animationType: .autoReverse(presenting: .zoom))
+            case .language:
+                navigateToViewController(EditProfileVC.self, storyboardName: StoryboardName.discover, animationType: .autoReverse(presenting: .zoom)) { vc in
+                    vc.settingType = type
+                }
             case .privacy:
                 print("")
             case .notiftn:

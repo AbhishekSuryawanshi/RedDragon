@@ -172,12 +172,6 @@ extension NewsCommentsVC: UITableViewDataSource {
 extension NewsCommentsVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let model = commentsArray[indexPath.row]
-        let height = model.comment.heightOfString2(width: screenWidth - 90, font: fontRegular(13))
-        if (UserDefaults.standard.user?.id ?? 0) == model.user.id {
-            return height + 75
-        } else {
-            return height + 53
-        }
+        return UITableView.automaticDimension
     }
 }
