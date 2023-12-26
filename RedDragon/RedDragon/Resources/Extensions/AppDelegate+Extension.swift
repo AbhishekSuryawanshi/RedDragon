@@ -10,12 +10,12 @@ import Foundation
 extension AppDelegate{
     func setupLanguage(){
         var lang = DeviceLanguage.currentLanguage()
-        if lang.contains("zh"){
-            lang = "zh-Hans"
-        }
-        else{
+        if lang.contains("zh") {
+            lang = "zh" //"zh-Hans"
+        } else {
             lang = "en"
         }
         UserDefaults.standard.language = lang
     }
 }
+
