@@ -15,6 +15,7 @@ class BetLeagueTableVC: UITableViewCell {
     @IBOutlet var leagueTitle: UILabel!
     @IBOutlet var leagueLogo: UIImageView!
     @IBOutlet var sectionLable: UILabel!
+    @IBOutlet weak var fixedMatches: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,7 +34,7 @@ class BetLeagueTableVC: UITableViewCell {
         leagueLogo.setImage(imageStr: match.logo ?? "", placeholder: UIImage(named: ImageConstants.placeHolderTeam))
         sectionLable.text = match.section
         matchesCount.text = "\(match.matches?.count ?? 0)"
-        
+        fixedMatches.text = "Matches".localized
     }
     
 }

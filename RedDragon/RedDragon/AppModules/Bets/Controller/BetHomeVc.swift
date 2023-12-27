@@ -12,7 +12,8 @@ import Combine
 
 class BetHomeVc: UIViewController {
     
-    @IBOutlet var pointsLable: UILabel!
+    @IBOutlet var pointsLable: UILabel!    
+    @IBOutlet weak var lblTitle: UILabel!
     var viewModelBet = BetsHomeViewModel()
     var viewModel = BetMatchesHomeViewModel()
     var selectedType : BetsTitleCollectionView = .All
@@ -32,6 +33,7 @@ class BetHomeVc: UIViewController {
 
         // Do any additional setup after loading the view.
         initial()
+        setupLocalisation()
         configureLanguage()
         networkCall()
         fetchBetMetches()
@@ -44,6 +46,10 @@ class BetHomeVc: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         // set points from user defaults
         pointsLable.text = UserDefaults.standard.points ?? "00"
+    }
+    
+    func setupLocalisation(){
+        lblTitle.text = "Bets".localized
     }
 
     func initial(){
@@ -63,13 +69,13 @@ class BetHomeVc: UIViewController {
             if matchesList?.count ?? 0 > 0 {
                 tableView.reloadData()
             }else{
-                viewModel.fetchAllMatchesAsyncCall(sport: UserDefaults.standard.sport ?? Sports.football.title.lowercased(), lang: fetchCurrentLanguageCode == "en" ? "en" : "zh", day: "tommorow")
+                viewModel.fetchAllMatchesAsyncCall(sport: UserDefaults.standard.sport ?? Sports.football.rawValue.lowercased(), lang: fetchCurrentLanguageCode == "en" ? "en" : "zh", day: "tommorow")
             }
         case .Live:
             if liveMatchesList?.count ?? 0 > 0 {
                 tableView.reloadData()
             }else{
-                viewModel.fetchAllMatchesAsyncCall(sport: UserDefaults.standard.sport ?? Sports.football.title.lowercased(), lang: fetchCurrentLanguageCode == "en" ? "en" : "zh", day: "today")
+                viewModel.fetchAllMatchesAsyncCall(sport: UserDefaults.standard.sport ?? Sports.football.rawValue.lowercased(), lang: fetchCurrentLanguageCode == "en" ? "en" : "zh", day: "today")
             }
         case .Win:
             if winBets?.count ?? 0 > 0 {

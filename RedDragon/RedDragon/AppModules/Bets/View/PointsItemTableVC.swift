@@ -38,11 +38,10 @@ class PointsItemTableVC: UITableViewCell {
             imgStatus.image = .doubleArrowUp
             amountLable.text = "\(amount)"
         }
-        
         let dateFormats = DateFormatter()
         dateFormats.dateFormat = dateFormat.yyyyMMddHHmmss.rawValue
         dateLable.text = dateFormats.date(from: transaction?.created ?? "")!.formatDate(outputFormat: dateFormat.ddMMyyyyHHmm)
-        
+        statusLable.text = "Successfull".localized
     }
     
 }

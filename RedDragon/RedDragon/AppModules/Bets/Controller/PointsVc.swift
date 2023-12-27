@@ -14,8 +14,11 @@ class PointsVc: UIViewController {
     private var cancellable = Set<AnyCancellable>()
     var walletList : [Transaction]? = []
     
+    @IBOutlet weak var lblYourDiamonds: UILabel!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var amountLable: UILabel!
+    @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var lblRecentBets: UILabel!
     
     
     override func viewDidLoad() {
@@ -24,14 +27,19 @@ class PointsVc: UIViewController {
         // Do any additional setup after loading the view.
         networkCall()
         fetchWalletPoints()
-        
         tableView.register(CellIdentifier.pointsItemTableVC)
+        setupLocalisations()
+    }
+    
+    func setupLocalisations(){
+        lblTitle.text = "Bet Diamonds".localized
+        lblYourDiamonds.text = "Your Bet Diamonds".localized
+        lblRecentBets.text = "Recent Bets".localized
     }
     
     func networkCall(){
         viewModel.fetchPointsAsyncCall()
     }
-    
     
 }
 
