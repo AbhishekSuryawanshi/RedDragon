@@ -49,7 +49,7 @@ class NewsModuleVC: UIViewController {
                 vc.sportType = self.sportType
             }
         } else {
-            searchTextField.placeholder = "Search"
+            searchTextField.placeholder = "Search".localized
             sportsTypeArray = [.football, .tennis, .eSports, .basketball]
             ViewEmbedder.embedXIBController(childVC: NewsVC(viewModel: NewsViewModel(sportType: sportType)), parentVC: self, container: containerView)
         }
@@ -97,9 +97,9 @@ extension NewsModuleVC: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.headerTopCollectionViewCell, for: indexPath) as! HeaderTopCollectionViewCell
         
         if collectionView == headerCollectionView {
-            cell.configureUnderLineCell(title: NewsHeaders.allCases[indexPath.row].rawValue, selected: NewsHeaders.allCases[indexPath.row] == contentType)
+            cell.configureUnderLineCell(title: NewsHeaders.allCases[indexPath.row].rawValue.localized, selected: NewsHeaders.allCases[indexPath.row] == contentType)
         } else {
-            cell.configureUnderLineCell(title: sportsTypeArray[indexPath.row].rawValue, selected: sportsTypeArray[indexPath.row] == sportType, textColor: .black, fontSize: 15)
+            cell.configureUnderLineCell(title: sportsTypeArray[indexPath.row].rawValue.localized, selected: sportsTypeArray[indexPath.row] == sportType, textColor: .black, fontSize: 15)
         }
         return cell
     }
