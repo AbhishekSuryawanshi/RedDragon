@@ -20,7 +20,7 @@ class NewTeamTableViewCell: UITableViewCell {
     
     func configureCell(obj:StreetTeam?){
         lblTeam.text = obj?.name
-        if UserDefaults.standard.language == "zh-Hans"{
+        if UserDefaults.standard.language == "zh"{
             lblTeam.text = obj?.nameCN
         }
         imgLogo.setImage(imageStr: obj?.logoImgURL ?? "", placeholder: .placeholderTeam)

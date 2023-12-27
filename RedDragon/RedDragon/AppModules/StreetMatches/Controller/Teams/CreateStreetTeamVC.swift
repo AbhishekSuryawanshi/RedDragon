@@ -31,6 +31,7 @@ class CreateStreetTeamVC: UIViewController {
     @IBOutlet weak var fixedAboutTeamCn: UILabel!
     @IBOutlet weak var fixedAboutTeamEn: UILabel!
     @IBOutlet weak var fixedAddPlayers: UILabel!
+    @IBOutlet weak var searchBar: UISearchBar!
     // @IBOutlet weak var btnAddPlayers: UIButton!
     //Variables
     var tableViewPlayersObserver: NSKeyValueObservation?
@@ -77,6 +78,7 @@ class CreateStreetTeamVC: UIViewController {
     }
     
     func setupLocalisation(){
+        searchBar.placeholder = "Search Players".localized
         btnCreate.setTitle("Create Team".localized, for: .normal)
         lblTitle.text = "Create Team".localized
         textViewAbout.placeholder = "About Team English".localized

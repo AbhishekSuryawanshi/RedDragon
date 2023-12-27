@@ -21,7 +21,7 @@ class ListPlayerPositionTableViewCell: UITableViewCell {
     
     func configureCell(obj:StreetPosition?){
         lblPlayerPosition.text = obj?.positionName
-        if UserDefaults.standard.language == "zh-Hans"{
+        if UserDefaults.standard.language == "zh"{
            lblPlayerPosition.text = obj?.positionNameCN
      }
         lblCount.text = obj?.count

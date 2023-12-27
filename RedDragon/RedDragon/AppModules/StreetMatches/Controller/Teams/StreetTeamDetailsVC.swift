@@ -23,6 +23,7 @@ class StreetTeamDetailsVC: UIViewController {
     @IBOutlet weak var tableListHeight: NSLayoutConstraint!
     @IBOutlet weak var fixedInfo: UILabel!
     @IBOutlet weak var fixedAboutTeam: UILabel!
+    @IBOutlet weak var fixedTeamDetails: UILabel!
     
     //Variables
     var teamDetailsViewModel:StreetTeamDetailsViewModel?
@@ -39,9 +40,7 @@ class StreetTeamDetailsVC: UIViewController {
         super.viewDidLoad()
         initialSetup()
     }
-    
-    
-    
+   
     func initialSetup(){
         nibInitialization()
         setupLocalisation()
@@ -70,10 +69,9 @@ class StreetTeamDetailsVC: UIViewController {
     }
     
     func setupLocalisation(){
-        
         fixedInfo.text = "Info".localized
         fixedAboutTeam.text = "About Team".localized
-       
+        fixedTeamDetails.text = "Team Details".localized
     }
     
     func showLoader(_ value: Bool) {
@@ -128,7 +126,7 @@ class StreetTeamDetailsVC: UIViewController {
         lblAbout.text = teamDetails?.description
         infoTableView.reloadData()
         
-        if UserDefaults.standard.language == "zh-Hans"{
+        if UserDefaults.standard.language == "zh"{
             lblTeam.text = teamDetails?.nameCN
             lblAbout.text = teamDetails?.descriptionCN
             
@@ -136,11 +134,11 @@ class StreetTeamDetailsVC: UIViewController {
     }
     
     func toPlayerDetails(player:Player?){
-//        let vc = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
-//        vc.isOtherPlayer = true
-//        vc.playerID = player?.player_id
-//        vc.userID = player?.userId
-//        self.navigationController?.pushViewController(vc, animated: true)
+        navigateToViewController(StreetPlayerProfileViewController.self,storyboardName: StoryboardName.streetMatches) { vc in
+            vc.isOtherPlayer = true
+            vc.userID = player?.userID
+            vc.playerID = player?.playerID
+        }
     }
     
     func toMatchDetails(matchID:Int?){
@@ -151,10 +149,6 @@ class StreetTeamDetailsVC: UIViewController {
     }
  
 }
-
-
-
-
 
 extension StreetTeamDetailsVC:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -199,7 +193,7 @@ extension StreetTeamDetailsVC:UITableViewDelegate,UITableViewDataSource{
             switch indexPath.row{
             case 0:
                 var team = teamDetails?.name ?? ""
-                if UserDefaults.standard.language == "zh-Hans"{
+                if UserDefaults.standard.language == "zh"{
                     team = teamDetails?.nameCN ?? ""
                 }
                 cell.configureCell(key: "Team Name".localized, value: team)

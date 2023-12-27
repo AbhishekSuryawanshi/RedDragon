@@ -30,5 +30,9 @@ class StadiumTableViewCell: UITableViewCell {
         lblStadium.text = obj?.name
         lblDescription.text = obj?.description
         lblLocation.text = obj?.address
+        if UserDefaults.standard.language == "zh"{
+            lblStadium.text = obj?.nameCN
+            lblDescription.text = obj?.descriptionCN
+        }
     }
 }

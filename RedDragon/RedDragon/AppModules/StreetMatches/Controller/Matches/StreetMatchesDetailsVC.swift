@@ -24,6 +24,8 @@ class StreetMatchesDetailsVC: UIViewController {
     @IBOutlet weak var fixedHomeLineup: UILabel!
     @IBOutlet weak var tableViewAwayHeight: NSLayoutConstraint!
     @IBOutlet weak var tableViewHomeHeight: NSLayoutConstraint!
+    @IBOutlet weak var lblMatchDetails: UILabel!
+    
     var matchDetails:StreetMatchDetails?
     var tableViewHomeObserver: NSKeyValueObservation?
     var tableViewAwayObserver: NSKeyValueObservation?
@@ -34,11 +36,18 @@ class StreetMatchesDetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         nibInitialization()
+        setupLocalisation()
         setObserver()
         fetchMatchDetailsViewModel()
         makeNetworkCall()
 
         // Do any additional setup after loading the view.
+    }
+    
+    func setupLocalisation(){
+        lblMatchDetails.text = "Match Details".localized
+        fixedAwayLineup.text = "Away Lineup".localized
+        fixedHomeLineup.text = "Home Lineup".localized
     }
     
     func nibInitialization() {
@@ -101,8 +110,11 @@ class StreetMatchesDetailsVC: UIViewController {
         }
         tableViewHomeLineup.reloadData()
         tableViewAwayLineup.reloadData()
+        if UserDefaults.standard.language == "zh"{
+            lblHome.text = matchDetails?.homeTeam?.nameCN
+            lblAway.text = matchDetails?.awayTeam?.nameCN
+        }
     }
-
 }
 
 
@@ -129,6 +141,20 @@ extension StreetMatchesDetailsVC:UITableViewDelegate,UITableViewDataSource{
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let player:StreetMatchPlayer?
+        if tableView == tableViewHomeLineup{
+            player = matchDetails?.homeTeam?.players?[indexPath.row]
+        }
+        else{
+            player = matchDetails?.awayTeam?.players?[indexPath.row]
+        }
+        navigateToViewController(StreetPlayerProfileViewController.self,storyboardName: StoryboardName.streetMatches) { vc in
+            vc.isOtherPlayer = true
+            vc.userID = player?.userID
+            vc.playerID = player?.playerID
+        }
+    }
    
    
 }

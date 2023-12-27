@@ -96,6 +96,7 @@ class StadiumDetailsVC: UIViewController {
     
     func initialSetups(){
         nibInitialization()
+        setupLocalisations()
         fillDetails()
         tableViewObserver = tableViewTimings.observe(\.contentSize, options: .new) { (_, change) in
                     guard let height = change.newValue?.height else { return }
@@ -111,12 +112,24 @@ class StadiumDetailsVC: UIViewController {
         collectionViewImages.register(CellIdentifier.imageSliderCollectionViewCell)
     }
     
+    func setupLocalisations(){
+        fixedOwnerName.text = "Owner Name".localized
+        fixedPhone.text = "Phone Number".localized
+        fixedAddress.text = "Location".localized
+        fixedSports.text = "Available Sports".localized
+        fixedAmenities.text = "Available Amenities".localized
+        fixedTimings.text = "Timings".localized
+        fixedContactDetails.text = "Contact Details".localized
+        
+    }
+    
+    
     func fillDetails(){
        
         lblLocation.text = stadium?.address
         lblStadiumName.text = stadium?.name
         lblDescription.text = stadium?.description
-        if UserDefaults.standard.language == "zh-Hans"{
+        if UserDefaults.standard.language == "zh"{
             lblStadiumName.text = stadium?.nameCN
             lblDescription.text = stadium?.descriptionCN
         }

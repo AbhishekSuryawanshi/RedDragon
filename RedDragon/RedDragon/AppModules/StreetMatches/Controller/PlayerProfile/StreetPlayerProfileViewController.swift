@@ -174,7 +174,7 @@ class StreetPlayerProfileViewController: UIViewController {
         lblName.text = "\(user?.firstName ?? "") \(user?.lastName ?? "")"
         lblLocation.text = user?.player?.address
         lblAbout.text = user?.player?.description
-        if UserDefaults.standard.language == "zh-Hans"{
+        if UserDefaults.standard.language == "zh"{
             lblAbout.text = user?.player?.descriptionCN
         }
         if !(user?.player?.imgURL?.isEmpty ?? false){
@@ -234,13 +234,13 @@ extension StreetPlayerProfileViewController:UITableViewDelegate,UITableViewDataS
             switch indexPath.row{
             case 0:
                 var position = user?.player?.positionName ?? ""
-                if UserDefaults.standard.language == "zh-Hans"{
+                if UserDefaults.standard.language == "zh"{
                     position = user?.player?.positionNameCN ?? ""
                 }
                 cell.configureCell(key: "Main Position".localized, value: position)
             case 1:
                 var valueText = user?.player?.dominateFoot ?? ""
-                if UserDefaults.standard.language == "zh-Hans"{
+                if UserDefaults.standard.language == "zh"{
                     if valueText == "LEFT"{
                         valueText = "LEFT".localized
                     }

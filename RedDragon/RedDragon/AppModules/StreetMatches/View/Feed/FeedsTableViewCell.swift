@@ -43,6 +43,10 @@ class FeedsTableViewCell: UITableViewCell {
         if let dt1 = dateFormatter.date(from: obj?.createdAt ?? "") {
             lblDate.text = dt1.formatDate(outputFormat: .ddMMyyyy)
         }
+        if UserDefaults.standard.language == "zh"{
+            lblPost.text = obj?.descriptionCN
+            
+        }
     }
     
 }

@@ -40,6 +40,7 @@ class StreetCreateEventsVC: UIViewController {
     @IBOutlet weak var fixedTime: UILabel!
     @IBOutlet weak var fixedDate: UILabel!
     @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var fixedLblMedia: UILabel!
     
     //Variables
     var tableViewPlayersObserver: NSKeyValueObservation?
@@ -114,7 +115,7 @@ class StreetCreateEventsVC: UIViewController {
         fixedTime.text = "Time".localized
         txtTime.placeholder = "Time".localized
         lblTitle.text = "\("Create Event".localized) - \(titleStr)"
-        
+        fixedLblMedia.text = "Media".localized
     }
     
     func makeNetworkCall(){

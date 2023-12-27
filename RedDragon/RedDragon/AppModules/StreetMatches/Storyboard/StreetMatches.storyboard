@@ -991,6 +991,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnCreate" destination="P1G-Wq-nmR" id="60B-3l-mGg"/>
                         <outlet property="searchBar" destination="9ii-Na-wfd" id="MHA-JR-ddb"/>
                         <outlet property="tableView" destination="icA-Ow-gjP" id="LRY-D2-Odx"/>
                     </connections>
@@ -2157,6 +2158,7 @@
                         <outlet property="lblHome" destination="pH9-cc-g3q" id="LQZ-9O-4tB"/>
                         <outlet property="lblHomeScore" destination="vUo-Yf-nzF" id="rlX-Se-FEL"/>
                         <outlet property="lblLocation" destination="uZs-qa-Ihb" id="Rb6-zI-uxs"/>
+                        <outlet property="lblMatchDetails" destination="geh-Hl-EZ6" id="Nrx-Ls-gbu"/>
                         <outlet property="lblTime" destination="U13-ME-5jl" id="iTe-ab-lO8"/>
                         <outlet property="tableViewAwayHeight" destination="TPv-2s-sH2" id="r5d-BN-M9I"/>
                         <outlet property="tableViewAwayLineup" destination="FC0-Dh-zA7" id="DRR-dS-JIr"/>
@@ -2565,6 +2567,7 @@
                         <outlet property="descriptionStack" destination="tZ0-yj-Vlb" id="XUX-T9-Wg4"/>
                         <outlet property="fixedAboutTeam" destination="cnj-Tq-HST" id="TAq-0z-ZpB"/>
                         <outlet property="fixedInfo" destination="KiC-qc-dAI" id="puW-1B-9Ui"/>
+                        <outlet property="fixedTeamDetails" destination="DcY-Zn-IgU" id="B5i-sB-Zrm"/>
                         <outlet property="imageViewTeam" destination="vMB-d3-ZR6" id="Yau-GL-gPX"/>
                         <outlet property="infoStack" destination="tTI-eZ-LJj" id="u6a-a5-otf"/>
                         <outlet property="infoTableView" destination="DTO-QW-Hle" id="tnz-Rl-Ygc"/>
@@ -2618,7 +2621,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x0e-qI-j2w">
-                                <rect key="frame" x="0.0" y="109" width="393" height="709"/>
+                                <rect key="frame" x="0.0" y="109" width="393" height="709.00000000000023"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g94-PN-UPG">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="1349.3333333333333"/>
@@ -3039,6 +3042,7 @@
                         <outlet property="lblTitle" destination="Vac-6t-JAB" id="wCg-yi-Qeo"/>
                         <outlet property="playersTableHeight" destination="Are-Yi-cWT" id="zZm-lg-NVJ"/>
                         <outlet property="playersTableView" destination="A5g-xO-lyD" id="0hg-YB-UwW"/>
+                        <outlet property="searchBar" destination="jJW-jj-EKC" id="kcF-gO-BJI"/>
                         <outlet property="textViewAbout" destination="BzL-Ka-vtu" id="wlv-3M-haG"/>
                         <outlet property="textViewChineseAbout" destination="OW0-0w-LH1" id="gHH-xM-maT"/>
                         <outlet property="txtChineseTeamName" destination="6pc-to-IcZ" id="9fU-yq-Ced"/>
@@ -4278,7 +4282,7 @@
                                                                     <constraint firstAttribute="height" constant="50" id="xP4-gs-m8T"/>
                                                                 </constraints>
                                                                 <state key="normal" title="Button"/>
-                                                                <buttonConfiguration key="configuration" style="plain" title="Create Post">
+                                                                <buttonConfiguration key="configuration" style="plain" title="Create Event">
                                                                     <fontDescription key="titleFontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="15"/>
                                                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </buttonConfiguration>
@@ -4344,6 +4348,7 @@
                         <outlet property="fixedDate" destination="h7f-B5-GCm" id="ew9-CW-8VO"/>
                         <outlet property="fixedDescriptionCn" destination="DMf-7F-0Fo" id="SHE-hz-hB5"/>
                         <outlet property="fixedDescriptionEn" destination="R8b-Yd-6Pg" id="Ncj-kb-V8E"/>
+                        <outlet property="fixedLblMedia" destination="Sqg-qc-KxE" id="pKD-PU-pv9"/>
                         <outlet property="fixedLocation" destination="tXJ-4t-gur" id="Hnn-y0-PE3"/>
                         <outlet property="fixedTime" destination="jYn-hQ-BoV" id="641-XX-Deg"/>
                         <outlet property="imageViewMedia" destination="aqZ-ZU-9Dd" id="40V-W4-Nzr"/>
