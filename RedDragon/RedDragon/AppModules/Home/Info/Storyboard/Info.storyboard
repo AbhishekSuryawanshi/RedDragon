@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="F0O-ys-Elv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="F0O-ys-Elv">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -490,6 +490,7 @@
                                                             <constraint firstAttribute="trailing" secondItem="zKB-y1-Xri" secondAttribute="trailing" constant="8" id="J3c-6y-S9P"/>
                                                             <constraint firstItem="NRk-bK-3YN" firstAttribute="top" secondItem="wcr-c4-hnB" secondAttribute="top" constant="10" id="Op7-RV-y9c"/>
                                                             <constraint firstItem="ffJ-V8-lVY" firstAttribute="leading" secondItem="wcr-c4-hnB" secondAttribute="leading" constant="8" id="ZcI-xl-wYJ"/>
+                                                            <constraint firstAttribute="bottom" secondItem="ffJ-V8-lVY" secondAttribute="bottom" constant="5" id="f7E-70-nqm"/>
                                                             <constraint firstItem="ffJ-V8-lVY" firstAttribute="top" secondItem="zKB-y1-Xri" secondAttribute="bottom" id="gHm-aO-70p"/>
                                                             <constraint firstItem="NRk-bK-3YN" firstAttribute="leading" secondItem="wcr-c4-hnB" secondAttribute="leading" constant="20" symbolic="YES" id="qf2-Ab-anZ"/>
                                                             <constraint firstItem="zKB-y1-Xri" firstAttribute="centerY" secondItem="NRk-bK-3YN" secondAttribute="centerY" id="tZV-91-eqB"/>
@@ -1013,12 +1014,13 @@
                                                                     <action selector="seeAllButton:" destination="F0O-ys-Elv" eventType="touchUpInside" id="hnQ-LK-KOp"/>
                                                                 </connections>
                                                             </button>
-                                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="81u-rI-emL">
+                                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="377" placeholderIntrinsicHeight="250" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="81u-rI-emL">
                                                                 <rect key="frame" x="8" y="43" width="377" height="250"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" priority="250" constant="250" id="hQ1-xL-q74"/>
+                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="250" id="hQ1-xL-q74"/>
                                                                 </constraints>
+                                                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                 <connections>
                                                                     <outlet property="dataSource" destination="F0O-ys-Elv" id="Foc-cb-l3E"/>
                                                                     <outlet property="delegate" destination="F0O-ys-Elv" id="Ege-bQ-YFF"/>
@@ -1028,7 +1030,6 @@
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstItem="75K-uh-V8z" firstAttribute="leading" secondItem="BOC-Gy-Joo" secondAttribute="leading" constant="20" id="2MG-j6-64H"/>
-                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="287" id="Dqj-V2-QIq"/>
                                                             <constraint firstAttribute="trailing" secondItem="81u-rI-emL" secondAttribute="trailing" constant="8" id="N56-pW-NvD"/>
                                                             <constraint firstAttribute="trailing" secondItem="OrO-nb-3it" secondAttribute="trailing" constant="3" id="NRa-JQ-MKY"/>
                                                             <constraint firstItem="OrO-nb-3it" firstAttribute="centerY" secondItem="75K-uh-V8z" secondAttribute="centerY" id="Ndx-xN-u77"/>
@@ -1115,7 +1116,6 @@
                         <outlet property="expertTableLabel" destination="75K-uh-V8z" id="xXX-tX-zII"/>
                         <outlet property="expertTableView" destination="81u-rI-emL" id="ofb-jY-aer"/>
                         <outlet property="expertTableViewHeight" destination="hQ1-xL-q74" id="9hL-NS-XM2"/>
-                        <outlet property="expertViewHeight" destination="Dqj-V2-QIq" id="qDL-vk-By6"/>
                         <outlet property="firstExpertImageView" destination="o4G-dW-03S" id="gz4-pc-UKr"/>
                         <outlet property="firstExpertNameLabel" destination="Wgu-k4-bj9" id="dk8-yV-vrT"/>
                         <outlet property="firstExpertWinPercentLabel" destination="Agm-Xs-Qpp" id="Gnp-DA-AKH"/>
