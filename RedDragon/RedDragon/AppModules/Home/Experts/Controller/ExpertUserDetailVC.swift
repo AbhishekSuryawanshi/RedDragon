@@ -18,17 +18,20 @@ class ExpertUserDetailVC: UIViewController {
     @IBOutlet weak var successCountLabel: UILabel!
     @IBOutlet weak var unsuccessCountLabel: UILabel!
     @IBOutlet weak var coinLabel: UILabel!
-    @IBOutlet weak var followButton: UIButton!
-    @IBOutlet weak var followingButton: UIButton!
+    @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var predictionButton: UIButton!
+    
     var cancellable = Set<AnyCancellable>()
     var userId = Int()
     private var expertPredictUserVM = ExpertPredictionUserDetailViewModel()
     var matchArray = [ExpertPredictionMatch]()
     var userData: ExpertUser?
+    var transactionVM = TransactionViewModel()
     var commentsArray: [Comment] = []
     var sectionHeading = ["Previous Results", "Comments"]
     var tagData = [String]()
+    var amount = Int()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +46,8 @@ class ExpertUserDetailVC: UIViewController {
     
     // MARK: - Methods
     func performInitialSetup() {
+        // if user has unlocked prediction then hide blur view
+        blurView.isHidden = UserDefaults.standard.bool(forKey: "\(userId)") ? true : false
         nibInitialization()
         fetchPredictUserDetailViewModelResponse()
         fetchCommentsViewModel()
@@ -68,19 +73,23 @@ class ExpertUserDetailVC: UIViewController {
         successCountLabel.text = "Success: \(userData?.appdata?.predict?.predictStats?.successCount ?? 0)"
         unsuccessCountLabel.text = "Failed: \(userData?.appdata?.predict?.predictStats?.unsuccessCount ?? 0)"
         coinLabel.text = "Coin: \(userData?.appdata?.predict?.predictStats?.coins ?? 0)"
-        if userData?.following ?? true {
-            followButton.isHidden = true
-        }else {
-            followingButton.isHidden = true
-        }
-        
         matchArray = userData?.appdata?.predict?.prediction ?? []
-//        if matchArray.isEmpty {
-//            self.customAlertView(title: ErrorMessage.matchEmptyAlert.localized, description: "", image: "empty")
-//        }
         tagData = userData?.tags ?? []
+        if userData?.appdata?.predict?.predictStats?.successRate ?? 0 >= 30 && userData?.wallet ?? 0 >= 10 {
+            predictionButton.setTitle("Unlock Prediction for 10", for: .normal)
+            amount = 10
+        }else if userData?.appdata?.predict?.predictStats?.successRate ?? 0 < 30 && userData?.wallet ?? 0 >= 5 {
+            predictionButton.setTitle("Unlock Prediction for 5", for: .normal)
+            amount = 5
+        }
         collectionView.reloadData()
         tableView.reloadData()
+    }
+    
+    @IBAction func unlockPreidtcionButtonAction(_ sender: UIButton) {
+        let params = ["coin_count":amount, "type": "d"] as! [String: Any]  // type "d" for Debit, "c" for Credit
+        transactionVM.postDebitPredictionAmount(params: params)
+        fetchTransactionViewModelResponse()
     }
 }
 
@@ -167,6 +176,25 @@ extension ExpertUserDetailVC {
                     }
                 }
                 self?.tableView.reloadData()
+            })
+            .store(in: &cancellable)
+    }
+   
+    func fetchTransactionViewModelResponse() {
+        transactionVM.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        transactionVM.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        transactionVM.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] result in
+                if result?.response?.code == 200 {
+                    UserDefaults.standard.setValue(true, forKey: "\(self?.userId ?? 0)")
+                    self?.blurView.isHidden = true
+                }
             })
             .store(in: &cancellable)
     }
