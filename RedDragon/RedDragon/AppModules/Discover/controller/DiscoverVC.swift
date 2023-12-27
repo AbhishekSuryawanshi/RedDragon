@@ -37,7 +37,7 @@ class DiscoverVC: UIViewController {
     
     func refreshView() {
         self.navigationController?.navigationBar.isHidden = true
-        
+        self.tabBarController?.tabBar.isHidden = false
         headerLabel.text = "Our Services".localized
         profileHeaderLabel.text = "Profile & Settings".localized
         otherHeaderLabel.text = "Other".localized
@@ -46,8 +46,11 @@ class DiscoverVC: UIViewController {
     
     func filterProfileArray() {
         /// Filter items for logged in user
-        if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) && !profileArray.contains(.logout){
-            profileArray.append(.logout)
+        if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
+            
+            if !profileArray.contains(.logout){
+                profileArray.append(.logout)
+            }
         } else {
             profileArray = profileArray.filter({$0 != .logout})
         }
@@ -142,6 +145,8 @@ extension DiscoverVC: UICollectionViewDataSource {
 extension DiscoverVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == servicesCollectionView {
+            self.tabBarController?.tabBar.isHidden = true
+            
             switch ServiceType.allCases[indexPath.row] {
             case .predictions:
                 navigateToViewController(HomePredictionViewController.self, storyboardName: StoryboardName.prediction, animationType: .autoReverse(presenting: .zoom))

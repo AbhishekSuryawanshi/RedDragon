@@ -9,8 +9,8 @@ import UIKit
 import Combine
 
 enum NewsHeaders: String, CaseIterable {
-    case gossip = "Gossip"
     case news   = "News"
+    case gossip = "Gossip"
 }
 
 class NewsModuleVC: UIViewController {
@@ -22,7 +22,7 @@ class NewsModuleVC: UIViewController {
     
     var sportsTypeArray: [SportsType] = []
     var sportType: SportsType = .football
-    var contentType: NewsHeaders = .gossip
+    var contentType: NewsHeaders = .news
     private var cancellable = Set<AnyCancellable>()
     
     override func viewDidLoad() {

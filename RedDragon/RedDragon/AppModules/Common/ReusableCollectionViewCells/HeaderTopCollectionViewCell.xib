@@ -17,24 +17,37 @@
                 <rect key="frame" x="0.0" y="0.0" width="289" height="51"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q1O-wH-SHd">
-                        <rect key="frame" x="0.0" y="15.666666666666664" width="289" height="20"/>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dzG-Ou-dHI">
+                        <rect key="frame" x="0.0" y="0.0" width="289" height="51"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q1O-wH-SHd">
+                                <rect key="frame" x="0.0" y="15.666666666666664" width="289" height="20"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="17"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <constraints>
+                            <constraint firstItem="Q1O-wH-SHd" firstAttribute="centerY" secondItem="dzG-Ou-dHI" secondAttribute="centerY" id="Deg-mu-UfG"/>
+                            <constraint firstAttribute="trailing" secondItem="Q1O-wH-SHd" secondAttribute="trailing" id="NQf-sm-atz"/>
+                            <constraint firstItem="Q1O-wH-SHd" firstAttribute="leading" secondItem="dzG-Ou-dHI" secondAttribute="leading" id="Uvc-m8-EJJ"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="Q1O-wH-SHd" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="4om-ot-vez"/>
-                <constraint firstAttribute="trailing" secondItem="Q1O-wH-SHd" secondAttribute="trailing" id="qdi-bE-Kcf"/>
-                <constraint firstItem="Q1O-wH-SHd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="v8K-eE-rap"/>
+                <constraint firstItem="dzG-Ou-dHI" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="A9A-8F-cOB"/>
+                <constraint firstAttribute="bottom" secondItem="dzG-Ou-dHI" secondAttribute="bottom" id="bXJ-f7-5lG"/>
+                <constraint firstAttribute="trailing" secondItem="dzG-Ou-dHI" secondAttribute="trailing" id="oXP-y6-sCW"/>
+                <constraint firstItem="dzG-Ou-dHI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ttP-HW-ZpT"/>
             </constraints>
             <size key="customSize" width="289" height="51"/>
             <connections>
+                <outlet property="bgView" destination="dzG-Ou-dHI" id="RTq-z1-Ts4"/>
                 <outlet property="titleLabel" destination="Q1O-wH-SHd" id="O3a-fh-8Gj"/>
             </connections>
             <point key="canvasLocation" x="150.38167938931298" y="0.35211267605633806"/>

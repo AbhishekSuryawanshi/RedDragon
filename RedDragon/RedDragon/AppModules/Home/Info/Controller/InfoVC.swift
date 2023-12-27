@@ -94,6 +94,7 @@ class InfoVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     @IBAction func appModulesButton(_ sender: UIButton) {
@@ -405,6 +406,7 @@ extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == servicesCollectionView {
+            self.tabBarController?.tabBar.isHidden = true
             switch ServiceType.allCases[indexPath.row] {
             case .predictions:
                 navigateToViewController(HomePredictionViewController.self, storyboardName: StoryboardName.prediction, animationType: .autoReverse(presenting: .zoom))
