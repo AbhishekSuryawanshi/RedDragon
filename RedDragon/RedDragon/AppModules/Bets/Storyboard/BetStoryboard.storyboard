@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -166,6 +166,7 @@
                     <navigationItem key="navigationItem" id="pXU-kf-t7n"/>
                     <connections>
                         <outlet property="collectionView" destination="Y0y-oK-cj5" id="EIU-wz-xig"/>
+                        <outlet property="lblTitle" destination="M4L-hC-84q" id="jvp-e3-i6p"/>
                         <outlet property="pointsLable" destination="NLi-zL-sHj" id="SIn-V0-6mp"/>
                         <outlet property="tableView" destination="hWH-WS-rqq" id="xkh-j2-ApI"/>
                     </connections>
@@ -746,6 +747,10 @@
                         <outlet property="estWinAmount" destination="bgH-2w-ap3" id="Zn0-wf-mYS"/>
                         <outlet property="etAmount" destination="VSo-li-qbc" id="qwn-T9-P6B"/>
                         <outlet property="expertsLable" destination="HYO-JD-rCJ" id="fIJ-wn-HKn"/>
+                        <outlet property="fixedAmountStake" destination="agr-2s-bdU" id="vCQ-rz-XhH"/>
+                        <outlet property="fixedLblChooseOdds" destination="Eax-6w-923" id="ATv-3V-dub"/>
+                        <outlet property="fixedTotalEstReturns" destination="cpD-Ei-PfG" id="nBq-Fk-Nx1"/>
+                        <outlet property="fixedTotalStake" destination="Q5N-1n-hHv" id="6l5-K8-yxQ"/>
                         <outlet property="homeName" destination="wbu-dD-fNi" id="7g4-cB-VNW"/>
                         <outlet property="imgAway" destination="auA-bx-eRY" id="Y5h-oh-tRa"/>
                         <outlet property="imgHome" destination="L8y-ou-sPQ" id="SYq-Sz-vHS"/>
@@ -787,8 +792,8 @@
                                             <action selector="backClicked:" destination="PyI-yk-9Cj" eventType="touchUpInside" id="2z8-kC-NH1"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bet Diamond" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ESy-G0-3Mh">
-                                        <rect key="frame" x="144.66666666666666" y="69.333333333333329" width="103.66666666666666" height="21.333333333333329"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bet Diamonds" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ESy-G0-3Mh">
+                                        <rect key="frame" x="140" y="69.333333333333329" width="113" height="21.333333333333329"/>
                                         <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -897,6 +902,9 @@
                     </view>
                     <connections>
                         <outlet property="amountLable" destination="ycF-bO-8Dr" id="UQG-jb-CoC"/>
+                        <outlet property="lblRecentBets" destination="NNb-5O-4j0" id="YVw-c2-32s"/>
+                        <outlet property="lblTitle" destination="ESy-G0-3Mh" id="H9C-q8-P4Y"/>
+                        <outlet property="lblYourDiamonds" destination="eVk-Zk-I7R" id="GUg-M3-7V2"/>
                         <outlet property="tableView" destination="l9S-o2-Q1P" id="XZp-Yu-t7M"/>
                     </connections>
                 </viewController>
@@ -951,6 +959,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="BqZ-ta-yfo"/>
                     <connections>
+                        <outlet property="lblTitle" destination="7QF-cT-w6Z" id="n4X-Sn-OTe"/>
                         <outlet property="tableView" destination="OoB-Ys-PEq" id="YUb-43-h1f"/>
                     </connections>
                 </viewController>
