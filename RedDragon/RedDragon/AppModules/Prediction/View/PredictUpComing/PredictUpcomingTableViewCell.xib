@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -29,14 +29,14 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zBn-Hf-VtT">
                         <rect key="frame" x="10" y="10" width="300" height="40"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hl-mO-wOf">
-                                <rect key="frame" x="9.9999999999999982" y="13" width="31.333333333333329" height="14.333333333333336"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hl-mO-wOf">
+                                <rect key="frame" x="10" y="13" width="94" height="14.333333333333336"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPM-Nt-N83">
-                                <rect key="frame" x="258" y="13" width="32" height="14.333333333333336"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPM-Nt-N83">
+                                <rect key="frame" x="196" y="13" width="94" height="14.333333333333336"/>
                                 <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -55,8 +55,10 @@
                             <constraint firstItem="pq9-8c-ezI" firstAttribute="centerX" secondItem="zBn-Hf-VtT" secondAttribute="centerX" id="M84-VO-fTW"/>
                             <constraint firstAttribute="height" constant="40" id="QvX-KW-xzO"/>
                             <constraint firstItem="pq9-8c-ezI" firstAttribute="centerY" secondItem="zBn-Hf-VtT" secondAttribute="centerY" id="Qyf-JA-QPg"/>
+                            <constraint firstItem="YPM-Nt-N83" firstAttribute="leading" secondItem="pq9-8c-ezI" secondAttribute="trailing" constant="30" id="Vma-u0-hfA"/>
                             <constraint firstItem="YPM-Nt-N83" firstAttribute="centerY" secondItem="zBn-Hf-VtT" secondAttribute="centerY" id="X3S-zp-x3Q"/>
                             <constraint firstAttribute="trailing" secondItem="YPM-Nt-N83" secondAttribute="trailing" constant="10" id="eLe-IE-A88"/>
+                            <constraint firstItem="pq9-8c-ezI" firstAttribute="leading" secondItem="9hl-mO-wOf" secondAttribute="trailing" constant="30" id="jHJ-U0-thY"/>
                             <constraint firstItem="pq9-8c-ezI" firstAttribute="centerY" secondItem="zBn-Hf-VtT" secondAttribute="centerY" id="xxl-fQ-tUQ"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>

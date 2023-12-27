@@ -123,10 +123,10 @@ struct URLConstants {
     
 
     // MARK: - Prediction
-    static let getMatchesList       = "api/match/list?"
-    static let postMatchPrediction  = "api/predict"
-    static let matchDetail          = "api/match"
-    static let predictionList       = "api/predict/list/withMatch?"
+    static let getMatchesList       = "prediction/match/list?"
+    static let postMatchPrediction  = "prediction/predict"
+    static let matchDetail          = "prediction/match"
+    static let predictionList       = "prediction/predict/list/withMatch?"
     static let predictionGetMatchList = baseURL + "prediction/match/list?"
     
     

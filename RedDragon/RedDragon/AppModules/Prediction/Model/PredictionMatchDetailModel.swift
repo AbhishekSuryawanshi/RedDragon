@@ -9,6 +9,14 @@ import Foundation
 
 // MARK: - PredictionMatchDetailModelElement
 struct PredictionMatchDetailModel: Codable {
+    var response: PredictionMatchDetailResponse?
+    var error: ErrorResponse?
+}
+
+// MARK: - Response
+struct PredictionMatchDetailResponse: Codable {
+    var code: Int?
+    var messages: [String]?
     var data: [PredictionMatchDetailModelElementData]?
 }
 // MARK: - PredictionMatchDetailModelElement
@@ -137,7 +145,7 @@ struct PredictionsProgress: Codable {
 // MARK: - ProgressDatum
 struct ProgressData: Codable {
     var time: String?
-    var score: PredictionsScore?
+    var score: String?
     var mainPlayerName, mainPlayerSlug, subPlayerName, subPlayerSlug: String?
     var action: String?
     var isHome: Bool?
@@ -153,10 +161,6 @@ struct ProgressData: Codable {
     }
 }
 
-enum PredictionsScore: String, Codable {
-    case empty = ""
-    case the10 = "(1 - 0)"
-}
 
 // MARK: - Referee
 struct PredictionsReferee: Codable {
@@ -218,7 +222,7 @@ struct PredictionMatchDetailPercnt: Codable {
 
 // MARK: - WinStats
 struct WinStatsMatch: Codable {
-    var homeTeamPrcnt, awayTeamPrcnt, drawPrcnt: Int?
+    var homeTeamPrcnt, awayTeamPrcnt, drawPrcnt: Double?
 
     enum CodingKeys: String, CodingKey {
         case homeTeamPrcnt = "home_team_prcnt"
