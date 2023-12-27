@@ -69,6 +69,7 @@ extension MeetHomeVC {
     func fetchMeetUserViewModel() {
         userVM?.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+            self?.viewContainerForButtons.isHidden = true
         }
         userVM?.displayLoader = { [weak self] value in
             self?.showLoader(value)
@@ -84,7 +85,8 @@ extension MeetHomeVC {
     
     func execute_onUserListResponseData(_ userList: MeetUserListModel) {
         arrayOfUsers = userList.response?.data ?? []
-        cardStack.reloadData()
+        viewContainerForButtons.isHidden = false
+        cardStack.reloadData() 
     }
     
     func fetchMeetLikeUserViewModel(_ likedUserIndex: Int) {
