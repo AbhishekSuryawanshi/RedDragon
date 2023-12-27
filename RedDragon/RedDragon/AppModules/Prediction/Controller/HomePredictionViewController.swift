@@ -58,7 +58,7 @@ class HomePredictionViewController: UIViewController {
     @IBOutlet weak var sportsSelectionView: UIView!
     @IBOutlet weak var predictionTopView: TopView!
     
-    var sportsArr = ["football" , "basketball"]
+    var sportsArr = ["football","basketball"]
     var selectedMatch: PredictionData?
     private var predictionMatchesViewModel: PredictionViewModel?
     private var predictionListUserViewModel:PredictionsListUserViewModel?
@@ -78,6 +78,13 @@ class HomePredictionViewController: UIViewController {
         appearance.backgroundColor = #colorLiteral(red: 0.7333333333, green: 0.09803921569, blue: 0.06274509804, alpha: 1)
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         self.navigationController?.isNavigationBarHidden = false
+        self.navigationItem.title = "User Prediction"
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+
+        navigationItem.standardAppearance = appearance
+        navigationItem.scrollEdgeAppearance = appearance
+       
     }
     
     func configureView() {
@@ -85,7 +92,6 @@ class HomePredictionViewController: UIViewController {
         loadFunctionality()
         fetchPredictionMatchesViewModel()
         makeNetworkCall(sport: selectedSports)
-        
         
     }
     
@@ -101,11 +107,19 @@ class HomePredictionViewController: UIViewController {
     }
     
     func makeNetworkCall(sport: String) {
+        if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
+            predictionTopView.userImgView.setImage(imageStr: UserDefaults.standard.user?.profileImg ?? "")
+            predictionTopView.usernameLbl.text = UserDefaults.standard.user?.name
+            
+        }
         predictionMatchesViewModel?.fetchPredictionMatchesAsyncCall(lang: "en", date: Date().formatDate(outputFormat: dateFormat.yyyyMMdd), sportType: sport)
     }
     
     func makeNetworkCall2(sport: String) {
-        predictionListUserViewModel?.fetchPredictionUserListAsyncCall(appUserID: "7", sportType: sport)  // To give logged in user id instead of 7
+      //  if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
+            let userID = UserDefaults.standard.user?.appDataIDs.predictMatchUserId
+            predictionListUserViewModel?.fetchPredictionUserListAsyncCall(appUserID: "\(userID ?? 0)" , sportType: sport)  // To give logged in user id instead of 7
+       // }
     }
     func showLoader(_ value: Bool) {
         value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
@@ -114,7 +128,7 @@ class HomePredictionViewController: UIViewController {
     @objc func predictBtn1(){
         navigateToViewController(PredictionDetailsViewController.self, storyboardName: StoryboardName.prediction) { vc in
             vc.sport = self.selectedSports
-            self.selectedMatch = self.predictionMatchesViewModel?.responseData?.data?[self.upcomingPredictBtn1.tag]
+            self.selectedMatch = self.predictionMatchesViewModel?.responseData?.response?.data?[self.upcomingPredictBtn1.tag]
             vc.selectedMatch = self.selectedMatch
                 }
     }
@@ -122,7 +136,7 @@ class HomePredictionViewController: UIViewController {
     @objc func predictBtn2(){
         navigateToViewController(PredictionDetailsViewController.self, storyboardName: StoryboardName.prediction) { vc in
             vc.sport = self.selectedSports
-            self.selectedMatch = self.predictionMatchesViewModel?.responseData?.data?[self.upcomingPredictBtn2.tag]
+            self.selectedMatch = self.predictionMatchesViewModel?.responseData?.response?.data?[self.upcomingPredictBtn2.tag]
             vc.selectedMatch = self.selectedMatch
                 }
     }
@@ -130,7 +144,7 @@ class HomePredictionViewController: UIViewController {
     @objc func predictBtn3(){
         navigateToViewController(PredictionDetailsViewController.self, storyboardName: StoryboardName.prediction) { vc in
             vc.sport = self.selectedSports
-            self.selectedMatch = self.predictionMatchesViewModel?.responseData?.data?[self.upcomingPredictBtn3.tag]
+            self.selectedMatch = self.predictionMatchesViewModel?.responseData?.response?.data?[self.upcomingPredictBtn3.tag]
             vc.selectedMatch = self.selectedMatch
         }
     }
@@ -171,7 +185,7 @@ extension HomePredictionViewController {
         fetchPredictionUserListViewModel()
         makeNetworkCall2(sport: selectedSports)
         predictionsModel = data
-        if let data = data.data{
+        if let data = data.response?.data{
             UIView.animate(withDuration: 1.0) { [self] in
                 upcomingLeagueNameLbl1.text = data[0].league
                 upcomingLeagueImgView1.sd_imageIndicator = SDWebImageActivityIndicator.white
@@ -251,17 +265,19 @@ extension HomePredictionViewController {
         predictionListUserModel = data
         if let data = data.data{
             UIView.animate(withDuration: 1.0) { [self] in
-                predictionsLeagueNameLbl1.text = data[0].matchDetail.leagueName
-                predictionsLeagueImgView1.sd_imageIndicator = SDWebImageActivityIndicator.white
-                // predictionsLeagueImgView1.sd_setImage(with: URL(string: data?[0].matchDetail[0].logo ?? ""))
-                predictionsTeam1Lbl1.text = data[0].matchDetail.homeTeamName
-                predictionsTeam2Lbl1.text = data[0].matchDetail.awayTeamName
-                predictionsdateLbl1.text =  data[0].matchDetail.matchDatetime
-                //  upcomingPredictBtn1.tag = 0
-                
-                //  upcomingPredictBtn1.addTarget(self, action: #selector(predictBtn1), for: .touchUpInside)
-                seeAllBtn.addTarget(self, action: #selector(placedPredictionSeeAll), for: .touchUpInside)
-                if data.count ?? 0 > 1{
+                if data.count > 0{
+                    predictionsLeagueNameLbl1.text = data[0].matchDetail.leagueName
+                    predictionsLeagueImgView1.sd_imageIndicator = SDWebImageActivityIndicator.white
+                    // predictionsLeagueImgView1.sd_setImage(with: URL(string: data?[0].matchDetail[0].logo ?? ""))
+                    predictionsTeam1Lbl1.text = data[0].matchDetail.homeTeamName
+                    predictionsTeam2Lbl1.text = data[0].matchDetail.awayTeamName
+                    predictionsdateLbl1.text =  data[0].matchDetail.matchDatetime
+                    //  upcomingPredictBtn1.tag = 0
+                    
+                    //  upcomingPredictBtn1.addTarget(self, action: #selector(predictBtn1), for: .touchUpInside)
+                    seeAllBtn.addTarget(self, action: #selector(placedPredictionSeeAll), for: .touchUpInside)
+                }
+                if data.count > 1{
                     if data[1] != nil{
                         predictionsLeagueLbl2.text = data[1].matchDetail.leagueName
                         predictionsLeagueImgView2.sd_imageIndicator = SDWebImageActivityIndicator.white
@@ -283,11 +299,12 @@ extension HomePredictionViewController {
                 
             }
         }
+        
         else{
             handleError(data.error)
         }
-        
     }
+    
 }
 
 extension HomePredictionViewController {
@@ -337,6 +354,10 @@ extension HomePredictionViewController: UICollectionViewDelegate, UICollectionVi
 /// LoginVCDelegate to refresh data with login user
 extension HomePredictionViewController: LoginVCDelegate {
     func viewControllerDismissed() {
-        makeNetworkCall2(sport: selectedSports)
+        makeNetworkCall(sport: selectedSports)
+        predictionTopView.userImgView.setImage(imageStr: UserDefaults.standard.user?.profileImg ?? "")
+        predictionTopView.usernameLbl.text = UserDefaults.standard.user?.name
+        
+      
     }
 }

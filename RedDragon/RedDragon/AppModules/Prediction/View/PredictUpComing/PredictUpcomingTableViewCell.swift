@@ -16,6 +16,7 @@ class PredictUpcomingTableViewCell: UITableViewCell {
     var match: PredictionMatch?
     var predictionData: PredictionData?
     var position = 0
+    var selectedSports = ""
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,20 +29,21 @@ class PredictUpcomingTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configCell(predictionData: PredictionData?, row: Int){
+    func configCell(predictionData: PredictionData?, row: Int, sport: String?){
         self.predictionData = predictionData
         self.team1Lbl.text = predictionData?.matches?[row].homeTeam
         self.team2Lbl.text = predictionData?.matches?[row].awayTeam
         self.dateTimeLbl.text = predictionData?.matches?[row].time
         match = predictionData?.matches?[row]
         position = row
+        selectedSports = sport ?? "football"
     }
     
     @IBAction func predictBtnAction(_ sender: Any) {
         parentContainerViewController()?.navigateToViewController(PredictionDetailsViewController.self, storyboardName: StoryboardName.prediction, animationType: .autoReverse(presenting: .zoom), configure: {vc in
             vc.selectedUpComingMatch = self.predictionData
             vc.selectedUpComingPosition = self.position
-            
+            vc.sport = self.selectedSports
         })
     }
 }
