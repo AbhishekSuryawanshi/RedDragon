@@ -138,7 +138,7 @@ class StreetEventDetailsViewController: UIViewController {
     }
     
     func eventRequestSuccess(){
-        self.customAlertView(title: ErrorMessage.success.localized, description: "Event Request Sent", image: ImageConstants.successImage) {
+        self.customAlertView(title: ErrorMessage.success.localized, description: "Event Request Sent".localized, image: ImageConstants.successImage) {
             self.navigationController?.popViewController(animated: true)
         }
     }
@@ -172,7 +172,7 @@ class StreetEventDetailsViewController: UIViewController {
         imageViewTeam.setImage(imageStr: details?.teamLogoURL ?? "", placeholder: .placeholderTeam)
         lblTeamName.text = details?.teamName
         lblTeamLocation.text = details?.teamAddress
-        if UserDefaults.standard.language == "zh-Hans"{
+        if UserDefaults.standard.language == "zh"{
             lblTeamName.text = details?.teamNameCN
             lblDescription.text = details?.descriptionCN
             

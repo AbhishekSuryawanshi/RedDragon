@@ -35,6 +35,10 @@ class StreetMatchPlayerTableViewCell: UITableViewCell {
         lblPosition.text = obj?.positionName
         let age = StreetMatchPlayerTableViewCell.getDateDiffrence(dateStr: obj?.birthdate ?? "")
         lblAge.text = "\(age) \("Years".localized)"
+        if UserDefaults.standard.language == "zh"{
+            lblPosition.text = obj?.positionNameCN
+            
+        }
     }
     
     class func getDateDiffrence(dateStr:String) -> Int{

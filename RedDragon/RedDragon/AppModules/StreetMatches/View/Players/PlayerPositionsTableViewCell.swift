@@ -22,7 +22,7 @@ class PlayerPositionsTableViewCell: UITableViewCell {
     
     func configureCell(obj:StreetPlayerPosition?){
         lblPlayerPosition.text = obj?.name
-        if UserDefaults.standard.language == "zh-Hans"{
+        if UserDefaults.standard.language == "zh"{
             lblPlayerPosition.text = obj?.nameCN
         }
     }

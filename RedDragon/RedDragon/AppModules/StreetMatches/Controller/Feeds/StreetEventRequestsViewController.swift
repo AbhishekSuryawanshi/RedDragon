@@ -105,11 +105,12 @@ class StreetEventRequestsViewController: UIViewController {
     }
     
     func goToPlayerProfile(player:Player?){
-//        let vc = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
-//        vc.isOtherPlayer = true
-//        vc.playerID = player?.id
-//        vc.userID = player?.userId
-//        self.navigationController?.pushViewController(vc, animated: true)
+        navigateToViewController(StreetPlayerProfileViewController.self,storyboardName: StoryboardName.streetMatches) { vc in
+            vc.isOtherPlayer = true
+            vc.userID = player?.userID
+            vc.playerID = player?.playerID
+        }
+
     }
    
 

@@ -45,6 +45,7 @@ class StreetMatchHomeVC: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var btnCreate: UIButton!
     //Variables
     var headers = ["Available Stadiums".localized,"Feeds".localized,"Matches".localized]
     var homeData:StreetMatchHome?
@@ -56,6 +57,7 @@ class StreetMatchHomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         nibInitialization()
+        setupLocalisation()
         fetchStreetHomeViewModel()
         makeNetworkCall()
     }
@@ -75,6 +77,11 @@ class StreetMatchHomeVC: UIViewController {
             return
         }
         presentOverViewController(ChooseOptionsVC.self,storyboardName: StoryboardName.streetMatches)
+    }
+    
+    
+    func setupLocalisation(){
+        btnCreate.setTitle("Create".localized, for: .normal)
     }
     
     func nibInitialization() {

@@ -10,7 +10,7 @@ import UIKit
 enum streetMatchesHeaderSegment: String, CaseIterable {
     case home = "Home"
     case stadiums = "Stadiums"
-    case feeds = "Feeds"
+    case feeds = "Events"
     case matches = "Matches"
     case teams = "Teams"
     case profile = "Profile"
@@ -50,7 +50,7 @@ extension StreetMatchesDashboardVC: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.headerTopCollectionViewCell, for: indexPath) as! HeaderTopCollectionViewCell
-        cell.configureUnderLineCell(title: streetMatchesHeaderSegment.allCases[indexPath.row].rawValue, selected: selectedSegment == streetMatchesHeaderSegment.allCases[indexPath.row])
+        cell.configureUnderLineCell(title: streetMatchesHeaderSegment.allCases[indexPath.row].rawValue.localized, selected: selectedSegment == streetMatchesHeaderSegment.allCases[indexPath.row])
         return cell
     }
     

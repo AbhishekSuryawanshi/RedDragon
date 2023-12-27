@@ -8,11 +8,28 @@
 import UIKit
 
 class ChooseOptionsVC: UIViewController {
-
+    
+    @IBOutlet weak var fixedLblScheduleMatch: UILabel!
+    @IBOutlet weak var fixedLblLookingTeams: UILabel!
+    @IBOutlet weak var fixedLblCreatePost: UILabel!
+    @IBOutlet weak var fixedLblCreateMatch: UILabel!
+    @IBOutlet weak var fixedLblLookingPlayers: UILabel!
+    @IBOutlet weak var fixedLblCreateTeam: UILabel!
+    @IBOutlet weak var fixedLblCreateStadium: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupLocalisation()
+    }
+    
+    func setupLocalisation(){
+        fixedLblScheduleMatch.text = "Schedule a match".localized
+        fixedLblLookingTeams.text = "Looking for Teams".localized
+        fixedLblCreatePost.text = "Create Post".localized
+        fixedLblCreateMatch.text = "Create a Match".localized
+        fixedLblLookingPlayers.text = "Looking for Players".localized
+        fixedLblCreateTeam.text = "Create a Team".localized
+        fixedLblCreateStadium.text = "Create a Stadium".localized
     }
    
     @IBAction func actionTapCreateStadium(_ sender: Any) {
@@ -31,7 +48,6 @@ class ChooseOptionsVC: UIViewController {
        let vc = UIStoryboard(name: StoryboardName.streetMatches, bundle: nil).instantiateViewController(withIdentifier: "CreateStreetTeamVC")
        nav?.pushViewController(vc, animated: true)
         self.dismiss(animated: false)
-        
     }
     
     

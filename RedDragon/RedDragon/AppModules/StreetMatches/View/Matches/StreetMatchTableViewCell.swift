@@ -40,5 +40,9 @@ class StreetMatchTableViewCell: UITableViewCell {
         if let dt1 = dateFormatter.date(from: obj?.scheduleTime ?? "") {
             lblTime.text = dt1.formatDate(outputFormat: .ddMMMyyyyhmma)
         }
+        if UserDefaults.standard.language == "zh"{
+            lblHome.text = obj?.homeTeam?.nameCN
+            lblAway.text = obj?.awayTeam?.nameCN
+        }
     }
 }

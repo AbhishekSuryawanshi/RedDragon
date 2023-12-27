@@ -15,7 +15,7 @@ class TeamCollectionViewCell: UICollectionViewCell {
     
     func configureCell(obj:StreetTeam?){
         lblTeam.text = obj?.name
-        if UserDefaults.standard.language == "zh-Hans"{
+        if UserDefaults.standard.language == "zh"{
             lblTeam.text = obj?.nameCN
         }
 
