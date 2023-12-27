@@ -160,6 +160,7 @@ struct URLConstants {
     static let expertUserList         = expertsBaseURL + "/user/list"
     static let followUser             = expertsBaseURL + "/user/follow/"
     static let unfollowUser           = expertsBaseURL + "/user/unfollow/"
+    static let transaction            = expertsBaseURL + "/user/wallet/transaction/add"
     
     // MARK: - Wallet
     static let subscriptionList       = baseURL + "user/wallet/history"

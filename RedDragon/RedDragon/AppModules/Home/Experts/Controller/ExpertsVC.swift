@@ -127,7 +127,6 @@ extension ExpertsVC: UITableViewDataSource, UITableViewDelegate {
                     }
                     tableView.reloadData()
                 }
-                
             }
         }
     }

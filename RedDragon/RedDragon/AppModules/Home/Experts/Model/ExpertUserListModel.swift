@@ -111,11 +111,11 @@ struct PredictMatch: Codable {
 }
 
 // MARK: - Follow Users
-struct FollowOrUnfollowUserModel: Codable {
-    let response: FollowOrUnfollowUser?
+struct GeneralResponseModel: Codable {
+    let response: GeneralResponse?
 }
 
-struct FollowOrUnfollowUser: Codable {
+struct GeneralResponse: Codable {
     let code: Int?
     let messages: [String]?
 }
