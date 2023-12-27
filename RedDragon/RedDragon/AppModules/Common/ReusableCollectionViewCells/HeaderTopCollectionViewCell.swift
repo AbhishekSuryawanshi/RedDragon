@@ -9,6 +9,7 @@ import UIKit
 
 class HeaderTopCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     
     override func awakeFromNib() {

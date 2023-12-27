@@ -69,7 +69,7 @@ class GossipDetailVC: UIViewController {
         headerLabel.text = "Article".localized
         commentsTitleLabel.text = "Comments".localized
         viewAllTitleLabel.text = "View All".localized
-        commentTextField.placeholder = "  " + "Add a comment".localized
+        commentTextField.placeholder = "   " + "Add a comment".localized
     }
     
     func nibInitialization() {
@@ -141,7 +141,6 @@ extension GossipDetailVC {
                     }
                 }
                 self?.commentTableView.reloadData()
-                self?.noCommentView.isHidden = self?.commentsArray.count ?? 0 > 0
             })
             .store(in: &cancellable)
     }

@@ -9,6 +9,8 @@ import UIKit
 
 class ProfileVC: UIViewController {
 
+    @IBOutlet weak var headerLabel: UILabel!
+    @IBOutlet weak var listTableView: UITableView!
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var tagsCollectionView: UICollectionView!
@@ -22,11 +24,26 @@ class ProfileVC: UIViewController {
         initialSettings()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        headerLabel.text = "Profile".localized
+       // listTableView.reloadData()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        listTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+    }
+    
     func initialSettings() {
+        nibInitialization()
         photoImageView.setImage(imageStr: user?.profileImg ?? "", placeholder: .placeholderUser)
         nameLabel.text = user?.name ?? ""
     }
 
+    func nibInitialization() {
+        tagsCollectionView.register(CellIdentifier.headerTopCollectionViewCell)
+        historicalTagCollectionView.register(CellIdentifier.headerTopCollectionViewCell)
+    }
+    
     func getProfileValue(type: SettingType) -> String {
         switch type {
         case .name:
@@ -70,24 +87,39 @@ extension ProfileVC: UITableViewDataSource {
 }
 
 extension ProfileVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
 }
 
 // MARK: - CollectionView Delegates
 extension ProfileVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        tagsCollectionView.isHidden = (user?.tags.count ?? 0) == 0
+        historicalTagCollectionView.isHidden = (user?.historicTags.count ?? 0) == 0
         return collectionView == tagsCollectionView ? user?.tags.count ?? 0 : user?.historicTags.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.headerTopCollectionViewCell, for: indexPath) as! HeaderTopCollectionViewCell
-        cell.configureTagCell(title: "")
-       
-        if collectionView == tagsCollectionView {
-            
-        } else {
-            
-        }
+        let text = collectionView == tagsCollectionView ? user?.tags[indexPath.row] ?? "" : user?.historicTags[indexPath.row] ?? ""
+        cell.configureTagCell(title: text.capitalized, textColor: collectionView == tagsCollectionView ? .base : .blue2)
+        cell.bgView.backgroundColor = collectionView == tagsCollectionView ? .wheat1 : .blue1
+        cell.bgView.borderColor = collectionView == tagsCollectionView ? .base : .blue2
+        cell.bgView.borderWidth = 1
+        cell.bgView.cornerRadius = 13
         return cell
+    }
+}
+
+extension ProfileVC: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let text = collectionView == tagsCollectionView ? user?.tags[indexPath.row] ?? "" : user?.historicTags[indexPath.row] ?? ""
+        let TextWidth = text.size(OfFont: fontRegular(13)).width
+        return CGSize(width: TextWidth + 20, height: 26)
     }
 }
