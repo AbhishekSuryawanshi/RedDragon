@@ -51,13 +51,13 @@ enum NewsSection {
             return ""
 
         case .latest(_):
-            return "Trending"
+            return "Trending".localized
             
         case .trending(_):
-            return "Latest"
+            return "Latest".localized
             
         case .video(_):
-            return "Videos"
+            return "Videos".localized
         }
     }
     
