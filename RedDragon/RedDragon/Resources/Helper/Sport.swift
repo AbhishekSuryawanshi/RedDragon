@@ -37,7 +37,7 @@ public enum Sports: String, CaseIterable {
     var title: String {
         switch self {
         case .football:
-            return "Football"
+            return "Football".localized
         case .basketball:
             return "Basketball".localized
         case .tennis:

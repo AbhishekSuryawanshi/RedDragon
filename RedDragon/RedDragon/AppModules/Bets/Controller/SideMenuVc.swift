@@ -13,6 +13,7 @@ class SideMenuVc: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     
+    @IBOutlet weak var lblTitle: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,7 @@ class SideMenuVc: UIViewController {
     }
 
     func initial(){
+        lblTitle.text = "Choose Your Sport".localized
         tableView.register(CellIdentifier.menuItemTableVC)
         
         switch(UserDefaults.standard.sport?.lowercased() ?? Sports.football.title.lowercased()){

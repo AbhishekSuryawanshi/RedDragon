@@ -11,6 +11,10 @@ import Combine
 class PlaceBetVc: UIViewController {
     
     
+    @IBOutlet weak var fixedTotalEstReturns: UILabel!
+    @IBOutlet weak var fixedTotalStake: UILabel!
+    @IBOutlet weak var fixedAmountStake: UILabel!
+    @IBOutlet weak var fixedLblChooseOdds: UILabel!
     @IBOutlet var btnBetTitle: UIButton!
     @IBOutlet var expertsLable: UILabel!
     @IBOutlet var matchDetails: UILabel!
@@ -49,10 +53,20 @@ class PlaceBetVc: UIViewController {
         setValues()
         clicks()
         onPlaceBet()
+        setupLocalisations()
+    }
+    
+    func setupLocalisations(){
+        btnBetTitle.setTitle("Place Bet".localized, for: .normal)
+        fixedTotalEstReturns.text = "Total Est. Returns".localized
+        fixedTotalStake.text = "Total Staked".localized
+        fixedAmountStake.text = "Amount To Stake".localized
+        fixedLblChooseOdds.text = "Chose your Odds".localized
+        expertsLable.text = "Experts".localized
+        matchDetails.text = "Match Details".localized
     }
 
     func setValues(){
-        
         guard let match = betItem else{
             return
         }
@@ -60,8 +74,7 @@ class PlaceBetVc: UIViewController {
         if match.betDetail?.betPlaced ?? false {
             btnBetTitle.setTitle(ErrorMessage.betPlacedAlready, for: .normal)
         }
-        
-        titleLable.text = UserDefaults.standard.sport ?? Sports.football.title
+        titleLable.text = UserDefaults.standard.sport?.localized ?? Sports.football.title
         leagueLable.text = matchesList?.league
         imgLeague.setImage(imageStr: matchesList?.logo ?? "", placeholder: UIImage(named: ImageConstants.placeHolderLeague))
         homeName.text = match.homeTeam
@@ -84,8 +97,6 @@ class PlaceBetVc: UIViewController {
             oddsLable3.text = match.odds3Value ?? "1"
         }
         score.text = "\(match.homeScore ?? "0") : \(match.awayScore ?? "0")"
-      
-        
     }
     
  
