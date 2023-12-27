@@ -29,6 +29,16 @@ class UpComingMatchesViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = #colorLiteral(red: 0.7333333333, green: 0.09803921569, blue: 0.06274509804, alpha: 1)
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationItem.title = "Upcoming Matches"
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+
+        navigationItem.standardAppearance = appearance
+        navigationItem.scrollEdgeAppearance = appearance
         getNextFiveDatesArr()
         loadFunctionality()
         upcomingMatchesTableView.reloadData()
@@ -133,16 +143,16 @@ extension UpComingMatchesViewController: UICollectionViewDelegate, UICollectionV
 
 extension UpComingMatchesViewController: UITableViewDelegate, UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return predictionMatchesModel?.data?.count ?? 0
+        return predictionMatchesModel?.response?.data?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return predictionMatchesModel?.data?[section].matches?.count ?? 0
+        return predictionMatchesModel?.response?.data?[section].matches?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.predictUpcomingTableViewCell, for: indexPath) as! PredictUpcomingTableViewCell
-        cell.configCell(predictionData: predictionMatchesModel?.data?[indexPath.section], row: indexPath.row)
+        cell.configCell(predictionData: predictionMatchesModel?.response?.data?[indexPath.section], row: indexPath.row, sport: selectedSports)
       
         return cell
     }
@@ -150,7 +160,7 @@ extension UpComingMatchesViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         navigateToViewController(MatchDetailsVC.self, storyboardName: StoryboardName.matchDetail, animationType: .autoReverse(presenting: .zoom), configure:{ vc in
             vc.isFromPrediction = true
-            vc.matchSlug = self.predictionMatchesModel?.data?[indexPath.section].matches?[indexPath.row].slug
+            vc.matchSlug = self.predictionMatchesModel?.response?.data?[indexPath.section].matches?[indexPath.row].slug
             vc.sports = self.selectedSports
         })
     }
@@ -158,8 +168,8 @@ extension UpComingMatchesViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = PredictUpcomingHeaderView()
         headerView.leagueImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
-        headerView.leagueImgView.sd_setImage(with: URL(string: predictionMatchesModel?.data?[section].logo ?? ""))
-        headerView.leagueNameLbl.text = predictionMatchesModel?.data?[section].league
+        headerView.leagueImgView.sd_setImage(with: URL(string: predictionMatchesModel?.response?.data?[section].logo ?? ""))
+        headerView.leagueNameLbl.text = predictionMatchesModel?.response?.data?[section].league
         return headerView
     }
     
@@ -190,7 +200,7 @@ extension UpComingMatchesViewController {
     
     func renderResponseData(data: PredictionMatchesModel) {
         predictionMatchesModel = data
-        let data = data.data
+        let data = data.response?.data
         UIView.animate(withDuration: 1.0) { [self] in
             upcomingMatchesTableView.reloadData()
                 

@@ -25,8 +25,6 @@ class PredictionDetailsViewController: UIViewController, UITextViewDelegate {
     var selectedUpComingPosition: Int = 0
     var isSelected = ""
     var sport = ""
-    
-    
     var selectedMatch: PredictionData?
     
     override func viewDidLoad() {
@@ -41,6 +39,17 @@ class PredictionDetailsViewController: UIViewController, UITextViewDelegate {
         configurePlacePredictionDescriptionView()
         fetchMatchDetailViewModel()
         makeNetworkCall2()
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = #colorLiteral(red: 0.7333333333, green: 0.09803921569, blue: 0.06274509804, alpha: 1)
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationItem.title = "Place Prediction"
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+
+        navigationItem.standardAppearance = appearance
+        navigationItem.scrollEdgeAppearance = appearance
         
     }
     
@@ -216,13 +225,13 @@ extension PredictionDetailsViewController {
         makePredictionsModel = data
        // let data = data.data
         UIView.animate(withDuration: 1.0) { [self] in
-            if makePredictionsModel?.message == "success"{
+            if makePredictionsModel?.response?.data?.message == "success"{
                 let okAction = PMAlertAction(title: "OK", style: .default) {
                     
                     self.navigationController?.popViewController(animated: true)
                 }
                 
-                customAlertView(title: makePredictionsModel?.message ?? "", description: "Placed Prediction Successfully", image: "", actions: [okAction]
+                customAlertView(title: makePredictionsModel?.response?.data?.message ?? "", description: "Placed Prediction Successfully", image: "", actions: [okAction]
                                 
                 )
                
@@ -250,7 +259,7 @@ extension PredictionDetailsViewController {
     }
     
     func renderResponseData(data: PredictionMatchDetailModel) {
-        predictionDetailModelData = data.data?[0]
+        predictionDetailModelData = data.response?.data?[0]
         UIView.animate(withDuration: 1.0) { [self] in
             DispatchQueue.main.async{
                 self.setupProgressView(winstats: self.predictionDetailModelData?.predPercnt?.winStats)
