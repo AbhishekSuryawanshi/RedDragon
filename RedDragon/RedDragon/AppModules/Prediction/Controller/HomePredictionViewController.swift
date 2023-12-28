@@ -306,11 +306,11 @@ extension HomePredictionViewController {
                     break
                 }
                 
-                predictionTopView.totalCountLbl.text = "\(data[0].user?.predStats?.allCnt ?? 0)"
-                predictionTopView.wonCountLbl.text = "\(data[0].user?.predStats?.successCnt ?? 0)"
-                predictionTopView.lostCountLbl.text = "\(data[0].user?.predStats?.unsuccessCnt ?? 0)"
-                
                 if data.count > 0{
+                    predictionTopView.totalCountLbl.text = "\(data[0].user?.predStats?.allCnt ?? 0)"
+                    predictionTopView.wonCountLbl.text = "\(data[0].user?.predStats?.successCnt ?? 0)"
+                    predictionTopView.lostCountLbl.text = "\(data[0].user?.predStats?.unsuccessCnt ?? 0)"
+                    
                     predictionsLeagueNameLbl1.text = data[0].matchDetail.leagueName
                     predictionsTeam1ImgView1.sd_imageIndicator = SDWebImageActivityIndicator.white
                     predictionsTeam1ImgView1.sd_setImage(with: URL(string: data[0].matchDetail.homeTeamImage ?? ""))
