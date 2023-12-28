@@ -108,7 +108,7 @@ enum ServiceType: String, CaseIterable {
     case bets        = "Bets"
     case social      = "Social"
     case fantasy     = "Fantasy"
-    case quizz       = "Quizz"
+   // case quizz       = "Quizz"
     case matches     = "Matches"
     case updates     = "Updates"
     case database    = "Database"
@@ -130,8 +130,8 @@ enum ServiceType: String, CaseIterable {
             return .infoSocial
         case .fantasy:
             return .infoFantasy
-        case .quizz:
-            return .infoQuiz
+//        case .quizz:
+//            return .infoQuiz
         case .matches:
             return .infoMatches
         case .updates:

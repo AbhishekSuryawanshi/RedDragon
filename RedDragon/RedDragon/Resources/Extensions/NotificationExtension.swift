@@ -14,4 +14,6 @@ extension Notification.Name {
     static let dismissLoginVC      = Notification.Name("dismissLoginVC")
     static let selectedSport       = Notification.Name("selectedSport")
     static let moveToNewsDetail    = Notification.Name("NewsDetail")
+    static let languageUpdated     = Notification.Name("languageUpdated")
+    static let selectHomeTab       = Notification.Name("selectHomeTab")
 }
