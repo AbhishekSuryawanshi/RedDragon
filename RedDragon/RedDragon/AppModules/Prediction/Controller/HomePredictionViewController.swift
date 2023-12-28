@@ -85,17 +85,7 @@ class HomePredictionViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = #colorLiteral(red: 0.7333333333, green: 0.09803921569, blue: 0.06274509804, alpha: 1)
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        self.navigationController?.isNavigationBarHidden = false
-        self.navigationItem.title = "User Prediction"
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-
-        navigationItem.standardAppearance = appearance
-        navigationItem.scrollEdgeAppearance = appearance
-        
+       // addNavigationBar(title: "User Prediction")
          if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
               let userID = UserDefaults.standard.user?.appDataIDs.predictMatchUserId
               predictionListUserViewModel?.fetchPredictionUserListAsyncCall(appUserID: "\(userID ?? 0)" , sportType: selectedSports)  // To give logged in user id instead of 7
@@ -121,6 +111,9 @@ class HomePredictionViewController: UIViewController {
         selectedSports = sportsArr[0]
         
     }
+    @IBAction func backBtnAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     
     func makeNetworkCall(sport: String) {
         if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
@@ -139,7 +132,7 @@ class HomePredictionViewController: UIViewController {
        // }
     }
     func showLoader(_ value: Bool) {
-        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
+        value ? startLoader() : stopLoader()
     }
     
     @objc func predictBtn1(){
@@ -254,6 +247,7 @@ extension HomePredictionViewController {
                     /// Show login page to login/register new user
                     self.presentOverViewController(LoginVC.self, storyboardName: StoryboardName.login) { vc in
                         vc.delegate = self
+                        
                     }
                 }
             }
@@ -371,6 +365,26 @@ extension HomePredictionViewController {
 }
 
 extension HomePredictionViewController {
+    func addNavigationBar(title:String){
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = #colorLiteral(red: 0.7333333333, green: 0.09803921569, blue: 0.06274509804, alpha: 1)
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationItem.title = title
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+
+        navigationItem.standardAppearance = appearance
+        navigationItem.scrollEdgeAppearance = appearance
+        
+        let yourBackImage = UIImage(named: "cardGame_back")
+        self.navigationController?.navigationBar.backIndicatorImage = yourBackImage
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = yourBackImage
+        self.navigationController?.navigationBar.backItem?.title = ""
+        self.navigationController?.navigationBar.tintColor = .white
+        
+    }
+    
     func addActivityIndicator() {
         self.view.addSubview(Loader.activityIndicator)
     }
