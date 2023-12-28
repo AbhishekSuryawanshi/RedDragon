@@ -69,7 +69,7 @@ class SocialSearchVC: UIViewController {
                 logoImageView.setImage(imageStr: teamModel.logoURL, placeholder: .placeholderTeam)
             }
             titleLabel.text = teamModel.id == "" ? (UserDefaults.standard.language == "en" ? leagueModel.enName : leagueModel.cnName) : (UserDefaults.standard.language == "en" ? teamModel.enName : teamModel.cnName)
-            matchTitleLabel.text = "Top Matches in " + (teamModel.id == "" ? "Leage" : "Team")
+            matchTitleLabel.text = teamModel.id == "" ? "Top Matches in Leage".localized : "Top Matches in Team".localized
             SocialMatchVM.shared.fetchMatchListAsyncCall(leagueId: leagueModel.id, teamId: teamModel.id)
         } else {
             loadPostsView()
@@ -174,7 +174,7 @@ extension SocialSearchVC: UITableViewDelegate {
 // MARK: - Custom Delegate
 extension SocialSearchVC: PostListVCDelegate {
     func postList(height: CGFloat, count: Int) {
-        headerSubLabel.text = "\(count) " + (count < 2 ? "Post" : "Posts")
+        headerSubLabel.text = "\(count) " + (count < 2 ? "Post".localized : "Posts".localized)
         containerHeightConstraint.constant = height
         if searchEnable {
             searchEnable = false

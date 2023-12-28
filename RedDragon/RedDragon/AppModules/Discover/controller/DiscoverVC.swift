@@ -41,6 +41,8 @@ class DiscoverVC: UIViewController {
         headerLabel.text = "Our Services".localized
         profileHeaderLabel.text = "Profile & Settings".localized
         otherHeaderLabel.text = "Other".localized
+        servicesCollectionView.reloadData()
+        otherCollectionView.reloadData()
         filterProfileArray()
     }
     
@@ -145,7 +147,11 @@ extension DiscoverVC: UICollectionViewDataSource {
 extension DiscoverVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == servicesCollectionView {
-            self.tabBarController?.tabBar.isHidden = true
+            /// show tab bar for these types, these are main tabbar controller items
+            let typeArray: [ServiceType] = [.social, .database, .wallet, .experts, .analysis]
+            if !typeArray.contains(ServiceType.allCases[indexPath.row]) {
+                self.tabBarController?.tabBar.isHidden = true
+            }
             
             switch ServiceType.allCases[indexPath.row] {
             case .predictions:
@@ -155,9 +161,7 @@ extension DiscoverVC: UICollectionViewDelegate {
             case .social:
                 self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[1]
             case .fantasy:
-                print("")
-            case .quizz:
-                print("")
+                navigateToViewController(AllPlayersViewController.self, storyboardName: StoryboardName.cardGame, identifier: "AllPlayersViewController")
             case .matches:
                 navigateToViewController(MatchesDashboardVC.self, storyboardName: StoryboardName.matches, animationType: .autoReverse(presenting: .zoom))
             case .updates:
@@ -165,7 +169,9 @@ extension DiscoverVC: UICollectionViewDelegate {
             case .database:
                 self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[2]
             case .analysis:
-                print("")
+                self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[0]
+                let dataDict:[String: Any] = ["tabName": "expert"]
+                NotificationCenter.default.post(name: .selectHomeTab, object: nil, userInfo: dataDict)
             case .users:
                 print("")
             case .street:
@@ -173,7 +179,9 @@ extension DiscoverVC: UICollectionViewDelegate {
             case .meet:
                 navigateToViewController(MeetDashboardVC.self, storyboardName: StoryboardName.meet, animationType: .autoReverse(presenting: .zoom))
             case .experts:
-                navigateToViewController(HomeVC.self, storyboardName: StoryboardName.home, animationType: .autoReverse(presenting: .zoom))
+                self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[0]
+                let dataDict:[String: Any] = ["tabName": "expert"]
+                NotificationCenter.default.post(name: .selectHomeTab, object: nil, userInfo: dataDict)
             case .cards:
                 navigateToViewController(AllPlayersViewController.self, storyboardName: StoryboardName.cardGame, identifier: "AllPlayersViewController")
             default: //wallet
@@ -181,6 +189,7 @@ extension DiscoverVC: UICollectionViewDelegate {
             }
         } else {
             let type = collectionView == profileCollectionView ? profileArray[indexPath.row] : otherArray[indexPath.row]
+            self.tabBarController?.tabBar.isHidden = true
             switch type {
             case .account:
                 

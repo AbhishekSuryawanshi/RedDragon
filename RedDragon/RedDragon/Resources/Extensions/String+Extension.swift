@@ -1,8 +1,8 @@
 //
-//  UIString+Extension.swift
+//  String+Extension.swift
 //  RedDragon
 //
-//  Created by QASR02 on 23/10/2023.
+//  Created by Qasr01 on 28/12/2023.
 //
 
 import UIKit

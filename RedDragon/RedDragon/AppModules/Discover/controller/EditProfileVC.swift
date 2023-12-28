@@ -17,6 +17,8 @@ class EditProfileVC: UIViewController {
     @IBOutlet weak var countryCodeButton: UIButton!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet var pickerView: UIPickerView!
+    @IBOutlet weak var listTableView: UITableView!
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var saveButton: UIButton!
     
     var cancellable = Set<AnyCancellable>()
@@ -25,7 +27,7 @@ class EditProfileVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        nibInitialization()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,11 +36,16 @@ class EditProfileVC: UIViewController {
 
     func initialSettings() {
         selectedLanguage = UserDefaults.standard.language == "en" ? .en : .zh
+        basicTextFieldView.isHidden = settingType == .language
         phoneView.isHidden = settingType != .phone
         phoneTextField.placeholder = settingType?.rawValue.localized
         basicTextField.placeholder = settingType?.rawValue.localized
         headerLabel.text = "\("Edit".localized) \(settingType?.rawValue.localized ?? "")"
         saveButton.setTitle("Save".localized, for: .normal)
+    }
+    
+    func nibInitialization() {
+        listTableView.register(CellIdentifier.nameRightIconTableViewCell)
     }
     
     func showLoader(_ value: Bool) {
@@ -49,6 +56,7 @@ class EditProfileVC: UIViewController {
     @IBAction func saveButtonTapped(_ sender: Any) {
         if settingType == .language {
             UserDefaults.standard.language = selectedLanguage == .en ? "en" : "zh"
+            NotificationCenter.default.post(name: .languageUpdated, object: nil)
             initialSettings()
         }
         self.navigationController?.popViewController(animated: true)
@@ -87,12 +95,35 @@ extension EditProfileVC {
     }
 }
 
+// MARK: - TableView Delegates
+extension EditProfileVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        tableViewHeightConstraint.constant = CGFloat(settingType == .language ? ((LanguageType.allCases.count * 60) + 50) : 0)
+        return LanguageType.allCases.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.nameRightIconTableViewCell, for: indexPath) as! NameRightIconTableViewCell
+        cell.configureLanguageCell(type: LanguageType.allCases[indexPath.row], selected: LanguageType.allCases[indexPath.row] == selectedLanguage)
+        return cell
+    }
+}
+extension EditProfileVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedLanguage = LanguageType.allCases[indexPath.row]
+        tableView.reloadData()
+    }
+}
+
+
 // MARK: - Textfield Delegates
 extension EditProfileVC: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if settingType == .language {
-            basicTextField.inputView = pickerView
-        }
+      
         return true
     }
 }

@@ -108,9 +108,9 @@ struct CellIdentifier {
     
     //Home
 
-    static let bannerCell                        = "BannerCollectionViewCell"
-    static let predictionTableCell               = "HomePagePredictionTableViewCell"
-    static let forYouLiveMatchTabelCell          = "ForYouLiveMatchTableViewCell"
+    static let bannerCell                      = "BannerCollectionViewCell"
+    static let predictionTableCell             = "HomePagePredictionTableViewCell"
+    static let forYouLiveMatchTabelCell        = "ForYouLiveMatchTableViewCell"
     
     //Wallet
     static let subscriptionTableViewCell       = "SubscriptionTableViewCell"
@@ -122,5 +122,7 @@ struct CellIdentifier {
 
     //Discover | Profile
     static let profileTableViewCell            = "ProfileTableViewCell"
+    static let nameRightIconTableViewCell      = "NameRightIconTableViewCell"
+    
 }
 

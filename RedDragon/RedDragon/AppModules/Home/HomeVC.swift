@@ -28,7 +28,11 @@ class HomeVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.tabBarController?.tabBar.isHidden = false
+        refreshPage()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .selectHomeTab, object: nil)
     }
     
     // MARK: - Methods
@@ -45,10 +49,27 @@ class HomeVC: UIViewController {
                 // print("ERROR WITH TWILIO LOGIN")
             }
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(self.selectHomeTab(notification:)), name: .selectHomeTab, object: nil)
+    }
+    
+    private func refreshPage() {
+        self.tabBarController?.tabBar.isHidden = false
+        headerCollectionView.reloadData()
     }
     
     func nibInitialization() {
         headerCollectionView.register(CellIdentifier.headerTopCollectionViewCell)
+    }
+    
+    @objc func selectHomeTab(notification: Notification) {
+        if let dict = notification.userInfo as NSDictionary? {
+            let tabName = dict["tabName"] as? String ?? ""
+            if tabName == "expert" {
+                selectedSegment = .experts
+                headerCollectionView.reloadData()
+                embedExpertsVC()
+            }
+        }
     }
 }
 
@@ -60,7 +81,7 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.headerTopCollectionViewCell, for: indexPath) as! HeaderTopCollectionViewCell
-        cell.configureUnderLineCell(title: homeHeaderSegment.allCases[indexPath.row].rawValue, selected: selectedSegment == homeHeaderSegment.allCases[indexPath.row])
+        cell.configureUnderLineCell(title: homeHeaderSegment.allCases[indexPath.row].rawValue.localized, selected: selectedSegment == homeHeaderSegment.allCases[indexPath.row])
         return cell
     }
     
