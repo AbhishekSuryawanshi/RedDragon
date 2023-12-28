@@ -56,8 +56,10 @@ private extension NewsDetailViewController {
     func build() {
         bind()
         configureViews()
-        CommentListVM.shared.getCommentsAsyncCall(sectionId: "\(viewModel.model.id ?? 0)")
-        fetchCommentsViewModel()
+        if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
+            CommentListVM.shared.getCommentsAsyncCall(sectionId: "\(viewModel.model.id ?? 0)")
+            fetchCommentsViewModel()
+        }
     }
     
     func bind() {
@@ -111,7 +113,7 @@ extension NewsDetailViewController: UITableViewDataSource, UITableViewDelegate {
         if commentsArray.count > 0 {
             return 3
         }
-        return 2
+        return ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) ? 2 : 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
