@@ -40,7 +40,7 @@ class PredictionDetailsViewController: UIViewController, UITextViewDelegate {
         fetchMatchDetailViewModel()
         makeNetworkCall2()
         
-        let appearance = UINavigationBarAppearance()
+       /* let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = #colorLiteral(red: 0.7333333333, green: 0.09803921569, blue: 0.06274509804, alpha: 1)
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         self.navigationController?.isNavigationBarHidden = false
@@ -49,10 +49,13 @@ class PredictionDetailsViewController: UIViewController, UITextViewDelegate {
         appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
 
         navigationItem.standardAppearance = appearance
-        navigationItem.scrollEdgeAppearance = appearance
+        navigationItem.scrollEdgeAppearance = appearance*/
         
     }
     
+    @IBAction func backBtnAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     func configureTopView(){
         if selectedUpComingMatch != nil{
             predictionDetailTopView.leagueNameLbl.text = selectedUpComingMatch?.league
@@ -197,7 +200,7 @@ class PredictionDetailsViewController: UIViewController, UITextViewDelegate {
     }
     
     func showLoader(_ value: Bool) {
-        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
+        value ? startLoader() : stopLoader()
     }
 
 }

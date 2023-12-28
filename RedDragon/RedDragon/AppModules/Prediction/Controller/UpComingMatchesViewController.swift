@@ -30,16 +30,6 @@ class UpComingMatchesViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = #colorLiteral(red: 0.7333333333, green: 0.09803921569, blue: 0.06274509804, alpha: 1)
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        self.navigationController?.isNavigationBarHidden = false
-        self.navigationItem.title = "Upcoming Matches"
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-
-        navigationItem.standardAppearance = appearance
-        navigationItem.scrollEdgeAppearance = appearance
         getNextFiveDatesArr()
         loadFunctionality()
         upcomingMatchesTableView.reloadData()
@@ -61,6 +51,9 @@ class UpComingMatchesViewController: UIViewController {
        
     }
     
+    @IBAction func backBtnAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     func getNextFiveDatesArr(){
         for i in 0 ..< 5{
             let date = Date()
@@ -83,7 +76,7 @@ class UpComingMatchesViewController: UIViewController {
     }
     
     func showLoader(_ value: Bool) {
-        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
+        value ? startLoader() : stopLoader()
     }
     
     func filterUpcomingMatches(){
