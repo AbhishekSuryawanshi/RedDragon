@@ -31,12 +31,14 @@ class PredictUpcomingTableViewCell: UITableViewCell {
     
     func configCell(predictionData: PredictionData?, row: Int, sport: String?){
         self.predictionData = predictionData
-        self.team1Lbl.text = predictionData?.matches?[row].homeTeam
-        self.team2Lbl.text = predictionData?.matches?[row].awayTeam
-        self.dateTimeLbl.text = predictionData?.matches?[row].time
-        match = predictionData?.matches?[row]
-        position = row
-        selectedSports = sport ?? "football"
+        if predictionData?.matches?[row].matchState == "notstarted"{
+            self.team1Lbl.text = predictionData?.matches?[row].homeTeam
+            self.team2Lbl.text = predictionData?.matches?[row].awayTeam
+            self.dateTimeLbl.text = predictionData?.matches?[row].time
+            match = predictionData?.matches?[row]
+            position = row
+            selectedSports = sport ?? "football"
+        }
     }
     
     @IBAction func predictBtnAction(_ sender: Any) {

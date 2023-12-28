@@ -9,8 +9,15 @@ import Foundation
 
 // MARK: - PredictionListModel
 struct PredictionListModel: Codable {
-    var data: [PredictionsData]?
+    var response: PredictionListResponse?
     var error: ErrorResponse?
+}
+
+// MARK: - Response
+struct PredictionListResponse: Codable {
+    var code: Int?
+    var messages: [String]?
+    var data: [PredictionsData]?
 }
 
 struct PredictionsData: Codable {
