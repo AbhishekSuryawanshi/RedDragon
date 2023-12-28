@@ -93,8 +93,8 @@ class InfoVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.isHidden = true
-        self.tabBarController?.tabBar.isHidden = false
+        refreshPage()
+        whatsHappeningLabel.text = "What's Happening".localized
     }
     
     @IBAction func appModulesButton(_ sender: UIButton) {
@@ -110,6 +110,11 @@ class InfoVC: UIViewController {
     }
     
     @IBAction func seeAllButton(_ sender: UIButton) {
+        ///What's Happening
+        if sender.tag == 22 {
+            self.tabBarController?.tabBar.isHidden = true
+            navigateToViewController(NewsModuleVC.self, storyboardName: StoryboardName.news, identifier: "NewsModuleVC")
+        }
     }
 }
 
@@ -142,6 +147,13 @@ extension InfoVC {
         fetchPredictionViewModel()
         fetchExpertViewModel()
         expertDataAPICall()
+    }
+    
+    private func refreshPage() {
+        self.navigationController?.navigationBar.isHidden = true
+        self.tabBarController?.tabBar.isHidden = false
+        servicesCollectionView.reloadData()
+        whatsHappeningLabel.text = ""
     }
     
     private func showLoader(_ value: Bool) {
@@ -406,7 +418,12 @@ extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == servicesCollectionView {
-            self.tabBarController?.tabBar.isHidden = true
+            /// show tab bar for these types, these are main tabbar controller items
+            let typeArray: [ServiceType] = [.social, .database, .wallet, .experts, .analysis]
+            if !typeArray.contains(ServiceType.allCases[indexPath.row]) {
+                self.tabBarController?.tabBar.isHidden = true
+            }
+            
             switch ServiceType.allCases[indexPath.row] {
             case .predictions:
                 navigateToViewController(HomePredictionViewController.self, storyboardName: StoryboardName.prediction, animationType: .autoReverse(presenting: .zoom))
@@ -415,9 +432,7 @@ extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
             case .social:
                 self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[1]
             case .fantasy:
-                print("")
-            case .quizz:
-                print("")
+                navigateToViewController(AllPlayersViewController.self, storyboardName: StoryboardName.cardGame, identifier: "AllPlayersViewController")
             case .matches:
                 navigateToViewController(MatchesDashboardVC.self, storyboardName: StoryboardName.matches, animationType: .autoReverse(presenting: .zoom))
             case .updates:
@@ -425,7 +440,9 @@ extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
             case .database:
                 self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[2]
             case .analysis:
-                print("")
+                self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[0]
+                let dataDict:[String: Any] = ["tabName": "expert"]
+                NotificationCenter.default.post(name: .selectHomeTab, object: nil, userInfo: dataDict)
             case .users:
                 print("")
             case .street:
@@ -433,7 +450,9 @@ extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
             case .meet:
                 navigateToViewController(MeetDashboardVC.self, storyboardName: StoryboardName.meet, animationType: .autoReverse(presenting: .zoom))
             case .experts:
-                navigateToViewController(HomeVC.self, storyboardName: StoryboardName.home, animationType: .autoReverse(presenting: .zoom))
+                self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[0]
+                let dataDict:[String: Any] = ["tabName": "expert"]
+                NotificationCenter.default.post(name: .selectHomeTab, object: nil, userInfo: dataDict)
             case .cards:
                 navigateToViewController(AllPlayersViewController.self, storyboardName: StoryboardName.cardGame, identifier: "AllPlayersViewController")
             default: //wallet
@@ -526,6 +545,17 @@ extension InfoVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if tableView == expertTableView {
             expertTableViewHeight.constant = CGFloat(200 * (expertPredictUserVM?.responseData?.response?.data?.count ?? 0))
+        }
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch tableView {
+        case whatsHappeningTableView:
+            navigateToViewController(GossipDetailVC.self, storyboardName: StoryboardName.gossip, animationType: .autoReverse(presenting: .zoom)) { vc in
+                vc.commentSectionID = "gossipNewsID:-\(self.gossipsArray[indexPath.row].slug ?? "")"
+                vc.gossipModel = self.gossipsArray[indexPath.row]
+            }
+        default:
+            return
         }
     }
 }

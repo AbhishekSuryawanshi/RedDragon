@@ -95,10 +95,10 @@ class PostTableViewCell: UITableViewCell {
         commentCountLabel.text = "\(model.commentCount)"
         if model.type == "POLL" {
             pollCount = model.option_1Count + model.option_2Count + model.option_3Count
-            statusLabel.text = pollCount < 2 ? "\(pollCount) Vote" : "\(pollCount) Votes"
+            statusLabel.text = pollCount < 2 ? "\(pollCount) \("Vote".localized)" : "\(pollCount) \("Votes".localized)"
         } else {
             let statusCount = model.likeCount + model.commentCount
-            statusLabel.text = statusCount == 0 ? "" : (statusCount == 1 ? "\(statusCount) Like/Comment" : "\(statusCount) Likes/Comments")
+            statusLabel.text = statusCount == 0 ? "" : (statusCount == 1 ? "\(statusCount) \("Like/Comment".localized)" : "\(statusCount) \("Likes/Comments".localized)")
         }
         
         if model.type == "POLL" {

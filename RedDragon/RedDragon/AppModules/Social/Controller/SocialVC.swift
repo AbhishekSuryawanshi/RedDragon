@@ -17,6 +17,7 @@ enum socialHeaderSegment: String, CaseIterable {
 class SocialVC: UIViewController {
     
     @IBOutlet weak var tagView: UIView!
+    @IBOutlet weak var trendingTopicLabel: UILabel!
     @IBOutlet weak var tagCollectionView: UICollectionView!
     @IBOutlet weak var tagCVHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var leagueView: UIView!
@@ -66,8 +67,10 @@ class SocialVC: UIViewController {
     
     func refreshPage() {
         self.tabBarController?.tabBar.isHidden = false
+        headerCollectionView.reloadData()
         headerCVLeadingConstraint.constant = 60
         loadFunctionality()
+        trendingTopicLabel.text = "Trending Topics".localized
         leagueLabel.text = "Leagues".localized
         teamLabel.text = "Teams".localized
         createPostButton.setTitle("Create a Post".localized, for: .normal)

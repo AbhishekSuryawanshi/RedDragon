@@ -7,8 +7,8 @@
 
 import UIKit
 import Combine
-import MarqueeLabel
 import AVKit
+import MarqueeLabel
 
 class GossipVC: UIViewController {
     
@@ -44,6 +44,9 @@ class GossipVC: UIViewController {
     var sportType: SportsType = .football
     var newsSource = "thehindu"
     var pageNum = 1
+    var initialLoad = true
+    var timer = Timer()
+    var breakingNewsGossipModel = Gossip() //to save breaking news gossip model
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +70,10 @@ class GossipVC: UIViewController {
         topMarqueeLabel.speed = .rate(50)
         topMarqueeLabel.animationCurve = .linear
         // topMarqueeLabel.fadeLength = 10.0
+        //change breaking news texts
+        _ = Timer.scheduledTimer(timeInterval: 8.0, target: self, selector: #selector(self.changeBreakingNews), userInfo: nil, repeats: true)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.breakingNewsTapped(_:)))
+        topMarqueeLabel.addGestureRecognizer(tap)
         
         breakngNewsImage.zoomAnimation()
         
@@ -88,13 +95,25 @@ class GossipVC: UIViewController {
     }
     
     func refreshPage() {
+        viewAllButton.isHidden = false
         breakingNewsTitleLabel.text = "Breaking News".localized
-       topPublishersTitleLabel.text = "Top Publishers".localized
+        topPublishersTitleLabel.text = "Top Publishers".localized
         leaguesTitleLabel.text = "Top Leagues".localized
         tredingTitleLabel.text = "Trending Topics".localized
         newsCategoryTitleLabel.text = "News Category".localized
         videosTitleLabel.text = "Videos".localized
         viewAllButton.setTitle("View All".localized, for: .normal)
+    }
+    
+    @objc func changeBreakingNews(_ timer1: Timer) {
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseInOut, animations: {
+            self.topMarqueeLabel.text = self.gossipsArray.shuffled().first?.title
+            self.breakingNewsGossipModel = self.gossipsArray.shuffled().first ?? Gossip()
+        }, completion: nil)
+    }
+    
+    @objc func breakingNewsTapped(_ sender: UITapGestureRecognizer? = nil) {
+        gotoDetailPage(model: breakingNewsGossipModel)
     }
     
     @objc func searchEnable(notification: Notification) {
@@ -302,7 +321,9 @@ extension GossipVC {
     
     func loadGossipData(showEsportdata: Bool) {
         gossipsArray = GossipListVM.shared.gossipsArray
-        topMarqueeLabel.text = gossipsArray.reversed().map({$0.title ?? ""}).joined(separator: "   *   ")
+        topMarqueeLabel.text = gossipsArray.shuffled().first?.title
+        breakingNewsGossipModel = gossipsArray.shuffled().first ?? Gossip()
+        
         /// Show 5 news of gossip array in trending topic section
         /// shuffle gossip array to avoid repeat content on "trending topic" and "news category"
         let suffledArray = gossipsArray.shuffled()
@@ -316,7 +337,13 @@ extension GossipVC {
             }
             self.isPagination = false
         }
-        viewAllButton.isHidden = gossipsArray.count == 0
+        viewAllButton.isHidden = initialLoad == false
+        if initialLoad {
+            initialLoad = false
+            viewAllButton.isHidden = gossipsArray.count == 0
+        }
+        
+        
         publisherCollectionView.reloadData()
         trendingCollectionView.reloadData()
         newsTableView.reloadData()
@@ -431,12 +458,12 @@ extension GossipVC: UITableViewDataSource {
         /// news category section's table height calculation
         /// If count = 0, height = 70 to show "No data" label
         /// maximum height of table sould be 20 * cell height, if more than 20 items are there, do pagination
-        if gossipsArray.count < 20 {
-            newsTableHeightConstraint.constant = (gossipsArray.count * 70) < 70 ? 300 : CGFloat(gossipsArray.count * 120)
-        } else {
-            newsTableHeightConstraint.constant = CGFloat(20 * 120)
-        }
-        
+        //        if gossipsArray.count < 20 {
+        //            newsTableHeightConstraint.constant = (gossipsArray.count * 70) < 70 ? 300 : CGFloat(gossipsArray.count * 120)
+        //        } else {
+        //            newsTableHeightConstraint.constant = CGFloat(20 * 120)
+        //        }
+        newsTableHeightConstraint.constant = (gossipsArray.count * 70) < 70 ? 300 : (CGFloat(gossipsArray.count * 120) - (viewAllButton.isHidden == false ? 0 : 10))
         if gossipsArray.count == 0 {
             tableView.setEmptyMessage(ErrorMessage.dataNotFound)
         } else {
@@ -460,12 +487,13 @@ extension GossipVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         gotoDetailPage(model: gossipsArray[indexPath.row])
     }
+
 }
 
 // MARK: - ScrollView Delegates
 extension GossipVC {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if scrollView == self.newsTableView && sportType != .eSports {
+        if scrollView == self.newsTableView && sportType != .eSports && viewAllButton.isHidden {
             if(scrollView.contentOffset.y>0 && scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.bounds.size.height)) {
                 if(isPagination == false){
                     isPagination = true

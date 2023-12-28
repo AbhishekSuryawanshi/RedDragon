@@ -33,11 +33,11 @@ struct ErrorMessage {
     static let dataNotFound                = "Data not found"
     static let networkAlert                = "No network connection!"
     static let somethingWentWrong          = "Something went wrong, please try again"
-    static let responseFailed              = "response failed with other than error code"
+    static let responseFailed              = "Response failed with other than error code"
     static let profileUpdated              = "Profile Updated."
     static let loginRequires               = "The App requires login"
     static var photoMinCountAlert          = "Alert! Photo count should be at least 1"
-    static var photoMaxCountAlert          = "You've already reached the limit of 5 photos"
+    static var photoMaxCountAlert          = "You have already reached the limit of 5 photos"
     static var textEmptyAlert              = "What do you want to talk about?"
     static var pollOptionEmptyAlert        = "Please add two poll choices"
     
@@ -59,11 +59,11 @@ struct ErrorMessage {
     static let insufficientBudget          = "Sorry, you don't have sufficient budget to buy this player"
     static let addPlayerToPlay             = "In order to play the game, you must have at least 11 players"
     static let playerAlreadyUsed           = "Your team already has this player"
-    static let playerBuyed                 = "Player bought successfully!!"
-    static let playerRemoved               = "Player removed!!"
-    static let matchDraw                   = "Match Draw!!"
+    static let playerBuyed                 = "Player bought successfully!"
+    static let playerRemoved               = "Player removed!"
+    static let matchDraw                   = "Match Draw!"
     static let sameScore                   = "Both users scored same score"
-    static let wellPlayed                  = "Well Played!!"
+    static let wellPlayed                  = "Well Played!"
     
     static let betPlacedSuccess            = "Bet Placed Successfully"
     static let betPlacedAlready            = "Bet Already Placed"
@@ -74,14 +74,14 @@ struct ErrorMessage {
     static let eventStartDateEmptyAlert    = "Please enter event start date"
     static let eventStartTimeEmptyAlert    = "Please enter event start time"
     static let eventLocationEmptyAlert     = "Please enter event location"
-    static let eventPriceEmptyAlert        = "Please enter event location"
+    static let eventPriceEmptyAlert        = "Please enter event price"
     
     static let bannerNotFound              = "Banner data not found"
     static let liveMatchNotFound           = "Live matches are not available at this moment."
     static let whatsHappeningNotFound      = "Data not found for What's Happening section"
     static let predictionsNotFound         = "Predictions data not available"
-    static let expertNotFound              = "Experts data not availabel"
-    static let upcomingDataNotFound        = "Upcoming matches data not availbale"
+    static let expertNotFound              = "Experts data not available"
+    static let upcomingDataNotFound        = "Upcoming matches data not available"
 }
 
 struct SuccessMessage {
