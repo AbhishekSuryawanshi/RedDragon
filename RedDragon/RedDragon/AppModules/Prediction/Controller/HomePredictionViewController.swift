@@ -11,6 +11,11 @@ import SDWebImage
 
 class HomePredictionViewController: UIViewController {
 
+    @IBOutlet weak var upcomingMatchesStackView: UIStackView!
+    @IBOutlet weak var placedPredictionView3: UIView!
+    @IBOutlet weak var placedPredictionView2: UIView!
+    @IBOutlet weak var placedPredictionView1: UIView!
+    @IBOutlet weak var placedPredictionsStackView: UIStackView!
     @IBOutlet weak var sportsCollectionView: UICollectionView!
     @IBOutlet weak var predictionsTimeLbl3: UILabel!
     @IBOutlet weak var predictionsTeamWinLbl3: UILabel!
@@ -18,21 +23,27 @@ class HomePredictionViewController: UIViewController {
     @IBOutlet weak var predictionsdateLbl3: UILabel!
     @IBOutlet weak var predictionsTeam1Lbl3: UILabel!
     @IBOutlet weak var predictionsLeagueNameLbl3: UILabel!
-    @IBOutlet weak var predictionsLeagueImgView3: UIImageView!
+    
+    @IBOutlet weak var predictionsTeam2ImgView3: UIImageView!
+    @IBOutlet weak var predictionsTeam1ImgView3: UIImageView!
     @IBOutlet weak var predictionsTimeLbl2: UILabel!
     @IBOutlet weak var predictionsTeamWinLbl2: UILabel!
     @IBOutlet weak var predictionsTeam2Lbl2: UILabel!
     @IBOutlet weak var predictionsdateLbl2: UILabel!
     @IBOutlet weak var predictionTeam1Lbl2: UILabel!
     @IBOutlet weak var predictionsLeagueLbl2: UILabel!
-    @IBOutlet weak var predictionsLeagueImgView2: UIImageView!
+   
+    @IBOutlet weak var predictionsTeam2ImgView2: UIImageView!
+    @IBOutlet weak var predictionsTeam1ImgView2: UIImageView!
     @IBOutlet weak var predictionsTimeLbl1: UILabel!
     @IBOutlet weak var predictionsTeamWinLbl1: UILabel!
     @IBOutlet weak var predictionsTeam2Lbl1: UILabel!
     @IBOutlet weak var predictionsdateLbl1: UILabel!
     @IBOutlet weak var predictionsTeam1Lbl1: UILabel!
     @IBOutlet weak var predictionsLeagueNameLbl1: UILabel!
-    @IBOutlet weak var predictionsLeagueImgView1: UIImageView!
+    
+    @IBOutlet weak var predictionsTeam2ImgView1: UIImageView!
+    @IBOutlet weak var predictionsTeam1ImgView1: UIImageView!
     @IBOutlet weak var seeAllPlacedPredictionsBtn: UIButton!
     @IBOutlet weak var placedPredictionsLbl: UILabel!
     @IBOutlet weak var upcomingteam2Lbl3: UILabel!
@@ -84,6 +95,11 @@ class HomePredictionViewController: UIViewController {
 
         navigationItem.standardAppearance = appearance
         navigationItem.scrollEdgeAppearance = appearance
+        
+         if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
+              let userID = UserDefaults.standard.user?.appDataIDs.predictMatchUserId
+              predictionListUserViewModel?.fetchPredictionUserListAsyncCall(appUserID: "\(userID ?? 0)" , sportType: selectedSports)  // To give logged in user id instead of 7
+          }
        
     }
     
@@ -110,6 +126,7 @@ class HomePredictionViewController: UIViewController {
         if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
             predictionTopView.userImgView.setImage(imageStr: UserDefaults.standard.user?.profileImg ?? "")
             predictionTopView.usernameLbl.text = UserDefaults.standard.user?.name
+            
             
         }
         predictionMatchesViewModel?.fetchPredictionMatchesAsyncCall(lang: "en", date: Date().formatDate(outputFormat: dateFormat.yyyyMMdd), sportType: sport)
@@ -243,7 +260,6 @@ extension HomePredictionViewController {
         }
     }
 
-    
     func fetchPredictionUserListViewModel() {
         predictionListUserViewModel = PredictionsListUserViewModel()
         predictionListUserViewModel?.showError = { [weak self] error in
@@ -263,38 +279,85 @@ extension HomePredictionViewController {
     
     func renderResponseData(data: PredictionListModel) {
         predictionListUserModel = data
-        if let data = data.data{
+        if let data = data.response?.data{
             UIView.animate(withDuration: 1.0) { [self] in
+                  switch(data.count){
+                case 0:
+                 
+                      placedPredictionsStackView.isHidden = true
+                case 1:
+                  
+                      placedPredictionsStackView.isHidden = false
+                      placedPredictionView1.isHidden = false
+                      placedPredictionView2.isHidden = true
+                      placedPredictionView3.isHidden = true
+                   
+                case 2:
+                      
+                      placedPredictionsStackView.isHidden = false
+                      placedPredictionView1.isHidden = false
+                      placedPredictionView2.isHidden = false
+                      placedPredictionView3.isHidden = true
+                   
+                    
+                case 3:
+                  
+                      placedPredictionsStackView.isHidden = false
+                      placedPredictionView1.isHidden = false
+                      placedPredictionView2.isHidden = false
+                      placedPredictionView3.isHidden = false
+                   
+                    
+                default:
+                    break
+                }
+                
+                predictionTopView.totalCountLbl.text = "\(data[0].user?.predStats?.allCnt ?? 0)"
+                predictionTopView.wonCountLbl.text = "\(data[0].user?.predStats?.successCnt ?? 0)"
+                predictionTopView.lostCountLbl.text = "\(data[0].user?.predStats?.unsuccessCnt ?? 0)"
+                
                 if data.count > 0{
                     predictionsLeagueNameLbl1.text = data[0].matchDetail.leagueName
-                    predictionsLeagueImgView1.sd_imageIndicator = SDWebImageActivityIndicator.white
-                    // predictionsLeagueImgView1.sd_setImage(with: URL(string: data?[0].matchDetail[0].logo ?? ""))
+                    predictionsTeam1ImgView1.sd_imageIndicator = SDWebImageActivityIndicator.white
+                    predictionsTeam1ImgView1.sd_setImage(with: URL(string: data[0].matchDetail.homeTeamImage ?? ""))
+                    predictionsTeam2ImgView1.sd_imageIndicator = SDWebImageActivityIndicator.white
+                    predictionsTeam2ImgView1.sd_setImage(with: URL(string: data[0].matchDetail.awayTeamImage ?? ""))
                     predictionsTeam1Lbl1.text = data[0].matchDetail.homeTeamName
                     predictionsTeam2Lbl1.text = data[0].matchDetail.awayTeamName
                     predictionsdateLbl1.text =  data[0].matchDetail.matchDatetime
-                    //  upcomingPredictBtn1.tag = 0
-                    
-                    //  upcomingPredictBtn1.addTarget(self, action: #selector(predictBtn1), for: .touchUpInside)
+                    predictionsTimeLbl1.text = data[0].createdAt
+                    predictionsTeamWinLbl1.text = "Prediction: " + getPredictedTeam(predictiveTeam: data[0].predictedTeam)
                     seeAllBtn.addTarget(self, action: #selector(placedPredictionSeeAll), for: .touchUpInside)
                 }
                 if data.count > 1{
                     if data[1] != nil{
                         predictionsLeagueLbl2.text = data[1].matchDetail.leagueName
-                        predictionsLeagueImgView2.sd_imageIndicator = SDWebImageActivityIndicator.white
-                        // predictionsLeagueImgView1.sd_setImage(with: URL(string: data?[0].matchDetail[0].logo ?? ""))
+                        predictionsTeam1ImgView2.sd_imageIndicator = SDWebImageActivityIndicator.white
+                        predictionsTeam1ImgView2.sd_setImage(with: URL(string: data[1].matchDetail.homeTeamImage ?? ""))
+                        predictionsTeam2ImgView2.sd_imageIndicator = SDWebImageActivityIndicator.white
+                        predictionsTeam2ImgView2.sd_setImage(with: URL(string: data[1].matchDetail.awayTeamImage ?? ""))
                         predictionTeam1Lbl2.text = data[1].matchDetail.homeTeamName
                         predictionsTeam2Lbl2.text = data[1].matchDetail.awayTeamName
                         predictionsdateLbl2.text =  data[1].matchDetail.matchDatetime
+                        predictionsTimeLbl2.text = data[1].createdAt
+                        predictionsTeamWinLbl2.text = "Prediction: " + getPredictedTeam(predictiveTeam: data[1].predictedTeam)
                     }
+                    
+                    
+                }
+                if data.count > 2{
                     if data[2] != nil{
                         predictionsLeagueNameLbl3.text = data[2].matchDetail.leagueName
-                        predictionsLeagueImgView3.sd_imageIndicator = SDWebImageActivityIndicator.white
-                        // predictionsLeagueImgView1.sd_setImage(with: URL(string: data?[0].matchDetail[0].logo ?? ""))
+                        predictionsTeam1ImgView3.sd_imageIndicator = SDWebImageActivityIndicator.white
+                        predictionsTeam1ImgView3.sd_setImage(with: URL(string: data[2].matchDetail.homeTeamImage ?? ""))
+                        predictionsTeam2ImgView3.sd_imageIndicator = SDWebImageActivityIndicator.white
+                        predictionsTeam2ImgView3.sd_setImage(with: URL(string: data[2].matchDetail.awayTeamImage ?? ""))
                         predictionsTeam1Lbl3.text = data[2].matchDetail.homeTeamName
                         predictionsTeam2Lbl3.text = data[2].matchDetail.awayTeamName
                         predictionsdateLbl3.text =  data[2].matchDetail.matchDatetime
+                        predictionsTimeLbl3.text = data[2].createdAt
+                        predictionsTeamWinLbl3.text = "Prediction: " + getPredictedTeam(predictiveTeam: data[2].predictedTeam)
                     }
-                    
                 }
                 
             }
@@ -321,6 +384,21 @@ extension HomePredictionViewController {
         var lang = UserDefaults.standard.string(forKey: UserDefaultString.language) ?? "en"
         lang = (lang == "en-US") ? "en" : lang
         // fetchCurrentLanguageCode = lang
+    }
+    
+    func getPredictedTeam(predictiveTeam:String?) -> String{
+        if predictiveTeam == "1"{
+            return "Draw"
+        }
+        else if predictiveTeam == "2"{
+            return "Home"
+        }
+        else if predictiveTeam == "3"{
+            return "Away"
+        }
+        else{
+            return ""
+        }
     }
 }
     
@@ -357,6 +435,9 @@ extension HomePredictionViewController: LoginVCDelegate {
         makeNetworkCall(sport: selectedSports)
         predictionTopView.userImgView.setImage(imageStr: UserDefaults.standard.user?.profileImg ?? "")
         predictionTopView.usernameLbl.text = UserDefaults.standard.user?.name
+        predictionTopView.totalCountLbl.text = "\(predictionListUserModel?.response?.data?[0].user?.predStats?.allCnt ?? 0)"
+        predictionTopView.wonCountLbl.text = "\(predictionListUserModel?.response?.data?[0].user?.predStats?.successCnt ?? 0)"
+        predictionTopView.lostCountLbl.text = "\(predictionListUserModel?.response?.data?[0].user?.predStats?.unsuccessCnt ?? 0)"
         
       
     }

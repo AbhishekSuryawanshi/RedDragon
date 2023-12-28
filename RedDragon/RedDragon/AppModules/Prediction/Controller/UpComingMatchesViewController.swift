@@ -18,6 +18,7 @@ class UpComingMatchesViewController: UIViewController {
     var dateArr: [String]? = []
     private var predictionMatchesViewModel: PredictionViewModel?
     var predictionMatchesModel: PredictionMatchesModel?
+    var predictData: [PredictionData]?
     var sportsArr = ["football" , "basketball"]
     var selectedSports = ""
     
@@ -83,6 +84,16 @@ class UpComingMatchesViewController: UIViewController {
     
     func showLoader(_ value: Bool) {
         value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
+    }
+    
+    func filterUpcomingMatches(){
+        for i in 0 ..< (predictionMatchesModel?.response?.data?.count ?? 0){
+            for j in 0 ..< (predictionMatchesModel?.response?.data?[i].matches?.count ?? 0){
+                if predictionMatchesModel?.response?.data?[i].matches?[j].matchState  == "notstarted"{
+                    predictData?.append(contentsOf: (predictionMatchesModel?.response?.data)!)
+                }
+            }
+        }
     }
     
 }
