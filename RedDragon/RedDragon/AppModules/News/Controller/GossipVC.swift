@@ -33,6 +33,7 @@ class GossipVC: UIViewController {
     @IBOutlet weak var videosCollectionView: UICollectionView!
     @IBOutlet weak var videoCollectionHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var scrollView: UIScrollView!
     var cancellable = Set<AnyCancellable>()
     var isPagination = false
     var publishersArray: [String] = []
@@ -62,6 +63,7 @@ class GossipVC: UIViewController {
     }
     
     func initialSettings() {
+        scrollView.delegate = self
         nibInitialization()
         
         /// breakng news view
@@ -475,8 +477,10 @@ extension GossipVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.newsTableViewCell, for: indexPath) as! NewsTableViewCell
         cell.configureGossipCell(model: gossipsArray[indexPath.row])
+        print(indexPath.row)
         return cell
     }
+
 }
 
 extension GossipVC: UITableViewDelegate {
@@ -492,15 +496,36 @@ extension GossipVC: UITableViewDelegate {
 
 // MARK: - ScrollView Delegates
 extension GossipVC {
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if scrollView == self.newsTableView && sportType != .eSports && viewAllButton.isHidden {
-            if(scrollView.contentOffset.y>0 && scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.bounds.size.height)) {
-                if(isPagination == false){
-                    isPagination = true
-                    pageNum = pageNum + 1
-                    self.getNewsList()
-                }
+    
+    func setupPagination(){
+        if sportType != .eSports && viewAllButton.isHidden{
+            if(isPagination == false){
+                isPagination = true
+                pageNum = pageNum + 1
+                self.getNewsList()
             }
         }
+    }
+    
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if scrollView == self.scrollView{
+            print("Parent Scroll")
+            print(scrollView.contentOffset.y)
+            print("Frame for tableView::\(newsTableView.frame.minY),\(newsTableView.frame.maxY)")
+            print("tableView content y::\(newsTableView.contentOffset.y)")
+            if scrollView.contentOffset.y >= newsTableView.frame.maxY{
+                setupPagination()
+            }
+        }
+//        if scrollView == self.newsTableView && sportType != .eSports && viewAllButton.isHidden {
+//            if(scrollView.contentOffset.y>0 && scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.bounds.size.height)) {
+//                if(isPagination == false){
+//                    isPagination = true
+//                    pageNum = pageNum + 1
+//                    self.getNewsList()
+//                }
+//            }
+//        }
     }
 }
