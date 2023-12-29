@@ -72,7 +72,9 @@ extension UserDefaults {
     
     func clearSpecifiedItems() {
         removeObject(forKey: UserDefaultString.token)
+        removeObject(forKey: UserDefaultString.user)
         removeObject(forKey: UserDefaultString.language)
+        removeObject(forKey: UserDefaultString.points)
         synchronize()
     }
    

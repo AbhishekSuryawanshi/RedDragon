@@ -105,15 +105,13 @@ extension DiscoverVC {
     
     func execute_onResponseData(_ response: LoginResponse?) {
         if let dataResponse = response?.response {
-            UserDefaults.standard.user = nil
-            UserDefaults.standard.token = nil
-            UserDefaults.standard.points = nil
-            self.filterProfileArray()
+            UserDefaults.standard.clearSpecifiedItems()
         } else {
             if let errorResponse = response?.error {
                 self.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
             }
         }
+        self.filterProfileArray()
     }
 }
 
@@ -189,7 +187,10 @@ extension DiscoverVC: UICollectionViewDelegate {
             }
         } else {
             let type = collectionView == profileCollectionView ? profileArray[indexPath.row] : otherArray[indexPath.row]
-            self.tabBarController?.tabBar.isHidden = true
+            if type == .account && type == .language {
+                self.tabBarController?.tabBar.isHidden = true
+            }
+            
             switch type {
             case .account:
                 

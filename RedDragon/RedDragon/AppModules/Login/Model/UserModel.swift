@@ -78,7 +78,7 @@ struct User: Codable {
         tags = try container.decodeIfPresent([String].self, forKey: .tags) ?? []
         historicTags = try container.decodeIfPresent([String].self, forKey: .historicTags) ?? []
         appDataIDs = try container.decodeIfPresent(LocalAppUserID.self, forKey: .appDataIDs) ?? LocalAppUserID()
-        affAppData = try container.decodeIfPresent(AffAppData.self, forKey: .affAppData)
+     //   affAppData = try container.decodeIfPresent(AffAppData.self, forKey: .affAppData)
         streetPlayerUpdated = try container.decodeIfPresent(Int.self, forKey: .streetPlayerUpdated) ?? 0
     }
 }

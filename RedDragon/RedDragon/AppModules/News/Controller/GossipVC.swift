@@ -465,7 +465,7 @@ extension GossipVC: UITableViewDataSource {
         //        } else {
         //            newsTableHeightConstraint.constant = CGFloat(20 * 120)
         //        }
-        newsTableHeightConstraint.constant = (gossipsArray.count * 70) < 70 ? 300 : (CGFloat(gossipsArray.count * 120) - (viewAllButton.isHidden == false ? 0 : 10))
+        newsTableHeightConstraint.constant = (gossipsArray.count * 70) < 70 ? 300 : (CGFloat(gossipsArray.count * 120) - (viewAllButton.isHidden == false ? -10 : 10))
         if gossipsArray.count == 0 {
             tableView.setEmptyMessage(ErrorMessage.dataNotFound)
         } else {
@@ -491,7 +491,7 @@ extension GossipVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         gotoDetailPage(model: gossipsArray[indexPath.row])
     }
-
+    
 }
 
 // MARK: - ScrollView Delegates
