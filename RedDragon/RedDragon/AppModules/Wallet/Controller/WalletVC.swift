@@ -47,10 +47,10 @@ class WalletVC: UIViewController {
     func initialSettings() {
         nibInitialization()
         fetchWalletViewModel()
-        heatPointLabel.text = String(UserDefaults.standard.user?.wallet ?? 0)
     }
     
     func refreshView() {
+        heatPointLabel.text = String(UserDefaults.standard.user?.wallet ?? 0)
         if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
             WalletVM.shared.subscriptionListAsyncCall()
         }

@@ -130,9 +130,7 @@ extension DiscoverViewController {
     
     func execute_onResponseData(_ response: LoginResponse?) {
         if let dataResponse = response?.response {
-            UserDefaults.standard.removeObject(forKey: UserDefaultString.user)
-            UserDefaults.standard.token = nil
-            UserDefaults.standard.points = nil
+            UserDefaults.standard.clearSpecifiedItems()
         } else {
             if let errorResponse = response?.error {
                 self.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)

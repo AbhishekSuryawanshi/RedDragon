@@ -34,6 +34,12 @@ class HTTPSClient: HTTPSClientProtocol {
         guard let res = urlResponse as? HTTPURLResponse, 200..<407 ~= res.statusCode else {
             throw CustomErrors.unknown
         }
+        
+        // Unauthorized user, token expired
+        if let res = urlResponse as? HTTPURLResponse, res.statusCode == 401  {
+            UserDefaults.standard.clearSpecifiedItems()
+        }
+        
         // Decode the received data into the specified Decodable type.
         return try JSONDecoder().decode(T.self, from: data)
     }
