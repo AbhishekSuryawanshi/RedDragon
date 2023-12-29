@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -27,7 +27,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="393" height="134"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderProfilePic" translatesAutoresizingMaskIntoConstraints="NO" id="lwk-lZ-0Th">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderUser" translatesAutoresizingMaskIntoConstraints="NO" id="lwk-lZ-0Th">
                         <rect key="frame" x="20" y="20" width="50" height="50"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="2lt-4w-2r9"/>
@@ -39,8 +39,8 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rAP-AR-PMa">
-                        <rect key="frame" x="79.999999999999986" y="28" width="138.66666666666663" height="25"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rAP-AR-PMa">
+                        <rect key="frame" x="80" y="28" width="143" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="if7-99-XSr"/>
                         </constraints>
@@ -48,8 +48,8 @@
                         <color key="textColor" name="base"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 23 bets " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9p0-Bb-yMT">
-                        <rect key="frame" x="232.66666666666666" y="28" width="37.999999999999972" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9p0-Bb-yMT">
+                        <rect key="frame" x="237" y="28" width="38" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="0gN-sY-tfk"/>
                         </constraints>
@@ -58,7 +58,7 @@
                         <nil key="highlightedColor"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="10"/>
+                                <real key="value" value="5"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                 <color key="value" red="0.0" green="0.39607843139999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -68,13 +68,12 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </label>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="p4O-sH-PuZ">
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p4O-sH-PuZ">
                         <rect key="frame" x="80" y="63" width="230" height="57"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="57" id="Vvt-zA-txm"/>
                         </constraints>
-                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
                         <color key="textColor" systemColor="labelColor"/>
                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="10"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -88,7 +87,7 @@
                         <color key="textColor" red="0.0" green="0.39607843139999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="67%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAW-RW-OlW">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAW-RW-OlW">
                         <rect key="frame" x="315" y="46" width="58" height="29"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="29" id="zIe-iR-DUv"/>
@@ -110,13 +109,13 @@
                         </state>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="10"/>
+                                <real key="value" value="5"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 147 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7N-Nr-IVO">
-                        <rect key="frame" x="278.66666666666669" y="26" width="26.333333333333314" height="22"/>
-                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7N-Nr-IVO">
+                        <rect key="frame" x="283" y="26" width="24" height="22"/>
+                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="10"/>
                         <color key="textColor" red="0.99215686274509807" green="0.396078431372549" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <userDefinedRuntimeAttributes>
@@ -140,7 +139,9 @@
                     <constraint firstItem="9p0-Bb-yMT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="28" id="7QW-Ga-c18"/>
                     <constraint firstItem="rAP-AR-PMa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="28" id="9MP-u5-zBw"/>
                     <constraint firstItem="lwk-lZ-0Th" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="9xt-Yl-zSz"/>
+                    <constraint firstItem="q7N-Nr-IVO" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.0610687" id="C8y-JK-gcf"/>
                     <constraint firstAttribute="trailing" secondItem="HoL-jG-8jk" secondAttribute="trailing" constant="20" id="FJG-dp-RcV"/>
+                    <constraint firstItem="rAP-AR-PMa" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.363868" id="HWj-qw-Deh"/>
                     <constraint firstItem="nsh-gv-zB2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="Jly-aN-gxa"/>
                     <constraint firstItem="q7N-Nr-IVO" firstAttribute="centerY" secondItem="9p0-Bb-yMT" secondAttribute="centerY" id="Ku5-j0-bP6"/>
                     <constraint firstItem="fAW-RW-OlW" firstAttribute="top" secondItem="nsh-gv-zB2" secondAttribute="bottom" constant="10" id="MGn-Yr-9BV"/>
@@ -152,7 +153,7 @@
                     <constraint firstAttribute="bottom" secondItem="p4O-sH-PuZ" secondAttribute="bottom" constant="14" id="gn2-XO-G3K"/>
                     <constraint firstItem="p4O-sH-PuZ" firstAttribute="top" secondItem="rAP-AR-PMa" secondAttribute="bottom" constant="10" id="iV2-vk-GpY"/>
                     <constraint firstItem="q7N-Nr-IVO" firstAttribute="leading" secondItem="9p0-Bb-yMT" secondAttribute="trailing" constant="8" id="iVK-1c-ZgM"/>
-                    <constraint firstItem="nsh-gv-zB2" firstAttribute="leading" secondItem="q7N-Nr-IVO" secondAttribute="trailing" constant="10" id="kas-95-8C0"/>
+                    <constraint firstItem="nsh-gv-zB2" firstAttribute="leading" secondItem="q7N-Nr-IVO" secondAttribute="trailing" constant="8" id="kas-95-8C0"/>
                     <constraint firstItem="p4O-sH-PuZ" firstAttribute="leading" secondItem="lwk-lZ-0Th" secondAttribute="trailing" constant="10" id="rWL-ua-uBs"/>
                     <constraint firstItem="nsh-gv-zB2" firstAttribute="centerX" secondItem="fAW-RW-OlW" secondAttribute="centerX" id="vDk-eC-pcc"/>
                     <constraint firstItem="9p0-Bb-yMT" firstAttribute="leading" secondItem="rAP-AR-PMa" secondAttribute="trailing" constant="14" id="x8S-G1-SFw"/>
@@ -173,7 +174,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="placeholderProfilePic" width="73.333335876464844" height="73"/>
+        <image name="placeholderUser" width="32" height="32"/>
         <namedColor name="base">
             <color red="0.71764705882352942" green="0.094117647058823528" blue="0.054901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -33,7 +33,7 @@ class AnalysisViewModel: APIServiceManager<AnalysisModel> {
     
     ///fetch analysis data
     func fetchPredictionAnalysisAsyncCall(matchID: String) {
-        let url     = URLConstants.predictionBaseURL + URLConstants.analysisURL
+        let url     = URLConstants.baseURL + URLConstants.analysisURL
         let method  = RequestType.get
         let queryItems = [
            URLQueryItem(name: "matchId", value: matchID),
@@ -44,6 +44,6 @@ class AnalysisViewModel: APIServiceManager<AnalysisModel> {
         
         guard let url = urlComponents?.url else {return  }
        
-        asyncCall(urlString: (urlComponents?.string)!, method: method, parameters: nil, isGuestUser: true, anyDefaultToken: "108|HOAfqPcOxKaCS4dzAMgBvsN5tScJNhskT4w3iSeZee09c5cb")
+        asyncCall(urlString: (urlComponents?.string)!, method: method, parameters: nil)
     }
 }

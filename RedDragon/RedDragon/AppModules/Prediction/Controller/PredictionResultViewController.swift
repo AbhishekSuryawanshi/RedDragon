@@ -24,15 +24,6 @@ class PredictionResultViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = #colorLiteral(red: 0.7333333333, green: 0.09803921569, blue: 0.06274509804, alpha: 1)
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        self.navigationController?.isNavigationBarHidden = false
-        self.navigationItem.title = "Prediction Details"
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationItem.standardAppearance = appearance
-        navigationItem.scrollEdgeAppearance = appearance
         configureTopView()
     }
     
@@ -88,4 +79,7 @@ class PredictionResultViewController: UIViewController {
         }
     }
 
+    @IBAction func backBtnAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
