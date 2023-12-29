@@ -156,6 +156,7 @@ extension UpComingMatchesViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.predictUpcomingTableViewCell, for: indexPath) as! PredictUpcomingTableViewCell
+        cell.selectionStyle = .none
         cell.configCell(predictionData: predictionMatchesModel?.response?.data?[indexPath.section], row: indexPath.row, sport: selectedSports)
       
         return cell

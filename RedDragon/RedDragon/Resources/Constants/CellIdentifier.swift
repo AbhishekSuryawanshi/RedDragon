@@ -63,6 +63,8 @@ struct CellIdentifier {
     
     //Prediction
     static let predictUpcomingTableViewCell    = "PredictUpcomingTableViewCell"
+    static let predictTagCollectionViewCell    = "PredictionTagCollectionViewCell"
+    static let predictHistoryTableViewCell     = "PredictHistoryTableViewCell"
 
     //Meet
     static let meetUserTableViewCell           = "MeetUserTableViewCell"

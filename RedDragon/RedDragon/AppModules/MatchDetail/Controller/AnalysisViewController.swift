@@ -44,26 +44,50 @@ class AnalysisViewController: UIViewController {
     }
     
     func showLoader(_ value: Bool) {
-        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
+        value ? startLoader() : stopLoader()
     }
     
     func makeNetworkCall() {
         analysisViewModel?.fetchPredictionAnalysisAsyncCall(matchID: matchSlug)
+    }
+    
+    func labelWithImage(lbl:UILabel, text: String){
+        // Create Attachment
+        let imageAttachment = NSTextAttachment()
+        imageAttachment.image = UIImage(named:"fire")
+        // Set bound to reposition
+        let imageOffsetY: CGFloat = -3.0
+        imageAttachment.bounds = CGRect(x: 0, y: imageOffsetY, width: imageAttachment.image!.size.width, height: imageAttachment.image!.size.height)
+        // Create string with attachment
+        let attachmentString = NSAttributedString(attachment: imageAttachment)
+        // Initialize mutable string
+        let completeText = NSMutableAttributedString(string: "")
+        // Add image to mutable string
+        completeText.append(attachmentString)
+        // Add your text to mutable string
+        let textAfterIcon = NSAttributedString(string: text)
+        completeText.append(textAfterIcon)
+        lbl.textAlignment = .center
+        lbl.attributedText = completeText
     }
 
 }
 
 extension AnalysisViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return analysisModel?.data?.count ?? 0
+        return analysisModel?.response?.data?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.analysisTableViewCell, for: indexPath) as! AnalysisTableViewCell
         cell.userImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
-        cell.userImgView.sd_setImage(with: URL(string: analysisModel?.data?[indexPath.row].user?.imgURL ?? ""))
-        cell.nameLbl.text = analysisModel?.data?[indexPath.row].user?.name
-        cell.descriptionTxtView.text = analysisModel?.data?[indexPath.row].comments
+        cell.userImgView.sd_setImage(with: URL(string: analysisModel?.response?.data?[indexPath.row].user?.imgURL ?? ""))
+        cell.nameLbl.text = analysisModel?.response?.data?[indexPath.row].user?.name
+        cell.descriptionTxtView.text = analysisModel?.response?.data?[indexPath.row].comments
+        cell.winPercentageLbl.text = String(format: "%.1f",analysisModel?.response?.data?[indexPath.row].user?.predStats?.successRate ?? 0.0 ) + "%"
+        cell.betsLbl.text = " \(analysisModel?.response?.data?[indexPath.row].user?.predStats?.allCnt ?? 0)" + " Predictions  "
+       labelWithImage(lbl: cell.fireCountLbl, text: " \(analysisModel?.response?.data?[indexPath.row].user?.predStats?.successCnt ?? 0)" + " ")
+       // cell.fireCountLbl.text = " \(analysisModel?.response?.data?[indexPath.row].user?.predStats?.successCnt ?? 0)" + " "
         cell.selectionStyle = .none
         return cell
     }

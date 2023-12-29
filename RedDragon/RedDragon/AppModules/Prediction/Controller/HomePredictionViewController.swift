@@ -78,6 +78,7 @@ class HomePredictionViewController: UIViewController {
     private var cancellable = Set<AnyCancellable>()
     var selectedSports = ""
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
@@ -86,10 +87,19 @@ class HomePredictionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
        // addNavigationBar(title: "User Prediction")
-         if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
-              let userID = UserDefaults.standard.user?.appDataIDs.predictMatchUserId
-              predictionListUserViewModel?.fetchPredictionUserListAsyncCall(appUserID: "\(userID ?? 0)" , sportType: selectedSports)  // To give logged in user id instead of 7
-          }
+        if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
+            removeBlurView()
+            let userID = UserDefaults.standard.user?.appDataIDs.predictMatchUserId
+            predictionListUserViewModel?.fetchPredictionUserListAsyncCall(appUserID: "\(userID ?? 0)" , sportType: selectedSports)  // To give logged in user id instead of 7
+            predictionTopView.tagsCollectionView.register(CellIdentifier.predictTagCollectionViewCell)
+            predictionTopView.tagsCollectionView.delegate = self
+            predictionTopView.tagsCollectionView.dataSource = self
+            predictionTopView.tagsCollectionView.reloadData()
+            
+        }
+        else{
+            addBlurView()
+        }
        
     }
     
@@ -110,6 +120,20 @@ class HomePredictionViewController: UIViewController {
         sportsCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .left)
         selectedSports = sportsArr[0]
         
+    }
+    
+    func addBlurView(){
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.tag = 9
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(blurEffectView)
+
+    }
+    
+    func removeBlurView(){
+        view.viewWithTag(9)?.removeFromSuperview()
     }
     @IBAction func backBtnAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -167,7 +191,9 @@ class HomePredictionViewController: UIViewController {
     }
     
     @objc func placedPredictionSeeAll(){
-        
+        navigateToViewController(PredictionHistoryViewController.self, storyboardName: StoryboardName.prediction){ vc in
+            vc.predictionListUserModel = self.predictionListUserModel
+        }
     }
 
 }
@@ -243,12 +269,14 @@ extension HomePredictionViewController {
                 self.customAlertView(title: ErrorMessage.alert.localized, description: error.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
             }
             else{
-                self.customAlertView_2Actions(title: "Login / Sign Up".localized, description: ErrorMessage.loginRequires.localized) {
+                self.customAlertView_3Actions(title: "Login / Sign Up".localized, description: ErrorMessage.loginRequires.localized) {
                     /// Show login page to login/register new user
                     self.presentOverViewController(LoginVC.self, storyboardName: StoryboardName.login) { vc in
                         vc.delegate = self
                         
                     }
+                } dismissAction: {
+                    self.navigationController?.popViewController(animated: true)
                 }
             }
         }
@@ -277,36 +305,29 @@ extension HomePredictionViewController {
             UIView.animate(withDuration: 1.0) { [self] in
                   switch(data.count){
                 case 0:
-                 
                       placedPredictionsStackView.isHidden = true
                 case 1:
-                  
                       placedPredictionsStackView.isHidden = false
                       placedPredictionView1.isHidden = false
                       placedPredictionView2.isHidden = true
                       placedPredictionView3.isHidden = true
-                   
                 case 2:
-                      
                       placedPredictionsStackView.isHidden = false
                       placedPredictionView1.isHidden = false
                       placedPredictionView2.isHidden = false
                       placedPredictionView3.isHidden = true
-                   
-                    
                 case 3:
-                  
                       placedPredictionsStackView.isHidden = false
                       placedPredictionView1.isHidden = false
                       placedPredictionView2.isHidden = false
                       placedPredictionView3.isHidden = false
                    
-                    
                 default:
                     break
                 }
                 
                 if data.count > 0{
+                    seeAllPlacedPredictionsBtn.addTarget(self, action: #selector(placedPredictionSeeAll), for: .touchUpInside)
                     predictionTopView.totalCountLbl.text = "\(data[0].user?.predStats?.allCnt ?? 0)"
                     predictionTopView.wonCountLbl.text = "\(data[0].user?.predStats?.successCnt ?? 0)"
                     predictionTopView.lostCountLbl.text = "\(data[0].user?.predStats?.unsuccessCnt ?? 0)"
@@ -420,23 +441,47 @@ extension HomePredictionViewController {
 
 extension HomePredictionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sportsArr.count
+        if collectionView == predictionTopView.tagsCollectionView{
+            return UserDefaults.standard.user?.tags.count ?? 0
+        }
+        else{
+            return sportsArr.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.leagueNamesCollectionCell, for: indexPath) as! LeagueCollectionViewCell
-        cell.leagueName.text = sportsArr[indexPath.row]
-        return cell
+        if collectionView == predictionTopView.tagsCollectionView{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.predictTagCollectionViewCell, for: indexPath) as! PredictionTagCollectionViewCell
+            cell.tagsLbl.text = UserDefaults.standard.user?.tags[indexPath.row]
+            cell.tagsLbl.textColor = .random
+            cell.tagsLbl.borderColor = cell.tagsLbl.textColor
+            return cell
+        }
+        else{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.leagueNamesCollectionCell, for: indexPath) as! LeagueCollectionViewCell
+            cell.leagueName.text = sportsArr[indexPath.row]
+            return cell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        fetchPredictionMatchesViewModel()
-        selectedSports = sportsArr[indexPath.row]
-        makeNetworkCall(sport: selectedSports)
+        if collectionView == predictionTopView.tagsCollectionView{
+            
+        }
+        else{
+            fetchPredictionMatchesViewModel()
+            selectedSports = sportsArr[indexPath.row]
+            makeNetworkCall(sport: selectedSports)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: screenWidth / 2, height: 15)
+        if collectionView == predictionTopView.tagsCollectionView{
+            return CGSize(width: 100, height: 30)
+        }
+        else{
+            return CGSize(width: screenWidth / 2, height: 15)
+        }
     }
     
     
@@ -452,7 +497,14 @@ extension HomePredictionViewController: LoginVCDelegate {
         predictionTopView.totalCountLbl.text = "\(predictionListUserModel?.response?.data?[0].user?.predStats?.allCnt ?? 0)"
         predictionTopView.wonCountLbl.text = "\(predictionListUserModel?.response?.data?[0].user?.predStats?.successCnt ?? 0)"
         predictionTopView.lostCountLbl.text = "\(predictionListUserModel?.response?.data?[0].user?.predStats?.unsuccessCnt ?? 0)"
-        
+        if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
+            removeBlurView()
+            predictionTopView.tagsCollectionView.register(CellIdentifier.predictTagCollectionViewCell)
+            predictionTopView.tagsCollectionView.delegate = self
+            predictionTopView.tagsCollectionView.dataSource = self
+            predictionTopView.tagsCollectionView.reloadData()
+            
+        }
       
     }
 }

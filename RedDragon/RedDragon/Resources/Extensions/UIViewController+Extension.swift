@@ -39,6 +39,19 @@ extension UIViewController {
         self.present(alertVC, animated: true, completion: nil)
     }
     
+    func customAlertView_3Actions(title: String, description: String, image: UIImage = UIImage.alert, okBTNTitle: String = StringConstants.continue_, okAction:@escaping () -> Void, dismissAction:@escaping() -> Void) {
+        let alertVC = PMAlertController(title: title.localized, description: description.localized, image: image, style: .alert)
+        alertVC.addAction(PMAlertAction(title: okBTNTitle.localized, style: .default, action: { () in
+            print("Capture continue action")
+            okAction()
+        }))
+        alertVC.addAction(PMAlertAction(title: StringConstants.dismiss.localized, style: .cancel, action:{ () in
+            dismissAction()
+        }))
+        self.present(alertVC, animated: true, completion: nil)
+    }
+    
+    
     func appPermissionAlert(type: String) {
         customAlertView_2Actions(title: "Settings", description: "\("Please enable your ".localized)\(type.localized)\(" in Settings to continue".localized)") {
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {

@@ -9,6 +9,13 @@ import Foundation
 
 // MARK: - AnalysisModel
 struct AnalysisModel: Codable {
+    var response: AnalysisResponse?
+    
+}
+// MARK: - Response
+struct AnalysisResponse: Codable {
+    var code: Int?
+    var messages: [String]?
     var data: [AnalysisData]?
 }
 
@@ -64,5 +71,11 @@ struct AnalysisUser: Codable {
 // MARK: - AnalysisPredStats
 struct AnalysisPredStats: Codable {
     var allCnt, successCnt, unsuccessCnt, coins: Int?
+    var successRate: Double?
+    
+    enum CodingKeys: String, CodingKey {
+        case allCnt, successCnt, unsuccessCnt, coins
+        case successRate = "success_rate"
+    }
 }
 
