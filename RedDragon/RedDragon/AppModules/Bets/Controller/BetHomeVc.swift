@@ -48,6 +48,7 @@ class BetHomeVc: UIViewController {
         pointsLable.text = UserDefaults.standard.points ?? "00"
     }
     
+    
     func setupLocalisation(){
         lblTitle.text = "Bets".localized
     }
@@ -216,6 +217,7 @@ extension BetHomeVc : UITableViewDelegate, UITableViewDataSource {
                 vc.matches = self.liveMatchesList![indexPath.row].matches
                 vc.matchesList = self.liveMatchesList![indexPath.row]
             })
+            
             
         default:
             print("N/A")

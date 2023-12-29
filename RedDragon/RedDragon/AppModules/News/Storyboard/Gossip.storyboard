@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -225,7 +225,7 @@
                                                                 <color key="textColor" name="base"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ZfM-UF-cdX">
+                                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ZfM-UF-cdX">
                                                                 <rect key="frame" x="0.0" y="29" width="363" height="128"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
@@ -354,6 +354,7 @@
                         <outlet property="newsTableView" destination="ZfM-UF-cdX" id="OsI-jE-1OJ"/>
                         <outlet property="publisherCollectionView" destination="qSW-OC-bLu" id="5og-af-eDi"/>
                         <outlet property="publishersView" destination="Mig-cA-T8S" id="rMp-Ps-U1a"/>
+                        <outlet property="scrollView" destination="72h-Ju-tR9" id="O2F-9r-jUe"/>
                         <outlet property="topMarqueeLabel" destination="2Mm-Wd-eqy" id="Inc-nY-fEF"/>
                         <outlet property="topPublishersTitleLabel" destination="eyq-wk-7WR" id="zOF-A9-b7P"/>
                         <outlet property="tredingTitleLabel" destination="Eyh-2n-Z1a" id="bFP-hn-fs9"/>
@@ -960,9 +961,6 @@
     <designables>
         <designable name="2Mm-Wd-eqy"/>
         <designable name="IqG-ZJ-EUz"/>
-        <designable name="T9F-re-Ujp">
-            <size key="intrinsicContentSize" width="-1" height="30"/>
-        </designable>
     </designables>
     <resources>
         <image name="Shadow3" width="375" height="8"/>
