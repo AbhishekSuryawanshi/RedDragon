@@ -31,6 +31,7 @@ class PredictUpcomingTableViewCell: UITableViewCell {
     
     func configCell(predictionData: PredictionData?, row: Int, sport: String?){
         self.predictionData = predictionData
+        predictBtn.setTitle("Predict".localized, for: .normal)
         if predictionData?.matches?[row].matchState == "notstarted"{
             self.team1Lbl.text = predictionData?.matches?[row].homeTeam
             self.team2Lbl.text = predictionData?.matches?[row].awayTeam

@@ -44,9 +44,16 @@ class UpComingMatchesViewController: UIViewController {
         dateCollectionView.register(CellIdentifier.homeTitleCollectionVc)
         sportsCollectionView.register(CellIdentifier.leagueNamesCollectionCell)
         upcomingMatchesTableView.register(CellIdentifier.predictUpcomingTableViewCell)
-        sportsCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .left)
+        if selectedSports == "football"{
+            sportsCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .left)
+            selectedSports = sportsArr[0]
+        }
+        else{
+            sportsCollectionView.selectItem(at: IndexPath(row: 1, section: 0), animated: true, scrollPosition: .left)
+            selectedSports = sportsArr[1]
+        }
         dateCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .left)
-        selectedSports = sportsArr[0]
+        
         
        
     }
@@ -110,7 +117,7 @@ extension UpComingMatchesViewController: UICollectionViewDelegate, UICollectionV
         }
         if collectionView == sportsCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.leagueNamesCollectionCell, for: indexPath) as! LeagueCollectionViewCell
-            cell.leagueName.text = sportsArr[indexPath.row]
+            cell.leagueName.text = sportsArr[indexPath.row].localized
             return cell
         }
         else{
@@ -174,7 +181,7 @@ extension UpComingMatchesViewController: UITableViewDelegate, UITableViewDataSou
         let headerView = PredictUpcomingHeaderView()
         headerView.leagueImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
         headerView.leagueImgView.sd_setImage(with: URL(string: predictionMatchesModel?.response?.data?[section].logo ?? ""))
-        headerView.leagueNameLbl.text = predictionMatchesModel?.response?.data?[section].league
+        headerView.leagueNameLbl.text = predictionMatchesModel?.response?.data?[section].league?.localized
         return headerView
     }
     

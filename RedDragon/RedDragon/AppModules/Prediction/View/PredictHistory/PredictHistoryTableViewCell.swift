@@ -9,6 +9,7 @@ import UIKit
 
 class PredictHistoryTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var predictionRewardView: UIView!
     @IBOutlet weak var correctPredictionLbl: UILabel!
     @IBOutlet weak var wrongPredictionLbl: UILabel!
     @IBOutlet weak var rewardsLbl: UILabel!
@@ -19,7 +20,7 @@ class PredictHistoryTableViewCell: UITableViewCell {
     @IBOutlet weak var team1ImgView: UIImageView!
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var leagueNameLbl: UILabel!
-    @IBOutlet weak var leagueImgView: UIImageView!
+   // @IBOutlet weak var leagueImgView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -28,14 +28,16 @@ class PredictionResultViewController: UIViewController {
     }
     
     func configureTopView(){
+        self.predictionResultView.selectedMatchLbl.text = "Selected Match".localized
         self.predictionResultView.leagueImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
         self.predictionResultView.leagueImgView.sd_setImage(with: URL(string: data?.homeEvents.first?.leagueLogo ?? ""))
+        self.predictionResultView.leagueNameLbl.text = data?.leagueName
         self.predictionResultView.team1Lbl.text = data?.homeTeamName
         self.predictionResultView.team2Lbl.text = data?.awayTeamName
         self.predictionResultView.dateLbl.text = data?.matchDatetime
-        self.predictionResultView.team1Btn.setTitle(data?.homeTeamName, for: .normal)
-        self.predictionResultView.team2Btn.setTitle(data?.awayTeamName, for: .normal)
-        self.predictionResultView.drawBtn.setTitle("Draw", for: .normal)
+        self.predictionResultView.team1Btn.setTitle(data?.homeTeamName.localized, for: .normal)
+        self.predictionResultView.team2Btn.setTitle(data?.awayTeamName.localized, for: .normal)
+        self.predictionResultView.drawBtn.setTitle("Draw".localized, for: .normal)
         self.predictionDescriptionView.descriptionTxtView.text = self.analysisData?.comments
         
         if(analysisData?.loggedIn == true ){
@@ -77,6 +79,10 @@ class PredictionResultViewController: UIViewController {
             }
             
         }
+    }
+    
+    func configureDescriptionView(){
+        predictionDescriptionView.descriptionLbl.text = "Description".localized
     }
 
     @IBAction func backBtnAction(_ sender: Any) {

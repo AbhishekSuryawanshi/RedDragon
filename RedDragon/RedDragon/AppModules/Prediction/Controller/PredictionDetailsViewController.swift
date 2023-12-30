@@ -57,20 +57,25 @@ class PredictionDetailsViewController: UIViewController, UITextViewDelegate {
         self.navigationController?.popViewController(animated: true)
     }
     func configureTopView(){
+        predictionDetailTopView.selectedMatchLbl.text = "Selected Match".localized
+        predictionDetailTopView.homeLbl.text = "Home".localized
+        predictionDetailTopView.drawLbl.text = "Draw".localized
+        predictionDetailTopView.awayLbl.text = "Away".localized
+        
         if selectedUpComingMatch != nil{
-            predictionDetailTopView.leagueNameLbl.text = selectedUpComingMatch?.league
+            predictionDetailTopView.leagueNameLbl.text = selectedUpComingMatch?.league?.localized
             predictionDetailTopView.leagueImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
             predictionDetailTopView.leagueImgView.sd_setImage(with: URL(string: selectedUpComingMatch?.logo ?? ""))
-            predictionDetailTopView.team1Lbl.text = selectedUpComingMatch?.matches?[selectedUpComingPosition].homeTeam
-            predictionDetailTopView.team2Lbl.text = selectedUpComingMatch?.matches?[selectedUpComingPosition].awayTeam
+            predictionDetailTopView.team1Lbl.text = selectedUpComingMatch?.matches?[selectedUpComingPosition].homeTeam?.localized
+            predictionDetailTopView.team2Lbl.text = selectedUpComingMatch?.matches?[selectedUpComingPosition].awayTeam?.localized
             predictionDetailTopView.dateLbl.text = Date().formatDate(outputFormat: dateFormat(rawValue: "yyyy-MM-dd")!) + " | " + (selectedUpComingMatch?.matches?[selectedUpComingPosition].time)!
         }
         else{
-            predictionDetailTopView.leagueNameLbl.text = selectedMatch?.league
+            predictionDetailTopView.leagueNameLbl.text = selectedMatch?.league?.localized
             predictionDetailTopView.leagueImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
             predictionDetailTopView.leagueImgView.sd_setImage(with: URL(string: selectedMatch?.logo ?? ""))
-            predictionDetailTopView.team1Lbl.text = selectedMatch?.matches?[0].homeTeam
-            predictionDetailTopView.team2Lbl.text = selectedMatch?.matches?[0].awayTeam
+            predictionDetailTopView.team1Lbl.text = selectedMatch?.matches?[0].homeTeam?.localized
+            predictionDetailTopView.team2Lbl.text = selectedMatch?.matches?[0].awayTeam?.localized
             predictionDetailTopView.dateLbl.text = Date().formatDate(outputFormat: dateFormat(rawValue: "yyyy-MM-dd")!) + " | " + (selectedMatch?.matches?[0].time)!
         }
         
@@ -78,17 +83,20 @@ class PredictionDetailsViewController: UIViewController, UITextViewDelegate {
     
     func configurePlacePredictionView(){
         
-        predictionPlaceView.homeBtn.titleLabel?.text = "Home"
-        predictionPlaceView.drawBtn.titleLabel?.text = "Draw"
-        predictionPlaceView.awayBtn.titleLabel?.text = "Away"
+        predictionPlaceView.homeBtn.setTitle("Home".localized, for: .normal)
+        predictionPlaceView.drawBtn.setTitle("Draw".localized, for: .normal)
+        predictionPlaceView.awayBtn.setTitle("Away".localized, for: .normal)
         predictionPlaceView.homeBtn.addTarget(self, action: #selector(homeBtnAction), for: .touchUpInside)
         predictionPlaceView.drawBtn.addTarget(self, action: #selector(drawBtnAction), for: .touchUpInside)
         predictionPlaceView.awayBtn.addTarget(self, action: #selector(awayBtnAction), for: .touchUpInside)
+        predictionPlaceView.placePredictionLbl.text = "Place Prediction".localized
     }
     
     func configurePlacePredictionDescriptionView(){
         placePredictionDescriptionView.descriptionTxtView.delegate = self
         placePredictionDescriptionView.publishPredictionBtn.addTarget(self, action: #selector(publishPredictionBtnAction), for: .touchUpInside)
+        placePredictionDescriptionView.descriptionLbl.text = "Description".localized
+        placePredictionDescriptionView.publishPredictionBtn.setTitle("Publish Prediction", for: .normal)
     }
     
     func makeNetworkCall2(){
@@ -113,7 +121,7 @@ class PredictionDetailsViewController: UIViewController, UITextViewDelegate {
     @objc func publishPredictionBtnAction(){
         if isSelected != ""{
             if self.placePredictionDescriptionView.descriptionTxtView.text == ""{
-                customAlertView(title: "Alert", description: "Please write description", image: "")
+                customAlertView(title: "Alert".localized, description: "Please write description".localized, image: "")
             }
             else{
                 fetchMakePredictionViewModel()
@@ -121,7 +129,7 @@ class PredictionDetailsViewController: UIViewController, UITextViewDelegate {
             }
         }
         else{
-            customAlertView(title: "Alert", description: "Please Select a team", image: "")
+            customAlertView(title: "Alert".localized, description: "Please Select a team".localized, image: "")
         }
     }
     
@@ -176,11 +184,11 @@ class PredictionDetailsViewController: UIViewController, UITextViewDelegate {
         view3.backgroundColor = UIColor.init(hex: "BB1910")
         view3.translatesAutoresizingMaskIntoConstraints = false
         
-        predictionDetailTopView.homeLbl.text = "Home"
+        predictionDetailTopView.homeLbl.text = "Home".localized
         predictionDetailTopView.homePercentValueLbl.text = "\(winstats?.homeTeamPrcnt ?? 0)" + "%"
-        predictionDetailTopView.drawLbl.text = "Draw"
+        predictionDetailTopView.drawLbl.text = "Draw".localized
         predictionDetailTopView.drawPercentValueLbl.text = "\(winstats?.drawPrcnt ?? 0)" + "%"
-        predictionDetailTopView.awayLbl.text = "Away"
+        predictionDetailTopView.awayLbl.text = "Away".localized
         predictionDetailTopView.awayPercentValueLbl.text = "\(winstats?.awayTeamPrcnt ?? 0)" + "%"
               
         // Add subviews to stackView
@@ -234,7 +242,7 @@ extension PredictionDetailsViewController {
                     self.navigationController?.popViewController(animated: true)
                 }
                 
-                customAlertView(title: makePredictionsModel?.response?.data?.message ?? "", description: "Placed Prediction Successfully", image: "", actions: [okAction]
+                customAlertView(title: makePredictionsModel?.response?.data?.message ?? "", description: "Placed Prediction Successfully".localized, image: "", actions: [okAction]
                                 
                 )
                

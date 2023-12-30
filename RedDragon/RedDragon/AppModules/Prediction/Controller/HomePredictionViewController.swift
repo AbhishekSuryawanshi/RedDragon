@@ -90,12 +90,16 @@ class HomePredictionViewController: UIViewController {
         if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
             removeBlurView()
             let userID = UserDefaults.standard.user?.appDataIDs.predictMatchUserId
-            predictionListUserViewModel?.fetchPredictionUserListAsyncCall(appUserID: "\(userID ?? 0)" , sportType: selectedSports)  // To give logged in user id instead of 7
+            predictionListUserViewModel?.fetchPredictionUserListAsyncCall(appUserID: "\(userID ?? 0)" , sportType: selectedSports, date: "")  // To give logged in user id instead of 7
             predictionTopView.tagsCollectionView.register(CellIdentifier.predictTagCollectionViewCell)
             predictionTopView.tagsCollectionView.delegate = self
             predictionTopView.tagsCollectionView.dataSource = self
             predictionTopView.tagsCollectionView.reloadData()
-            
+            predictionTopView.predictionHistoryBtn.addTarget(self, action: #selector(placedPredictionSeeAll), for: .touchUpInside)
+            upcomingMatchesLbl.text = "Upcoming Matches".localized
+            placedPredictionsLbl.text = "Placed Predictions".localized
+            seeAllBtn.setTitle("See all".localized, for: .normal)
+            seeAllPlacedPredictionsBtn.setTitle("See all".localized, for: .normal)
         }
         else{
             addBlurView()
@@ -143,17 +147,16 @@ class HomePredictionViewController: UIViewController {
         if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
             predictionTopView.userImgView.setImage(imageStr: UserDefaults.standard.user?.profileImg ?? "")
             predictionTopView.usernameLbl.text = UserDefaults.standard.user?.name
-            
+            predictionTopView.walletPointsLbl.text = "Points: ".localized + " \(UserDefaults.standard.user?.wallet ?? 0)"
             
         }
         predictionMatchesViewModel?.fetchPredictionMatchesAsyncCall(lang: "en", date: Date().formatDate(outputFormat: dateFormat.yyyyMMdd), sportType: sport)
     }
     
-    func makeNetworkCall2(sport: String) {
-      //  if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
-            let userID = UserDefaults.standard.user?.appDataIDs.predictMatchUserId
-            predictionListUserViewModel?.fetchPredictionUserListAsyncCall(appUserID: "\(userID ?? 0)" , sportType: sport)  // To give logged in user id instead of 7
-       // }
+    func makeNetworkCall2(sport: String, date: String) {
+        let userID = UserDefaults.standard.user?.appDataIDs.predictMatchUserId
+        predictionListUserViewModel?.fetchPredictionUserListAsyncCall(appUserID: "\(userID ?? 0)" , sportType: sport, date: date)  // To give logged in user id instead of 7
+      
     }
     func showLoader(_ value: Bool) {
         value ? startLoader() : stopLoader()
@@ -193,8 +196,11 @@ class HomePredictionViewController: UIViewController {
     @objc func placedPredictionSeeAll(){
         navigateToViewController(PredictionHistoryViewController.self, storyboardName: StoryboardName.prediction){ vc in
             vc.predictionListUserModel = self.predictionListUserModel
+            vc.selectedSports = self.selectedSports
         }
     }
+    
+    
 
 }
 
@@ -219,18 +225,18 @@ extension HomePredictionViewController {
     
     func renderResponseData(data: PredictionMatchesModel) {
         fetchPredictionUserListViewModel()
-        makeNetworkCall2(sport: selectedSports)
+        makeNetworkCall2(sport: selectedSports, date: "")
         predictionsModel = data
         if let data = data.response?.data{
             UIView.animate(withDuration: 1.0) { [self] in
-                upcomingLeagueNameLbl1.text = data[0].league
+                upcomingLeagueNameLbl1.text = data[0].league?.localized
                 upcomingLeagueImgView1.sd_imageIndicator = SDWebImageActivityIndicator.white
                 upcomingLeagueImgView1.sd_setImage(with: URL(string: data[0].logo ?? ""))
-                upcomingTeam1Lbl1.text = data[0].matches?[0].homeTeam
-                upcomingTeam2Lbl1.text = data[0].matches?[0].awayTeam
+                upcomingTeam1Lbl1.text = data[0].matches?[0].homeTeam?.localized
+                upcomingTeam2Lbl1.text = data[0].matches?[0].awayTeam?.localized
                 upcomingdateLbl1.text = Date().formatDate(outputFormat: dateFormat(rawValue: "yyyy-MM-dd")!) + " | " + (data[0].matches?[0].time ?? "")
                 upcomingPredictBtn1.tag = 0
-                
+                upcomingPredictBtn1.setTitle("Predict".localized, for: .normal)
                 upcomingPredictBtn1.addTarget(self, action: #selector(predictBtn1), for: .touchUpInside)
                 seeAllBtn.addTarget(self, action: #selector(upcomingSeeAll), for: .touchUpInside)
                 
@@ -242,6 +248,7 @@ extension HomePredictionViewController {
                     upcomingTeam2Lbl2.text = data[1].matches?[0].awayTeam
                     upcomingdateLbl2.text = Date().formatDate(outputFormat: dateFormat(rawValue: "yyyy-MM-dd")!) + " | " + (data[1].matches?[0].time ?? "")
                     upcomingPredictBtn2.tag = 1
+                    upcomingPredictBtn2.setTitle("Predict".localized, for: .normal)
                     upcomingPredictBtn2.addTarget(self, action: #selector(predictBtn2), for: .touchUpInside)
                 }
                 if data[2] != nil{
@@ -252,6 +259,7 @@ extension HomePredictionViewController {
                     upcomingteam2Lbl3.text = data[2].matches?[0].awayTeam
                     upcomingdateLbl3.text = Date().formatDate(outputFormat: dateFormat(rawValue: "yyyy-MM-dd")!) + " | " + (data[2].matches?[0].time ?? "")
                     upcomingPredictBtn3.tag = 2
+                    upcomingPredictBtn3.setTitle("Predict".localized, for: .normal)
                     upcomingPredictBtn3.addTarget(self, action: #selector(predictBtn3), for: .touchUpInside)
                 }
                 
@@ -328,21 +336,24 @@ extension HomePredictionViewController {
                 
                 if data.count > 0{
                     seeAllPlacedPredictionsBtn.addTarget(self, action: #selector(placedPredictionSeeAll), for: .touchUpInside)
+                    predictionTopView.predictionHistoryBtn.setTitle("Check Prediction History".localized, for: .normal)
                     predictionTopView.totalCountLbl.text = "\(data[0].user?.predStats?.allCnt ?? 0)"
                     predictionTopView.wonCountLbl.text = "\(data[0].user?.predStats?.successCnt ?? 0)"
                     predictionTopView.lostCountLbl.text = "\(data[0].user?.predStats?.unsuccessCnt ?? 0)"
-                    
+                    predictionTopView.wonLbl.text = "Won".localized
+                    predictionTopView.lostLbl.text = "Lost".localized
+                    predictionTopView.totalLbl.text = "Total".localized
                     predictionsLeagueNameLbl1.text = data[0].matchDetail.leagueName
                     predictionsTeam1ImgView1.sd_imageIndicator = SDWebImageActivityIndicator.white
                     predictionsTeam1ImgView1.sd_setImage(with: URL(string: data[0].matchDetail.homeTeamImage ?? ""))
                     predictionsTeam2ImgView1.sd_imageIndicator = SDWebImageActivityIndicator.white
                     predictionsTeam2ImgView1.sd_setImage(with: URL(string: data[0].matchDetail.awayTeamImage ?? ""))
-                    predictionsTeam1Lbl1.text = data[0].matchDetail.homeTeamName
-                    predictionsTeam2Lbl1.text = data[0].matchDetail.awayTeamName
+                    predictionsTeam1Lbl1.text = data[0].matchDetail.homeTeamName?.localized
+                    predictionsTeam2Lbl1.text = data[0].matchDetail.awayTeamName?.localized
                     predictionsdateLbl1.text =  data[0].matchDetail.matchDatetime
                     predictionsTimeLbl1.text = data[0].createdAt
-                    predictionsTeamWinLbl1.text = "Prediction: " + getPredictedTeam(predictiveTeam: data[0].predictedTeam)
-                    seeAllBtn.addTarget(self, action: #selector(placedPredictionSeeAll), for: .touchUpInside)
+                    predictionsTeamWinLbl1.text = "Prediction: ".localized + getPredictedTeam(predictiveTeam: data[0].predictedTeam)
+                   // seeAllBtn.addTarget(self, action: #selector(placedPredictionSeeAll), for: .touchUpInside)
                 }
                 if data.count > 1{
                     if data[1] != nil{
@@ -351,11 +362,11 @@ extension HomePredictionViewController {
                         predictionsTeam1ImgView2.sd_setImage(with: URL(string: data[1].matchDetail.homeTeamImage ?? ""))
                         predictionsTeam2ImgView2.sd_imageIndicator = SDWebImageActivityIndicator.white
                         predictionsTeam2ImgView2.sd_setImage(with: URL(string: data[1].matchDetail.awayTeamImage ?? ""))
-                        predictionTeam1Lbl2.text = data[1].matchDetail.homeTeamName
-                        predictionsTeam2Lbl2.text = data[1].matchDetail.awayTeamName
+                        predictionTeam1Lbl2.text = data[1].matchDetail.homeTeamName?.localized
+                        predictionsTeam2Lbl2.text = data[1].matchDetail.awayTeamName?.localized
                         predictionsdateLbl2.text =  data[1].matchDetail.matchDatetime
                         predictionsTimeLbl2.text = data[1].createdAt
-                        predictionsTeamWinLbl2.text = "Prediction: " + getPredictedTeam(predictiveTeam: data[1].predictedTeam)
+                        predictionsTeamWinLbl2.text = "Prediction: ".localized + getPredictedTeam(predictiveTeam: data[1].predictedTeam)
                     }
                     
                     
@@ -452,14 +463,14 @@ extension HomePredictionViewController: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == predictionTopView.tagsCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.predictTagCollectionViewCell, for: indexPath) as! PredictionTagCollectionViewCell
-            cell.tagsLbl.text = UserDefaults.standard.user?.tags[indexPath.row]
+            cell.tagsLbl.text = UserDefaults.standard.user?.tags[indexPath.row].localized
             cell.tagsLbl.textColor = .random
             cell.tagsLbl.borderColor = cell.tagsLbl.textColor
             return cell
         }
         else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.leagueNamesCollectionCell, for: indexPath) as! LeagueCollectionViewCell
-            cell.leagueName.text = sportsArr[indexPath.row]
+            cell.leagueName.text = sportsArr[indexPath.row].localized
             return cell
         }
     }
@@ -503,6 +514,7 @@ extension HomePredictionViewController: LoginVCDelegate {
             predictionTopView.tagsCollectionView.delegate = self
             predictionTopView.tagsCollectionView.dataSource = self
             predictionTopView.tagsCollectionView.reloadData()
+            predictionTopView.predictionHistoryBtn.addTarget(self, action: #selector(placedPredictionSeeAll), for: .touchUpInside)
             
         }
       

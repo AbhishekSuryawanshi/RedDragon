@@ -54,7 +54,7 @@ class AnalysisViewController: UIViewController {
     func labelWithImage(lbl:UILabel, text: String){
         // Create Attachment
         let imageAttachment = NSTextAttachment()
-        imageAttachment.image = UIImage(named:"fire")
+        imageAttachment.image = UIImage(named:"fire1")
         // Set bound to reposition
         let imageOffsetY: CGFloat = -3.0
         imageAttachment.bounds = CGRect(x: 0, y: imageOffsetY, width: imageAttachment.image!.size.width, height: imageAttachment.image!.size.height)
@@ -85,7 +85,7 @@ extension AnalysisViewController: UITableViewDataSource, UITableViewDelegate{
         cell.nameLbl.text = analysisModel?.response?.data?[indexPath.row].user?.name
         cell.descriptionTxtView.text = analysisModel?.response?.data?[indexPath.row].comments
         cell.winPercentageLbl.text = String(format: "%.1f",analysisModel?.response?.data?[indexPath.row].user?.predStats?.successRate ?? 0.0 ) + "%"
-        cell.betsLbl.text = " \(analysisModel?.response?.data?[indexPath.row].user?.predStats?.allCnt ?? 0)" + " Predictions  "
+        cell.betsLbl.text = " \(analysisModel?.response?.data?[indexPath.row].user?.predStats?.allCnt ?? 0)" + " Predictions  ".localized
        labelWithImage(lbl: cell.fireCountLbl, text: " \(analysisModel?.response?.data?[indexPath.row].user?.predStats?.successCnt ?? 0)" + " ")
        // cell.fireCountLbl.text = " \(analysisModel?.response?.data?[indexPath.row].user?.predStats?.successCnt ?? 0)" + " "
         cell.selectionStyle = .none
