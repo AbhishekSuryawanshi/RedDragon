@@ -19,14 +19,7 @@ class WalletVC: UIViewController {
     
     @IBOutlet weak var packageLabel: UILabel!
     @IBOutlet weak var saveUptoLabel: UILabel!
-    @IBOutlet weak var firstPointsLabel: UILabel!
-    @IBOutlet weak var firstPriceLabel: UILabel!
-    @IBOutlet weak var secondPonitsLabel: UILabel!
-    @IBOutlet weak var secondPriceLabel: UILabel!
-    @IBOutlet weak var thirdPointsLabel: UILabel!
-    @IBOutlet weak var thirdPriceLabel: UILabel!
-    @IBOutlet weak var fourthPointsLabel: UILabel!
-    @IBOutlet weak var fourthPriceLabel: UILabel!
+    @IBOutlet weak var pointsCollectionView: UICollectionView!
     
     @IBOutlet weak var bannerCollectionView: UICollectionView!
     
@@ -62,6 +55,7 @@ class WalletVC: UIViewController {
     
     func nibInitialization() {
         bannerCollectionView.register(CellIdentifier.bannerCell)
+        pointsCollectionView.register(CellIdentifier.pointsCollectionViewCell)
     }
     
     private func showLoader(_ value: Bool) {
@@ -82,6 +76,13 @@ class WalletVC: UIViewController {
         }
         banners_count = (banners_count + 1) % dataCount
     }
+    
+    // MARK: - Button Actions
+    @IBAction func packageButtonTapped(_ sender: UIButton) {
+        
+    }
+    
+    
 }
 // MARK: - API Services
 extension WalletVC {
@@ -165,16 +166,28 @@ extension WalletVC: UITableViewDelegate {
 // MARK: - CollectionView Delegates
 extension WalletVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return bannerVM?.responseData?.data.top.count ?? 0
+        if collectionView == bannerCollectionView {
+            return bannerVM?.responseData?.data.top.count ?? 0
+        } else {
+          return  WalletVM.shared.betsArray.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let banner = bannerVM?.responseData?.data.top else {
-            return UICollectionViewCell()
+        if collectionView == bannerCollectionView {
+            guard let banner = bannerVM?.responseData?.data.top else {
+                return UICollectionViewCell()
+            }
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.bannerCell, for: indexPath) as! BannerCollectionViewCell
+            cell.bannerImage.setImage(imageStr:URLConstants.bannerBaseURL + banner[indexPath.item].coverPath, placeholder: .empty)
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.pointsCollectionViewCell, for: indexPath) as! PointsCollectionViewCell
+            cell.titleLabel.text = "\(WalletVM.shared.betsArray[indexPath.row]) BPs"
+            cell.subTitleLabel.text = "for".localized + " \(WalletVM.shared.heatsArray[indexPath.row])🔥"
+            return cell
         }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.bannerCell, for: indexPath) as! BannerCollectionViewCell
-        cell.bannerImage.setImage(imageStr:URLConstants.bannerBaseURL + banner[indexPath.item].coverPath, placeholder: .empty)
-        return cell
+       
     }
 }
 
@@ -186,12 +199,18 @@ extension WalletVC: UICollectionViewDelegate {
                 guard let url = URL(string: bannerMesssage) else { return }
                 UIApplication.shared.open(url)
             }
+        } else {
+            presentOverViewController(GetPointsVC.self, storyboardName: StoryboardName.wallet)
         }
     }
 }
 
 extension WalletVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: screenWidth, height: 220)
+        if collectionView == bannerCollectionView {
+            return CGSize(width: screenWidth, height: 220)
+        } else {
+            return CGSize(width: 90, height: 75)
+        }
     }
 }

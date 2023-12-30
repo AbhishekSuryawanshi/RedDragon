@@ -480,7 +480,7 @@ extension GossipVC: UITableViewDataSource {
         print(indexPath.row)
         return cell
     }
-
+    
 }
 
 extension GossipVC: UITableViewDelegate {
@@ -491,7 +491,6 @@ extension GossipVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         gotoDetailPage(model: gossipsArray[indexPath.row])
     }
-    
 }
 
 // MARK: - ScrollView Delegates
@@ -507,25 +506,24 @@ extension GossipVC {
         }
     }
     
-    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView == self.scrollView{
             print("Parent Scroll")
             print(scrollView.contentOffset.y)
             print("Frame for tableView::\(newsTableView.frame.minY),\(newsTableView.frame.maxY)")
             print("tableView content y::\(newsTableView.contentOffset.y)")
-            if scrollView.contentOffset.y >= newsTableView.frame.maxY{
+            if scrollView.contentOffset.y >= newsTableView.frame.maxY {
                 setupPagination()
             }
         }
-//        if scrollView == self.newsTableView && sportType != .eSports && viewAllButton.isHidden {
-//            if(scrollView.contentOffset.y>0 && scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.bounds.size.height)) {
-//                if(isPagination == false){
-//                    isPagination = true
-//                    pageNum = pageNum + 1
-//                    self.getNewsList()
-//                }
-//            }
-//        }
+        //        if scrollView == self.newsTableView && sportType != .eSports && viewAllButton.isHidden {
+        //            if(scrollView.contentOffset.y>0 && scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.bounds.size.height)) {
+        //                if(isPagination == false){
+        //                    isPagination = true
+        //                    pageNum = pageNum + 1
+        //                    self.getNewsList()
+        //                }
+        //            }
+        //        }
     }
 }

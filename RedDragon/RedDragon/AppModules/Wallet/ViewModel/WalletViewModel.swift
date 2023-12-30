@@ -12,6 +12,8 @@ class WalletVM: APIServiceManager<SubscriptionResponse> {
     static let shared = WalletVM()
     
     var subscriptionArray: [Subscription] = []
+    var betsArray: [Int] = [10, 40, 75, 200]
+    var heatsArray: [Int] = [10, 20, 50, 100]
     
     ///function to fetch subscriptions in wallet module
     func subscriptionListAsyncCall() {
