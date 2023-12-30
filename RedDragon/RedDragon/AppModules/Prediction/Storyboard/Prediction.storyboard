@@ -1186,21 +1186,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bLG-j7-qw4">
-                                <rect key="frame" x="0.0" y="100" width="393" height="50"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <rect key="frame" x="0.0" y="100" width="393" height="30"/>
+                                <color key="backgroundColor" name="wheat8"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="fgs-nr-Itz"/>
+                                    <constraint firstAttribute="height" constant="30" id="fgs-nr-Itz"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oJW-Yv-Giw">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oJW-Yv-Giw">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Qrk-Wb-ifr" id="7MX-kY-fTG"/>
+                                    <outlet property="delegate" destination="Qrk-Wb-ifr" id="UfG-6h-1qU"/>
+                                </connections>
                             </collectionView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xdT-iu-0IZ">
-                                <rect key="frame" x="0.0" y="150" width="393" height="60"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xdT-iu-0IZ">
+                                <rect key="frame" x="0.0" y="130" width="393" height="60"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="l6o-Qr-d4Y"/>
@@ -1212,9 +1216,13 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Qrk-Wb-ifr" id="bD4-VN-xh0"/>
+                                    <outlet property="delegate" destination="Qrk-Wb-ifr" id="EgF-44-Dhu"/>
+                                </connections>
                             </collectionView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zTj-3H-Mgi">
-                                <rect key="frame" x="0.0" y="210" width="393" height="608"/>
+                                <rect key="frame" x="0.0" y="190" width="393" height="628"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Qrk-Wb-ifr" id="htN-PI-lv4"/>
@@ -1273,7 +1281,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="datesCollectionView" destination="xdT-iu-0IZ" id="NXF-rh-rNO"/>
                         <outlet property="predictionMatchesTableView" destination="zTj-3H-Mgi" id="MFc-SU-4kY"/>
+                        <outlet property="sportsCollectionView" destination="bLG-j7-qw4" id="vzd-a1-juk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hhq-o4-77f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

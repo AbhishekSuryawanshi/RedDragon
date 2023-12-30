@@ -10,6 +10,8 @@ import UIKit
 class TopView: UIView {
 
     @IBOutlet var contentView: UIView!
+    @IBOutlet weak var walletPointsLbl: UILabel!
+    @IBOutlet weak var predictionHistoryBtn: UIButton!
     @IBOutlet weak var totalCountLbl: UILabel!
     @IBOutlet weak var totalLbl: UILabel!
     @IBOutlet weak var lostCountLbl: UILabel!

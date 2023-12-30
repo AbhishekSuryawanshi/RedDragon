@@ -64,13 +64,15 @@ class PredictionDetailViewModel: APIServiceManager<PredictionMatchDetailModel> {
 class PredictionsListUserViewModel: APIServiceManager<PredictionListModel> {
     
     ///fetch prediction matches data
-    func fetchPredictionUserListAsyncCall(appUserID: String, sportType: String) {
+    func fetchPredictionUserListAsyncCall(appUserID: String, sportType: String, date: String?) {
         let url     = URLConstants.baseURL + URLConstants.predictionList
         let method  = RequestType.get
         // Add the query parameters to the URL components
                 let queryItems = [
                     URLQueryItem(name: "app_user_id", value: appUserID),
-                    URLQueryItem(name: "sportType", value: sportType)
+                    URLQueryItem(name: "sportType", value: sportType),
+                    URLQueryItem(name: "dated", value: date)
+                    
                 ]
                 
                 var urlComponents = URLComponents(string: url)
