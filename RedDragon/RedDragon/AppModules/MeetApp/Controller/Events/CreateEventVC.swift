@@ -21,6 +21,18 @@ class CreateEventVC: UIViewController {
     @IBOutlet weak var priceSegmentControl: UISegmentedControl!
     @IBOutlet weak var priceTextField: UITextField!
     @IBOutlet weak var priceView: UIView!
+    @IBOutlet weak var sportsTitleLabel: UILabel!
+    @IBOutlet weak var eventTitleLabel: UILabel!
+    @IBOutlet weak var eventDescriptionTitleLabel: UILabel!
+    @IBOutlet weak var addImageTitleLabel: UILabel!
+    @IBOutlet weak var startEventTitleLabel: UILabel!
+    @IBOutlet weak var locationTitleLabel: UILabel!
+    @IBOutlet weak var eventPriceTitleLabel: UILabel!
+    @IBOutlet weak var scheduleEventButton: UIButton!
+    @IBOutlet weak var eventCreatedTitleLabel: UILabel!
+    @IBOutlet weak var eventMessageSubtitleLabel: UILabel!
+    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var controllerHeaderTitleLabel: UILabel!
     
     var dateFormatter = DateFormatter()
     var geocoder = CLGeocoder()
@@ -39,9 +51,27 @@ class CreateEventVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         performInitialSetup()
+        performLanguageLocalisation()
     }
     
     // MARK: - Methods
+    func performLanguageLocalisation() {
+        controllerHeaderTitleLabel.text = "Schedule a Match".localized
+        sportsTitleLabel.text = "Select sports type *".localized
+        eventTitleLabel.text = "Event Title *".localized
+        eventDescriptionTitleLabel.text = "Event Description *".localized
+        addImageTitleLabel.text = "Add Image *".localized
+        startEventTitleLabel.text = "Start Event *".localized
+        locationTitleLabel.text = "Location *".localized
+        eventPriceTitleLabel.text = "Event Price *".localized
+        eventCreatedTitleLabel.text = "Event Created!".localized
+        eventMessageSubtitleLabel.text = "The event has been created successfully.".localized
+        scheduleEventButton.setTitle("Schedule Event".localized, for: .normal)
+        doneButton.setTitle("Done".localized, for: .normal)
+        priceSegmentControl.setTitle("Free".localized, forSegmentAt: 0)
+        priceSegmentControl.setTitle("Paid".localized, forSegmentAt: 1)
+    }
+    
     func performInitialSetup() {
         self.startEventDateTextField.addInputViewDatePicker(target: self, selector: #selector(startDateDoneAction))
         self.startEventTimeTextField.addInputViewDatePicker(target: self, selector: #selector(startTimeDoneAction), datePickerMode: .time)
@@ -77,25 +107,25 @@ class CreateEventVC: UIViewController {
     
     func validate() -> Bool {
         if eventTitleTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            self.view.makeToast(ErrorMessage.eventTitleEmptyAlert)
+            self.view.makeToast(ErrorMessage.eventTitleEmptyAlert.localized)
             return false
         } else if eventDescTextView.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            self.view.makeToast(ErrorMessage.eventDescEmptyAlert)
+            self.view.makeToast(ErrorMessage.eventDescEmptyAlert.localized)
             return false
         } else if selectedImage?.0 == nil {
-            self.view.makeToast(ErrorMessage.eventImageEmptyAlert)
+            self.view.makeToast(ErrorMessage.eventImageEmptyAlert.localized)
             return false
         } else if startEventDateTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            self.view.makeToast(ErrorMessage.eventStartDateEmptyAlert)
+            self.view.makeToast(ErrorMessage.eventStartDateEmptyAlert.localized)
             return false
         } else if startEventTimeTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            self.view.makeToast(ErrorMessage.eventStartTimeEmptyAlert)
+            self.view.makeToast(ErrorMessage.eventStartTimeEmptyAlert.localized)
             return false
         } else if locationTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            self.view.makeToast(ErrorMessage.eventLocationEmptyAlert)
+            self.view.makeToast(ErrorMessage.eventLocationEmptyAlert.localized)
             return false
         }else if (isPaid == 1 && price == 0.0) {
-            self.view.makeToast(ErrorMessage.eventPriceEmptyAlert)
+            self.view.makeToast(ErrorMessage.eventPriceEmptyAlert.localized)
             return false
         }
         return true

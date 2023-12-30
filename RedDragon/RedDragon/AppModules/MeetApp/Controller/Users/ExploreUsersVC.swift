@@ -14,6 +14,8 @@ class ExploreUsersVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var matchGifImageView: GIFImageView!
     @IBOutlet weak var matchUserNameLabel: UILabel!
+    @IBOutlet weak var matchFoundTitleLabel: UILabel!
+    @IBOutlet weak var matchMessageSubtitleLabel: UILabel!
     @IBOutlet weak var gifContainerView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
     var users = [MeetUser]()
@@ -24,12 +26,18 @@ class ExploreUsersVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         performInitialSetup()
+        performLanguageLocalisation()
     }
     
     // MARK: - Methods
     func performInitialSetup() {
         gifContainerView.isHidden = true
         nibInitialization()
+    }
+    
+    func performLanguageLocalisation() {
+        matchFoundTitleLabel.text = "Match Found!".localized
+        matchMessageSubtitleLabel.text = "Discover Common Interests with Your New Match.".localized
     }
     
     func nibInitialization() {
@@ -79,6 +87,7 @@ extension ExploreUsersVC {
         cell.dislikeButton.tag = indexPath.row
         cell.likeButton.addTarget(self, action: #selector(likeButtonTapped(sender:)), for: .touchUpInside)
         cell.dislikeButton.addTarget(self, action: #selector(dislikeButtonTapped(sender:)), for: .touchUpInside)
+        cell.detailButton.setTitle("See Details".localized, for: .normal)
         return cell
     }
     
@@ -115,7 +124,7 @@ extension ExploreUsersVC {
             let name = filteredUserArray[likedUserIndex].name ?? ""
             self.matchUserNameLabel.text = name
         }
-        self.view.makeToast(SuccessMessage.successfullyLikedUser)
+        self.view.makeToast(SuccessMessage.successfullyLikedUser.localized)
         self.filteredUserArray.remove(at: likedUserIndex)
         self.tableView.deleteRows(at: [IndexPath(row: likedUserIndex, section: 0)], with: .fade)
         self.tableView.reloadData()

@@ -21,12 +21,18 @@ class MeetExploreVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         performInitialSetup()
+        performLanguageLocalisation()
     }
     
     // MARK: - Methods
     func performInitialSetup() {
         makeNetworkCall()
         fetchViewModelResponse()
+    }
+    
+    func performLanguageLocalisation() {
+        segmentControl.setTitle("Explore".localized, forSegmentAt: 0)
+        segmentControl.setTitle("My Matches".localized, forSegmentAt: 1)
     }
     
     func showLoader(_ value: Bool) {

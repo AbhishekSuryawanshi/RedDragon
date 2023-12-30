@@ -20,16 +20,28 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateEventVC" customModule="RedDragon" customModuleProvider="target">
             <connections>
+                <outlet property="addImageTitleLabel" destination="4ja-Rr-3OR" id="KG7-qd-Uw0"/>
                 <outlet property="collectionView" destination="ES7-GL-NOe" id="MAC-n2-Gx2"/>
+                <outlet property="controllerHeaderTitleLabel" destination="AKg-9t-Kpt" id="N69-BY-yYL"/>
+                <outlet property="doneButton" destination="L65-DZ-D7d" id="fpg-cH-DR8"/>
+                <outlet property="eventCreatedTitleLabel" destination="n5P-Nb-0zD" id="TvY-2T-mFi"/>
                 <outlet property="eventDescTextView" destination="0OU-U3-gQI" id="y6X-rJ-0i2"/>
+                <outlet property="eventDescriptionTitleLabel" destination="gfy-wO-Ori" id="z3H-ic-QG7"/>
                 <outlet property="eventImgView" destination="0R7-re-Sdm" id="a2O-ZQ-V6A"/>
+                <outlet property="eventMessageSubtitleLabel" destination="qCh-M0-eCh" id="yhc-gt-HE1"/>
+                <outlet property="eventPriceTitleLabel" destination="dJM-Tc-djr" id="1Pz-hS-JE7"/>
+                <outlet property="eventTitleLabel" destination="yIp-ZK-2dJ" id="f2a-2M-0qT"/>
                 <outlet property="eventTitleTextField" destination="06E-ug-tm8" id="j1v-Ir-Owr"/>
                 <outlet property="locationTextField" destination="ULi-U9-c7c" id="z9J-Bw-xxb"/>
+                <outlet property="locationTitleLabel" destination="3cB-36-nsE" id="10a-bI-1dP"/>
                 <outlet property="priceSegmentControl" destination="rLZ-jd-hMJ" id="36C-b3-8ej"/>
                 <outlet property="priceTextField" destination="gdt-em-Erj" id="zCb-GL-K1b"/>
                 <outlet property="priceView" destination="mW8-Yl-BAW" id="0Lt-Sk-xnl"/>
+                <outlet property="scheduleEventButton" destination="uFC-cl-qkN" id="b86-fp-Asc"/>
+                <outlet property="sportsTitleLabel" destination="TH1-C7-mGm" id="8xB-Lp-TZf"/>
                 <outlet property="startEventDateTextField" destination="1SG-Kv-YHB" id="jTW-tw-aMJ"/>
                 <outlet property="startEventTimeTextField" destination="DdV-Bx-lBt" id="IEE-fl-vjl"/>
+                <outlet property="startEventTitleLabel" destination="kuD-wM-WDL" id="zgN-zk-hgT"/>
                 <outlet property="successView" destination="cnY-lO-cvG" id="YHm-0s-Fe0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -86,7 +98,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="55w-uf-ctU" userLabel="Sports View">
                                                     <rect key="frame" x="0.0" y="0.0" width="373" height="92.333333333333329"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select sport type *" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TH1-C7-mGm">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select sports type *" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TH1-C7-mGm">
                                                             <rect key="frame" x="10" y="9.9999999999999982" width="353" height="22.333333333333329"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                                             <color key="textColor" name="black1"/>
@@ -568,7 +580,7 @@
                                     <color key="textColor" name="headingColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your event has been created successfully." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCh-M0-eCh">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The event has been created successfully." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCh-M0-eCh">
                                     <rect key="frame" x="15" y="199" width="270" height="37.333333333333343"/>
                                     <fontDescription key="fontDescription" name="Urbanist-Medium" family="Urbanist" pointSize="16"/>
                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

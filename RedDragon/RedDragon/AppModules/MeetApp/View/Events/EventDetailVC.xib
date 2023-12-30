@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EventDetailVC" customModule="RedDragon" customModuleProvider="target">
             <connections>
+                <outlet property="descriptionTitleLbl" destination="JU6-Pj-cvt" id="aJW-cI-6mZ"/>
                 <outlet property="eventCreateByUserLbl" destination="ZDU-28-GkU" id="aG0-TG-mqG"/>
                 <outlet property="eventCreatorImgView" destination="gGK-mz-xuW" id="1BC-yR-ABJ"/>
                 <outlet property="eventDateLbl" destination="gXQ-qD-yhy" id="y5f-dB-OBC"/>
@@ -24,6 +25,7 @@
                 <outlet property="eventSportsLbl" destination="KFm-ls-ILh" id="tVg-he-DdQ"/>
                 <outlet property="eventTimeLbl" destination="CUu-mX-rKs" id="MFt-aP-aCO"/>
                 <outlet property="joinEventBtn" destination="sV9-tS-LVu" id="JcL-a6-mcc"/>
+                <outlet property="sportsTitleLbl" destination="0IM-JI-2qj" id="fVG-ef-TwU"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -258,7 +260,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sV9-tS-LVu">
-                                            <rect key="frame" x="76.333333333333314" y="531" width="240" height="44"/>
+                                            <rect key="frame" x="76.333333333333314" y="601" width="240" height="44"/>
                                             <color key="backgroundColor" name="base"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="240" id="66g-K2-WZP"/>
@@ -315,7 +317,7 @@
                                         <constraint firstItem="cbw-bq-FwB" firstAttribute="trailing" secondItem="JU6-Pj-cvt" secondAttribute="trailing" id="xE2-Ih-vhH"/>
                                         <constraint firstItem="0IM-JI-2qj" firstAttribute="top" secondItem="cbw-bq-FwB" secondAttribute="bottom" constant="15" id="xMM-MA-VVq"/>
                                         <constraint firstItem="fV0-Z9-cxG" firstAttribute="top" secondItem="UpU-Qd-aDl" secondAttribute="bottom" constant="15" id="xlI-WJ-uD1"/>
-                                        <constraint firstAttribute="bottom" secondItem="sV9-tS-LVu" secondAttribute="bottom" constant="150" id="yMH-V2-Fim"/>
+                                        <constraint firstAttribute="bottom" secondItem="sV9-tS-LVu" secondAttribute="bottom" constant="80" id="yMH-V2-Fim"/>
                                         <constraint firstItem="KFm-ls-ILh" firstAttribute="trailing" secondItem="aS3-aP-ik6" secondAttribute="trailing" id="z7V-TW-U6g"/>
                                     </constraints>
                                 </view>
@@ -374,4 +376,3 @@
         </systemColor>
     </resources>
 </document>
-

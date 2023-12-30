@@ -12,7 +12,7 @@ enum sportCategorySegment: String, CaseIterable {
     case hottest = "Hottest"
     case football = "Football"
     case basketball = "Basketball"
-    case tennis = "Tennis"
+  //  case tennis = "Tennis"
 }
 
 class MatchesDashboardVC: UIViewController {
@@ -24,7 +24,7 @@ class MatchesDashboardVC: UIViewController {
     
     var cancellable = Set<AnyCancellable>()
     var selectedSegment: sportCategorySegment = .hottest
-    var sectionTitle = ["Live Matches", "Upcoming Matches", "Past Matches"]
+    var sectionTitle = ["Live Matches".localized, "Upcoming Matches".localized, "Past Matches".localized]
     var leagueArray: [HotLeagues] = []
     var liveMatchArray: [GlobalMatchList] = []
     var finishedMatchArray: [GlobalMatchList] = []
@@ -46,9 +46,15 @@ class MatchesDashboardVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         performInitialSetup()
+        performLanguageLocalisation()
     }
     
     // MARK: - Methods
+    func performLanguageLocalisation() {
+        segmentControl.setTitle("Football".localized, forSegmentAt: 0)
+        segmentControl.setTitle("Basketball".localized, forSegmentAt: 1)
+    }
+    
     func performInitialSetup() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         nibInitialization()
@@ -284,12 +290,12 @@ extension MatchesDashboardVC: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == headerCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.headerTopCollectionViewCell, for: indexPath) as! HeaderTopCollectionViewCell
-            cell.configureUnderLineCell(title: sportCategorySegment.allCases[indexPath.item].rawValue, selected: selectedSegment == sportCategorySegment.allCases[indexPath.item])
+            cell.configureUnderLineCell(title: sportCategorySegment.allCases[indexPath.item].rawValue.localized, selected: selectedSegment == sportCategorySegment.allCases[indexPath.item])
             return cell
         }else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.leagueNamesCollectionCell, for: indexPath) as! LeagueCollectionViewCell
             if indexPath.item == 0 {
-                cell.leagueName.text = "All"
+                cell.leagueName.text = "All".localized
             }else {
                 cell.leagueName.text = leagueArray[indexPath.item-1].nameEnShort
             }
@@ -379,7 +385,7 @@ extension MatchesDashboardVC: UITableViewDataSource, UITableViewDelegate {
         if isLeagueMatches ?? false {
             return nil
         }else {
-            return sectionTitle[section]
+            return sectionTitle[section].localized
         }
     }
     
@@ -464,15 +470,15 @@ extension MatchesDashboardVC {
         cell.awayNameLabel.text = matches.awayInfo?.name ?? ""
         
         if isFootball ?? true {
-            cell.leagueNameLabel.text = "\(matches.leagueInfo?.name ?? "") | Round \(matches.round?.round ?? 0)"
-            cell.cornerLabel.text = "Corners: \(matches.homeInfo?.cornerScore ?? 0)-\(matches.awayInfo?.cornerScore ?? 0)"
-            cell.scoreLabel.text = "Score: \(matches.homeInfo?.homeScore ?? 0)-\(matches.awayInfo?.awayScore ?? 0)"
+            cell.leagueNameLabel.text = "\(matches.leagueInfo?.name ?? "") | "  + "Round".localized + " \(matches.round?.round ?? 0)"
+            cell.cornerLabel.text = "Corners".localized + ":" + " \(matches.homeInfo?.cornerScore ?? 0)-\(matches.awayInfo?.cornerScore ?? 0)"
+            cell.scoreLabel.text = "Score".localized + ":" + " \(matches.homeInfo?.homeScore ?? 0)-\(matches.awayInfo?.awayScore ?? 0)"
             cell.halftimeLabel.isHidden = false
-            cell.halftimeLabel.text = "Halftime: \(matches.homeInfo?.halfTimeScore ?? 0)-\(matches.awayInfo?.halfTimeScore ?? 0)"
+            cell.halftimeLabel.text = "Halftime".localized + ":" + " \(matches.homeInfo?.halfTimeScore ?? 0)-\(matches.awayInfo?.halfTimeScore ?? 0)"
         }else {
             cell.leagueNameLabel.text = matches.leagueInfo?.name ?? ""
-            cell.cornerLabel.text = "Position: \(matches.matchPosition?.home ?? "")-\(matches.matchPosition?.away ?? "")"
-            cell.scoreLabel.text = "Overtime Score: \(matches.homeInfo?.overtimeScore ?? 0)-\(matches.awayInfo?.overtimeScore ?? 0)"
+            cell.cornerLabel.text = "Position".localized + ":" + " \(matches.matchPosition?.home ?? "")-\(matches.matchPosition?.away ?? "")"
+            cell.scoreLabel.text = "Overtime Score".localized + ":" + " \(matches.homeInfo?.overtimeScore ?? 0)-\(matches.awayInfo?.overtimeScore ?? 0)"
             cell.halftimeLabel.isHidden = true
         }
     }

@@ -18,8 +18,11 @@ class EventDetailVC: UIViewController {
     @IBOutlet weak var eventDateLbl: UILabel!
     @IBOutlet weak var eventTimeLbl: UILabel!
     @IBOutlet weak var eventPriceLbl: UILabel!
+    @IBOutlet weak var descriptionTitleLbl: UILabel!
+    @IBOutlet weak var sportsTitleLbl: UILabel!
     @IBOutlet weak var eventImgView: UIImageView!
     @IBOutlet weak var eventSportsLbl: UILabel!
+    @IBOutlet weak var controllerHeaderTitleLbl: UILabel!
     @IBOutlet weak var eventCreatorImgView: UIImageView!
     private var eventDetailVM: MeetEventDetailViewModel?
     var selectedEventId = Int()
@@ -30,11 +33,19 @@ class EventDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         performInitialSetup()
+        performLanguageLocalisation()
     }
     
     // MARK: - Methods
     func performInitialSetup() {
         makeNetworkCall()
+    }
+    
+    func  performLanguageLocalisation() {
+        descriptionTitleLbl.text = "Description".localized
+        sportsTitleLbl.text = "Sports:".localized
+        joinEventBtn.setTitle("Join Event".localized, for: .normal)
+        controllerHeaderTitleLbl.text = "Event Details".localized
     }
     
     func showLoader(_ value: Bool) {
@@ -87,7 +98,7 @@ extension EventDetailVC {
         self.eventTimeLbl.text = event?.time
         self.eventCreateByUserLbl.text = "by \(event?.creator?.name ?? "")"
         self.eventDescLbl.text = event?.description
-        self.eventJoineesLbl.text = "\(event?.peopleJoinedCount ?? 0) people joined"
+        self.eventJoineesLbl.text = "\(event?.peopleJoinedCount ?? 0)" + "People joined".localized
         self.eventSportsLbl.text = event?.interest?.name ?? ""
         self.eventLocationLbl.text = event?.address
         let creatorImage = event?.creator?.profileImg ?? ""

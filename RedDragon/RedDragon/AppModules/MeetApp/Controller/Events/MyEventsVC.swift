@@ -11,6 +11,12 @@ class MyEventsVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var emptyView: UIView!
+    @IBOutlet weak var upcomingTitleLabel: UILabel!
+    @IBOutlet weak var pastTitleLabel: UILabel!
+    @IBOutlet weak var noEventMessageLabel: UILabel!
+    @IBOutlet weak var createEventButton: UIButton!
+    
     var upcomingEventsArray = [MeetEvent]()
     var upcomingEventsArray1 = [MeetEvent]()
     var pastEventsArray1 = [MeetEvent]()
@@ -18,13 +24,20 @@ class MyEventsVC: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         performInitialSetup()
+        performLanguageLocalisation()
     }
     
     // MARK: - Methods
     func performInitialSetup() {
         nibInitialization()
+    }
+    
+    func performLanguageLocalisation() {
+        upcomingTitleLabel.text = "Upcoming".localized
+        pastTitleLabel.text = "Past".localized
+        noEventMessageLabel.text = "No upcoming events. Create your event.".localized
+        createEventButton.setTitle("Create an Event".localized, for: .normal)
     }
     
     func nibInitialization() {
@@ -37,6 +50,14 @@ class MyEventsVC: UIViewController {
         self.upcomingEventsArray1 = upcomingEvents
         self.pastEventsArray1 = pastEvents
         self.pastEventsArray = pastEvents
+        
+        if !upcomingEventsArray.isEmpty {
+            collectionView.isHidden = false
+            emptyView.isHidden = true
+        }else {
+            collectionView.isHidden = true
+            emptyView.isHidden = false
+        }
     }
     
     // MARK: - Button Action
@@ -109,14 +130,14 @@ extension MyEventsVC {
             cell.eventNameLbl.text = event.name ?? ""
             cell.eventImgView.setImage(imageStr: event.bannerImage?.image ?? "", placeholder: UIImage(named: "defaultEvent"))
             cell.eventCreatedByUserLbl.text = event.creator?.name ?? ""
-            cell.noOfPeopleJoinedLbl.text = "\(event.peopleJoinedCount ?? 0) People joined"
+            cell.noOfPeopleJoinedLbl.text = "\(event.peopleJoinedCount ?? 0)" + "People joined".localized
             let date = event.date?.formatDate(inputFormat: dateFormat.yyyyMMdd, outputFormat: dateFormat.ddMMM) ?? ""
             cell.dateTimeLbl.text = "\(date), \(event.time ?? "")"
         }else if let cell = cell as? MyEventsCollectionViewCell {
             cell.eventNameLbl.text = event.name ?? ""
             cell.eventImgView.setImage(imageStr: event.bannerImage?.image ?? "", placeholder: UIImage(named: "defaultEvent"))
             cell.eventCreatedByUserLbl.text = event.creator?.name ?? ""
-            cell.noOfPeopleJoinedLbl.text = "\(event.peopleJoinedCount ?? 0) People joined"
+            cell.noOfPeopleJoinedLbl.text = "\(event.peopleJoinedCount ?? 0)" + "People joined".localized
             let date = event.date?.formatDate(inputFormat: dateFormat.yyyyMMdd, outputFormat: dateFormat.ddMMM) ?? ""
             cell.dateTimeLbl.text = "\(date), \(event.time ?? "")"
         }

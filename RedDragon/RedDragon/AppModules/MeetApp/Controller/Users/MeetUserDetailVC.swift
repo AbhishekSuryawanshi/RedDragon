@@ -12,8 +12,11 @@ import Combine
 class MeetUserDetailVC: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var interestTitleLabel: UILabel!
     @IBOutlet weak var aboutLabel: UILabel!
+    @IBOutlet weak var aboutTitleLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var locationTitleLabel: UILabel!
     @IBOutlet weak var startConversationButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -27,6 +30,14 @@ class MeetUserDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         performInitialSetup()
+        performLanguageLocalisation()
+    }
+    
+    func performLanguageLocalisation() {
+        aboutTitleLabel.text = "About".localized
+        interestTitleLabel.text = "Interests".localized
+        locationTitleLabel.text = "Location".localized
+        startConversationButton.setTitle("Start Conversation".localized, for: .normal)
     }
 
     // MARK: - Methods
