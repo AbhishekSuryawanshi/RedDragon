@@ -26,5 +26,4 @@ class HomePagePredictionVM: APIServiceManager<HomePagePredictionData> {
                         
         asyncCall(urlString: (urlComponents?.string)!, method: method, parameters: nil)
     }
-
 }

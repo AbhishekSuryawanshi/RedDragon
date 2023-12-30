@@ -116,7 +116,9 @@ struct CellIdentifier {
     
     //Wallet
     static let subscriptionTableViewCell       = "SubscriptionTableViewCell"
-
+    static let pointTableViewCell              = "PointTableViewCell"
+    static let pointsCollectionViewCell        = "PointsCollectionViewCell"
+    
     //Experts
     static let predictUserListTableViewCell           = "PredictUserListTableViewCell"
     static let userTagsCollectionViewCell             = "UserTagsCollectionViewCell"
