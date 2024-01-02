@@ -10,11 +10,6 @@
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Roboto-Regular.ttf">
-            <string>Roboto-Regular</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Matches DashboardVC-->
         <scene sceneID="rpI-Mx-9aj">
@@ -45,32 +40,6 @@
                                             <outlet property="delegate" destination="g2S-eP-FIk" id="K1S-Rm-rnU"/>
                                         </connections>
                                     </collectionView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SWv-ER-5qY">
-                                        <rect key="frame" x="-332.33333333333331" y="59" width="60" height="60"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="KvV-Nk-bg9"/>
-                                            <constraint firstAttribute="width" constant="60" id="xPI-Rc-Av0"/>
-                                        </constraints>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="close_1"/>
-                                    </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pVV-I3-Y9x">
-                                        <rect key="frame" x="-267.33333333333331" y="71.666666666666671" width="267.33333333333331" height="35"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="qDq-rV-RXj"/>
-                                        </constraints>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
-                                                <color key="value" systemColor="systemGray5Color"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIf-3j-FMR">
                                         <rect key="frame" x="0.0" y="59" width="60" height="60"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -80,21 +49,20 @@
                                         </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="search"/>
+                                        <state key="normal" image="cardGame_back"/>
+                                        <connections>
+                                            <action selector="backClicked:" destination="g2S-eP-FIk" eventType="touchUpInside" id="nKj-wo-d0k"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" name="base"/>
                                 <constraints>
                                     <constraint firstItem="2W7-1y-AKe" firstAttribute="leading" secondItem="C78-PF-Est" secondAttribute="leading" constant="60" id="1Nk-mR-vqY"/>
-                                    <constraint firstItem="pVV-I3-Y9x" firstAttribute="trailing" secondItem="NIf-3j-FMR" secondAttribute="leading" id="6Pc-Xo-QeV"/>
                                     <constraint firstAttribute="trailing" secondItem="2W7-1y-AKe" secondAttribute="trailing" id="Hbx-WF-mK4"/>
-                                    <constraint firstItem="SWv-ER-5qY" firstAttribute="centerY" secondItem="pVV-I3-Y9x" secondAttribute="centerY" id="M3Y-RG-Usl"/>
-                                    <constraint firstItem="pVV-I3-Y9x" firstAttribute="centerY" secondItem="NIf-3j-FMR" secondAttribute="centerY" id="MgZ-Jd-Hzk"/>
-                                    <constraint firstItem="SWv-ER-5qY" firstAttribute="trailing" secondItem="pVV-I3-Y9x" secondAttribute="leading" constant="-5" id="QQ7-ed-4Ez"/>
                                     <constraint firstItem="2W7-1y-AKe" firstAttribute="leading" secondItem="NIf-3j-FMR" secondAttribute="trailing" id="WTG-pN-gOK"/>
-                                    <constraint firstItem="pVV-I3-Y9x" firstAttribute="width" secondItem="C78-PF-Est" secondAttribute="width" multiplier="0.68" id="ah6-D3-w0y"/>
                                     <constraint firstAttribute="bottom" secondItem="2W7-1y-AKe" secondAttribute="bottom" constant="5" id="b2T-fj-dpv"/>
                                     <constraint firstAttribute="bottom" secondItem="NIf-3j-FMR" secondAttribute="bottom" id="gzY-1E-tr6"/>
+                                    <constraint firstItem="NIf-3j-FMR" firstAttribute="leading" secondItem="C78-PF-Est" secondAttribute="leading" id="wkt-0H-Vic"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Wzg-WD-5jT">
@@ -196,7 +164,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Mk-TR-glf">
-                                <rect key="frame" x="0.0" y="119" width="393" height="699"/>
+                                <rect key="frame" x="0.0" y="119" width="393" height="733"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PKN-yy-ck5">
                                         <rect key="frame" x="20" y="60" width="353" height="101"/>
@@ -321,7 +289,7 @@
                                         </connections>
                                     </collectionView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="VhK-dh-ER2">
-                                        <rect key="frame" x="20" y="216" width="353" height="473"/>
+                                        <rect key="frame" x="20" y="216" width="353" height="487"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="separatorColor" name="gray2"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -334,7 +302,7 @@
                                 <color key="backgroundColor" name="wheat9"/>
                                 <constraints>
                                     <constraint firstItem="kl1-8j-TcD" firstAttribute="top" secondItem="PKN-yy-ck5" secondAttribute="bottom" constant="-1" id="1Eg-XL-fn4"/>
-                                    <constraint firstAttribute="bottom" secondItem="VhK-dh-ER2" secondAttribute="bottom" constant="10" id="7UM-lW-GG8"/>
+                                    <constraint firstAttribute="bottom" secondItem="VhK-dh-ER2" secondAttribute="bottom" constant="30" id="7UM-lW-GG8"/>
                                     <constraint firstItem="Hzw-bE-weI" firstAttribute="trailing" secondItem="PKN-yy-ck5" secondAttribute="trailing" id="862-XD-Chr"/>
                                     <constraint firstItem="Hzw-bE-weI" firstAttribute="top" secondItem="PKN-yy-ck5" secondAttribute="bottom" constant="12" id="9Qg-4p-cxT"/>
                                     <constraint firstItem="VhK-dh-ER2" firstAttribute="leading" secondItem="Hzw-bE-weI" secondAttribute="leading" id="E4S-gG-mmW"/>
@@ -378,7 +346,7 @@
                         <constraints>
                             <constraint firstItem="loN-Uk-Kzz" firstAttribute="top" secondItem="Q5o-LL-cAj" secondAttribute="top" id="64C-fc-yEY"/>
                             <constraint firstItem="Q5o-LL-cAj" firstAttribute="trailing" secondItem="1Mk-TR-glf" secondAttribute="trailing" id="92h-qd-1Ak"/>
-                            <constraint firstItem="Q5o-LL-cAj" firstAttribute="bottom" secondItem="1Mk-TR-glf" secondAttribute="bottom" id="S2X-L5-anh"/>
+                            <constraint firstAttribute="bottom" secondItem="1Mk-TR-glf" secondAttribute="bottom" id="S2X-L5-anh"/>
                             <constraint firstItem="loN-Uk-Kzz" firstAttribute="leading" secondItem="Q5o-LL-cAj" secondAttribute="leading" constant="16" id="emB-hY-NY6"/>
                             <constraint firstItem="1Mk-TR-glf" firstAttribute="leading" secondItem="Q5o-LL-cAj" secondAttribute="leading" id="iJl-yt-CpG"/>
                             <constraint firstItem="1Mk-TR-glf" firstAttribute="top" secondItem="Q5o-LL-cAj" secondAttribute="top" constant="60" id="jKF-F6-JAs"/>
@@ -402,8 +370,6 @@
     </scenes>
     <resources>
         <image name="cardGame_back" width="12" height="19"/>
-        <image name="close_1" width="23" height="23"/>
-        <image name="search" width="17.666666030883789" height="17.666666030883789"/>
         <namedColor name="base">
             <color red="0.71764705882352942" green="0.094117647058823528" blue="0.054901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -424,9 +390,6 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
