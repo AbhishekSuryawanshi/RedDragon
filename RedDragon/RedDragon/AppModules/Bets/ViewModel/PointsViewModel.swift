@@ -9,13 +9,12 @@ import Foundation
 
 class PointsViewModel : APIServiceManager<WalletBalanceModel> {
     
+    static let shared = PointsViewModel()
+    
     //function to fetch All transactions
-    func fetchPointsAsyncCall(){
+    func fetchPointsAsyncCall(params: [String: Any]) {
         let urlString   = URLConstants.points
         let method      = RequestType.post
-        let params: [String: Any] = [
-            "offset" : 0
-        ]
         
         asyncCall(urlString: urlString, method: method, parameters: params)
     }

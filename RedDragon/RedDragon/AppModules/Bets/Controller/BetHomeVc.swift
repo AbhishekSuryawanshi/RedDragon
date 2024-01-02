@@ -45,7 +45,7 @@ class BetHomeVc: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         // set points from user defaults
-        pointsLable.text = UserDefaults.standard.points ?? "00"
+        pointsLable.text = UserDefaults.standard.user?.affAppData?.bet?.point ?? "00"
     }
     
     

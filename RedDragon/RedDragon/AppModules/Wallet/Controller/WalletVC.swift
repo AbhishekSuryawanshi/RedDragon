@@ -19,7 +19,10 @@ class WalletVC: UIViewController {
     
     @IBOutlet weak var packageLabel: UILabel!
     @IBOutlet weak var saveUptoLabel: UILabel!
-    @IBOutlet weak var pointsCollectionView: UICollectionView!
+    @IBOutlet weak var betPointsCollectionView: UICollectionView!
+    
+    @IBOutlet weak var convertBetLabel: UILabel!
+    @IBOutlet weak var heatPointsCollectionView: UICollectionView!
     
     @IBOutlet weak var bannerCollectionView: UICollectionView!
     
@@ -27,6 +30,8 @@ class WalletVC: UIViewController {
     private var bannerVM: BannerViewModel?
     private var banners_count = 0
     private var timer = Timer()
+    private var pointType: PointsType = .bet
+    private var selectedIndex = 0 //for heat and bet points packages list index
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,26 +45,35 @@ class WalletVC: UIViewController {
     func initialSettings() {
         nibInitialization()
         fetchWalletViewModel()
+        fetchBannerViewModel()
+        fetchPointsViewModel()
     }
     
     func refreshView() {
-        heatPointLabel.text = String(UserDefaults.standard.user?.wallet ?? 0)
+       // Show heat points and transactions for loggined user
         if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
-            WalletVM.shared.subscriptionListAsyncCall()
+            showTransactions()
         }
         heatPointTitleLabel.text = "Your HeatPoints Balance".localized + "🔥"
         recentTrasactionLabel.text = "Recent Transactions".localized
         transactionSeeAllButton.setTitle("View All".localized, for: .normal)
         packageLabel.text = "Packages".localized
+        convertBetLabel.text = "Convert Bet Diamonds to Heat Points".localized
     }
     
     func nibInitialization() {
         bannerCollectionView.register(CellIdentifier.bannerCell)
-        pointsCollectionView.register(CellIdentifier.pointsCollectionViewCell)
+        betPointsCollectionView.register(CellIdentifier.pointsCollectionViewCell)
+        heatPointsCollectionView.register(CellIdentifier.pointsCollectionViewCell)
     }
     
     private func showLoader(_ value: Bool) {
         value ? startLoader() : stopLoader()
+    }
+    
+    func showTransactions() {
+        heatPointLabel.text = String(UserDefaults.standard.user?.wallet ?? 0)
+        WalletVM.shared.subscriptionListAsyncCall()
     }
     
     @objc func pageControllerForBanners() {
@@ -77,13 +91,29 @@ class WalletVC: UIViewController {
         banners_count = (banners_count + 1) % dataCount
     }
     
-    // MARK: - Button Actions
-    @IBAction func packageButtonTapped(_ sender: UIButton) {
+    func purchasePoints(type: PointsType, index: Int) {
+        if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
         
+            presentOverViewController(GetPointsVC.self, storyboardName: StoryboardName.wallet) { vc in
+                vc.selectedIndex = index
+                vc.pointType = type
+                vc.delegate = self
+            }
+            
+        } else {
+            self.customAlertView_2Actions(title: "Login / Sign Up".localized, description: ErrorMessage.loginRequires.localized) {
+                /// Show login page to login/register new user
+                /// hide tabbar before presenting a viewcontroller
+                /// show tabbar while dismissing a presented viewcontroller in delegate
+                self.tabBarController?.tabBar.isHidden = true
+                self.presentOverViewController(LoginVC.self, storyboardName: StoryboardName.login) { vc in
+                    vc.delegate = self
+                }
+            }
+        }
     }
-    
-    
 }
+
 // MARK: - API Services
 extension WalletVC {
     func fetchWalletViewModel() {
@@ -102,6 +132,30 @@ extension WalletVC {
             })
             .store(in: &cancellable)
         
+        /// Purchase Package
+        AddWalletVM.shared.showError = { [weak self] error in
+            self?.view.makeToast(error, duration: 2.0, position: .center)
+        }
+        AddWalletVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        AddWalletVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                
+                //Update bet points / bet transaction
+                self?.updateBetPoints()
+                
+                if let dataResponse = response?.response {
+                    self?.showTransactions()
+                } else {
+                    if let errorResponse = response?.error {
+                        self?.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
+                    }
+                }
+            })
+            .store(in: &cancellable)
     }
     
     func fetchBannerViewModel() {
@@ -126,8 +180,35 @@ extension WalletVC {
         bannerVM?.fetchBannerDataAsyncCall()
     }
     
+    ///fetch view model for points
+    func fetchPointsViewModel() {
+        PointsViewModel.shared.showError = { [weak self] error in
+            self?.view.makeToast(ErrorMessage.bannerNotFound.localized, duration: 2.0, position: .center)
+        }
+        PointsViewModel.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        PointsViewModel.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] points in
+                
+            })
+            .store(in: &cancellable)
+    }
+    
+    func updateBetPoints() {
+        var betDiffValue = (pointType == .bet ? 1 : -1) * WalletVM.shared.betsArray[selectedIndex]
+        
+        let param: [String: Any] = [
+            "amount": betDiffValue,
+            "message": "Package purchased"
+        ]
+        PointsViewModel.shared.fetchPointsAsyncCall(params: param)
+    }
+    
     func execute_onSubscriptionsResponseData(_ response: SubscriptionResponse?) {
-        fetchBannerViewModel()
+       
         if let dataResponse = response?.response {
             WalletVM.shared.subscriptionArray = dataResponse.data ?? []
         } else {
@@ -183,11 +264,15 @@ extension WalletVC: UICollectionViewDataSource {
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.pointsCollectionViewCell, for: indexPath) as! PointsCollectionViewCell
-            cell.titleLabel.text = "\(WalletVM.shared.betsArray[indexPath.row]) BPs"
-            cell.subTitleLabel.text = "for".localized + " \(WalletVM.shared.heatsArray[indexPath.row])🔥"
+            if collectionView == betPointsCollectionView {
+                cell.titleLabel.text = "\(WalletVM.shared.betsArray[indexPath.row]) BDs"
+                cell.subTitleLabel.text = "for".localized + " \(WalletVM.shared.heatsArray[indexPath.row])🔥"
+            } else {
+                cell.titleLabel.text = "\(WalletVM.shared.heatsArray[indexPath.row]) HPs"
+                cell.subTitleLabel.text = "for".localized + " \(WalletVM.shared.betsArray[indexPath.row])🔥"
+            }
             return cell
         }
-       
     }
 }
 
@@ -200,7 +285,7 @@ extension WalletVC: UICollectionViewDelegate {
                 UIApplication.shared.open(url)
             }
         } else {
-            presentOverViewController(GetPointsVC.self, storyboardName: StoryboardName.wallet)
+            purchasePoints(type: collectionView == self.betPointsCollectionView ? .bet : .heat, index: indexPath.row)
         }
     }
 }
@@ -212,5 +297,30 @@ extension WalletVC: UICollectionViewDelegateFlowLayout {
         } else {
             return CGSize(width: 90, height: 75)
         }
+    }
+}
+
+// MARK: - Custom Delegates
+extension WalletVC: GetPointsVCDelegate {
+    func PointPurchased(index: Int, type: PointsType) {
+        selectedIndex = index
+        pointType = type
+        
+        //Update heat point and after api response update bet points
+        
+        let param: [String: Any] = [
+            "coin_count": WalletVM.shared.heatsArray[selectedIndex],
+            "type": pointType == .bet ? "d" : "c",
+            "event": "Package purchased"
+        ]
+        AddWalletVM.shared.addTransaction(parameters: param)
+    
+    }
+}
+
+/// LoginVCDelegate to show hided tabbar
+extension WalletVC: LoginVCDelegate {
+    func viewControllerDismissed() {
+        self.tabBarController?.tabBar.isHidden = false
     }
 }

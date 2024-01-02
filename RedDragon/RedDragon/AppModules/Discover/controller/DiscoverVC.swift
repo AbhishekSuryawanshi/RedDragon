@@ -105,6 +105,7 @@ extension DiscoverVC {
     
     func execute_onResponseData(_ response: LoginResponse?) {
         if let dataResponse = response?.response {
+            self.view.makeToast(StringConstants.logoutSuccess.localized, duration: 2.0, position: .center)
             UserDefaults.standard.clearSpecifiedItems()
         } else {
             if let errorResponse = response?.error {

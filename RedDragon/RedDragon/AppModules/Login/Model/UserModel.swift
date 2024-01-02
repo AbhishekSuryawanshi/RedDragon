@@ -78,16 +78,26 @@ struct User: Codable {
         tags = try container.decodeIfPresent([String].self, forKey: .tags) ?? []
         historicTags = try container.decodeIfPresent([String].self, forKey: .historicTags) ?? []
         appDataIDs = try container.decodeIfPresent(LocalAppUserID.self, forKey: .appDataIDs) ?? LocalAppUserID()
-     //   affAppData = try container.decodeIfPresent(AffAppData.self, forKey: .affAppData)
+        affAppData = try container.decodeIfPresent(AffAppData.self, forKey: .affAppData)
         streetPlayerUpdated = try container.decodeIfPresent(Int.self, forKey: .streetPlayerUpdated) ?? 0
     }
 }
 
 struct AffAppData: Codable {
+    var bet: BetApp?
     var sportCard: SportCard?
 
     enum CodingKeys: String, CodingKey {
+        case bet
         case sportCard = "sport-card"
+    }
+}
+
+struct BetApp: Codable {
+    var point: String = "00"
+    
+    enum CodingKeys: String, CodingKey {
+        case point = "bet_points"
     }
 }
 

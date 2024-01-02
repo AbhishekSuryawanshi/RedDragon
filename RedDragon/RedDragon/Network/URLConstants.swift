@@ -164,6 +164,7 @@ struct URLConstants {
     
     // MARK: - Wallet
     static let subscriptionList       = baseURL + "user/wallet/history"
+    static let addSubscription        = baseURL + "user/wallet/transaction/add"
     
     // MARK: - Translation
     static let translation            = "/get_translations.php"
