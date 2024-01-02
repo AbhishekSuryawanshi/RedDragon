@@ -17,6 +17,7 @@ class MeetHomeVC: UIViewController {
     @IBOutlet weak var matchUserNameLabel: UILabel!
     @IBOutlet weak var matchFoundTitleLabel: UILabel!
     @IBOutlet weak var matchSubtitleLabel: UILabel!
+    @IBOutlet weak var noUserMessageLabel: UILabel!
     @IBOutlet weak var gifContainerView: UIView!
     
     var cancellable = Set<AnyCancellable>()
@@ -43,6 +44,7 @@ class MeetHomeVC: UIViewController {
     func performLanguageLocalisation() {
         matchFoundTitleLabel.text = "Match Found!".localized
         matchSubtitleLabel.text = "Discover Common Interests with Your New Match.".localized
+        noUserMessageLabel.text = "Please come tommorrow to get more users.".localized
     }
     
     func showLoader(_ value: Bool) {

@@ -21,6 +21,8 @@ class ExpertUserDetailVC: UIViewController {
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var predictionButton: UIButton!
+    @IBOutlet weak var winRateTitleLabel: UILabel!
+    @IBOutlet weak var walletButton: UIButton!
     
     var cancellable = Set<AnyCancellable>()
     var userId = Int()
@@ -29,13 +31,20 @@ class ExpertUserDetailVC: UIViewController {
     var userData: ExpertUser?
     var transactionVM = TransactionViewModel()
     var commentsArray: [Comment] = []
-    var sectionHeading = ["Previous Results", "Comments"]
+    var sectionHeading = ["Previous Results".localized, "Comments".localized]
     var tagData = [String]()
     var amount = Int()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         performInitialSetup()
+        
+        performLanguageLocalisation()
+    }
+    
+    // MARK: - Methods
+    func performLanguageLocalisation() {
+        winRateTitleLabel.text = "Win Rate".localized
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,13 +82,14 @@ class ExpertUserDetailVC: UIViewController {
         successCountLabel.text = "Success: \(userData?.appdata?.predict?.predictStats?.successCount ?? 0)"
         unsuccessCountLabel.text = "Failed: \(userData?.appdata?.predict?.predictStats?.unsuccessCount ?? 0)"
         coinLabel.text = "Coin: \(userData?.appdata?.predict?.predictStats?.coins ?? 0)"
+        walletButton.setTitle("\(userData?.wallet ?? 0)", for: .normal)
         matchArray = userData?.appdata?.predict?.prediction ?? []
         tagData = userData?.tags ?? []
         if userData?.appdata?.predict?.predictStats?.successRate ?? 0 >= 30 && userData?.wallet ?? 0 >= 10 {
-            predictionButton.setTitle("Unlock Prediction for 10", for: .normal)
+            predictionButton.setTitle("Unlock Prediction for 10".localized, for: .normal)
             amount = 10
         }else if userData?.appdata?.predict?.predictStats?.successRate ?? 0 < 30 && userData?.wallet ?? 0 >= 5 {
-            predictionButton.setTitle("Unlock Prediction for 5", for: .normal)
+            predictionButton.setTitle("Unlock Prediction for 5".localized, for: .normal)
             amount = 5
         }
         collectionView.reloadData()
@@ -216,25 +226,20 @@ extension ExpertUserDetailVC {
         
         switch predStatus {
         case 0:
-            cell.predictionStatusLabel.text = "Prediction Failed"
+            cell.predictionStatusLabel.text = "Prediction Failed".localized
             cell.predictionStatusLabel.backgroundColor = .gray1
             cell.predictionStatusLabel.textColor = .white
             
         case 1:
-            cell.predictionStatusLabel.text = "Correct Prediction"
+            cell.predictionStatusLabel.text = "Correct Prediction".localized
             cell.predictionStatusLabel.backgroundColor = .green1
             cell.predictionStatusLabel.textColor = .black1
         default:
-            cell.predictionStatusLabel.text = "Prediction Pending"
+            cell.predictionStatusLabel.text = "Prediction Pending".localized
             cell.predictionStatusLabel.backgroundColor = .base
             cell.predictionStatusLabel.textColor = .white
         }
-        
-//        if userData?.appdata?.predict?.prediction[indexPath.row].isSuccess ?? 0 {
-//            cell.predictionStatusLabel.text = "Correct Prediction"
-//        }else {
-//            cell.predictionStatusLabel.text = "Prediction Failed"
-//        }
+
         return cell
     }
     
