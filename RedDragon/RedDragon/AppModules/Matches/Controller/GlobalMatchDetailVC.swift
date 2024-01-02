@@ -292,8 +292,8 @@ extension GlobalMatchDetailVC {
         cell.leagueImageView.setImage(imageStr: leagueLogo, placeholder: UIImage(named: "placeholderLeague"))
         cell.homeNameLabel.text = matchForH2HArr[indexPath.row].homeName
         cell.awayNameLabel.text = matchForH2HArr[indexPath.row].awayName
-        cell.overtimeLabel.text = "Overtime: \(matchForH2HArr[indexPath.row].homeOvertimeScore ?? 0)-\(matchForH2HArr[indexPath.row].awayOvertimeScore ?? 0)"
-        cell.halftimeLabel.text = "Ranking: \(matchForH2HArr[indexPath.row].homeRanking ?? "" )-\(matchForH2HArr[indexPath.row].awayRanking ?? "")"
+        cell.overtimeLabel.text = "Overtime".localized + ":" + "\(matchForH2HArr[indexPath.row].homeOvertimeScore ?? 0)-\(matchForH2HArr[indexPath.row].awayOvertimeScore ?? 0)"
+        cell.halftimeLabel.text = "Ranking".localized + ":" + "\(matchForH2HArr[indexPath.row].homeRanking ?? "" )-\(matchForH2HArr[indexPath.row].awayRanking ?? "")"
     
         return cell
     }

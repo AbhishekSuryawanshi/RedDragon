@@ -70,7 +70,7 @@ struct ErrorMessage {
     
     static let eventTitleEmptyAlert        = "Please enter event title"
     static let eventDescEmptyAlert         = "Please enter event description"
-    static let eventImageEmptyAlert        = "Please enter event image"
+    static let eventImageEmptyAlert        = "Please add event image"
     static let eventStartDateEmptyAlert    = "Please enter event start date"
     static let eventStartTimeEmptyAlert    = "Please enter event start time"
     static let eventLocationEmptyAlert     = "Please enter event location"

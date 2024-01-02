@@ -15,6 +15,8 @@ class MeetHomeVC: UIViewController {
     @IBOutlet weak var viewContainerForButtons: UIView!
     @IBOutlet weak var matchGifImageView: GIFImageView!
     @IBOutlet weak var matchUserNameLabel: UILabel!
+    @IBOutlet weak var matchFoundTitleLabel: UILabel!
+    @IBOutlet weak var matchSubtitleLabel: UILabel!
     @IBOutlet weak var gifContainerView: UIView!
     
     var cancellable = Set<AnyCancellable>()
@@ -25,6 +27,7 @@ class MeetHomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         performInitialSetup()
+        performLanguageLocalisation()
     }
     
     // MARK: - Methods
@@ -35,6 +38,11 @@ class MeetHomeVC: UIViewController {
         gifContainerView.isHidden = true
         makeNetworkCall()
         fetchMeetUserViewModel()
+    }
+    
+    func performLanguageLocalisation() {
+        matchFoundTitleLabel.text = "Match Found!".localized
+        matchSubtitleLabel.text = "Discover Common Interests with Your New Match.".localized
     }
     
     func showLoader(_ value: Bool) {

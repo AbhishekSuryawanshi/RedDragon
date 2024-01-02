@@ -212,7 +212,7 @@
                                                 <color key="textColor" name="gray1"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Discover Common Interests with Your New Match" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bms-KG-hc5">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Discover Common Interests with Your New Match." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bms-KG-hc5">
                                                 <rect key="frame" x="15" y="137" width="220" height="32.666666666666657"/>
                                                 <fontDescription key="fontDescription" name="Urbanist-Medium" family="Urbanist" pointSize="14"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -304,7 +304,9 @@
                     <connections>
                         <outlet property="cardStack" destination="C92-p6-dO3" id="fol-Gl-dtL"/>
                         <outlet property="gifContainerView" destination="Nry-h7-PdA" id="waS-6y-4Cr"/>
+                        <outlet property="matchFoundTitleLabel" destination="5GP-Fh-pmj" id="iNk-gF-72n"/>
                         <outlet property="matchGifImageView" destination="pdT-nK-RNn" id="9SL-gc-Ia3"/>
+                        <outlet property="matchSubtitleLabel" destination="bms-KG-hc5" id="VvG-9k-NOw"/>
                         <outlet property="matchUserNameLabel" destination="RNP-vM-wfM" id="SCG-ZC-XbE"/>
                         <outlet property="viewContainerForButtons" destination="crc-lP-eUA" id="lVA-At-hZr"/>
                     </connections>
@@ -671,8 +673,11 @@
                     </view>
                     <connections>
                         <outlet property="aboutLabel" destination="GpD-pO-J2N" id="eTg-ce-VW0"/>
+                        <outlet property="aboutTitleLabel" destination="bqo-Ym-krG" id="36k-97-ROe"/>
                         <outlet property="collectionView" destination="EEc-Ym-TmT" id="JRo-C4-fv0"/>
+                        <outlet property="interestTitleLabel" destination="MyM-5K-T18" id="XiM-C4-Uqa"/>
                         <outlet property="locationLabel" destination="LhE-QZ-2Kf" id="nnC-Vi-VjD"/>
+                        <outlet property="locationTitleLabel" destination="6ZD-4M-2E3" id="1Mw-0x-ACl"/>
                         <outlet property="nameLabel" destination="aTz-iz-Y5d" id="hxR-qf-dDg"/>
                         <outlet property="profileImageView" destination="Pib-YU-QIY" id="KZu-Sf-DON"/>
                         <outlet property="startConversationButton" destination="LLj-GY-cOy" id="UQu-gA-1IB"/>
@@ -918,6 +923,11 @@
             <point key="canvasLocation" x="3604" y="-23"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="izI-K1-IvX">
+            <size key="intrinsicContentSize" width="-1" height="30"/>
+        </designable>
+    </designables>
     <resources>
         <image name="Shadow3" width="375" height="8"/>
         <image name="close_1" width="23" height="23"/>

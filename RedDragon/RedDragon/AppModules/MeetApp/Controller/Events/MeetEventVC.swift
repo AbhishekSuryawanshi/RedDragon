@@ -25,6 +25,12 @@ class MeetEventVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         performInitialSetup()
+        performLanguageLocalisation()
+    }
+    
+    func performLanguageLocalisation() {
+        segmentControl.setTitle("Explore".localized, forSegmentAt: 0)
+        segmentControl.setTitle("My Events".localized, forSegmentAt: 1)
     }
     
     // MARK: - Methods

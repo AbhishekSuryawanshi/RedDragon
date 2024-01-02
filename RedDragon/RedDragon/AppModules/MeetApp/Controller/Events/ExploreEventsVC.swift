@@ -28,7 +28,8 @@ class ExploreEventsVC: UIViewController {
     }
     
     func nibInitialization() {
-        tableView.register(CellIdentifier.exploreEventsTableViewCell)
+        tableView.register(ExploreEventsTableViewCell.nibName)
+        tableView.register(NoDataTableViewCell.nibName)
     }
     
     func configureEvents(hotEvents: [MeetEvent], allEvents: [MeetEvent]) {
@@ -47,14 +48,19 @@ extension ExploreEventsVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return hotEventsArray.count // Hot events collection
+            return hotEventsArray.isEmpty ? 1 : hotEventsArray.count // Hot events collection
         default:
-            return allEventsArray.count
+            return allEventsArray.isEmpty ? 1 : allEventsArray.count
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableCell(indexPath: indexPath)
+        switch indexPath.section {
+        case 0:
+            return hotEventsArray.isEmpty ? noDataTableCell(indexPath: indexPath) : tableCell(indexPath: indexPath) // Hot events collection
+        default:
+            return allEventsArray.isEmpty ? noDataTableCell(indexPath: indexPath) : tableCell(indexPath: indexPath)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -66,20 +72,29 @@ extension ExploreEventsVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 74.0
+        switch indexPath.section {
+        case 0:
+            return hotEventsArray.isEmpty ? UITableView.automaticDimension : 74 // Hot events collection
+        default:
+            return allEventsArray.isEmpty ? UITableView.automaticDimension : 74
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            navigateToXIBViewController(EventDetailVC.self, nibName: "EventDetailVC") {
-                vc in
-                vc.selectedEventId = self.hotEventsArray[indexPath.row].eventId ?? 0
+            if !hotEventsArray.isEmpty {
+                navigateToXIBViewController(EventDetailVC.self, nibName: "EventDetailVC") {
+                    vc in
+                    vc.selectedEventId = self.hotEventsArray[indexPath.row].eventId ?? 0
+                }
             }
         default:
-            navigateToXIBViewController(EventDetailVC.self, nibName: "EventDetailVC") {
-                vc in
-                vc.selectedEventId = self.allEventsArray[indexPath.row].eventId ?? 0
+            if !allEventsArray.isEmpty {
+                navigateToXIBViewController(EventDetailVC.self, nibName: "EventDetailVC") {
+                    vc in
+                    vc.selectedEventId = self.allEventsArray[indexPath.row].eventId ?? 0
+                }
             }
         }
     }
@@ -102,9 +117,16 @@ extension ExploreEventsVC {
         cell.eventNameLbl.text = event.name ?? ""
         cell.eventImgView.setImage(imageStr: event.bannerImage?.image ?? "", placeholder: UIImage(named: "defaultEvent"))
         cell.eventCreatedByUserLbl.text = event.creator?.name ?? ""
-        cell.noOfPeopleJoinedLbl.text = "\(event.peopleJoinedCount ?? 0) People joined"
+        cell.noOfPeopleJoinedLbl.text = "\(event.peopleJoinedCount ?? 0)" + "People joined".localized
         let date = event.date?.formatDate(inputFormat: dateFormat.yyyyMMdd, outputFormat: dateFormat.ddMMM) ?? ""
         cell.dateTimeLbl.text = "\(date), \(event.time ?? "")"
+    }
+    
+    private func noDataTableCell(indexPath:IndexPath) -> NoDataTableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NoDataTableViewCell.nibName, for: indexPath) as! NoDataTableViewCell
+        tableView.separatorStyle = .none
+        cell.configureCell(message: "No events found.".localized)
+        return cell
     }
 }
 
