@@ -22,3 +22,14 @@ class WalletVM: APIServiceManager<SubscriptionResponse> {
         asyncCall(urlString: urlString, method: method, parameters: nil)
     }
 }
+
+class AddWalletVM: APIServiceManager<BasicAPIResponse> {
+    init () {}
+    static let shared = AddWalletVM()
+    
+    func addTransaction(parameters: [String: Any]) {
+        let urlString   = URLConstants.addSubscription
+        let method      = RequestType.post
+        asyncCall(urlString: urlString, method: method, parameters: parameters)
+    }
+}

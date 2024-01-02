@@ -38,7 +38,10 @@ class PointsVc: UIViewController {
     }
     
     func networkCall(){
-        viewModel.fetchPointsAsyncCall()
+        let params: [String: Any] = [
+            "offset" : 0
+        ]
+        viewModel.fetchPointsAsyncCall(params: params)
     }
     
 }
@@ -81,7 +84,7 @@ extension PointsVc {
         if let list = points.response?.data?.data {
             walletList = list
             amountLable.text = points.response?.data?.wallet
-            UserDefaults.standard.points = points.response?.data?.wallet
+            UserDefaults.standard.user?.affAppData?.bet?.point = points.response?.data?.wallet ?? "00"
             tableView.reloadData()
         }else{
             handleError(points.error)

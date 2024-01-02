@@ -12,8 +12,12 @@ enum PointsType {
     case heat
 }
 
-class GetPointsVC: UIViewController {
+protocol GetPointsVCDelegate: AnyObject {
+    func PointPurchased(index: Int, type: PointsType)
+}
 
+class GetPointsVC: UIViewController {
+    
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var currentPointLabel: UILabel!
     @IBOutlet weak var iconWidthConstraint: NSLayoutConstraint!
@@ -23,8 +27,8 @@ class GetPointsVC: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var pointsTableHeightConstraint: NSLayoutConstraint!
     
+    weak var delegate: GetPointsVCDelegate?
     var pointType: PointsType = .bet
-    
     var selectedIndex = 0
     
     override func viewDidLoad() {
@@ -36,9 +40,9 @@ class GetPointsVC: UIViewController {
     }
     
     func initialSettings() {
-        headerLabel.text = pointType == .bet ? "Get Bet Points".localized : "Get Heat Points".localized
-        currentPointLabel.text = pointType == .bet ? "\("Current Heat Points".localized): \(UserDefaults.standard.user?.wallet ?? 0)" : "\("Current Bet Points".localized): \(UserDefaults.standard.points ?? "0")"
-        descriptionLabel.text = pointType == .bet ? "Convert Heat Points to Bet Points and unleash your inner champion! Choose your package:".localized : "Convert Bet Points to Heat Points and unleash your inner champion! Choose your package:".localized
+        headerLabel.text = pointType == .bet ? "Get Bet Diamonds".localized : "Get Heat Points".localized
+        currentPointLabel.text = pointType == .bet ? "\("Current Heat Points".localized): \(UserDefaults.standard.user?.wallet ?? 0)" : "\("Current Bet Diamonds".localized): \(UserDefaults.standard.user?.affAppData?.bet?.point ?? "00")"
+        descriptionLabel.text = pointType == .bet ? "Convert Heat Points to Bet Diamonds and unleash your inner champion! Choose your package:".localized : "Convert Bet Diamonds to Heat Points and unleash your inner champion! Choose your package:".localized
         cancelButton.setTitle(StringConstants.cancel.localized, for: .normal)
         convertButton.setTitle("Convert Now".localized, for: .normal)
     }
@@ -46,7 +50,18 @@ class GetPointsVC: UIViewController {
     // MARK: - Button Actions
     
     @IBAction func convertButtonTapped(_ sender: UIButton) {
-        
+        if pointType == .bet {
+            let pointValue = (NumberFormatter().number(from: UserDefaults.standard.user?.affAppData?.bet?.point ?? ""))?.intValue ?? 0
+            UserDefaults.standard.user?.affAppData?.bet?.point = String(pointValue + WalletVM.shared.betsArray[selectedIndex])
+            UserDefaults.standard.user?.wallet = (UserDefaults.standard.user?.wallet ?? 0) - WalletVM.shared.heatsArray[selectedIndex]
+            
+        } else {
+            UserDefaults.standard.user?.wallet = (UserDefaults.standard.user?.wallet ?? 0) + WalletVM.shared.heatsArray[selectedIndex]
+            let pointValue = (NumberFormatter().number(from: UserDefaults.standard.user?.affAppData?.bet?.point ?? ""))?.intValue ?? 0
+            UserDefaults.standard.user?.affAppData?.bet?.point = String(pointValue - WalletVM.shared.betsArray[selectedIndex])
+        }
+        delegate?.PointPurchased(index: selectedIndex, type: pointType)
+        self.backClicked(UIButton())
     }
 }
 
@@ -60,12 +75,11 @@ extension GetPointsVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.pointTableViewCell, for: indexPath) as! PointTableViewCell
-        var boldText = NSMutableAttributedString().semiBold(pointType == .bet ? "Bet Points".localized : "Heat Points".localized, size: 14)
-        var formatedText = NSMutableAttributedString()
+        let formatedText = NSMutableAttributedString()
         if pointType == .bet {
-            cell.titleLabel.attributedText = formatedText.semiBold("\(WalletVM.shared.betsArray[indexPath.row])", size: 15).regular(" ", size: 15).semiBold("Bet Points".localized, size: 15).regular(" ", size: 15).regular("for".localized, size: 15).regular(" ", size: 15).regular("\(WalletVM.shared.heatsArray[indexPath.row])", size: 15).regular(" ", size: 15).regular("Heat Points".localized, size: 15)
+            cell.titleLabel.attributedText = formatedText.semiBold("\(WalletVM.shared.betsArray[indexPath.row])", size: 15).regular(" ", size: 15).semiBold("Bet Diamonds".localized, size: 15).regular(" ", size: 15).regular("for".localized, size: 15).regular(" ", size: 15).regular("\(WalletVM.shared.heatsArray[indexPath.row])", size: 15).regular(" ", size: 15).regular("Heat Points".localized, size: 15)
         } else {
-            cell.titleLabel.attributedText = formatedText.semiBold("\(WalletVM.shared.heatsArray[indexPath.row])", size: 15).regular(" ", size: 15).semiBold("Heat Points".localized, size: 15).regular(" ", size: 15).regular("for".localized, size: 15).regular(" ", size: 15).regular("\(WalletVM.shared.betsArray[indexPath.row])", size: 15).regular(" ", size: 15).regular("Bet Points".localized, size: 15)
+            cell.titleLabel.attributedText = formatedText.semiBold("\(WalletVM.shared.heatsArray[indexPath.row])", size: 15).regular(" ", size: 15).semiBold("Heat Points".localized, size: 15).regular(" ", size: 15).regular("for".localized, size: 15).regular(" ", size: 15).regular("\(WalletVM.shared.betsArray[indexPath.row])", size: 15).regular(" ", size: 15).regular("Bet Diamonds".localized, size: 15)
         }
         cell.bgView.borderWidth = selectedIndex == indexPath.row ? 1 : 0
         cell.leftImageView.image = selectedIndex == indexPath.row ? .radioButtonSelected : .radioButton
