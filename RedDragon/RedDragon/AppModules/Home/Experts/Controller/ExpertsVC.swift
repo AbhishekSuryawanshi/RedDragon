@@ -43,6 +43,8 @@ class ExpertsVC: UIViewController {
     func performInitialSetup() {
         fetchTagsViewModel()
         predictDropDown.optionArray = ["Prediction", "Bet"]
+        predictDropDown.text = "Prediction Experts".localized
+        tagsDropDown.text = "Tags".localized
         predictDropDown.selectedIndex = 0
         expertPredictUserVM.fetchExpertUserListAsyncCall(page: predictScrollPage, slug: Slug.predict.rawValue)
         fetchPredictUserListViewModelResponse()

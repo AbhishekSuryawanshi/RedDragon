@@ -372,7 +372,7 @@ extension InfoVC {
                 self?.firstThreeExpertsData()
                 self?.userArray = response?.response?.data ?? []
                 self?.expertTableView.reloadData()
-            //    self?.expertViewHeight.constant = 1000
+                //    self?.expertViewHeight.constant = 1000
             })
             .store(in: &cancellable)
     }
@@ -564,8 +564,8 @@ extension InfoVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-            if tableView == expertTableView {
-                expertTableViewHeight.constant = CGFloat(200 * (expertPredictUserVM?.responseData?.response?.data?.count ?? 0))
-            }
+        if tableView == expertTableView {
+            expertTableViewHeight.constant = CGFloat(200 * (expertPredictUserVM?.responseData?.response?.data?.count ?? 0))
         }
+    }
 }

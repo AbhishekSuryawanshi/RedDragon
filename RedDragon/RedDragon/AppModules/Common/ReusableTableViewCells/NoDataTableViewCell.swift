@@ -22,7 +22,7 @@ class NoDataTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureCell(image: String? = "", message: String? = "No Data") {
+    func configureCell(image: String? = "", message: String? = "No Data".localized) {
         noDataImageView?.setImage(imageStr: image!, placeholder: .empty)
         noDataLabel?.text = message
     }
