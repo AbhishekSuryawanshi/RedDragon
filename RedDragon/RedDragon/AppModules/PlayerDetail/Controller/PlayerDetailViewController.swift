@@ -61,11 +61,11 @@ class PlayerDetailViewController: UIViewController {
     }
     
     func showLoader(_ value: Bool) {
-        value ? Loader.activityIndicator.startAnimating() : Loader.activityIndicator.stopAnimating()
+        value ? startLoader() : stopLoader()
     }
     
     func makeNetworkCall() {
-        playerDetailViewModel?.fetchPlayerDetailAsyncCall(lang: "en", slug: playerSlug)
+        playerDetailViewModel?.fetchPlayerDetailAsyncCall(lang: UserDefaults.standard.language ?? "en", slug: playerSlug)
     }
     
     @IBAction func backBtnAction(_ sender: Any) {
@@ -180,7 +180,7 @@ extension PlayerDetailViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.matchTabsCollectionViewCell, for: indexPath) as! MatchTabsCollectionViewCell
-        cell.tabNameLabel.text = playerDetailsArr[indexPath.row]
+        cell.tabNameLabel.text = playerDetailsArr[indexPath.row].localized
         return cell
     }
     

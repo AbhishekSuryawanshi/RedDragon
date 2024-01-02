@@ -11,6 +11,7 @@ import SDWebImage
 
 class HomePredictionViewController: UIViewController {
 
+    @IBOutlet weak var userPredictionTitleLbl: UILabel!
     @IBOutlet weak var upcomingMatchesStackView: UIStackView!
     @IBOutlet weak var placedPredictionView3: UIView!
     @IBOutlet weak var placedPredictionView2: UIView!
@@ -87,6 +88,7 @@ class HomePredictionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
        // addNavigationBar(title: "User Prediction")
+        userPredictionTitleLbl.text = "User Prediction".localized
         if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
             removeBlurView()
             let userID = UserDefaults.standard.user?.appDataIDs.predictMatchUserId
@@ -150,7 +152,7 @@ class HomePredictionViewController: UIViewController {
             predictionTopView.walletPointsLbl.text = "Points: ".localized + " \(UserDefaults.standard.user?.wallet ?? 0)"
             
         }
-        predictionMatchesViewModel?.fetchPredictionMatchesAsyncCall(lang: "en", date: Date().formatDate(outputFormat: dateFormat.yyyyMMdd), sportType: sport)
+        predictionMatchesViewModel?.fetchPredictionMatchesAsyncCall(lang: UserDefaults.standard.language ?? "en", date: Date().formatDate(outputFormat: dateFormat.yyyyMMdd), sportType: sport)
     }
     
     func makeNetworkCall2(sport: String, date: String) {
@@ -229,40 +231,42 @@ extension HomePredictionViewController {
         predictionsModel = data
         if let data = data.response?.data{
             UIView.animate(withDuration: 1.0) { [self] in
-                upcomingLeagueNameLbl1.text = data[0].league?.localized
-                upcomingLeagueImgView1.sd_imageIndicator = SDWebImageActivityIndicator.white
-                upcomingLeagueImgView1.sd_setImage(with: URL(string: data[0].logo ?? ""))
-                upcomingTeam1Lbl1.text = data[0].matches?[0].homeTeam?.localized
-                upcomingTeam2Lbl1.text = data[0].matches?[0].awayTeam?.localized
-                upcomingdateLbl1.text = Date().formatDate(outputFormat: dateFormat(rawValue: "yyyy-MM-dd")!) + " | " + (data[0].matches?[0].time ?? "")
-                upcomingPredictBtn1.tag = 0
-                upcomingPredictBtn1.setTitle("Predict".localized, for: .normal)
-                upcomingPredictBtn1.addTarget(self, action: #selector(predictBtn1), for: .touchUpInside)
-                seeAllBtn.addTarget(self, action: #selector(upcomingSeeAll), for: .touchUpInside)
-                
-                if data[1] != nil{
-                    upcomingLeagueNameLbl2.text = data[1].league
-                    upcomingLeagueImgView2.sd_imageIndicator = SDWebImageActivityIndicator.white
-                    upcomingLeagueImgView2.sd_setImage(with: URL(string: data[1].logo ?? ""))
-                    upcomingTeam1Lbl2.text = data[1].matches?[0].homeTeam
-                    upcomingTeam2Lbl2.text = data[1].matches?[0].awayTeam
-                    upcomingdateLbl2.text = Date().formatDate(outputFormat: dateFormat(rawValue: "yyyy-MM-dd")!) + " | " + (data[1].matches?[0].time ?? "")
-                    upcomingPredictBtn2.tag = 1
-                    upcomingPredictBtn2.setTitle("Predict".localized, for: .normal)
-                    upcomingPredictBtn2.addTarget(self, action: #selector(predictBtn2), for: .touchUpInside)
+                if data.count > 0{
+                    upcomingLeagueNameLbl1.text = data[0].league?.localized
+                    upcomingLeagueImgView1.sd_imageIndicator = SDWebImageActivityIndicator.white
+                    upcomingLeagueImgView1.sd_setImage(with: URL(string: data[0].logo ?? ""))
+                    upcomingTeam1Lbl1.text = data[0].matches?[0].homeTeam?.localized
+                    upcomingTeam2Lbl1.text = data[0].matches?[0].awayTeam?.localized
+                    upcomingdateLbl1.text = Date().formatDate(outputFormat: dateFormat(rawValue: "yyyy-MM-dd")!) + " | " + (data[0].matches?[0].time ?? "")
+                    upcomingPredictBtn1.tag = 0
+                    upcomingPredictBtn1.setTitle("Predict".localized, for: .normal)
+                    upcomingPredictBtn1.addTarget(self, action: #selector(predictBtn1), for: .touchUpInside)
+                    seeAllBtn.addTarget(self, action: #selector(upcomingSeeAll), for: .touchUpInside)
+                    
+                    if data[1] != nil{
+                        upcomingLeagueNameLbl2.text = data[1].league
+                        upcomingLeagueImgView2.sd_imageIndicator = SDWebImageActivityIndicator.white
+                        upcomingLeagueImgView2.sd_setImage(with: URL(string: data[1].logo ?? ""))
+                        upcomingTeam1Lbl2.text = data[1].matches?[0].homeTeam
+                        upcomingTeam2Lbl2.text = data[1].matches?[0].awayTeam
+                        upcomingdateLbl2.text = Date().formatDate(outputFormat: dateFormat(rawValue: "yyyy-MM-dd")!) + " | " + (data[1].matches?[0].time ?? "")
+                        upcomingPredictBtn2.tag = 1
+                        upcomingPredictBtn2.setTitle("Predict".localized, for: .normal)
+                        upcomingPredictBtn2.addTarget(self, action: #selector(predictBtn2), for: .touchUpInside)
+                    }
+                    if data[2] != nil{
+                        upcomingLeagueNameLbl3.text = data[2].league
+                        upcomingLeagueImgView3.sd_imageIndicator = SDWebImageActivityIndicator.white
+                        upcomingLeagueImgView3.sd_setImage(with: URL(string: data[2].logo ?? ""))
+                        upcomingTeam1Lbl3.text = data[2].matches?[0].homeTeam
+                        upcomingteam2Lbl3.text = data[2].matches?[0].awayTeam
+                        upcomingdateLbl3.text = Date().formatDate(outputFormat: dateFormat(rawValue: "yyyy-MM-dd")!) + " | " + (data[2].matches?[0].time ?? "")
+                        upcomingPredictBtn3.tag = 2
+                        upcomingPredictBtn3.setTitle("Predict".localized, for: .normal)
+                        upcomingPredictBtn3.addTarget(self, action: #selector(predictBtn3), for: .touchUpInside)
+                    }
+                    
                 }
-                if data[2] != nil{
-                    upcomingLeagueNameLbl3.text = data[2].league
-                    upcomingLeagueImgView3.sd_imageIndicator = SDWebImageActivityIndicator.white
-                    upcomingLeagueImgView3.sd_setImage(with: URL(string: data[2].logo ?? ""))
-                    upcomingTeam1Lbl3.text = data[2].matches?[0].homeTeam
-                    upcomingteam2Lbl3.text = data[2].matches?[0].awayTeam
-                    upcomingdateLbl3.text = Date().formatDate(outputFormat: dateFormat(rawValue: "yyyy-MM-dd")!) + " | " + (data[2].matches?[0].time ?? "")
-                    upcomingPredictBtn3.tag = 2
-                    upcomingPredictBtn3.setTitle("Predict".localized, for: .normal)
-                    upcomingPredictBtn3.addTarget(self, action: #selector(predictBtn3), for: .touchUpInside)
-                }
-                
             }
         }
         else{
@@ -352,7 +356,7 @@ extension HomePredictionViewController {
                     predictionsTeam2Lbl1.text = data[0].matchDetail.awayTeamName?.localized
                     predictionsdateLbl1.text =  data[0].matchDetail.matchDatetime
                     predictionsTimeLbl1.text = data[0].createdAt
-                    predictionsTeamWinLbl1.text = "Prediction: ".localized + getPredictedTeam(predictiveTeam: data[0].predictedTeam)
+                    predictionsTeamWinLbl1.text = "Prediction: ".localized + getPredictedTeam(predictiveTeam: data[0].predictedTeam).localized
                    // seeAllBtn.addTarget(self, action: #selector(placedPredictionSeeAll), for: .touchUpInside)
                 }
                 if data.count > 1{
@@ -366,7 +370,7 @@ extension HomePredictionViewController {
                         predictionsTeam2Lbl2.text = data[1].matchDetail.awayTeamName?.localized
                         predictionsdateLbl2.text =  data[1].matchDetail.matchDatetime
                         predictionsTimeLbl2.text = data[1].createdAt
-                        predictionsTeamWinLbl2.text = "Prediction: ".localized + getPredictedTeam(predictiveTeam: data[1].predictedTeam)
+                        predictionsTeamWinLbl2.text = "Prediction: ".localized + getPredictedTeam(predictiveTeam: data[1].predictedTeam).localized
                     }
                     
                     
@@ -382,7 +386,7 @@ extension HomePredictionViewController {
                         predictionsTeam2Lbl3.text = data[2].matchDetail.awayTeamName
                         predictionsdateLbl3.text =  data[2].matchDetail.matchDatetime
                         predictionsTimeLbl3.text = data[2].createdAt
-                        predictionsTeamWinLbl3.text = "Prediction: " + getPredictedTeam(predictiveTeam: data[2].predictedTeam)
+                        predictionsTeamWinLbl3.text = "Prediction: " + getPredictedTeam(predictiveTeam: data[2].predictedTeam).localized
                     }
                 }
                 

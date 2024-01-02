@@ -201,7 +201,7 @@ extension DatabaseVC: UITableViewDelegate, UITableViewDataSource {
                 }
                 return cell
             } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.eventsTableCell, for: indexPath) as! EventsTableViewCell
+                    let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.eventsTableCell, for: indexPath) as! EventsTableViewCell
                 guard let data = databaseVM?.responseData?.data.events[0].matches[indexPath.row] else {
                     return UITableViewCell()
                 }

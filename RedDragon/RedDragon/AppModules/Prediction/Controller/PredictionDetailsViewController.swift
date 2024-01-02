@@ -11,6 +11,7 @@ import Combine
 
 class PredictionDetailsViewController: UIViewController, UITextViewDelegate {
 
+    @IBOutlet weak var predictionDetailTitleLbl: UILabel!
     @IBOutlet weak var placePredictionDescriptionView: PlacePredictionDescriptionView!
     @IBOutlet weak var predictionPlaceView: PlacePredictionView!
     @IBOutlet weak var predictionDetailTopView: PredictionDetailTopView!
@@ -34,6 +35,7 @@ class PredictionDetailsViewController: UIViewController, UITextViewDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        predictionDetailTitleLbl.text = "Prediction Details".localized
         configureTopView()
         configurePlacePredictionView()
         configurePlacePredictionDescriptionView()
@@ -96,15 +98,15 @@ class PredictionDetailsViewController: UIViewController, UITextViewDelegate {
         placePredictionDescriptionView.descriptionTxtView.delegate = self
         placePredictionDescriptionView.publishPredictionBtn.addTarget(self, action: #selector(publishPredictionBtnAction), for: .touchUpInside)
         placePredictionDescriptionView.descriptionLbl.text = "Description".localized
-        placePredictionDescriptionView.publishPredictionBtn.setTitle("Publish Prediction", for: .normal)
+        placePredictionDescriptionView.publishPredictionBtn.setTitle("Publish Prediction".localized, for: .normal)
     }
     
     func makeNetworkCall2(){
         if selectedUpComingMatch != nil{
-            predictionDetailViewModel?.fetchPredictionMatchesDetailAsyncCall(lang: "en", matchID: selectedUpComingMatch?.matches?[selectedUpComingPosition].slug ?? "", sport: sport)
+            predictionDetailViewModel?.fetchPredictionMatchesDetailAsyncCall(lang: UserDefaults.standard.language ?? "en", matchID: selectedUpComingMatch?.matches?[selectedUpComingPosition].slug ?? "", sport: sport)
         }
         else{
-            predictionDetailViewModel?.fetchPredictionMatchesDetailAsyncCall(lang: "en", matchID: selectedMatch?.matches?[0].slug ?? "", sport: sport)
+            predictionDetailViewModel?.fetchPredictionMatchesDetailAsyncCall(lang: UserDefaults.standard.language ?? "en", matchID: selectedMatch?.matches?[0].slug ?? "", sport: sport)
         }
     }
     

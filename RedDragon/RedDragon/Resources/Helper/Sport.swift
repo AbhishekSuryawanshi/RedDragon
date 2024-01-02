@@ -37,17 +37,17 @@ public enum Sports: String, CaseIterable {
     var title: String {
         switch self {
         case .football:
-            return "Football".localized
+            return "Football"
         case .basketball:
-            return "Basketball".localized
+            return "Basketball"
         case .tennis:
-            return "Tennis".localized
+            return "Tennis"
         case .handball:
-            return "Handball".localized
+            return "Handball"
         case .hockey:
-            return "Hockey".localized
+            return "Hockey"
         case .volleyball:
-            return "Volleyball".localized
+            return "Volleyball"
         }
     }
 }

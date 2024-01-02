@@ -10,6 +10,7 @@ import SDWebImage
 
 class PredictionResultViewController: UIViewController {
 
+    @IBOutlet weak var predictionDetailTitleLbl: UILabel!
     @IBOutlet weak var predictionDescriptionView: PredictResultDescriptionView!
     @IBOutlet weak var predictionResultView: PredictResultTopView!
     
@@ -24,6 +25,7 @@ class PredictionResultViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        predictionDetailTitleLbl.text = "Prediction Details".localized
         configureTopView()
     }
     

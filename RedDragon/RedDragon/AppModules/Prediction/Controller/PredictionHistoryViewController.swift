@@ -11,6 +11,7 @@ import Combine
 
 class PredictionHistoryViewController: UIViewController {
 
+    @IBOutlet weak var predictionHistoryTitleLbl: UILabel!
     @IBOutlet weak var predictionMatchesTableView: UITableView!
     @IBOutlet weak var datesCollectionView: UICollectionView!
     @IBOutlet weak var sportsCollectionView: UICollectionView!
@@ -29,6 +30,7 @@ class PredictionHistoryViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        predictionHistoryTitleLbl.text = "Prediction History".localized
         getNextFiveDatesArr()
         configureView()
     }
@@ -61,8 +63,6 @@ class PredictionHistoryViewController: UIViewController {
         datesCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .left)
         
     }
-    
-    
     
     func getNextFiveDatesArr(){
         for i in 0 ..< 5{
@@ -232,13 +232,13 @@ extension PredictionHistoryViewController: UITableViewDelegate, UITableViewDataS
         if predictionListUserModel?.response?.data?[indexPath.row].isSuccess == 0{
             cell.predictionRewardView.backgroundColor = UIColor.init(hex: "FFDAD5")
             cell.rewardsLbl.isHidden = true
-            cell.wrongPredictionLbl.text = getPredictedTeam(predictiveTeam: predictionListUserModel?.response?.data?[indexPath.row].predictedTeam) + " - " + "Wrong Prediction".localized
+            cell.wrongPredictionLbl.text = (getPredictedTeam(predictiveTeam: predictionListUserModel?.response?.data?[indexPath.row].predictedTeam)).localized + " - " + "Wrong Prediction".localized
             
         }
         else if predictionListUserModel?.response?.data?[indexPath.row].isSuccess == 1{
             cell.predictionRewardView.backgroundColor = UIColor.init(hex: "CEF6D7")
             cell.rewardsLbl.isHidden = false
-            cell.correctPredictionLbl.text = getPredictedTeam(predictiveTeam: predictionListUserModel?.response?.data?[indexPath.row].predictedTeam) + " - " + "Correct Prediction".localized
+            cell.correctPredictionLbl.text = (getPredictedTeam(predictiveTeam: predictionListUserModel?.response?.data?[indexPath.row].predictedTeam)).localized + " - " + "Correct Prediction".localized
         }
         
       
