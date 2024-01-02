@@ -61,13 +61,13 @@
                                                 <rect key="frame" x="0.0" y="222" width="393" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upcoming Matches" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOO-AV-0v4">
-                                                        <rect key="frame" x="10" y="17" width="123" height="16.333333333333329"/>
+                                                        <rect key="frame" x="10" y="16.666666666666686" width="122" height="16.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="14"/>
                                                         <color key="textColor" name="base"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E6W-6i-Fb2">
-                                                        <rect key="frame" x="347" y="12" width="36" height="26"/>
+                                                        <rect key="frame" x="346" y="11.666666666666686" width="37" height="27"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="12"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="See all">
@@ -392,13 +392,13 @@
                                                 <rect key="frame" x="0.0" y="542" width="393" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Placed Predictions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u7b-vZ-KWh">
-                                                        <rect key="frame" x="9.9999999999999929" y="17" width="117.33333333333331" height="16.333333333333329"/>
+                                                        <rect key="frame" x="10.000000000000007" y="16.666666666666629" width="118.66666666666669" height="16.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="14"/>
                                                         <color key="textColor" name="base"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fdr-5Y-OWl">
-                                                        <rect key="frame" x="347" y="12" width="36" height="26"/>
+                                                        <rect key="frame" x="346" y="11.666666666666629" width="37" height="27"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="12"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="See all">
@@ -886,6 +886,7 @@
                         <outlet property="upcomingdateLbl2" destination="uCY-pV-OHk" id="QYG-CH-GSo"/>
                         <outlet property="upcomingdateLbl3" destination="USq-Bb-uBl" id="0al-2x-fkK"/>
                         <outlet property="upcomingteam2Lbl3" destination="1Fb-w4-ywA" id="kOl-EI-x0c"/>
+                        <outlet property="userPredictionTitleLbl" destination="opp-DK-9Jx" id="xpg-XL-fF1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -971,6 +972,7 @@
                     </view>
                     <connections>
                         <outlet property="placePredictionDescriptionView" destination="QeF-At-nR4" id="6eW-Eq-q0W"/>
+                        <outlet property="predictionDetailTitleLbl" destination="MBU-zU-VW7" id="SpG-7D-DJa"/>
                         <outlet property="predictionDetailTopView" destination="XHo-ey-N9G" id="Kg9-qG-OWA"/>
                         <outlet property="predictionPlaceView" destination="dvK-hS-0pd" id="GBR-FY-YHI"/>
                     </connections>
@@ -1048,6 +1050,7 @@
                     </view>
                     <connections>
                         <outlet property="predictionDescriptionView" destination="Ron-nQ-4Yw" id="ONe-ur-rMg"/>
+                        <outlet property="predictionDetailTitleLbl" destination="dLR-ll-sb6" id="jhp-KW-LPm"/>
                         <outlet property="predictionResultView" destination="vJp-0v-Wy4" id="mQq-0c-r0e"/>
                     </connections>
                 </viewController>
@@ -1171,6 +1174,7 @@
                         <outlet property="dateCollectionView" destination="xU3-jq-4G9" id="zTW-RK-VaF"/>
                         <outlet property="sportsCollectionView" destination="Wte-ZN-0Bm" id="bgq-xR-JpY"/>
                         <outlet property="upcomingMatchesTableView" destination="mjP-Vl-7K6" id="JTH-Ut-RTM"/>
+                        <outlet property="upcomingMatchesTitleLbl" destination="EG3-Ba-WlV" id="bTS-Ju-0P7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TB8-aV-pQH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1282,6 +1286,7 @@
                     </view>
                     <connections>
                         <outlet property="datesCollectionView" destination="xdT-iu-0IZ" id="NXF-rh-rNO"/>
+                        <outlet property="predictionHistoryTitleLbl" destination="dHq-Jf-0MM" id="pgS-0r-f2B"/>
                         <outlet property="predictionMatchesTableView" destination="zTj-3H-Mgi" id="MFc-SU-4kY"/>
                         <outlet property="sportsCollectionView" destination="bLG-j7-qw4" id="vzd-a1-juk"/>
                     </connections>

@@ -11,6 +11,7 @@ import Combine
 
 class UpComingMatchesViewController: UIViewController {
 
+    @IBOutlet weak var upcomingMatchesTitleLbl: UILabel!
     @IBOutlet weak var sportsCollectionView: UICollectionView!
     @IBOutlet weak var dateCollectionView: UICollectionView!
     @IBOutlet weak var upcomingMatchesTableView: UITableView!
@@ -30,6 +31,7 @@ class UpComingMatchesViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        upcomingMatchesTitleLbl.text = "Upcoming Matches".localized
         getNextFiveDatesArr()
         loadFunctionality()
         upcomingMatchesTableView.reloadData()

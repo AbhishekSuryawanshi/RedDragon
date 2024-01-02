@@ -17,7 +17,9 @@ class PredictionViewModel: APIServiceManager<PredictionMatchesModel> {
                 let queryItems = [
                     URLQueryItem(name: "sportType", value: sportType),
                     URLQueryItem(name: "lang", value: lang),
-                    URLQueryItem(name: "date", value: date)
+                    URLQueryItem(name: "date", value: date),
+                   
+                    
                 ]
                 
                 var urlComponents = URLComponents(string: url)

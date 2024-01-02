@@ -43,6 +43,7 @@ class PlayerDetailProfileViewController: UIViewController {
     }
     
     func configurePlayerDetailView(){
+        playerDetailView.playerDetailLbl.text = "Player Details".localized
         playerDetailView.playerDetailTxtView.text = playerDetailViewModel?.responseData?.data?.about
        
     }
@@ -50,7 +51,7 @@ class PlayerDetailProfileViewController: UIViewController {
     func configurePlayerTeamDetailView(){
         playerTeamsView.team1Lbl.text = playerDetailViewModel?.responseData?.data?.playerCountry
         playerTeamsView.team1ImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
-       // playerTeamsView.team1ImgView.sd_setImage(with: URL(string: playerDetailViewModel?.responseData?.data?.playerPhoto ?? ""))
+        playerTeamsView.team1ImgView.sd_setImage(with: URL(string: "http://45.76.178.21:6045/flags/flag.php?flag=" + (playerTeamsView.team1Lbl.text ?? "")))
         for i in 0 ..< (playerDetailViewModel?.responseData?.data?.indicators?.count ?? 0){
             if playerDetailViewModel?.responseData?.data?.indicators?[i].key == "Player number"{
                 playerTeamsView.team1RankLbl.text = playerDetailViewModel?.responseData?.data?.indicators?[i].value
@@ -93,6 +94,7 @@ class PlayerDetailProfileViewController: UIViewController {
     }
     
     func chart(){
+        playerSkillView.skillOverviewLbl.text = "Skills Overview".localized
         let spiderChartView = DDSpiderChartView(frame: CGRect(x: 10, y: 50, width: screenWidth - 20, height: 350)) // Replace with some frame or add constraints
         spiderChartView.axes = skillArr.map{
             attributedAxisLabel($0 ?? "")} // Set axes by giving their labels
@@ -119,6 +121,8 @@ class PlayerDetailProfileViewController: UIViewController {
     }
     
     func configureLastMatchesView(){
+        playerLastMatches.seeAllBtn.setTitle("See all".localized, for: .normal)
+        playerLastMatches.lastMatchesLbl.text = "Last Matches".localized
         playerLastMatches.seeAllBtn.addTarget(self, action: #selector(seeAllMatches), for: .touchUpInside)
         for var j in 0 ..< (playerDetailViewModel?.responseData?.data?.events?[0].matches?.count ?? 0){
             if j < 1{
@@ -156,6 +160,8 @@ class PlayerDetailProfileViewController: UIViewController {
     }
     
     func configureMediaView(){
+        playerMediaDetails.seeAllBtn.setTitle("See all".localized, for: .normal)
+        playerMediaDetails.mediaLbl.text = "Media".localized
         playerMediaDetails.seeAllBtn.addTarget(self, action: #selector(seeAllMedia), for: .touchUpInside)
         for i in 0 ..< (playerDetailViewModel?.responseData?.data?.medias?.count ?? 0){
             playerMediaDetails.mediaImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
