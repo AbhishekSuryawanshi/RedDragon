@@ -11,8 +11,9 @@ import Toast
 import Combine
 import SDWebImage
 
-class InfoVC: UIViewController {
+class InfoVC: UIViewController, UIScrollViewDelegate {
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var servicesCollectionView: UICollectionView!
     @IBOutlet weak var firstStaticDataView: UIView!
     
@@ -28,6 +29,7 @@ class InfoVC: UIViewController {
     @IBOutlet weak var fourthPointsLabel: UILabel!
     @IBOutlet weak var fourthPriceLabel: UILabel!
     
+    @IBOutlet weak var tagsView: UIView!
     @IBOutlet weak var tagsCollectionView: UICollectionView!
     @IBOutlet weak var bannerCollectionView: UICollectionView!
     @IBOutlet weak var topMatchesLabel: UILabel!
@@ -72,6 +74,10 @@ class InfoVC: UIViewController {
     @IBOutlet weak var expertTableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var expertViewHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var constantViewForTags: UIView!
+    @IBOutlet weak var constantTagsViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var constantTagsCollectionView: UICollectionView!
+    
     private var cancellable = Set<AnyCancellable>()
     private var bannerVM: BannerViewModel?
     private var tagsVM: TagsViewModel?
@@ -86,15 +92,14 @@ class InfoVC: UIViewController {
     private var timer = Timer()
     var tableViewHeight: CGFloat = 0
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadFunctionality()
+        setupConstantTagView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        refreshPage()
-        whatsHappeningLabel.text = "What's Happening".localized
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     @IBAction func appModulesButton(_ sender: UIButton) {
@@ -110,16 +115,16 @@ class InfoVC: UIViewController {
     }
     
     @IBAction func seeAllButton(_ sender: UIButton) {
-        ///What's Happening
-        if sender.tag == 22 {
-            self.tabBarController?.tabBar.isHidden = true
-            navigateToViewController(NewsModuleVC.self, storyboardName: StoryboardName.news, identifier: "NewsModuleVC")
-        }
     }
 }
 
 /// __Supportive functions
 extension InfoVC {
+    
+    private func setupConstantTagView() {
+        constantViewForTags.isHidden = true
+        constantViewForTags.backgroundColor = UIColor(red: 255/255, green: 218/255, blue: 213/255, alpha: 1)
+    }
     
     private func loadFunctionality() {
         initializeNibFiles()
@@ -133,6 +138,7 @@ extension InfoVC {
         whatsHappeningTableView.register(CellIdentifier.newsTableViewCell)
         predictionTabelView.register(CellIdentifier.predictionTableCell)
         expertTableView.register(CellIdentifier.predictUserListTableViewCell)
+        constantTagsCollectionView.register(CellIdentifier.leagueNamesCollectionCell)
     }
     
     func configureUI() {
@@ -149,20 +155,26 @@ extension InfoVC {
         expertDataAPICall()
     }
     
-    private func refreshPage() {
-        self.navigationController?.navigationBar.isHidden = true
-        self.tabBarController?.tabBar.isHidden = false
-        servicesCollectionView.reloadData()
-        whatsHappeningLabel.text = ""
+    // MARK: - UIScrollViewDelegate
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // Check if tags view is not visible on the screen
+        self.constantViewForTags.isHidden = isViewVisibleOnScreen(tagsView)
+    }
+    
+    // Helper function to check if a view is visible on the screen
+    private func isViewVisibleOnScreen(_ view: UIView) -> Bool {
+        let rect = view.convert(view.bounds, to: nil)
+        return rect.intersects(view.window?.bounds ?? CGRect.zero)
     }
     
     private func showLoader(_ value: Bool) {
         value ? startLoader() : stopLoader()
     }
     
-    func highlightFirstIndex_collectionView() {
-        let indexPath = IndexPath(item: 0, section: 0)
+    func highlightFirstIndex_collectionView(item: Int = 0) {
+        let indexPath = IndexPath(item: item, section: 0)
         tagsCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
+        constantTagsCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
     }
     
     func congifureCell(cell: GlobalMatchesTableViewCell, matches: GlobalMatchList) {
@@ -192,7 +204,6 @@ extension InfoVC {
         cell.followStackView.isHidden = false
         cell.heightConstraint.constant = 35.67
         cell.nameLabel.text = userArray[indexPath.row].appdata?.predict?.name?.capitalized
-        //    let roundedValue = (userArray[indexPath.row].appdata?.predict?.predictStats?.successRate ?? 0.0).rounded(toPlaces: 2)
         cell.winRateLabel.text = "\(userArray[indexPath.row].appdata?.predict?.predictStats?.successRate ?? 0)%"
         cell.allCountLabel.text = "Total: \(userArray[indexPath.row].appdata?.predict?.predictStats?.allCount ?? 0)"
         cell.successCountLabel.text = "Success: \(userArray[indexPath.row].appdata?.predict?.predictStats?.successCount ?? 0)"
@@ -251,6 +262,7 @@ extension InfoVC {
                 }
             })
             .store(in: &cancellable)
+        
         /// API call for banners
         bannerVM?.fetchBannerDataAsyncCall()
     }
@@ -262,9 +274,11 @@ extension InfoVC {
             .dropFirst()
             .sink(receiveValue: { [weak self] data in
                 self?.tagsCollectionView.reloadData()
+                self?.constantTagsCollectionView.reloadData()
                 self?.highlightFirstIndex_collectionView()
             })
             .store(in: &cancellable)
+        
         /// API call to fetch all tags
         tagsVM?.fetchTagsAsyncCall()
     }
@@ -285,6 +299,7 @@ extension InfoVC {
                 self?.topMatchesTableView.reloadData()
             })
             .store(in: &cancellable)
+        
         /// API call for Live matches
         footballLiveMatchesVM?.fetchFootballLiveMatches()
     }
@@ -304,6 +319,7 @@ extension InfoVC {
                 self?.whatsHappeningTableView.reloadData()
             })
             .store(in: &cancellable)
+        
         /// API call to fetch What's Happing data
         whatsHappingAPICall()
     }
@@ -336,6 +352,7 @@ extension InfoVC {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let formattedDate = dateFormatter.string(from: currentDate)
+        
         /// API call to fetch prediction data
         predictionVM?.fetchHomePagePredictionMatchesAsyncCall(lang: "en", date: formattedDate)
     }
@@ -355,7 +372,7 @@ extension InfoVC {
                 self?.firstThreeExpertsData()
                 self?.userArray = response?.response?.data ?? []
                 self?.expertTableView.reloadData()
-              //  self?.expertViewHeight.constant = 1100
+            //    self?.expertViewHeight.constant = 1000
             })
             .store(in: &cancellable)
     }
@@ -385,45 +402,52 @@ extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == servicesCollectionView {
+        switch collectionView {
+        case servicesCollectionView:
             return ServiceType.allCases.count
-        } else {
-            return collectionView == bannerCollectionView ?
-            bannerVM?.responseData?.data.top.count ?? 0 :
-            tagsVM?.responseData?.response.data.count ?? 0
+            
+        case bannerCollectionView:
+            return bannerVM?.responseData?.data.top.count ?? 0
+            
+        default:
+            return tagsVM?.responseData?.response.data.count ?? 0
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == servicesCollectionView {
+        switch collectionView {
+            
+        case servicesCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.iconNameCollectionViewCell, for: indexPath) as! IconNameCollectionViewCell
             cell.configure(title: ServiceType.allCases[indexPath.row].rawValue.localized, titleTop: -4, iconImage: ServiceType.allCases[indexPath.row].iconImage, bgViewWidth: 55, imageWidth: (0.55 * 55))
             cell.bgView.borderWidth = 0
             cell.titleLabel.textColor = .base
             return cell
-        } else {
-            if collectionView == bannerCollectionView, let banner = bannerVM?.responseData?.data.top {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.bannerCell, for: indexPath) as! BannerCollectionViewCell
-                cell.bannerImage.sd_imageIndicator = SDWebImageActivityIndicator.white
-                cell.bannerImage.sd_setImage(with: URL(string: URLConstants.bannerBaseURL + banner[indexPath.item].coverPath))
-                return cell
-            } else if let tags = tagsVM?.responseData?.response.data {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.leagueNamesCollectionCell, for: indexPath) as! LeagueCollectionViewCell
-                cell.leagueName.text = tags[indexPath.item].tag
-                return cell
+            
+        case bannerCollectionView:
+            guard let banner = bannerVM?.responseData?.data.top else {
+                return UICollectionViewCell()
             }
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.bannerCell, for: indexPath) as! BannerCollectionViewCell
+            cell.bannerImage.sd_imageIndicator = SDWebImageActivityIndicator.white
+            cell.bannerImage.sd_setImage(with: URL(string: URLConstants.bannerBaseURL + banner[indexPath.item].coverPath))
+            return cell
+            
+        case tagsCollectionView, constantTagsCollectionView:
+            guard let tags = tagsVM?.responseData?.response.data else {
+                return UICollectionViewCell()
+            }
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.leagueNamesCollectionCell, for: indexPath) as! LeagueCollectionViewCell
+            cell.leagueName.text = tags[indexPath.item].tag
+            return cell
+            
+        default:
+            return UICollectionViewCell()
         }
-        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == servicesCollectionView {
-            /// show tab bar for these types, these are main tabbar controller items
-            let typeArray: [ServiceType] = [.social, .database, .wallet, .experts, .analysis]
-            if !typeArray.contains(ServiceType.allCases[indexPath.row]) {
-                self.tabBarController?.tabBar.isHidden = true
-            }
-            
             switch ServiceType.allCases[indexPath.row] {
             case .predictions:
                 navigateToViewController(HomePredictionViewController.self, storyboardName: StoryboardName.prediction, animationType: .autoReverse(presenting: .zoom))
@@ -432,7 +456,7 @@ extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
             case .social:
                 self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[1]
             case .fantasy:
-                navigateToViewController(AllPlayersViewController.self, storyboardName: StoryboardName.cardGame, identifier: "AllPlayersViewController")
+                print("")
             case .matches:
                 navigateToViewController(MatchesDashboardVC.self, storyboardName: StoryboardName.matches, animationType: .autoReverse(presenting: .zoom))
             case .updates:
@@ -440,9 +464,7 @@ extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
             case .database:
                 self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[2]
             case .analysis:
-                self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[0]
-                let dataDict:[String: Any] = ["tabName": "expert"]
-                NotificationCenter.default.post(name: .selectHomeTab, object: nil, userInfo: dataDict)
+                print("")
             case .users:
                 print("")
             case .street:
@@ -450,9 +472,7 @@ extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
             case .meet:
                 navigateToViewController(MeetDashboardVC.self, storyboardName: StoryboardName.meet, animationType: .autoReverse(presenting: .zoom))
             case .experts:
-                self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[0]
-                let dataDict:[String: Any] = ["tabName": "expert"]
-                NotificationCenter.default.post(name: .selectHomeTab, object: nil, userInfo: dataDict)
+                navigateToViewController(HomeVC.self, storyboardName: StoryboardName.home, animationType: .autoReverse(presenting: .zoom))
             case .cards:
                 navigateToViewController(AllPlayersViewController.self, storyboardName: StoryboardName.cardGame, identifier: "AllPlayersViewController")
             default: //wallet
@@ -468,6 +488,7 @@ extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
             } else {
                 let tag = tagsVM?.responseData?.response.data[indexPath.item].slug
                 expertPredictUserVM?.fetchExpertUserListAsyncCall(page: 1, slug: "predict-match", tag: tag)
+                highlightFirstIndex_collectionView(item: indexPath.item)
             }
         }
     }
@@ -543,19 +564,8 @@ extension InfoVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if tableView == expertTableView {
-            expertTableViewHeight.constant = CGFloat(200 * (expertPredictUserVM?.responseData?.response?.data?.count ?? 0))
-        }
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch tableView {
-        case whatsHappeningTableView:
-            navigateToViewController(GossipDetailVC.self, storyboardName: StoryboardName.gossip, animationType: .autoReverse(presenting: .zoom)) { vc in
-                vc.commentSectionID = "gossipNewsID:-\(self.gossipsArray[indexPath.row].slug ?? "")"
-                vc.gossipModel = self.gossipsArray[indexPath.row]
+            if tableView == expertTableView {
+                expertTableViewHeight.constant = CGFloat(200 * (expertPredictUserVM?.responseData?.response?.data?.count ?? 0))
             }
-        default:
-            return
         }
-    }
 }
