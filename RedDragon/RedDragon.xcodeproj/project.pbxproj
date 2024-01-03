@@ -450,6 +450,10 @@
 		AD16664E2B1763E1001C0770 /* SportsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD16664A2B1763E1001C0770 /* SportsCollectionViewCell.xib */; };
 		AD16664F2B1763E1001C0770 /* AmenityCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD16664B2B1763E1001C0770 /* AmenityCollectionViewCell.xib */; };
 		AD1666502B1763E1001C0770 /* SportsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD16664C2B1763E1001C0770 /* SportsCollectionViewCell.swift */; };
+		AD1CA0572B456A3C0032E490 /* SwiftFortuneWheel in Frameworks */ = {isa = PBXBuildFile; productRef = AD1CA0562B456A3C0032E490 /* SwiftFortuneWheel */; };
+		AD1CA05A2B456A9D0032E490 /* SpinWheel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD1CA0592B456A9D0032E490 /* SpinWheel.storyboard */; };
+		AD1CA05E2B456AE50032E490 /* SFWConfiguration+VariousWheelSimple.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1CA05C2B456AE50032E490 /* SFWConfiguration+VariousWheelSimple.swift */; };
+		AD1CA05F2B456AE50032E490 /* VariousWheelSimpleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1CA05D2B456AE50032E490 /* VariousWheelSimpleViewController.swift */; };
 		AD25B70C2B2ADA410022DA1E /* StreetPlayerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD25B70B2B2ADA410022DA1E /* StreetPlayerProfileViewController.swift */; };
 		AD25B70E2B2ADC320022DA1E /* StreetProfileUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD25B70D2B2ADC320022DA1E /* StreetProfileUser.swift */; };
 		AD25B7102B2AE1050022DA1E /* StreetPlayerProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD25B70F2B2AE1050022DA1E /* StreetPlayerProfileViewModel.swift */; };
@@ -1052,6 +1056,9 @@
 		AD16664A2B1763E1001C0770 /* SportsCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SportsCollectionViewCell.xib; sourceTree = "<group>"; };
 		AD16664B2B1763E1001C0770 /* AmenityCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AmenityCollectionViewCell.xib; sourceTree = "<group>"; };
 		AD16664C2B1763E1001C0770 /* SportsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SportsCollectionViewCell.swift; sourceTree = "<group>"; };
+		AD1CA0592B456A9D0032E490 /* SpinWheel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SpinWheel.storyboard; sourceTree = "<group>"; };
+		AD1CA05C2B456AE50032E490 /* SFWConfiguration+VariousWheelSimple.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SFWConfiguration+VariousWheelSimple.swift"; sourceTree = "<group>"; };
+		AD1CA05D2B456AE50032E490 /* VariousWheelSimpleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariousWheelSimpleViewController.swift; sourceTree = "<group>"; };
 		AD25B70B2B2ADA410022DA1E /* StreetPlayerProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetPlayerProfileViewController.swift; sourceTree = "<group>"; };
 		AD25B70D2B2ADC320022DA1E /* StreetProfileUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetProfileUser.swift; sourceTree = "<group>"; };
 		AD25B70F2B2AE1050022DA1E /* StreetPlayerProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetPlayerProfileViewModel.swift; sourceTree = "<group>"; };
@@ -1226,6 +1233,7 @@
 				41846BC32B0B395B0020F503 /* YouTubePlayerKit in Frameworks */,
 				472873702AEA7E3F0011F00F /* NVActivityIndicatorViewExtended in Frameworks */,
 				472873692AEA7E360011F00F /* SDWebImage in Frameworks */,
+				AD1CA0572B456A3C0032E490 /* SwiftFortuneWheel in Frameworks */,
 				47C8C9602AF1191700448D96 /* Kingfisher in Frameworks */,
 				41EB79DB2AF38D3F00D068F7 /* DDSpiderChart in Frameworks */,
 				472873732AEA7E470011F00F /* Hero in Frameworks */,
@@ -2337,6 +2345,7 @@
 				47CB0E082B11D6A10070744B /* News */,
 				6A1A057E2B22F48D009ED5C4 /* Matches */,
 				473BFC662B30297F00C75069 /* Wallet */,
+				AD1CA0542B4569C00032E490 /* SpinWheel */,
 			);
 			path = AppModules;
 			sourceTree = "<group>";
@@ -2853,6 +2862,32 @@
 			path = Players;
 			sourceTree = "<group>";
 		};
+		AD1CA0542B4569C00032E490 /* SpinWheel */ = {
+			isa = PBXGroup;
+			children = (
+				AD1CA05B2B456AB70032E490 /* Controller */,
+				AD1CA0582B456A5F0032E490 /* Storyboard */,
+			);
+			path = SpinWheel;
+			sourceTree = "<group>";
+		};
+		AD1CA0582B456A5F0032E490 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				AD1CA0592B456A9D0032E490 /* SpinWheel.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		AD1CA05B2B456AB70032E490 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AD1CA05C2B456AE50032E490 /* SFWConfiguration+VariousWheelSimple.swift */,
+				AD1CA05D2B456AE50032E490 /* VariousWheelSimpleViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		AD25B70A2B2AD9F00022DA1E /* PlayerProfile */ = {
 			isa = PBXGroup;
 			children = (
@@ -3257,6 +3292,7 @@
 				6A947A812B1EFDA600A00788 /* TwilioChatClient */,
 				49181D7E2B283966007D6614 /* SPConfetti */,
 				B8B4103C2B39751B0040A255 /* Alamofire */,
+				AD1CA0562B456A3C0032E490 /* SwiftFortuneWheel */,
 			);
 			productName = RedDragon;
 			productReference = 49B0B9E42AE68F0700A9D235 /* RedDragon.app */;
@@ -3307,6 +3343,7 @@
 				6A947A802B1EFDA600A00788 /* XCRemoteSwiftPackageReference "twilio-chat-ios" */,
 				49181D7D2B283966007D6614 /* XCRemoteSwiftPackageReference "SPConfetti" */,
 				B8B4103B2B39751B0040A255 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				AD1CA0552B456A3C0032E490 /* XCRemoteSwiftPackageReference "SwiftFortuneWheel" */,
 			);
 			productRefGroup = 49B0B9E52AE68F0700A9D235 /* Products */;
 			projectDirPath = "";
@@ -3362,6 +3399,7 @@
 				B8D338122B2AD332004ABC66 /* NewsDetailViewController.xib in Resources */,
 				41BB28802B0609AA0080E63F /* PlayerLeaguesCollectionViewCell.xib in Resources */,
 				6AD21DCC2B15B3100043D7C2 /* MyEventsCollectionViewCell.xib in Resources */,
+				AD1CA05A2B456A9D0032E490 /* SpinWheel.storyboard in Resources */,
 				474D993E2AE7F30D009499D0 /* Roboto-Medium.ttf in Resources */,
 				B8D3381F2B2AD448004ABC66 /* TrendingCollectionViewCell.xib in Resources */,
 				49B837382B04A28000CD9E26 /* StatisticsTableViewCell.xib in Resources */,
@@ -3523,6 +3561,7 @@
 				47AC3E952B3AAAF8004A5BBF /* CommentTableViewCell.swift in Sources */,
 				4196581B2B0CE27E00730D9F /* PlacePredictionDescriptionView.swift in Sources */,
 				496A9AB32B0F200900274FC6 /* LeagueCollectionViewCell.swift in Sources */,
+				AD1CA05E2B456AE50032E490 /* SFWConfiguration+VariousWheelSimple.swift in Sources */,
 				49B8373B2B04E2E700CD9E26 /* MediaCollectionViewCell.swift in Sources */,
 				49EF6C3E2B272F450082D06A /* WinViewController.swift in Sources */,
 				E9DDB63E2B04D3B1004C8ACF /* HomeTitleCollectionVc.swift in Sources */,
@@ -3665,6 +3704,7 @@
 				49E223C52B15CBB600A7202C /* LeaderboardViewController.swift in Sources */,
 				49B0BA212AE6982400A9D235 /* ErrorMessage.swift in Sources */,
 				AD25B70C2B2ADA410022DA1E /* StreetPlayerProfileViewController.swift in Sources */,
+				AD1CA05F2B456AE50032E490 /* VariousWheelSimpleViewController.swift in Sources */,
 				6A2140262B0B75F800F52E69 /* MeetUserModel.swift in Sources */,
 				49B0BA1F2AE697A500A9D235 /* CustomErrors.swift in Sources */,
 				E9129B9A2B05FC960073A407 /* BetLoseTableVC.swift in Sources */,
@@ -4310,6 +4350,14 @@
 				kind = branch;
 			};
 		};
+		AD1CA0552B456A3C0032E490 /* XCRemoteSwiftPackageReference "SwiftFortuneWheel" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sh-khashimov/SwiftFortuneWheel.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.4;
+			};
+		};
 		B8B4103B2B39751B0040A255 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -4428,6 +4476,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6A947A802B1EFDA600A00788 /* XCRemoteSwiftPackageReference "twilio-chat-ios" */;
 			productName = TwilioChatClient;
+		};
+		AD1CA0562B456A3C0032E490 /* SwiftFortuneWheel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD1CA0552B456A3C0032E490 /* XCRemoteSwiftPackageReference "SwiftFortuneWheel" */;
+			productName = SwiftFortuneWheel;
 		};
 		B8B4103C2B39751B0040A255 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

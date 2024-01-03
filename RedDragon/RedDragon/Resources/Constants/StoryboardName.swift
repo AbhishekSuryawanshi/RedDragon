@@ -30,4 +30,5 @@ struct StoryboardName {
     static let forYou           = "Foryou"
     static let wallet           = "Wallet"
     static let discover         = "Discover"
+    static let spinWheel        = "SpinWheel"
 }
