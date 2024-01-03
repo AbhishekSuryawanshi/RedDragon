@@ -501,6 +501,7 @@ extension GossipVC {
             if(isPagination == false){
                 isPagination = true
                 pageNum = pageNum + 1
+                
                 self.getNewsList()
             }
         }
