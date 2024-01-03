@@ -66,53 +66,39 @@ class ChatDetailVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-//    @IBAction func optionBtnAction(_ sender: Any) {
-//        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-//       
-//            let unmatchAction = UIAlertAction(title: "Report Profile".localized, style: .default, handler: { (UIAlertAction) in
-//                CommonFxns.showConfirmationAlert(title: "Report Profile".localized, message: "Caution! You're about to flag this user as malicious or abusive. Are you sure you want to report it?".localized, cancel: true, vc: self) {
-//                    
-//                    let otherVCObj = ReportUserVC(nibName: enumViewControllerIdentifier.reportUserVC.rawValue, bundle: nil)
-//                    self.navigationController?.pushViewController(otherVCObj, animated: true)
-//                }
-//            })
-//            optionMenu.addAction(unmatchAction)
-//       
-//
-//        let blockAction = UIAlertAction(title: "Block Profile".localized, style: .default, handler: { (UIAlertAction) in
-//            
-//            if appDelegate.isGuestUser {
-//                CommonFxns.showAlertForGuest(vc: self)
-//             return
-//            }
-//            
-//            DispatchQueue.main.async {
-//                CommonFxns.showPopUpToTakeInput(title: "Block Profile".localized, message: "Are you sure you want to block this user?".localized, cancel: true, vc: self, success: { reason in
-//                    CommonFxns.showProgress()
-//                    self.viewModel = UserViewModel(userType: .blockUser, userID: self.selectedUserId, reason: reason)
-//                    
-//                    self.viewModel?.bindUserViewModelToController = {
-//                        if self.viewModel?.unMatchOrBlockUser.code == 200 {
-//                            CommonFxns.showAlertWithCompletion(title: "Success".localized, message: "This user has been blocked successfully.".localized, vc: self, success: {
-//                                self.userBlocked?()
-//                                NotificationCenter.default.post(name: Notification.Name("userBlocked"), object: nil)
-//                                self.navigationController?.popViewController(animated: true)
-//                            })
-//                        }
-//                       
-//                    }
-//                })
-//            }
-//        })
-//        
-//        let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: { (UIAlertAction) in
-//            optionMenu.dismiss(animated: true)
-//        })
-//        
-//        optionMenu.addAction(blockAction)
-//        optionMenu.addAction(cancelAction)
-//        self.present(optionMenu, animated: true, completion: nil)
-//    }
+    @IBAction func optionBtnAction(_ sender: Any) {
+        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+       
+        let unmatchAction = UIAlertAction(title: "Report Profile".localized, style: .default, handler: { (UIAlertAction) in
+            self.customAlertView_3Actions(title: "Report Profile".localized, description: "Are you sure you want to report this user?".localized) {
+                /// navigate to Report user
+                self.navigateToXIBViewController(ReportUserVC.self, nibName: "ReportUserVC")
+            } dismissAction: {
+                self.navigationController?.popViewController(animated: true)
+            }
+        })
+            optionMenu.addAction(unmatchAction)
+       
+           let blockAction = UIAlertAction(title: "Block Profile".localized, style: .default, handler: { (UIAlertAction) in
+          
+               self.customAlertView_3Actions(title: "Block Profile".localized, description: "Are you sure you want to block this user?".localized) {
+                   /// navigate to Block user
+                   self.navigateToXIBViewController(ReportUserVC.self, nibName: "ReportUserVC") { vc in
+                       vc.isFromBlockUser = true
+                   }
+               } dismissAction: {
+                   self.navigationController?.popViewController(animated: true)
+               }
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: { (UIAlertAction) in
+            optionMenu.dismiss(animated: true)
+        })
+        
+        optionMenu.addAction(blockAction)
+        optionMenu.addAction(cancelAction)
+        self.present(optionMenu, animated: true, completion: nil)
+    }
     
     func loadMessages(){
         messages.removeAll()
