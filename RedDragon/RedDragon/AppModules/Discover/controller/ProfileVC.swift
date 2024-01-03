@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class ProfileVC: UIViewController {
 
@@ -16,7 +17,9 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var tagsCollectionView: UICollectionView!
     @IBOutlet weak var historicalTagCollectionView: UICollectionView!
     
-    let user = UserDefaults.standard.user
+    private var cancellable = Set<AnyCancellable>()
+    var imageData: Data?
+    var user = UserDefaults.standard.user
     var profileArray: [SettingType] = [.name, .userName, .email, .phone, .password, .gender, .dob, .location]
     
     override func viewDidLoad() {
@@ -25,8 +28,11 @@ class ProfileVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        user = UserDefaults.standard.user
         headerLabel.text = "Profile".localized
-       // listTableView.reloadData()
+        photoImageView.setImage(imageStr: user?.profileImg ?? "", placeholder: .placeholderUser)
+        nameLabel.text = user?.name ?? ""
+        listTableView.reloadData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -35,13 +41,16 @@ class ProfileVC: UIViewController {
     
     func initialSettings() {
         nibInitialization()
-        photoImageView.setImage(imageStr: user?.profileImg ?? "", placeholder: .placeholderUser)
-        nameLabel.text = user?.name ?? ""
+        fetchProfileViewModel()
     }
 
     func nibInitialization() {
         tagsCollectionView.register(CellIdentifier.headerTopCollectionViewCell)
         historicalTagCollectionView.register(CellIdentifier.headerTopCollectionViewCell)
+    }
+    
+    private func showLoader(_ value: Bool) {
+        value ? startLoader() : stopLoader()
     }
     
     func getProfileValue(type: SettingType) -> String {
@@ -68,7 +77,42 @@ class ProfileVC: UIViewController {
     // MARK: - Button Actions
     
     @IBAction func imageButtonTapped(_ sender: UIButton) {
-        
+        showNewImageActionSheet(sourceView: sender)
+    }
+}
+
+// MARK: - API Services
+extension ProfileVC {
+    func fetchProfileViewModel() {
+        EditProfileVM.shared.showError = { [weak self] error in
+            self?.view.makeToast(error, duration: 2.0, position: .center)
+        }
+        EditProfileVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        EditProfileVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                self?.execute_onResponseData(response)
+            })
+            .store(in: &cancellable)
+    }
+    
+    func execute_onResponseData(_ response: LoginResponse?) {
+        if let dataResponse = response?.response {
+            if let user = dataResponse.data {
+                photoImageView.setImage(imageStr: user.profileImg, placeholder: .placeholderUser)
+                UserDefaults.standard.user = user
+                UserDefaults.standard.token = user.token
+                UserDefaults.standard.budget = Int(user.affAppData?.sportCard?.budget ?? "200000000")
+                UserDefaults.standard.score = Int(user.affAppData?.sportCard?.score ?? "0")
+            }
+        } else {
+            if let errorResponse = response?.error {
+                self.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
+            }
+        }
     }
 }
 
@@ -92,7 +136,9 @@ extension ProfileVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        navigateToViewController(EditProfileVC.self, storyboardName: StoryboardName.discover, animationType: .autoReverse(presenting: .zoom)) { vc in
+            vc.settingType = self.profileArray[indexPath.row]
+        }
     }
 }
 
@@ -123,3 +169,14 @@ extension ProfileVC: UICollectionViewDelegateFlowLayout {
         return CGSize(width: TextWidth + 20, height: 26)
     }
 }
+
+//MARK: - ImagePicker Delegate
+extension ProfileVC: ImagePickerDelegate, UINavigationControllerDelegate {
+    func pickerCanceled() {}
+    
+    func finishedPickingImage(image: UIImage, imageName: String) {
+        guard let imageData = image.jpegData(compressionQuality: 0.8) else { return }
+        EditProfileVM.shared.updateProfileAsyncCall(parameter: nil, imageName: imageName, imageData: imageData)
+    }
+}
+

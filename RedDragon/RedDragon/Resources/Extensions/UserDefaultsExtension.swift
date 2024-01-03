@@ -63,7 +63,6 @@ extension UserDefaults {
     func clearSpecifiedItems() {
         removeObject(forKey: UserDefaultString.token)
         removeObject(forKey: UserDefaultString.user)
-        removeObject(forKey: UserDefaultString.language)
         synchronize()
     }
    
@@ -84,5 +83,6 @@ extension UserDefaults {
          }
      }
 }
+
 
 

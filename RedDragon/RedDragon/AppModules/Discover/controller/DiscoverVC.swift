@@ -43,10 +43,9 @@ class DiscoverVC: UIViewController {
         otherHeaderLabel.text = "Other".localized
         servicesCollectionView.reloadData()
         otherCollectionView.reloadData()
-        filterProfileArray()
-    }
-    
-    func filterProfileArray() {
+        
+        //filter Profile Array
+        
         /// Filter items for logged in user
         if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
             
@@ -112,7 +111,7 @@ extension DiscoverVC {
                 self.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
             }
         }
-        self.filterProfileArray()
+        self.refreshView()
     }
 }
 
@@ -242,6 +241,7 @@ extension DiscoverVC: UICollectionViewDelegateFlowLayout {
 extension DiscoverVC: LoginVCDelegate {
     func viewControllerDismissed() {
         self.tabBarController?.tabBar.isHidden = false
-        filterProfileArray()
+        refreshView()
     }
 }
+
