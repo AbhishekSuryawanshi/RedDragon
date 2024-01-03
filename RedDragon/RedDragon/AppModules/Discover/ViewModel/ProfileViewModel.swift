@@ -17,12 +17,16 @@ class ProfileVM: APIServiceManager<LoginResponse> {
     }
 }
 
-class EditProfileVM: APIServiceManager<LoginResponse> {
-    init () {}
+class EditProfileVM: MultipartAPIServiceManager<LoginResponse> {
     static let shared = EditProfileVM()
     
-    ///function to get profile
-    func updateProfileAsyncCall(parameter: [String:Any]) {
-        asyncCall(urlString: URLConstants.profile, method: .post, parameters: parameter)
+    ///function to update profile
+    func updateProfileAsyncCall(parameter: [String:Any]?, imageName: String = "", imageData: Data = Data()) {
+        if let param = parameter {
+            asyncCall(urlString: URLConstants.updateProfile, params: param)
+        } else {
+            asyncCall(urlString: URLConstants.updateProfile, params: nil, imageName: imageName, imageData: imageData, imageKey: "profile_img")
+        }
     }
 }
+

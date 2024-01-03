@@ -72,6 +72,7 @@ struct User: Codable {
         gender = try container.decodeIfPresent(String.self, forKey: .gender) ?? ""
         dob = try container.decodeIfPresent(String.self, forKey: .dob) ?? ""
         language = try container.decodeIfPresent(String.self, forKey: .language) ?? "en"
+        UserDefaults.standard.language = language
         locationName = try container.decodeIfPresent(String.self, forKey: .locationName) ?? ""
         token = try container.decodeIfPresent(String.self, forKey: .token) ?? ""
         wallet = try container.decodeIfPresent(Int.self, forKey: .wallet) ?? 0

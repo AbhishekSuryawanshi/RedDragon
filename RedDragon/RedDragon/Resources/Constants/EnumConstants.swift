@@ -63,6 +63,12 @@ enum LanguageType: String, CaseIterable {
     case zh = "Chinese" //cn
 }
 
+enum GenderType: String, CaseIterable {
+    case male   = "male"
+    case female = "female"
+    case other  = "other"
+}
+
 enum SettingType: String, CaseIterable {
     case account     = "Account"
     case privacy     = "Privacy Policy"
@@ -155,3 +161,4 @@ enum ServiceType: String, CaseIterable {
         }
     }
 }
+

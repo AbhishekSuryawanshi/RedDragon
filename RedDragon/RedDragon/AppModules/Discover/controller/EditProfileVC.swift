@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 class EditProfileVC: UIViewController {
-
+    
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var basicTextFieldView: UIView!
     @IBOutlet weak var basicTextField: UITextField!
@@ -24,19 +24,26 @@ class EditProfileVC: UIViewController {
     var cancellable = Set<AnyCancellable>()
     var settingType: SettingType?
     var selectedLanguage: LanguageType = .en
+    var selectedGender: GenderType = .male
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nibInitialization()
+        initialSettings()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        initialSettings()
+        refreshView()
     }
-
+    
     func initialSettings() {
+        nibInitialization()
+        fetchProfileViewModel()
+    }
+    
+    func refreshView() {
         selectedLanguage = UserDefaults.standard.language == "en" ? .en : .zh
-        basicTextFieldView.isHidden = settingType == .language
+        selectedGender = UserDefaults.standard.user?.gender == "male" ? .male : (UserDefaults.standard.user?.gender == "female" ? .female : .other)
+        basicTextFieldView.isHidden = !(settingType != .language && settingType != .gender)
         phoneView.isHidden = settingType != .phone
         phoneTextField.placeholder = settingType?.rawValue.localized
         basicTextField.placeholder = settingType?.rawValue.localized
@@ -52,14 +59,40 @@ class EditProfileVC: UIViewController {
         value ? startLoader() : stopLoader()
     }
     
+    func updateProfile() {
+        var param: [String: Any] = [:]
+        
+        switch settingType {
+        case .name:
+            param.updateValue(basicTextField.text!, forKey: "full_name")
+        case .userName:
+            param.updateValue(basicTextField.text!, forKey: "username")
+        case .email:
+            param.updateValue(basicTextField.text!, forKey: "email")
+        case .location:
+            param.updateValue(basicTextField.text!, forKey: "location_name")
+        case .gender :
+            param.updateValue(selectedGender.rawValue, forKey: "gender")
+        case .language:
+            param.updateValue(selectedLanguage == .en ? "en" : "zh", forKey: "preffered_language")
+        default:
+            return
+        }
+        EditProfileVM.shared.updateProfileAsyncCall(parameter: param)
+    }
+    
     // MARK: - Button Actions
     @IBAction func saveButtonTapped(_ sender: Any) {
-        if settingType == .language {
-            UserDefaults.standard.language = selectedLanguage == .en ? "en" : "zh"
-            NotificationCenter.default.post(name: .languageUpdated, object: nil)
-            initialSettings()
+        if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
+            updateProfile()
+        } else {
+            if settingType == .language {
+                UserDefaults.standard.language = selectedLanguage == .en ? "en" : "zh"
+                initialSettings()
+                NotificationCenter.default.post(name: .languageUpdated, object: nil)
+                self.navigationController?.popViewController(animated: true)
+            }
         }
-        self.navigationController?.popViewController(animated: true)
     }
 }
 
@@ -85,7 +118,17 @@ extension EditProfileVC {
     func execute_onResponseData(_ response: LoginResponse?) {
         if let dataResponse = response?.response {
             if let user = dataResponse.data {
+                UserDefaults.standard.user = user
+                UserDefaults.standard.token = user.token
+                UserDefaults.standard.budget = Int(user.affAppData?.sportCard?.budget ?? "200000000")
+                UserDefaults.standard.score = Int(user.affAppData?.sportCard?.score ?? "0")
                 
+                if settingType == .language {
+                    initialSettings()
+                    NotificationCenter.default.post(name: .languageUpdated, object: nil)
+                }
+                
+                self.navigationController?.popViewController(animated: true)
             }
         } else {
             if let errorResponse = response?.error {
@@ -98,23 +141,41 @@ extension EditProfileVC {
 // MARK: - TableView Delegates
 extension EditProfileVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        tableViewHeightConstraint.constant = CGFloat(settingType == .language ? ((LanguageType.allCases.count * 60) + 50) : 0)
-        return LanguageType.allCases.count
+        if settingType == .language {
+            tableViewHeightConstraint.constant =  CGFloat(LanguageType.allCases.count * 57) + 50
+            return LanguageType.allCases.count
+        } else if settingType == .gender {
+            tableViewHeightConstraint.constant = CGFloat(GenderType.allCases.count * 57) + 50
+            return GenderType.allCases.count
+        } else {
+            tableViewHeightConstraint.constant = 0
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.nameRightIconTableViewCell, for: indexPath) as! NameRightIconTableViewCell
-        cell.configureLanguageCell(type: LanguageType.allCases[indexPath.row], selected: LanguageType.allCases[indexPath.row] == selectedLanguage)
+        
+        if settingType == .language {
+            cell.configureCell(name: LanguageType.allCases[indexPath.row].rawValue, selected: LanguageType.allCases[indexPath.row] == selectedLanguage)
+        } else {
+            cell.configureCell(name: GenderType.allCases[indexPath.row].rawValue.capitalized, selected: GenderType.allCases[indexPath.row] == selectedGender)
+        }
         return cell
     }
 }
+
 extension EditProfileVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 57
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedLanguage = LanguageType.allCases[indexPath.row]
+        if settingType == .language {
+            selectedLanguage = LanguageType.allCases[indexPath.row]
+        } else {
+            selectedGender = GenderType.allCases[indexPath.row]
+        }
         tableView.reloadData()
     }
 }
@@ -123,44 +184,6 @@ extension EditProfileVC: UITableViewDelegate {
 // MARK: - Textfield Delegates
 extension EditProfileVC: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-      
         return true
-    }
-}
-// MARK: - PickerView Delegate
-extension EditProfileVC: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if settingType == .language {
-            return LanguageType.allCases.count
-        } else {
-            return 0
-        }
-    }
-    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        return pickerView.frame.size.width
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if settingType == .language {
-            basicTextField.text = LanguageType.allCases[row].rawValue
-            selectedLanguage = LanguageType.allCases[row]
-        } else {
-           
-        }
-    }
-    public func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        let label = view as? UILabel ?? UILabel()
-        label.font = fontRegular(17)
-        label.textAlignment = .center
-        label.textColor = .black
-        if settingType == .language {
-            label.text = LanguageType.allCases[row].rawValue
-        } else {
-            
-        }
-        return label
     }
 }

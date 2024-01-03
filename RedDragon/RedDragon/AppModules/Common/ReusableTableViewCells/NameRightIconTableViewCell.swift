@@ -24,8 +24,8 @@ class NameRightIconTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureLanguageCell(type: LanguageType, selected: Bool) {
-        titleLabel.text = type.rawValue.localized
+    func configureCell(name: String, selected: Bool) {
+        titleLabel.text = name.localized
         rightImageView.image = selected ? .radioButtonSelected : .radioButton
     }
     

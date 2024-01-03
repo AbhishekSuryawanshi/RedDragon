@@ -47,12 +47,15 @@ class MultipartAPIServiceManager<ResponseModel: Decodable>: ObservableObject {
                 bodyData.append("\(value as AnyObject)\(lineBreak)")
             }
         }
-        bodyData.append("--\(boundary + lineBreak)")
-        bodyData.append("Content-Disposition: form-data; name=\"\(imageKey)\"; filename=\"\(imageName)\"\(lineBreak)")
-        bodyData.append("Content-Type: image/jpeg\(lineBreak)\(lineBreak)")
-        bodyData.append(imageData)
-        bodyData.append(lineBreak)
-        bodyData.append("--\(boundary)--\(lineBreak)")
+        
+        if imageKey != "" {
+            bodyData.append("--\(boundary + lineBreak)")
+            bodyData.append("Content-Disposition: form-data; name=\"\(imageKey)\"; filename=\"\(imageName)\"\(lineBreak)")
+            bodyData.append("Content-Type: image/jpeg\(lineBreak)\(lineBreak)")
+            bodyData.append(imageData)
+            bodyData.append(lineBreak)
+            bodyData.append("--\(boundary)--\(lineBreak)")
+        }
         
         request.httpBody = bodyData
         
@@ -78,7 +81,7 @@ class MultipartAPIServiceManager<ResponseModel: Decodable>: ObservableObject {
     }
     
     // Asynchronously perform an API call with optional parameters.
-    func asyncCall(urlString: String, params: [String: Any]?, isGuestUser: Bool = false, anyDefaultToken: String = "", imageName: String, imageData: Data, imageKey: String) {
+    func asyncCall(urlString: String, params: [String: Any]?, isGuestUser: Bool = false, anyDefaultToken: String = "", imageName: String = "", imageData: Data = Data(), imageKey: String = "") {
         
         guard Reachability.isConnectedToNetwork() else {
             showError?(ErrorMessage.networkAlert.localized)

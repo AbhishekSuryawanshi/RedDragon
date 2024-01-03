@@ -17,7 +17,7 @@ struct URLConstants {
     static let predictionBaseURL   = "http://45.76.178.21:5069/"
     static let newsBaseURL         = "https://www.77577.live"
     static let translationBaseURL  = "http://45.76.178.21:5072"
-
+    
     // MARK: -  Login
     static let login               = baseURL + "login"
     static let register            = baseURL + "register"
@@ -28,9 +28,9 @@ struct URLConstants {
     static let logout              = baseURL + "logout"
     
     // MARK: - Discover | Profile
-      static let profile             = baseURL + "profile"
-      static let updateProfile       = baseURL + "/user/profile/update"
-
+    static let profile             = baseURL + "profile"
+    static let updateProfile       = baseURL + "user/profile/update"
+    
     // MARK: - Home
     static let banners             = "https://api996.com/api/v1/banner/com.app.b8"
     static let bannerBaseURL       = "https://api996.com/"
@@ -54,7 +54,7 @@ struct URLConstants {
     // MARK: -  Social
     static let socialBaseURL       = baseURL + "euro5league/"
     static let euro5leagueBaseURL  = "https://muheh.com/euro5leagues/"
-   
+    
     //Match
     static let socialPublicLeague  = euro5leagueBaseURL + "api/league/list"
     static let socialPublicTeam    = euro5leagueBaseURL + "api/team/list"
@@ -87,7 +87,7 @@ struct URLConstants {
     static let allBets             = baseURL + "bet/play/get"
     static let points              = baseURL + "bet/account/wallet"
     static let placeBet            = baseURL + "bet/play/create"
-
+    
     // MARK: -  Meet
     static let meetBaseURL         = "https://kicktin.com/vinder/api/"
     static let meetUserList        = baseURL + "vinder/listuser"
@@ -103,7 +103,7 @@ struct URLConstants {
     
     // MARK: - StreetMatches
     static let streetMatchesBaseURL = baseURL//"https://gsports.cloud/api/"
-
+    
     static let streetHome           = streetMatchesBaseURL + "streetmatch/home/data"
     static let stadiumList          = streetMatchesBaseURL + "streetmatch/stadium/list"
     static let eventsList           = streetMatchesBaseURL + "streetmatch/event/list"
@@ -121,7 +121,7 @@ struct URLConstants {
     static let streetPlayers        = streetMatchesBaseURL + "streetmatch/player"
     static let streetUpdateProfile  = streetMatchesBaseURL + "streetmatch/user/info"
     
-
+    
     // MARK: - Prediction
     static let getMatchesList       = "prediction/match/list?"
     static let postMatchPrediction  = "prediction/predict"
@@ -168,5 +168,6 @@ struct URLConstants {
     
     // MARK: - Translation
     static let translation            = "/get_translations.php"
-
+    
 }
+

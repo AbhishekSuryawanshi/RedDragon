@@ -198,7 +198,7 @@ extension WalletVC {
     }
     
     func updateBetPoints() {
-        var betDiffValue = (pointType == .bet ? 1 : -1) * WalletVM.shared.betsArray[selectedIndex]
+        let betDiffValue = (pointType == .bet ? 1 : -1) * WalletVM.shared.betsArray[selectedIndex]
         
         let param: [String: Any] = [
             "amount": betDiffValue,
@@ -321,6 +321,7 @@ extension WalletVC: GetPointsVCDelegate {
 /// LoginVCDelegate to show hided tabbar
 extension WalletVC: LoginVCDelegate {
     func viewControllerDismissed() {
+        showTransactions()
         self.tabBarController?.tabBar.isHidden = false
     }
 }
