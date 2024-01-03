@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="U0w-ao-aWV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -405,7 +405,7 @@
                             <constraint firstItem="a4R-C2-p3n" firstAttribute="leading" secondItem="OdQ-6a-XQP" secondAttribute="leading" id="P6G-cK-xfp"/>
                             <constraint firstItem="k0t-EP-Ugi" firstAttribute="top" secondItem="a4R-C2-p3n" secondAttribute="bottom" id="R2v-YB-Nmq"/>
                             <constraint firstItem="kzC-OP-XEC" firstAttribute="top" secondItem="yhW-LX-AJy" secondAttribute="top" constant="60" id="XoB-ac-SOr"/>
-                            <constraint firstItem="a4R-C2-p3n" firstAttribute="top" secondItem="yhW-LX-AJy" secondAttribute="top" constant="120" id="fZv-9O-kGA"/>
+                            <constraint firstItem="a4R-C2-p3n" firstAttribute="top" secondItem="yhW-LX-AJy" secondAttribute="top" constant="120" id="j4m-RG-Y3d"/>
                             <constraint firstItem="k0t-EP-Ugi" firstAttribute="trailing" secondItem="OdQ-6a-XQP" secondAttribute="trailing" id="p1I-F3-l2n"/>
                         </constraints>
                     </view>
@@ -413,7 +413,7 @@
                         <outlet property="backBtnHeightConstraint" destination="tjd-8n-Azx" id="lhv-ct-fi1"/>
                         <outlet property="mediaCollectionView" destination="k0t-EP-Ugi" id="eGD-Ig-ydG"/>
                         <outlet property="mediaTopView" destination="a4R-C2-p3n" id="kEK-Sn-iZc"/>
-                        <outlet property="mediaViewTopConstraint" destination="fZv-9O-kGA" id="Yfk-eC-65Y"/>
+                        <outlet property="mediaViewTopConstraint" destination="j4m-RG-Y3d" id="laq-Ja-dzg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1m7-YZ-PrV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -427,13 +427,46 @@
                     <view key="view" contentMode="scaleToFill" id="Hsl-zt-wB9">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F16-dm-0UU">
+                                <rect key="frame" x="10" y="59" width="75" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="Qd1-lP-jpU"/>
+                                    <constraint firstAttribute="height" constant="40" id="cg0-dr-gqL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="15"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeBtnAction:" destination="1JP-cb-uAl" eventType="touchUpInside" id="Ade-6S-ddQ"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gne-pD-kxc" customClass="YTPlayerView">
+                                <rect key="frame" x="0.0" y="107" width="393" height="711"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="hRf-Cc-Dhd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="F16-dm-0UU" firstAttribute="leading" secondItem="hRf-Cc-Dhd" secondAttribute="leading" constant="10" id="2tw-73-0ul"/>
+                            <constraint firstItem="Gne-pD-kxc" firstAttribute="trailing" secondItem="hRf-Cc-Dhd" secondAttribute="trailing" id="62F-Pa-Mbj"/>
+                            <constraint firstItem="Gne-pD-kxc" firstAttribute="top" secondItem="F16-dm-0UU" secondAttribute="bottom" constant="8" id="cfc-yQ-XN2"/>
+                            <constraint firstItem="Gne-pD-kxc" firstAttribute="leading" secondItem="hRf-Cc-Dhd" secondAttribute="leading" id="dmf-Ei-yDD"/>
+                            <constraint firstItem="F16-dm-0UU" firstAttribute="top" secondItem="hRf-Cc-Dhd" secondAttribute="top" id="gAB-V7-5A4"/>
+                            <constraint firstItem="Gne-pD-kxc" firstAttribute="bottom" secondItem="hRf-Cc-Dhd" secondAttribute="bottom" id="gbj-59-Inp"/>
+                            <constraint firstItem="Gne-pD-kxc" firstAttribute="width" secondItem="Hsl-zt-wB9" secondAttribute="width" id="j3F-W0-hEf"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="playerView" destination="Gne-pD-kxc" id="cyr-gn-2Oq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xLC-3I-3EZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4266.4122137404574" y="-35.211267605633807"/>
+            <point key="canvasLocation" x="4264.8854961832058" y="-35.211267605633807"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8ZT-hU-VdM">
@@ -444,9 +477,6 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Je7-Wa-Ps8" kind="relationship" relationship="rootViewController" id="JY1-w0-fuA"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DVK-j9-sFc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

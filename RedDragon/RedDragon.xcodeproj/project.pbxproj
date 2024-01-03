@@ -11,6 +11,7 @@
 		085385C02B079F7F00C4E953 /* SubstituteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085385BE2B079F7F00C4E953 /* SubstituteTableViewCell.swift */; };
 		085385C12B079F7F00C4E953 /* SubstituteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085385BF2B079F7F00C4E953 /* SubstituteTableViewCell.xib */; };
 		41119D922B14D97300797C84 /* PredictionMatchDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41119D912B14D97300797C84 /* PredictionMatchDetailModel.swift */; };
+		411537992B45938100312969 /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 411537982B45938100312969 /* YouTubeiOSPlayerHelper */; };
 		4137D57B2B15BFA9007CF84E /* PredictionMakeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4137D57A2B15BFA9007CF84E /* PredictionMakeModel.swift */; };
 		4137D57D2B163AB8007CF84E /* PredictionDetailCommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4137D57C2B163AB8007CF84E /* PredictionDetailCommentsView.swift */; };
 		4137D57F2B163ACE007CF84E /* PredictionDetailCommentsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4137D57E2B163ACE007CF84E /* PredictionDetailCommentsView.xib */; };
@@ -1241,6 +1242,7 @@
 				472873692AEA7E360011F00F /* SDWebImage in Frameworks */,
 				AD1CA0572B456A3C0032E490 /* SwiftFortuneWheel in Frameworks */,
 				47C8C9602AF1191700448D96 /* Kingfisher in Frameworks */,
+				411537992B45938100312969 /* YouTubeiOSPlayerHelper in Frameworks */,
 				41EB79DB2AF38D3F00D068F7 /* DDSpiderChart in Frameworks */,
 				472873732AEA7E470011F00F /* Hero in Frameworks */,
 				6A947A822B1EFDA600A00788 /* TwilioChatClient in Frameworks */,
@@ -3310,6 +3312,7 @@
 				49181D7E2B283966007D6614 /* SPConfetti */,
 				B8B4103C2B39751B0040A255 /* Alamofire */,
 				AD1CA0562B456A3C0032E490 /* SwiftFortuneWheel */,
+				411537982B45938100312969 /* YouTubeiOSPlayerHelper */,
 			);
 			productName = RedDragon;
 			productReference = 49B0B9E42AE68F0700A9D235 /* RedDragon.app */;
@@ -3361,6 +3364,7 @@
 				49181D7D2B283966007D6614 /* XCRemoteSwiftPackageReference "SPConfetti" */,
 				B8B4103B2B39751B0040A255 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				AD1CA0552B456A3C0032E490 /* XCRemoteSwiftPackageReference "SwiftFortuneWheel" */,
+				411537972B45938100312969 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
 			);
 			productRefGroup = 49B0B9E52AE68F0700A9D235 /* Products */;
 			projectDirPath = "";
@@ -4242,6 +4246,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		411537972B45938100312969 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/youtube/youtube-ios-player-helper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.4;
+			};
+		};
 		41846BC12B0B395B0020F503 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SvenTiigi/YouTubePlayerKit.git";
@@ -4397,6 +4409,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		411537982B45938100312969 /* YouTubeiOSPlayerHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 411537972B45938100312969 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */;
+			productName = YouTubeiOSPlayerHelper;
+		};
 		41846BC22B0B395B0020F503 /* YouTubePlayerKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 41846BC12B0B395B0020F503 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */;

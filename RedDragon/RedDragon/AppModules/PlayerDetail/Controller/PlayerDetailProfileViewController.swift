@@ -8,6 +8,8 @@
 import UIKit
 import DDSpiderChart
 import SDWebImage
+import YouTubePlayerKit
+import SwiftUI
 
 class PlayerDetailProfileViewController: UIViewController {
     
@@ -53,27 +55,27 @@ class PlayerDetailProfileViewController: UIViewController {
         playerTeamsView.team1ImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
         playerTeamsView.team1ImgView.sd_setImage(with: URL(string: "http://45.76.178.21:6045/flags/flag.php?flag=" + (playerTeamsView.team1Lbl.text ?? "")))
         for i in 0 ..< (playerDetailViewModel?.responseData?.data?.indicators?.count ?? 0){
-            if playerDetailViewModel?.responseData?.data?.indicators?[i].key == "Player number"{
+            if playerDetailViewModel?.responseData?.data?.indicators?[i].key == "Player number".localized{
                 playerTeamsView.team1RankLbl.text = playerDetailViewModel?.responseData?.data?.indicators?[i].value
                 playerTeamsView.team2RankLbl.text = playerDetailViewModel?.responseData?.data?.indicators?[i].value
             }
-            if playerDetailViewModel?.responseData?.data?.indicators?[i].key == "Age"{
-                playerStatsView.lbl1.text = (playerDetailViewModel?.responseData?.data?.indicators?[i].value ?? "") + " Years"
+            if playerDetailViewModel?.responseData?.data?.indicators?[i].key == "Age".localized{
+                playerStatsView.lbl1.text = (playerDetailViewModel?.responseData?.data?.indicators?[i].value ?? "") + " " + "Years".localized
             }
-            if playerDetailViewModel?.responseData?.data?.indicators?[i].key == "Date of birth"{
+            if playerDetailViewModel?.responseData?.data?.indicators?[i].key == "Date of birth".localized{
                 playerStatsView.lbl2.text = playerDetailViewModel?.responseData?.data?.indicators?[i].value
             }
-            if playerDetailViewModel?.responseData?.data?.indicators?[i].key == "Height"{
+            if playerDetailViewModel?.responseData?.data?.indicators?[i].key == "Height".localized{
                 playerStatsView.lbl3.text = playerDetailViewModel?.responseData?.data?.indicators?[i].value
                 playerStatsView.lbl4.text = playerDetailViewModel?.responseData?.data?.indicators?[i].key
                 
             }
-            if playerDetailViewModel?.responseData?.data?.indicators?[i].key == "Preferred foot"{
+            if playerDetailViewModel?.responseData?.data?.indicators?[i].key == "Preferred foot".localized{
                 playerStatsView.lbl5.text = playerDetailViewModel?.responseData?.data?.indicators?[i].value
                 playerStatsView.lbl6.text = playerDetailViewModel?.responseData?.data?.indicators?[i].key
                 
             }
-            if playerDetailViewModel?.responseData?.data?.indicators?[i].key == "Market price"{
+            if playerDetailViewModel?.responseData?.data?.indicators?[i].key == "Market price".localized{
                 playerStatsView.lbl7.text = playerDetailViewModel?.responseData?.data?.indicators?[i].value
                 playerStatsView.lbl8.text = playerDetailViewModel?.responseData?.data?.indicators?[i].key
                 
@@ -159,6 +161,42 @@ class PlayerDetailProfileViewController: UIViewController {
         }
     }
     
+    @objc func playVideo(sender: UIButton){
+      
+       /* let video = playerDetailViewModel?.responseData?.data?.medias?[sender.tag].video ?? ""
+        let configuration = YouTubePlayer.Configuration(
+            // Define which fullscreen mode should be used (system or web)
+            fullscreenMode: .system,
+            // Custom action to perform when a URL gets opened
+           
+            // Enable auto play
+            autoPlay: true,
+            // Hide controls
+            showControls: true,
+            // Enable loop
+            loopEnabled: true
+            
+            
+        )
+        let youTubePlayer = YouTubePlayer(
+            source: .url(video),
+            configuration: configuration
+        )
+       
+        
+        let youTubePlayerViewController = YouTubePlayerViewController(
+            player: youTubePlayer
+        )*/
+        navigateToViewController(PlayerDetailYoutubeViewController.self, storyboardName: StoryboardName.playerDetail, animationType: .autoReverse(presenting: .zoom)){vc in
+            vc.videoURL = self.playerDetailViewModel?.responseData?.data?.medias?[sender.tag].video ?? ""
+            
+        }
+      //  let playerdetailyoutubecontroller = PlayerDetailYoutubeViewController()
+       // self.navigationController?.pushViewController(youTubePlayerViewController, animated: true)
+     //   self.present(youTubePlayerViewController, animated: true)
+        
+    }
+    
     func configureMediaView(){
         playerMediaDetails.seeAllBtn.setTitle("See all".localized, for: .normal)
         playerMediaDetails.mediaLbl.text = "Media".localized
@@ -169,6 +207,8 @@ class PlayerDetailProfileViewController: UIViewController {
             playerMediaDetails.dateLbl.text = playerDetailViewModel?.responseData?.data?.medias?[i].date
             playerMediaDetails.mediaDetailTitleLbl.text = playerDetailViewModel?.responseData?.data?.medias?[i].title
             playerMediaDetails.mediaDetailTxtView.text = playerDetailViewModel?.responseData?.data?.medias?[i].subtitle
+            playerMediaDetails.tag = i
+            playerMediaDetails.playBtn.addTarget(self, action: #selector(playVideo), for: .touchUpInside)
         }
     }
     

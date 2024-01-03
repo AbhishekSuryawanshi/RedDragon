@@ -39,7 +39,7 @@ class PlayerDetailMediaViewController: UIViewController {
     }
     
     @objc func playVideo(sender: UIButton){
-        let video = playerDetailViewModel?.responseData?.data?.medias?[sender.tag].video ?? ""
+       /* let video = playerDetailViewModel?.responseData?.data?.medias?[sender.tag].video ?? ""
         let configuration = YouTubePlayer.Configuration(
             // Define which fullscreen mode should be used (system or web)
             fullscreenMode: .system,
@@ -60,7 +60,11 @@ class PlayerDetailMediaViewController: UIViewController {
         let youTubePlayerViewController = YouTubePlayerViewController(
             player: youTubePlayer
         )
-        self.present(youTubePlayerViewController, animated: true)
+        self.present(youTubePlayerViewController, animated: true)*/
+        navigateToViewController(PlayerDetailYoutubeViewController.self, storyboardName: StoryboardName.playerDetail, animationType: .autoReverse(presenting: .zoom)){vc in
+            vc.videoURL = self.playerDetailViewModel?.responseData?.data?.medias?[sender.tag].video ?? ""
+            
+        }
         
     }
     

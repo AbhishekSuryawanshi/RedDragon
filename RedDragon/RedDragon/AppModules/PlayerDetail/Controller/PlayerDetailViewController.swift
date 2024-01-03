@@ -99,11 +99,11 @@ extension PlayerDetailViewController {
             playerProfileView.profileImg.sd_imageIndicator = SDWebImageActivityIndicator.white
             playerProfileView.profileImg.sd_setImage(with: URL(string: data?.playerPhoto ?? ""))
             for i in 0 ..< (data?.indicators?.count ?? 0){
-                if data?.indicators?[i].key == "Main position"{
-                    playerProfileView.positionLbl.text = " " + "\(data?.indicators?[i].value ?? "")" + " "
+                if data?.indicators?[i].key == "Main position".localized{
+                    playerProfileView.positionLbl.text = "  " + "\(data?.indicators?[i].value ?? "")" + "  "
                 }
-                if data?.indicators?[i].key == "Rating"{
-                    playerProfileView.valueLbl.text = " " + "\(data?.indicators?[i].value ?? "")" + " "
+                if data?.indicators?[i].key == "Rating".localized{
+                    playerProfileView.valueLbl.text = "  " + "\(data?.indicators?[i].value ?? "")" + "  "
                 }
             }
             

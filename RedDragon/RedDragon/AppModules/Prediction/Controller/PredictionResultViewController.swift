@@ -17,10 +17,8 @@ class PredictionResultViewController: UIViewController {
     var analysisData: AnalysisData?
     var data: MatchDataClass?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
     }
     
@@ -42,7 +40,7 @@ class PredictionResultViewController: UIViewController {
         self.predictionResultView.drawBtn.setTitle("Draw".localized, for: .normal)
         self.predictionDescriptionView.descriptionTxtView.text = self.analysisData?.comments
         
-        if(analysisData?.loggedIn == true ){
+       // if(analysisData?.loggedIn == true ){
             if analysisData?.isSuccess == 0{
                 if analysisData?.predictedTeam == "1"{
                     self.predictionResultView.drawBtn.backgroundColor = UIColor.init(hex: "FFDAD5")
@@ -80,7 +78,7 @@ class PredictionResultViewController: UIViewController {
                 }
             }
             
-        }
+       // }
     }
     
     func configureDescriptionView(){

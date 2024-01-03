@@ -9,6 +9,7 @@ import UIKit
 
 class MediaView: UIView {
 
+    @IBOutlet weak var playBtn: UIButton!
     @IBOutlet weak var playImgView: UIImageView!
     @IBOutlet weak var mediaDetailTitleLbl: UILabel!
     @IBOutlet var contentView: UIView!
