@@ -48,10 +48,10 @@ class ForgotPasswordVC: UIViewController {
     
     func validate() -> Bool {
         if emailTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            self.view.makeToast(ErrorMessage.emailEmptyAlert)
+            self.view.makeToast(ErrorMessage.emailEmptyAlert.localized)
             return false
         } else if !isValidEmail(validate: emailTextfield.text!) {
-            self.view.makeToast(ErrorMessage.invalidEmail)
+            self.view.makeToast(ErrorMessage.invalidEmail.localized)
             return false
         }
         return true

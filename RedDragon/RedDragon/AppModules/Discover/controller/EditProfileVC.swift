@@ -16,13 +16,15 @@ class EditProfileVC: UIViewController {
     @IBOutlet weak var phoneView: UIView!
     @IBOutlet weak var countryCodeButton: UIButton!
     @IBOutlet weak var phoneTextField: UITextField!
-    @IBOutlet var pickerView: UIPickerView!
+    @IBOutlet var datePicker: UIDatePicker!
     @IBOutlet weak var listTableView: UITableView!
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var saveButton: UIButton!
     
     var cancellable = Set<AnyCancellable>()
     var settingType: SettingType?
+    var phoneCode = "0"
+    var countryCode = "0"
     var selectedLanguage: LanguageType = .en
     var selectedGender: GenderType = .male
     
@@ -38,50 +40,105 @@ class EditProfileVC: UIViewController {
     func initialSettings() {
         nibInitialization()
         fetchProfileViewModel()
+        
+        //Configure date picker
+        datePicker.datePickerMode = .date
+        datePicker.maximumDate = Date()
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        } else {
+            // Fallback on earlier versions
+        }
+        datePicker.addTarget(self, action: #selector(handleDatePicker), for: .valueChanged)
     }
     
     func refreshView() {
-        selectedLanguage = UserDefaults.standard.language == "en" ? .en : .zh
-        selectedGender = UserDefaults.standard.user?.gender == "male" ? .male : (UserDefaults.standard.user?.gender == "female" ? .female : .other)
-        basicTextFieldView.isHidden = !(settingType != .language && settingType != .gender)
+        basicTextFieldView.isHidden = !(settingType != .language && settingType != .gender && settingType != .phone)
         phoneView.isHidden = settingType != .phone
         phoneTextField.placeholder = settingType?.rawValue.localized
         basicTextField.placeholder = settingType?.rawValue.localized
         headerLabel.text = "\("Edit".localized) \(settingType?.rawValue.localized ?? "")"
         saveButton.setTitle("Save".localized, for: .normal)
+        
+        //set value
+        basicTextField.text = ProfileVM.shared.getProfileValue(type: settingType!)
+        if settingType == .phone {
+            countryCode = UserDefaults.standard.user?.countyCode ?? ""
+            setCountryCode()
+        }
+        selectedLanguage = UserDefaults.standard.language == "en" ? .en : .zh
+        selectedGender = UserDefaults.standard.user?.gender == "male" ? .male : (UserDefaults.standard.user?.gender == "female" ? .female : .other)
     }
     
     func nibInitialization() {
         listTableView.register(CellIdentifier.nameRightIconTableViewCell)
     }
     
+    func setCountryCode() {
+        countryCodeButton.setTitle("\(phoneCode)", for: .normal)
+        countryCodeButton.setImage(UIImage(named: countryCode) ?? .placeholder1, for: .normal)
+    }
+    
     func showLoader(_ value: Bool) {
         value ? startLoader() : stopLoader()
     }
     
-    func updateProfile() {
-        var param: [String: Any] = [:]
-        
-        switch settingType {
-        case .name:
-            param.updateValue(basicTextField.text!, forKey: "full_name")
-        case .userName:
-            param.updateValue(basicTextField.text!, forKey: "username")
-        case .email:
-            param.updateValue(basicTextField.text!, forKey: "email")
-        case .location:
-            param.updateValue(basicTextField.text!, forKey: "location_name")
-        case .gender :
-            param.updateValue(selectedGender.rawValue, forKey: "gender")
-        case .language:
-            param.updateValue(selectedLanguage == .en ? "en" : "zh", forKey: "preffered_language")
-        default:
-            return
+    func validate() -> Bool {
+        if settingType != .gender && settingType != .language {
+            if basicTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+                self.view.makeToast("Please enter your \(settingType?.rawValue.lowercased() ?? "")".localized)
+                return false
+            } else if settingType == .phone && !isValidPhone(validate: countryCode + phoneTextField.text!) {
+                self.view.makeToast(ErrorMessage.invalidPhone.localized)
+                return false
+            }
+            return true
         }
-        EditProfileVM.shared.updateProfileAsyncCall(parameter: param)
+        return true
+    }
+    
+    func updateProfile() {
+        if validate() {
+            var param: [String: Any] = [:]
+            
+            switch settingType {
+            case .name:
+                param.updateValue(basicTextField.text!, forKey: "full_name")
+            case .userName:
+                param.updateValue(basicTextField.text!, forKey: "username")
+            case .email:
+                param.updateValue(basicTextField.text!, forKey: "email")
+            case .phone:
+                param.updateValue(countryCode + phoneTextField.text!, forKey: "phone_number")
+                param.updateValue(countryCode, forKey: "country_code")
+            case .location:
+                param.updateValue(basicTextField.text!, forKey: "location_name")
+            case .gender :
+                param.updateValue(selectedGender.rawValue, forKey: "gender")
+            case .dob :
+                param.updateValue(basicTextField.text!.formatDate(inputFormat: dateFormat.ddMMyyyy2, outputFormat: dateFormat.yyyyMMdd), forKey: "dob")
+            case .language:
+                param.updateValue(selectedLanguage == .en ? "en" : "zh", forKey: "preffered_language")
+            default:
+                return
+            }
+            EditProfileVM.shared.updateProfileAsyncCall(parameter: param)
+        }
+    }
+    
+    // MARK: - UIDatePicker
+    @objc func handleDatePicker(_ datePicker: UIDatePicker) {
+        basicTextField.text = datePicker.date.formatDate(outputFormat: dateFormat.ddMMyyyy2)
     }
     
     // MARK: - Button Actions
+    
+    @IBAction func countryCodeButtonTapped(_ sender: UIButton) {
+        let countryVC = CountryCodeListVC()
+        countryVC.delegate = self
+        self.present(countryVC, animated: true)
+    }
+    
     @IBAction func saveButtonTapped(_ sender: Any) {
         if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
             updateProfile()
@@ -184,6 +241,19 @@ extension EditProfileVC: UITableViewDelegate {
 // MARK: - Textfield Delegates
 extension EditProfileVC: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if settingType == .dob {
+            textField.inputView = self.datePicker
+        }
         return true
+    }
+}
+
+
+// MARK: - Custom Delegate
+extension EditProfileVC: CountryDelegate {
+    func countrySelected(country: CountryModel) {
+        countryCode = country.code
+        phoneCode = country.phoneCode
+        setCountryCode()
     }
 }

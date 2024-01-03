@@ -106,13 +106,13 @@ class PlaceBetVc: UIViewController {
     @IBAction func placeBet(_ sender: Any) {
         
         if self.etAmount.text == ""{
-            self.view.makeToast(ErrorMessage.amountEmptyAlert, duration: 3.0, position: .bottom)
+            self.view.makeToast(ErrorMessage.amountEmptyAlert.localized, duration: 3.0, position: .bottom)
         } else if self.oddIndex == "-"{
-            self.view.makeToast(ErrorMessage.oddsEmptyAlert, duration: 3.0, position: .bottom)
+            self.view.makeToast(ErrorMessage.oddsEmptyAlert.localized, duration: 3.0, position: .bottom)
         }else{
             
             if btnBetTitle.titleLabel?.text == ErrorMessage.betPlacedSuccess || btnBetTitle.titleLabel?.text == ErrorMessage.betPlacedAlready{
-                self.view.makeToast(ErrorMessage.betPlacedAlready, duration: 3.0, position: .bottom)
+                self.view.makeToast(ErrorMessage.betPlacedAlready.localized, duration: 3.0, position: .bottom)
 
             }else{
                 

@@ -59,7 +59,7 @@ extension MatchesListViewController : UITableViewDelegate, UITableViewDataSource
                     vc.day = "tommorow"
                 })
             }else{
-                self.view.makeToast(ErrorMessage.onlyLiveMatches, duration: 3.0, position: .bottom)
+                self.view.makeToast(ErrorMessage.onlyLiveMatches.localized, duration: 3.0, position: .bottom)
             }
         }
     }

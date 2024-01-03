@@ -36,7 +36,7 @@ class DiscoverVC: UIViewController {
     }
     
     func refreshView() {
-        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = false
         self.tabBarController?.tabBar.isHidden = false
         headerLabel.text = "Our Services".localized
         profileHeaderLabel.text = "Profile & Settings".localized
@@ -186,15 +186,13 @@ extension DiscoverVC: UICollectionViewDelegate {
                 self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[3]
             }
         } else {
-            let type = collectionView == profileCollectionView ? profileArray[indexPath.row] : otherArray[indexPath.row]
-            if type == .account && type == .language {
-                self.tabBarController?.tabBar.isHidden = true
-            }
             
+            let type = collectionView == profileCollectionView ? profileArray[indexPath.row] : otherArray[indexPath.row]
             switch type {
             case .account:
                 
                 if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
+                    self.tabBarController?.tabBar.isHidden = true
                     navigateToViewController(ProfileVC.self, storyboardName: StoryboardName.discover, animationType: .autoReverse(presenting: .zoom))
                 } else {
                     self.customAlertView_2Actions(title: "Login / Sign Up".localized, description: ErrorMessage.loginRequires.localized) {
@@ -209,6 +207,7 @@ extension DiscoverVC: UICollectionViewDelegate {
                 }
                 
             case .language:
+                self.tabBarController?.tabBar.isHidden = true
                 navigateToViewController(EditProfileVC.self, storyboardName: StoryboardName.discover, animationType: .autoReverse(presenting: .zoom)) { vc in
                     vc.settingType = type
                 }

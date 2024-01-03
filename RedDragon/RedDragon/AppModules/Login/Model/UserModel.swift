@@ -24,6 +24,7 @@ struct User: Codable {
     var email: String = ""
     var username: String = ""
     var phoneNumber: String = ""
+    var countyCode: String = ""
     var profileImg: String = ""
     var createdAt: String = ""
     var updatedAt: String = ""
@@ -46,6 +47,7 @@ struct User: Codable {
         case tags, historicTags
         case name = "full_name"
         case phoneNumber = "phone_number"
+        case countyCode = "country_code"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case otpVerified = "otp_verified"
@@ -65,6 +67,7 @@ struct User: Codable {
         email = try container.decodeIfPresent(String.self, forKey: .email) ?? ""
         username = try container.decodeIfPresent(String.self, forKey: .username) ?? ""
         phoneNumber = try container.decodeIfPresent(String.self, forKey: .phoneNumber) ?? ""
+        countyCode = try container.decodeIfPresent(String.self, forKey: .countyCode) ?? ""
         createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) ?? ""
         updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt) ?? ""
         otpVerified = try container.decodeIfPresent(Int.self, forKey: .otpVerified) ?? 0

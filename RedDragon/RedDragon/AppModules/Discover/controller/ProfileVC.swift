@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 class ProfileVC: UIViewController {
-
+    
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var listTableView: UITableView!
     @IBOutlet weak var photoImageView: UIImageView!
@@ -43,7 +43,7 @@ class ProfileVC: UIViewController {
         nibInitialization()
         fetchProfileViewModel()
     }
-
+    
     func nibInitialization() {
         tagsCollectionView.register(CellIdentifier.headerTopCollectionViewCell)
         historicalTagCollectionView.register(CellIdentifier.headerTopCollectionViewCell)
@@ -51,27 +51,6 @@ class ProfileVC: UIViewController {
     
     private func showLoader(_ value: Bool) {
         value ? startLoader() : stopLoader()
-    }
-    
-    func getProfileValue(type: SettingType) -> String {
-        switch type {
-        case .name:
-            return user?.name ?? ""
-        case .userName:
-            return user?.username ?? ""
-        case .email:
-            return user?.email ?? ""
-        case .phone:
-            return user?.phoneNumber ?? ""
-        case .gender:
-            return user?.gender ?? ""
-        case .dob:
-            return user?.dob ?? ""
-        case .location:
-            return user?.locationName ?? ""
-        default:
-            return ""
-        }
     }
     
     // MARK: - Button Actions
@@ -125,7 +104,7 @@ extension ProfileVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.profileTableViewCell, for: indexPath) as! ProfileTableViewCell
         cell.titleLabel.text = profileArray[indexPath.row].rawValue.localized
-        cell.valueLabel.text = getProfileValue(type: profileArray[indexPath.row])
+        cell.valueLabel.text = ProfileVM.shared.getProfileValue(type: profileArray[indexPath.row])
         return cell
     }
 }
@@ -136,8 +115,12 @@ extension ProfileVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigateToViewController(EditProfileVC.self, storyboardName: StoryboardName.discover, animationType: .autoReverse(presenting: .zoom)) { vc in
-            vc.settingType = self.profileArray[indexPath.row]
+        if self.profileArray[indexPath.row] == .password {
+            navigateToViewController(UpdatePasswordVC.self, storyboardName: StoryboardName.discover, animationType: .autoReverse(presenting: .zoom))
+        } else {
+            navigateToViewController(EditProfileVC.self, storyboardName: StoryboardName.discover, animationType: .autoReverse(presenting: .zoom)) { vc in
+                vc.settingType = self.profileArray[indexPath.row]
+            }
         }
     }
 }

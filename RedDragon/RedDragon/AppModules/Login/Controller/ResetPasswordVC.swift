@@ -11,16 +11,19 @@ import Combine
 class ResetPasswordVC: UIViewController {
     
     @IBOutlet weak var bgView: UIView!
+    @IBOutlet weak var headerLabel: UILabel!
+    @IBOutlet weak var topLabel: UILabel!
     @IBOutlet weak var countryCodeButton: UIButton!
+    @IBOutlet weak var phoneTitleLabel: UILabel!
+    @IBOutlet weak var passwordTitleLabel: UILabel!
+    @IBOutlet weak var confirmPassTitleLabel: UILabel!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextfield: UITextField!
-    @IBOutlet weak var headerLabel: UILabel!
-    @IBOutlet weak var topLabel: UILabel!
     @IBOutlet weak var continueButton: UIButton!
     
     var cancellable = Set<AnyCancellable>()
-    var countryCode = "0"
+    var phoneCode = "0"
     var verificationCode = ""
     
     override func viewDidLoad() {
@@ -42,14 +45,17 @@ class ResetPasswordVC: UIViewController {
         fetchLoginViewModel()
         
         ///set deafult value for country code
-        countryCode = "+971"
-        countryCodeButton.setTitle(countryCode, for: .normal)
+        phoneCode = "+971"
+        countryCodeButton.setTitle(phoneCode, for: .normal)
         countryCodeButton.setImage(UIImage(named: "AE") ?? .placeholder1, for: .normal)
     }
     
     func refreshPage() {
         headerLabel.text = "Reset Password".localized
         topLabel.text = "Enter the details below to reset Password".localized
+        phoneTitleLabel.text = "Phone Number".localized
+        passwordTitleLabel.text = "Password".localized
+        confirmPassTitleLabel.text = "Confirm Password".localized
         phoneTextField.placeholder = "Phone Number".localized
         passwordTextField.placeholder = "Password".localized
         confirmPasswordTextfield.placeholder = "Confirm Password".localized
@@ -62,22 +68,22 @@ class ResetPasswordVC: UIViewController {
     
     func validate() -> Bool {
         if phoneTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            self.view.makeToast(ErrorMessage.phoneEmptyAlert)
+            self.view.makeToast(ErrorMessage.phoneEmptyAlert.localized)
             return false
-        } else if !isValidPhone(validate: countryCode + phoneTextField.text!) {
-            self.view.makeToast(ErrorMessage.invalidPhone)
+        } else if !isValidPhone(validate: phoneCode + phoneTextField.text!) {
+            self.view.makeToast(ErrorMessage.invalidPhone.localized)
             return false
         } else if passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            self.view.makeToast(ErrorMessage.passwordEmptyAlert)
+            self.view.makeToast(ErrorMessage.passwordEmptyAlert.localized)
             return false
         } else if !isValidPassword(validate: passwordTextField.text!) {
-            self.view.makeToast(ErrorMessage.passwordCondition, duration: 5)
+            self.view.makeToast(ErrorMessage.passwordCondition.localized, duration: 5)
             return false
         } else if confirmPasswordTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            self.view.makeToast(ErrorMessage.confirmPasswordEmptyAlert)
+            self.view.makeToast(ErrorMessage.confirmPasswordEmptyAlert.localized)
             return false
         } else if passwordTextField.text! != confirmPasswordTextfield.text! {
-            self.view.makeToast(ErrorMessage.passwordNotmatchedAlert)
+            self.view.makeToast(ErrorMessage.passwordNotmatchedAlert.localized)
             return false
         }
         return true
@@ -95,7 +101,7 @@ class ResetPasswordVC: UIViewController {
         if validate() {
             let param: [String: Any] = [
                 "code": verificationCode,
-                "phone": countryCode + phoneTextField.text!,
+                "phone": phoneCode + phoneTextField.text!,
                 "password": passwordTextField.text!
             ]
             ResetPasswordVM.shared.resetPasswordAsyncCall(parameters: param)
@@ -173,7 +179,7 @@ extension ResetPasswordVC: UITextFieldDelegate {
 // MARK: - Custom Delegate
 extension ResetPasswordVC: CountryDelegate {
     func countrySelected(country: CountryModel) {
-        countryCode = country.phoneCode
+        phoneCode = country.phoneCode
         countryCodeButton.setTitle("\(country.phoneCode)", for: .normal)
         countryCodeButton.setImage(UIImage(named: country.code) ?? .placeholder1, for: .normal)
     }

@@ -209,12 +209,12 @@ class PostCreateVC: UIViewController {
     
     func validate() -> Bool {
         if contentTxtView.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            self.view.makeToast(ErrorMessage.textEmptyAlert)
+            self.view.makeToast(ErrorMessage.textEmptyAlert.localized)
             return false
         }
         if currentPostType == .poll {
             if pollArray.count < 2 {
-                self.view.makeToast(ErrorMessage.pollOptionEmptyAlert)
+                self.view.makeToast(ErrorMessage.pollOptionEmptyAlert.localized)
                 return false
             }
         } else {

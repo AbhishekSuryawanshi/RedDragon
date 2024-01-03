@@ -28,7 +28,7 @@ class LoginVC: UIViewController {
     
     weak var delegate:LoginVCDelegate?
     var cancellable = Set<AnyCancellable>()
-    var countryCode = "0"
+    var phoneCode = "0"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,8 +56,8 @@ class LoginVC: UIViewController {
     func initialSettings() {
         fetchLoginViewModel()
         ///set deafult value for country code
-        countryCode = "+971"
-        countryCodeButton.setTitle(countryCode, for: .normal)
+        phoneCode = "+971"
+        countryCodeButton.setTitle(phoneCode, for: .normal)
         countryCodeButton.setImage(UIImage(named: "AE") ?? .placeholder1, for: .normal)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.dismissLoginVC), name: .dismissLoginVC, object: nil)
@@ -86,13 +86,13 @@ class LoginVC: UIViewController {
     
     func validate() -> Bool {
         if phoneTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            self.view.makeToast(ErrorMessage.phoneEmptyAlert)
+            self.view.makeToast(ErrorMessage.phoneEmptyAlert.localized)
             return false
-        } else if !isValidPhone(validate: countryCode + phoneTextField.text!) {
-            self.view.makeToast(ErrorMessage.invalidPhone)
+        } else if !isValidPhone(validate: phoneCode + phoneTextField.text!) {
+            self.view.makeToast(ErrorMessage.invalidPhone.localized)
             return false
         } else if passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            self.view.makeToast(ErrorMessage.passwordEmptyAlert)
+            self.view.makeToast(ErrorMessage.passwordEmptyAlert.localized)
             return false
         }
         return true
@@ -113,7 +113,7 @@ class LoginVC: UIViewController {
     @IBAction func createAccountButtonTapped(_ sender: UIButton) {
         if validate() {
             let param: [String: Any] = [
-                "phone_number": countryCode + phoneTextField.text!,
+                "phone_number": phoneCode + phoneTextField.text!,
                 "password": passwordTextField.text!
             ]
             LoginVM.shared.loginAsyncCall(parameters: param)
@@ -218,7 +218,7 @@ extension LoginVC: UITextViewDelegate {
 // MARK: - Custom Delegate
 extension LoginVC: CountryDelegate {
     func countrySelected(country: CountryModel) {
-        countryCode = country.phoneCode
+        phoneCode = country.phoneCode
         countryCodeButton.setTitle("\(country.phoneCode)", for: .normal)
         countryCodeButton.setImage(UIImage(named: country.code) ?? .placeholder1, for: .normal)
     }
