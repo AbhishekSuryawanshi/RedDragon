@@ -6,42 +6,36 @@
 //
 
 import UIKit
-import YouTubePlayerKit
+import YouTubeiOSPlayerHelper
 
 
 class PlayerDetailYoutubeViewController: UIViewController {
     
     var videoURL = ""
 
+    @IBOutlet weak var playerView: YTPlayerView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let video = videoURL
-        let configuration = YouTubePlayer.Configuration(
-            // Define which fullscreen mode should be used (system or web)
-            fullscreenMode: .system,
-            // Custom action to perform when a URL gets opened
-           
-            // Enable auto play
-            autoPlay: true,
-            // Hide controls
-            showControls: true,
-            // Enable loop
-            loopEnabled: true
-        )
-        let youTubePlayer = YouTubePlayer(
-            source: .url(video),
-            configuration: configuration
-        )
-        
-        let youTubePlayerViewController = YouTubePlayerViewController(
-            player: youTubePlayer
-        )
-        self.present(youTubePlayerViewController, animated: true)
 
+        if let index = (videoURL.range(of: "=")?.upperBound)
+        {
+            let afterEqualsTo = String(videoURL.suffix(from: index))
+            loadVideo(videoId: afterEqualsTo)
+        }
         
+      
+    }
+    
+    private func loadVideo(videoId: String) {
+        // Set playsinline = 1 to enable the video play inside the UIViewController
+        let playerVars: [String: Any] = ["playsinline": 1]
+        playerView.load(withVideoId: videoId, playerVars: playerVars)
+       
     }
     
    
+    @IBAction func closeBtnAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     
 }

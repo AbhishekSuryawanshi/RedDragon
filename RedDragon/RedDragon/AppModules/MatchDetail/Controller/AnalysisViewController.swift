@@ -18,6 +18,8 @@ class AnalysisViewController: UIViewController {
     private var cancellable = Set<AnyCancellable>()
     var matchSlug = ""
     var data: MatchDataClass?
+    var followUserVM = FollowUserViewModel()
+    var unfollowUserVM = UnfollowUserViewModel()
 
     
     override func viewDidLoad() {
@@ -70,6 +72,11 @@ class AnalysisViewController: UIViewController {
         lbl.textAlignment = .center
         lbl.attributedText = completeText
     }
+    
+    @objc func followBtnAction(sender: UIButton){
+        followUserVM.postFollowUser(userId: sender.tag)
+        followUserViewModelResponse(index: sender.tag)
+    }
 
 }
 
@@ -86,8 +93,9 @@ extension AnalysisViewController: UITableViewDataSource, UITableViewDelegate{
         cell.descriptionTxtView.text = analysisModel?.response?.data?[indexPath.row].comments
         cell.winPercentageLbl.text = String(format: "%.1f",analysisModel?.response?.data?[indexPath.row].user?.predStats?.successRate ?? 0.0 ) + "%"
         cell.betsLbl.text = " \(analysisModel?.response?.data?[indexPath.row].user?.predStats?.allCnt ?? 0)" + " Predictions  ".localized
+        cell.followBtn.addTarget(self, action: #selector(followBtnAction), for: .touchUpInside)
        labelWithImage(lbl: cell.fireCountLbl, text: " \(analysisModel?.response?.data?[indexPath.row].user?.predStats?.successCnt ?? 0)" + " ")
-       // cell.fireCountLbl.text = " \(analysisModel?.response?.data?[indexPath.row].user?.predStats?.successCnt ?? 0)" + " "
+       
         cell.selectionStyle = .none
         return cell
     }
@@ -95,6 +103,7 @@ extension AnalysisViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         navigateToViewController(PredictionResultViewController.self, storyboardName: StoryboardName.prediction, animationType: .autoReverse(presenting: .zoom), configure: { vc in
             vc.data = self.data
+            vc.analysisData = self.analysisModel?.response?.data?[indexPath.row]
             //vc.configureTopView()
              
            })
@@ -134,4 +143,43 @@ extension AnalysisViewController {
         }
         
     }
+    
+    func followUserViewModelResponse(index: Int) {
+        followUserVM.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        followUserVM.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        followUserVM.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] result in
+                if result?.response?.code == 200 {
+                 //   self?.userArray[index].following = true
+                 //   self?.tableView.reloadData()
+                }
+            })
+            .store(in: &cancellable)
+    }
+    
+    func unfollowUserViewModelResponse(index: Int) {
+        unfollowUserVM.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        unfollowUserVM.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        unfollowUserVM.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] result in
+                if result?.response?.code == 200 {
+                 //   self?.userArray[index].following = false
+                 //   self?.tableView.reloadData()
+                }
+            })
+            .store(in: &cancellable)
+    }
+
 }
