@@ -67,7 +67,6 @@ class ResetPasswordVM: APIServiceManager<LoginResponse> {
     }
 }
 
-
 class LogoutVM: APIServiceManager<LoginResponse> {
     init () {}
     static let shared = LogoutVM()

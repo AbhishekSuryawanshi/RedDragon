@@ -96,7 +96,7 @@ class VerificationVC: UIViewController {
                 UserVerifyVM.shared.verificationAsyncCall(parameters: param)
             }
         } else {
-            self.view.makeToast(ErrorMessage.otpEmptyAlert)
+            self.view.makeToast(ErrorMessage.otpEmptyAlert.localized)
         }
     }
 }
@@ -148,7 +148,7 @@ extension VerificationVC {
                     //go back to tabbar
                     NotificationCenter.default.post(name: .dismissLoginVC, object: nil)
                 } else {
-                    self.view.makeToast(ErrorMessage.incorrectOTP)
+                    self.view.makeToast(ErrorMessage.incorrectOTP.localized)
                 }
             }
         } else {

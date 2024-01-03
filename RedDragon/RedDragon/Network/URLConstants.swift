@@ -25,6 +25,7 @@ struct URLConstants {
     static let resendOTP           = baseURL + "resendotp"
     static let forgetPassword      = baseURL + "forgetPass"
     static let resetpassword       = baseURL + "resetpassword"
+    static let updatepassword      = baseURL + "change-password"
     static let logout              = baseURL + "logout"
     
     // MARK: - Discover | Profile
@@ -82,7 +83,7 @@ struct URLConstants {
     // MARK: - PlayerDetail
     static let playerDetail        = databaseBaseURL + "player.php"
     
-    //Bets
+    // MARK: - Bets
     static let betAllMatches       = baseURL + "bet/match/get"
     static let allBets             = baseURL + "bet/play/get"
     static let points              = baseURL + "bet/account/wallet"

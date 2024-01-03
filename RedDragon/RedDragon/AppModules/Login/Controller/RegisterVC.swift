@@ -32,7 +32,7 @@ class RegisterVC: UIViewController {
     @IBOutlet weak var createAccountButton: UIButton!
     
     var cancellable = Set<AnyCancellable>()
-    var countryCode = "0"
+    var phoneCode = "0"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,8 +53,8 @@ class RegisterVC: UIViewController {
         fetchLoginViewModel()
         
         ///set deafult value for country code
-        countryCode = "+971"
-        countryCodeButton.setTitle(countryCode, for: .normal)
+        phoneCode = "+971"
+        countryCodeButton.setTitle(phoneCode, for: .normal)
         countryCodeButton.setImage(UIImage(named: "AE") ?? .placeholder1, for: .normal)
     }
     
@@ -92,37 +92,37 @@ class RegisterVC: UIViewController {
     
     func validate() -> Bool {
         if nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            self.view.makeToast(ErrorMessage.nameEmptyAlert)
+            self.view.makeToast(ErrorMessage.nameEmptyAlert.localized)
             return false
         } else if emailTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            self.view.makeToast(ErrorMessage.emailEmptyAlert)
+            self.view.makeToast(ErrorMessage.emailEmptyAlert.localized)
             return false
         } else if !isValidEmail(validate: emailTextfield.text!) {
-            self.view.makeToast(ErrorMessage.invalidEmail)
+            self.view.makeToast(ErrorMessage.invalidEmail.localized)
             return false
         } else if phoneTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            self.view.makeToast(ErrorMessage.phoneEmptyAlert)
+            self.view.makeToast(ErrorMessage.phoneEmptyAlert.localized)
             return false
-        } else if !isValidPhone(validate: countryCode + phoneTextField.text!) {
-            self.view.makeToast(ErrorMessage.invalidPhone)
+        } else if !isValidPhone(validate: phoneCode + phoneTextField.text!) {
+            self.view.makeToast(ErrorMessage.invalidPhone.localized)
             return false
         } else if userNameTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            self.view.makeToast(ErrorMessage.userNameEmptyAlert)
+            self.view.makeToast(ErrorMessage.userNameEmptyAlert.localized)
             return false
         } else if passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            self.view.makeToast(ErrorMessage.passwordEmptyAlert)
+            self.view.makeToast(ErrorMessage.passwordEmptyAlert.localized)
             return false
         } else if !isValidPassword(validate: passwordTextField.text!) {
-            self.view.makeToast(ErrorMessage.passwordCondition, duration: 5)
+            self.view.makeToast(ErrorMessage.passwordCondition.localized, duration: 5)
             return false
         } else if confirmPasswordTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            self.view.makeToast(ErrorMessage.confirmPasswordEmptyAlert)
+            self.view.makeToast(ErrorMessage.confirmPasswordEmptyAlert.localized)
             return false
         } else if passwordTextField.text! != confirmPasswordTextfield.text! {
-            self.view.makeToast(ErrorMessage.passwordNotmatchedAlert)
+            self.view.makeToast(ErrorMessage.passwordNotmatchedAlert.localized)
             return false
         } else if !checkButton.isSelected {
-            self.view.makeToast(ErrorMessage.termsAlert)
+            self.view.makeToast(ErrorMessage.termsAlert.localized)
             return false
         }
         return true
@@ -150,7 +150,8 @@ class RegisterVC: UIViewController {
             let param: [String: Any] = [
                 "full_name": nameTextField.text!,
                 "email": emailTextfield.text!,
-                "phone_number": countryCode + phoneTextField.text!,
+                "phone_number": phoneCode + phoneTextField.text!,
+                "country_code": phoneCode,
                 "username": userNameTextfield.text!,
                 "password": passwordTextField.text!
             ]
@@ -247,7 +248,7 @@ extension RegisterVC: UITextViewDelegate {
 // MARK: - Custom Delegate
 extension RegisterVC: CountryDelegate {
     func countrySelected(country: CountryModel) {
-        countryCode = country.phoneCode
+        phoneCode = country.phoneCode
         countryCodeButton.setTitle("\(country.phoneCode)", for: .normal)
         countryCodeButton.setImage(UIImage(named: country.code) ?? .placeholder1, for: .normal)
     }
