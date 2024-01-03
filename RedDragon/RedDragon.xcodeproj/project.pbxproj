@@ -408,6 +408,8 @@
 		6A947AA62B1F33DB00A00788 /* ChannelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A947AA22B1F33DB00A00788 /* ChannelManager.swift */; };
 		6A947AA72B1F33DB00A00788 /* MessagingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A947AA32B1F33DB00A00788 /* MessagingManager.swift */; };
 		6A947AA82B1F33DB00A00788 /* TokenRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A947AA42B1F33DB00A00788 /* TokenRequestHandler.swift */; };
+		6AAA1D2D2B45408200465CDB /* ReportUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAA1D2B2B45408200465CDB /* ReportUserVC.swift */; };
+		6AAA1D2E2B45408200465CDB /* ReportUserVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AAA1D2C2B45408200465CDB /* ReportUserVC.xib */; };
 		6AB18E372B187B7B00287A9C /* EventDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB18E352B187B7B00287A9C /* EventDetailVC.swift */; };
 		6AB18E382B187B7B00287A9C /* EventDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AB18E362B187B7B00287A9C /* EventDetailVC.xib */; };
 		6ABB24BF2B3C459300C60EC8 /* NoDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABB24BD2B3C459300C60EC8 /* NoDataTableViewCell.swift */; };
@@ -1015,6 +1017,8 @@
 		6A947AA22B1F33DB00A00788 /* ChannelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelManager.swift; sourceTree = "<group>"; };
 		6A947AA32B1F33DB00A00788 /* MessagingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagingManager.swift; sourceTree = "<group>"; };
 		6A947AA42B1F33DB00A00788 /* TokenRequestHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenRequestHandler.swift; sourceTree = "<group>"; };
+		6AAA1D2B2B45408200465CDB /* ReportUserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserVC.swift; sourceTree = "<group>"; };
+		6AAA1D2C2B45408200465CDB /* ReportUserVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportUserVC.xib; sourceTree = "<group>"; };
 		6AB18E352B187B7B00287A9C /* EventDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailVC.swift; sourceTree = "<group>"; };
 		6AB18E362B187B7B00287A9C /* EventDetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventDetailVC.xib; sourceTree = "<group>"; };
 		6ABB24BD2B3C459300C60EC8 /* NoDataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoDataTableViewCell.swift; sourceTree = "<group>"; };
@@ -1857,6 +1861,7 @@
 		47FC33DD2AEA4D4200FABED4 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				6AAA1D2A2B453E9400465CDB /* Controller */,
 				47ACEB7D2B0C9721001AD0EB /* Model */,
 				47AC3E8E2B3AAA87004A5BBF /* ReusableTableViewCells */,
 				47FC33DE2AEA4D4E00FABED4 /* ReusableCollectionViewCells */,
@@ -2787,6 +2792,15 @@
 			path = "Twilio Chat";
 			sourceTree = "<group>";
 		};
+		6AAA1D2A2B453E9400465CDB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6AAA1D2B2B45408200465CDB /* ReportUserVC.swift */,
+				6AAA1D2C2B45408200465CDB /* ReportUserVC.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		6AC52DD52B29BF2400723A52 /* Experts */ = {
 			isa = PBXGroup;
 			children = (
@@ -3510,6 +3524,7 @@
 				49581AFD2B14CC1800048189 /* MyTeamCollectionViewCell.xib in Resources */,
 				6A1DEC092B287F73006EC885 /* GlobalMatchHeadToHeadTableViewCell.xib in Resources */,
 				41846BDA2B0C7E050020F503 /* TopView.xib in Resources */,
+				6AAA1D2E2B45408200465CDB /* ReportUserVC.xib in Resources */,
 				47AD8CD32B3EFF31006FEA03 /* PointsCollectionViewCell.xib in Resources */,
 				6ABB24C02B3C459300C60EC8 /* NoDataTableViewCell.xib in Resources */,
 				4716B11A2AEF8D6B003582A9 /* MatchTableViewCell.xib in Resources */,
@@ -3725,6 +3740,7 @@
 				E93C6C052B0C88D80042657B /* WalletBalanceModel.swift in Sources */,
 				ADC076052B29C2BD009FE6C4 /* StreetEventRequestAcceptViewModel.swift in Sources */,
 				6ABB24BF2B3C459300C60EC8 /* NoDataTableViewCell.swift in Sources */,
+				6AAA1D2D2B45408200465CDB /* ReportUserVC.swift in Sources */,
 				4988F7372B2084A700905CDD /* BudgetCalculation.swift in Sources */,
 				ADC5886E2B244926004F2A49 /* StreetPlayersListViewModel.swift in Sources */,
 				47C3B7142B04D43500E12A4D /* CountryCodeListVC.swift in Sources */,
