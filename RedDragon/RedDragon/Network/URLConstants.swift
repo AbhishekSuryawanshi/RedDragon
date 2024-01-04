@@ -90,7 +90,6 @@ struct URLConstants {
     static let placeBet            = baseURL + "bet/play/create"
     
     // MARK: -  Meet
-    static let meetBaseURL         = "https://kicktin.com/vinder/api/"
     static let meetUserList        = baseURL + "vinder/listuser"
     static let meetHotEventList    = baseURL + "vinder/events/hot"
     static let meetAllEventList    = baseURL + "vinder/event/list"
@@ -157,11 +156,10 @@ struct URLConstants {
     static let basketballH2HMatchList = globalMatchBaseURL + "basketball/match-analysis/statics/"
     
     // MARK: - Experts
-    static let expertsBaseURL         = "http://157.245.159.136:5072/api"
-    static let expertUserList         = expertsBaseURL + "/user/list"
-    static let followUser             = expertsBaseURL + "/user/follow/"
-    static let unfollowUser           = expertsBaseURL + "/user/unfollow/"
-    static let transaction            = expertsBaseURL + "/user/wallet/transaction/add"
+    static let expertUserList         = baseURL + "user/list"
+    static let followUser             = baseURL + "user/follow/"
+    static let unfollowUser           = baseURL + "user/unfollow/"
+    static let transaction            = baseURL + "user/wallet/transaction/add"
     
     // MARK: - Wallet
     static let subscriptionList       = baseURL + "user/wallet/history"
@@ -170,5 +168,8 @@ struct URLConstants {
     // MARK: - Translation
     static let translation            = "/get_translations.php"
     
+    // MARK: - User Module
+    static let blockUser              = baseURL + "user/block"
+    static let reportUser             = baseURL + "user/report"
 }
 

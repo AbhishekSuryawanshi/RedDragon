@@ -85,6 +85,7 @@ class ChatDetailVC: UIViewController {
                    /// navigate to Block user
                    self.navigateToXIBViewController(ReportUserVC.self, nibName: "ReportUserVC") { vc in
                        vc.isFromBlockUser = true
+                       vc.userId = self.selectedUserId
                    }
                } dismissAction: {
                    self.navigationController?.popViewController(animated: true)
