@@ -10,6 +10,7 @@ import Foundation
 // MARK: - AnalysisModel
 struct AnalysisModel: Codable {
     var response: AnalysisResponse?
+    var error: ErrorResponse?
     
 }
 // MARK: - Response
@@ -28,7 +29,8 @@ struct AnalysisData: Codable {
     var comments: String?
     var predictedVia: String?
     var user: AnalysisUser?
-    var loggedIn: Bool?
+    var loggedIn, isFollow: Bool?
+    var reddragonUserID: Int?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -45,6 +47,8 @@ struct AnalysisData: Codable {
         case predictedVia = "predicted_via"
         case user
         case loggedIn = "logged_in"
+        case isFollow = "is_follow"
+        case reddragonUserID = "reddragon_user_id"
     }
 }
 

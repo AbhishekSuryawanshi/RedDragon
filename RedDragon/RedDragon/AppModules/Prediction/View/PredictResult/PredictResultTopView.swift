@@ -9,9 +9,20 @@ import UIKit
 
 class PredictResultTopView: UIView {
 
-    @IBOutlet weak var team2Btn: UIButton!
-    @IBOutlet weak var drawBtn: UIButton!
-    @IBOutlet weak var team1Btn: UIButton!
+   
+    @IBOutlet weak var team2View: UIView!
+    @IBOutlet weak var drawView: UIView!
+    @IBOutlet weak var team1View: UIView!
+    @IBOutlet weak var team2SelectionImgView: UIImageView!
+    @IBOutlet weak var team2NameLbl: UILabel!
+    @IBOutlet weak var drawSelectionImgView: UIImageView!
+    @IBOutlet weak var drawLbl: UILabel!
+    @IBOutlet weak var team1SelectionImgView: UIImageView!
+    @IBOutlet weak var team1NameLbl: UILabel!
+    @IBOutlet weak var predictionLbl: UILabel!
+  //  @IBOutlet weak var team2Btn: UIButton!
+  //  @IBOutlet weak var drawBtn: UIButton!
+  //  @IBOutlet weak var team1Btn: UIButton!
     @IBOutlet weak var team2Lbl: UILabel!
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var team1Lbl: UILabel!

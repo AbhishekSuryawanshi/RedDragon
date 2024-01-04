@@ -35,46 +35,157 @@ class PredictionResultViewController: UIViewController {
         self.predictionResultView.team1Lbl.text = data?.homeTeamName
         self.predictionResultView.team2Lbl.text = data?.awayTeamName
         self.predictionResultView.dateLbl.text = data?.matchDatetime
-        self.predictionResultView.team1Btn.setTitle(data?.homeTeamName.localized, for: .normal)
-        self.predictionResultView.team2Btn.setTitle(data?.awayTeamName.localized, for: .normal)
-        self.predictionResultView.drawBtn.setTitle("Draw".localized, for: .normal)
+        self.predictionResultView.team1NameLbl.text = data?.homeTeamName
+        self.predictionResultView.team2NameLbl.text = data?.awayTeamName
+        self.predictionResultView.drawLbl.text = "Draw".localized
+       // self.predictionResultView.team1Btn.setTitle(data?.homeTeamName.localized, for: .normal)
+       // self.predictionResultView.team2Btn.setTitle(data?.awayTeamName.localized, for: .normal)
+       // self.predictionResultView.drawBtn.setTitle("Draw".localized, for: .normal)
         self.predictionDescriptionView.descriptionTxtView.text = self.analysisData?.comments
         
        // if(analysisData?.loggedIn == true ){
             if analysisData?.isSuccess == 0{
+                self.predictionResultView.predictionLbl.text = "Wrong Prediction".localized
+                self.predictionResultView.predictionLbl.textColor = UIColor.init(hex: "BB1910")
                 if analysisData?.predictedTeam == "1"{
-                    self.predictionResultView.drawBtn.backgroundColor = UIColor.init(hex: "FFDAD5")
-                    self.predictionResultView.drawBtn.borderWidth = 2
-                    self.predictionResultView.drawBtn.borderColor = UIColor.init(hex: "BB1910")
+                    //self.predictionResultView.drawBtn.backgroundColor = UIColor.init(hex: "FFDAD5")
+                    //self.predictionResultView.drawBtn.borderWidth = 2
+                    //self.predictionResultView.drawBtn.borderColor = UIColor.init(hex: "BB1910")
+                    self.predictionResultView.drawView.borderColor = UIColor.init(hex: "FFDAD6")
+                    self.predictionResultView.drawView.borderWidth = 2
+                    self.predictionResultView.drawView.backgroundColor = UIColor.init(hex: "BA1A1A")
+                    self.predictionResultView.drawSelectionImgView.isHidden = false
+                    self.predictionResultView.drawSelectionImgView.image = UIImage(named: "wrong")
+                    self.predictionResultView.team1SelectionImgView.isHidden = true
+                    self.predictionResultView.team2SelectionImgView.isHidden = true
+                    if analysisData?.winnerTeam == "2"{
+                        self.predictionResultView.team1View.borderColor = UIColor.init(hex: "308C57")
+                        self.predictionResultView.team1View.borderWidth = 2
+                        self.predictionResultView.team1View.backgroundColor = UIColor.init(hex: "CEF6D7")
+                        self.predictionResultView.team1SelectionImgView.isHidden = false
+                        self.predictionResultView.team1SelectionImgView.image = UIImage(named: "right")
+                        self.predictionResultView.drawSelectionImgView.isHidden = true
+                        self.predictionResultView.team2SelectionImgView.isHidden = true
+                    }
+                    else if analysisData?.winnerTeam == "3"{
+                        self.predictionResultView.team2View.borderColor = UIColor.init(hex: "308C57")
+                        self.predictionResultView.team2View.borderWidth = 2
+                        self.predictionResultView.team2View.backgroundColor = UIColor.init(hex: "CEF6D7")
+                        self.predictionResultView.team2SelectionImgView.isHidden = false
+                        self.predictionResultView.team2SelectionImgView.image = UIImage(named: "right")
+                        self.predictionResultView.drawSelectionImgView.isHidden = true
+                        self.predictionResultView.team1SelectionImgView.isHidden = true
+                    }
+                    
+                    
                 }
                 else if analysisData?.predictedTeam == "2"{
-                    self.predictionResultView.team1Btn.backgroundColor = UIColor.init(hex: "FFDAD5")
-                    self.predictionResultView.team1Btn.borderWidth = 2
-                    self.predictionResultView.team1Btn.borderColor = UIColor.init(hex: "BB1910")
+                   // self.predictionResultView.team1Btn.backgroundColor = UIColor.init(hex: "FFDAD5")
+                   // self.predictionResultView.team1Btn.borderWidth = 2
+                   // self.predictionResultView.team1Btn.borderColor = UIColor.init(hex: "BB1910")
+                    
+                    self.predictionResultView.team1View.borderColor = UIColor.init(hex: "FFDAD6")
+                    self.predictionResultView.team1View.borderWidth = 2
+                    self.predictionResultView.team1View.backgroundColor = UIColor.init(hex: "BA1A1A")
+                    self.predictionResultView.team1SelectionImgView.isHidden = false
+                    self.predictionResultView.team1SelectionImgView.image = UIImage(named: "wrong")
+                    self.predictionResultView.drawSelectionImgView.isHidden = true
+                    self.predictionResultView.team2SelectionImgView.isHidden = true
+                    
+                    if analysisData?.winnerTeam == "1"{
+                        self.predictionResultView.drawView.borderColor = UIColor.init(hex: "308C57")
+                        self.predictionResultView.drawView.borderWidth = 2
+                        self.predictionResultView.drawView.backgroundColor = UIColor.init(hex: "CEF6D7")
+                        self.predictionResultView.drawSelectionImgView.isHidden = false
+                        self.predictionResultView.drawSelectionImgView.image = UIImage(named: "right")
+                        self.predictionResultView.team1SelectionImgView.isHidden = true
+                        self.predictionResultView.team2SelectionImgView.isHidden = true
+                    }
+                    else if analysisData?.winnerTeam == "3"{
+                        self.predictionResultView.team2View.borderColor = UIColor.init(hex: "308C57")
+                        self.predictionResultView.team2View.borderWidth = 2
+                        self.predictionResultView.team2View.backgroundColor = UIColor.init(hex: "CEF6D7")
+                        self.predictionResultView.team2SelectionImgView.isHidden = false
+                        self.predictionResultView.team2SelectionImgView.image = UIImage(named: "right")
+                        self.predictionResultView.drawSelectionImgView.isHidden = true
+                        self.predictionResultView.team1SelectionImgView.isHidden = true
+                        
+                    }
                     
                 }
                 else if analysisData?.predictedTeam == "3"{
-                    self.predictionResultView.team2Btn.backgroundColor = UIColor.init(hex: "FFDAD5")
-                    self.predictionResultView.team2Btn.borderWidth = 2
-                    self.predictionResultView.team2Btn.borderColor = UIColor.init(hex: "BB1910")
+                   // self.predictionResultView.team2Btn.backgroundColor = UIColor.init(hex: "FFDAD5")
+                   // self.predictionResultView.team2Btn.borderWidth = 2
+                   // self.predictionResultView.team2Btn.borderColor = UIColor.init(hex: "BB1910")
+                    self.predictionResultView.team2View.borderColor = UIColor.init(hex: "FFDAD6")
+                    self.predictionResultView.team2View.borderWidth = 2
+                    self.predictionResultView.team2View.backgroundColor = UIColor.init(hex: "BA1A1A")
+                    self.predictionResultView.team2SelectionImgView.isHidden = false
+                    self.predictionResultView.team2SelectionImgView.image = UIImage(named: "wrong")
+                    self.predictionResultView.team1SelectionImgView.isHidden = true
+                    self.predictionResultView.drawSelectionImgView.isHidden = true
+                    
+                    if analysisData?.winnerTeam == "1"{
+                        self.predictionResultView.drawView.borderColor = UIColor.init(hex: "308C57")
+                        self.predictionResultView.drawView.borderWidth = 2
+                        self.predictionResultView.drawView.backgroundColor = UIColor.init(hex: "CEF6D7")
+                        self.predictionResultView.drawSelectionImgView.isHidden = false
+                        self.predictionResultView.drawSelectionImgView.image = UIImage(named: "right")
+                        self.predictionResultView.team1SelectionImgView.isHidden = true
+                        self.predictionResultView.team2SelectionImgView.isHidden = true
+                    }
+                    else if analysisData?.winnerTeam == "2"{
+                        self.predictionResultView.team1View.borderColor = UIColor.init(hex: "308C57")
+                        self.predictionResultView.team1View.borderWidth = 2
+                        self.predictionResultView.team1View.backgroundColor = UIColor.init(hex: "CEF6D7")
+                        self.predictionResultView.team1SelectionImgView.isHidden = false
+                        self.predictionResultView.team1SelectionImgView.image = UIImage(named: "right")
+                        self.predictionResultView.drawSelectionImgView.isHidden = true
+                        self.predictionResultView.team2SelectionImgView.isHidden = true
+                    }
                 }
+                
             }
             else if analysisData?.isSuccess == 1{
+                self.predictionResultView.predictionLbl.text = "Correct Prediction".localized
+                self.predictionResultView.predictionLbl.textColor = UIColor.init(hex: "308C57")
                 if analysisData?.predictedTeam == "1"{
-                    self.predictionResultView.drawBtn.backgroundColor = UIColor.init(hex: "CEF6D7")
-                    self.predictionResultView.drawBtn.borderWidth = 2
-                    self.predictionResultView.drawBtn.borderColor = UIColor.init(hex: "308C57")
+                 //   self.predictionResultView.drawBtn.backgroundColor = UIColor.init(hex: "CEF6D7")
+                 //   self.predictionResultView.drawBtn.borderWidth = 2
+                 //   self.predictionResultView.drawBtn.borderColor = UIColor.init(hex: "308C57")
+                    self.predictionResultView.drawView.borderColor = UIColor.init(hex: "308C57")
+                    self.predictionResultView.drawView.borderWidth = 2
+                    self.predictionResultView.drawView.backgroundColor = UIColor.init(hex: "CEF6D7")
+                    self.predictionResultView.drawSelectionImgView.isHidden = false
+                    self.predictionResultView.drawSelectionImgView.image = UIImage(named: "right")
+                    self.predictionResultView.team1SelectionImgView.isHidden = true
+                    self.predictionResultView.team2SelectionImgView.isHidden = true
+                    
                 }
                 else if analysisData?.predictedTeam == "2"{
-                    self.predictionResultView.team1Btn.backgroundColor = UIColor.init(hex: "CEF6D7")
-                    self.predictionResultView.team1Btn.borderWidth = 2
-                    self.predictionResultView.team1Btn.borderColor = UIColor.init(hex: "308C57")
+                //    self.predictionResultView.team1Btn.backgroundColor = UIColor.init(hex: "CEF6D7")
+                //    self.predictionResultView.team1Btn.borderWidth = 2
+                //    self.predictionResultView.team1Btn.borderColor = UIColor.init(hex: "308C57")
+                    self.predictionResultView.team1View.borderColor = UIColor.init(hex: "308C57")
+                    self.predictionResultView.team1View.borderWidth = 2
+                    self.predictionResultView.team1View.backgroundColor = UIColor.init(hex: "CEF6D7")
+                    self.predictionResultView.team1SelectionImgView.isHidden = false
+                    self.predictionResultView.team1SelectionImgView.image = UIImage(named: "right")
+                    self.predictionResultView.drawSelectionImgView.isHidden = true
+                    self.predictionResultView.team2SelectionImgView.isHidden = true
                     
                 }
                 else if analysisData?.predictedTeam == "3"{
-                    self.predictionResultView.team2Btn.backgroundColor = UIColor.init(hex: "CEF6D7")
-                    self.predictionResultView.team2Btn.borderWidth = 2
-                    self.predictionResultView.team2Btn.borderColor = UIColor.init(hex: "308C57")
+                //    self.predictionResultView.team2Btn.backgroundColor = UIColor.init(hex: "CEF6D7")
+                //    self.predictionResultView.team2Btn.borderWidth = 2
+                //    self.predictionResultView.team2Btn.borderColor = UIColor.init(hex: "308C57")
+                    self.predictionResultView.team2View.borderColor = UIColor.init(hex: "308C57")
+                    self.predictionResultView.team2View.borderWidth = 2
+                    self.predictionResultView.team2View.backgroundColor = UIColor.init(hex: "CEF6D7")
+                    self.predictionResultView.team2SelectionImgView.isHidden = false
+                    self.predictionResultView.team2SelectionImgView.image = UIImage(named: "right")
+                    self.predictionResultView.drawSelectionImgView.isHidden = true
+                    self.predictionResultView.team1SelectionImgView.isHidden = true
                 }
             }
             
