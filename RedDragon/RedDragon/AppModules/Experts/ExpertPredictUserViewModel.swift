@@ -42,7 +42,7 @@ class ExpertPredictionUserDetailViewModel: APIServiceManager<ExpertUserDetailMod
     }
 }
 
-class FollowUserViewModel: APIServiceManager<GeneralResponseModel> {
+class FollowUserViewModel: APIServiceManager<BasicAPIResponse> {
     
     ///function to post follow user
     func postFollowUser(userId: Int) {
@@ -52,7 +52,7 @@ class FollowUserViewModel: APIServiceManager<GeneralResponseModel> {
     }
 }
 
-class UnfollowUserViewModel: APIServiceManager<GeneralResponseModel> {
+class UnfollowUserViewModel: APIServiceManager<BasicAPIResponse> {
     
     ///function to post unfollow user
     func postUnfollowUser(userId: Int) {
@@ -62,7 +62,7 @@ class UnfollowUserViewModel: APIServiceManager<GeneralResponseModel> {
     }
 }
 
-class TransactionViewModel: APIServiceManager<GeneralResponseModel> {
+class TransactionViewModel: APIServiceManager<BasicAPIResponse> {
     
     ///function to post transaction
     func postDebitPredictionAmount(params: [String:Any]) {

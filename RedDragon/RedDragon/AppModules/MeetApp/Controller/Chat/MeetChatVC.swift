@@ -35,6 +35,7 @@ class MeetChatVC: UIViewController, ChatListTVDelegate {
         searchBar.delegate = self
         channels = [TCHChannel]()
         navigationController?.setNavigationBarHidden(true, animated: false)
+        NotificationCenter.default.addObserver(self, selector: #selector(userBlocked), name: Notification.Name("UserBlocked"), object: nil)
         callToViewModelToFetchUser()
         chatListTableView.didSelect = didSelect
     }
@@ -68,7 +69,7 @@ class MeetChatVC: UIViewController, ChatListTVDelegate {
         }
     }
     
-    func userBlocked(){
+    @objc func userBlocked(){
         callToViewModelToFetchUser()
     }
     

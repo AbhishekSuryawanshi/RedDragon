@@ -109,13 +109,3 @@ struct ExpertPredictionMatch: Codable {
 struct PredictMatch: Codable {
     let detail: PredictionMatchDetail?
 }
-
-// MARK: - Follow Users
-struct GeneralResponseModel: Codable {
-    let response: GeneralResponse?
-}
-
-struct GeneralResponse: Codable {
-    let code: Int?
-    let messages: [String]?
-}

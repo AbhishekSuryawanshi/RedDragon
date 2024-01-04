@@ -87,4 +87,6 @@ struct ErrorMessage {
 
 struct SuccessMessage {
     static let successfullyLikedUser       = "User liked successfully"
+    static let successfullyBlockedUser     = "User blocked successfully"
+    static let successfullyReportedUser    = "User reported successfully"
 }
