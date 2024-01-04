@@ -17,6 +17,7 @@ class InfoVC: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var servicesCollectionView: UICollectionView!
     @IBOutlet weak var firstStaticDataView: UIView!
     
+    @IBOutlet weak var liveLabel: UILabel!
     @IBOutlet weak var packageLabel: UILabel!
     @IBOutlet weak var saveUptoLabel: UILabel!
     @IBOutlet weak var packageSeeAllButton: UIButton!
@@ -94,6 +95,7 @@ class InfoVC: UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setLabel()
         loadFunctionality()
         setupConstantTagView()
     }
@@ -115,11 +117,34 @@ class InfoVC: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func seeAllButton(_ sender: UIButton) {
+
     }
 }
 
 /// __Supportive functions
 extension InfoVC {
+    
+    private func setLabel() {
+        expertTableLabel.text = "Experts".localized
+        continuesWinningLabel.text = "Continues Winning".localized
+        topAccuracyLabel.text = "Top Accuracy".localized
+        onAStrakLabel.text = "On A Streak".localized
+        packageLabel.text = "Packages".localized
+        saveUptoLabel.text = "Save upto".localized
+        topMatchesLabel.text = "Top Matches".localized
+        liveLabel.text = "Live".localized
+        whatsHappeningLabel.text = "What's Happening".localized
+        recommendedLabel.text = "Recommended Experts".localized
+        firstWinRateLabel.text = "Win Rate".localized
+        secondExpertWinRateLabel.text = "Win Rate".localized
+        thirdExpertWinRateLabel.text = "Win Rate".localized
+        expertSeeAllLabel.setTitle("See All".localized, for: .normal)
+        topMatchesSeeMoreButton.setTitle("See All".localized, for: .normal)
+        recommendedSeeAllLabel.setTitle("See All".localized, for: .normal)
+        whatsHappeningSeeAllButton.setTitle("See All".localized, for: .normal)
+        predictionSeeAllButton.setTitle("See All".localized, for: .normal)
+        packageSeeAllButton.setTitle("See All".localized, for: .normal)
+    }
     
     private func setupConstantTagView() {
         constantViewForTags.isHidden = true
@@ -184,11 +209,11 @@ extension InfoVC {
         cell.homeNameLabel.text = matches.homeInfo?.name ?? ""
         cell.awayNameLabel.text = matches.awayInfo?.name ?? ""
         
-        cell.leagueNameLabel.text = "\(matches.leagueInfo?.name ?? "") | Round \(matches.round?.round ?? 0)"
-        cell.cornerLabel.text = "Corners: \(matches.homeInfo?.cornerScore ?? 0)-\(matches.awayInfo?.cornerScore ?? 0)"
-        cell.scoreLabel.text = "Score: \(matches.homeInfo?.homeScore ?? 0)-\(matches.awayInfo?.awayScore ?? 0)"
+        cell.leagueNameLabel.text = "\(matches.leagueInfo?.name ?? "") | \("Round".localized) \(matches.round?.round ?? 0)"
+        cell.cornerLabel.text = "\("Corners".localized):" + " \(matches.homeInfo?.cornerScore ?? 0)-\(matches.awayInfo?.cornerScore ?? 0)"
+        cell.scoreLabel.text = "\("Score".localized): \(matches.homeInfo?.homeScore ?? 0)-\(matches.awayInfo?.awayScore ?? 0)"
         cell.halftimeLabel.isHidden = false
-        cell.halftimeLabel.text = "Halftime: \(matches.homeInfo?.halfTimeScore ?? 0)-\(matches.awayInfo?.halfTimeScore ?? 0)"
+        cell.halftimeLabel.text = "\("Halftime".localized): \(matches.homeInfo?.halfTimeScore ?? 0)-\(matches.awayInfo?.halfTimeScore ?? 0)"
     }
     
     private func tableCell(indexPath:IndexPath) -> PredictUserListTableViewCell {
@@ -205,10 +230,10 @@ extension InfoVC {
         cell.heightConstraint.constant = 35.67
         cell.nameLabel.text = userArray[indexPath.row].appdata?.predict?.name?.capitalized
         cell.winRateLabel.text = "\(userArray[indexPath.row].appdata?.predict?.predictStats?.successRate ?? 0)%"
-        cell.allCountLabel.text = "Total: \(userArray[indexPath.row].appdata?.predict?.predictStats?.allCount ?? 0)"
-        cell.successCountLabel.text = "Success: \(userArray[indexPath.row].appdata?.predict?.predictStats?.successCount ?? 0)"
-        cell.unsuccessCountLabel.text = "Failed: \(userArray[indexPath.row].appdata?.predict?.predictStats?.unsuccessCount ?? 0)"
-        cell.coinLabel.text = "Coin: \(userArray[indexPath.row].appdata?.predict?.predictStats?.coins ?? 0)"
+        cell.allCountLabel.text = "\("Total".localized): \(userArray[indexPath.row].appdata?.predict?.predictStats?.allCount ?? 0)"
+        cell.successCountLabel.text = "\("Success".localized): \(userArray[indexPath.row].appdata?.predict?.predictStats?.successCount ?? 0)"
+        cell.unsuccessCountLabel.text = "\("Failed".localized): \(userArray[indexPath.row].appdata?.predict?.predictStats?.unsuccessCount ?? 0)"
+        cell.coinLabel.text = "\("Coin".localized): \(userArray[indexPath.row].appdata?.predict?.predictStats?.coins ?? 0)"
         cell.dateLabel.text = "  \(userArray[indexPath.row].appdata?.predict?.date.formatDate(inputFormat: dateFormat.ddMMyyyyWithTimeZone, outputFormat: dateFormat.ddMMMyyyyhmma) ?? "")"
         
         if userArray[indexPath.row].following ?? true {
