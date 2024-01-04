@@ -26,6 +26,10 @@ class WalletVC: UIViewController {
     
     @IBOutlet weak var bannerCollectionView: UICollectionView!
     
+    @IBOutlet weak var bannerTitleLabel: UILabel!
+    @IBOutlet weak var spinLabel: UILabel!
+    @IBOutlet weak var playButton: UIButton!
+    
     private var cancellable = Set<AnyCancellable>()
     private var bannerVM: BannerViewModel?
     private var banners_count = 0
@@ -59,6 +63,9 @@ class WalletVC: UIViewController {
         transactionSeeAllButton.setTitle("View All".localized, for: .normal)
         packageLabel.text = "Packages".localized
         convertBetLabel.text = "Convert Bet Diamonds to Heat Points".localized
+        bannerTitleLabel.text = "\("Play & Earn".localized) \n\("Heat Points".localized) 🔥"
+        spinLabel.text = "Spin".localized
+        playButton.setTitle("Play".localized, for: .normal)
     }
     
     func nibInitialization() {
@@ -111,6 +118,12 @@ class WalletVC: UIViewController {
                 }
             }
         }
+    }
+    
+    // MARK: - Button Action
+    
+    @IBAction func spinPlayButtonTapped(_ sender: UIButton) {
+        
     }
 }
 
