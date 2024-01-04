@@ -162,39 +162,11 @@ class PlayerDetailProfileViewController: UIViewController {
     }
     
     @objc func playVideo(sender: UIButton){
-      
-       /* let video = playerDetailViewModel?.responseData?.data?.medias?[sender.tag].video ?? ""
-        let configuration = YouTubePlayer.Configuration(
-            // Define which fullscreen mode should be used (system or web)
-            fullscreenMode: .system,
-            // Custom action to perform when a URL gets opened
-           
-            // Enable auto play
-            autoPlay: true,
-            // Hide controls
-            showControls: true,
-            // Enable loop
-            loopEnabled: true
-            
-            
-        )
-        let youTubePlayer = YouTubePlayer(
-            source: .url(video),
-            configuration: configuration
-        )
-       
-        
-        let youTubePlayerViewController = YouTubePlayerViewController(
-            player: youTubePlayer
-        )*/
         navigateToViewController(PlayerDetailYoutubeViewController.self, storyboardName: StoryboardName.playerDetail, animationType: .autoReverse(presenting: .zoom)){vc in
             vc.videoURL = self.playerDetailViewModel?.responseData?.data?.medias?[sender.tag].video ?? ""
             
         }
-      //  let playerdetailyoutubecontroller = PlayerDetailYoutubeViewController()
-       // self.navigationController?.pushViewController(youTubePlayerViewController, animated: true)
-     //   self.present(youTubePlayerViewController, animated: true)
-        
+      
     }
     
     func configureMediaView(){

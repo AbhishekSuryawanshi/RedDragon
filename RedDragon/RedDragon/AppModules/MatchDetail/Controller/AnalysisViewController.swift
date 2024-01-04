@@ -10,7 +10,7 @@ import Combine
 import SDWebImage
 
 class AnalysisViewController: UIViewController {
-
+    
     @IBOutlet weak var analysisTableView: UITableView!
     
     private var analysisViewModel: AnalysisViewModel?
@@ -74,8 +74,17 @@ class AnalysisViewController: UIViewController {
     }
     
     @objc func followBtnAction(sender: UIButton){
-        followUserVM.postFollowUser(userId: sender.tag)
-        followUserViewModelResponse(index: sender.tag)
+        if sender.tag != 0{
+            if sender.backgroundColor == UIColor.init(hex: "FFE08A"){
+                unfollowUserVM.postUnfollowUser(userId: sender.tag)
+                unfollowUserViewModelResponse()
+            }
+            else{
+                followUserVM.postFollowUser(userId: sender.tag)
+                followUserViewModelResponse()
+            }
+        }
+       
     }
 
 }
@@ -88,14 +97,39 @@ extension AnalysisViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.analysisTableViewCell, for: indexPath) as! AnalysisTableViewCell
         cell.userImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
-        cell.userImgView.sd_setImage(with: URL(string: analysisModel?.response?.data?[indexPath.row].user?.imgURL ?? ""))
+       // cell.userImgView.sd_setImage(with: URL(string: analysisModel?.response?.data?[indexPath.row].user?.imgURL ?? ""))
         cell.nameLbl.text = analysisModel?.response?.data?[indexPath.row].user?.name
-        cell.descriptionTxtView.text = analysisModel?.response?.data?[indexPath.row].comments
+      //  cell.descriptionTxtView.text = analysisModel?.response?.data?[indexPath.row].comments
         cell.winPercentageLbl.text = String(format: "%.1f",analysisModel?.response?.data?[indexPath.row].user?.predStats?.successRate ?? 0.0 ) + "%"
-        cell.betsLbl.text = " \(analysisModel?.response?.data?[indexPath.row].user?.predStats?.allCnt ?? 0)" + " Predictions  ".localized
+        cell.betsLbl.text = " \(analysisModel?.response?.data?[indexPath.row].user?.predStats?.allCnt ?? 0)" + " " + "Predictions".localized + " "
+        if analysisModel?.response?.data?[indexPath.row].isFollow == true{
+            cell.followBtn.setTitle("Following".localized, for: .normal)
+            cell.followBtn.backgroundColor = UIColor.init(hex: "FFE08A")
+            cell.followBtn.setTitleColor(.black, for: .normal)
+        }
+        else{
+            cell.followBtn.setTitle("Follow".localized, for: .normal)
+            cell.followBtn.backgroundColor = UIColor.init(hex: "00658C")
+            cell.followBtn.setTitleColor(.white, for: .normal)
+        }
+        cell.followBtn.tag = analysisModel?.response?.data?[indexPath.row].reddragonUserID ?? 0
         cell.followBtn.addTarget(self, action: #selector(followBtnAction), for: .touchUpInside)
        labelWithImage(lbl: cell.fireCountLbl, text: " \(analysisModel?.response?.data?[indexPath.row].user?.predStats?.successCnt ?? 0)" + " ")
-       
+        cell.winRateLbl.text = "Win Rate".localized
+        cell.predictedLbl.text = "Predicted".localized
+        if analysisModel?.response?.data?[indexPath.row].predictedTeam == "1"{
+            cell.predictionLbl.text = " " + "Draw".localized + " "
+        }
+        else if analysisModel?.response?.data?[indexPath.row].predictedTeam == "2"{
+            cell.predictionLbl.text = " " + (data?.homeTeamName ?? "Home") + " " + "Win".localized + " "
+        }
+        else if analysisModel?.response?.data?[indexPath.row].predictedTeam == "3"{
+            cell.predictionLbl.text = " " + (data?.awayTeamName ?? "Away") + " " + "Win".localized + " "
+        }
+            
+        
+      
+        
         cell.selectionStyle = .none
         return cell
     }
@@ -137,14 +171,19 @@ extension AnalysisViewController {
     
     func renderResponseData(data: AnalysisModel) {
         analysisModel = data
-        UIView.animate(withDuration: 1.0) { [self] in
-            analysisTableView.reloadData()
+        if let data = data.response?.data{
+            UIView.animate(withDuration: 1.0) { [self] in
+                analysisTableView.reloadData()
                 
+            }
+        }
+        else{
+            handleError(data.error)
         }
         
     }
     
-    func followUserViewModelResponse(index: Int) {
+    func followUserViewModelResponse() {
         followUserVM.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
@@ -158,12 +197,16 @@ extension AnalysisViewController {
                 if result?.response?.code == 200 {
                  //   self?.userArray[index].following = true
                  //   self?.tableView.reloadData()
+                    self?.makeNetworkCall()
+                }
+                else{
+                   // handleError(result?.response)
                 }
             })
             .store(in: &cancellable)
     }
     
-    func unfollowUserViewModelResponse(index: Int) {
+    func unfollowUserViewModelResponse() {
         unfollowUserVM.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
@@ -177,9 +220,35 @@ extension AnalysisViewController {
                 if result?.response?.code == 200 {
                  //   self?.userArray[index].following = false
                  //   self?.tableView.reloadData()
+                    self?.makeNetworkCall()
                 }
             })
             .store(in: &cancellable)
     }
+    
+    func handleError(_ error :  ErrorResponse?){
+        if let error = error {
+            if error.messages?.first != "Unauthorized user" {
+                self.customAlertView(title: ErrorMessage.alert.localized, description: error.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+            }
+            else{
+                self.customAlertView_3Actions(title: "Login / Sign Up".localized, description: ErrorMessage.loginRequires.localized) {
+                    /// Show login page to login/register new user
+                    self.presentOverViewController(LoginVC.self, storyboardName: StoryboardName.login) { vc in
+                        vc.delegate = self
+                        
+                    }
+                } dismissAction: {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+        }
+    }
 
+
+}
+extension AnalysisViewController: LoginVCDelegate{
+    func viewControllerDismissed() {
+        makeNetworkCall()
+    }
 }

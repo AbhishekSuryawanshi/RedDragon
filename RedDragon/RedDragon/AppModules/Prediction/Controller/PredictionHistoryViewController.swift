@@ -31,7 +31,7 @@ class PredictionHistoryViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         predictionHistoryTitleLbl.text = "Prediction History".localized
-        getNextFiveDatesArr()
+        getPreviousFiveDatesArr()
         configureView()
     }
     
@@ -64,8 +64,8 @@ class PredictionHistoryViewController: UIViewController {
         
     }
     
-    func getNextFiveDatesArr(){
-        for i in 0 ..< 5{
+    func getPreviousFiveDatesArr(){
+        for i in -5 ..< 0{
             let date = Date()
             let addingDate = date.add(days: i)
             dateArr?.append(addingDate?.formatDate(outputFormat: dateFormat.yyyyMMdd) ?? "")

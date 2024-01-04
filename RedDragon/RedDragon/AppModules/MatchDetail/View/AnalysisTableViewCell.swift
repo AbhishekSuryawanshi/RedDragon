@@ -9,10 +9,12 @@ import UIKit
 
 class AnalysisTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var predictionLbl: UILabel!
+    @IBOutlet weak var predictedLbl: UILabel!
     @IBOutlet weak var followBtn: UIButton!
     @IBOutlet weak var winPercentageLbl: UILabel!
     @IBOutlet weak var winRateLbl: UILabel!
-    @IBOutlet weak var descriptionTxtView: UITextView!
+  //  @IBOutlet weak var descriptionTxtView: UITextView!
     @IBOutlet weak var fireCountLbl: UILabel!
     @IBOutlet weak var betsLbl: UILabel!
     @IBOutlet weak var nameLbl: UILabel!

@@ -990,14 +990,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vJp-0v-Wy4" customClass="PredictResultTopView" customModule="RedDragon" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="100" width="393" height="167"/>
+                                <rect key="frame" x="0.0" y="100" width="393" height="200"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="167" id="od0-m2-Hay"/>
+                                    <constraint firstAttribute="height" constant="200" id="od0-m2-Hay"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ron-nQ-4Yw" customClass="PredictResultDescriptionView" customModule="RedDragon" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="267" width="393" height="217"/>
+                                <rect key="frame" x="0.0" y="300" width="393" height="217"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="217" id="ltY-AL-vjQ"/>
@@ -1033,17 +1033,27 @@
                                     <constraint firstAttribute="height" constant="100" id="sG7-Po-AcT"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QgE-8k-y3S" customClass="PredictionDetailCommentsView" customModule="RedDragon" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="517" width="393" height="214"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="214" id="YhT-yv-ND0"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9DK-oq-Cex"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Ron-nQ-4Yw" firstAttribute="leading" secondItem="9DK-oq-Cex" secondAttribute="leading" id="025-cZ-e7T"/>
                             <constraint firstItem="SFZ-GD-huu" firstAttribute="leading" secondItem="9DK-oq-Cex" secondAttribute="leading" id="3bI-fr-Ibi"/>
+                            <constraint firstItem="QgE-8k-y3S" firstAttribute="trailing" secondItem="9DK-oq-Cex" secondAttribute="trailing" id="5dk-v9-hsq"/>
                             <constraint firstItem="SFZ-GD-huu" firstAttribute="trailing" secondItem="9DK-oq-Cex" secondAttribute="trailing" id="GPH-Gb-OCW"/>
                             <constraint firstItem="Ron-nQ-4Yw" firstAttribute="top" secondItem="vJp-0v-Wy4" secondAttribute="bottom" id="Hvp-hM-Xhi"/>
+                            <constraint firstItem="QgE-8k-y3S" firstAttribute="leading" secondItem="9DK-oq-Cex" secondAttribute="leading" id="KB6-qV-2AC"/>
                             <constraint firstItem="Ron-nQ-4Yw" firstAttribute="trailing" secondItem="9DK-oq-Cex" secondAttribute="trailing" id="Kmb-Sr-6CF"/>
                             <constraint firstItem="vJp-0v-Wy4" firstAttribute="top" secondItem="SFZ-GD-huu" secondAttribute="bottom" id="Kzn-ve-ThP"/>
                             <constraint firstItem="vJp-0v-Wy4" firstAttribute="leading" secondItem="9DK-oq-Cex" secondAttribute="leading" id="MFZ-dK-XBB"/>
+                            <constraint firstItem="QgE-8k-y3S" firstAttribute="top" secondItem="Ron-nQ-4Yw" secondAttribute="bottom" id="SNk-nf-YRo"/>
                             <constraint firstItem="vJp-0v-Wy4" firstAttribute="trailing" secondItem="9DK-oq-Cex" secondAttribute="trailing" id="lVa-6d-os4"/>
                             <constraint firstItem="SFZ-GD-huu" firstAttribute="top" secondItem="fq8-GF-Mkx" secondAttribute="top" id="p30-sV-OlE"/>
                         </constraints>
@@ -1052,6 +1062,7 @@
                         <outlet property="predictionDescriptionView" destination="Ron-nQ-4Yw" id="ONe-ur-rMg"/>
                         <outlet property="predictionDetailTitleLbl" destination="dLR-ll-sb6" id="jhp-KW-LPm"/>
                         <outlet property="predictionResultView" destination="vJp-0v-Wy4" id="mQq-0c-r0e"/>
+                        <outlet property="predictionsCommentsView" destination="QgE-8k-y3S" id="gVc-ug-qPZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BgR-hX-D2i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
