@@ -14,7 +14,6 @@ class PredictUserListTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var aboutLabel: UILabel!
     @IBOutlet weak var winRateLabel: UILabel!
-    @IBOutlet weak var winRateTitleLabel: UILabel!
     @IBOutlet weak var allCountLabel: UILabel!
     @IBOutlet weak var successCountLabel: UILabel!
     @IBOutlet weak var unsuccessCountLabel: UILabel!
