@@ -8,12 +8,12 @@
 import UIKit
 
 class PredictUserListTableViewCell: UITableViewCell {
+    @IBOutlet weak var winRateTitleLabel: UILabel!
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var aboutLabel: UILabel!
     @IBOutlet weak var winRateLabel: UILabel!
-    @IBOutlet weak var winRateTitleLabel: UILabel!
     @IBOutlet weak var allCountLabel: UILabel!
     @IBOutlet weak var successCountLabel: UILabel!
     @IBOutlet weak var unsuccessCountLabel: UILabel!
@@ -34,9 +34,7 @@ class PredictUserListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         tagCollectionView.register(CellIdentifier.userTagsCollectionViewCell)
-        followButton.setTitle("Follow".localized, for: .normal)
-        followingButton.setTitle("Following".localized, for: .normal)
-        winRateTitleLabel.text = "Win Rate".localized
+        configureUI()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -48,6 +46,12 @@ class PredictUserListTableViewCell: UITableViewCell {
     func configureTagCollectionData(data: [String]) {
         self.data = data
         tagCollectionView.reloadData()
+    }
+    
+    func configureUI() {
+        winRateTitleLabel.text = "Win Rate".localized
+        followButton.setTitle("Follow".localized, for: .normal)
+        followingButton.setTitle("Following".localized, for: .normal)
     }
 }
 

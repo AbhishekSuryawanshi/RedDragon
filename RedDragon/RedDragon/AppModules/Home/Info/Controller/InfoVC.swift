@@ -125,6 +125,10 @@ class InfoVC: UIViewController, UIScrollViewDelegate {
 extension InfoVC {
     
     private func setLabel() {
+        expertTableLabel.text = "Experts".localized
+        continuesWinningLabel.text = "Continues Winning".localized
+        topAccuracyLabel.text = "Top Accuracy".localized
+        onAStrakLabel.text = "On A Streak".localized
         packageLabel.text = "Packages".localized
         saveUptoLabel.text = "Save upto".localized
         topMatchesLabel.text = "Top Matches".localized
@@ -134,6 +138,8 @@ extension InfoVC {
         firstWinRateLabel.text = "Win Rate".localized
         secondExpertWinRateLabel.text = "Win Rate".localized
         thirdExpertWinRateLabel.text = "Win Rate".localized
+        expertSeeAllLabel.setTitle("See All".localized, for: .normal)
+        topMatchesSeeMoreButton.setTitle("See All".localized, for: .normal)
         recommendedSeeAllLabel.setTitle("See All".localized, for: .normal)
         whatsHappeningSeeAllButton.setTitle("See All".localized, for: .normal)
         predictionSeeAllButton.setTitle("See All".localized, for: .normal)
