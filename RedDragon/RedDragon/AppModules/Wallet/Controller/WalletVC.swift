@@ -123,6 +123,27 @@ class WalletVC: UIViewController {
     // MARK: - Button Action
     
     @IBAction func spinPlayButtonTapped(_ sender: UIButton) {
+        if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
+            let today = Date().formatDate(outputFormat: .ddMMyyyy)
+            let spinDate = UserDefaults.standard.spinDate
+            if today == spinDate{
+                self.customAlertView(title: ErrorMessage.alert.localized, description: "Today's turn is over.Try next day!".localized, image: ImageConstants.alertImage)
+                return
+            }
+            UserDefaults.standard.spinDate = today
+            navigateToViewController(VariousWheelSimpleViewController.self,storyboardName: StoryboardName.spinWheel)
+        }
+        else {
+            self.customAlertView_2Actions(title: "Login / Sign Up".localized, description: ErrorMessage.loginRequires.localized) {
+                /// Show login page to login/register new user
+                /// hide tabbar before presenting a viewcontroller
+                /// show tabbar while dismissing a presented viewcontroller in delegate
+                self.tabBarController?.tabBar.isHidden = true
+                self.presentOverViewController(LoginVC.self, storyboardName: StoryboardName.login) { vc in
+                    vc.delegate = self
+                }
+            }
+        }
         
     }
 }

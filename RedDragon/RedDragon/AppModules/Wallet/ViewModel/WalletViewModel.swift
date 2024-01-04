@@ -23,7 +23,7 @@ class WalletVM: APIServiceManager<SubscriptionResponse> {
     }
 }
 
-class AddWalletVM: APIServiceManager<BasicAPIResponse> {
+class AddWalletVM: APIServiceManager<AddSubscriptionResponse> {
     init () {}
     static let shared = AddWalletVM()
     

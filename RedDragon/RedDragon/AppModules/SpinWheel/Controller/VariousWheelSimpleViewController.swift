@@ -81,7 +81,7 @@ class VariousWheelSimpleViewController: UIViewController {
     }
     
     func failureAlert(){
-        self.customAlertView(title: "Sorry!!", description: "Better try next time".localized, image: ImageConstants.alertImage) {
+        self.customAlertView(title: "Sorry!!".localized, description: "Better try next time".localized, image: ImageConstants.alertImage) {
             self.navigationController?.popViewController(animated: true)
         }
         
@@ -111,6 +111,9 @@ class VariousWheelSimpleViewController: UIViewController {
                 
                 
                 if let dataResponse = response?.response {
+                    var user = UserDefaults.standard.user
+                    user?.wallet = dataResponse.data?.userwallet ?? 0
+                    UserDefaults.standard.user = user
                     self?.successAddPoints(message: dataResponse.messages?.first ?? "Points Saved".localized)
                     
                 } else {

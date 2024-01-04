@@ -59,6 +59,16 @@ extension UserDefaults {
         }
     }
     
+    var spinDate: String? {
+        get {
+            return value(forKey: UserDefaultString.spinDate) as? String
+        }
+        set {
+            set(newValue, forKey: UserDefaultString.spinDate)
+            synchronize()
+        }
+    }
+    
     
     func clearSpecifiedItems() {
         removeObject(forKey: UserDefaultString.token)
