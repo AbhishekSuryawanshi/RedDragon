@@ -17,6 +17,7 @@ class PostListVC: UIViewController {
     
     @IBOutlet weak var listTableView: UITableView!
     
+    var selectedSegment: socialHeaderSegment = .followed
     var cancellable = Set<AnyCancellable>()
     weak var delegate: PostListVCDelegate?
     var allPostArray: [SocialPost] = []
@@ -202,7 +203,11 @@ class PostListVC: UIViewController {
 // MARK: - API Services
 extension PostListVC {
     func makeNetworkCall() {
-        SocialPostListVM.shared.fetchPostListAsyncCall()
+        if selectedSegment == .followed {
+            SocialPostListVM.shared.fetchFollowedPostListAsyncCall()
+        } else {
+            SocialPostListVM.shared.fetchPostListAsyncCall()
+        }
     }
     
     func fetchPostViewModel() {

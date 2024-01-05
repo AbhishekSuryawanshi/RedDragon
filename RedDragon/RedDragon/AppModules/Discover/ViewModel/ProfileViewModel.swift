@@ -63,3 +63,21 @@ class UpdatePasswordVM: APIServiceManager<BasicAPIResponse> {
         asyncCall(urlString: URLConstants.updatepassword, method: .post, parameters: parameters)
     }
 }
+
+class DeleteAccountVM: APIServiceManager<BasicAPIResponse> {
+    static let shared = DeleteAccountVM()
+    
+    ///function to delete user account
+    func deleteAccount() {
+        asyncCall(urlString: URLConstants.deleteAccount, method: .delete, parameters: nil)
+    }
+}
+
+class LogoutVM: APIServiceManager<LoginResponse> {
+    static let shared = LogoutVM()
+    
+    ///function for logout
+    func logoutAsyncCall() {
+        asyncCall(urlString: URLConstants.logout, method: .get, parameters: nil)
+    }
+}

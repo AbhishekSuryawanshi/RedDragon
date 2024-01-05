@@ -21,6 +21,7 @@ class RegisterVC: UIViewController {
     @IBOutlet weak var confirmPassTiltleLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var emailTextfield: UITextField!
+    @IBOutlet weak var flagImageView: UIImageView!
     @IBOutlet weak var countryCodeButton: UIButton!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var userNameTextfield: UITextField!
@@ -32,7 +33,7 @@ class RegisterVC: UIViewController {
     @IBOutlet weak var createAccountButton: UIButton!
     
     var cancellable = Set<AnyCancellable>()
-    var phoneCode = "0"
+    var phoneCode = "+971"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,11 +52,7 @@ class RegisterVC: UIViewController {
     
     func initialSettings() {
         fetchLoginViewModel()
-        
-        ///set deafult value for country code
-        phoneCode = "+971"
-        countryCodeButton.setTitle(phoneCode, for: .normal)
-        countryCodeButton.setImage(UIImage(named: "AE") ?? .placeholder1, for: .normal)
+        flagImageView.setImage(imageStr: "http://157.245.159.136:5072/flags/flagspng/ae.png", placeholder: .placeholderFlag)
     }
     
     func refreshPage() {
@@ -140,7 +137,7 @@ class RegisterVC: UIViewController {
     }
     
     @IBAction func countryCodeButtonTapped(_ sender: UIButton) {
-        let countryVC = CountryCodeListVC()
+        let countryVC = CountryListVC()
         countryVC.delegate = self
         self.present(countryVC, animated: true)
     }
@@ -247,9 +244,9 @@ extension RegisterVC: UITextViewDelegate {
 
 // MARK: - Custom Delegate
 extension RegisterVC: CountryDelegate {
-    func countrySelected(country: CountryModel) {
+    func countrySelected(country: Country) {
         phoneCode = country.phoneCode
         countryCodeButton.setTitle("\(country.phoneCode)", for: .normal)
-        countryCodeButton.setImage(UIImage(named: country.code) ?? .placeholder1, for: .normal)
+        flagImageView.setImage(imageStr: country.flag, placeholder: .placeholderFlag)
     }
 }

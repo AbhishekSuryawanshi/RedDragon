@@ -32,7 +32,7 @@ class DiscoverVC: UIViewController {
     
     func initialSettings() {
         nibInitialization()
-        fetchLoginViewModel()
+        fetchProfileViewModel()
     }
     
     func refreshView() {
@@ -85,7 +85,7 @@ class DiscoverVC: UIViewController {
 
 // MARK: - API Services
 extension DiscoverVC {
-    func fetchLoginViewModel() {
+    func fetchProfileViewModel() {
         
         LogoutVM.shared.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)

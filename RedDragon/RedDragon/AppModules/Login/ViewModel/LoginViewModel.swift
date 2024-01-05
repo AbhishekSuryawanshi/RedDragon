@@ -8,7 +8,6 @@
 import Foundation
 
 class RegisterVM: APIServiceManager<LoginResponse> {
-    init () {}
     static let shared = RegisterVM()
     
     ///function for user registration
@@ -18,8 +17,7 @@ class RegisterVM: APIServiceManager<LoginResponse> {
 }
 
 class LoginVM: APIServiceManager<LoginResponse> {
-    init () {}
-    static let shared = LoginVM()
+     static let shared = LoginVM()
     
     ///function for user login
     func loginAsyncCall(parameters: [String: Any]) {
@@ -28,7 +26,6 @@ class LoginVM: APIServiceManager<LoginResponse> {
 }
 
 class UserVerifyVM: APIServiceManager<LoginResponse> {
-    init () {}
     static let shared = UserVerifyVM()
     
     ///function for user verification after register
@@ -38,7 +35,6 @@ class UserVerifyVM: APIServiceManager<LoginResponse> {
 }
 
 class ResendOtpVM: APIServiceManager<LoginResponse> {
-    init () {}
     static let shared = ResendOtpVM()
     
     ///function for resend OTP
@@ -48,7 +44,6 @@ class ResendOtpVM: APIServiceManager<LoginResponse> {
 }
 
 class ForgotPasswordVM: APIServiceManager<LoginResponse> {
-    init () {}
     static let shared = ForgotPasswordVM()
     
     ///function for forgot password
@@ -58,7 +53,6 @@ class ForgotPasswordVM: APIServiceManager<LoginResponse> {
 }
 
 class ResetPasswordVM: APIServiceManager<LoginResponse> {
-    init () {}
     static let shared = ResetPasswordVM()
     
     ///function for reset password
@@ -67,12 +61,3 @@ class ResetPasswordVM: APIServiceManager<LoginResponse> {
     }
 }
 
-class LogoutVM: APIServiceManager<LoginResponse> {
-    init () {}
-    static let shared = LogoutVM()
-    
-    ///function for logout
-    func logoutAsyncCall() {
-        asyncCall(urlString: URLConstants.logout, method: .get, parameters: nil)
-    }
-}

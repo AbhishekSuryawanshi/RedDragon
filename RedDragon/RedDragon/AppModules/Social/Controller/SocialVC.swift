@@ -9,9 +9,9 @@ import UIKit
 import Combine
 
 enum socialHeaderSegment: String, CaseIterable {
+    case new = "Newest"
     case followed = "Followed"
     case recommend = "Recommended"
-    case new = "Newest"
 }
 
 class SocialVC: UIViewController {
@@ -84,6 +84,7 @@ class SocialVC: UIViewController {
                            , parent: self, container: postContainerView) { vc in
             let vc = vc as! PostListVC
             vc.delegate = self
+            vc.selectedSegment = self.selectedSegment
         }
        
         if refreshLeagueList {

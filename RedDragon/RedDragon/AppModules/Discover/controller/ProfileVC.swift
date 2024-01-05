@@ -20,7 +20,7 @@ class ProfileVC: UIViewController {
     private var cancellable = Set<AnyCancellable>()
     var imageData: Data?
     var user = UserDefaults.standard.user
-    var profileArray: [SettingType] = [.name, .userName, .email, .phone, .password, .gender, .dob, .location]
+    var profileArray: [SettingType] = [.name, .userName, .email, .phone, .password, .gender, .dob, .location, .deleteAccount]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +28,7 @@ class ProfileVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         user = UserDefaults.standard.user
         headerLabel.text = "Profile".localized
         photoImageView.setImage(imageStr: user?.profileImg ?? "", placeholder: .placeholderUser)
@@ -53,6 +54,12 @@ class ProfileVC: UIViewController {
         value ? startLoader() : stopLoader()
     }
     
+    func deleteAccount() {
+        self.customAlertView_2Actions(title: "", description: StringConstants.deleteAlert.localized) {
+            DeleteAccountVM.shared.deleteAccount()
+        }
+    }
+    
     // MARK: - Button Actions
     
     @IBAction func imageButtonTapped(_ sender: UIButton) {
@@ -74,6 +81,31 @@ extension ProfileVC {
             .dropFirst()
             .sink(receiveValue: { [weak self] response in
                 self?.execute_onResponseData(response)
+            })
+            .store(in: &cancellable)
+        
+        
+        DeleteAccountVM.shared.showError = { [weak self] error in
+            self?.view.makeToast(error, duration: 2.0, position: .center)
+        }
+        DeleteAccountVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        DeleteAccountVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] response in
+                if let dataResponse = response?.response {
+                    self?.view.makeToast(dataResponse.messages?.first)
+                    Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { (timer) in
+                        UserDefaults.standard.clearSpecifiedItems()
+                        self?.navigationController?.popViewController(animated: true)
+                    }
+                } else {
+                    if let errorResponse = response?.error {
+                        self?.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
+                    }
+                }
             })
             .store(in: &cancellable)
     }
@@ -103,8 +135,7 @@ extension ProfileVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.profileTableViewCell, for: indexPath) as! ProfileTableViewCell
-        cell.titleLabel.text = profileArray[indexPath.row].rawValue.localized
-        cell.valueLabel.text = ProfileVM.shared.getProfileValue(type: profileArray[indexPath.row])
+        cell.configureProfileCellValues(type: profileArray[indexPath.row])
         return cell
     }
 }
@@ -115,7 +146,12 @@ extension ProfileVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.profileArray[indexPath.row] == .password {
+        let nonEditableFields: [SettingType] = [.phone, .email, .userName]
+        if nonEditableFields.contains(self.profileArray[indexPath.row]) {
+            //User cant update
+        } else if self.profileArray[indexPath.row] == .deleteAccount {
+            deleteAccount()
+        } else if self.profileArray[indexPath.row] == .password {
             navigateToViewController(UpdatePasswordVC.self, storyboardName: StoryboardName.discover, animationType: .autoReverse(presenting: .zoom))
         } else {
             navigateToViewController(EditProfileVC.self, storyboardName: StoryboardName.discover, animationType: .autoReverse(presenting: .zoom)) { vc in

@@ -18,6 +18,12 @@ class SocialPostListVM: APIServiceManager<SocialPostListResponse> {
         asyncCall(urlString: urlString, method: method, parameters: nil)
     }
     
+    func fetchFollowedPostListAsyncCall() {
+        let urlString   = URLConstants.followedPosts
+        let method      = RequestType.get
+        asyncCall(urlString: urlString, method: method, parameters: nil)
+    }
+    
     func heightOfPostCell(model: SocialPost) -> CGFloat {
         var contentText = ""
         
@@ -38,6 +44,19 @@ class SocialPostListVM: APIServiceManager<SocialPostListResponse> {
         return totalHeight
     }
 }
+
+//class SocialFollowedPostsVM: APIServiceManager<SocialPostListResponse> {
+//    init () {}
+//    static let shared = SocialFollowedPostsVM()
+//    
+//    ///function to fetch post list for social module
+//    func fetchPostListAsyncCall() {
+//        let urlString   = URLConstants.followedPosts
+//        let method      = RequestType.get
+//        asyncCall(urlString: urlString, method: method, parameters: nil)
+//    }
+//}
+
 
 class SocialPostVM: APIServiceManager<BasicAPIResponse> {
     init () {}

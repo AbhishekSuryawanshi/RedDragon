@@ -67,7 +67,7 @@ class MultipartAPIServiceManager<ResponseModel: Decodable>: ObservableObject {
                 request.setValue("Bearer " + userToken, forHTTPHeaderField: "Authorization")
             }
         }
-        print("[Request] :==>\(request)\n[Token] :==>\(UserDefaults.standard.token ?? "")")
+        print("[Request] :==>\(request)\n[Token] :==>\(UserDefaults.standard.token ?? "")\n[Parameter] :==>\(params ?? [:])")
         return request
     }
     
