@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="K4K-gj-7iF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="K4K-gj-7iF">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -52,6 +52,9 @@
                                                                 <state key="normal" title="See All">
                                                                     <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="seeAllButtonAction:" destination="K4K-gj-7iF" eventType="touchUpInside" id="HZa-we-cTU"/>
+                                                                </connections>
                                                             </button>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="P2H-ry-B1V">
                                                                 <rect key="frame" x="20" y="42" width="353" height="70"/>
@@ -275,6 +278,9 @@
                                                                 <state key="normal" title="See All">
                                                                     <color key="titleColor" red="0.73333333329999995" green="0.098039215690000001" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="seeAllButtonAction:" destination="K4K-gj-7iF" eventType="touchUpInside" id="BmX-0k-bW8"/>
+                                                                </connections>
                                                             </button>
                                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="7YW-8Q-SJo">
                                                                 <rect key="frame" x="8" y="35" width="377" height="200"/>
@@ -323,6 +329,9 @@
                                                                 <state key="normal" title="See All">
                                                                     <color key="titleColor" red="0.73333333329999995" green="0.098039215690000001" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="seeAllButtonAction:" destination="K4K-gj-7iF" eventType="touchUpInside" id="zGp-AZ-DEg"/>
+                                                                </connections>
                                                             </button>
                                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="yEi-Dc-Dua">
                                                                 <rect key="frame" x="8" y="38" width="377" height="400"/>
@@ -371,6 +380,9 @@
                                                                 <state key="normal" title="See All">
                                                                     <color key="titleColor" red="0.73333333329999995" green="0.098039215690000001" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="seeAllButtonAction:" destination="K4K-gj-7iF" eventType="touchUpInside" id="k1O-fl-w5d"/>
+                                                                </connections>
                                                             </button>
                                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zzW-mE-vTQ">
                                                                 <rect key="frame" x="8" y="35" width="377" height="200"/>
@@ -419,6 +431,9 @@
                                                                 <state key="normal" title="See All">
                                                                     <color key="titleColor" red="0.73333333329999995" green="0.098039215690000001" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="seeAllButtonAction:" destination="K4K-gj-7iF" eventType="touchUpInside" id="W9F-I1-T33"/>
+                                                                </connections>
                                                             </button>
                                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="qUf-nY-aEf">
                                                                 <rect key="frame" x="8" y="47" width="377" height="224"/>
@@ -467,6 +482,9 @@
                                                                 <state key="normal" title="See All">
                                                                     <color key="titleColor" red="0.73333333329999995" green="0.098039215690000001" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="seeAllButtonAction:" destination="K4K-gj-7iF" eventType="touchUpInside" id="Knd-Ut-K4E"/>
+                                                                </connections>
                                                             </button>
                                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ajt-y6-ubn">
                                                                 <rect key="frame" x="20" y="38" width="353" height="265"/>
@@ -506,6 +524,9 @@
                                                                 <state key="normal" title="See All">
                                                                     <color key="titleColor" red="0.73333333329999995" green="0.098039215690000001" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="seeAllButtonAction:" destination="K4K-gj-7iF" eventType="touchUpInside" id="NB4-qD-Xr1"/>
+                                                                </connections>
                                                             </button>
                                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LMH-dn-xbJ">
                                                                 <rect key="frame" x="10" y="40" width="383" height="100"/>
@@ -560,6 +581,9 @@
                                                                 <state key="normal" title="See All">
                                                                     <color key="titleColor" red="0.73333333329999995" green="0.098039215690000001" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="seeAllButtonAction:" destination="K4K-gj-7iF" eventType="touchUpInside" id="Flg-IB-4jT"/>
+                                                                </connections>
                                                             </button>
                                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eqG-NC-Cmi">
                                                                 <rect key="frame" x="10" y="40" width="383" height="100"/>
@@ -614,6 +638,9 @@
                                                                 <state key="normal" title="See All">
                                                                     <color key="titleColor" red="0.73333333329999995" green="0.098039215690000001" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="seeAllButtonAction:" destination="K4K-gj-7iF" eventType="touchUpInside" id="hhd-Pt-T6n"/>
+                                                                </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Street Matches Feed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fYA-0D-sya">
                                                                 <rect key="frame" x="20" y="10" width="200" height="20"/>
@@ -717,8 +744,8 @@
                         <outlet property="expertsSeeAllButton" destination="v7V-Jo-McQ" id="W9M-ZZ-DKW"/>
                         <outlet property="leagueCollectionView" destination="LMH-dn-xbJ" id="v0t-yf-OOE"/>
                         <outlet property="liveMatchesLabel" destination="1Sj-NS-nN9" id="68l-I6-IGY"/>
+                        <outlet property="liveMatchesSeeAllButton" destination="jnX-vV-RC3" id="wzP-wY-jAT"/>
                         <outlet property="liveMatchesTabelView" destination="7YW-8Q-SJo" id="Woi-om-cSl"/>
-                        <outlet property="liveMatchesTableView" destination="jnX-vV-RC3" id="CXO-jB-DAL"/>
                         <outlet property="packageLabel" destination="I2S-vu-602" id="i3o-ad-GHt"/>
                         <outlet property="packageSeeAllButton" destination="783-VK-j3g" id="9l5-NB-v3z"/>
                         <outlet property="saveUptoLabel" destination="6EF-FU-0Kn" id="utB-66-5uD"/>

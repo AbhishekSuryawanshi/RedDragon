@@ -122,7 +122,10 @@ extension HomeVC {
     }
     
     func embedExpertsVC() {
-        ViewEmbedder.embed(withIdentifier: "ExpertsVC", storyboard: UIStoryboard(name: StoryboardName.expert, bundle: nil), parent: self, container: viewContainer)
+        ViewEmbedder.embed(withIdentifier: "ExpertsVC", storyboard: UIStoryboard(name: StoryboardName.expert, bundle: nil), parent: self, container: viewContainer) { vc in
+            let vc = vc as! ExpertsVC
+            vc.isNavigationFromTab = true
+        }
     }
     
     func embedForYouVC() {
