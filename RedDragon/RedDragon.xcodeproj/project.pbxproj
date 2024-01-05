@@ -144,6 +144,12 @@
 		47A1AB2D2AECE5ED00F1BD13 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A1AB2C2AECE5ED00F1BD13 /* UserDefaultsExtension.swift */; };
 		47A1AB312AED3CA300F1BD13 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A1AB2F2AED3CA300F1BD13 /* PostTableViewCell.swift */; };
 		47A1AB322AED3CA300F1BD13 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47A1AB302AED3CA300F1BD13 /* PostTableViewCell.xib */; };
+		47A352AD2B46BB0400A0A754 /* CountryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A352AC2B46BB0400A0A754 /* CountryViewModel.swift */; };
+		47A352AF2B46DFE600A0A754 /* CountryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A352AE2B46DFE600A0A754 /* CountryModel.swift */; };
+		47A352B42B46E19D00A0A754 /* CountryListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A352B22B46E19D00A0A754 /* CountryListVC.swift */; };
+		47A352B52B46E19D00A0A754 /* CountryListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47A352B32B46E19D00A0A754 /* CountryListVC.xib */; };
+		47A352B82B46E2C100A0A754 /* CountryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A352B62B46E2C100A0A754 /* CountryTableViewCell.swift */; };
+		47A352B92B46E2C100A0A754 /* CountryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47A352B72B46E2C100A0A754 /* CountryTableViewCell.xib */; };
 		47AC3E952B3AAAF8004A5BBF /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC3E932B3AAAF8004A5BBF /* CommentTableViewCell.swift */; };
 		47AC3E962B3AAAF8004A5BBF /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47AC3E942B3AAAF8004A5BBF /* CommentTableViewCell.xib */; };
 		47AC3E982B3AEFF9004A5BBF /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC3E972B3AEFF9004A5BBF /* ProfileViewModel.swift */; };
@@ -168,12 +174,6 @@
 		47BBF5052B19B3A500CDE3D9 /* CHIPageControl in Frameworks */ = {isa = PBXBuildFile; productRef = 47BBF5042B19B3A500CDE3D9 /* CHIPageControl */; };
 		47C18F7B2B1A0B8700DC1B11 /* ESportsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C18F7A2B1A0B8700DC1B11 /* ESportsModel.swift */; };
 		47C18F7D2B1A103800DC1B11 /* VideosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C18F7C2B1A103800DC1B11 /* VideosModel.swift */; };
-		47C3B7142B04D43500E12A4D /* CountryCodeListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C3B7122B04D43500E12A4D /* CountryCodeListVC.swift */; };
-		47C3B7152B04D43500E12A4D /* CountryCodeListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47C3B7132B04D43500E12A4D /* CountryCodeListVC.xib */; };
-		47C3B71B2B04D4C000E12A4D /* FlagKit.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47C3B71A2B04D4C000E12A4D /* FlagKit.xcassets */; };
-		47C3B71D2B04D4D700E12A4D /* countryCodes.json in Resources */ = {isa = PBXBuildFile; fileRef = 47C3B71C2B04D4D700E12A4D /* countryCodes.json */; };
-		47C3B7202B04D5DA00E12A4D /* CountryListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C3B71E2B04D5DA00E12A4D /* CountryListTableViewCell.swift */; };
-		47C3B7212B04D5DA00E12A4D /* CountryListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47C3B71F2B04D5DA00E12A4D /* CountryListTableViewCell.xib */; };
 		47C8C9512AF0CAB700448D96 /* SingleImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C8C94F2AF0CAB700448D96 /* SingleImageCollectionViewCell.swift */; };
 		47C8C9522AF0CAB700448D96 /* SingleImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47C8C9502AF0CAB700448D96 /* SingleImageCollectionViewCell.xib */; };
 		47C8C9552AF0D3A900448D96 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 47C8C9542AF0D3A900448D96 /* CropViewController */; };
@@ -761,6 +761,12 @@
 		47A1AB2C2AECE5ED00F1BD13 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 		47A1AB2F2AED3CA300F1BD13 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		47A1AB302AED3CA300F1BD13 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
+		47A352AC2B46BB0400A0A754 /* CountryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryViewModel.swift; sourceTree = "<group>"; };
+		47A352AE2B46DFE600A0A754 /* CountryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryModel.swift; sourceTree = "<group>"; };
+		47A352B22B46E19D00A0A754 /* CountryListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListVC.swift; sourceTree = "<group>"; };
+		47A352B32B46E19D00A0A754 /* CountryListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CountryListVC.xib; sourceTree = "<group>"; };
+		47A352B62B46E2C100A0A754 /* CountryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryTableViewCell.swift; sourceTree = "<group>"; };
+		47A352B72B46E2C100A0A754 /* CountryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CountryTableViewCell.xib; sourceTree = "<group>"; };
 		47AC3E932B3AAAF8004A5BBF /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		47AC3E942B3AAAF8004A5BBF /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
 		47AC3E972B3AEFF9004A5BBF /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -784,12 +790,6 @@
 		47B3E9992AF25F70008BB827 /* SocialPollTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialPollTableViewCell.xib; sourceTree = "<group>"; };
 		47C18F7A2B1A0B8700DC1B11 /* ESportsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESportsModel.swift; sourceTree = "<group>"; };
 		47C18F7C2B1A103800DC1B11 /* VideosModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosModel.swift; sourceTree = "<group>"; };
-		47C3B7122B04D43500E12A4D /* CountryCodeListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodeListVC.swift; sourceTree = "<group>"; };
-		47C3B7132B04D43500E12A4D /* CountryCodeListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CountryCodeListVC.xib; sourceTree = "<group>"; };
-		47C3B71A2B04D4C000E12A4D /* FlagKit.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = FlagKit.xcassets; sourceTree = "<group>"; };
-		47C3B71C2B04D4D700E12A4D /* countryCodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countryCodes.json; sourceTree = "<group>"; };
-		47C3B71E2B04D5DA00E12A4D /* CountryListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListTableViewCell.swift; sourceTree = "<group>"; };
-		47C3B71F2B04D5DA00E12A4D /* CountryListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CountryListTableViewCell.xib; sourceTree = "<group>"; };
 		47C8C94F2AF0CAB700448D96 /* SingleImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		47C8C9502AF0CAB700448D96 /* SingleImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingleImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		47C8C9582AF0D3FB00448D96 /* ImagePickerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerHelper.swift; sourceTree = "<group>"; };
@@ -1556,7 +1556,6 @@
 			isa = PBXGroup;
 			children = (
 				4710646F2B0DED7E00E9C0AC /* Loader */,
-				47C3B7112B04D40500E12A4D /* PhoneCountryCode */,
 				4716B11B2AEF982F003582A9 /* SubClass */,
 				474D992D2AE7F2F6009499D0 /* Fonts */,
 				49B0B9FE2AE690BF00A9D235 /* Constants */,
@@ -1630,9 +1629,19 @@
 			path = TableViewCells;
 			sourceTree = "<group>";
 		};
+		47A352AB2B46BAE600A0A754 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				47A352AC2B46BB0400A0A754 /* CountryViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		47AC3E8E2B3AAA87004A5BBF /* ReusableTableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				47A352B62B46E2C100A0A754 /* CountryTableViewCell.swift */,
+				47A352B72B46E2C100A0A754 /* CountryTableViewCell.xib */,
 				47AC3E932B3AAAF8004A5BBF /* CommentTableViewCell.swift */,
 				47AC3E942B3AAAF8004A5BBF /* CommentTableViewCell.xib */,
 				6ABB24BD2B3C459300C60EC8 /* NoDataTableViewCell.swift */,
@@ -1647,6 +1656,7 @@
 			isa = PBXGroup;
 			children = (
 				47ACEB7E2B0C9737001AD0EB /* ResponseModel.swift */,
+				47A352AE2B46DFE600A0A754 /* CountryModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1696,19 +1706,6 @@
 				47AE9C9E2B03AECF00C271FB /* Login.storyboard */,
 			);
 			path = Storyboard;
-			sourceTree = "<group>";
-		};
-		47C3B7112B04D40500E12A4D /* PhoneCountryCode */ = {
-			isa = PBXGroup;
-			children = (
-				47C3B7122B04D43500E12A4D /* CountryCodeListVC.swift */,
-				47C3B7132B04D43500E12A4D /* CountryCodeListVC.xib */,
-				47C3B71E2B04D5DA00E12A4D /* CountryListTableViewCell.swift */,
-				47C3B71F2B04D5DA00E12A4D /* CountryListTableViewCell.xib */,
-				47C3B71C2B04D4D700E12A4D /* countryCodes.json */,
-				47C3B71A2B04D4C000E12A4D /* FlagKit.xcassets */,
-			);
-			path = PhoneCountryCode;
 			sourceTree = "<group>";
 		};
 		47CB0E082B11D6A10070744B /* News */ = {
@@ -2811,6 +2808,8 @@
 		6AAA1D2A2B453E9400465CDB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				47A352B22B46E19D00A0A754 /* CountryListVC.swift */,
+				47A352B32B46E19D00A0A754 /* CountryListVC.xib */,
 				6AAA1D2B2B45408200465CDB /* ReportUserVC.swift */,
 				6AAA1D2C2B45408200465CDB /* ReportUserVC.xib */,
 			);
@@ -3403,7 +3402,6 @@
 				AD90AF2C2B230AEB00515C60 /* InfoTableViewCell.xib in Resources */,
 				AD90AF132B22FFCE00515C60 /* TeamCollectionViewCell.xib in Resources */,
 				41EB79D02AF37BA000D068F7 /* TeamsView.xib in Resources */,
-				47C3B71D2B04D4D700E12A4D /* countryCodes.json in Resources */,
 				498F02E32B2C2335008B1DC9 /* Info.storyboard in Resources */,
 				47AC3E962B3AAAF8004A5BBF /* CommentTableViewCell.xib in Resources */,
 				474D99452AE7F30D009499D0 /* Roboto-MediumItalic.ttf in Resources */,
@@ -3414,7 +3412,7 @@
 				47FC33E22AEA4DAC00FABED4 /* HeaderTopCollectionViewCell.xib in Resources */,
 				47C8C9522AF0CAB700448D96 /* SingleImageCollectionViewCell.xib in Resources */,
 				41BB28842B064C8F0080E63F /* PlayerStatsTableViewHeader.xib in Resources */,
-				47C3B7212B04D5DA00E12A4D /* CountryListTableViewCell.xib in Resources */,
+				47A352B52B46E19D00A0A754 /* CountryListVC.xib in Resources */,
 				ADC076022B29C14F009FE6C4 /* FeedsTeamTableViewCell.xib in Resources */,
 				6A5F2B962B0CC31900AB6A98 /* MyMatchVC.xib in Resources */,
 				6A947A952B1F2A0C00A00788 /* ReceiverTableViewCell.xib in Resources */,
@@ -3423,7 +3421,6 @@
 				49DCA7C02B0C8A54005902AF /* CardGame.xcassets in Resources */,
 				474D99412AE7F30D009499D0 /* Roboto-Bold.ttf in Resources */,
 				494D7B732AE8E9E500488E27 /* Database.storyboard in Resources */,
-				47C3B7152B04D43500E12A4D /* CountryCodeListVC.xib in Resources */,
 				472873562AEA7A780011F00F /* HeaderBottom_1CollectionViewCell.xib in Resources */,
 				49A822BC2B04FC27007752C2 /* RecentMatchTableViewCell.xib in Resources */,
 				493D212D2AFE126400045672 /* PlayerDetailsTopView.xib in Resources */,
@@ -3494,7 +3491,6 @@
 				AD93101E2B187786005E4DAF /* ImageSliderCollectionViewCell.xib in Resources */,
 				AD16664E2B1763E1001C0770 /* SportsCollectionViewCell.xib in Resources */,
 				49DDB4752AF0E3E2000F9AFB /* SeasonPerformanceTableViewCell.xib in Resources */,
-				47C3B71B2B04D4C000E12A4D /* FlagKit.xcassets in Resources */,
 				49F3429E2AF23CC70057C147 /* EventsTableViewCell.xib in Resources */,
 				6AECE5812B0E2025004D7E76 /* MatchesCollectionViewCell.xib in Resources */,
 				6A5F2BA22B0CE10300AB6A98 /* MeetUserTableViewCell.xib in Resources */,
@@ -3507,6 +3503,7 @@
 				6A947A932B1F2A0C00A00788 /* ChatListTableViewCell.xib in Resources */,
 				474D993F2AE7F30D009499D0 /* Roboto-Thin.ttf in Resources */,
 				6A31B3602B302F390027EA6B /* UserTagsCollectionViewCell.xib in Resources */,
+				47A352B92B46E2C100A0A754 /* CountryTableViewCell.xib in Resources */,
 				41EB79D22AF37BA000D068F7 /* PlayerStatsView.xib in Resources */,
 				49B0B9F12AE68F0800A9D235 /* Assets.xcassets in Resources */,
 				47051F1A2B14BCBE004D190A /* Gossip.storyboard in Resources */,
@@ -3587,6 +3584,7 @@
 				47051F162B148773004D190A /* EnumConstants.swift in Sources */,
 				41EB79CE2AF37BA000D068F7 /* PlayerProfileTopView.swift in Sources */,
 				47E7C8432AEFBD6400D054A8 /* PostModel.swift in Sources */,
+				47A352AF2B46DFE600A0A754 /* CountryModel.swift in Sources */,
 				497A05052B2D8D6E00FDB020 /* BannerViewModel.swift in Sources */,
 				419658172B0CDF4700730D9F /* PlacePredictionView.swift in Sources */,
 				4936FBFF2B15F8430037F620 /* LeaderboardTableViewCell.swift in Sources */,
@@ -3600,6 +3598,7 @@
 				496A9AB32B0F200900274FC6 /* LeagueCollectionViewCell.swift in Sources */,
 				AD1CA05E2B456AE50032E490 /* SFWConfiguration+VariousWheelSimple.swift in Sources */,
 				49B8373B2B04E2E700CD9E26 /* MediaCollectionViewCell.swift in Sources */,
+				47A352B82B46E2C100A0A754 /* CountryTableViewCell.swift in Sources */,
 				49EF6C3E2B272F450082D06A /* WinViewController.swift in Sources */,
 				E9DDB63E2B04D3B1004C8ACF /* HomeTitleCollectionVc.swift in Sources */,
 				6A947AA52B1F33DB00A00788 /* DateTodayFormatter.swift in Sources */,
@@ -3621,6 +3620,7 @@
 				B8D338152B2AD3AB004ABC66 /* NewsVideoModel.swift in Sources */,
 				6A1A05842B22F659009ED5C4 /* MatchesDashboardVC.swift in Sources */,
 				6A2140212B0B730C00F52E69 /* SwipeCardOverlay.swift in Sources */,
+				47A352AD2B46BB0400A0A754 /* CountryViewModel.swift in Sources */,
 				AD3B55602B1607E7007B14F7 /* SelectionCollectionViewCell.swift in Sources */,
 				E9DDB6372B04B4CA004C8ACF /* Bets.swift in Sources */,
 				6A947A9F2B1F325C00A00788 /* ChatDetailTV.swift in Sources */,
@@ -3649,6 +3649,7 @@
 				4137D57D2B163AB8007CF84E /* PredictionDetailCommentsView.swift in Sources */,
 				ADD339902B0F6DB700B91101 /* FeedsTableViewCell.swift in Sources */,
 				4988F7392B2084FC00905CDD /* UpdateInfoViewModel.swift in Sources */,
+				47A352B42B46E19D00A0A754 /* CountryListVC.swift in Sources */,
 				6A2140222B0B730C00F52E69 /* SwipeCardFooterView.swift in Sources */,
 				41B5C9FF2B11DEE3000A7A59 /* PredictionListModel.swift in Sources */,
 				41E2AB4B2B0CBB73005425CF /* PredictionDetailsViewController.swift in Sources */,
@@ -3762,7 +3763,6 @@
 				6AAA1D2D2B45408200465CDB /* ReportUserVC.swift in Sources */,
 				4988F7372B2084A700905CDD /* BudgetCalculation.swift in Sources */,
 				ADC5886E2B244926004F2A49 /* StreetPlayersListViewModel.swift in Sources */,
-				47C3B7142B04D43500E12A4D /* CountryCodeListVC.swift in Sources */,
 				6A08D66A2B0F83F400E1AE7C /* ExploreEventsTableViewCell.swift in Sources */,
 				494D7B752AE8F4CB00488E27 /* DatabaseVC.swift in Sources */,
 				419658222B0CF16D00730D9F /* PredictResultTopView.swift in Sources */,
@@ -3887,7 +3887,6 @@
 				4137D57B2B15BFA9007CF84E /* PredictionMakeModel.swift in Sources */,
 				473BFC682B3029BC00C75069 /* WalletVC.swift in Sources */,
 				B8D338372B2AD4BA004ABC66 /* NewsBannerTableViewCell.swift in Sources */,
-				47C3B7202B04D5DA00E12A4D /* CountryListTableViewCell.swift in Sources */,
 				6A08D65E2B0F808700E1AE7C /* MeetEventModel.swift in Sources */,
 				6A5F2B8E2B0CB7D500AB6A98 /* MeetChatVC.swift in Sources */,
 				AD1042BC2B271F1D00451DB9 /* StreetCreateEventsVC.swift in Sources */,

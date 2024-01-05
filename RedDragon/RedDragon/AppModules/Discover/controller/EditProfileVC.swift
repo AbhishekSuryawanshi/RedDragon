@@ -13,9 +13,7 @@ class EditProfileVC: UIViewController {
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var basicTextFieldView: UIView!
     @IBOutlet weak var basicTextField: UITextField!
-    @IBOutlet weak var phoneView: UIView!
-    @IBOutlet weak var countryCodeButton: UIButton!
-    @IBOutlet weak var phoneTextField: UITextField!
+    @IBOutlet weak var locationButton: UIButton!
     @IBOutlet var datePicker: UIDatePicker!
     @IBOutlet weak var listTableView: UITableView!
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
@@ -23,10 +21,9 @@ class EditProfileVC: UIViewController {
     
     var cancellable = Set<AnyCancellable>()
     var settingType: SettingType?
-    var phoneCode = "0"
-    var countryCode = "0"
     var selectedLanguage: LanguageType = .en
     var selectedGender: GenderType = .male
+    var selectedCountry = Country()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,30 +50,20 @@ class EditProfileVC: UIViewController {
     }
     
     func refreshView() {
-        basicTextFieldView.isHidden = !(settingType != .language && settingType != .gender && settingType != .phone)
-        phoneView.isHidden = settingType != .phone
-        phoneTextField.placeholder = settingType?.rawValue.localized
-        basicTextField.placeholder = settingType?.rawValue.localized
         headerLabel.text = "\("Edit".localized) \(settingType?.rawValue.localized ?? "")"
+        basicTextFieldView.isHidden = !(settingType != .language && settingType != .gender && settingType != .phone)
+        basicTextField.placeholder = settingType?.rawValue.localized
+        locationButton.isHidden = settingType != .location
         saveButton.setTitle("Save".localized, for: .normal)
         
         //set value
         basicTextField.text = ProfileVM.shared.getProfileValue(type: settingType!)
-        if settingType == .phone {
-            countryCode = UserDefaults.standard.user?.countyCode ?? ""
-            setCountryCode()
-        }
         selectedLanguage = UserDefaults.standard.language == "en" ? .en : .zh
         selectedGender = UserDefaults.standard.user?.gender == "male" ? .male : (UserDefaults.standard.user?.gender == "female" ? .female : .other)
     }
     
     func nibInitialization() {
         listTableView.register(CellIdentifier.nameRightIconTableViewCell)
-    }
-    
-    func setCountryCode() {
-        countryCodeButton.setTitle("\(phoneCode)", for: .normal)
-        countryCodeButton.setImage(UIImage(named: countryCode) ?? .placeholder1, for: .normal)
     }
     
     func showLoader(_ value: Bool) {
@@ -87,9 +74,6 @@ class EditProfileVC: UIViewController {
         if settingType != .gender && settingType != .language {
             if basicTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
                 self.view.makeToast("Please enter your \(settingType?.rawValue.lowercased() ?? "")".localized)
-                return false
-            } else if settingType == .phone && !isValidPhone(validate: countryCode + phoneTextField.text!) {
-                self.view.makeToast(ErrorMessage.invalidPhone.localized)
                 return false
             }
             return true
@@ -108,11 +92,8 @@ class EditProfileVC: UIViewController {
                 param.updateValue(basicTextField.text!, forKey: "username")
             case .email:
                 param.updateValue(basicTextField.text!, forKey: "email")
-            case .phone:
-                param.updateValue(countryCode + phoneTextField.text!, forKey: "phone_number")
-                param.updateValue(countryCode, forKey: "country_code")
             case .location:
-                param.updateValue(basicTextField.text!, forKey: "location_name")
+                param.updateValue(selectedCountry.id, forKey: "location_id")
             case .gender :
                 param.updateValue(selectedGender.rawValue, forKey: "gender")
             case .dob :
@@ -132,9 +113,8 @@ class EditProfileVC: UIViewController {
     }
     
     // MARK: - Button Actions
-    
-    @IBAction func countryCodeButtonTapped(_ sender: UIButton) {
-        let countryVC = CountryCodeListVC()
+    @IBAction func locationButtonTapped(_ sender: UIButton) {
+        let countryVC = CountryListVC()
         countryVC.delegate = self
         self.present(countryVC, animated: true)
     }
@@ -248,12 +228,10 @@ extension EditProfileVC: UITextFieldDelegate {
     }
 }
 
-
 // MARK: - Custom Delegate
 extension EditProfileVC: CountryDelegate {
-    func countrySelected(country: CountryModel) {
-        countryCode = country.code
-        phoneCode = country.phoneCode
-        setCountryCode()
+    func countrySelected(country: Country) {
+        selectedCountry = country
+        basicTextField.text = selectedCountry.name
     }
 }

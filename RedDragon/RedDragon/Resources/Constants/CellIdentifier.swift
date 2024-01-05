@@ -128,5 +128,6 @@ struct CellIdentifier {
     static let profileTableViewCell            = "ProfileTableViewCell"
     static let nameRightIconTableViewCell      = "NameRightIconTableViewCell"
     
+    static let countryTableViewCell            = "CountryTableViewCell"
 }
 

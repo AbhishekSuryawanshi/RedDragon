@@ -25,12 +25,13 @@ struct URLConstants {
     static let resendOTP           = baseURL + "resendotp"
     static let forgetPassword      = baseURL + "forgetPass"
     static let resetpassword       = baseURL + "resetpassword"
-    static let updatepassword      = baseURL + "change-password"
-    static let logout              = baseURL + "logout"
     
     // MARK: - Discover | Profile
     static let profile             = baseURL + "profile"
     static let updateProfile       = baseURL + "user/profile/update"
+    static let updatepassword      = baseURL + "change-password"
+    static let deleteAccount       = baseURL + "delete/account"
+    static let logout              = baseURL + "logout"
     
     // MARK: - Home
     static let banners             = "https://api996.com/api/v1/banner/com.app.b8"
@@ -65,6 +66,7 @@ struct URLConstants {
     
     //Post
     static let postList            = socialBaseURL + "poll-post"
+    static let followedPosts       = baseURL + "user/social/feed"
     static let post                = socialBaseURL + "post"
     static let blockPost           = socialBaseURL + "post/block"
     
@@ -171,5 +173,8 @@ struct URLConstants {
     // MARK: - User Module
     static let blockUser              = baseURL + "user/block"
     static let reportUser             = baseURL + "user/report"
+
+    // MARK: - Country
+    static let getcountries           = baseURL + "getcountries"
 }
 
