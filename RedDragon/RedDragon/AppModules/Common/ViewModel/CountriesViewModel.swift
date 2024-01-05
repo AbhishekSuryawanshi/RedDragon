@@ -1,8 +1,8 @@
 //
-//  CountryViewModel.swift
+//  CountriesViewModel.swift
 //  RedDragon
 //
-//  Created by Qasr01 on 04/01/2024.
+//  Created by Qasr01 on 05/01/2024.
 //
 
 import Foundation
