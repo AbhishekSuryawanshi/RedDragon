@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import Combine
 
 class PredictionResultViewController: UIViewController {
 
@@ -15,8 +16,13 @@ class PredictionResultViewController: UIViewController {
     @IBOutlet weak var predictionDescriptionView: PredictResultDescriptionView!
     @IBOutlet weak var predictionResultView: PredictResultTopView!
     
+   // private var commentsListViewModel: CommentListVM?
+    var commentsListModel: CommentResponse?
     var analysisData: AnalysisData?
     var data: MatchDataClass?
+    var commentsArray: [Comment] = []
+    var sectionId = ""
+    var cancellable = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +33,9 @@ class PredictionResultViewController: UIViewController {
         predictionDetailTitleLbl.text = "Prediction Details".localized
         configureTopView()
         configureDescriptionView()
+        configureCommentsView()
+        fetchCommentsViewModel()
+        makeNetworkCall(sectionId: ((analysisData?.matchID ?? "") + "\(analysisData?.user?.id ?? 0)" + "predDetail"))
     }
     
     func configureTopView(){
@@ -179,11 +188,67 @@ class PredictionResultViewController: UIViewController {
     func configureCommentsView(){
         predictionsCommentsView.commentsLbl.text = "Comments".localized
         predictionsCommentsView.viewAllBtn.setTitle("View all".localized, for: .normal)
+        predictionsCommentsView.viewAllBtn.addTarget(self, action: #selector(commentsViewAll), for: .touchUpInside)
         
+    }
+    
+    @objc func commentsViewAll(){
+        navigateToViewController(NewsCommentsVC.self, storyboardName: StoryboardName.gossip, animationType: .autoReverse(presenting: .zoom)) { vc in
+        }
+    }
+    
+    func showLoader(_ value: Bool) {
+        value ? startLoader() : stopLoader()
+    }
+    
+    func makeNetworkCall(sectionId:String) {
+        CommentListVM.shared.getCommentsAsyncCall(sectionId: sectionId)
     }
 
 
     @IBAction func backBtnAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+    }
+}
+
+// MARK: - API Services
+extension PredictionResultViewController {
+    func fetchCommentsViewModel() {
+        ///fetch comment list
+        CommentListVM.shared.showError = { [weak self] error in
+            self?.view.makeToast(error, duration: 2.0, position: .center)
+        }
+        CommentListVM.shared.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        CommentListVM.shared.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] data in
+                self?.renderResponseData(data: data!)
+              /*  if let dataResponse = response?.response {
+                    self?.commentsArray = dataResponse.data?.reversed() ?? []
+                } else {
+                    if let errorResponse = response?.error {
+                        self?.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
+                    }
+                }
+                // self?.listTableView.reloadData()
+                if self?.commentsArray.count ?? 0 > 0 {
+                   // let indexPosition = IndexPath(row: (self?.commentsArray.count ?? 1) - 1, section: 0)
+                    //     self?.listTableView.scrollToRow(at: indexPosition, at: UITableView.ScrollPosition.bottom, animated: true)
+                }*/
+            })
+            .store(in: &cancellable)
+    }
+    
+    func renderResponseData(data: CommentResponse) {
+        commentsListModel = data
+        let data = data.response?.data
+        UIView.animate(withDuration: 1.0) { [self] in
+           // upcomingMatchesTableView.reloadData()
+                
+        }
+        
     }
 }
