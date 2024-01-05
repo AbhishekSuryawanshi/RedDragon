@@ -22,7 +22,6 @@ class MatchDetailsVC: UIViewController {
     @IBOutlet weak var viewContainer: UIView!
     @IBOutlet weak var viewContainerHeight: NSLayoutConstraint!
     
-    
     private var cancellable = Set<AnyCancellable>()
     private var matchDetailViewModel: MatchDetailsViewModel?
     private var tennisDetailViewModel: TennisDetailsViewModel?
@@ -33,7 +32,6 @@ class MatchDetailsVC: UIViewController {
     var sports: String?
     var isFromPrediction = false
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }

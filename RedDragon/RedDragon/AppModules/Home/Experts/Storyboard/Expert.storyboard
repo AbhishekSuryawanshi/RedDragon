@@ -18,8 +18,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aTX-0A-KWk" userLabel="topView">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="103"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OBT-ca-PLt">
+                                        <rect key="frame" x="15" y="68" width="30" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="7wc-yS-UiO"/>
+                                            <constraint firstAttribute="width" constant="30" id="Trf-ev-Cx5"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="cardGame_back"/>
+                                        <connections>
+                                            <action selector="backClicked:" destination="aCM-jx-fZZ" eventType="touchUpInside" id="EmU-hF-vk1"/>
+                                            <action selector="backClicked:" destination="7k2-H9-dwo" eventType="touchUpInside" id="Gt5-wz-adf"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Experts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lni-QO-xrL">
+                                        <rect key="frame" x="166.33333333333334" y="72.333333333333329" width="60.666666666666657" height="21.666666666666671"/>
+                                        <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="base"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="OBT-ca-PLt" secondAttribute="bottom" constant="5" id="5Wp-sv-BpH"/>
+                                    <constraint firstItem="OBT-ca-PLt" firstAttribute="leading" secondItem="aTX-0A-KWk" secondAttribute="leading" constant="15" id="qDr-MK-PGd"/>
+                                    <constraint firstItem="Lni-QO-xrL" firstAttribute="centerY" secondItem="OBT-ca-PLt" secondAttribute="centerY" id="rir-bh-BXa"/>
+                                    <constraint firstItem="Lni-QO-xrL" firstAttribute="centerX" secondItem="aTX-0A-KWk" secondAttribute="centerX" id="sH7-hc-jli"/>
+                                </constraints>
+                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="v0K-4c-3cJ">
-                                <rect key="frame" x="10" y="69" width="373" height="36"/>
+                                <rect key="frame" x="10" y="109" width="373" height="36"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Prediction Experts" borderStyle="bezel" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="9pc-UE-5ab" customClass="DropDown" customModule="RedDragon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="181.66666666666666" height="36"/>
@@ -53,7 +86,7 @@
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="PvI-6j-qeQ">
-                                <rect key="frame" x="10" y="125" width="373" height="693"/>
+                                <rect key="frame" x="10" y="155" width="373" height="663"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="separatorColor" name="gray2"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -66,24 +99,30 @@
                         <viewLayoutGuide key="safeArea" id="UBO-H6-rjd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="PvI-6j-qeQ" firstAttribute="top" secondItem="v0K-4c-3cJ" secondAttribute="bottom" constant="20" id="0ES-eV-hyF"/>
+                            <constraint firstItem="aTX-0A-KWk" firstAttribute="top" secondItem="bYz-CV-GjX" secondAttribute="top" id="HxB-7f-i2h"/>
                             <constraint firstItem="PvI-6j-qeQ" firstAttribute="leading" secondItem="v0K-4c-3cJ" secondAttribute="leading" id="LPZ-SF-Fmg"/>
+                            <constraint firstItem="v0K-4c-3cJ" firstAttribute="top" secondItem="aTX-0A-KWk" secondAttribute="bottom" constant="6" id="LqE-us-GIl"/>
                             <constraint firstItem="PvI-6j-qeQ" firstAttribute="trailing" secondItem="v0K-4c-3cJ" secondAttribute="trailing" id="PtP-XT-wpc"/>
                             <constraint firstItem="v0K-4c-3cJ" firstAttribute="leading" secondItem="UBO-H6-rjd" secondAttribute="leading" constant="10" id="TxC-kR-gzK"/>
-                            <constraint firstItem="v0K-4c-3cJ" firstAttribute="top" secondItem="UBO-H6-rjd" secondAttribute="top" constant="10" id="X1U-ff-acN"/>
                             <constraint firstAttribute="trailing" secondItem="v0K-4c-3cJ" secondAttribute="trailing" constant="10" id="c6M-OO-GdV"/>
                             <constraint firstItem="PvI-6j-qeQ" firstAttribute="bottom" secondItem="UBO-H6-rjd" secondAttribute="bottom" id="fcF-Q8-rnV"/>
+                            <constraint firstItem="UBO-H6-rjd" firstAttribute="top" secondItem="aTX-0A-KWk" secondAttribute="bottom" constant="-44" id="jhr-qd-BLg"/>
+                            <constraint firstItem="aTX-0A-KWk" firstAttribute="trailing" secondItem="UBO-H6-rjd" secondAttribute="trailing" id="mjZ-JF-L4D"/>
+                            <constraint firstItem="aTX-0A-KWk" firstAttribute="leading" secondItem="UBO-H6-rjd" secondAttribute="leading" id="sWK-8G-3PD"/>
+                            <constraint firstItem="PvI-6j-qeQ" firstAttribute="top" secondItem="v0K-4c-3cJ" secondAttribute="bottom" constant="10" id="twM-fV-Du6"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="controllerHeaderTitle" destination="Lni-QO-xrL" id="WmS-PK-5HS"/>
                         <outlet property="predictDropDown" destination="9pc-UE-5ab" id="B3q-da-LOw"/>
                         <outlet property="tableView" destination="PvI-6j-qeQ" id="AUb-Us-UJF"/>
                         <outlet property="tagsDropDown" destination="FBV-vA-DpU" id="t2Q-YS-pd6"/>
+                        <outlet property="topView" destination="aTX-0A-KWk" id="QvF-VH-2Z1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w6f-NV-Mnm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="920" y="5"/>
+            <point key="canvasLocation" x="919.84732824427476" y="4.9295774647887329"/>
         </scene>
         <!--Expert User DetailVC-->
         <scene sceneID="nek-Io-CVo">

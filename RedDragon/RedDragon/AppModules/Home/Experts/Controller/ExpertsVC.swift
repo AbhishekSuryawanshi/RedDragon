@@ -17,6 +17,8 @@ class ExpertsVC: UIViewController {
     @IBOutlet weak var predictDropDown : DropDown!
     @IBOutlet weak var tagsDropDown : DropDown!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var controllerHeaderTitle: UILabel!
     
     private var expertPredictUserVM = ExpertPredictUserViewModel()
     private var expertBetUserVM = ExpertBetUserViewModel()
@@ -33,6 +35,7 @@ class ExpertsVC: UIViewController {
     var betScrollPage: Int = 1
     var followUserVM = FollowUserViewModel()
     var unfollowUserVM = UnfollowUserViewModel()
+    var isNavigationFromTab = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +44,9 @@ class ExpertsVC: UIViewController {
     
     // MARK: - Methods
     func performInitialSetup() {
+     
+        topView.isHidden = isNavigationFromTab ? true : false
+        controllerHeaderTitle.text = "Experts".localized
         fetchTagsViewModel()
         predictDropDown.optionArray = ["Prediction", "Bet"]
         predictDropDown.text = "Prediction Experts".localized

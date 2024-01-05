@@ -17,7 +17,7 @@ class ForYouVC: UIViewController {
     
     @IBOutlet weak var liveMatchesLabel: UILabel!
     @IBOutlet weak var liveMatchesTabelView: UITableView!
-    @IBOutlet weak var liveMatchesTableView: UIButton!
+    @IBOutlet weak var liveMatchesSeeAllButton: UIButton!
     
     @IBOutlet weak var topExpertsLabel: UILabel!
     @IBOutlet weak var expertsSeeAllButton: UIButton!
@@ -75,7 +75,40 @@ class ForYouVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
     }
-
+    
+    @IBAction func seeAllButtonAction(_ sender: UIButton) {
+        switch sender {
+        case packageSeeAllButton:
+            self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[3]
+            
+        case liveMatchesSeeAllButton:
+            navigateToViewController(MatchesDashboardVC.self, storyboardName: StoryboardName.matches, animationType: .autoReverse(presenting: .zoom))
+            
+        case expertsSeeAllButton:
+            navigateToViewController(ExpertsVC.self, storyboardName: StoryboardName.expert, animationType: .autoReverse(presenting: .zoom)) { vc in
+                vc.isNavigationFromTab = false
+            }
+            
+        case upcomingMatchesSeeAllButton:
+            navigateToViewController(MatchesDashboardVC.self, storyboardName: StoryboardName.matches, animationType: .autoReverse(presenting: .zoom))
+            
+        case topPredictionsSeeAllButton:
+            navigateToViewController(HomePredictionViewController.self, storyboardName: StoryboardName.prediction, animationType: .autoReverse(presenting: .zoom))
+            
+        case whatsHappeningSeeAllButton:
+            navigateToViewController(NewsModuleVC.self, storyboardName: StoryboardName.news, identifier: "NewsModuleVC")
+            
+        case topLeagueSeeAllButton:
+            self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[2]
+            
+        case topTeamSeeAllButton:
+            self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[2]
+            
+        default: // streetMatchSeeAllButton
+            navigateToViewController(StreetMatchesDashboardVC.self, storyboardName: StoryboardName.streetMatches, animationType: .autoReverse(presenting: .zoom))
+        }
+    }
+    
 }
 
 /// __Fetch View model
@@ -313,31 +346,31 @@ extension ForYouVC {
         cell.awayYellowCountLabel.text = "\(matches.awayInfo?.yellowCards ?? 0)"
         cell.oddsLabel.text = "Win \(matches.odds?.header?.euro?.home ?? 0) Draw \(matches.odds?.header?.euro?.handicap ?? 0) Lose \(matches.odds?.header?.euro?.away ?? 0)"
     }
-
+    
     private func configureCell(cell: ForYouLiveMatchTableViewCell, matches: GlobalMatchList) {
         configureCommonCell(cell: cell, matches: matches)
         cell.dateLabel.text = ""
         cell.scoreLabel.text = "\(matches.homeInfo?.homeScore ?? 0):\(matches.awayInfo?.awayScore ?? 0)"
         cell.dateTimeViewWeight.constant = 50
     }
-
+    
     private func configureCellForUpcomingMatches(cell: ForYouLiveMatchTableViewCell, matches: GlobalMatchList) {
         configureCommonCell(cell: cell, matches: matches)
-
+        
         if let dateString = matches.matchTime {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-
+            
             if let date = dateFormatter.date(from: dateString) {
                 let outputDateFormatter = DateFormatter()
                 outputDateFormatter.dateFormat = "E dd MMM"
                 
                 let outputTimeFormatter = DateFormatter()
                 outputTimeFormatter.dateFormat = "hh:mm a"
-
+                
                 let formattedDate = outputDateFormatter.string(from: date)
                 let formattedTime = outputTimeFormatter.string(from: date)
-
+                
                 cell.dateLabel.text = formattedDate
                 cell.scoreLabel.text = formattedTime
             } else {
@@ -442,6 +475,48 @@ extension ForYouVC: UITableViewDelegate, UITableViewDataSource {
             cell.configureCell(obj: homeData?.events?[indexPath.row])
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch tableView {
+        case liveMatchesTabelView:
+            presentOverViewController(GlobalMatchDetailVC.self, storyboardName: StoryboardName.matches) { [self] vc in
+                configureDidSelectTableCell(vc: vc, array: liveMatchArray[indexPath.row])
+            }
+            
+        case expertTableView:
+            navigateToViewController(ExpertUserDetailVC.self, storyboardName: StoryboardName.expert) { vc in
+                vc.userId = self.userArray[indexPath.row].id ?? 0
+            }
+            
+        case upcomingMatchesTaleView:
+            presentOverViewController(GlobalMatchDetailVC.self, storyboardName: StoryboardName.matches) { [self] vc in
+                configureDidSelectTableCell(vc: vc, array: upcomingMatchArray[indexPath.row])
+            }
+            
+        case topPredictionsTableView:
+            navigateToViewController(MatchDetailsVC.self, storyboardName: StoryboardName.matchDetail) { vc in
+                vc.matchSlug = self.predictionVM?.responseData?.response.data[indexPath.row].matches.first?.slug ?? ""
+                vc.sports = UserDefaults.standard.sport ?? Sports.football.title.lowercased()
+            }
+           
+        case whatsHappeningTableView:
+            navigateToViewController(GossipDetailVC.self, storyboardName: StoryboardName.gossip, animationType: .autoReverse(presenting: .zoom)) { vc in
+                vc.gossipModel = self.gossipsArray[indexPath.row]
+                vc.commentSectionID = "gossipNewsID:-\(self.gossipsArray[indexPath.row].slug ?? "")"
+            }
+        default:
+            navigateToViewController(StreetEventDetailsViewController.self,storyboardName: StoryboardName.streetMatches) { vc in
+                vc.details = self.homeData?.events?[indexPath.row]
+            }
+        }
+    }
+    
+    func configureDidSelectTableCell(vc: GlobalMatchDetailVC, array: GlobalMatchList) {
+        vc.match = array
+        vc.matchId = array.id ?? ""
+        vc.leagueName = array.leagueInfo?.name ?? ""
+        vc.leagueLogo = array.leagueInfo?.logo ?? ""
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

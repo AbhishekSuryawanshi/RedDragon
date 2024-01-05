@@ -497,7 +497,9 @@ extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
             case .meet:
                 navigateToViewController(MeetDashboardVC.self, storyboardName: StoryboardName.meet, animationType: .autoReverse(presenting: .zoom))
             case .experts:
-                navigateToViewController(HomeVC.self, storyboardName: StoryboardName.home, animationType: .autoReverse(presenting: .zoom))
+                navigateToViewController(ExpertsVC.self, storyboardName: StoryboardName.expert, animationType: .autoReverse(presenting: .zoom)) { vc in
+                    vc.isNavigationFromTab = false
+                }
             case .cards:
                 navigateToViewController(AllPlayersViewController.self, storyboardName: StoryboardName.cardGame, identifier: "AllPlayersViewController")
             default: //wallet

@@ -25,7 +25,7 @@ class PredictionDetailsViewController: UIViewController, UITextViewDelegate {
     
     var selectedUpComingPosition: Int = 0
     var isSelected = ""
-    var sport = ""
+    var sport = "football"
     var selectedMatch: PredictionData?
     
     override func viewDidLoad() {
@@ -84,7 +84,6 @@ class PredictionDetailsViewController: UIViewController, UITextViewDelegate {
     }
     
     func configurePlacePredictionView(){
-        
         predictionPlaceView.homeBtn.setTitle("Home".localized, for: .normal)
         predictionPlaceView.drawBtn.setTitle("Draw".localized, for: .normal)
         predictionPlaceView.awayBtn.setTitle("Away".localized, for: .normal)

@@ -10,7 +10,7 @@ import Combine
 import SDWebImage
 
 class HomePredictionViewController: UIViewController {
-
+    
     @IBOutlet weak var userPredictionTitleLbl: UILabel!
     @IBOutlet weak var upcomingMatchesStackView: UIStackView!
     @IBOutlet weak var placedPredictionView3: UIView!
@@ -33,7 +33,7 @@ class HomePredictionViewController: UIViewController {
     @IBOutlet weak var predictionsdateLbl2: UILabel!
     @IBOutlet weak var predictionTeam1Lbl2: UILabel!
     @IBOutlet weak var predictionsLeagueLbl2: UILabel!
-   
+    
     @IBOutlet weak var predictionsTeam2ImgView2: UIImageView!
     @IBOutlet weak var predictionsTeam1ImgView2: UIImageView!
     @IBOutlet weak var predictionsTimeLbl1: UILabel!
@@ -83,11 +83,11 @@ class HomePredictionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-       // addNavigationBar(title: "User Prediction")
+        // addNavigationBar(title: "User Prediction")
         userPredictionTitleLbl.text = "User Prediction".localized
         if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
             removeBlurView()
@@ -106,7 +106,7 @@ class HomePredictionViewController: UIViewController {
         else{
             addBlurView()
         }
-       
+        
     }
     
     func configureView() {
@@ -135,7 +135,7 @@ class HomePredictionViewController: UIViewController {
         blurEffectView.tag = 9
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(blurEffectView)
-
+        
     }
     
     func removeBlurView(){
@@ -158,7 +158,7 @@ class HomePredictionViewController: UIViewController {
     func makeNetworkCall2(sport: String, date: String) {
         let userID = UserDefaults.standard.user?.appDataIDs.predictMatchUserId
         predictionListUserViewModel?.fetchPredictionUserListAsyncCall(appUserID: "\(userID ?? 0)" , sportType: sport, date: date)  // To give logged in user id instead of 7
-      
+        
     }
     func showLoader(_ value: Bool) {
         value ? startLoader() : stopLoader()
@@ -169,7 +169,7 @@ class HomePredictionViewController: UIViewController {
             vc.sport = self.selectedSports
             self.selectedMatch = self.predictionMatchesViewModel?.responseData?.response?.data?[self.upcomingPredictBtn1.tag]
             vc.selectedMatch = self.selectedMatch
-                }
+        }
     }
     
     @objc func predictBtn2(){
@@ -177,7 +177,7 @@ class HomePredictionViewController: UIViewController {
             vc.sport = self.selectedSports
             self.selectedMatch = self.predictionMatchesViewModel?.responseData?.response?.data?[self.upcomingPredictBtn2.tag]
             vc.selectedMatch = self.selectedMatch
-                }
+        }
     }
     
     @objc func predictBtn3(){
@@ -203,7 +203,7 @@ class HomePredictionViewController: UIViewController {
     }
     
     
-
+    
 }
 
 extension HomePredictionViewController {
@@ -293,7 +293,7 @@ extension HomePredictionViewController {
             }
         }
     }
-
+    
     func fetchPredictionUserListViewModel() {
         predictionListUserViewModel = PredictionsListUserViewModel()
         predictionListUserViewModel?.showError = { [weak self] error in
@@ -315,25 +315,25 @@ extension HomePredictionViewController {
         predictionListUserModel = data
         if let data = data.response?.data{
             UIView.animate(withDuration: 1.0) { [self] in
-                  switch(data.count){
+                switch(data.count){
                 case 0:
-                      placedPredictionsStackView.isHidden = true
+                    placedPredictionsStackView.isHidden = true
                 case 1:
-                      placedPredictionsStackView.isHidden = false
-                      placedPredictionView1.isHidden = false
-                      placedPredictionView2.isHidden = true
-                      placedPredictionView3.isHidden = true
+                    placedPredictionsStackView.isHidden = false
+                    placedPredictionView1.isHidden = false
+                    placedPredictionView2.isHidden = true
+                    placedPredictionView3.isHidden = true
                 case 2:
-                      placedPredictionsStackView.isHidden = false
-                      placedPredictionView1.isHidden = false
-                      placedPredictionView2.isHidden = false
-                      placedPredictionView3.isHidden = true
+                    placedPredictionsStackView.isHidden = false
+                    placedPredictionView1.isHidden = false
+                    placedPredictionView2.isHidden = false
+                    placedPredictionView3.isHidden = true
                 case 3:
-                      placedPredictionsStackView.isHidden = false
-                      placedPredictionView1.isHidden = false
-                      placedPredictionView2.isHidden = false
-                      placedPredictionView3.isHidden = false
-                   
+                    placedPredictionsStackView.isHidden = false
+                    placedPredictionView1.isHidden = false
+                    placedPredictionView2.isHidden = false
+                    placedPredictionView3.isHidden = false
+                    
                 default:
                     break
                 }
@@ -357,7 +357,7 @@ extension HomePredictionViewController {
                     predictionsdateLbl1.text =  data[0].matchDetail.matchDatetime
                     predictionsTimeLbl1.text = data[0].createdAt
                     predictionsTeamWinLbl1.text = "Prediction: ".localized + getPredictedTeam(predictiveTeam: data[0].predictedTeam).localized
-                   // seeAllBtn.addTarget(self, action: #selector(placedPredictionSeeAll), for: .touchUpInside)
+                    // seeAllBtn.addTarget(self, action: #selector(placedPredictionSeeAll), for: .touchUpInside)
                 }
                 if data.count > 1{
                     if data[1] != nil{
@@ -409,7 +409,7 @@ extension HomePredictionViewController {
         self.navigationItem.title = title
         appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-
+        
         navigationItem.standardAppearance = appearance
         navigationItem.scrollEdgeAppearance = appearance
         
@@ -451,7 +451,7 @@ extension HomePredictionViewController {
         }
     }
 }
-    
+
 
 
 extension HomePredictionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
@@ -521,6 +521,6 @@ extension HomePredictionViewController: LoginVCDelegate {
             predictionTopView.predictionHistoryBtn.addTarget(self, action: #selector(placedPredictionSeeAll), for: .touchUpInside)
             
         }
-      
+        
     }
 }
