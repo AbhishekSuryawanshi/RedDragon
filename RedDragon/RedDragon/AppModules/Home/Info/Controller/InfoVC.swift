@@ -11,6 +11,10 @@ import Toast
 import Combine
 import SDWebImage
 
+protocol CommuncationDelegate: AnyObject {
+    func openExpertsScreen()
+}
+
 class InfoVC: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -92,6 +96,8 @@ class InfoVC: UIViewController, UIScrollViewDelegate {
     private var banners_count = 0
     private var timer = Timer()
     var tableViewHeight: CGFloat = 0
+    
+    weak var commDelegate: CommuncationDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -491,15 +497,16 @@ extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
             case .analysis:
                 print("")
             case .users:
-                print("")
+                commDelegate?.openExpertsScreen()
             case .street:
                 navigateToViewController(StreetMatchesDashboardVC.self, storyboardName: StoryboardName.streetMatches, animationType: .autoReverse(presenting: .zoom))
             case .meet:
                 navigateToViewController(MeetDashboardVC.self, storyboardName: StoryboardName.meet, animationType: .autoReverse(presenting: .zoom))
             case .experts:
-                navigateToViewController(ExpertsVC.self, storyboardName: StoryboardName.expert, animationType: .autoReverse(presenting: .zoom)) { vc in
-                    vc.isNavigationFromTab = false
-                }
+                commDelegate?.openExpertsScreen()
+//                navigateToViewController(ExpertsVC.self, storyboardName: StoryboardName.expert, animationType: .autoReverse(presenting: .zoom)) { vc in
+//                    vc.isNavigationFromTab = false
+//                }
             case .cards:
                 navigateToViewController(AllPlayersViewController.self, storyboardName: StoryboardName.cardGame, identifier: "AllPlayersViewController")
             default: //wallet

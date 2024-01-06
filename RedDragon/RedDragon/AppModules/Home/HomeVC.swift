@@ -117,6 +117,7 @@ extension HomeVC {
     func embedInfoVC() {
         ViewEmbedder.embed(withIdentifier: "InfoVC", storyboard: UIStoryboard(name: StoryboardName.info, bundle: nil), parent: self, container: viewContainer) { vc in
             let vc = vc as! InfoVC
+            vc.commDelegate = self
             vc.configureUI()
         }
     }
@@ -133,5 +134,13 @@ extension HomeVC {
             let vc = vc as! ForYouVC
             vc.configureUI()
         }
+    }
+}
+
+extension HomeVC: CommuncationDelegate {
+    func openExpertsScreen() {
+        //code to show collectionView cell default first index selected
+        let indexPath = IndexPath(item: 1, section: 0)
+        collectionView(headerCollectionView, didSelectItemAt: indexPath)
     }
 }
