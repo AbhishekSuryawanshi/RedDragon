@@ -81,7 +81,7 @@ class PostTableViewCell: UITableViewCell {
         
         commentStackView.isHidden = model.type == "POLL"
         
-        userImageView.setImage(imageStr: model.userImage, placeholder: .placeholderUser)
+        userImageView.setImage(imageStr: model.user.profileImg, placeholder: .placeholderUser)
         userNameLabel.text = "\(model.firstName) \(model.lastName)"
         userNameLabel.textColor = detailPage ? .blue4 : .black
         dateLabel.text = model.updatedTime.formatDate2(inputFormat: .ddMMyyyyWithTimeZone)

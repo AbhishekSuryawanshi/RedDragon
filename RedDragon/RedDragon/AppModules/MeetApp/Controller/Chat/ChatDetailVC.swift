@@ -72,7 +72,10 @@ class ChatDetailVC: UIViewController {
         let unmatchAction = UIAlertAction(title: "Report Profile".localized, style: .default, handler: { (UIAlertAction) in
             self.customAlertView_3Actions(title: "Report Profile".localized, description: "Are you sure you want to report this user?".localized) {
                 /// navigate to Report user
-                self.navigateToXIBViewController(ReportUserVC.self, nibName: "ReportUserVC")
+                self.navigateToXIBViewController(ReportUserVC.self, nibName: "ReportUserVC") { vc in
+                    vc.reportType = .reportUser
+                    vc.userId = self.selectedUserId
+                }
             } dismissAction: {
                 self.navigationController?.popViewController(animated: true)
             }
@@ -84,7 +87,7 @@ class ChatDetailVC: UIViewController {
                self.customAlertView_3Actions(title: "Block Profile".localized, description: "Are you sure you want to block this user?".localized) {
                    /// navigate to Block user
                    self.navigateToXIBViewController(ReportUserVC.self, nibName: "ReportUserVC") { vc in
-                       vc.isFromBlockUser = true
+                       vc.reportType = .blockUser
                        vc.userId = self.selectedUserId
                    }
                } dismissAction: {

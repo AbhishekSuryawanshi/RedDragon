@@ -33,7 +33,7 @@ class SocialVC: UIViewController {
     @IBOutlet weak var headerCVLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var searchTextField: UITextField!
     
-    var selectedSegment: socialHeaderSegment = .followed
+    var selectedSegment: socialHeaderSegment = .new
     var cancellable = Set<AnyCancellable>()
     var tagsArray: [String] = []
     var leagueArray: [SocialLeague] = []
@@ -79,13 +79,7 @@ class SocialVC: UIViewController {
     
     func loadFunctionality() {
         tagView.isHidden = true
-        startLoader()
-        ViewEmbedder.embed(withIdentifier: "PostListVC", storyboard: UIStoryboard(name: StoryboardName.social, bundle: nil)
-                           , parent: self, container: postContainerView) { vc in
-            let vc = vc as! PostListVC
-            vc.delegate = self
-            vc.selectedSegment = self.selectedSegment
-        }
+        loadPosts()
        
         if refreshLeagueList {
             refreshLeagueList = false
@@ -97,6 +91,16 @@ class SocialVC: UIViewController {
         } else {
             leagueCollectionView.reloadData()
             teamsCollectionView.reloadData()
+        }
+    }
+    
+    func loadPosts() {
+        startLoader()
+        ViewEmbedder.embed(withIdentifier: "PostListVC", storyboard: UIStoryboard(name: StoryboardName.social, bundle: nil)
+                           , parent: self, container: postContainerView) { vc in
+            let vc = vc as! PostListVC
+            vc.delegate = self
+            vc.selectedSegment = self.selectedSegment
         }
     }
     
@@ -394,6 +398,7 @@ extension SocialVC: UICollectionViewDelegate {
         } else {
             selectedSegment = socialHeaderSegment.allCases[indexPath.row]
             collectionView.reloadData()
+            loadPosts()
         }
     }
 }

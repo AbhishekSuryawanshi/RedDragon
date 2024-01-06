@@ -185,7 +185,7 @@ class GossipVC: UIViewController {
             vc.newsSource = self.newsSource
         }
     }
-    
+   
     // MARK: - Button Actions
     
     @IBAction func viewAllButtonTapped(_ sender: UIButton) {

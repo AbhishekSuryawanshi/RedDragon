@@ -11,6 +11,7 @@ class MainTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        refreshForLocalization()
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshForLocalization), name: .languageUpdated, object: nil)
     }
     
