@@ -126,11 +126,12 @@ class WalletVC: UIViewController {
         if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
             let today = Date().formatDate(outputFormat: .ddMMyyyy)
             let spinDate = UserDefaults.standard.spinDate
-            if today == spinDate{
+            let userVAl:Bool = UserDefaults.standard.user?.id == UserDefaults.standard.spinUserID
+            if today == spinDate && userVAl{
                 self.customAlertView(title: ErrorMessage.alert.localized, description: "Today's turn is over.Try next day!".localized, image: ImageConstants.alertImage)
                 return
             }
-            UserDefaults.standard.spinDate = today
+            
             navigateToViewController(VariousWheelSimpleViewController.self,storyboardName: StoryboardName.spinWheel)
         }
         else {
