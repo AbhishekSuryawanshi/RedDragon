@@ -70,6 +70,9 @@ class PostListVC: UIViewController {
                     if item.descriptn.lowercased().range(of: text.lowercased()) != nil {
                         return true
                     }
+                    if item.firstName.lowercased().range(of: text.lowercased()) != nil {
+                        return true
+                    }
                     return false
                 })
             } else {
@@ -102,26 +105,11 @@ class PostListVC: UIViewController {
         }
     }
     
-    func blockUser(userId: Int) {
-        //        let param: [String: Any] = [
-        //            "blocked_user_id": userId,
-        //            "flag": true
-        //        ]
-        //
-        //        self.startLoader()
-        //        PSSettingVM.shared.blockUserOrPost(type: .user, parameters: param) { status, errorMsg in
-        //            stopLoader()
-        //            if status{
-        //                self.getPostList()
-        //            } else {
-        //                PSToast.show(message: errorMsg, view: self.view)
-        //            }
-        //        }
-    }
+    
     
     func shareAction(model: SocialPost, image: UIImage) {
         stopLoader()
-        let vc = UIActivityViewController(activityItems: [image, "\n\n\("Dive into this story via the Rampage Sports app".localized) \n\(model.descriptn) \n\("Stay connected to the latest in football, basketball, tennis, and other sports with us. Install it from the App Store to find more news.".localized) \n\n \(URLConstants.appstore)"], applicationActivities: [])
+        let vc = UIActivityViewController(activityItems: [image, "\n\n\("Dive into this story via the Rampage Sports app.".localized) \n\(model.descriptn) \n\("Stay connected to the latest in football, basketball, tennis, and other sports with us.".localized) \n\n \(URLConstants.appstore)"], applicationActivities: [])
         if let popoverController = vc.popoverPresentationController {
             popoverController.sourceView = self.listTableView
             popoverController.sourceRect = self.listTableView.bounds
@@ -149,17 +137,21 @@ class PostListVC: UIViewController {
         } else {
             let action1 = UIAlertAction(title: "Block User".localized, style: .default , handler:{ (UIAlertAction) in
                 self.customAlertView_2Actions(title: "".localized, description: StringConstants.blockAlert.localized) {
-                    self.blockUser(userId: self.postArray[sender.tag].userId)
+                    self.navigateToXIBViewController(ReportUserVC.self, nibName: "ReportUserVC") { vc in
+                        vc.reportType = .blockUser
+                        vc.userId = self.postArray[sender.tag].userId
+                        vc.pushFromSocialModule = true
+                    }
                 }
             })
             alert.addAction(action1)
             let action2 = UIAlertAction(title: "Report Post".localized, style: .default , handler:{ (UIAlertAction) in
                 self.customAlertView_2Actions(title: "".localized, description: StringConstants.reportPostAlert) {
-                    //ToDo
-                    //                    let nextVC = homeStoryboard.instantiateViewController(withIdentifier: "PSReportVC") as! PSReportVC
-                    //                    nextVC.contentId = self.postList[sender.tag].id
-                    //                    nextVC.reportType = self.postList[sender.tag].type == "POLL" ? .poll : .post
-                    //                    self.navigationController?.pushViewController(nextVC, animated: true)
+                    self.navigateToXIBViewController(ReportUserVC.self, nibName: "ReportUserVC") { vc in
+                        vc.reportType = self.postArray[sender.tag].type == "POST" ? .reportPost : .reportPoll
+                        vc.userId = self.postArray[sender.tag].userId
+                        vc.postOrPollId = self.postArray[sender.tag].id
+                    }
                 }
             })
             alert.addAction(action2)
@@ -171,7 +163,8 @@ class PostListVC: UIViewController {
     @objc func shareButtonTapped(sender: UIButton) {
         startLoader()
         let postModel = postArray[sender.tag]
-        var shareImage = UIImage() //ToDo add app logo
+        var shareImage: UIImage = .appLogo
+        
         if postModel.postImages.count > 0 {
             UIImageView().kf.setImage(with: URL(string: postModel.postImages.first ?? "")) { result in
                 switch result {

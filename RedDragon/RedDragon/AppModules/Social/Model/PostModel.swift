@@ -21,8 +21,8 @@ struct SocialPostListData: Codable {
 struct SocialPost: Codable {
     
     var id: Int = 0 //It can be poll id or post id check "type"
-    var type: String = ""
-    var title: String  = ""
+    var type: String = "" //type = "POLL" | "POST"
+    var title: String = ""
     var contentHtml: String  = ""
     var isVisible: Int = 0 // 0 1
     var leagueId: String = ""
@@ -39,6 +39,7 @@ struct SocialPost: Codable {
     var liked: Bool = false
     var likeCount: Int = 0
     var commentCount: Int = 0
+    var user = User()
     
     //Poll
     var user_id: Int = 0 //for parsing only
@@ -55,7 +56,7 @@ struct SocialPost: Codable {
     var pollArray: [Poll] = []
     
     enum CodingKeys: String, CodingKey {
-        case id, type, title, user_id, option_1, option_2, question
+        case id, type, title, user_id, option_1, option_2, question, user
         case contentHtml = "content_html"
         case descriptn = "description"
         case isVisible = "is_visible"
@@ -122,6 +123,8 @@ struct SocialPost: Codable {
         user_id = try (container.decodeIfPresent(Int.self, forKey: .user_id) ?? 0)
         ///html content from contentHtml saved to description
         contentHtml = try (container.decodeIfPresent(String.self, forKey: .contentHtml) ?? "")
+        
+        user = try (container.decodeIfPresent(User.self, forKey: .user) ?? User())
         
         if type == "POLL" {
             userId = user_id

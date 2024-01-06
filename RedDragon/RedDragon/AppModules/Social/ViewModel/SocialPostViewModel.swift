@@ -149,3 +149,15 @@ class SocialDeleteCommentVM: APIServiceManager<BasicAPIResponse> {
         asyncCall(urlString: urlString, method: method, parameters: nil)
     }
 }
+
+
+class SocialPostReportVM: APIServiceManager<BasicAPIResponse> {
+    static let shared = SocialPostReportVM()
+    
+    ///function to add comment for a post for social module
+    func reportPostOrPollAsyncCall(reportType: ReportType, parameters: [String: Any]) {
+        let urlString   = reportType == .reportPost ? URLConstants.blockPost :  URLConstants.blockPoll
+        let method      = RequestType.post
+        asyncCall(urlString: urlString, method: method, parameters: parameters)
+    }
+}

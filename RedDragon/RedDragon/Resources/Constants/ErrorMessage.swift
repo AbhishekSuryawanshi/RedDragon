@@ -41,6 +41,7 @@ struct ErrorMessage {
     static var photoMaxCountAlert          = "You have already reached the limit of 5 photos"
     static var textEmptyAlert              = "What do you want to talk about?"
     static var pollOptionEmptyAlert        = "Please add two poll choices"
+    static var reasonEmptyAlert            = "Please enter your reason"
     
     static var postEmptyAlert              = "No Posts & Analysis yet!"
     static var chatEmptyAlert              = "No Chats yet!"
@@ -89,4 +90,5 @@ struct SuccessMessage {
     static let successfullyLikedUser       = "User liked successfully"
     static let successfullyBlockedUser     = "User blocked successfully"
     static let successfullyReportedUser    = "User reported successfully"
+    static let successfullyReportedPost    = "Post reported successfully"
 }
