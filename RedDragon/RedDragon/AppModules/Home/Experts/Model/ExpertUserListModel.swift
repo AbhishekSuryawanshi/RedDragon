@@ -33,7 +33,7 @@ struct ExpertUser: Codable {
     let profileImg: String?
     var following: Bool?
     let tags: [String]?
-    let wallet: Int?
+    var wallet: Int?
     
     enum CodingKeys: String, CodingKey {
         case appdata, tags, wallet, name
@@ -97,15 +97,17 @@ struct Bet: Codable {
 }
 
 struct ExpertPredictionMatch: Codable {
+    let id: Int?
     let isSuccess: Int? = nil
     let match: PredictMatch?
     
     enum CodingKeys: String, CodingKey {
         case isSuccess = "is_success"
-        case match
+        case match, id
     }
 }
 
 struct PredictMatch: Codable {
     let detail: PredictionMatchDetail?
 }
+

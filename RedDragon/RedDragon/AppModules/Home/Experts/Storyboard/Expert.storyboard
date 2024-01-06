@@ -324,39 +324,6 @@
                                                             <outlet property="delegate" destination="aCM-jx-fZZ" id="NS2-oA-P89"/>
                                                         </connections>
                                                     </tableView>
-                                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ob8-I2-vKA">
-                                                        <rect key="frame" x="0.0" y="160" width="393" height="555"/>
-                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="NAg-j3-5p3">
-                                                            <rect key="frame" x="0.0" y="0.0" width="393" height="555"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <subviews>
-                                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IN8-3O-9u3">
-                                                                    <rect key="frame" x="25" y="255" width="343" height="45"/>
-                                                                    <color key="backgroundColor" name="base"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="45" id="jOR-PW-bOD"/>
-                                                                    </constraints>
-                                                                    <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="18"/>
-                                                                    <inset key="imageEdgeInsets" minX="300" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                                    <state key="normal" title="Unlock Prediction " image="heat"/>
-                                                                    <userDefinedRuntimeAttributes>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                            <real key="value" value="7"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                    </userDefinedRuntimeAttributes>
-                                                                    <connections>
-                                                                        <action selector="unlockPreidtcionButtonAction:" destination="aCM-jx-fZZ" eventType="touchUpInside" id="12G-fB-2Cb"/>
-                                                                    </connections>
-                                                                </button>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstAttribute="trailing" secondItem="IN8-3O-9u3" secondAttribute="trailing" constant="25" id="Mg4-c8-DZ3"/>
-                                                                <constraint firstItem="IN8-3O-9u3" firstAttribute="centerY" secondItem="NAg-j3-5p3" secondAttribute="centerY" id="TfR-q9-mPG"/>
-                                                                <constraint firstItem="IN8-3O-9u3" firstAttribute="leading" secondItem="NAg-j3-5p3" secondAttribute="leading" constant="25" id="m79-yB-jSU"/>
-                                                            </constraints>
-                                                        </view>
-                                                        <blurEffect style="systemUltraThinMaterial"/>
-                                                    </visualEffectView>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
@@ -367,16 +334,12 @@
                                                     <constraint firstItem="hGy-kX-vO3" firstAttribute="trailing" secondItem="dPp-yY-r9V" secondAttribute="trailing" id="QGQ-Ya-efI"/>
                                                     <constraint firstItem="Ew6-6S-IXZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4rk-vO-904" secondAttribute="trailing" constant="37.329999999999998" id="QQd-jN-aPd"/>
                                                     <constraint firstAttribute="trailing" secondItem="Ew6-6S-IXZ" secondAttribute="trailing" constant="10" id="QS6-Ik-8z1"/>
-                                                    <constraint firstItem="Ob8-I2-vKA" firstAttribute="top" secondItem="hGy-kX-vO3" secondAttribute="top" id="QXc-6g-nny"/>
                                                     <constraint firstItem="asy-t6-XSS" firstAttribute="top" secondItem="3Hq-oL-Kln" secondAttribute="top" id="Scr-UL-T4A"/>
                                                     <constraint firstItem="ouD-jC-aM1" firstAttribute="trailing" secondItem="Ew6-6S-IXZ" secondAttribute="trailing" id="V0k-JC-Mma"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Ob8-I2-vKA" secondAttribute="trailing" id="VA8-na-POV"/>
-                                                    <constraint firstItem="Ob8-I2-vKA" firstAttribute="leading" secondItem="AGh-Gm-Lbf" secondAttribute="leading" id="W8C-Cb-V6t"/>
                                                     <constraint firstItem="dPp-yY-r9V" firstAttribute="trailing" secondItem="ouD-jC-aM1" secondAttribute="trailing" id="Wb6-jJ-yQL"/>
                                                     <constraint firstItem="4rk-vO-904" firstAttribute="centerY" secondItem="asy-t6-XSS" secondAttribute="centerY" id="X5E-FK-YRs"/>
                                                     <constraint firstItem="asy-t6-XSS" firstAttribute="leading" secondItem="3Hq-oL-Kln" secondAttribute="trailing" constant="5" id="cGL-Xy-Tdz"/>
                                                     <constraint firstItem="sMT-KK-3br" firstAttribute="top" secondItem="ouD-jC-aM1" secondAttribute="top" id="g3R-Ua-UzT"/>
-                                                    <constraint firstItem="Ob8-I2-vKA" firstAttribute="bottom" secondItem="hGy-kX-vO3" secondAttribute="bottom" id="gZB-lN-dm0"/>
                                                     <constraint firstItem="ouD-jC-aM1" firstAttribute="leading" secondItem="sMT-KK-3br" secondAttribute="trailing" constant="10" id="j6u-sV-Nfk"/>
                                                     <constraint firstItem="ouD-jC-aM1" firstAttribute="top" secondItem="Ew6-6S-IXZ" secondAttribute="bottom" constant="3" id="nGr-oi-ZrH"/>
                                                     <constraint firstItem="sMT-KK-3br" firstAttribute="top" secondItem="asy-t6-XSS" secondAttribute="bottom" id="ong-KA-1zE"/>
@@ -424,11 +387,9 @@
                     <connections>
                         <outlet property="aboutLabel" destination="sMT-KK-3br" id="UFd-Cb-2dP"/>
                         <outlet property="allCountLabel" destination="X5K-8h-gff" id="98A-0x-xHR"/>
-                        <outlet property="blurView" destination="Ob8-I2-vKA" id="Pf6-0V-Ghz"/>
                         <outlet property="coinLabel" destination="hm0-W0-h6M" id="2g0-sl-PLv"/>
                         <outlet property="collectionView" destination="nom-Bb-zfS" id="fi1-sk-PvG"/>
                         <outlet property="nameLabel" destination="asy-t6-XSS" id="ama-c4-qvh"/>
-                        <outlet property="predictionButton" destination="IN8-3O-9u3" id="913-1v-nkN"/>
                         <outlet property="successCountLabel" destination="nN6-70-fdR" id="Jhx-PA-JnW"/>
                         <outlet property="tableView" destination="hGy-kX-vO3" id="GmP-I9-xus"/>
                         <outlet property="unsuccessCountLabel" destination="hEU-h1-EoZ" id="CId-Pt-Vnb"/>
