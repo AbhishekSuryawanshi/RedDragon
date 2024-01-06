@@ -62,7 +62,7 @@ class UnfollowUserViewModel: APIServiceManager<BasicAPIResponse> {
     }
 }
 
-class TransactionViewModel: APIServiceManager<BasicAPIResponse> {
+class TransactionViewModel: APIServiceManager<TransactionModelResponse> {
     
     ///function to post transaction
     func postDebitPredictionAmount(params: [String:Any]) {

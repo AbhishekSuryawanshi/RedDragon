@@ -23,6 +23,36 @@
                 <rect key="frame" x="0.0" y="0.0" width="309" height="97"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ASX-sX-E7L">
+                        <rect key="frame" x="0.0" y="0.0" width="309" height="94"/>
+                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="1vX-Kp-eAH">
+                            <rect key="frame" x="0.0" y="0.0" width="309" height="94"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="psP-gZ-9aQ">
+                                    <rect key="frame" x="44.666666666666657" y="32" width="219.99999999999997" height="30"/>
+                                    <color key="backgroundColor" name="base"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="Kaz-Wu-E1j"/>
+                                        <constraint firstAttribute="width" constant="220" id="udT-C9-dF5"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="14"/>
+                                    <inset key="imageEdgeInsets" minX="180" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <state key="normal" title="Unlock Prediction " image="heat"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="7"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="psP-gZ-9aQ" firstAttribute="centerY" secondItem="1vX-Kp-eAH" secondAttribute="centerY" id="qh7-sN-AZq"/>
+                                <constraint firstItem="psP-gZ-9aQ" firstAttribute="centerX" secondItem="1vX-Kp-eAH" secondAttribute="centerX" id="wJY-Nn-bhx"/>
+                            </constraints>
+                        </view>
+                        <blurEffect style="systemThickMaterial"/>
+                    </visualEffectView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="eB3-nM-tiL">
                         <rect key="frame" x="0.0" y="0.0" width="309" height="94"/>
                         <subviews>
@@ -145,9 +175,13 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="eB3-nM-tiL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="3kU-pQ-4rV"/>
+                    <constraint firstItem="ASX-sX-E7L" firstAttribute="trailing" secondItem="eB3-nM-tiL" secondAttribute="trailing" id="5rk-CQ-KLW"/>
                     <constraint firstItem="eB3-nM-tiL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="KR1-yJ-0le"/>
+                    <constraint firstItem="ASX-sX-E7L" firstAttribute="top" secondItem="eB3-nM-tiL" secondAttribute="top" id="NqD-qt-o5U"/>
                     <constraint firstAttribute="trailing" secondItem="eB3-nM-tiL" secondAttribute="trailing" id="kEu-Wo-D1e"/>
                     <constraint firstAttribute="bottom" secondItem="eB3-nM-tiL" secondAttribute="bottom" constant="8" id="kU5-g2-GPZ"/>
+                    <constraint firstItem="ASX-sX-E7L" firstAttribute="leading" secondItem="eB3-nM-tiL" secondAttribute="leading" id="n4O-Sm-CRq"/>
+                    <constraint firstItem="ASX-sX-E7L" firstAttribute="bottom" secondItem="eB3-nM-tiL" secondAttribute="bottom" id="n5Y-b7-k15"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -155,17 +189,20 @@
                 <outlet property="awayImageView" destination="0St-cs-Ge8" id="bNu-1v-Wbm"/>
                 <outlet property="awayNameLabel" destination="WND-nL-96h" id="3Xf-pW-dor"/>
                 <outlet property="awayScoreLabel" destination="JdV-AW-sFo" id="Shg-ss-ClS"/>
+                <outlet property="blurView" destination="ASX-sX-E7L" id="bzC-OG-qV4"/>
                 <outlet property="dateLabel" destination="uiA-yB-dMH" id="S90-oY-wMe"/>
                 <outlet property="homeImageView" destination="Xne-hU-hb5" id="vGu-kE-sgh"/>
                 <outlet property="homeNameLabel" destination="kcs-Uc-RSZ" id="HP9-Fv-gkI"/>
                 <outlet property="homeScoreLabel" destination="bhJ-Fj-5nB" id="0cs-fD-Fir"/>
                 <outlet property="leagueNameLabel" destination="aAv-1E-lsx" id="PVC-qq-J9j"/>
                 <outlet property="predictionStatusLabel" destination="haq-Px-hPL" id="xA8-l4-06P"/>
+                <outlet property="unlockPredictionButton" destination="psP-gZ-9aQ" id="99q-lq-Ugj"/>
             </connections>
-            <point key="canvasLocation" x="125.95419847328243" y="37.676056338028168"/>
+            <point key="canvasLocation" x="125.95419847328243" y="36.971830985915496"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="heat" width="16" height="16"/>
         <namedColor name="base">
             <color red="0.71764705882352942" green="0.094117647058823528" blue="0.054901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

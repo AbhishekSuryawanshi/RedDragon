@@ -18,14 +18,15 @@ class ExpertUserDetailVC: UIViewController {
     @IBOutlet weak var successCountLabel: UILabel!
     @IBOutlet weak var unsuccessCountLabel: UILabel!
     @IBOutlet weak var coinLabel: UILabel!
-    @IBOutlet weak var blurView: UIVisualEffectView!
+ //   @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var predictionButton: UIButton!
+ //   @IBOutlet weak var predictionButton: UIButton!
     @IBOutlet weak var winRateTitleLabel: UILabel!
     @IBOutlet weak var walletButton: UIButton!
     
     var cancellable = Set<AnyCancellable>()
     var userId = Int()
+    var matchId = Int()
     private var expertPredictUserVM = ExpertPredictionUserDetailViewModel()
     var matchArray = [ExpertPredictionMatch]()
     var userData: ExpertUser?
@@ -37,8 +38,8 @@ class ExpertUserDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         performInitialSetup()
-        
         performLanguageLocalisation()
     }
     
@@ -56,7 +57,6 @@ class ExpertUserDetailVC: UIViewController {
     // MARK: - Methods
     func performInitialSetup() {
         // if user has unlocked prediction then hide blur view
-        blurView.isHidden = UserDefaults.standard.bool(forKey: "\(userId)") ? true : false
         nibInitialization()
         fetchPredictUserDetailViewModelResponse()
         fetchCommentsViewModel()
@@ -85,21 +85,22 @@ class ExpertUserDetailVC: UIViewController {
         walletButton.setTitle("\(userData?.wallet ?? 0)", for: .normal)
         matchArray = userData?.appdata?.predict?.prediction ?? []
         tagData = userData?.tags ?? []
-        if userData?.appdata?.predict?.predictStats?.successRate ?? 0 >= 30 && userData?.wallet ?? 0 >= 10 {
-            predictionButton.setTitle("Unlock Prediction for 10".localized, for: .normal)
-            amount = 10
-        }else if userData?.appdata?.predict?.predictStats?.successRate ?? 0 < 30 && userData?.wallet ?? 0 >= 5 {
-            predictionButton.setTitle("Unlock Prediction for 5".localized, for: .normal)
-            amount = 5
-        }
+//        if userData?.appdata?.predict?.predictStats?.successRate ?? 0 >= 30 && userData?.wallet ?? 0 >= 10 {
+//            predictionButton.setTitle("Unlock Prediction for 10".localized, for: .normal)
+//            amount = 10
+//        }else if userData?.appdata?.predict?.predictStats?.successRate ?? 0 < 30 && userData?.wallet ?? 0 >= 5 {
+//            predictionButton.setTitle("Unlock Prediction for 5".localized, for: .normal)
+//            amount = 5
+//        }
         collectionView.reloadData()
         tableView.reloadData()
     }
     
-    @IBAction func unlockPreidtcionButtonAction(_ sender: UIButton) {
+     @objc func unlockPreidtcionButtonAction(sender: UIButton) {
         let params = ["coin_count":amount, "type": "d"] as! [String: Any]  // type "d" for Debit, "c" for Credit
         transactionVM.postDebitPredictionAmount(params: params)
-        fetchTransactionViewModelResponse()
+        matchId = userData?.appdata?.predict?.prediction[sender.tag].id ?? 0
+        fetchTransactionViewModelResponse(matchId)
     }
 }
 
@@ -190,7 +191,7 @@ extension ExpertUserDetailVC {
             .store(in: &cancellable)
     }
    
-    func fetchTransactionViewModelResponse() {
+    func fetchTransactionViewModelResponse(_ matchId: Int) {
         transactionVM.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
@@ -202,8 +203,9 @@ extension ExpertUserDetailVC {
             .dropFirst()
             .sink(receiveValue: { [weak self] result in
                 if result?.response?.code == 200 {
-                    UserDefaults.standard.setValue(true, forKey: "\(self?.userId ?? 0)")
-                    self?.blurView.isHidden = true
+                    UserDefaults.standard.setValue(true, forKey: "\(self?.userId ?? 0 + matchId)")
+                    self?.userData?.wallet = result?.response?.data?.userwallet
+                    self?.tableView.reloadData()
                 }
             })
             .store(in: &cancellable)
@@ -212,16 +214,25 @@ extension ExpertUserDetailVC {
     private func tableCell(indexPath:IndexPath) -> UserDetailPredictMatchesTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.userDetailPredictMatchesTableViewCell, for: indexPath) as! UserDetailPredictMatchesTableViewCell
         tableView.separatorStyle = .singleLine
+        cell.blurView.isHidden = UserDefaults.standard.bool(forKey: "\(userId + matchId)") ? true : false
         cell.leagueNameLabel.text = userData?.appdata?.predict?.prediction[indexPath.row].match?.detail?.leagueName
         cell.homeNameLabel.text = userData?.appdata?.predict?.prediction[indexPath.row].match?.detail?.homeTeamName
         cell.awayNameLabel.text = userData?.appdata?.predict?.prediction[indexPath.row].match?.detail?.awayTeamName
         cell.homeScoreLabel.text = userData?.appdata?.predict?.prediction[indexPath.row].match?.detail?.homeScore
         cell.awayScoreLabel.text = userData?.appdata?.predict?.prediction[indexPath.row].match?.detail?.awayScore
         cell.dateLabel.text = userData?.appdata?.predict?.prediction[indexPath.row].match?.detail?.matchDatetime
-        
         cell.homeImageView.setImage(imageStr: userData?.appdata?.predict?.prediction[indexPath.row].match?.detail?.homeTeamImage ?? "", placeholder: UIImage(named: "placeholderLeague"))
         cell.awayImageView.setImage(imageStr: userData?.appdata?.predict?.prediction[indexPath.row].match?.detail?.awayTeamImage ?? "", placeholder: UIImage(named: "placeholderLeague"))
         
+        if userData?.appdata?.predict?.predictStats?.successRate ?? 0 >= 30 && userData?.wallet ?? 0 >= 10 {
+            cell.unlockPredictionButton.setTitle("Unlock Prediction for 10".localized, for: .normal)
+            amount = 10
+        }else if userData?.appdata?.predict?.predictStats?.successRate ?? 0 < 30 && userData?.wallet ?? 0 >= 5 {
+            cell.unlockPredictionButton.setTitle("Unlock Prediction for 5".localized, for: .normal)
+            amount = 5
+        }
+        cell.unlockPredictionButton.addTarget(self, action: #selector(unlockPreidtcionButtonAction(sender:)), for: .touchUpInside)
+       
         let predStatus = userData?.appdata?.predict?.prediction[indexPath.row].isSuccess
         
         switch predStatus {
@@ -229,7 +240,6 @@ extension ExpertUserDetailVC {
             cell.predictionStatusLabel.text = "Prediction Failed".localized
             cell.predictionStatusLabel.backgroundColor = .gray1
             cell.predictionStatusLabel.textColor = .white
-            
         case 1:
             cell.predictionStatusLabel.text = "Correct Prediction".localized
             cell.predictionStatusLabel.backgroundColor = .green1

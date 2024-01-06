@@ -18,6 +18,8 @@ class UserDetailPredictMatchesTableViewCell: UITableViewCell {
     @IBOutlet weak var predictionStatusLabel: UILabel!
     @IBOutlet weak var homeScoreLabel: UILabel!
     @IBOutlet weak var awayScoreLabel: UILabel!
+    @IBOutlet weak var blurView: UIVisualEffectView!
+    @IBOutlet weak var unlockPredictionButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
