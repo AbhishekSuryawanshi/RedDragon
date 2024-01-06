@@ -128,6 +128,9 @@ class VariousWheelSimpleViewController: UIViewController {
     
     func successAddPoints(message:String){
         self.customAlertView(title: ErrorMessage.success.localized, description: message, image: ImageConstants.successImage) {
+            let today = Date().formatDate(outputFormat: .ddMMyyyy)
+            UserDefaults.standard.spinDate = today
+            UserDefaults.standard.spinUserID = UserDefaults.standard.user?.id
             self.navigationController?.popViewController(animated: true)
         }
     }

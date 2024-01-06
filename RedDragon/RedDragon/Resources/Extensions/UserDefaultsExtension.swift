@@ -69,6 +69,16 @@ extension UserDefaults {
         }
     }
     
+    var spinUserID: Int? {
+        get {
+            return value(forKey: UserDefaultString.spinUserID) as? Int
+        }
+        set {
+            set(newValue, forKey: UserDefaultString.spinUserID)
+            synchronize()
+        }
+    }
+    
     
     func clearSpecifiedItems() {
         removeObject(forKey: UserDefaultString.token)

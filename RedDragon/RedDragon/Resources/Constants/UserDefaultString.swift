@@ -20,6 +20,7 @@ struct UserDefaultString {
     static let cardGame_budget      = "budget"
     static let cardGame_score       = "score"
     static let spinDate             = "spinDate"
+    static let spinUserID             = "spinUserID"
 }
 
 struct DefaultToken {
