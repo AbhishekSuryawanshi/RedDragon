@@ -46,11 +46,16 @@ class WalletVC: UIViewController {
         refreshView()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func initialSettings() {
         nibInitialization()
         fetchWalletViewModel()
         fetchBannerViewModel()
         fetchPointsViewModel()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.walletPackageSelected(notification:)), name: .packageSelected, object: nil)
     }
     
     func refreshView() {
@@ -68,6 +73,8 @@ class WalletVC: UIViewController {
         bannerTitleLabel.text = "\("Play & Earn".localized) \n\("Heat Points".localized) 🔥"
         spinLabel.text = "Spin".localized
         playButton.setTitle("Play".localized, for: .normal)
+        betPointsCollectionView.reloadData()
+        heatPointsCollectionView.reloadData()
     }
     
     func nibInitialization() {
@@ -102,13 +109,21 @@ class WalletVC: UIViewController {
         banners_count = (banners_count + 1) % dataCount
     }
     
-    func purchasePoints(type: PointsType, index: Int) {
+    @objc func walletPackageSelected(notification: Notification) {
+        if let dict = notification.userInfo as NSDictionary? {
+            selectedIndex = dict["index"] as? Int ?? 0
+            pointType = .heat
+            purchasePoints()
+        }
+    }
+    
+    func purchasePoints() {
         
         if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
             
             presentOverViewController(GetPointsVC.self, storyboardName: StoryboardName.wallet) { vc in
-                vc.selectedIndex = index
-                vc.pointType = type
+                vc.selectedIndex = self.selectedIndex
+                vc.pointType = self.pointType
                 vc.delegate = self
             }
             
@@ -327,7 +342,9 @@ extension WalletVC: UICollectionViewDelegate {
                 UIApplication.shared.open(url)
             }
         } else {
-            purchasePoints(type: collectionView == self.betPointsCollectionView ? .bet : .heat, index: indexPath.row)
+            selectedIndex = indexPath.row
+            pointType = collectionView == self.betPointsCollectionView ? .bet : .heat
+            purchasePoints()
         }
     }
 }
@@ -335,7 +352,7 @@ extension WalletVC: UICollectionViewDelegate {
 extension WalletVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == bannerCollectionView {
-            return CGSize(width: screenWidth, height: 220)
+            return CGSize(width: screenWidth, height: 180) //220
         } else {
             return CGSize(width: 90, height: 75)
         }

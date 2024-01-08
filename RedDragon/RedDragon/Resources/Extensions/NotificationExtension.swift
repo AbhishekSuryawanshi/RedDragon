@@ -16,4 +16,5 @@ extension Notification.Name {
     static let moveToNewsDetail    = Notification.Name("NewsDetail")
     static let languageUpdated     = Notification.Name("languageUpdated")
     static let selectHomeTab       = Notification.Name("selectHomeTab")
+    static let packageSelected     = Notification.Name("packageSelected")
 }

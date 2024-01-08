@@ -52,6 +52,10 @@ class VariousWheelSimpleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewModels()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         setupLocalisation()
     }
     
