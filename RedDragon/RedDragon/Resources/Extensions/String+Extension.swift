@@ -234,6 +234,13 @@ extension NSMutableAttributedString {
         }
     }
     
+    public func changeFont(textToFind:String, font: UIFont) {
+        let foundRange = self.mutableString.range(of: textToFind)
+        if foundRange.location != NSNotFound {
+            self.addAttribute(.font, value: font, range: foundRange)
+        }
+    }
+    
     public func addLink(textToFind:String, linkURL:String) {//link color set by setting tint color in storyboard
         let foundRange = self.mutableString.range(of: textToFind)
         if foundRange.location != NSNotFound {

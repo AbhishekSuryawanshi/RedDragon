@@ -88,6 +88,7 @@ class WalletVC: UIViewController {
     }
     
     func showTransactions() {
+        // show transactions for loggined user only
         if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
             heatPointLabel.text = String(UserDefaults.standard.user?.wallet ?? 0)
             WalletVM.shared.subscriptionListAsyncCall()

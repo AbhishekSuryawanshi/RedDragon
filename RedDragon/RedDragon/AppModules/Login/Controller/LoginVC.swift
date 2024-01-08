@@ -63,15 +63,19 @@ class LoginVC: UIViewController {
     func refreshPage() {
         headerLabel.text = "Welcome to Rampage Sports App".localized
         let topFormatedText = NSMutableAttributedString()
-        topTextLabel.attributedText = topFormatedText.regular("Please ", size: 15).semiBold("Login", size: 15).regular(" to continue", size: 15)
+        topFormatedText.regular("Please Login to continue".localized, size: 15)
+        topFormatedText.changeFont(textToFind: "Login".localized, font: fontSemiBold(16))
+        topTextLabel.attributedText = topFormatedText
+        
+        //topFormatedText.regular("Please ", size: 15).semiBold("Login".localized, size: 15).regular(" to continue", size: 15)
         phoneTitleLabel.text = "Phone Number".localized
         passwordTitleLabel.text = "Password".localized
         phoneTextField.placeholder = "Phone Number".localized
         passwordTextField.placeholder = "Password".localized
         let bottomFormatedText = NSMutableAttributedString()
-        bottomFormatedText.regular("Don't Have an Account? Tap here to", size: 15).semiBold(" Register", size: 15)
-        bottomFormatedText.addUnderLine(textToFind: "Register")
-        bottomFormatedText.addLink(textToFind: " Register", linkURL: "register")
+        bottomFormatedText.regular("Don't Have an Account? Tap here to".localized, size: 15).semiBold(" ", size: 15).semiBold("Register".localized, size: 15)
+        bottomFormatedText.addUnderLine(textToFind: "Register".localized)
+        bottomFormatedText.addLink(textToFind: "Register".localized, linkURL: "register")
         bottomTextView.attributedText = bottomFormatedText
         forgotPassButton.setTitle("Forgot Password".localized, for: .normal)
         loginButton.setTitle("Login".localized, for: .normal)

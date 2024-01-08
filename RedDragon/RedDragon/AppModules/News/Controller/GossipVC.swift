@@ -28,7 +28,6 @@ class GossipVC: UIViewController {
     @IBOutlet weak var trendingCollectionView: UICollectionView!
     @IBOutlet weak var newsTableView: UITableView!
     @IBOutlet weak var newsTableHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var viewAllButton: UIButton!
     @IBOutlet weak var videosView: UIView!
     @IBOutlet weak var videosCollectionView: UICollectionView!
     @IBOutlet weak var videoCollectionHeightConstraint: NSLayoutConstraint!
@@ -97,14 +96,12 @@ class GossipVC: UIViewController {
     }
     
     func refreshPage() {
-        viewAllButton.isHidden = false
         breakingNewsTitleLabel.text = "Breaking News".localized
         topPublishersTitleLabel.text = "Top Publishers".localized
         leaguesTitleLabel.text = "Top Leagues".localized
         tredingTitleLabel.text = "Trending Topics".localized
         newsCategoryTitleLabel.text = "News Category".localized
         videosTitleLabel.text = "Videos".localized
-        viewAllButton.setTitle("View All".localized, for: .normal)
     }
     
     @objc func changeBreakingNews(_ timer1: Timer) {
@@ -150,7 +147,6 @@ class GossipVC: UIViewController {
                 })
                 trendingArray.removeAll()
                 leaguesView.isHidden = leagueArray.count == 0
-                viewAllButton.isHidden = true
                 trendingCollectionView.reloadData()
                 newsTableView.reloadData()
             } else {
@@ -185,14 +181,6 @@ class GossipVC: UIViewController {
             vc.newsSource = self.newsSource
         }
     }
-   
-    // MARK: - Button Actions
-    
-    @IBAction func viewAllButtonTapped(_ sender: UIButton) {
-        viewAllButton.isHidden = true
-        gossipsArray = GossipListVM.shared.gossipsArray
-        newsTableView.reloadData()
-    }
 }
 
 // MARK: - API Services
@@ -201,6 +189,7 @@ extension GossipVC {
         ///If sportType == .eSports, ESports model array else Gossip model array
         ///ESports model to gossip model conversion doing in the api response function
         publishersView.isHidden = sportType == .eSports
+        leaguesView.isHidden = sportType != .football
         
         if sportType == .eSports {
             ESportsListVM.shared.fetchESportsListAsyncCall()
@@ -330,21 +319,13 @@ extension GossipVC {
         /// shuffle gossip array to avoid repeat content on "trending topic" and "news category"
         let suffledArray = gossipsArray.shuffled()
         trendingArray = Array(suffledArray.prefix(5))
-        /// Show 3 news of gossip array, and show all news if "see All" button tapped
+        
         if showEsportdata {
-            gossipsArray = Array(GossipListVM.shared.gossipsArray.prefix(3))
+            gossipsArray = GossipListVM.shared.gossipsArray
         } else {
-            if !self.isPagination {
-                gossipsArray = Array(GossipListVM.shared.gossipsArray.prefix(3))
-            }
+            gossipsArray = GossipListVM.shared.gossipsArray
             self.isPagination = false
         }
-        viewAllButton.isHidden = initialLoad == false
-        if initialLoad {
-            initialLoad = false
-            viewAllButton.isHidden = gossipsArray.count == 0
-        }
-        
         
         publisherCollectionView.reloadData()
         trendingCollectionView.reloadData()
@@ -459,13 +440,7 @@ extension GossipVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         /// news category section's table height calculation
         /// If count = 0, height = 70 to show "No data" label
-        /// maximum height of table sould be 20 * cell height, if more than 20 items are there, do pagination
-        //        if gossipsArray.count < 20 {
-        //            newsTableHeightConstraint.constant = (gossipsArray.count * 70) < 70 ? 300 : CGFloat(gossipsArray.count * 120)
-        //        } else {
-        //            newsTableHeightConstraint.constant = CGFloat(20 * 120)
-        //        }
-        newsTableHeightConstraint.constant = (gossipsArray.count * 70) < 70 ? 300 : (CGFloat(gossipsArray.count * 120) - (viewAllButton.isHidden == false ? -10 : 10))
+       newsTableHeightConstraint.constant = (gossipsArray.count * 70) < 70 ? 300 : (CGFloat(gossipsArray.count * 120))
         if gossipsArray.count == 0 {
             tableView.setEmptyMessage(ErrorMessage.dataNotFound)
         } else {
@@ -497,7 +472,7 @@ extension GossipVC: UITableViewDelegate {
 extension GossipVC {
     
     func setupPagination(){
-        if sportType != .eSports && viewAllButton.isHidden{
+        if sportType != .eSports {
             if(isPagination == false){
                 isPagination = true
                 pageNum = pageNum + 1

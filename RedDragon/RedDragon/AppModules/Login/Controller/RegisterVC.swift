@@ -57,8 +57,10 @@ class RegisterVC: UIViewController {
     
     func refreshPage() {
         headerLabel.text = "Welcome to Rampage Sports App".localized
-        let formatedText = NSMutableAttributedString()
-        topTextLabel.attributedText = formatedText.regular("Please ", size: 15).semiBold("Create an account", size: 15).regular(" to continue", size: 15)
+        let topFormatedText = NSMutableAttributedString()
+        topFormatedText.regular("Please Create an account to continue".localized, size: 15)
+        topFormatedText.changeFont(textToFind: "Create an account".localized, font: fontSemiBold(16))
+        topTextLabel.attributedText = topFormatedText
         nameTiltleLabel.text = "Full Name".localized
         emailTiltleLabel.text = "Email".localized
         phoneTiltleLabel.text = "Phone Number".localized
@@ -72,13 +74,14 @@ class RegisterVC: UIViewController {
         passwordTextField.placeholder = "Password".localized
         confirmPasswordTextfield.placeholder = "Confirm Password".localized
         let bottomFormatedText = NSMutableAttributedString()
-        bottomFormatedText.regular("Already Have an Account? Tap here to".localized, size: 15).semiBold(" Sign In".localized, size: 15)
-        bottomFormatedText.addUnderLine(textToFind: "Sign In")
-        bottomFormatedText.addLink(textToFind: " Sign In", linkURL: "signIn")
+        bottomFormatedText.regular("Already Have an Account? Tap here to".localized, size: 15).semiBold(" ".localized, size: 15).semiBold("Sign In".localized, size: 15)
+        bottomFormatedText.addUnderLine(textToFind: "Sign In".localized)
+        bottomFormatedText.addLink(textToFind: "Sign In".localized, linkURL: "signIn")
         bottomTextView.attributedText = bottomFormatedText
         let termsFormatedText = NSMutableAttributedString()
-        termsFormatedText.regular("Confirm your acceptance of the".localized, size: 14).semiBold(" Terms and Conditions".localized, size: 15)
-        bottomFormatedText.addLink(textToFind: "Confirm your acceptance of the Terms and Conditions".localized, linkURL: URLConstants.terms)
+        termsFormatedText.regular("Confirm your acceptance of the Terms and Conditions".localized, size: 15)
+        termsFormatedText.addLink(textToFind: "Confirm your acceptance of the Terms and Conditions".localized, linkURL: URLConstants.terms)
+        termsFormatedText.changeFont(textToFind: "Terms and Conditions".localized, font: fontSemiBold(16))
         termsTextView.attributedText = termsFormatedText
         createAccountButton.setTitle("Create an Account".localized, for: .normal)
     }
