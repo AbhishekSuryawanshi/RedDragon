@@ -18,15 +18,14 @@ class ExpertUserDetailVC: UIViewController {
     @IBOutlet weak var successCountLabel: UILabel!
     @IBOutlet weak var unsuccessCountLabel: UILabel!
     @IBOutlet weak var coinLabel: UILabel!
- //   @IBOutlet weak var blurView: UIVisualEffectView!
+    //   @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var tableView: UITableView!
- //   @IBOutlet weak var predictionButton: UIButton!
+    //   @IBOutlet weak var predictionButton: UIButton!
     @IBOutlet weak var winRateTitleLabel: UILabel!
     @IBOutlet weak var walletButton: UIButton!
     
     var cancellable = Set<AnyCancellable>()
     var userId = Int()
-    var matchId = Int()
     private var expertPredictUserVM = ExpertPredictionUserDetailViewModel()
     var matchArray = [ExpertPredictionMatch]()
     var userData: ExpertUser?
@@ -38,7 +37,7 @@ class ExpertUserDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         performInitialSetup()
         performLanguageLocalisation()
     }
@@ -85,22 +84,34 @@ class ExpertUserDetailVC: UIViewController {
         walletButton.setTitle("\(userData?.wallet ?? 0)", for: .normal)
         matchArray = userData?.appdata?.predict?.prediction ?? []
         tagData = userData?.tags ?? []
-//        if userData?.appdata?.predict?.predictStats?.successRate ?? 0 >= 30 && userData?.wallet ?? 0 >= 10 {
-//            predictionButton.setTitle("Unlock Prediction for 10".localized, for: .normal)
-//            amount = 10
-//        }else if userData?.appdata?.predict?.predictStats?.successRate ?? 0 < 30 && userData?.wallet ?? 0 >= 5 {
-//            predictionButton.setTitle("Unlock Prediction for 5".localized, for: .normal)
-//            amount = 5
-//        }
+        //        if userData?.appdata?.predict?.predictStats?.successRate ?? 0 >= 30 && userData?.wallet ?? 0 >= 10 {
+        //            predictionButton.setTitle("Unlock Prediction for 10".localized, for: .normal)
+        //            amount = 10
+        //        }else if userData?.appdata?.predict?.predictStats?.successRate ?? 0 < 30 && userData?.wallet ?? 0 >= 5 {
+        //            predictionButton.setTitle("Unlock Prediction for 5".localized, for: .normal)
+        //            amount = 5
+        //        }
         collectionView.reloadData()
         tableView.reloadData()
     }
     
-     @objc func unlockPreidtcionButtonAction(sender: UIButton) {
-        let params = ["coin_count":amount, "type": "d"] as! [String: Any]  // type "d" for Debit, "c" for Credit
+    //    {
+    //        "match_id": "2023-12-26-chelsea-crystal-palace",
+    //        "prediction_id": 2760,
+    //        "profile id":1,
+    //        "sportType":"football",
+    //        "coin_count":10
+    //    }
+    
+    @objc func unlockPreidtcionButtonAction(sender: UIButton) {
+        var matchId = userData?.appdata?.predict?.prediction[sender.tag].matchId ?? ""
+        var predictionId = userData?.appdata?.predict?.prediction[sender.tag].predictionId ?? 0
+        var sportType = userData?.appdata?.predict?.prediction[sender.tag].sportType ?? ""
+        var profileId = userData?.id ?? 0
+        
+        let params = ["match_id": matchId, "prediction_id": predictionId, "profile_id": profileId, "sportType" : sportType, "coin_count":amount] as! [String: Any]
         transactionVM.postDebitPredictionAmount(params: params)
-        matchId = userData?.appdata?.predict?.prediction[sender.tag].id ?? 0
-        fetchTransactionViewModelResponse(matchId)
+        fetchTransactionViewModelResponse(sender.tag)
     }
 }
 
@@ -119,13 +130,13 @@ extension ExpertUserDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-            if let headerView = view as? UITableViewHeaderFooterView {
-                headerView.contentView.backgroundColor = .opaqueSeparator
-                headerView.textLabel?.textColor = .base
-                headerView.textLabel?.font = UIFont.systemFont(ofSize: 16)
-                headerView.textLabel?.textAlignment = .left
-                headerView.textLabel?.sizeToFit()
-            }
+        if let headerView = view as? UITableViewHeaderFooterView {
+            headerView.contentView.backgroundColor = .opaqueSeparator
+            headerView.textLabel?.textColor = .base
+            headerView.textLabel?.font = UIFont.systemFont(ofSize: 16)
+            headerView.textLabel?.textAlignment = .left
+            headerView.textLabel?.sizeToFit()
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -190,8 +201,8 @@ extension ExpertUserDetailVC {
             })
             .store(in: &cancellable)
     }
-   
-    func fetchTransactionViewModelResponse(_ matchId: Int) {
+    
+    func fetchTransactionViewModelResponse(_ index: Int) {
         transactionVM.showError = { [weak self] error in
             self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
         }
@@ -203,8 +214,8 @@ extension ExpertUserDetailVC {
             .dropFirst()
             .sink(receiveValue: { [weak self] result in
                 if result?.response?.code == 200 {
-                    UserDefaults.standard.setValue(true, forKey: "\(self?.userId ?? 0 + matchId)")
                     self?.userData?.wallet = result?.response?.data?.userwallet
+                    self?.userData?.appdata?.predict?.prediction[index].revealed = true
                     self?.tableView.reloadData()
                 }
             })
@@ -213,8 +224,9 @@ extension ExpertUserDetailVC {
     
     private func tableCell(indexPath:IndexPath) -> UserDetailPredictMatchesTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.userDetailPredictMatchesTableViewCell, for: indexPath) as! UserDetailPredictMatchesTableViewCell
-        tableView.separatorStyle = .singleLine
-        cell.blurView.isHidden = UserDefaults.standard.bool(forKey: "\(userId + matchId)") ? true : false
+        tableView.separatorStyle = .none
+       
+        cell.blurView.isHidden = userData?.appdata?.predict?.prediction[indexPath.row].revealed ?? false ? true : false
         cell.leagueNameLabel.text = userData?.appdata?.predict?.prediction[indexPath.row].match?.detail?.leagueName
         cell.homeNameLabel.text = userData?.appdata?.predict?.prediction[indexPath.row].match?.detail?.homeTeamName
         cell.awayNameLabel.text = userData?.appdata?.predict?.prediction[indexPath.row].match?.detail?.awayTeamName
@@ -225,14 +237,15 @@ extension ExpertUserDetailVC {
         cell.awayImageView.setImage(imageStr: userData?.appdata?.predict?.prediction[indexPath.row].match?.detail?.awayTeamImage ?? "", placeholder: UIImage(named: "placeholderLeague"))
         
         if userData?.appdata?.predict?.predictStats?.successRate ?? 0 >= 30 && userData?.wallet ?? 0 >= 10 {
-            cell.unlockPredictionButton.setTitle("Unlock Prediction for 10".localized, for: .normal)
+            cell.unlockPredictionButton.setTitle("Unlock Prediction for 10".localized + " 🔥", for: .normal)
             amount = 10
         }else if userData?.appdata?.predict?.predictStats?.successRate ?? 0 < 30 && userData?.wallet ?? 0 >= 5 {
-            cell.unlockPredictionButton.setTitle("Unlock Prediction for 5".localized, for: .normal)
+            cell.unlockPredictionButton.setTitle("Unlock Prediction for 5".localized + " 🔥", for: .normal)
             amount = 5
         }
+        cell.unlockPredictionButton.tag = indexPath.row
         cell.unlockPredictionButton.addTarget(self, action: #selector(unlockPreidtcionButtonAction(sender:)), for: .touchUpInside)
-       
+        
         let predStatus = userData?.appdata?.predict?.prediction[indexPath.row].isSuccess
         
         switch predStatus {
@@ -249,7 +262,6 @@ extension ExpertUserDetailVC {
             cell.predictionStatusLabel.backgroundColor = .base
             cell.predictionStatusLabel.textColor = .white
         }
-
         return cell
     }
     

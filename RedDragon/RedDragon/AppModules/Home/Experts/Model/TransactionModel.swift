@@ -20,4 +20,3 @@ struct TransactionModel: Codable {
 struct WalletData: Codable {
     let userwallet: Int?
 }
-
