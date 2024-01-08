@@ -73,6 +73,7 @@ class InfoVC: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var topAccuracyLabel: UILabel!
     @IBOutlet weak var continuesWinningLabel: UILabel!
     
+    @IBOutlet weak var expertsSeeAllButton: UIButton!
     @IBOutlet weak var expertTableLabel: UILabel!
     @IBOutlet weak var expertSeeAllLabel: UIButton!
     @IBOutlet weak var expertTableView: UITableView!
@@ -194,11 +195,9 @@ extension InfoVC {
 //        case liveMatchesSeeAllButton:
 //            navigateToViewController(MatchesDashboardVC.self, storyboardName: StoryboardName.matches, animationType: .autoReverse(presenting: .zoom))
 //            
-//        case expertsSeeAllButton:
-//            navigateToViewController(ExpertsVC.self, storyboardName: StoryboardName.expert, animationType: .autoReverse(presenting: .zoom)) { vc in
-//                vc.isNavigationFromTab = false
-//            }
-//            
+        case expertsSeeAllButton:
+            commDelegate?.openExpertsScreen()
+//
 //        case upcomingMatchesSeeAllButton:
 //            navigateToViewController(MatchesDashboardVC.self, storyboardName: StoryboardName.matches, animationType: .autoReverse(presenting: .zoom))
 //            

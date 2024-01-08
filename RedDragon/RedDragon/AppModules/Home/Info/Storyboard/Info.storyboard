@@ -521,6 +521,13 @@
                                                                     <action selector="seeAllButton:" destination="F0O-ys-Elv" eventType="touchUpInside" id="Ofi-8b-Ons"/>
                                                                 </connections>
                                                             </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0zH-ad-vid">
+                                                                <rect key="frame" x="310" y="15" width="75" height="30"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <connections>
+                                                                    <action selector="seeAllButtonAction:" destination="F0O-ys-Elv" eventType="touchUpInside" id="wyi-BY-vqu"/>
+                                                                </connections>
+                                                            </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recommended Experts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oIJ-qx-pX8">
                                                                 <rect key="frame" x="20" y="20" width="173" height="20.333333333333329"/>
                                                                 <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="17"/>
@@ -745,6 +752,7 @@
                                                             <constraint firstItem="MjH-kI-G5N" firstAttribute="top" secondItem="HEq-lQ-eIo" secondAttribute="top" id="2Tl-XL-slj"/>
                                                             <constraint firstItem="Jcu-KW-LNf" firstAttribute="top" secondItem="5v0-1w-zRZ" secondAttribute="bottom" constant="3" id="30s-40-xnc"/>
                                                             <constraint firstItem="tgT-PU-PKg" firstAttribute="bottom" secondItem="MFX-Oh-0qT" secondAttribute="bottom" constant="15" id="6hk-O0-w1v"/>
+                                                            <constraint firstItem="0zH-ad-vid" firstAttribute="bottom" secondItem="013-rw-UXw" secondAttribute="bottom" id="7Ku-vC-2za"/>
                                                             <constraint firstItem="Agm-Xs-Qpp" firstAttribute="top" secondItem="Wgu-k4-bj9" secondAttribute="bottom" constant="3" id="Cxt-VS-obV"/>
                                                             <constraint firstItem="xLj-ax-LFh" firstAttribute="top" secondItem="HEq-lQ-eIo" secondAttribute="top" id="D27-W7-BbW"/>
                                                             <constraint firstItem="xLj-ax-LFh" firstAttribute="leading" secondItem="HEq-lQ-eIo" secondAttribute="leading" id="E3G-QH-4H8"/>
@@ -758,13 +766,16 @@
                                                             <constraint firstItem="Wz8-xM-147" firstAttribute="top" secondItem="OsV-Ee-cSH" secondAttribute="bottom" constant="3" id="Iux-ZJ-uZ1"/>
                                                             <constraint firstItem="Wz8-xM-147" firstAttribute="centerX" secondItem="OsV-Ee-cSH" secondAttribute="centerX" id="KiS-sj-N56"/>
                                                             <constraint firstItem="oIJ-qx-pX8" firstAttribute="leading" secondItem="HEq-lQ-eIo" secondAttribute="leading" constant="20" id="MRe-Ca-nnM"/>
+                                                            <constraint firstItem="0zH-ad-vid" firstAttribute="leading" secondItem="013-rw-UXw" secondAttribute="leading" id="O4T-5j-JYo"/>
                                                             <constraint firstItem="OsV-Ee-cSH" firstAttribute="centerX" secondItem="0N4-b0-gx4" secondAttribute="centerX" id="PJ4-Hp-2xQ"/>
                                                             <constraint firstItem="5v0-1w-zRZ" firstAttribute="top" secondItem="aaK-gU-zhX" secondAttribute="bottom" constant="3" id="Sia-eM-nAz"/>
                                                             <constraint firstItem="eMs-Mu-3hL" firstAttribute="centerX" secondItem="bXR-XF-SyA" secondAttribute="centerX" id="T4C-6Q-kgK"/>
                                                             <constraint firstItem="013-rw-UXw" firstAttribute="centerY" secondItem="oIJ-qx-pX8" secondAttribute="centerY" id="VUp-UE-MR5"/>
+                                                            <constraint firstItem="0zH-ad-vid" firstAttribute="top" secondItem="013-rw-UXw" secondAttribute="top" id="VbB-bs-6JN"/>
                                                             <constraint firstAttribute="trailing" secondItem="xLj-ax-LFh" secondAttribute="trailing" id="WDo-L9-oiI"/>
                                                             <constraint firstItem="Wgu-k4-bj9" firstAttribute="top" secondItem="bXR-XF-SyA" secondAttribute="bottom" constant="8" symbolic="YES" id="WPv-L7-zee"/>
                                                             <constraint firstItem="0N4-b0-gx4" firstAttribute="centerX" secondItem="DkT-lF-uv7" secondAttribute="centerX" id="Xys-Lc-S8M"/>
+                                                            <constraint firstItem="0zH-ad-vid" firstAttribute="trailing" secondItem="013-rw-UXw" secondAttribute="trailing" id="aaN-dt-8Hz"/>
                                                             <constraint firstItem="bXR-XF-SyA" firstAttribute="leading" secondItem="hxh-Ec-Tuf" secondAttribute="trailing" constant="25" id="cUg-mE-PVJ"/>
                                                             <constraint firstAttribute="bottom" secondItem="gxa-Em-LZU" secondAttribute="bottom" id="fBp-U1-Cz2"/>
                                                             <constraint firstItem="gxa-Em-LZU" firstAttribute="centerX" secondItem="HEq-lQ-eIo" secondAttribute="centerX" id="h3z-Hp-uyJ"/>
@@ -1154,6 +1165,7 @@
                         <outlet property="expertTableLabel" destination="75K-uh-V8z" id="xXX-tX-zII"/>
                         <outlet property="expertTableView" destination="81u-rI-emL" id="ofb-jY-aer"/>
                         <outlet property="expertTableViewHeight" destination="hQ1-xL-q74" id="9hL-NS-XM2"/>
+                        <outlet property="expertsSeeAllButton" destination="0zH-ad-vid" id="7Ch-sz-vTI"/>
                         <outlet property="firstExpertImageView" destination="o4G-dW-03S" id="gz4-pc-UKr"/>
                         <outlet property="firstExpertNameLabel" destination="Wgu-k4-bj9" id="dk8-yV-vrT"/>
                         <outlet property="firstExpertWinPercentLabel" destination="Agm-Xs-Qpp" id="Gnp-DA-AKH"/>
