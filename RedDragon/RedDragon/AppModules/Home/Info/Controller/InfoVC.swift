@@ -15,6 +15,10 @@ protocol CommuncationDelegate: AnyObject {
     func openExpertsScreen()
 }
 
+extension CommuncationDelegate {
+    func openExpertsScreen() {}
+}
+
 class InfoVC: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -25,14 +29,7 @@ class InfoVC: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var packageLabel: UILabel!
     @IBOutlet weak var saveUptoLabel: UILabel!
     @IBOutlet weak var packageSeeAllButton: UIButton!
-    @IBOutlet weak var firstPointsLabel: UILabel!
-    @IBOutlet weak var firstPriceLabel: UILabel!
-    @IBOutlet weak var secondPonitsLabel: UILabel!
-    @IBOutlet weak var secondPriceLabel: UILabel!
-    @IBOutlet weak var thirdPointsLabel: UILabel!
-    @IBOutlet weak var thirdPriceLabel: UILabel!
-    @IBOutlet weak var fourthPointsLabel: UILabel!
-    @IBOutlet weak var fourthPriceLabel: UILabel!
+    @IBOutlet weak var packagesCollectionView: UICollectionView!
     
     @IBOutlet weak var tagsView: UIView!
     @IBOutlet weak var tagsCollectionView: UICollectionView!
@@ -102,12 +99,12 @@ class InfoVC: UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setLabel()
         loadFunctionality()
         setupConstantTagView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        refreshPage()
         self.navigationController?.navigationBar.isHidden = true
     }
     
@@ -131,13 +128,19 @@ class InfoVC: UIViewController, UIScrollViewDelegate {
 /// __Supportive functions
 extension InfoVC {
     
+    private func refreshPage() {
+        setLabel()
+        servicesCollectionView.reloadData()
+        packagesCollectionView.reloadData()
+    }
+    
     private func setLabel() {
         expertTableLabel.text = "Experts".localized
         continuesWinningLabel.text = "Continues Winning".localized
         topAccuracyLabel.text = "Top Accuracy".localized
         onAStrakLabel.text = "On A Streak".localized
         packageLabel.text = "Packages".localized
-        saveUptoLabel.text = "Save upto".localized
+        saveUptoLabel.text = "Massive savings".localized
         topMatchesLabel.text = "Top Matches".localized
         liveLabel.text = "Live".localized
         whatsHappeningLabel.text = "What's Happening".localized
@@ -150,7 +153,6 @@ extension InfoVC {
         recommendedSeeAllLabel.setTitle("See All".localized, for: .normal)
         whatsHappeningSeeAllButton.setTitle("See All".localized, for: .normal)
         predictionSeeAllButton.setTitle("See All".localized, for: .normal)
-        packageSeeAllButton.setTitle("See All".localized, for: .normal)
     }
     
     private func setupConstantTagView() {
@@ -164,6 +166,7 @@ extension InfoVC {
     
     private func initializeNibFiles() {
         servicesCollectionView.register(CellIdentifier.iconNameCollectionViewCell)
+        packagesCollectionView.register(CellIdentifier.pointsCollectionViewCell)
         bannerCollectionView.register(CellIdentifier.bannerCell)
         tagsCollectionView.register(CellIdentifier.leagueNamesCollectionCell)
         topMatchesTableView.register(CellIdentifier.globalMatchesTableViewCell)
@@ -468,7 +471,8 @@ extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
         switch collectionView {
         case servicesCollectionView:
             return ServiceType.allCases.count
-            
+        case packagesCollectionView:
+            return  WalletVM.shared.betsArray.count
         case bannerCollectionView:
             return bannerVM?.responseData?.data.top.count ?? 0
             
@@ -486,7 +490,12 @@ extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
             cell.bgView.borderWidth = 0
             cell.titleLabel.textColor = .base
             return cell
-            
+           
+        case packagesCollectionView:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.pointsCollectionViewCell, for: indexPath) as! PointsCollectionViewCell
+            cell.titleLabel.text = "\(WalletVM.shared.heatsArray[indexPath.row]) HPs"
+            cell.subTitleLabel.text = "for".localized + " \(WalletVM.shared.betsArray[indexPath.row])🔥"
+            return cell
         case bannerCollectionView:
             guard let banner = bannerVM?.responseData?.data.top else {
                 return UICollectionViewCell()
@@ -510,7 +519,14 @@ extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == servicesCollectionView {
+        switch collectionView {
+            
+        case servicesCollectionView:
+            /// show tab bar for these types, these are main tabbar controller items
+            let typeArray: [ServiceType] = [.social, .database, .wallet, .experts, .analysis]
+            if !typeArray.contains(ServiceType.allCases[indexPath.row]) {
+                self.tabBarController?.tabBar.isHidden = true
+            }
             switch ServiceType.allCases[indexPath.row] {
             case .predictions:
                 navigateToViewController(HomePredictionViewController.self, storyboardName: StoryboardName.prediction, animationType: .autoReverse(presenting: .zoom))
@@ -544,18 +560,20 @@ extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
             default: //wallet
                 self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[3]
             }
-        } else {
-            if collectionView == bannerCollectionView {
-                let bannerMesssage = bannerVM?.responseData?.data.top[indexPath.item].message ?? ""
-                if bannerMesssage.contains("http") || bannerMesssage.contains("www"){
-                    guard let url = URL(string: bannerMesssage) else { return }
-                    UIApplication.shared.open(url)
-                }
-            } else {
-                let tag = tagsVM?.responseData?.response.data[indexPath.item].slug
-                expertPredictUserVM?.fetchExpertUserListAsyncCall(page: 1, slug: "predict-match", tag: tag)
-                highlightFirstIndex_collectionView(item: indexPath.item)
+        case packagesCollectionView:
+            let dataDict:[String: Any] = ["index": indexPath.row]
+            NotificationCenter.default.post(name: .packageSelected, object: nil, userInfo: dataDict)
+            self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[3]
+        case bannerCollectionView:
+            let bannerMesssage = bannerVM?.responseData?.data.top[indexPath.item].message ?? ""
+            if bannerMesssage.contains("http") || bannerMesssage.contains("www"){
+                guard let url = URL(string: bannerMesssage) else { return }
+                UIApplication.shared.open(url)
             }
+        default:
+            let tag = tagsVM?.responseData?.response.data[indexPath.item].slug
+            expertPredictUserVM?.fetchExpertUserListAsyncCall(page: 1, slug: "predict-match", tag: tag)
+            highlightFirstIndex_collectionView(item: indexPath.item)
         }
     }
     
@@ -563,6 +581,8 @@ extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
         let width: CGFloat
         if collectionView == servicesCollectionView {
             return CGSize(width: (screenWidth - 25) / 5, height: 85)
+        } else if collectionView == packagesCollectionView {
+            return CGSize(width: 90, height: 75)
         } else if collectionView == bannerCollectionView {
             width = collectionView.bounds.width
         } else {
@@ -633,5 +653,12 @@ extension InfoVC: UITableViewDelegate, UITableViewDataSource {
         if tableView == expertTableView {
             expertTableViewHeight.constant = CGFloat(200 * (expertPredictUserVM?.responseData?.response?.data?.count ?? 0))
         }
+    }
+}
+
+/// LoginVCDelegate to show hided tabbar
+extension InfoVC: LoginVCDelegate {
+    func viewControllerDismissed() {
+        self.tabBarController?.tabBar.isHidden = false
     }
 }
