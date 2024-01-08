@@ -84,13 +84,7 @@ class ExpertUserDetailVC: UIViewController {
         walletButton.setTitle("\(userData?.wallet ?? 0)", for: .normal)
         matchArray = userData?.appdata?.predict?.prediction ?? []
         tagData = userData?.tags ?? []
-        //        if userData?.appdata?.predict?.predictStats?.successRate ?? 0 >= 30 && userData?.wallet ?? 0 >= 10 {
-        //            predictionButton.setTitle("Unlock Prediction for 10".localized, for: .normal)
-        //            amount = 10
-        //        }else if userData?.appdata?.predict?.predictStats?.successRate ?? 0 < 30 && userData?.wallet ?? 0 >= 5 {
-        //            predictionButton.setTitle("Unlock Prediction for 5".localized, for: .normal)
-        //            amount = 5
-        //        }
+    
         collectionView.reloadData()
         tableView.reloadData()
     }
@@ -151,6 +145,15 @@ extension ExpertUserDetailVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            break
+        default:
+            break
+        }
     }
 }
 
@@ -218,7 +221,12 @@ extension ExpertUserDetailVC {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.userDetailPredictMatchesTableViewCell, for: indexPath) as! UserDetailPredictMatchesTableViewCell
         tableView.separatorStyle = .none
        
-        cell.blurView.isHidden = userData?.appdata?.predict?.prediction[indexPath.row].revealed ?? false ? true : false
+        if userData?.appdata?.predict?.prediction[indexPath.row].match?.detail?.matchState == "finished" {
+            cell.blurView.isHidden = true
+        }else {
+            cell.blurView.isHidden = userData?.appdata?.predict?.prediction[indexPath.row].revealed ?? false ? true : false
+        }
+        
         cell.leagueNameLabel.text = userData?.appdata?.predict?.prediction[indexPath.row].match?.detail?.leagueName
         cell.homeNameLabel.text = userData?.appdata?.predict?.prediction[indexPath.row].match?.detail?.homeTeamName
         cell.awayNameLabel.text = userData?.appdata?.predict?.prediction[indexPath.row].match?.detail?.awayTeamName

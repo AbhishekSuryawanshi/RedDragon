@@ -94,6 +94,8 @@ class InfoVC: UIViewController, UIScrollViewDelegate {
     private var banners_count = 0
     private var timer = Timer()
     var tableViewHeight: CGFloat = 0
+    var followUserVM = FollowUserViewModel()
+    var unfollowUserVM = UnfollowUserViewModel()
     
     weak var commDelegate: CommuncationDelegate?
     
@@ -278,12 +280,29 @@ extension InfoVC {
         cell.coinLabel.text = "\("Coin".localized): \(userArray[indexPath.row].appdata?.predict?.predictStats?.coins ?? 0)"
         cell.dateLabel.text = "  \(userArray[indexPath.row].appdata?.predict?.date.formatDate(inputFormat: dateFormat.ddMMyyyyWithTimeZone, outputFormat: dateFormat.ddMMMyyyyhmma) ?? "")"
         
-        if userArray[indexPath.row].following ?? true {
+        cell.followButton.tag = indexPath.row
+        cell.followingButton.tag = indexPath.row
+        cell.followButton.addTarget(self, action: #selector(postFollowUser(sender:)), for: .touchUpInside)
+        cell.followingButton.addTarget(self, action: #selector(postUnfollowUser(sender:)), for: .touchUpInside)
+        
+        if userArray[indexPath.row].following ?? false {
             cell.followButton.isHidden = true
+            cell.followingButton.isHidden = false
         }else {
             cell.followingButton.isHidden = true
+            cell.followButton.isHidden = false
         }
         return cell
+    }
+    
+    @objc func postFollowUser(sender: UIButton) {
+        followUserVM.postFollowUser(userId: userArray[sender.tag].id ?? 0)
+        followUserViewModelResponse(index: sender.tag)
+    }
+    
+    @objc func postUnfollowUser(sender: UIButton) {
+        unfollowUserVM.postUnfollowUser(userId: userArray[sender.tag].id ?? 0)
+        unfollowUserViewModelResponse(index: sender.tag)
     }
     
     private func firstThreeExpertsData() {
@@ -449,6 +468,43 @@ extension InfoVC {
         expertPredictUserVM?.fetchExpertUserListAsyncCall(page: 1, slug: "predict-match", tag: "betting-expert")
     }
     
+    func followUserViewModelResponse(index: Int) {
+        followUserVM.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        followUserVM.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        followUserVM.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] result in
+                if result?.response?.code == 200 {
+                    self?.userArray[index].following = true
+                    self?.expertTableView.reloadData()
+                }
+            })
+            .store(in: &cancellable)
+    }
+    
+    func unfollowUserViewModelResponse(index: Int) {
+        unfollowUserVM.showError = { [weak self] error in
+            self?.customAlertView(title: ErrorMessage.alert.localized, description: error, image: ImageConstants.alertImage)
+        }
+        unfollowUserVM.displayLoader = { [weak self] value in
+            self?.showLoader(value)
+        }
+        unfollowUserVM.$responseData
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] result in
+                if result?.response?.code == 200 {
+                    self?.userArray[index].following = false
+                    self?.expertTableView.reloadData()
+                }
+            })
+            .store(in: &cancellable)
+    }
 }
 
 extension InfoVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -653,6 +709,14 @@ extension InfoVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if tableView == expertTableView {
             expertTableViewHeight.constant = CGFloat(200 * (expertPredictUserVM?.responseData?.response?.data?.count ?? 0))
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == expertTableView {
+            navigateToViewController(ExpertUserDetailVC.self, storyboardName: StoryboardName.expert) { vc in
+                vc.userId = self.userArray[indexPath.row].id ?? 0
+            }
         }
     }
 }
