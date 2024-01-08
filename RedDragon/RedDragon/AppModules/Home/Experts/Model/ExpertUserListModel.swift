@@ -99,7 +99,7 @@ struct Bet: Codable {
 struct ExpertPredictionMatch: Codable {
     let predictionId: Int?
     let matchId: String?
-    let isSuccess: Int? = nil
+    let isSuccess: Int?
     let match: PredictMatch?
     let sportType: String?
     var revealed: Bool?
