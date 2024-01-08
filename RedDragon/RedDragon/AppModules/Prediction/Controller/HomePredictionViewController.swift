@@ -83,11 +83,8 @@ class HomePredictionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        
     }
-    
     override func viewWillAppear(_ animated: Bool) {
-        // addNavigationBar(title: "User Prediction")
         userPredictionTitleLbl.text = "User Prediction".localized
         if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
             removeBlurView()
@@ -114,7 +111,6 @@ class HomePredictionViewController: UIViewController {
         loadFunctionality()
         fetchPredictionMatchesViewModel()
         makeNetworkCall(sport: selectedSports)
-        
     }
     
     func loadFunctionality() {
@@ -125,7 +121,6 @@ class HomePredictionViewController: UIViewController {
         sportsCollectionView.register(CellIdentifier.leagueNamesCollectionCell)
         sportsCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .left)
         selectedSports = sportsArr[0]
-        
     }
     
     func addBlurView(){
@@ -135,7 +130,6 @@ class HomePredictionViewController: UIViewController {
         blurEffectView.tag = 9
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(blurEffectView)
-        
     }
     
     func removeBlurView(){
@@ -201,9 +195,6 @@ class HomePredictionViewController: UIViewController {
             vc.selectedSports = self.selectedSports
         }
     }
-    
-    
-    
 }
 
 extension HomePredictionViewController {
@@ -243,7 +234,7 @@ extension HomePredictionViewController {
                     upcomingPredictBtn1.addTarget(self, action: #selector(predictBtn1), for: .touchUpInside)
                     seeAllBtn.addTarget(self, action: #selector(upcomingSeeAll), for: .touchUpInside)
                     
-                    if data[1] != nil{
+                    if data.count > 1{
                         upcomingLeagueNameLbl2.text = data[1].league
                         upcomingLeagueImgView2.sd_imageIndicator = SDWebImageActivityIndicator.white
                         upcomingLeagueImgView2.sd_setImage(with: URL(string: data[1].logo ?? ""))
@@ -254,7 +245,7 @@ extension HomePredictionViewController {
                         upcomingPredictBtn2.setTitle("Predict".localized, for: .normal)
                         upcomingPredictBtn2.addTarget(self, action: #selector(predictBtn2), for: .touchUpInside)
                     }
-                    if data[2] != nil{
+                    if data.count > 2{
                         upcomingLeagueNameLbl3.text = data[2].league
                         upcomingLeagueImgView3.sd_imageIndicator = SDWebImageActivityIndicator.white
                         upcomingLeagueImgView3.sd_setImage(with: URL(string: data[2].logo ?? ""))
@@ -355,39 +346,51 @@ extension HomePredictionViewController {
                     predictionsTeam1Lbl1.text = data[0].matchDetail.homeTeamName?.localized
                     predictionsTeam2Lbl1.text = data[0].matchDetail.awayTeamName?.localized
                     predictionsdateLbl1.text =  data[0].matchDetail.matchDatetime
-                    predictionsTimeLbl1.text = data[0].createdAt
+                    if let index = (data[0].createdAt?.range(of: "T")?.lowerBound)
+                    {
+                        let beforeT = String(data[0].createdAt?.prefix(upTo: index) ?? "")
+                        predictionsTimeLbl1.text = beforeT
+                    }
+                    
                     predictionsTeamWinLbl1.text = "Prediction: ".localized + getPredictedTeam(predictiveTeam: data[0].predictedTeam).localized
                     // seeAllBtn.addTarget(self, action: #selector(placedPredictionSeeAll), for: .touchUpInside)
                 }
                 if data.count > 1{
-                    if data[1] != nil{
-                        predictionsLeagueLbl2.text = data[1].matchDetail.leagueName
-                        predictionsTeam1ImgView2.sd_imageIndicator = SDWebImageActivityIndicator.white
-                        predictionsTeam1ImgView2.sd_setImage(with: URL(string: data[1].matchDetail.homeTeamImage ?? ""))
-                        predictionsTeam2ImgView2.sd_imageIndicator = SDWebImageActivityIndicator.white
-                        predictionsTeam2ImgView2.sd_setImage(with: URL(string: data[1].matchDetail.awayTeamImage ?? ""))
-                        predictionTeam1Lbl2.text = data[1].matchDetail.homeTeamName?.localized
-                        predictionsTeam2Lbl2.text = data[1].matchDetail.awayTeamName?.localized
-                        predictionsdateLbl2.text =  data[1].matchDetail.matchDatetime
-                        predictionsTimeLbl2.text = data[1].createdAt
-                        predictionsTeamWinLbl2.text = "Prediction: ".localized + getPredictedTeam(predictiveTeam: data[1].predictedTeam).localized
-                    }
                     
+                    predictionsLeagueLbl2.text = data[1].matchDetail.leagueName
+                    predictionsTeam1ImgView2.sd_imageIndicator = SDWebImageActivityIndicator.white
+                    predictionsTeam1ImgView2.sd_setImage(with: URL(string: data[1].matchDetail.homeTeamImage ?? ""))
+                    predictionsTeam2ImgView2.sd_imageIndicator = SDWebImageActivityIndicator.white
+                    predictionsTeam2ImgView2.sd_setImage(with: URL(string: data[1].matchDetail.awayTeamImage ?? ""))
+                    predictionTeam1Lbl2.text = data[1].matchDetail.homeTeamName?.localized
+                    predictionsTeam2Lbl2.text = data[1].matchDetail.awayTeamName?.localized
+                    predictionsdateLbl2.text =  data[1].matchDetail.matchDatetime
+                    if let index = (data[1].createdAt?.range(of: "T")?.lowerBound)
+                    {
+                        let beforeT = String(data[1].createdAt?.prefix(upTo: index) ?? "")
+                        predictionsTimeLbl2.text = beforeT
+                    }
+                   
+                    predictionsTeamWinLbl2.text = "Prediction: ".localized + getPredictedTeam(predictiveTeam: data[1].predictedTeam).localized
                     
                 }
                 if data.count > 2{
-                    if data[2] != nil{
-                        predictionsLeagueNameLbl3.text = data[2].matchDetail.leagueName
-                        predictionsTeam1ImgView3.sd_imageIndicator = SDWebImageActivityIndicator.white
-                        predictionsTeam1ImgView3.sd_setImage(with: URL(string: data[2].matchDetail.homeTeamImage ?? ""))
-                        predictionsTeam2ImgView3.sd_imageIndicator = SDWebImageActivityIndicator.white
-                        predictionsTeam2ImgView3.sd_setImage(with: URL(string: data[2].matchDetail.awayTeamImage ?? ""))
-                        predictionsTeam1Lbl3.text = data[2].matchDetail.homeTeamName
-                        predictionsTeam2Lbl3.text = data[2].matchDetail.awayTeamName
-                        predictionsdateLbl3.text =  data[2].matchDetail.matchDatetime
-                        predictionsTimeLbl3.text = data[2].createdAt
-                        predictionsTeamWinLbl3.text = "Prediction: " + getPredictedTeam(predictiveTeam: data[2].predictedTeam).localized
+                    
+                    predictionsLeagueNameLbl3.text = data[2].matchDetail.leagueName
+                    predictionsTeam1ImgView3.sd_imageIndicator = SDWebImageActivityIndicator.white
+                    predictionsTeam1ImgView3.sd_setImage(with: URL(string: data[2].matchDetail.homeTeamImage ?? ""))
+                    predictionsTeam2ImgView3.sd_imageIndicator = SDWebImageActivityIndicator.white
+                    predictionsTeam2ImgView3.sd_setImage(with: URL(string: data[2].matchDetail.awayTeamImage ?? ""))
+                    predictionsTeam1Lbl3.text = data[2].matchDetail.homeTeamName
+                    predictionsTeam2Lbl3.text = data[2].matchDetail.awayTeamName
+                    predictionsdateLbl3.text =  data[2].matchDetail.matchDatetime
+                    if let index = (data[2].createdAt?.range(of: "T")?.lowerBound)
+                    {
+                        let beforeT = String(data[2].createdAt?.prefix(upTo: index) ?? "")
+                        predictionsTimeLbl3.text = beforeT
                     }
+                    predictionsTeamWinLbl3.text = "Prediction: ".localized + getPredictedTeam(predictiveTeam: data[2].predictedTeam).localized
+                    
                 }
                 
             }
@@ -452,8 +455,6 @@ extension HomePredictionViewController {
     }
 }
 
-
-
 extension HomePredictionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == predictionTopView.tagsCollectionView{
@@ -498,8 +499,6 @@ extension HomePredictionViewController: UICollectionViewDelegate, UICollectionVi
             return CGSize(width: screenWidth / 2, height: 15)
         }
     }
-    
-    
     
 }
 
