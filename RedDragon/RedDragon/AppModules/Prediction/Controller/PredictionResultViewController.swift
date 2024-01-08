@@ -35,7 +35,8 @@ class PredictionResultViewController: UIViewController {
         configureDescriptionView()
         configureCommentsView()
         fetchCommentsViewModel()
-        makeNetworkCall(sectionId: ((analysisData?.matchID ?? "") + "\(analysisData?.user?.id ?? 0)" + "predDetail"))
+        sectionId = ((analysisData?.matchID ?? "") + "\(analysisData?.user?.id ?? 0)" + "predDetail")
+        makeNetworkCall(sectionId: sectionId)
     }
     
     func configureTopView(){
@@ -194,6 +195,8 @@ class PredictionResultViewController: UIViewController {
     
     @objc func commentsViewAll(){
         navigateToViewController(NewsCommentsVC.self, storyboardName: StoryboardName.gossip, animationType: .autoReverse(presenting: .zoom)) { vc in
+            vc.sectionId = self.sectionId
+            vc.commentsArray = self.commentsArray
         }
     }
     
@@ -244,9 +247,15 @@ extension PredictionResultViewController {
     
     func renderResponseData(data: CommentResponse) {
         commentsListModel = data
-        let data = data.response?.data
+        let commentsData = data.response?.data
         UIView.animate(withDuration: 1.0) { [self] in
-           // upcomingMatchesTableView.reloadData()
+            if commentsData?.count ?? 0 > 0{
+                commentsArray = commentsData ?? []
+                predictionsCommentsView.nameLbl.text = commentsData?[0].user.name
+                predictionsCommentsView.userImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
+                predictionsCommentsView.userImgView.sd_setImage(with: URL(string: commentsData?[0].user.profileImg ?? ""))
+                predictionsCommentsView.commentsTxtView.text = commentsData?[0].comment
+            }
                 
         }
         
