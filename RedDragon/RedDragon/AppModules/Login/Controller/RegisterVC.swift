@@ -185,7 +185,7 @@ extension RegisterVC {
                 UserDefaults.standard.token = user.token //required for resend api
                 UserDefaults.standard.budget = Int(user.affAppData?.sportCard?.budget ?? "200000000")
                 UserDefaults.standard.score = Int(user.affAppData?.sportCard?.score ?? "0")
-                self.presentOverViewController(VerificationVC.self, storyboardName: StoryboardName.login) { vc in
+                self.presentViewController(VerificationVC.self, storyboardName: StoryboardName.login) { vc in
                     vc.email = user.email
                     vc.phoneNumber = user.phoneNumber
                     vc.password = self.passwordTextField.text ?? ""

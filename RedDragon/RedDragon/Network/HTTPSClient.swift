@@ -41,7 +41,14 @@ class HTTPSClient: HTTPSClientProtocol {
         }
         
         // Decode the received data into the specified Decodable type.
-        return try JSONDecoder().decode(T.self, from: data)
+        
+        do {
+            return try JSONDecoder().decode(T.self, from: data)
+        } catch {
+            // Check error
+            print(error)
+            return try JSONDecoder().decode(T.self, from: data)
+        }
     }
     
 }

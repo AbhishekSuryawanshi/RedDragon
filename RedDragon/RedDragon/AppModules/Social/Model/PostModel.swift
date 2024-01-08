@@ -1,5 +1,5 @@
 //
-//  PostModel.swift
+//  Postswift
 //  RedDragon
 //
 //  Created by Qasr01 on 30/10/2023.
@@ -39,8 +39,9 @@ struct SocialPost: Codable {
     var liked: Bool = false
     var likeCount: Int = 0
     var commentCount: Int = 0
+    var interactionsCount: Int = 0
     var user = User()
-    
+        
     //Poll
     var user_id: Int = 0 //for parsing only
     var descriptn: String = ""
@@ -149,6 +150,13 @@ struct SocialPost: Codable {
         if option_3 != "" {
             let poll_3 = Poll(title: option_3, count: option_3Count)
             pollArray.append(poll_3)
+        }
+        
+        // Calculate interactions count - total likes, comments, polls
+        if type == "POLL" {
+           interactionsCount = option_1Count + option_2Count + option_3Count
+        } else {
+            interactionsCount = likeCount + commentCount
         }
     }
 }

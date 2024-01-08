@@ -65,7 +65,8 @@ import UIKit
         guard let nib = loadNibAlertController(), let unwrappedView = nib[0] as? UIView else { return }
         self.view = unwrappedView
         
-        self.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        self.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
+        
         self.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         
         alertView.layer.cornerRadius = 5

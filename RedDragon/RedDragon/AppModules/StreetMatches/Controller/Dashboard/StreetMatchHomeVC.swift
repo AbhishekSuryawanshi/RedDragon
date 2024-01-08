@@ -70,7 +70,7 @@ class StreetMatchHomeVC: UIViewController {
                 /// hide tabbar before presenting a viewcontroller
                 /// show tabbar while dismissing a presented viewcontroller in delegate
                 self.tabBarController?.tabBar.isHidden = true
-                self.presentOverViewController(LoginVC.self, storyboardName: StoryboardName.login) { vc in
+                self.presentViewController(LoginVC.self, storyboardName: StoryboardName.login) { vc in
                     vc.delegate = self
                 }
             }

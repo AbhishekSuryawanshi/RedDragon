@@ -39,10 +39,16 @@ extension UIViewController {
         present(vc, animated: true)
     }
     
+    public func presentViewController<T: UIViewController>(_ viewController: T.Type, storyboardName: String = "Main", identifier: String? = nil, configure: ((T) -> Void)? = nil) {
+        let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: identifier ?? String(describing: viewController)) as! T
+        present(vc, animated: true)
+    }
+    
     public func presentOverViewController<T: UIViewController>(_ viewController: T.Type, storyboardName: String = "Main", identifier: String? = nil, configure: ((T) -> Void)? = nil) {
         let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: identifier ?? String(describing: viewController)) as! T
-        vc.modalPresentationStyle = .overCurrentContext
+        vc.modalPresentationStyle = .overFullScreen
         configure?(vc)
         present(vc, animated: true)
     }
@@ -60,6 +66,8 @@ extension UIViewController {
         configureViewControllerAnimation(vc, animationType: animationType, configure: configure)
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    
 }
 
 //MARK: above functions can be use like:--

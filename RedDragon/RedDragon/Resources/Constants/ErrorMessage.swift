@@ -84,6 +84,9 @@ struct ErrorMessage {
     static let predictionsNotFound         = "Predictions data not available"
     static let expertNotFound              = "Experts data not available"
     static let upcomingDataNotFound        = "Upcoming matches data not available"
+    
+    static let InsufficientBetPoints       = "Insufficient bet points to purchase heat points."
+    static let InsufficientHeatPoints      = "Insufficient heat points to purchase bet points."
 }
 
 struct SuccessMessage {

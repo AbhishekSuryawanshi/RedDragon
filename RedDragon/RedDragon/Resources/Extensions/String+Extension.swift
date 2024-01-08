@@ -14,10 +14,12 @@ extension String {
     /// If parameter "today" is true, it will show "Today" instead of date string
     func formatDate(inputFormat: dateFormat, outputFormat: dateFormat, today: Bool = false)-> String {
         let dateFormatterGet = DateFormatter()
+        dateFormatterGet.timeZone = TimeZone(abbreviation: "UTC")
         dateFormatterGet.dateFormat = inputFormat.rawValue
         let dateFormatterPrint = DateFormatter()
         dateFormatterPrint.dateFormat = outputFormat.rawValue
         dateFormatterPrint.locale = Locale(identifier: (UserDefaults.standard.language ?? "").contains("zh") ? "zh-Hans" : "en")
+        
         if let dateStr = dateFormatterGet.date(from: self) {
             if today && Calendar.current.isDateInToday(dateStr) {
                 return "Today".localized
@@ -31,6 +33,7 @@ extension String {
     
     func formatDate2(inputFormat: dateFormat)-> String {
         let dateFormatterGet = DateFormatter()
+        dateFormatterGet.timeZone = TimeZone(abbreviation: "UTC")
         dateFormatterGet.dateFormat = inputFormat.rawValue
         let dateFormatterPrint = DateFormatter()
         dateFormatterPrint.locale = Locale(identifier: "en")

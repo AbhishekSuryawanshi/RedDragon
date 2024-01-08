@@ -67,20 +67,6 @@ class DiscoverVC: UIViewController {
     func showLoader(_ value: Bool) {
         value ? startLoader() : stopLoader()
     }
-    
-    // MARK: - Button Actions
-    
-    @IBAction func appModulesButton(_ sender: UIButton) {
-        switch sender.tag {
-        case 8:
-            self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[2]
-        case 15:
-            self.tabBarController?.tabBar.isHidden = true
-            navigateToViewController(AllPlayersViewController.self, storyboardName: StoryboardName.cardGame, identifier: "AllPlayersViewController")
-        default:
-            print("default")
-        }
-    }
 }
 
 // MARK: - API Services
@@ -200,7 +186,7 @@ extension DiscoverVC: UICollectionViewDelegate {
                         /// hide tabbar before presenting a viewcontroller
                         /// show tabbar while dismissing a presented viewcontroller in delegate
                         self.tabBarController?.tabBar.isHidden = true
-                        self.presentOverViewController(LoginVC.self, storyboardName: StoryboardName.login) { vc in
+                        self.presentViewController(LoginVC.self, storyboardName: StoryboardName.login) { vc in
                             vc.delegate = self
                         }
                     }
