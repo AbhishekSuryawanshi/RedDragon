@@ -186,6 +186,39 @@ extension InfoVC {
         expertDataAPICall()
     }
     
+    @IBAction func seeAllButtonAction(_ sender: UIButton) {
+        switch sender {
+        case packageSeeAllButton:
+            self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[3]
+            
+//        case liveMatchesSeeAllButton:
+//            navigateToViewController(MatchesDashboardVC.self, storyboardName: StoryboardName.matches, animationType: .autoReverse(presenting: .zoom))
+//            
+//        case expertsSeeAllButton:
+//            navigateToViewController(ExpertsVC.self, storyboardName: StoryboardName.expert, animationType: .autoReverse(presenting: .zoom)) { vc in
+//                vc.isNavigationFromTab = false
+//            }
+//            
+//        case upcomingMatchesSeeAllButton:
+//            navigateToViewController(MatchesDashboardVC.self, storyboardName: StoryboardName.matches, animationType: .autoReverse(presenting: .zoom))
+//            
+//        case topPredictionsSeeAllButton:
+//            navigateToViewController(HomePredictionViewController.self, storyboardName: StoryboardName.prediction, animationType: .autoReverse(presenting: .zoom))
+            
+        case whatsHappeningSeeAllButton:
+            navigateToViewController(NewsModuleVC.self, storyboardName: StoryboardName.news, identifier: "NewsModuleVC")
+            
+//        case topLeagueSeeAllButton:
+//            self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[2]
+//            
+//        case topTeamSeeAllButton:
+//            self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[2]
+            
+        default: // streetMatchSeeAllButton
+            break
+        }
+    }
+    
     // MARK: - UIScrollViewDelegate
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // Check if tags view is not visible on the screen
