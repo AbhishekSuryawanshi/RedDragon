@@ -291,6 +291,9 @@ extension PostListVC {
             ///Posts and polls comes in separate order, so we have to apply date filter
             postArray = dataResponse.data ?? []
             postArray = postArray.sorted(by: { $0.updatedTime.compare($1.updatedTime) == .orderedDescending })
+            if selectedSegment == .recommend {
+                postArray = postArray.sorted(by: { $0.interactionsCount > $1.interactionsCount})
+            }
             allPostArray = postArray
             var hashTagAttay: [String] = []
             for post in self.postArray {
@@ -377,7 +380,7 @@ extension PostListVC: PostTableCellDelegate {
     }
     
     func postImageTapped(url: String) {
-        presentOverViewController(ImageZoomVC.self, storyboardName: StoryboardName.social) { vc in
+        presentViewController(ImageZoomVC.self, storyboardName: StoryboardName.social) { vc in
             vc.imageUrl = url
         }
     }

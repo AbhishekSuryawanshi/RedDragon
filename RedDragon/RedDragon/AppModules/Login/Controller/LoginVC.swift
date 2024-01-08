@@ -118,7 +118,7 @@ class LoginVC: UIViewController {
     }
     
     @IBAction func forgotButtonTapped(_ sender: UIButton) {
-        self.presentOverViewController(ForgotPasswordVC.self, storyboardName: StoryboardName.login)
+        self.presentViewController(ForgotPasswordVC.self, storyboardName: StoryboardName.login)
     }
 }
 
@@ -150,7 +150,7 @@ extension LoginVC {
                     UserDefaults.standard.token = user.token //required for resend api
                     UserDefaults.standard.budget = Int(user.affAppData?.sportCard?.budget ?? "200000000")
                     UserDefaults.standard.score = Int(user.affAppData?.sportCard?.score ?? "0")
-                    self.presentOverViewController(VerificationVC.self, storyboardName: StoryboardName.login) { vc in
+                    self.presentViewController(VerificationVC.self, storyboardName: StoryboardName.login) { vc in
                         vc.email = user.email
                         vc.phoneNumber = user.phoneNumber
                         vc.password = self.passwordTextField.text ?? ""
@@ -204,7 +204,7 @@ extension LoginVC: UITextViewDelegate {
     public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         switch URL.absoluteString {
         case "register":
-            presentOverViewController(RegisterVC.self, storyboardName: StoryboardName.login)
+            presentViewController(RegisterVC.self, storyboardName: StoryboardName.login)
         default:
             print("")
         }

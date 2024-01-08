@@ -44,11 +44,11 @@ class VariousWheelSimpleViewController: UIViewController {
         let slices = prizes.map({ Slice.init(contents: [Slice.ContentType.text(text: $0, preferences: .variousWheelSimpleText)]) })
         return slices
     }()
-
+    
     var finishIndex: Int {
         return Int.random(in: 0..<wheelControl.slices.count-1)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewModels()
@@ -125,11 +125,9 @@ class VariousWheelSimpleViewController: UIViewController {
             .store(in: &cancellable)
     }
     
-    
     func successAddPoints(message:String){
         self.customAlertView(title: ErrorMessage.success.localized, description: message, image: ImageConstants.successImage) {
             self.navigationController?.popViewController(animated: true)
         }
     }
-
 }

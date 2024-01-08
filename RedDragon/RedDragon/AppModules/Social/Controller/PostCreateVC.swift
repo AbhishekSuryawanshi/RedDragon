@@ -435,7 +435,7 @@ extension PostCreateVC: UICollectionViewDataSource {
 
 extension PostCreateVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        presentOverViewController(ImageZoomVC.self, storyboardName: StoryboardName.social) { vc in
+        presentViewController(ImageZoomVC.self, storyboardName: StoryboardName.social) { vc in
             vc.imageUrl = self.imageArray[indexPath.row]
         }
     }

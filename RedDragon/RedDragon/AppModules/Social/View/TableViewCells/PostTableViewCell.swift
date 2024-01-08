@@ -56,7 +56,7 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var bottomLineView: UIView!
     
     weak var delegate:PostTableCellDelegate?
-    var pollCount = 0
+    var totalPolls = 0
     var model = SocialPost()
     
     override func awakeFromNib() {
@@ -93,12 +93,13 @@ class PostTableViewCell: UITableViewCell {
         likeImageView.image = model.liked ? .likeSelected : .like
         likeCountLabel.text = "\(model.likeCount)"
         commentCountLabel.text = "\(model.commentCount)"
+        
+        // interactions count - total likes, comments, polls
         if model.type == "POLL" {
-            pollCount = model.option_1Count + model.option_2Count + model.option_3Count
-            statusLabel.text = pollCount < 2 ? "\(pollCount) \("Vote".localized)" : "\(pollCount) \("Votes".localized)"
+            totalPolls = model.interactionsCount
+            statusLabel.text = model.interactionsCount < 2 ? "\( model.interactionsCount) \("Vote".localized)" : "\( model.interactionsCount) \("Votes".localized)"
         } else {
-            let statusCount = model.likeCount + model.commentCount
-            statusLabel.text = statusCount == 0 ? "" : (statusCount == 1 ? "\(statusCount) \("Like/Comment".localized)" : "\(statusCount) \("Likes/Comments".localized)")
+            statusLabel.text =  model.interactionsCount == 0 ? "" : ( model.interactionsCount == 1 ? "\(model.interactionsCount) \("Like/Comment".localized)" : "\( model.interactionsCount) \("Likes/Comments".localized)")
         }
         
         if model.type == "POLL" {
@@ -215,7 +216,7 @@ extension PostTableViewCell: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.socialPollTableViewCell, for: indexPath) as! SocialPollTableViewCell
-        cell.configure(type: model.userPoll.answer == 0 ? .pollQuestien : .pollAnswer, poll: model.pollArray[indexPath.row], pollCount: pollCount)
+        cell.configure(type: model.userPoll.answer == 0 ? .pollQuestien : .pollAnswer, poll: model.pollArray[indexPath.row], pollCount: totalPolls)
         return cell
     }
 }

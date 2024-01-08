@@ -209,12 +209,11 @@ extension PlaceBetVc {
             else{
                 self.customAlertView_2Actions(title: "Login / Sign Up".localized, description: ErrorMessage.loginRequires.localized) {
                     /// Show login page to login/register new user
-                    self.presentOverViewController(LoginVC.self, storyboardName: StoryboardName.login)
+                    self.presentViewController(LoginVC.self, storyboardName: StoryboardName.login)
                 }
             }
         }
     }
-    
 }
 
 

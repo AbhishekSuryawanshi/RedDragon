@@ -54,10 +54,12 @@ class WalletVC: UIViewController {
     }
     
     func refreshView() {
-       // Show heat points and transactions for loggined user
-        if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
-            showTransactions()
-        }
+        // Show heat points and transactions for loggined user
+        heatPointLabel.text = "0"
+        showTransactions()
+        
+        self.tabBarController?.tabBar.isHidden = false
+        saveUptoLabel.text = "Massive savings".localized
         heatPointTitleLabel.text = "Your HeatPoints Balance".localized + "🔥"
         recentTrasactionLabel.text = "Recent Transactions".localized
         transactionSeeAllButton.setTitle("View All".localized, for: .normal)
@@ -79,8 +81,10 @@ class WalletVC: UIViewController {
     }
     
     func showTransactions() {
-        heatPointLabel.text = String(UserDefaults.standard.user?.wallet ?? 0)
-        WalletVM.shared.subscriptionListAsyncCall()
+        if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
+            heatPointLabel.text = String(UserDefaults.standard.user?.wallet ?? 0)
+            WalletVM.shared.subscriptionListAsyncCall()
+        }
     }
     
     @objc func pageControllerForBanners() {
@@ -99,8 +103,9 @@ class WalletVC: UIViewController {
     }
     
     func purchasePoints(type: PointsType, index: Int) {
-        if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
         
+        if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
+            
             presentOverViewController(GetPointsVC.self, storyboardName: StoryboardName.wallet) { vc in
                 vc.selectedIndex = index
                 vc.pointType = type
@@ -113,7 +118,7 @@ class WalletVC: UIViewController {
                 /// hide tabbar before presenting a viewcontroller
                 /// show tabbar while dismissing a presented viewcontroller in delegate
                 self.tabBarController?.tabBar.isHidden = true
-                self.presentOverViewController(LoginVC.self, storyboardName: StoryboardName.login) { vc in
+                self.presentViewController(LoginVC.self, storyboardName: StoryboardName.login) { vc in
                     vc.delegate = self
                 }
             }
@@ -123,6 +128,7 @@ class WalletVC: UIViewController {
     // MARK: - Button Action
     
     @IBAction func spinPlayButtonTapped(_ sender: UIButton) {
+        
         if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
             let today = Date().formatDate(outputFormat: .ddMMyyyy)
             let spinDate = UserDefaults.standard.spinDate
@@ -139,12 +145,11 @@ class WalletVC: UIViewController {
                 /// hide tabbar before presenting a viewcontroller
                 /// show tabbar while dismissing a presented viewcontroller in delegate
                 self.tabBarController?.tabBar.isHidden = true
-                self.presentOverViewController(LoginVC.self, storyboardName: StoryboardName.login) { vc in
+                self.presentViewController(LoginVC.self, storyboardName: StoryboardName.login) { vc in
                     vc.delegate = self
                 }
             }
         }
-        
     }
 }
 
@@ -180,12 +185,12 @@ extension WalletVC {
                 
                 //Update bet points / bet transaction
                 self?.updateBetPoints()
-                
+                self?.showTransactions()
                 if let dataResponse = response?.response {
-                    self?.showTransactions()
+                    
                 } else {
                     if let errorResponse = response?.error {
-                        self?.view.makeToast(errorResponse.messages?.first ?? CustomErrors.unknown.description, duration: 2.0, position: .center)
+                        self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
                     }
                 }
             })
@@ -225,8 +230,10 @@ extension WalletVC {
         PointsViewModel.shared.$responseData
             .receive(on: DispatchQueue.main)
             .dropFirst()
-            .sink(receiveValue: { [weak self] points in
-                
+            .sink(receiveValue: { [weak self] response in
+                if let errorResponse = response?.error {
+                    self?.customAlertView(title: ErrorMessage.alert.localized, description: errorResponse.messages?.first ?? CustomErrors.unknown.description, image: ImageConstants.alertImage)
+                }
             })
             .store(in: &cancellable)
     }
@@ -242,7 +249,7 @@ extension WalletVC {
     }
     
     func execute_onSubscriptionsResponseData(_ response: SubscriptionResponse?) {
-       
+        
         if let dataResponse = response?.response {
             WalletVM.shared.subscriptionArray = dataResponse.data ?? []
         } else {
@@ -284,7 +291,7 @@ extension WalletVC: UICollectionViewDataSource {
         if collectionView == bannerCollectionView {
             return bannerVM?.responseData?.data.top.count ?? 0
         } else {
-          return  WalletVM.shared.betsArray.count
+            return  WalletVM.shared.betsArray.count
         }
     }
     
@@ -336,6 +343,9 @@ extension WalletVC: UICollectionViewDelegateFlowLayout {
 
 // MARK: - Custom Delegates
 extension WalletVC: GetPointsVCDelegate {
+    func cancelTapped() {
+    }
+    
     func PointPurchased(index: Int, type: PointsType) {
         selectedIndex = index
         pointType = type
@@ -348,7 +358,6 @@ extension WalletVC: GetPointsVCDelegate {
             "event": "Package purchased"
         ]
         AddWalletVM.shared.addTransaction(parameters: param)
-    
     }
 }
 

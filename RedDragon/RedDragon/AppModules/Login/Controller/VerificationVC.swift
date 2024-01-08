@@ -83,7 +83,7 @@ class VerificationVC: UIViewController {
             
             if pushFrom == .forgotPass {
                 /// Api call handled ResetPasswordVC
-                self.presentOverViewController(ResetPasswordVC.self, storyboardName: StoryboardName.login) { vc in
+                self.presentViewController(ResetPasswordVC.self, storyboardName: StoryboardName.login) { vc in
                     vc.verificationCode = self.otpValue
                 }
             } else {

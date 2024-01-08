@@ -14,6 +14,7 @@ enum PointsType {
 
 protocol GetPointsVCDelegate: AnyObject {
     func PointPurchased(index: Int, type: PointsType)
+    func cancelTapped()
 }
 
 class GetPointsVC: UIViewController {
@@ -48,20 +49,43 @@ class GetPointsVC: UIViewController {
     }
     
     // MARK: - Button Actions
+  
+    @IBAction func cancelButtonTapped(_ sender: UIButton) {
+        delegate?.cancelTapped()
+        self.backClicked(UIButton())
+    }
     
     @IBAction func convertButtonTapped(_ sender: UIButton) {
-        if pointType == .bet {
-            let pointValue = (NumberFormatter().number(from: UserDefaults.standard.user?.affAppData?.bet?.point ?? ""))?.intValue ?? 0
-            UserDefaults.standard.user?.affAppData?.bet?.point = String(pointValue + WalletVM.shared.betsArray[selectedIndex])
-            UserDefaults.standard.user?.wallet = (UserDefaults.standard.user?.wallet ?? 0) - WalletVM.shared.heatsArray[selectedIndex]
+        print("current wallet - \(UserDefaults.standard.user?.wallet ?? 0)")
+        print("current Bet point - \(UserDefaults.standard.user?.affAppData?.bet?.point ?? "")")
+         if pointType == .bet {
+            //add bet points
+            
+            //check user have enough heat points in wallet to purchase bet points
+            if (UserDefaults.standard.user?.wallet ?? 0) >= WalletVM.shared.heatsArray[selectedIndex] {
+                let pointValue = (NumberFormatter().number(from: UserDefaults.standard.user?.affAppData?.bet?.point ?? ""))?.intValue ?? 0
+                UserDefaults.standard.user?.affAppData?.bet?.point = String(pointValue + WalletVM.shared.betsArray[selectedIndex])
+                UserDefaults.standard.user?.wallet = (UserDefaults.standard.user?.wallet ?? 0) - WalletVM.shared.heatsArray[selectedIndex]
+                delegate?.PointPurchased(index: selectedIndex, type: pointType)
+                self.backClicked(UIButton())
+            } else {
+                self.customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.InsufficientHeatPoints, image: ImageConstants.alertImage)
+            }
             
         } else {
-            UserDefaults.standard.user?.wallet = (UserDefaults.standard.user?.wallet ?? 0) + WalletVM.shared.heatsArray[selectedIndex]
+            //add heat points
+            
+            //check user have enough bet points to purchase heat points to the wallet
             let pointValue = (NumberFormatter().number(from: UserDefaults.standard.user?.affAppData?.bet?.point ?? ""))?.intValue ?? 0
-            UserDefaults.standard.user?.affAppData?.bet?.point = String(pointValue - WalletVM.shared.betsArray[selectedIndex])
+            if pointValue >= WalletVM.shared.betsArray[selectedIndex] {
+                UserDefaults.standard.user?.wallet = (UserDefaults.standard.user?.wallet ?? 0) + WalletVM.shared.heatsArray[selectedIndex]
+                UserDefaults.standard.user?.affAppData?.bet?.point = String(pointValue - WalletVM.shared.betsArray[selectedIndex])
+                delegate?.PointPurchased(index: selectedIndex, type: pointType)
+                self.backClicked(UIButton())
+            } else {
+                self.customAlertView(title: ErrorMessage.alert.localized, description: ErrorMessage.InsufficientBetPoints, image: ImageConstants.alertImage)
+            }
         }
-        delegate?.PointPurchased(index: selectedIndex, type: pointType)
-        self.backClicked(UIButton())
     }
 }
 
