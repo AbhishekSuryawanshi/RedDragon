@@ -26,7 +26,7 @@ class SubscriptionTableViewCell: UITableViewCell {
     
     func setCellValues(model: Subscription)  {
         arrowImageView.image = model.type == "c" ? .doubleArrowDown : .doubleArrowUp
-        titleLabel.text = model.event.capitalized
+        titleLabel.text = model.event.capitalized.localized
         pointsLabel.text = "\(model.coinCount)🔥"
         dateLabel.text = model.updatedTime.formatDate(inputFormat: .yyyyMMddHHmmss, outputFormat: .ddMMMyyyyhmma)
     }

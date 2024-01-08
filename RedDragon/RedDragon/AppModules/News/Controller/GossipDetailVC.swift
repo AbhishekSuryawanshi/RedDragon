@@ -14,7 +14,6 @@ class GossipDetailVC: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var gossipImageView: UIImageView!
     @IBOutlet weak var contentLabel: ExpandableLabel!
-    @IBOutlet weak var commentView: UIView!
     @IBOutlet weak var noCommentView: UIView!
     @IBOutlet weak var commentTableView: UITableView!
     @IBOutlet weak var commentHeightConstarint: NSLayoutConstraint!
@@ -41,10 +40,7 @@ class GossipDetailVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         refreshPage()
         if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
-            commentView.isHidden = false
             CommentListVM.shared.getCommentsAsyncCall(sectionId: commentSectionID)
-        } else {
-            commentView.isHidden = true
         }
     }
     
@@ -110,10 +106,22 @@ class GossipDetailVC: UIViewController {
     // MARK: - Button Action
     
     @IBAction func commentButtonTapped(_ sender: UIButton) {
-        navigateToViewController(NewsCommentsVC.self, storyboardName: StoryboardName.gossip, animationType: .autoReverse(presenting: .zoom)) { vc in
-            vc.sectionId = self.commentSectionID
-            vc.newsTitle = self.gossipModel.title ?? ""
-            vc.commentsArray = self.allCommentsArray
+        if ((UserDefaults.standard.token ?? "") != "") && ((UserDefaults.standard.user?.otpVerified ?? 0) == 1) {
+            navigateToViewController(NewsCommentsVC.self, storyboardName: StoryboardName.gossip, animationType: .autoReverse(presenting: .zoom)) { vc in
+                vc.sectionId = self.commentSectionID
+                vc.newsTitle = self.gossipModel.title ?? ""
+                vc.commentsArray = self.allCommentsArray
+            }
+        } else {
+            self.customAlertView_2Actions(title: "Login / Sign Up".localized, description: ErrorMessage.loginRequires.localized) {
+                /// Show login page to login/register new user
+                /// hide tabbar before presenting a viewcontroller
+                /// show tabbar while dismissing a presented viewcontroller in delegate
+                self.tabBarController?.tabBar.isHidden = true
+                self.presentViewController(LoginVC.self, storyboardName: StoryboardName.login) { vc in
+                    vc.delegate = self
+                }
+            }
         }
     }
 }
@@ -200,5 +208,11 @@ extension GossipDetailVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
+    }
+}
+
+/// LoginVCDelegate to show hided tabbar
+extension GossipDetailVC: LoginVCDelegate {
+    func viewControllerDismissed() {
     }
 }

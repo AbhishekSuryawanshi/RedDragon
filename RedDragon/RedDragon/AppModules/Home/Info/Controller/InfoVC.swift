@@ -153,6 +153,7 @@ extension InfoVC {
         recommendedSeeAllLabel.setTitle("See All".localized, for: .normal)
         whatsHappeningSeeAllButton.setTitle("See All".localized, for: .normal)
         predictionSeeAllButton.setTitle("See All".localized, for: .normal)
+        packageSeeAllButton.setTitle("See All".localized, for: .normal)
     }
     
     private func setupConstantTagView() {
