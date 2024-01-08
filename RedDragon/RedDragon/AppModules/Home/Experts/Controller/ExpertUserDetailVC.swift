@@ -94,20 +94,12 @@ class ExpertUserDetailVC: UIViewController {
         collectionView.reloadData()
         tableView.reloadData()
     }
-    
-    //    {
-    //        "match_id": "2023-12-26-chelsea-crystal-palace",
-    //        "prediction_id": 2760,
-    //        "profile id":1,
-    //        "sportType":"football",
-    //        "coin_count":10
-    //    }
-    
+ 
     @objc func unlockPreidtcionButtonAction(sender: UIButton) {
-        var matchId = userData?.appdata?.predict?.prediction[sender.tag].matchId ?? ""
-        var predictionId = userData?.appdata?.predict?.prediction[sender.tag].predictionId ?? 0
-        var sportType = userData?.appdata?.predict?.prediction[sender.tag].sportType ?? ""
-        var profileId = userData?.id ?? 0
+        let matchId = userData?.appdata?.predict?.prediction[sender.tag].matchId ?? ""
+        let predictionId = userData?.appdata?.predict?.prediction[sender.tag].predictionId ?? 0
+        let sportType = userData?.appdata?.predict?.prediction[sender.tag].sportType ?? ""
+        let profileId = userData?.id ?? 0
         
         let params = ["match_id": matchId, "prediction_id": predictionId, "profile_id": profileId, "sportType" : sportType, "coin_count":amount] as! [String: Any]
         transactionVM.postDebitPredictionAmount(params: params)
@@ -214,7 +206,7 @@ extension ExpertUserDetailVC {
             .dropFirst()
             .sink(receiveValue: { [weak self] result in
                 if result?.response?.code == 200 {
-                    self?.userData?.wallet = result?.response?.data?.userwallet
+                    UserDefaults.standard.user?.wallet = result?.response?.data?.userwallet ?? 0
                     self?.userData?.appdata?.predict?.prediction[index].revealed = true
                     self?.tableView.reloadData()
                 }
@@ -236,10 +228,10 @@ extension ExpertUserDetailVC {
         cell.homeImageView.setImage(imageStr: userData?.appdata?.predict?.prediction[indexPath.row].match?.detail?.homeTeamImage ?? "", placeholder: UIImage(named: "placeholderLeague"))
         cell.awayImageView.setImage(imageStr: userData?.appdata?.predict?.prediction[indexPath.row].match?.detail?.awayTeamImage ?? "", placeholder: UIImage(named: "placeholderLeague"))
         
-        if userData?.appdata?.predict?.predictStats?.successRate ?? 0 >= 30 && userData?.wallet ?? 0 >= 10 {
+        if userData?.appdata?.predict?.predictStats?.successRate ?? 0 >= 30 && UserDefaults.standard.user?.wallet ?? 0 >= 10 {
             cell.unlockPredictionButton.setTitle("Unlock Prediction for 10".localized + " 🔥", for: .normal)
             amount = 10
-        }else if userData?.appdata?.predict?.predictStats?.successRate ?? 0 < 30 && userData?.wallet ?? 0 >= 5 {
+        }else if userData?.appdata?.predict?.predictStats?.successRate ?? 0 < 30 && UserDefaults.standard.user?.wallet ?? 0 >= 5 {
             cell.unlockPredictionButton.setTitle("Unlock Prediction for 5".localized + " 🔥", for: .normal)
             amount = 5
         }
